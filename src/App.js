@@ -38,6 +38,9 @@ function App() {
           onPasteEntry();
         }
       }
+      if (event.key === "d") {
+        onCreateFolder();
+      }
     }
     if (event.key === "Backspace" || event.key === "Delete") {
       onDeleteEntry();
