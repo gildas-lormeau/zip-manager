@@ -166,6 +166,7 @@ function App() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
     setHighlightedEntry(null);
+    setClipboardData(null);
     setEntries([...root.children]);
   }
 
