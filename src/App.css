@@ -66,6 +66,10 @@ ol {
   cursor: pointer;
 }
 
+.button-group {
+  margin-inline-end: 8px;
+}
+
 .breadcrumb {
   display: inline-block;
   padding-block-end: 8px;
@@ -140,6 +144,11 @@ ol {
 }
 
 .button-bar-bottom button {
+  margin-inline-start: 4px;
+  margin-inline-end: 0;
+}
+
+.button-bar-bottom .button-group {
   margin-inline-start: 4px;
   margin-inline-end: 0;
 }

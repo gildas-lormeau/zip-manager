@@ -17,6 +17,7 @@ function App() {
   const [highlightedEntry, setHighlightedEntry] = useState(null);
   const [downloads, setDownloads] = useState([]);
   const [downloadId, setDownloadId] = useState(0);
+  const [clipboardData, setClipboardData] = useState(null);
   const downloader = useRef(null);
 
   function onCreateFolder(folderName) {
@@ -38,6 +39,40 @@ function App() {
       }
     });
     updateSelectedFolder();
+  }
+
+  function onCopyEntry() {
+    setClipboardData({
+      entry: highlightedEntry.clone()
+    });
+  }
+
+  function onCutEntry() {
+    setClipboardData({
+      entry: highlightedEntry,
+      cut: true
+    });
+  }
+
+  function onPasteEntry() {
+    try {
+      const { entry, cut } = clipboardData;
+      let clone;
+      if (!cut) {
+        clone = entry.clone();
+      }
+      zipFilesystem.move(entry, selectedFolder);
+      if (!cut) {
+        setClipboardData({ entry: clone });
+      }
+      updateSelectedFolder();
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  function onResetClipboardData() {
+    setClipboardData(null);
   }
 
   function onRenameEntry(entryName) {
@@ -209,6 +244,11 @@ function App() {
       />
       <BottomButtonBar
         highlightedEntry={highlightedEntry}
+        clipboardData={clipboardData}
+        onCopyEntry={onCopyEntry}
+        onCutEntry={onCutEntry}
+        onPasteEntry={onPasteEntry}
+        onResetClipboardData={onResetClipboardData}
         onRenameEntry={onRenameEntry}
         onDeleteEntry={onDeleteEntry}
       />
@@ -530,19 +570,77 @@ function FileDownloadButton({ file, onDownloadFile }) {
   );
 }
 
-function BottomButtonBar({ highlightedEntry, onRenameEntry, onDeleteEntry }) {
+function BottomButtonBar({
+  highlightedEntry,
+  clipboardData,
+  onCopyEntry,
+  onCutEntry,
+  onPasteEntry,
+  onResetClipboardData,
+  onRenameEntry,
+  onDeleteEntry
+}) {
   return (
     <div className="button-bar button-bar-bottom">
-      <RenameEntryButton
-        disabled={!highlightedEntry}
-        entryName={highlightedEntry?.name}
-        onRenameEntry={onRenameEntry}
-      />
-      <DeleteEntryButton
-        disabled={!highlightedEntry}
-        onDeleteEntry={onDeleteEntry}
-      />
+      <div className="button-group">
+        <CopyEntryButton
+          disabled={!highlightedEntry}
+          onCopyEntry={onCopyEntry}
+        />
+        <CutEntryButton disabled={!highlightedEntry} onCutEntry={onCutEntry} />
+        <PasteEntryButton
+          disabled={!clipboardData}
+          onPasteEntry={onPasteEntry}
+        />
+        <ResetClipboardDataButton
+          disabled={!clipboardData}
+          onResetClipboardData={onResetClipboardData}
+        />
+      </div>
+      <div className="button-group">
+        <RenameEntryButton
+          disabled={!highlightedEntry}
+          entryName={highlightedEntry?.name}
+          onRenameEntry={onRenameEntry}
+        />
+        <DeleteEntryButton
+          disabled={!highlightedEntry}
+          onDeleteEntry={onDeleteEntry}
+        />
+      </div>
     </div>
+  );
+}
+
+function CopyEntryButton({ disabled, onCopyEntry }) {
+  return (
+    <button onClick={onCopyEntry} disabled={disabled}>
+      Copy
+    </button>
+  );
+}
+
+function CutEntryButton({ disabled, onCutEntry }) {
+  return (
+    <button onClick={onCutEntry} disabled={disabled}>
+      Cut
+    </button>
+  );
+}
+
+function PasteEntryButton({ disabled, onPasteEntry }) {
+  return (
+    <button onClick={onPasteEntry} disabled={disabled}>
+      Paste
+    </button>
+  );
+}
+
+function ResetClipboardDataButton({ disabled, onResetClipboardData }) {
+  return (
+    <button onClick={onResetClipboardData} disabled={disabled}>
+      Reset clipboard
+    </button>
   );
 }
 
