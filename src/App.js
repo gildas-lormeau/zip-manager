@@ -343,7 +343,7 @@ function TopButtonBar({
 }
 
 function CreateFolderButton({ onCreateFolder }) {
-  return <button onClick={onCreateFolder}>Create folder</button>;
+  return <button onClick={onCreateFolder}>Create directory</button>;
 }
 
 function AddFilesButton({ onAddFiles }) {
