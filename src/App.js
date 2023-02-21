@@ -477,6 +477,23 @@ function Entries({
   onGoIntoFolder,
   onDownloadFile
 }) {
+  function handleKeyUp(event) {
+    if (highlightedEntry) {
+      if (event.key === "ArrowUp") {
+        const indexEntry = (getIndexHighlightedEntry() - 1 + entries.length) % entries.length;
+        onHighlightEntry(entries[indexEntry]);
+      }
+      if (event.key === "ArrowDown") {
+        const indexEntry = (getIndexHighlightedEntry() + 1) % entries.length;
+        onHighlightEntry(entries[indexEntry]);
+      }
+    }
+  }
+
+  function getIndexHighlightedEntry() {
+    return entries.findIndex((entry) => entry === highlightedEntry);
+  }
+
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
@@ -489,7 +506,7 @@ function Entries({
   }
 
   return (
-    <ol className="entries">
+    <ol className="entries" onKeyUp={handleKeyUp}>
       {entries.map((entry) => (
         <li key={entry.id} className={getEntryClassName(entry)}>
           <EntryName
@@ -520,16 +537,15 @@ function EntryName({
   const isParentEntry = entry === parentFolder;
 
   function handleClick() {
-    if (isParentEntry) {
-      onGoIntoFolder(entry);
-    } else {
-      onHighlightEntry(entry);
-    }
+    onHighlightEntry(entry);
   }
 
   function handleKeyUp(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Space") {
       handleClick();
+    }
+    if (event.key === "Enter") {
+      handleDoubleClick(entry);
     }
   }
 
