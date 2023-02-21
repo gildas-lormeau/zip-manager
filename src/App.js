@@ -477,23 +477,6 @@ function Entries({
   onGoIntoFolder,
   onDownloadFile
 }) {
-  function handleKeyUp(event) {
-    if (highlightedEntry) {
-      if (event.key === "ArrowUp") {
-        const indexEntry = (getIndexHighlightedEntry() - 1 + entries.length) % entries.length;
-        onHighlightEntry(entries[indexEntry]);
-      }
-      if (event.key === "ArrowDown") {
-        const indexEntry = (getIndexHighlightedEntry() + 1) % entries.length;
-        onHighlightEntry(entries[indexEntry]);
-      }
-    }
-  }
-
-  function getIndexHighlightedEntry() {
-    return entries.findIndex((entry) => entry === highlightedEntry);
-  }
-
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
@@ -506,7 +489,7 @@ function Entries({
   }
 
   return (
-    <ol className="entries" onKeyUp={handleKeyUp}>
+    <ol className="entries">
       {entries.map((entry) => (
         <li key={entry.id} className={getEntryClassName(entry)}>
           <EntryName
