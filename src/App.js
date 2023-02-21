@@ -60,7 +60,7 @@ function App() {
     }
   }
 
-  function onAddFile(files) {
+  function onAddFiles(files) {
     files.forEach((file) => {
       try {
         return selectedFolder.addBlob(file.name, file);
@@ -274,7 +274,7 @@ function App() {
       <TopButtonBar
         entriesLength={entries.length}
         onCreateFolder={onCreateFolder}
-        onAddFile={onAddFile}
+        onAddFiles={onAddFiles}
         onImportZipFile={onImportZipFile}
         onExportZipFile={onExportZipFile}
         onReset={onReset}
@@ -317,7 +317,7 @@ async function downloadBlob(blob, downloaderElement, download) {
 function TopButtonBar({
   entriesLength,
   onCreateFolder,
-  onAddFile,
+  onAddFiles,
   onImportZipFile,
   onExportZipFile,
   onReset
@@ -326,7 +326,7 @@ function TopButtonBar({
     <div className="button-bar">
       <div className="button-group">
         <CreateFolderButton onCreateFolder={onCreateFolder} />
-        <AddFilesButton onAddFile={onAddFile} />
+        <AddFilesButton onAddFiles={onAddFiles} />
       </div>
       <div className="button-group">
         <ImportZipButton onImportZipFile={onImportZipFile} />
@@ -346,7 +346,7 @@ function CreateFolderButton({ onCreateFolder }) {
   return <button onClick={onCreateFolder}>Create folder</button>;
 }
 
-function AddFilesButton({ onAddFile }) {
+function AddFilesButton({ onAddFiles }) {
   const fileInput = useRef(null);
   const { current } = fileInput;
 
@@ -354,7 +354,7 @@ function AddFilesButton({ onAddFile }) {
     const files = Array.from(target.files);
     current.value = "";
     if (files.length) {
-      onAddFile(files);
+      onAddFiles(files);
     }
   }
 
