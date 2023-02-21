@@ -277,14 +277,20 @@ function TopButtonBar({
 }) {
   return (
     <div className="button-bar">
-      <CreateFolderButton onCreateFolder={onCreateFolder} />
-      <AddFilesButton onAddFile={onAddFile} />
-      <ImportZipButton onImportZipFile={onImportZipFile} />
-      <ExportZipButton
-        disabled={!entriesLength}
-        onExportZipFile={onExportZipFile}
-      />
-      <ResetButton disabled={!entriesLength} onReset={onReset} />
+      <div className="button-group">
+        <CreateFolderButton onCreateFolder={onCreateFolder} />
+        <AddFilesButton onAddFile={onAddFile} />
+      </div>
+      <div className="button-group">
+        <ImportZipButton onImportZipFile={onImportZipFile} />
+        <ExportZipButton
+          disabled={!entriesLength}
+          onExportZipFile={onExportZipFile}
+        />
+      </div>
+      <div className="button-group">
+        <ResetButton disabled={!entriesLength} onReset={onReset} />
+      </div>
     </div>
   );
 }
