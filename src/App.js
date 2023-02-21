@@ -189,15 +189,14 @@ function App() {
         keepOrder: true
       });
       try {
-        const blob = await blobGetter(options)
-        downloadBlob(
-          blob,
-          downloader.current,
-          download.name
-        );
+        const blob = await blobGetter(options);
+        downloadBlob(blob, downloader.current, download.name);
       } catch (error) {
         const message = error.message || error;
-        if (message !== CANCELLED_DOWNLOAD_MESSAGE && error.name !== "AbortError") {
+        if (
+          message !== CANCELLED_DOWNLOAD_MESSAGE &&
+          error.name !== "AbortError"
+        ) {
           alert(message);
         }
       } finally {
@@ -451,7 +450,7 @@ function Entries({
   }
 
   return (
-    <ol className="entries" >
+    <ol className="entries">
       {entries.map((entry) => (
         <li key={entry.id} className={getEntryClassName(entry)}>
           <EntryName
