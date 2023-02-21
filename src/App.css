@@ -62,7 +62,7 @@ ol {
   padding-inline-end: 12px;
 }
 
-.button-bar :not([disabled]) {
+.button-bar button:not([disabled]) {
   cursor: pointer;
 }
 
