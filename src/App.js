@@ -541,7 +541,7 @@ function EntryName({
   }
 
   function handleKeyUp(event) {
-    if (event.key === "Space") {
+    if (event.key === " ") {
       handleClick();
     }
     if (event.key === "Enter") {
