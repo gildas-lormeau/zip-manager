@@ -20,13 +20,40 @@ function App() {
   const [clipboardData, setClipboardData] = useState(null);
   const downloader = useRef(null);
 
-  function onCreateFolder(folderName) {
-    try {
-      const folder = selectedFolder.addDirectory(folderName);
-      setHighlightedEntry(folder);
-      updateSelectedFolder();
-    } catch (error) {
-      alert(error.message);
+  function handleKeyUp(event) {
+    if (event.ctrlKey) {
+      if (highlightedEntry) {
+        if (event.key === "x") {
+          onCutEntry();
+        }
+        if (event.key === "c") {
+          onCopyEntry();
+        }
+        if (event.key === "r") {
+          onRenameEntry();
+        }
+      }
+      if (clipboardData) {
+        if (event.key === "v") {
+          onPasteEntry();
+        }
+      }
+    }
+    if (event.key === "Backspace" || event.key === "Delete") {
+      onDeleteEntry();
+    }
+  }
+
+  function onCreateFolder() {
+    const folderName = prompt("Please enter the folder name");
+    if (folderName) {
+      try {
+        const folder = selectedFolder.addDirectory(folderName);
+        setHighlightedEntry(folder);
+        updateSelectedFolder();
+      } catch (error) {
+        alert(error.message);
+      }
     }
   }
 
@@ -75,19 +102,28 @@ function App() {
     setClipboardData(null);
   }
 
-  function onRenameEntry(entryName) {
+  function onRenameEntry() {
     try {
-      highlightedEntry.rename(entryName);
-      updateSelectedFolder();
+      const entryName = prompt(
+        "Please enter the entry name",
+        highlightedEntry.name
+      );
+      if (entryName && entryName !== highlightedEntry.name) {
+        highlightedEntry.rename(entryName);
+        updateSelectedFolder();
+      }
     } catch (error) {
       alert(error.message);
     }
   }
 
   function onDeleteEntry() {
-    zipFilesystem.remove(highlightedEntry);
-    setHighlightedEntry(null);
-    updateSelectedFolder();
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Please confirm the deletion")) {
+      zipFilesystem.remove(highlightedEntry);
+      setHighlightedEntry(null);
+      updateSelectedFolder();
+    }
   }
 
   function onImportZipFile(zipFile) {
@@ -116,7 +152,10 @@ function App() {
   }
 
   function onReset() {
-    setZipFilesystem(new FS());
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Please confirm the reset")) {
+      setZipFilesystem(new FS());
+    }
   }
 
   function onHighlightEntry(entry) {
@@ -223,6 +262,10 @@ function App() {
 
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
+  useEffect(() => {
+    window.addEventListener("keyup", handleKeyUp);
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  });
   return (
     <div className="application">
       <TopButtonBar
@@ -297,14 +340,7 @@ function TopButtonBar({
 }
 
 function CreateFolderButton({ onCreateFolder }) {
-  function handleClick() {
-    const folderName = prompt("Please enter the folder name");
-    if (folderName) {
-      onCreateFolder(folderName);
-    }
-  }
-
-  return <button onClick={handleClick}>Create folder</button>;
+  return <button onClick={onCreateFolder}>Create folder</button>;
 }
 
 function AddFilesButton({ onAddFile }) {
@@ -368,15 +404,8 @@ function ExportZipButton({ disabled, onExportZipFile }) {
 }
 
 function ResetButton({ disabled, onReset }) {
-  function handleClick() {
-    // eslint-disable-next-line no-restricted-globals
-    if (confirm("Please confirm the reset")) {
-      onReset();
-    }
-  }
-
   return (
-    <button onClick={handleClick} disabled={disabled}>
+    <button onClick={onReset} disabled={disabled}>
       Reset
     </button>
   );
@@ -606,7 +635,6 @@ function BottomButtonBar({
       <div className="button-group">
         <RenameEntryButton
           disabled={!highlightedEntry}
-          entryName={highlightedEntry?.name}
           onRenameEntry={onRenameEntry}
         />
         <DeleteEntryButton
@@ -650,35 +678,17 @@ function ResetClipboardDataButton({ disabled, onResetClipboardData }) {
   );
 }
 
-function RenameEntryButton({ entryName, disabled, onRenameEntry }) {
-  function handleClick() {
-    const previousEntryName = entryName;
-    const newEntryName = prompt(
-      "Please enter the entry name",
-      previousEntryName
-    );
-    if (newEntryName && newEntryName !== previousEntryName) {
-      onRenameEntry(newEntryName);
-    }
-  }
-
+function RenameEntryButton({ disabled, onRenameEntry }) {
   return (
-    <button onClick={handleClick} disabled={disabled}>
+    <button onClick={onRenameEntry} disabled={disabled}>
       Rename
     </button>
   );
 }
 
 function DeleteEntryButton({ disabled, onDeleteEntry }) {
-  function handleClick() {
-    // eslint-disable-next-line no-restricted-globals
-    if (confirm("Please confirm the deletion")) {
-      onDeleteEntry();
-    }
-  }
-
   return (
-    <button onClick={handleClick} disabled={disabled}>
+    <button onClick={onDeleteEntry} disabled={disabled}>
       Delete
     </button>
   );
