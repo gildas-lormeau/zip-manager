@@ -519,10 +519,6 @@ function EntryName({
 }) {
   const isParentEntry = entry === parentFolder;
 
-  function handleClick() {
-    onHighlightEntry(entry);
-  }
-
   function handleKeyUp(event) {
     if (event.key === " ") {
       handleClick();
@@ -530,6 +526,10 @@ function EntryName({
     if (event.key === "Enter") {
       handleDoubleClick(entry);
     }
+  }
+
+  function handleClick() {
+    onHighlightEntry(entry);
   }
 
   function handleDoubleClick() {
