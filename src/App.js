@@ -477,6 +477,15 @@ function Entries({
   onGoIntoFolder,
   onDownloadFile
 }) {
+
+  function onActionEntry(entry) {
+    if (entry.directory) {
+      onGoIntoFolder(entry);
+    } else {
+      onDownloadFile(entry);
+    }
+  }
+
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
@@ -496,8 +505,7 @@ function Entries({
             entry={entry}
             parentFolder={parentFolder}
             onHighlightEntry={onHighlightEntry}
-            onGoIntoFolder={onGoIntoFolder}
-            onDownloadFile={onDownloadFile}
+            onActionEntry={onActionEntry}
           />
         </li>
       ))}
@@ -508,9 +516,8 @@ function Entries({
 function Entry({
   entry,
   parentFolder,
-  onGoIntoFolder,
   onHighlightEntry,
-  onDownloadFile
+  onActionEntry
 }) {
   return (
     <>
@@ -518,13 +525,11 @@ function Entry({
         entry={entry}
         parentFolder={parentFolder}
         onHighlightEntry={onHighlightEntry}
-        onGoIntoFolder={onGoIntoFolder}
-        onDownloadFile={onDownloadFile}
+        onActionEntry={onActionEntry}
       />
       <EntryButton
         entry={entry}
-        onGoIntoFolder={onGoIntoFolder}
-        onDownloadFile={onDownloadFile}
+        onActionEntry={onActionEntry}
       />
     </>
   );
@@ -533,9 +538,8 @@ function Entry({
 function EntryName({
   entry,
   parentFolder,
-  onGoIntoFolder,
   onHighlightEntry,
-  onDownloadFile
+  onActionEntry
 }) {
   const isParentEntry = entry === parentFolder;
 
@@ -556,11 +560,7 @@ function EntryName({
   }
 
   function handleDoubleClick() {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
-    }
+    onActionEntry(entry);
   }
 
   return (
@@ -576,17 +576,17 @@ function EntryName({
   );
 }
 
-function EntryButton({ entry, onGoIntoFolder, onDownloadFile }) {
+function EntryButton({ entry, onActionEntry }) {
   return entry.directory ? (
-    <FolderNavigationButton folder={entry} onGoIntoFolder={onGoIntoFolder} />
+    <FolderNavigationButton folder={entry} onActionEntry={onActionEntry} />
   ) : (
-    <FileDownloadButton file={entry} onDownloadFile={onDownloadFile} />
+    <FileDownloadButton file={entry} onActionEntry={onActionEntry} />
   );
 }
 
-function FolderNavigationButton({ folder, onGoIntoFolder }) {
+function FolderNavigationButton({ folder, onActionEntry }) {
   function handleClick() {
-    onGoIntoFolder(folder);
+    onActionEntry(folder);
   }
 
   function handleKeyUp(event) {
@@ -607,9 +607,9 @@ function FolderNavigationButton({ folder, onGoIntoFolder }) {
   );
 }
 
-function FileDownloadButton({ file, onDownloadFile }) {
+function FileDownloadButton({ file, onActionEntry }) {
   function handleClick() {
-    onDownloadFile(file);
+    onActionEntry(file);
   }
 
   function handleKeyUp(event) {
