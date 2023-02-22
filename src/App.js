@@ -43,7 +43,7 @@ function App() {
   const [downloads, setDownloads] = useState([]);
   const [downloadId, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
-  const downloader = useRef(null);
+  const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
@@ -284,7 +284,7 @@ function App() {
       });
       try {
         const blob = await blobGetter(options);
-        downloadBlob(blob, downloader.current, download.name);
+        downloadBlob(blob, downloaderRef.current, download.name);
       } catch (error) {
         const message = error.message || error;
         if (
@@ -375,7 +375,7 @@ function App() {
       />
       <DownloadManager
         downloads={downloads}
-        downloader={downloader}
+        downloaderRef={downloaderRef}
         onDeleteDownloadEntry={onDeleteDownloadEntry}
       />
     </div>
@@ -434,8 +434,8 @@ function CreateFolderButton({ onCreateFolder }) {
 }
 
 function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
-  const fileInput = useRef(null);
-  const { current } = fileInput;
+  const fileInputRef = useRef(null);
+  const { current } = fileInputRef;
 
   function handleChange({ target }) {
     const files = Array.from(target.files);
@@ -460,7 +460,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
       </button>
       <input
         onChange={handleChange}
-        ref={fileInput}
+        ref={fileInputRef}
         type="file"
         multiple
         hidden
@@ -823,7 +823,7 @@ function DeleteEntryButton({ disabled, onDeleteEntry }) {
   );
 }
 
-function DownloadManager({ downloads, downloader, onDeleteDownloadEntry }) {
+function DownloadManager({ downloads, downloaderRef, onDeleteDownloadEntry }) {
   return (
     <div className="downloads">
       <ol>
@@ -837,7 +837,7 @@ function DownloadManager({ downloads, downloader, onDeleteDownloadEntry }) {
         ))}
       </ol>
       {/* eslint-disable-next-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */}
-      <a hidden ref={downloader} />
+      <a hidden ref={downloaderRef} />
     </div>
   );
 }
