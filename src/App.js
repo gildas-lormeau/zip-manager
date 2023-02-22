@@ -19,6 +19,7 @@ function App() {
   const [downloadId, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
   const downloader = useRef(null);
+  const highlightedEntryRef = useRef(null);
 
   function handleKeyUp(event) {
     if (event.ctrlKey) {
@@ -51,8 +52,7 @@ function App() {
     const folderName = prompt("Please enter the folder name");
     if (folderName) {
       try {
-        const folder = selectedFolder.addDirectory(folderName);
-        setHighlightedEntry(folder);
+        selectedFolder.addDirectory(folderName);
         updateSelectedFolder();
       } catch (error) {
         alert(error.message);
@@ -152,6 +152,18 @@ function App() {
       { mimeType: DEFAULT_MIME_TYPE },
       (options) => selectedFolder.exportBlob(options)
     );
+  }
+
+  function onHighlightPreviousEntry() {
+    const indexEntry = entries.findIndex(entry => entry.id === highlightedEntry.id);
+    const previousEntry = entries[(indexEntry - 1 + entries.length) % entries.length]
+    setHighlightedEntry(previousEntry);
+  }
+
+  function onHighlightNextEntry() {
+    const indexEntry = entries.findIndex(entry => entry.id === highlightedEntry.id);
+    const nextEntry = entries[(indexEntry + 1) % entries.length];
+    setHighlightedEntry(nextEntry);
   }
 
   function onReset() {
@@ -263,8 +275,15 @@ function App() {
     );
   }
 
+  function updateHighlightedEntry() {
+    if (highlightedEntry && highlightedEntryRef && highlightedEntryRef.current) {
+      highlightedEntryRef.current.focus({ focusVisible: false });
+    }
+  }
+
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
+  useEffect(updateHighlightedEntry, [highlightedEntry]);
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
     return () => window.removeEventListener("keyup", handleKeyUp);
@@ -284,6 +303,9 @@ function App() {
         entries={entries}
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
+        highlightedEntryRef={highlightedEntryRef}
+        onHighlightPreviousEntry={onHighlightPreviousEntry}
+        onHighlightNextEntry={onHighlightNextEntry}
         onToggleHighlightedEntry={onToggleHighlightedEntry}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
@@ -474,6 +496,9 @@ function Entries({
   entries,
   selectedFolder,
   highlightedEntry,
+  highlightedEntryRef,
+  onHighlightPreviousEntry,
+  onHighlightNextEntry,
   onToggleHighlightedEntry,
   onGoIntoFolder,
   onDownloadFile
@@ -496,6 +521,14 @@ function Entries({
     if (event.key === "Enter") {
       onActionEntry(entry);
     }
+    if (entry === highlightedEntry) {
+      if (event.key === "ArrowDown") {
+        onHighlightNextEntry();
+      }
+      if (event.key === "ArrowUp") {
+        onHighlightPreviousEntry();
+      }
+    }
   }
 
   function onActionEntry(entry) {
@@ -508,20 +541,40 @@ function Entries({
 
   return (
     <ol className="entries">
-      {entries.map((entry) => (
-        <li
-          key={entry.id}
-          className={getEntryClassName(entry)}
-          onKeyUp={(event) => handleKeyUp({ event, entry })}
-          tabIndex="0">
-          <Entry
-            entry={entry}
-            selectedFolder={selectedFolder}
-            onToggleHighlightedEntry={onToggleHighlightedEntry}
-            onActionEntry={onActionEntry}
-          />
-        </li>
-      ))}
+      {entries.map((entry) => {
+        if (entry === highlightedEntry) {
+          return (
+            <li
+              key={entry.id}
+              ref={highlightedEntryRef}
+              className={getEntryClassName(entry)}
+              onKeyUp={(event) => handleKeyUp({ event, entry })}
+              tabIndex="0">
+              <Entry
+                entry={entry}
+                selectedFolder={selectedFolder}
+                onToggleHighlightedEntry={onToggleHighlightedEntry}
+                onActionEntry={onActionEntry}
+              />
+            </li>
+          );
+        } else {
+          return (
+            <li
+              key={entry.id}
+              className={getEntryClassName(entry)}
+              onKeyUp={(event) => handleKeyUp({ event, entry })}
+              tabIndex="0">
+              <Entry
+                entry={entry}
+                selectedFolder={selectedFolder}
+                onToggleHighlightedEntry={onToggleHighlightedEntry}
+                onActionEntry={onActionEntry}
+              />
+            </li>
+          );
+        }
+      })}
     </ol>
   );
 }
