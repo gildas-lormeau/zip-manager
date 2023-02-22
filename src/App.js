@@ -645,8 +645,6 @@ function Entries({
             <li
               key={entry.id}
               className={getEntryClassName(entry)}
-              onKeyUp={(event) => handleKeyUp({ event, entry })}
-              tabIndex={0}
             >
               <Entry
                 entry={entry}
