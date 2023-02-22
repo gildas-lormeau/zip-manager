@@ -563,16 +563,14 @@ function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
 }
 
 function EntryButton({ entry, onActionEntry }) {
-  return entry.directory ? (
-    <FolderNavigationButton folder={entry} onActionEntry={onActionEntry} />
-  ) : (
-    <FileDownloadButton file={entry} onActionEntry={onActionEntry} />
-  );
-}
+  function getButtonClassName() {
+    const classes = ["list-item-button"];
+    classes.push(entry.directory ? "navigate-button" : "download-button");
+    return classes.join(" ");
+  }
 
-function FolderNavigationButton({ folder, onActionEntry }) {
   function handleClick() {
-    onActionEntry(folder);
+    onActionEntry(entry);
   }
 
   function handleKeyUp(event) {
@@ -583,35 +581,12 @@ function FolderNavigationButton({ folder, onActionEntry }) {
 
   return (
     <span
-      className="list-item-button navigate-button"
+      className={getButtonClassName()}
       onClick={handleClick}
       onKeyUp={handleKeyUp}
       tabIndex="0"
     >
-      ↵
-    </span>
-  );
-}
-
-function FileDownloadButton({ file, onActionEntry }) {
-  function handleClick() {
-    onActionEntry(file);
-  }
-
-  function handleKeyUp(event) {
-    if (event.key === "Enter") {
-      handleClick();
-    }
-  }
-
-  return (
-    <span
-      className="list-item-button download-button"
-      onClick={handleClick}
-      onKeyUp={handleKeyUp}
-      tabIndex="0"
-    >
-      ↓
+      {entry.directory ? "↵" : "↓"}
     </span>
   );
 }
