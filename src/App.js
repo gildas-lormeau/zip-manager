@@ -9,6 +9,7 @@ const ROOT_FOLDER_LABEL = "[root]";
 const ZIP_EXTENSION = ".zip";
 const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
+const ABORT_ERROR_NAME = "AbortError";
 
 const KEYUP_EVENT_NAME = "keyup";
 const CLICK_EVENT_NAME = "click";
@@ -305,7 +306,7 @@ function App() {
         const message = error.message || error;
         if (
           message !== CANCELLED_DOWNLOAD_MESSAGE &&
-          error.name !== "AbortError"
+          error.name !== ABORT_ERROR_NAME
         ) {
           alert(message);
         }
