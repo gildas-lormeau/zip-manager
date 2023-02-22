@@ -488,6 +488,15 @@ function Entries({
     return classes.join(" ");
   }
 
+  function handleKeyUp({ event, entry }) {
+    if (event.key === " ") {
+      onHighlightEntry(entry);
+    }
+    if (event.key === "Enter") {
+      onActionEntry(entry);
+    }
+  }
+
   function onActionEntry(entry) {
     if (entry.directory) {
       onGoIntoFolder(entry);
@@ -499,7 +508,11 @@ function Entries({
   return (
     <ol className="entries">
       {entries.map((entry) => (
-        <li key={entry.id} className={getEntryClassName(entry)}>
+        <li
+          key={entry.id}
+          className={getEntryClassName(entry)}
+          onKeyUp={(event) => handleKeyUp({ event, entry })}
+          tabIndex="0">
           <Entry
             entry={entry}
             parentFolder={parentFolder}
@@ -529,16 +542,6 @@ function Entry({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
 function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
   const isParentEntry = entry === parentFolder;
 
-  function handleKeyUp(event) {
-    if (event.key === " ") {
-      handleClick();
-    }
-    if (event.key === "Enter") {
-      handleDoubleClick(entry);
-      event.stopPropagation();
-    }
-  }
-
   function handleClick() {
     if (!isParentEntry) {
       onHighlightEntry(entry);
@@ -554,8 +557,6 @@ function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
       className="list-item-name entry-name"
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      onKeyUp={handleKeyUp}
-      tabIndex="0"
     >
       {isParentEntry ? PARENT_FOLDER_LABEL : entry.name}
     </span>
@@ -573,18 +574,10 @@ function EntryButton({ entry, onActionEntry }) {
     onActionEntry(entry);
   }
 
-  function handleKeyUp(event) {
-    if (event.key === "Enter") {
-      handleClick();
-    }
-  }
-
   return (
     <span
       className={getButtonClassName()}
       onClick={handleClick}
-      onKeyUp={handleKeyUp}
-      tabIndex="0"
     >
       {entry.directory ? "↵" : "↓"}
     </span>
