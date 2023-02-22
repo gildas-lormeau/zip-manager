@@ -24,6 +24,12 @@ const SELECT_KEY = " ";
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
 
+const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
+const RENAME_MESSAGE = "Please enter the entry name";
+const RESET_MESSAGE = "Please confirm the reset";
+const DOWNLOAD_MESSAGE = "Please enter the file name";
+const DELETE_MESSAGE = "Please confirm the deletion";
+
 function App() {
   const [zipFilesystem, setZipFilesystem] = useState(new FS());
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -76,7 +82,7 @@ function App() {
   }
 
   function onCreateFolder() {
-    const folderName = prompt("Please enter the folder name");
+    const folderName = prompt(CREATE_FOLDER_MESSAGE);
     if (folderName) {
       try {
         selectedFolder.addDirectory(folderName);
@@ -134,10 +140,7 @@ function App() {
 
   function onRenameEntry() {
     try {
-      const entryName = prompt(
-        "Please enter the entry name",
-        highlightedEntry.name
-      );
+      const entryName = prompt(RENAME_MESSAGE, highlightedEntry.name);
       if (entryName && entryName !== highlightedEntry.name) {
         highlightedEntry.rename(entryName);
         updateSelectedFolder();
@@ -149,7 +152,7 @@ function App() {
 
   function onDeleteEntry() {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm("Please confirm the deletion")) {
+    if (confirm(DELETE_MESSAGE)) {
       zipFilesystem.remove(highlightedEntry);
       setHighlightedEntry(null);
       updateSelectedFolder();
@@ -200,7 +203,7 @@ function App() {
 
   function onReset() {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm("Please confirm the reset")) {
+    if (confirm(RESET_MESSAGE)) {
       setZipFilesystem(new FS());
     }
   }
@@ -256,7 +259,7 @@ function App() {
   }
 
   async function downloadFile(name, options, blobGetter) {
-    name = prompt("Please enter the file name", name);
+    name = prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
       const controller = new AbortController();
       const progressValue = null;
