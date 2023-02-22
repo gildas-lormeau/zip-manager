@@ -10,6 +10,9 @@ const ZIP_EXTENSION = ".zip";
 const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 
+const KEYUP_EVENT_NAME = "keyup";
+const CLICK_EVENT_NAME = "click";
+
 const ENTER_KEY = "Enter";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
@@ -330,8 +333,8 @@ function App() {
   useEffect(updateHighlightedEntry, [highlightedEntry]);
   useEffect(updateDefaultHighlightedEntry, [entries, highlightedEntry]);
   useEffect(() => {
-    window.addEventListener("keyup", handleKeyUp);
-    return () => window.removeEventListener("keyup", handleKeyUp);
+    window.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    return () => window.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
   });
   return (
     <div className="application">
@@ -441,7 +444,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
   }
 
   function dispatchEvent() {
-    current.dispatchEvent(new MouseEvent("click"));
+    current.dispatchEvent(new MouseEvent(CLICK_EVENT_NAME));
   }
 
   return (
@@ -469,7 +472,7 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
   const { current } = fileInput;
 
   function dispatchEvent() {
-    current.dispatchEvent(new MouseEvent("click"));
+    current.dispatchEvent(new MouseEvent(CLICK_EVENT_NAME));
   }
 
   return (
