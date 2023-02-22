@@ -525,6 +525,7 @@ function EntryName({
     }
     if (event.key === "Enter") {
       handleDoubleClick(entry);
+      event.stopPropagation();
     }
   }
 
