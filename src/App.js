@@ -155,13 +155,18 @@ function App() {
   }
 
   function onHighlightPreviousEntry() {
-    const indexEntry = entries.findIndex(entry => entry.id === highlightedEntry.id);
-    const previousEntry = entries[(indexEntry - 1 + entries.length) % entries.length]
+    const indexEntry = entries.findIndex(
+      (entry) => entry.id === highlightedEntry.id
+    );
+    const previousEntry =
+      entries[(indexEntry - 1 + entries.length) % entries.length];
     setHighlightedEntry(previousEntry);
   }
 
   function onHighlightNextEntry() {
-    const indexEntry = entries.findIndex(entry => entry.id === highlightedEntry.id);
+    const indexEntry = entries.findIndex(
+      (entry) => entry.id === highlightedEntry.id
+    );
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
   }
@@ -275,13 +280,17 @@ function App() {
   }
 
   function updateHighlightedEntry() {
-    if (highlightedEntry && highlightedEntryRef && highlightedEntryRef.current) {
+    if (
+      highlightedEntry &&
+      highlightedEntryRef &&
+      highlightedEntryRef.current
+    ) {
       highlightedEntryRef.current.focus();
     }
   }
 
   function updateDefaultHighlightedEntry() {
-    if (!entries.find(entry => entry === highlightedEntry)) {
+    if (!entries.find((entry) => entry === highlightedEntry)) {
       setHighlightedEntry(entries[0]);
     }
   }
@@ -555,7 +564,8 @@ function Entries({
               ref={highlightedEntryRef}
               className={getEntryClassName(entry)}
               onKeyUp={(event) => handleKeyUp({ event, entry })}
-              tabIndex="0">
+              tabIndex="0"
+            >
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
@@ -570,7 +580,8 @@ function Entries({
               key={entry.id}
               className={getEntryClassName(entry)}
               onKeyUp={(event) => handleKeyUp({ event, entry })}
-              tabIndex="0">
+              tabIndex="0"
+            >
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
@@ -585,7 +596,12 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onSetHighlightedEntry, onActionEntry }) {
+function Entry({
+  entry,
+  selectedFolder,
+  onSetHighlightedEntry,
+  onActionEntry
+}) {
   return (
     <>
       <EntryName
@@ -599,7 +615,12 @@ function Entry({ entry, selectedFolder, onSetHighlightedEntry, onActionEntry }) 
   );
 }
 
-function EntryName({ entry, selectedFolder, onSetHighlightedEntry, onActionEntry }) {
+function EntryName({
+  entry,
+  selectedFolder,
+  onSetHighlightedEntry,
+  onActionEntry
+}) {
   function handleClick() {
     onSetHighlightedEntry(entry);
   }
@@ -631,10 +652,7 @@ function EntryButton({ entry, onActionEntry }) {
   }
 
   return (
-    <span
-      className={getButtonClassName()}
-      onClick={handleClick}
-    >
+    <span className={getButtonClassName()} onClick={handleClick}>
       {entry.directory ? "↵" : "↓"}
     </span>
   );
@@ -651,15 +669,13 @@ function BottomButtonBar({
   onRenameEntry,
   onDeleteEntry
 }) {
-  const actionDisabled = !highlightedEntry || highlightedEntry === selectedFolder.parent;
+  const actionDisabled =
+    !highlightedEntry || highlightedEntry === selectedFolder.parent;
 
   return (
     <div className="button-bar button-bar-bottom">
       <div className="button-group">
-        <CopyEntryButton
-          disabled={actionDisabled}
-          onCopyEntry={onCopyEntry}
-        />
+        <CopyEntryButton disabled={actionDisabled} onCopyEntry={onCopyEntry} />
         <CutEntryButton disabled={actionDisabled} onCutEntry={onCutEntry} />
         <PasteEntryButton
           disabled={!clipboardData}
