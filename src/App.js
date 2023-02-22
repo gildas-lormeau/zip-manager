@@ -477,7 +477,6 @@ function Entries({
   onGoIntoFolder,
   onDownloadFile
 }) {
-
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
@@ -513,12 +512,7 @@ function Entries({
   );
 }
 
-function Entry({
-  entry,
-  parentFolder,
-  onHighlightEntry,
-  onActionEntry
-}) {
+function Entry({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
   return (
     <>
       <EntryName
@@ -527,20 +521,12 @@ function Entry({
         onHighlightEntry={onHighlightEntry}
         onActionEntry={onActionEntry}
       />
-      <EntryButton
-        entry={entry}
-        onActionEntry={onActionEntry}
-      />
+      <EntryButton entry={entry} onActionEntry={onActionEntry} />
     </>
   );
 }
 
-function EntryName({
-  entry,
-  parentFolder,
-  onHighlightEntry,
-  onActionEntry
-}) {
+function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
   const isParentEntry = entry === parentFolder;
 
   function handleKeyUp(event) {
