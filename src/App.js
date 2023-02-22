@@ -289,8 +289,8 @@ function App() {
         onDownloadFile={onDownloadFile}
       />
       <BottomButtonBar
-        highlightedEntry={highlightedEntry}
         selectedFolder={selectedFolder}
+        highlightedEntry={highlightedEntry}
         clipboardData={clipboardData}
         onCopyEntry={onCopyEntry}
         onCutEntry={onCutEntry}
@@ -582,8 +582,8 @@ function EntryButton({ entry, onActionEntry }) {
 }
 
 function BottomButtonBar({
-  highlightedEntry,
   selectedFolder,
+  highlightedEntry,
   clipboardData,
   onCopyEntry,
   onCutEntry,
