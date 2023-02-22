@@ -11,6 +11,15 @@ const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 
 const ENTER_KEY = "Enter";
+const CUT_KEY = "x";
+const COPY_KEY = "c";
+const RENAME_KEY = "r";
+const PASTE_KEY = "v";
+const CREATE_FOLDER_KEY = "d";
+const DELETE_KEYS = ["Backspace", "Delete"];
+const SELECT_KEY = " ";
+const DOWN_KEY = "ArrowDown";
+const UP_KEY = "ArrowUp";
 
 function App() {
   const [zipFilesystem, setZipFilesystem] = useState(new FS());
@@ -26,26 +35,26 @@ function App() {
   function handleKeyUp(event) {
     if (event.ctrlKey) {
       if (highlightedEntry) {
-        if (event.key === "x") {
+        if (event.key === CUT_KEY) {
           onCutEntry();
         }
-        if (event.key === "c") {
+        if (event.key === COPY_KEY) {
           onCopyEntry();
         }
-        if (event.key === "r") {
+        if (event.key === RENAME_KEY) {
           onRenameEntry();
         }
       }
       if (clipboardData) {
-        if (event.key === "v") {
+        if (event.key === PASTE_KEY) {
           onPasteEntry();
         }
       }
-      if (event.key === "d") {
+      if (event.key === CREATE_FOLDER_KEY) {
         onCreateFolder();
       }
     }
-    if (event.key === "Backspace" || event.key === "Delete") {
+    if (DELETE_KEYS.includes(event.key)) {
       onDeleteEntry();
     }
   }
@@ -532,17 +541,17 @@ function Entries({
   }
 
   function handleKeyUp({ event, entry }) {
-    if (event.key === " ") {
+    if (event.key === SELECT_KEY) {
       onSetHighlightedEntry(entry);
     }
     if (event.key === ENTER_KEY) {
       onActionEntry(entry);
     }
     if (entry === highlightedEntry) {
-      if (event.key === "ArrowDown") {
+      if (event.key === DOWN_KEY) {
         onHighlightNextEntry();
       }
-      if (event.key === "ArrowUp") {
+      if (event.key === UP_KEY) {
         onHighlightPreviousEntry();
       }
     }
