@@ -492,21 +492,41 @@ function Entries({
     <ol className="entries">
       {entries.map((entry) => (
         <li key={entry.id} className={getEntryClassName(entry)}>
-          <EntryName
+          <Entry
             entry={entry}
             parentFolder={parentFolder}
             onHighlightEntry={onHighlightEntry}
             onGoIntoFolder={onGoIntoFolder}
             onDownloadFile={onDownloadFile}
           />
-          <EntryButton
-            entry={entry}
-            onGoIntoFolder={onGoIntoFolder}
-            onDownloadFile={onDownloadFile}
-          />
         </li>
       ))}
     </ol>
+  );
+}
+
+function Entry({
+  entry,
+  parentFolder,
+  onGoIntoFolder,
+  onHighlightEntry,
+  onDownloadFile
+}) {
+  return (
+    <>
+      <EntryName
+        entry={entry}
+        parentFolder={parentFolder}
+        onHighlightEntry={onHighlightEntry}
+        onGoIntoFolder={onGoIntoFolder}
+        onDownloadFile={onDownloadFile}
+      />
+      <EntryButton
+        entry={entry}
+        onGoIntoFolder={onGoIntoFolder}
+        onDownloadFile={onDownloadFile}
+      />
+    </>
   );
 }
 
