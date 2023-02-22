@@ -632,7 +632,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSetHighlightedEntry={onSetHighlightedEntry}
+                onSelectEntry={onSetHighlightedEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
@@ -648,7 +648,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSetHighlightedEntry={onSetHighlightedEntry}
+                onSelectEntry={onSetHighlightedEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
@@ -662,7 +662,7 @@ function Entries({
 function Entry({
   entry,
   selectedFolder,
-  onSetHighlightedEntry,
+  onSelectEntry,
   onActionEntry
 }) {
   return (
@@ -670,7 +670,7 @@ function Entry({
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onSetHighlightedEntry={onSetHighlightedEntry}
+        onSelectEntry={onSelectEntry}
         onActionEntry={onActionEntry}
       />
       <EntryButton entry={entry} onActionEntry={onActionEntry} />
@@ -681,11 +681,11 @@ function Entry({
 function EntryName({
   entry,
   selectedFolder,
-  onSetHighlightedEntry,
+  onSelectEntry,
   onActionEntry
 }) {
   function handleClick() {
-    onSetHighlightedEntry(entry);
+    onSelectEntry(entry);
   }
 
   function handleDoubleClick() {
