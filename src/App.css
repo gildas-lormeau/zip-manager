@@ -139,6 +139,10 @@ ol {
   color: white;
 }
 
+.entries .entry-highlighted:focus {
+  outline: none;
+}
+
 .button-bar-bottom {
   justify-content: flex-end;
 }

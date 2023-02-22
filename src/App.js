@@ -173,12 +173,11 @@ function App() {
     }
   }
 
-  function onToggleHighlightedEntry(entry) {
-    setHighlightedEntry(entry === highlightedEntry ? null : entry);
+  function onSetHighlightedEntry(entry) {
+    setHighlightedEntry(entry);
   }
 
   function onGoIntoFolder(entry) {
-    setHighlightedEntry(null);
     setSelectedFolder(entry);
   }
 
@@ -277,13 +276,20 @@ function App() {
 
   function updateHighlightedEntry() {
     if (highlightedEntry && highlightedEntryRef && highlightedEntryRef.current) {
-      highlightedEntryRef.current.focus({ focusVisible: false });
+      highlightedEntryRef.current.focus();
+    }
+  }
+
+  function updateDefaultHighlightedEntry() {
+    if (!entries.find(entry => entry === highlightedEntry)) {
+      setHighlightedEntry(entries[0]);
     }
   }
 
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntry, [highlightedEntry]);
+  useEffect(updateDefaultHighlightedEntry, [entries, highlightedEntry]);
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
     return () => window.removeEventListener("keyup", handleKeyUp);
@@ -306,7 +312,7 @@ function App() {
         highlightedEntryRef={highlightedEntryRef}
         onHighlightPreviousEntry={onHighlightPreviousEntry}
         onHighlightNextEntry={onHighlightNextEntry}
-        onToggleHighlightedEntry={onToggleHighlightedEntry}
+        onSetHighlightedEntry={onSetHighlightedEntry}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
       />
@@ -499,7 +505,7 @@ function Entries({
   highlightedEntryRef,
   onHighlightPreviousEntry,
   onHighlightNextEntry,
-  onToggleHighlightedEntry,
+  onSetHighlightedEntry,
   onGoIntoFolder,
   onDownloadFile
 }) {
@@ -516,7 +522,7 @@ function Entries({
 
   function handleKeyUp({ event, entry }) {
     if (event.key === " ") {
-      onToggleHighlightedEntry(entry);
+      onSetHighlightedEntry(entry);
     }
     if (event.key === "Enter") {
       onActionEntry(entry);
@@ -553,7 +559,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onToggleHighlightedEntry={onToggleHighlightedEntry}
+                onSetHighlightedEntry={onSetHighlightedEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
@@ -568,7 +574,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onToggleHighlightedEntry={onToggleHighlightedEntry}
+                onSetHighlightedEntry={onSetHighlightedEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
@@ -579,13 +585,13 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onToggleHighlightedEntry, onActionEntry }) {
+function Entry({ entry, selectedFolder, onSetHighlightedEntry, onActionEntry }) {
   return (
     <>
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onToggleHighlightedEntry={onToggleHighlightedEntry}
+        onSetHighlightedEntry={onSetHighlightedEntry}
         onActionEntry={onActionEntry}
       />
       <EntryButton entry={entry} onActionEntry={onActionEntry} />
@@ -593,9 +599,9 @@ function Entry({ entry, selectedFolder, onToggleHighlightedEntry, onActionEntry 
   );
 }
 
-function EntryName({ entry, selectedFolder, onToggleHighlightedEntry, onActionEntry }) {
+function EntryName({ entry, selectedFolder, onSetHighlightedEntry, onActionEntry }) {
   function handleClick() {
-    onToggleHighlightedEntry(entry);
+    onSetHighlightedEntry(entry);
   }
 
   function handleDoubleClick() {
