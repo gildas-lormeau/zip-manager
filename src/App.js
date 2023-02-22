@@ -263,6 +263,22 @@ function App() {
     setEntries([...root.children]);
   }
 
+  function updateHighlightedEntry() {
+    if (
+      highlightedEntry &&
+      highlightedEntryRef &&
+      highlightedEntryRef.current
+    ) {
+      highlightedEntryRef.current.focus();
+    }
+  }
+
+  function updateDefaultHighlightedEntry() {
+    if (!entries.find((entry) => entry === highlightedEntry)) {
+      setHighlightedEntry(entries[0]);
+    }
+  }
+
   async function downloadFile(name, options, blobGetter) {
     name = prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
@@ -312,22 +328,6 @@ function App() {
         return download;
       })
     );
-  }
-
-  function updateHighlightedEntry() {
-    if (
-      highlightedEntry &&
-      highlightedEntryRef &&
-      highlightedEntryRef.current
-    ) {
-      highlightedEntryRef.current.focus();
-    }
-  }
-
-  function updateDefaultHighlightedEntry() {
-    if (!entries.find((entry) => entry === highlightedEntry)) {
-      setHighlightedEntry(entries[0]);
-    }
   }
 
   useEffect(updateSelectedFolder, [selectedFolder]);
