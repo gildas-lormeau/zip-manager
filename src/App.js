@@ -272,7 +272,7 @@ function App() {
   return (
     <div className="application">
       <TopButtonBar
-        entriesLength={entries.length}
+        entries={entries}
         onCreateFolder={onCreateFolder}
         onAddFiles={onAddFiles}
         onImportZipFile={onImportZipFile}
@@ -316,7 +316,7 @@ async function downloadBlob(blob, downloaderElement, download) {
 }
 
 function TopButtonBar({
-  entriesLength,
+  entries,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
@@ -332,12 +332,12 @@ function TopButtonBar({
       <div className="button-group">
         <ImportZipButton onImportZipFile={onImportZipFile} />
         <ExportZipButton
-          disabled={!entriesLength}
+          disabled={!entries.length}
           onExportZipFile={onExportZipFile}
         />
       </div>
       <div className="button-group">
-        <ResetButton disabled={!entriesLength} onReset={onReset} />
+        <ResetButton disabled={!entries.length} onReset={onReset} />
       </div>
     </div>
   );
