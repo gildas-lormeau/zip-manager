@@ -478,14 +478,6 @@ function Entries({
   onDownloadFile
 }) {
 
-  function onActionEntry(entry) {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
-    }
-  }
-
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
@@ -495,6 +487,14 @@ function Entries({
       classes.push("entry-highlighted");
     }
     return classes.join(" ");
+  }
+
+  function onActionEntry(entry) {
+    if (entry.directory) {
+      onGoIntoFolder(entry);
+    } else {
+      onDownloadFile(entry);
+    }
   }
 
   return (
