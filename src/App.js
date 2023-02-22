@@ -418,11 +418,11 @@ function TopButtonBar({
 }
 
 function CreateFolderButton({ onCreateFolder }) {
-  return <button
-    onClick={onCreateFolder}
-    title={"Ctrl-" + CREATE_FOLDER_KEY}>
-    Create directory
-  </button>;
+  return (
+    <button onClick={onCreateFolder} title={"Ctrl-" + CREATE_FOLDER_KEY}>
+      Create directory
+    </button>
+  );
 }
 
 function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
@@ -446,7 +446,8 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
       <button
         onClick={dispatchEvent}
         ref={addFilesButtonRef}
-        title={"Ctrl-" + ADD_FILES_KEY}>
+        title={"Ctrl-" + ADD_FILES_KEY}
+      >
         Add files
       </button>
       <input
@@ -473,7 +474,8 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
       <button
         onClick={dispatchEvent}
         ref={importZipButtonRef}
-        title={"Ctrl-" + IMPORT_ZIP_KEY}>
+        title={"Ctrl-" + IMPORT_ZIP_KEY}
+      >
         Import zip file
       </button>
       <input
@@ -489,10 +491,11 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
 
 function ExportZipButton({ disabled, onExportZipFile }) {
   return (
-    <button 
-      onClick={onExportZipFile} 
+    <button
+      onClick={onExportZipFile}
       disabled={disabled}
-      title={"Ctrl-" + EXPORT_ZIP_KEY}>
+      title={"Ctrl-" + EXPORT_ZIP_KEY}
+    >
       Export zip file
     </button>
   );
@@ -756,10 +759,11 @@ function BottomButtonBar({
 
 function CopyEntryButton({ disabled, onCopyEntry }) {
   return (
-    <button 
-      onClick={onCopyEntry} 
+    <button
+      onClick={onCopyEntry}
       disabled={disabled}
-      title={"Ctrl-" + COPY_KEY}>
+      title={"Ctrl-" + COPY_KEY}
+    >
       Copy
     </button>
   );
@@ -767,10 +771,7 @@ function CopyEntryButton({ disabled, onCopyEntry }) {
 
 function CutEntryButton({ disabled, onCutEntry }) {
   return (
-    <button 
-      onClick={onCutEntry} 
-      disabled={disabled}
-      title={"Ctrl-" + CUT_KEY}>
+    <button onClick={onCutEntry} disabled={disabled} title={"Ctrl-" + CUT_KEY}>
       Cut
     </button>
   );
@@ -778,10 +779,11 @@ function CutEntryButton({ disabled, onCutEntry }) {
 
 function PasteEntryButton({ disabled, onPasteEntry }) {
   return (
-    <button 
-      onClick={onPasteEntry} 
+    <button
+      onClick={onPasteEntry}
       disabled={disabled}
-      title={"Ctrl-" + PASTE_KEY}>
+      title={"Ctrl-" + PASTE_KEY}
+    >
       Paste
     </button>
   );
@@ -797,10 +799,11 @@ function ResetClipboardDataButton({ disabled, onResetClipboardData }) {
 
 function RenameEntryButton({ disabled, onRenameEntry }) {
   return (
-    <button 
-      onClick={onRenameEntry} 
+    <button
+      onClick={onRenameEntry}
       disabled={disabled}
-      title={"Ctrl-" + RENAME_KEY}>
+      title={"Ctrl-" + RENAME_KEY}
+    >
       Rename
     </button>
   );
@@ -808,10 +811,11 @@ function RenameEntryButton({ disabled, onRenameEntry }) {
 
 function DeleteEntryButton({ disabled, onDeleteEntry }) {
   return (
-    <button 
-      onClick={onDeleteEntry} 
+    <button
+      onClick={onDeleteEntry}
       disabled={disabled}
-      title={DELETE_KEYS.map(key => key).join(", ")}>
+      title={DELETE_KEYS.map((key) => key).join(", ")}
+    >
       Delete
     </button>
   );
