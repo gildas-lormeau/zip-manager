@@ -13,6 +13,8 @@ const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
 const CLICK_EVENT_NAME = "click";
 
+const CTRL_KEY_LABEL = "Ctrl-";
+
 const ACTION_KEY = "Enter";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
@@ -425,7 +427,7 @@ function TopButtonBar({
 
 function CreateFolderButton({ onCreateFolder }) {
   return (
-    <button onClick={onCreateFolder} title={"Ctrl-" + CREATE_FOLDER_KEY}>
+    <button onClick={onCreateFolder} title={CTRL_KEY_LABEL + CREATE_FOLDER_KEY}>
       Create directory
     </button>
   );
@@ -452,7 +454,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
       <button
         onClick={dispatchEvent}
         ref={addFilesButtonRef}
-        title={"Ctrl-" + ADD_FILES_KEY}
+        title={CTRL_KEY_LABEL + ADD_FILES_KEY}
       >
         Add files
       </button>
@@ -480,7 +482,7 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
       <button
         onClick={dispatchEvent}
         ref={importZipButtonRef}
-        title={"Ctrl-" + IMPORT_ZIP_KEY}
+        title={CTRL_KEY_LABEL + IMPORT_ZIP_KEY}
       >
         Import zip file
       </button>
@@ -500,7 +502,7 @@ function ExportZipButton({ disabled, onExportZipFile }) {
     <button
       onClick={onExportZipFile}
       disabled={disabled}
-      title={"Ctrl-" + EXPORT_ZIP_KEY}
+      title={CTRL_KEY_LABEL + EXPORT_ZIP_KEY}
     >
       Export zip file
     </button>
@@ -768,7 +770,7 @@ function CopyEntryButton({ disabled, onCopyEntry }) {
     <button
       onClick={onCopyEntry}
       disabled={disabled}
-      title={"Ctrl-" + COPY_KEY}
+      title={CTRL_KEY_LABEL + COPY_KEY}
     >
       Copy
     </button>
@@ -777,7 +779,7 @@ function CopyEntryButton({ disabled, onCopyEntry }) {
 
 function CutEntryButton({ disabled, onCutEntry }) {
   return (
-    <button onClick={onCutEntry} disabled={disabled} title={"Ctrl-" + CUT_KEY}>
+    <button onClick={onCutEntry} disabled={disabled} title={CTRL_KEY_LABEL + CUT_KEY}>
       Cut
     </button>
   );
@@ -788,7 +790,7 @@ function PasteEntryButton({ disabled, onPasteEntry }) {
     <button
       onClick={onPasteEntry}
       disabled={disabled}
-      title={"Ctrl-" + PASTE_KEY}
+      title={CTRL_KEY_LABEL + PASTE_KEY}
     >
       Paste
     </button>
@@ -808,7 +810,7 @@ function RenameEntryButton({ disabled, onRenameEntry }) {
     <button
       onClick={onRenameEntry}
       disabled={disabled}
-      title={"Ctrl-" + RENAME_KEY}
+      title={CTRL_KEY_LABEL + RENAME_KEY}
     >
       Rename
     </button>
