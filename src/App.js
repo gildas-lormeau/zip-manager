@@ -629,7 +629,7 @@ function Entries({
               ref={highlightedEntryRef}
               className={getEntryClassName(entry)}
               onKeyUp={(event) => handleKeyUp({ event, entry })}
-              tabIndex="0"
+              tabIndex={0}
             >
               <Entry
                 entry={entry}
@@ -645,7 +645,7 @@ function Entries({
               key={entry.id}
               className={getEntryClassName(entry)}
               onKeyUp={(event) => handleKeyUp({ event, entry })}
-              tabIndex="0"
+              tabIndex={0}
             >
               <Entry
                 entry={entry}
@@ -884,7 +884,7 @@ function DeleteDownloadEntryButton({ download, onDeleteDownloadEntry }) {
       className="list-item-button"
       onClick={handleClick}
       onKeyUp={handleKeyUp}
-      tabIndex="0"
+      tabIndex={0}
     >
       ✕
     </span>
