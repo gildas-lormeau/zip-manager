@@ -13,7 +13,7 @@ const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
 const CLICK_EVENT_NAME = "click";
 
-const ENTER_KEY = "Enter";
+const ACTION_KEY = "Enter";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
 const RENAME_KEY = "r";
@@ -540,7 +540,7 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
   }
 
   function handleKeyUp({ event, folder }) {
-    if (event.key === ENTER_KEY) {
+    if (event.key === ACTION_KEY) {
       handleClick(folder);
     }
   }
@@ -596,7 +596,7 @@ function Entries({
     if (event.key === SELECT_KEY) {
       onSetHighlightedEntry(entry);
     }
-    if (event.key === ENTER_KEY) {
+    if (event.key === ACTION_KEY) {
       onActionEntry(entry);
     }
     if (entry === highlightedEntry) {
@@ -878,7 +878,7 @@ function DeleteDownloadEntryButton({ download, onDeleteDownloadEntry }) {
   }
 
   function handleKeyUp(event) {
-    if (event.key === ENTER_KEY) {
+    if (event.key === ACTION_KEY) {
       handleClick();
     }
   }
