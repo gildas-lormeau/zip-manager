@@ -16,6 +16,9 @@ const COPY_KEY = "c";
 const RENAME_KEY = "r";
 const PASTE_KEY = "v";
 const CREATE_FOLDER_KEY = "d";
+const ADD_FILES_KEY = "f";
+const IMPORT_ZIP_KEY = "i";
+const EXPORT_ZIP_KEY = "e";
 const DELETE_KEYS = ["Backspace", "Delete"];
 const SELECT_KEY = " ";
 const DOWN_KEY = "ArrowDown";
@@ -31,6 +34,8 @@ function App() {
   const [clipboardData, setClipboardData] = useState(null);
   const downloader = useRef(null);
   const highlightedEntryRef = useRef(null);
+  const addFilesButtonRef = useRef(null);
+  const importZipButtonRef = useRef(null);
 
   function handleKeyUp(event) {
     if (event.ctrlKey) {
@@ -52,6 +57,15 @@ function App() {
       }
       if (event.key === CREATE_FOLDER_KEY) {
         onCreateFolder();
+      }
+      if (event.key === ADD_FILES_KEY) {
+        addFilesButtonRef.current.click();
+      }
+      if (event.key === IMPORT_ZIP_KEY) {
+        importZipButtonRef.current.click();
+      }
+      if (event.key === EXPORT_ZIP_KEY) {
+        onExportZipFile();
       }
     }
     if (DELETE_KEYS.includes(event.key)) {
@@ -318,6 +332,8 @@ function App() {
     <div className="application">
       <TopButtonBar
         entries={entries}
+        addFilesButtonRef={addFilesButtonRef}
+        importZipButtonRef={importZipButtonRef}
         onCreateFolder={onCreateFolder}
         onAddFiles={onAddFiles}
         onImportZipFile={onImportZipFile}
@@ -365,6 +381,8 @@ async function downloadBlob(blob, downloaderElement, download) {
 
 function TopButtonBar({
   entries,
+  addFilesButtonRef,
+  importZipButtonRef,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
@@ -375,10 +393,16 @@ function TopButtonBar({
     <div className="button-bar">
       <div className="button-group">
         <CreateFolderButton onCreateFolder={onCreateFolder} />
-        <AddFilesButton onAddFiles={onAddFiles} />
+        <AddFilesButton
+          onAddFiles={onAddFiles}
+          addFilesButtonRef={addFilesButtonRef}
+        />
       </div>
       <div className="button-group">
-        <ImportZipButton onImportZipFile={onImportZipFile} />
+        <ImportZipButton
+          onImportZipFile={onImportZipFile}
+          importZipButtonRef={importZipButtonRef}
+        />
         <ExportZipButton
           disabled={!entries.length}
           onExportZipFile={onExportZipFile}
@@ -395,7 +419,7 @@ function CreateFolderButton({ onCreateFolder }) {
   return <button onClick={onCreateFolder}>Create directory</button>;
 }
 
-function AddFilesButton({ onAddFiles }) {
+function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
   const fileInput = useRef(null);
   const { current } = fileInput;
 
@@ -413,7 +437,11 @@ function AddFilesButton({ onAddFiles }) {
 
   return (
     <>
-      <button onClick={dispatchEvent}>Add files</button>
+      <button
+        onClick={dispatchEvent}
+        ref={addFilesButtonRef}>
+        Add files
+      </button>
       <input
         onChange={handleChange}
         ref={fileInput}
@@ -425,7 +453,7 @@ function AddFilesButton({ onAddFiles }) {
   );
 }
 
-function ImportZipButton({ onImportZipFile }) {
+function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
   const fileInput = useRef(null);
   const { current } = fileInput;
 
@@ -435,7 +463,11 @@ function ImportZipButton({ onImportZipFile }) {
 
   return (
     <>
-      <button onClick={dispatchEvent}>Import zip file</button>
+      <button
+        onClick={dispatchEvent}
+        ref={importZipButtonRef}>
+        Import zip file
+      </button>
       <input
         onChange={({ target }) => onImportZipFile(target.files[0])}
         ref={fileInput}
