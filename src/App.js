@@ -661,12 +661,7 @@ function Entries({
   );
 }
 
-function Entry({
-  entry,
-  selectedFolder,
-  onSelectEntry,
-  onActionEntry
-}) {
+function Entry({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
   return (
     <>
       <EntryName
@@ -680,12 +675,7 @@ function Entry({
   );
 }
 
-function EntryName({
-  entry,
-  selectedFolder,
-  onSelectEntry,
-  onActionEntry
-}) {
+function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
   function handleClick() {
     onSelectEntry(entry);
   }
@@ -779,7 +769,11 @@ function CopyEntryButton({ disabled, onCopyEntry }) {
 
 function CutEntryButton({ disabled, onCutEntry }) {
   return (
-    <button onClick={onCutEntry} disabled={disabled} title={CTRL_KEY_LABEL + CUT_KEY}>
+    <button
+      onClick={onCutEntry}
+      disabled={disabled}
+      title={CTRL_KEY_LABEL + CUT_KEY}
+    >
       Cut
     </button>
   );
