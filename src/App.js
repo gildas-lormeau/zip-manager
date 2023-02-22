@@ -282,7 +282,7 @@ function App() {
       <Breadcrumb folder={selectedFolder} onGoIntoFolder={onGoIntoFolder} />
       <Entries
         entries={entries}
-        parentFolder={selectedFolder && selectedFolder.parent}
+        selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
         onHighlightEntry={onHighlightEntry}
         onGoIntoFolder={onGoIntoFolder}
@@ -290,6 +290,7 @@ function App() {
       />
       <BottomButtonBar
         highlightedEntry={highlightedEntry}
+        selectedFolder={selectedFolder}
         clipboardData={clipboardData}
         onCopyEntry={onCopyEntry}
         onCutEntry={onCutEntry}
@@ -471,7 +472,7 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
 
 function Entries({
   entries,
-  parentFolder,
+  selectedFolder,
   highlightedEntry,
   onHighlightEntry,
   onGoIntoFolder,
@@ -515,7 +516,7 @@ function Entries({
           tabIndex="0">
           <Entry
             entry={entry}
-            parentFolder={parentFolder}
+            selectedFolder={selectedFolder}
             onHighlightEntry={onHighlightEntry}
             onActionEntry={onActionEntry}
           />
@@ -525,12 +526,12 @@ function Entries({
   );
 }
 
-function Entry({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
+function Entry({ entry, selectedFolder, onHighlightEntry, onActionEntry }) {
   return (
     <>
       <EntryName
         entry={entry}
-        parentFolder={parentFolder}
+        selectedFolder={selectedFolder}
         onHighlightEntry={onHighlightEntry}
         onActionEntry={onActionEntry}
       />
@@ -539,13 +540,9 @@ function Entry({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
   );
 }
 
-function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
-  const isParentEntry = entry === parentFolder;
-
+function EntryName({ entry, selectedFolder, onHighlightEntry, onActionEntry }) {
   function handleClick() {
-    if (!isParentEntry) {
-      onHighlightEntry(entry);
-    }
+    onHighlightEntry(entry);
   }
 
   function handleDoubleClick() {
@@ -558,7 +555,7 @@ function EntryName({ entry, parentFolder, onHighlightEntry, onActionEntry }) {
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
-      {isParentEntry ? PARENT_FOLDER_LABEL : entry.name}
+      {entry === selectedFolder.parent ? PARENT_FOLDER_LABEL : entry.name}
     </span>
   );
 }
@@ -586,6 +583,7 @@ function EntryButton({ entry, onActionEntry }) {
 
 function BottomButtonBar({
   highlightedEntry,
+  selectedFolder,
   clipboardData,
   onCopyEntry,
   onCutEntry,
@@ -594,14 +592,16 @@ function BottomButtonBar({
   onRenameEntry,
   onDeleteEntry
 }) {
+  const actionDisabled = !highlightedEntry || highlightedEntry === selectedFolder.parent;
+
   return (
     <div className="button-bar button-bar-bottom">
       <div className="button-group">
         <CopyEntryButton
-          disabled={!highlightedEntry}
+          disabled={actionDisabled}
           onCopyEntry={onCopyEntry}
         />
-        <CutEntryButton disabled={!highlightedEntry} onCutEntry={onCutEntry} />
+        <CutEntryButton disabled={actionDisabled} onCutEntry={onCutEntry} />
         <PasteEntryButton
           disabled={!clipboardData}
           onPasteEntry={onPasteEntry}
@@ -613,11 +613,11 @@ function BottomButtonBar({
       </div>
       <div className="button-group">
         <RenameEntryButton
-          disabled={!highlightedEntry}
+          disabled={actionDisabled}
           onRenameEntry={onRenameEntry}
         />
         <DeleteEntryButton
-          disabled={!highlightedEntry}
+          disabled={actionDisabled}
           onDeleteEntry={onDeleteEntry}
         />
       </div>
