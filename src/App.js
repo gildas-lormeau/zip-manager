@@ -431,7 +431,7 @@ function ImportZipButton({ onImportZipFile }) {
         onChange={({ target }) => onImportZipFile(target.files[0])}
         ref={fileInput}
         type="file"
-        accept=".zip"
+        accept={ZIP_EXTENSION}
         hidden
       />
     </>
