@@ -64,8 +64,10 @@ function App() {
       if (event.key === IMPORT_ZIP_KEY) {
         importZipButtonRef.current.click();
       }
-      if (event.key === EXPORT_ZIP_KEY) {
-        onExportZipFile();
+      if (entries.length) {
+        if (event.key === EXPORT_ZIP_KEY) {
+          onExportZipFile();
+        }
       }
     }
     if (DELETE_KEYS.includes(event.key)) {
