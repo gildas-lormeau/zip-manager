@@ -14,8 +14,6 @@ const ABORT_ERROR_NAME = "AbortError";
 const KEYUP_EVENT_NAME = "keyup";
 const CLICK_EVENT_NAME = "click";
 
-const CTRL_KEY_LABEL = "Ctrl-";
-
 const ACTION_KEY = "Enter";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
@@ -29,6 +27,8 @@ const DELETE_KEYS = ["Backspace", "Delete"];
 const SELECT_KEY = " ";
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
+
+const CTRL_KEY_LABEL = "Ctrl-";
 
 const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
 const RENAME_MESSAGE = "Please enter the entry name";
