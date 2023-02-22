@@ -13,6 +13,10 @@ ol {
   list-style: none;
 }
 
+button {
+  user-select: none;
+}
+
 .list-item-button {
   cursor: pointer;
   opacity: 0.75;
