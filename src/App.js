@@ -10,6 +10,8 @@ const ZIP_EXTENSION = ".zip";
 const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 
+const ENTER_KEY = "Enter";
+
 function App() {
   const [zipFilesystem, setZipFilesystem] = useState(new FS());
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -477,7 +479,7 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
   }
 
   function handleKeyUp({ event, folder }) {
-    if (event.key === "Enter") {
+    if (event.key === ENTER_KEY) {
       handleClick(folder);
     }
   }
@@ -533,7 +535,7 @@ function Entries({
     if (event.key === " ") {
       onSetHighlightedEntry(entry);
     }
-    if (event.key === "Enter") {
+    if (event.key === ENTER_KEY) {
       onActionEntry(entry);
     }
     if (entry === highlightedEntry) {
@@ -799,7 +801,7 @@ function DeleteDownloadEntryButton({ download, onDeleteDownloadEntry }) {
   }
 
   function handleKeyUp(event) {
-    if (event.key === "Enter") {
+    if (event.key === ENTER_KEY) {
       handleClick();
     }
   }
