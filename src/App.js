@@ -457,13 +457,13 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
     }
   }
 
-  function handleClick() {
+  function handleClick(folder) {
     onGoIntoFolder(folder);
   }
 
-  function handleKeyUp(event) {
+  function handleKeyUp({ event, folder }) {
     if (event.key === "Enter") {
-      handleClick();
+      handleClick(folder);
     }
   }
 
@@ -480,8 +480,8 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
         <li key={folder.id}>
           <span
             className={getBreadcrumbItemClassName(folder)}
-            onClick={handleClick}
-            onKeyUp={handleKeyUp}
+            onClick={() => handleClick(folder)}
+            onKeyUp={(event) => handleKeyUp({ event, folder })}
             tabIndex={getTabIndex(folder)}
           >
             {folder.parent ? folder.name : ROOT_FOLDER_LABEL}
