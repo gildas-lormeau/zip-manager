@@ -529,7 +529,9 @@ function EntryName({
   }
 
   function handleClick() {
-    onHighlightEntry(entry);
+    if (!isParentEntry) {
+      onHighlightEntry(entry);
+    }
   }
 
   function handleDoubleClick() {
