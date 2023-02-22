@@ -697,18 +697,12 @@ function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
 }
 
 function EntryButton({ entry, onActionEntry }) {
-  function getButtonClassName() {
-    const classes = ["list-item-button"];
-    classes.push(entry.directory ? "navigate-button" : "download-button");
-    return classes.join(" ");
-  }
-
   function handleClick() {
     onActionEntry(entry);
   }
 
   return (
-    <span className={getButtonClassName()} onClick={handleClick}>
+    <span className="list-item-button" onClick={handleClick}>
       {entry.directory ? "↵" : "↓"}
     </span>
   );
