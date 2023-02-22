@@ -161,7 +161,7 @@ function App() {
     }
   }
 
-  function onHighlightEntry(entry) {
+  function onToggleHighlightedEntry(entry) {
     setHighlightedEntry(entry === highlightedEntry ? null : entry);
   }
 
@@ -284,7 +284,7 @@ function App() {
         entries={entries}
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
-        onHighlightEntry={onHighlightEntry}
+        onToggleHighlightedEntry={onToggleHighlightedEntry}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
       />
@@ -474,7 +474,7 @@ function Entries({
   entries,
   selectedFolder,
   highlightedEntry,
-  onHighlightEntry,
+  onToggleHighlightedEntry,
   onGoIntoFolder,
   onDownloadFile
 }) {
@@ -491,7 +491,7 @@ function Entries({
 
   function handleKeyUp({ event, entry }) {
     if (event.key === " ") {
-      onHighlightEntry(entry);
+      onToggleHighlightedEntry(entry);
     }
     if (event.key === "Enter") {
       onActionEntry(entry);
@@ -517,7 +517,7 @@ function Entries({
           <Entry
             entry={entry}
             selectedFolder={selectedFolder}
-            onHighlightEntry={onHighlightEntry}
+            onToggleHighlightedEntry={onToggleHighlightedEntry}
             onActionEntry={onActionEntry}
           />
         </li>
@@ -526,13 +526,13 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onHighlightEntry, onActionEntry }) {
+function Entry({ entry, selectedFolder, onToggleHighlightedEntry, onActionEntry }) {
   return (
     <>
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onHighlightEntry={onHighlightEntry}
+        onToggleHighlightedEntry={onToggleHighlightedEntry}
         onActionEntry={onActionEntry}
       />
       <EntryButton entry={entry} onActionEntry={onActionEntry} />
@@ -540,9 +540,9 @@ function Entry({ entry, selectedFolder, onHighlightEntry, onActionEntry }) {
   );
 }
 
-function EntryName({ entry, selectedFolder, onHighlightEntry, onActionEntry }) {
+function EntryName({ entry, selectedFolder, onToggleHighlightedEntry, onActionEntry }) {
   function handleClick() {
-    onHighlightEntry(entry);
+    onToggleHighlightedEntry(entry);
   }
 
   function handleDoubleClick() {
