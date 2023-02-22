@@ -36,8 +36,7 @@ button {
   background-color: white;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 20px);
-  max-height: calc(100vh - 20px);
+  height: calc(100vh - 50px);
   margin: 8px;
   border: solid gray 1px;
 }
