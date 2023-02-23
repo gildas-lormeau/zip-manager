@@ -24,14 +24,13 @@ const ADD_FILES_KEY = "f";
 const IMPORT_ZIP_KEY = "i";
 const EXPORT_ZIP_KEY = "e";
 const DELETE_KEYS = ["Backspace", "Delete"];
-const SELECT_KEY = " ";
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
 const HOME_KEY = "Home";
 const END_KEY = "End";
 
 const LIST_NAVIGATION_KEYS = [DOWN_KEY, UP_KEY, HOME_KEY, END_KEY];
-const NAVIGATION_KEYS = [...LIST_NAVIGATION_KEYS, SELECT_KEY, ACTION_KEY];
+const NAVIGATION_KEYS = [...LIST_NAVIGATION_KEYS, ACTION_KEY];
 
 const CTRL_KEY_LABEL = "Ctrl-";
 
@@ -255,9 +254,6 @@ function App() {
   }
 
   function onNavigateEntries(eventKey, entry) {
-    if (eventKey === SELECT_KEY) {
-      onSetHighlightedEntry(entry);
-    }
     if (eventKey === ACTION_KEY) {
       onActionEntry(entry);
     }
