@@ -426,6 +426,7 @@ function App() {
         highlightedEntryRef={highlightedEntryRef}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
+        onSetHighlightedEntry={onSetHighlightedEntry}
         onActionEntry={onActionEntry}
         onNavigateEntries={onNavigateEntries}
       />
