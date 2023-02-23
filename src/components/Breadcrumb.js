@@ -45,10 +45,6 @@ function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
     return classes.join(" ");
   }
 
-  function getTabIndex() {
-    return active ? 0 : null;
-  }
-
   function handleClick() {
     onGoIntoFolder(folder);
   }
@@ -64,7 +60,7 @@ function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
       className={getBreadcrumbItemClassName()}
       onClick={handleClick}
       onKeyUp={(event) => handleKeyUp({ event, folder })}
-      tabIndex={getTabIndex()}
+      tabIndex={active ? 0 : null}
     >
       {folder.parent ? folder.name : ROOT_FOLDER_LABEL}
     </span>
