@@ -291,10 +291,13 @@ function App() {
     if (selectedFolder && previousSelectedFolder === selectedFolder.parent) {
       setPreviousSelectedFolder(null);
       setHighlightedEntry(previousSelectedFolder);
-    } else if (previousSelectedFolder && previousSelectedFolder.parent === selectedFolder) {
+    } else if (
+      previousSelectedFolder &&
+      previousSelectedFolder.parent === selectedFolder
+    ) {
       setPreviousSelectedFolder(null);
       setHighlightedEntry(previousSelectedFolder);
-    } else if(!highlightedEntry || !entries.includes(highlightedEntry)) {
+    } else if (!highlightedEntry || !entries.includes(highlightedEntry)) {
       setHighlightedEntry(entries[0]);
     }
   }
@@ -353,7 +356,12 @@ function App() {
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntry, [highlightedEntry]);
-  useEffect(updateDefaultHighlightedEntry, [entries, highlightedEntry, previousSelectedFolder, selectedFolder]);
+  useEffect(updateDefaultHighlightedEntry, [
+    entries,
+    highlightedEntry,
+    previousSelectedFolder,
+    selectedFolder
+  ]);
   useEffect(() => {
     window.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
     return () => window.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
@@ -671,10 +679,7 @@ function Entries({
           );
         } else {
           return (
-            <li
-              key={entry.id}
-              className={getEntryClassName(entry)}
-            >
+            <li key={entry.id} className={getEntryClassName(entry)}>
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
