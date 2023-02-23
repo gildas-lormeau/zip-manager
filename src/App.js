@@ -209,7 +209,7 @@ function App() {
 
   function onHighlightPreviousEntry() {
     const indexEntry = entries.findIndex(
-      (entry) => entry.id === highlightedEntry.id
+      (entry) => entry === highlightedEntry
     );
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
@@ -218,7 +218,7 @@ function App() {
 
   function onHighlightNextEntry() {
     const indexEntry = entries.findIndex(
-      (entry) => entry.id === highlightedEntry.id
+      (entry) => entry === highlightedEntry
     );
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
