@@ -29,8 +29,6 @@ const UP_KEY = "ArrowUp";
 const HOME_KEY = "Home";
 const END_KEY = "End";
 
-const NAVIGATION_KEYS = [DOWN_KEY, UP_KEY, HOME_KEY, END_KEY, ACTION_KEY];
-
 const CTRL_KEY_LABEL = "Ctrl-";
 
 const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
@@ -89,8 +87,20 @@ function App() {
     if (DELETE_KEYS.includes(event.key)) {
       onDeleteEntry();
     }
-    if (NAVIGATION_KEYS.includes(event.key)) {
-      onNavigateEntries(event.key);
+    if (event.key === ACTION_KEY) {
+      onActionEntry();
+    }
+    if (event.key === DOWN_KEY) {
+      onHighlightNextEntry();
+    }
+    if (event.key === UP_KEY) {
+      onHighlightPreviousEntry();
+    }
+    if (event.key === HOME_KEY) {
+      onHighlightFirstEntry();
+    }
+    if (event.key === END_KEY) {
+      onHighlightLastEntry();
     }
   }
 
@@ -250,24 +260,6 @@ function App() {
       downloads.filter((download) => download.id !== deletedDownload.id)
     );
     deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
-  }
-
-  function onNavigateEntries(eventKey) {
-    if (eventKey === ACTION_KEY) {
-      onActionEntry();
-    }
-    if (eventKey === DOWN_KEY) {
-      onHighlightNextEntry();
-    }
-    if (eventKey === UP_KEY) {
-      onHighlightPreviousEntry();
-    }
-    if (eventKey === HOME_KEY) {
-      onHighlightFirstEntry();
-    }
-    if (eventKey === END_KEY) {
-      onHighlightLastEntry();
-    }
   }
 
   function onActionEntry() {
@@ -648,8 +640,12 @@ function Entries({
     return classes.join(" ");
   }
 
+  function handleKeyDown(event) {
+    event.preventDefault();
+  }
+
   return (
-    <ol className="entries">
+    <ol className="entries" onKeyDown={handleKeyDown}>
       {entries.map((entry) => {
         if (entry === highlightedEntry) {
           return (
