@@ -239,7 +239,6 @@ function ZipManager() {
   }
 
   function onHighlightLastEntry() {
-    setHighlightedEntry(entries[0]);
     setHighlightedEntry(entries[entries.length - 1]);
   }
 
