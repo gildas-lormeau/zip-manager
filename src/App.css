@@ -36,7 +36,7 @@ button {
   background-color: white;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 50px);
+  height: calc(100dvh - 50px);
   margin: 8px;
   border: solid gray 1px;
 }
