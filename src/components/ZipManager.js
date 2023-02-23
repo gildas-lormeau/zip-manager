@@ -270,11 +270,11 @@ function ZipManager() {
     deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
   }
 
-  function onActionEntry() {
-    if (highlightedEntry.directory) {
-      onGoIntoFolder(highlightedEntry);
+  function onActionEntry(entry = highlightedEntry) {
+    if (entry.directory) {
+      onGoIntoFolder(entry);
     } else {
-      onDownloadFile(highlightedEntry);
+      onDownloadFile(entry);
     }
   }
 
