@@ -234,7 +234,6 @@ function ZipManager() {
   }
 
   function onReset() {
-    // eslint-disable-next-line no-restricted-globals
     if (confirm(RESET_MESSAGE)) {
       setZipFilesystem(new FS());
     }
