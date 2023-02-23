@@ -311,12 +311,10 @@ function ZipManager() {
   }
 
   function updateDefaultHighlightedEntry() {
-    if (selectedFolder && previousSelectedFolder === selectedFolder.parent) {
-      setPreviousSelectedFolder(null);
-      setHighlightedEntry(previousSelectedFolder);
-    } else if (
-      previousSelectedFolder &&
-      previousSelectedFolder.parent === selectedFolder
+    if (
+      (selectedFolder && previousSelectedFolder === selectedFolder.parent) ||
+      (previousSelectedFolder &&
+        previousSelectedFolder.parent === selectedFolder)
     ) {
       setPreviousSelectedFolder(null);
       setHighlightedEntry(previousSelectedFolder);
