@@ -302,6 +302,7 @@ function ZipManager() {
   function updateZipFilesystem() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
+    setPreviousSelectedFolder(null);
     setHighlightedEntry(null);
     setClipboardData(null);
     setEntries([...root.children]);
