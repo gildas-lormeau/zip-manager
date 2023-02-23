@@ -2,7 +2,7 @@ body {
   font-weight: 400;
   background-color: lightgray;
   min-width: 360px;
-  max-width: 1024px;
+  max-width: max(1024px, 75vw);
   margin-inline-start: auto;
   margin-inline-end: auto;
 }
