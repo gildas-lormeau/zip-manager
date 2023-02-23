@@ -16,18 +16,3 @@ ol {
 button {
   user-select: none;
 }
-
-.list-item-button {
-  cursor: pointer;
-  opacity: 0.75;
-}
-
-.list-item-button:hover {
-  opacity: 1;
-}
-
-.list-item-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}

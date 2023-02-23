@@ -1,5 +1,6 @@
 import "./styles/Default.css";
 import "./styles/ZipManager.css";
+import "./styles/ListItem.css";
 import "./styles/ButtonBar.css";
 
 import { useEffect, useState, useRef } from "react";
