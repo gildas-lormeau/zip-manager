@@ -30,6 +30,8 @@ const UP_KEY = "ArrowUp";
 const HOME_KEY = "Home";
 const END_KEY = "End";
 
+const LIST_NAVIGATION_KEYS = [DOWN_KEY, UP_KEY, HOME_KEY, END_KEY];
+
 const CTRL_KEY_LABEL = "Ctrl-";
 
 const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
@@ -87,6 +89,9 @@ function App() {
     }
     if (DELETE_KEYS.includes(event.key)) {
       onDeleteEntry();
+    }
+    if (LIST_NAVIGATION_KEYS.includes(event.key)) {
+      onListNavigateEntries(event.key);
     }
   }
 
@@ -248,6 +253,41 @@ function App() {
     deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
   }
 
+  function onNavigateEntries(eventKey, entry) {
+    if (eventKey === SELECT_KEY) {
+      onSetHighlightedEntry(entry);
+    }
+    if (eventKey === ACTION_KEY) {
+      onActionEntry(entry);
+    }
+    if (entry === highlightedEntry) {
+      onListNavigateEntries(eventKey);
+    }
+  }
+
+  function onActionEntry(entry) {
+    if (entry.directory) {
+      onGoIntoFolder(entry);
+    } else {
+      onDownloadFile(entry);
+    }
+  }
+
+  function onListNavigateEntries(eventKey) {
+    if (eventKey === DOWN_KEY) {
+      onHighlightNextEntry();
+    }
+    if (eventKey === UP_KEY) {
+      onHighlightPreviousEntry();
+    }
+    if (eventKey === HOME_KEY) {
+      onHighlightFirstEntry();
+    }
+    if (eventKey === END_KEY) {
+      onHighlightLastEntry();
+    }
+  }
+
   function updateSelectedFolder() {
     if (selectedFolder) {
       const { parent, children } = selectedFolder;
@@ -384,13 +424,10 @@ function App() {
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
         highlightedEntryRef={highlightedEntryRef}
-        onHighlightPreviousEntry={onHighlightPreviousEntry}
-        onHighlightNextEntry={onHighlightNextEntry}
-        onHighlightFirstEntry={onHighlightFirstEntry}
-        onHighlightLastEntry={onHighlightLastEntry}
-        onSetHighlightedEntry={onSetHighlightedEntry}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
+        onActionEntry={onActionEntry}
+        onNavigateEntries={onNavigateEntries}
       />
       <BottomButtonBar
         selectedFolder={selectedFolder}
@@ -607,13 +644,9 @@ function Entries({
   selectedFolder,
   highlightedEntry,
   highlightedEntryRef,
-  onHighlightPreviousEntry,
-  onHighlightNextEntry,
-  onHighlightFirstEntry,
-  onHighlightLastEntry,
   onSetHighlightedEntry,
-  onGoIntoFolder,
-  onDownloadFile
+  onActionEntry,
+  onNavigateEntries
 }) {
   function getEntryClassName(entry) {
     const classes = [];
@@ -627,34 +660,8 @@ function Entries({
   }
 
   function handleKeyUp({ event, entry }) {
-    if (event.key === SELECT_KEY) {
-      onSetHighlightedEntry(entry);
-    }
-    if (event.key === ACTION_KEY) {
-      onActionEntry(entry);
-    }
-    if (entry === highlightedEntry) {
-      if (event.key === DOWN_KEY) {
-        onHighlightNextEntry();
-      }
-      if (event.key === UP_KEY) {
-        onHighlightPreviousEntry();
-      }
-      if (event.key === HOME_KEY) {
-        onHighlightFirstEntry();
-      }
-      if (event.key === END_KEY) {
-        onHighlightLastEntry();
-      }
-    }
-  }
-
-  function onActionEntry(entry) {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
-    }
+    onNavigateEntries(event.key, entry);
+    event.stopPropagation();
   }
 
   return (
