@@ -27,6 +27,7 @@ const HOME_KEY = "Home";
 const END_KEY = "End";
 
 const CTRL_KEY_LABEL = "Ctrl-";
+const SPACE_KEY_LABEL = "Space";
 
 const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
 const RENAME_MESSAGE = "Please enter the entry name";
@@ -61,6 +62,7 @@ export {
   HOME_KEY,
   END_KEY,
   CTRL_KEY_LABEL,
+  SPACE_KEY_LABEL,
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,
