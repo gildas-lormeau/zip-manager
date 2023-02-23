@@ -27,6 +27,8 @@ const DELETE_KEYS = ["Backspace", "Delete"];
 const SELECT_KEY = " ";
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
+const HOME_KEY = "Home";
+const END_KEY = "End";
 
 const CTRL_KEY_LABEL = "Ctrl-";
 
@@ -207,6 +209,15 @@ function App() {
     setHighlightedEntry(nextEntry);
   }
 
+  function onHighlightFirstEntry() {
+    setHighlightedEntry(entries[0]);
+  }
+
+  function onHighlightLastEntry() {
+    setHighlightedEntry(entries[0]);
+    setHighlightedEntry(entries[entries.length - 1]);
+  }
+
   function onReset() {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(RESET_MESSAGE)) {
@@ -359,6 +370,8 @@ function App() {
         highlightedEntryRef={highlightedEntryRef}
         onHighlightPreviousEntry={onHighlightPreviousEntry}
         onHighlightNextEntry={onHighlightNextEntry}
+        onHighlightFirstEntry={onHighlightFirstEntry}
+        onHighlightLastEntry={onHighlightLastEntry}
         onSetHighlightedEntry={onSetHighlightedEntry}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}
@@ -580,6 +593,8 @@ function Entries({
   highlightedEntryRef,
   onHighlightPreviousEntry,
   onHighlightNextEntry,
+  onHighlightFirstEntry,
+  onHighlightLastEntry,
   onSetHighlightedEntry,
   onGoIntoFolder,
   onDownloadFile
@@ -608,6 +623,12 @@ function Entries({
       }
       if (event.key === UP_KEY) {
         onHighlightPreviousEntry();
+      }
+      if (event.key === HOME_KEY) {
+        onHighlightFirstEntry();
+      }
+      if (event.key === END_KEY) {
+        onHighlightLastEntry();
       }
     }
   }
