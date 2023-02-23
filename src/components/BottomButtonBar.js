@@ -1,6 +1,7 @@
 import "./styles/BottomButtonBar.css";
 
 import {
+  SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
   COPY_KEY,
   CUT_KEY,
@@ -56,7 +57,7 @@ function CopyEntryButton({ disabled, onCopyEntry }) {
     <button
       onClick={onCopyEntry}
       disabled={disabled}
-      title={CTRL_KEY_LABEL + COPY_KEY}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + COPY_KEY}
     >
       Copy
     </button>
@@ -68,7 +69,7 @@ function CutEntryButton({ disabled, onCutEntry }) {
     <button
       onClick={onCutEntry}
       disabled={disabled}
-      title={CTRL_KEY_LABEL + CUT_KEY}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CUT_KEY}
     >
       Cut
     </button>
@@ -80,7 +81,7 @@ function PasteEntryButton({ disabled, onPasteEntry }) {
     <button
       onClick={onPasteEntry}
       disabled={disabled}
-      title={CTRL_KEY_LABEL + PASTE_KEY}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + PASTE_KEY}
     >
       Paste
     </button>
@@ -100,7 +101,7 @@ function RenameEntryButton({ disabled, onRenameEntry }) {
     <button
       onClick={onRenameEntry}
       disabled={disabled}
-      title={CTRL_KEY_LABEL + RENAME_KEY}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + RENAME_KEY}
     >
       Rename
     </button>

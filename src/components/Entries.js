@@ -1,9 +1,10 @@
 import "./styles/Entries.css";
 
 import {
+  SHORTCUT_LABEL,
+  SPACE_KEY_LABEL,
   PARENT_FOLDER_LABEL,
   TAB_KEY,
-  SPACE_KEY_LABEL
 } from "./../business/constants.js";
 
 function Entries({
@@ -114,7 +115,7 @@ function EntryButton({ entry, onActionEntry }) {
     <span
       className="list-item-button"
       onClick={handleClick}
-      title={SPACE_KEY_LABEL}
+      title={SHORTCUT_LABEL + SPACE_KEY_LABEL}
     >
       {entry.directory ? "↵" : "↓"}
     </span>

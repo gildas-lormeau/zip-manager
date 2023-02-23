@@ -2,6 +2,7 @@ import "./styles/TopButtonBar.css";
 
 import { useRef } from "react";
 import {
+  SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
   CREATE_FOLDER_KEY,
   CLICK_EVENT_NAME,
@@ -49,7 +50,7 @@ function TopButtonBar({
 
 function CreateFolderButton({ onCreateFolder }) {
   return (
-    <button onClick={onCreateFolder} title={CTRL_KEY_LABEL + CREATE_FOLDER_KEY}>
+    <button onClick={onCreateFolder} title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CREATE_FOLDER_KEY}>
       Create directory
     </button>
   );
@@ -76,7 +77,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
       <button
         onClick={dispatchEvent}
         ref={addFilesButtonRef}
-        title={CTRL_KEY_LABEL + ADD_FILES_KEY}
+        title={SHORTCUT_LABEL + CTRL_KEY_LABEL + ADD_FILES_KEY}
       >
         Add files
       </button>
@@ -104,7 +105,7 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
       <button
         onClick={dispatchEvent}
         ref={importZipButtonRef}
-        title={CTRL_KEY_LABEL + IMPORT_ZIP_KEY}
+        title={SHORTCUT_LABEL + CTRL_KEY_LABEL + IMPORT_ZIP_KEY}
       >
         Import zip file
       </button>
@@ -124,7 +125,7 @@ function ExportZipButton({ disabled, onExportZipFile }) {
     <button
       onClick={onExportZipFile}
       disabled={disabled}
-      title={CTRL_KEY_LABEL + EXPORT_ZIP_KEY}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + EXPORT_ZIP_KEY}
     >
       Export zip file
     </button>
