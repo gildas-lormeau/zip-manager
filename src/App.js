@@ -709,6 +709,9 @@ function Entry({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
 }
 
 function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
+  const entryLabel =
+    entry === selectedFolder.parent ? PARENT_FOLDER_LABEL : entry.name;
+
   function handleClick() {
     onSelectEntry(entry);
   }
@@ -720,10 +723,11 @@ function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
   return (
     <span
       className="list-item-name entry-name"
+      title={entryLabel}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
-      {entry === selectedFolder.parent ? PARENT_FOLDER_LABEL : entry.name}
+      {entryLabel}
     </span>
   );
 }
