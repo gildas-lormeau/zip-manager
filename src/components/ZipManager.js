@@ -386,6 +386,7 @@ function ZipManager() {
     );
   }
 
+  useEffect(registerKeyUpHandler);
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntry, [highlightedEntry]);
@@ -395,7 +396,7 @@ function ZipManager() {
     previousSelectedFolder,
     selectedFolder
   ]);
-  useEffect(registerKeyUpHandler);
+
   return (
     <div className="application">
       <TopButtonBar
