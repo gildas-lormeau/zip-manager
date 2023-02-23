@@ -208,18 +208,14 @@ function App() {
   }
 
   function onHighlightPreviousEntry() {
-    const indexEntry = entries.findIndex(
-      (entry) => entry === highlightedEntry
-    );
+    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
     setHighlightedEntry(previousEntry);
   }
 
   function onHighlightNextEntry() {
-    const indexEntry = entries.findIndex(
-      (entry) => entry === highlightedEntry
-    );
+    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
   }
