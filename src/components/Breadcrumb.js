@@ -2,7 +2,6 @@ import "./styles/Breadcrumb.css";
 
 import {
   ENTER_KEY,
-  ACTION_KEY,
   ROOT_FOLDER_LABEL
 } from "./../business/constants.js";
 
@@ -50,7 +49,7 @@ function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
   }
 
   function handleKeyUp({ event, folder }) {
-    if (event.key === ENTER_KEY || event.key === ACTION_KEY) {
+    if (event.key === ENTER_KEY) {
       handleClick(folder);
     }
   }
