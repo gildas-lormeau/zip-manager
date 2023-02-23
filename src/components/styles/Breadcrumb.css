@@ -8,13 +8,6 @@
   margin-block-end: 4px;
 }
 
-.breadcrumb li::after,
-.entries .directory .entry-name::after {
-  content: "/";
-  padding-inline-start: 2px;
-  padding-inline-end: 2px;
-}
-
 .breadcrumb li .breadcrumb-item:first-of-type {
   padding-inline-start: 0;
 }
