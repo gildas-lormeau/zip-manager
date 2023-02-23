@@ -29,8 +29,7 @@ const UP_KEY = "ArrowUp";
 const HOME_KEY = "Home";
 const END_KEY = "End";
 
-const LIST_NAVIGATION_KEYS = [DOWN_KEY, UP_KEY, HOME_KEY, END_KEY];
-const NAVIGATION_KEYS = [...LIST_NAVIGATION_KEYS, ACTION_KEY];
+const NAVIGATION_KEYS = [DOWN_KEY, UP_KEY, HOME_KEY, END_KEY, ACTION_KEY];
 
 const CTRL_KEY_LABEL = "Ctrl-";
 
@@ -90,8 +89,8 @@ function App() {
     if (DELETE_KEYS.includes(event.key)) {
       onDeleteEntry();
     }
-    if (LIST_NAVIGATION_KEYS.includes(event.key)) {
-      onListNavigateEntries(event.key);
+    if (NAVIGATION_KEYS.includes(event.key)) {
+      onNavigateEntries(event.key);
     }
   }
 
@@ -253,24 +252,10 @@ function App() {
     deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
   }
 
-  function onNavigateEntries(eventKey, entry) {
+  function onNavigateEntries(eventKey) {
     if (eventKey === ACTION_KEY) {
-      onActionEntry(entry);
+      onActionEntry();
     }
-    if (entry === highlightedEntry) {
-      onListNavigateEntries(eventKey);
-    }
-  }
-
-  function onActionEntry(entry) {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
-    }
-  }
-
-  function onListNavigateEntries(eventKey) {
     if (eventKey === DOWN_KEY) {
       onHighlightNextEntry();
     }
@@ -282,6 +267,14 @@ function App() {
     }
     if (eventKey === END_KEY) {
       onHighlightLastEntry();
+    }
+  }
+
+  function onActionEntry() {
+    if (highlightedEntry.directory) {
+      onGoIntoFolder(highlightedEntry);
+    } else {
+      onDownloadFile(highlightedEntry);
     }
   }
 
@@ -425,7 +418,6 @@ function App() {
         onDownloadFile={onDownloadFile}
         onSetHighlightedEntry={onSetHighlightedEntry}
         onActionEntry={onActionEntry}
-        onNavigateEntries={onNavigateEntries}
       />
       <BottomButtonBar
         selectedFolder={selectedFolder}
@@ -643,8 +635,7 @@ function Entries({
   highlightedEntry,
   highlightedEntryRef,
   onSetHighlightedEntry,
-  onActionEntry,
-  onNavigateEntries
+  onActionEntry
 }) {
   function getEntryClassName(entry) {
     const classes = [];
@@ -657,13 +648,6 @@ function Entries({
     return classes.join(" ");
   }
 
-  function handleKeyUp({ event, entry }) {
-    if (NAVIGATION_KEYS.includes(event.key)) {
-      onNavigateEntries(event.key, entry);
-      event.stopPropagation();
-    }
-  }
-
   return (
     <ol className="entries">
       {entries.map((entry) => {
@@ -673,7 +657,6 @@ function Entries({
               key={entry.id}
               ref={highlightedEntryRef}
               className={getEntryClassName(entry)}
-              onKeyUp={(event) => handleKeyUp({ event, entry })}
               tabIndex={0}
             >
               <Entry
