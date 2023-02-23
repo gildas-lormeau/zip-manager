@@ -14,7 +14,7 @@ const ABORT_ERROR_NAME = "AbortError";
 const KEYUP_EVENT_NAME = "keyup";
 const CLICK_EVENT_NAME = "click";
 
-const ACTION_KEY = "Enter";
+const ACTION_KEY = " ";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
 const RENAME_KEY = "r";
