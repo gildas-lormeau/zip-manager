@@ -1,0 +1,21 @@
+.button-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.button-bar button {
+  margin-inline-end: 4px;
+  margin-block-end: 4px;
+  padding: 8px;
+  padding-inline-start: 12px;
+  padding-inline-end: 12px;
+}
+
+.button-bar button:not([disabled]) {
+  cursor: pointer;
+}
+
+.button-group {
+  margin-inline-end: 4px;
+}

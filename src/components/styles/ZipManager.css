@@ -1,0 +1,24 @@
+.application {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 50px);
+  margin: 8px;
+  border: solid gray 1px;
+}
+
+.application > * {
+  padding: 8px;
+  padding-block-end: 4px;
+  border-block-end: solid gray 1px;
+}
+
+.application > :last-child {
+  border-block-end: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    filter: invert(1);
+  }
+}

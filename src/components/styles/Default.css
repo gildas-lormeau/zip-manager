@@ -1,0 +1,33 @@
+body {
+  font-weight: 400;
+  background-color: lightgray;
+  min-width: 360px;
+  max-width: max(1024px, 75vw);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  user-select: none;
+}
+
+.list-item-button {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.list-item-button:hover {
+  opacity: 1;
+}
+
+.list-item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

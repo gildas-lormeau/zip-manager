@@ -1,0 +1,25 @@
+.downloads {
+  height: 10vh;
+  overflow: auto;
+}
+
+.downloads li {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  padding-block-end: 8px;
+}
+
+.downloads .download-entry {
+  display: flex;
+}
+
+.downloads .download-entry-name {
+  flex: 1;
+}
+
+.downloads li progress {
+  width: 100%;
+  height: 12px;
+  accent-color: gray;
+}

@@ -1,0 +1,29 @@
+.entries {
+  flex: 1;
+  overflow: auto;
+}
+
+.entries li {
+  display: flex;
+  padding: 4px;
+  user-select: none;
+}
+
+.entries li > * {
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+}
+
+.entries .entry-name {
+  flex: 1;
+  cursor: pointer;
+}
+
+.entries .entry-highlighted {
+  background-color: gray;
+  color: white;
+}
+
+.entries .entry-highlighted:focus {
+  outline: none;
+}
