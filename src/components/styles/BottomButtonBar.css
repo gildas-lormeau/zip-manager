@@ -2,12 +2,12 @@
   justify-content: flex-end;
 }
 
-.button-bar-bottom button {
+.button-bar.button-bar-bottom button {
   margin-inline-start: 4px;
   margin-inline-end: 0;
 }
 
-.button-bar-bottom .button-group {
+.button-bar.button-bar-bottom .button-group {
   margin-inline-start: 4px;
   margin-inline-end: 0;
 }

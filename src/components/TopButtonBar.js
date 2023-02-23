@@ -1,3 +1,5 @@
+import "./styles/TopButtonBar.css";
+
 import { useRef } from "react";
 import {
   CTRL_KEY_LABEL,
