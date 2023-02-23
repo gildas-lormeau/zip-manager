@@ -41,6 +41,7 @@ const DELETE_MESSAGE = "Please confirm the deletion";
 function App() {
   const [zipFilesystem, setZipFilesystem] = useState(new FS());
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [previousSelectedFolder, setPreviousSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
   const [highlightedEntry, setHighlightedEntry] = useState(null);
   const [downloads, setDownloads] = useState([]);
@@ -230,6 +231,7 @@ function App() {
   }
 
   function onGoIntoFolder(entry) {
+    setPreviousSelectedFolder(selectedFolder);
     setSelectedFolder(entry);
   }
 
@@ -286,7 +288,11 @@ function App() {
   }
 
   function updateDefaultHighlightedEntry() {
-    if (!entries.find((entry) => entry === highlightedEntry)) {
+    if (selectedFolder && previousSelectedFolder === selectedFolder.parent) {
+      setHighlightedEntry(previousSelectedFolder);
+    } else if (previousSelectedFolder && previousSelectedFolder.parent === selectedFolder) {
+      setHighlightedEntry(previousSelectedFolder);
+    } else {
       setHighlightedEntry(entries[0]);
     }
   }
@@ -345,7 +351,7 @@ function App() {
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntry, [highlightedEntry]);
-  useEffect(updateDefaultHighlightedEntry, [entries, highlightedEntry]);
+  useEffect(updateDefaultHighlightedEntry, [entries, highlightedEntry, previousSelectedFolder, selectedFolder]);
   useEffect(() => {
     window.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
     return () => window.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
