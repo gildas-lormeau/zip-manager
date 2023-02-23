@@ -289,10 +289,12 @@ function App() {
 
   function updateDefaultHighlightedEntry() {
     if (selectedFolder && previousSelectedFolder === selectedFolder.parent) {
+      setPreviousSelectedFolder(null);
       setHighlightedEntry(previousSelectedFolder);
     } else if (previousSelectedFolder && previousSelectedFolder.parent === selectedFolder) {
+      setPreviousSelectedFolder(null);
       setHighlightedEntry(previousSelectedFolder);
-    } else {
+    } else if(!highlightedEntry || !entries.includes(highlightedEntry)) {
       setHighlightedEntry(entries[0]);
     }
   }
