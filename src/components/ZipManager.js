@@ -6,7 +6,14 @@ import "./styles/ButtonBar.css";
 import { useEffect, useState, useRef } from "react";
 import { fs } from "@zip.js/zip.js";
 
-import { downloadBlob, alert, confirm, prompt } from "./../util/util.js";
+import {
+  downloadBlob,
+  alert,
+  confirm,
+  prompt,
+  addEventListener,
+  removeEventListener
+} from "./../util/util.js";
 
 import TopButtonBar from "./TopButtonBar.js";
 import Breadcrumb from "./Breadcrumb.js";
@@ -324,8 +331,8 @@ function ZipManager() {
   }
 
   function registerKeyUpHandler() {
-    window.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
-    return () => window.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    return () => removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
   }
 
   async function downloadFile(name, options, blobGetter) {

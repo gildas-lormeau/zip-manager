@@ -17,4 +17,19 @@ function prompt(message, defaultValue) {
   return window.prompt(message, defaultValue);
 }
 
-export { downloadBlob, alert, confirm, prompt };
+function addEventListener(type, listener, options) {
+  window.addEventListener(type, listener, options);
+}
+
+function removeEventListener(type, listener, options) {
+  window.removeEventListener(type, listener, options);
+}
+
+export {
+  downloadBlob,
+  alert,
+  confirm,
+  prompt,
+  addEventListener,
+  removeEventListener
+};
