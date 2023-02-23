@@ -7,26 +7,49 @@ import {
 } from "./../business/constants.js";
 
 function Breadcrumb({ folder, onGoIntoFolder }) {
-  const folderAncestors = [];
   const lastItemFolder = folder;
+  const ancestors = getAncestors(folder);
+  return (
+    <ol className="breadcrumb">
+      {ancestors.map((folder) => (
+        <li key={folder.id}>
+          <BreadcrumbItem
+            folder={folder}
+            onGoIntoFolder={onGoIntoFolder}
+            active={ancestors.length > 1 && folder !== lastItemFolder}
+          />
+        </li>
+      ))}
+    </ol>
+  );
+}
 
-  function getBreadcrumbItemClassName(itemFolder) {
+function getAncestors(folder) {
+  const ancestors = [];
+  while (folder && folder.parent) {
+    ancestors.unshift(folder);
+    folder = folder.parent;
+  }
+  if (folder) {
+    ancestors.unshift(folder);
+  }
+  return ancestors;
+}
+
+function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
+  function getBreadcrumbItemClassName() {
     const classes = ["breadcrumb-item"];
-    if (folderAncestors.length > 1 && itemFolder !== lastItemFolder) {
+    if (active) {
       classes.push("breadcrumb-item-active");
     }
     return classes.join(" ");
   }
 
-  function getTabIndex(itemFolder) {
-    if (folderAncestors.length > 1 && itemFolder !== lastItemFolder) {
-      return 0;
-    } else {
-      return null;
-    }
+  function getTabIndex() {
+    return active ? 0 : null;
   }
 
-  function handleClick(folder) {
+  function handleClick() {
     onGoIntoFolder(folder);
   }
 
@@ -36,28 +59,15 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
     }
   }
 
-  while (folder && folder.parent) {
-    folderAncestors.unshift(folder);
-    folder = folder.parent;
-  }
-  if (folder) {
-    folderAncestors.unshift(folder);
-  }
   return (
-    <ol className="breadcrumb">
-      {folderAncestors.map((folder) => (
-        <li key={folder.id}>
-          <span
-            className={getBreadcrumbItemClassName(folder)}
-            onClick={() => handleClick(folder)}
-            onKeyUp={(event) => handleKeyUp({ event, folder })}
-            tabIndex={getTabIndex(folder)}
-          >
-            {folder.parent ? folder.name : ROOT_FOLDER_LABEL}
-          </span>
-        </li>
-      ))}
-    </ol>
+    <span
+      className={getBreadcrumbItemClassName()}
+      onClick={handleClick}
+      onKeyUp={(event) => handleKeyUp({ event, folder })}
+      tabIndex={getTabIndex()}
+    >
+      {folder.parent ? folder.name : ROOT_FOLDER_LABEL}
+    </span>
   );
 }
 
