@@ -1,7 +1,7 @@
 import "./styles/Base.css";
-import "./styles/ZipManager.css";
 import "./styles/ListItem.css";
 import "./styles/ButtonBar.css";
+import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
 import { fs } from "@zip.js/zip.js";
