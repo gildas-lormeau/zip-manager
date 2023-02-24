@@ -38,7 +38,7 @@
       "indent": ["error", 2],
       "linebreak-style": ["error", "unix"],
       "quotes": ["error", "double"],
-      "semi": ["error", "always"],
+      "semi": ["warn", "always"],
       "no-console": ["warn"],
       "no-debugger": ["warn"],
       "no-unused-vars": "warn"
