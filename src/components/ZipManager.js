@@ -1,5 +1,3 @@
-/* global AbortController */
-
 import "./styles/Base.css";
 import "./styles/Common.css";
 import "./styles/ListItem.css";
@@ -10,10 +8,18 @@ import { useEffect, useState, useRef } from "react";
 import { fs } from "@zip.js/zip.js";
 
 import {
-  downloadBlob,
-  alert,
-  confirm,
-  prompt,
+  getEntriesNavigationHandlers,
+  getFolderNavigationHandlers,
+  getSelectedFolderHandlers,
+  getHighlightedEntryHandlers,
+  getActionHandlers,
+  getZipFilesystemHandlers,
+  getDownloadHandlers,
+  getClipboardHandlers,
+  onKeyUp
+} from "./ZipManagerHandlers.js";
+
+import {
   addEventListener,
   removeEventListener
 } from "./../util/util.js";
@@ -25,33 +31,7 @@ import BottomButtonBar from "./BottomButtonBar.js";
 import DownloadManager from "./DownloadManager.js";
 
 import {
-  DEFAULT_MIME_TYPE,
-  ZIP_EXTENSION,
-  ROOT_ZIP_FILENAME,
-  CANCELLED_DOWNLOAD_MESSAGE,
-  ABORT_ERROR_NAME,
-  KEYUP_EVENT_NAME,
-  ACTION_KEY,
-  CUT_KEY,
-  COPY_KEY,
-  RENAME_KEY,
-  PASTE_KEY,
-  CREATE_FOLDER_KEY,
-  ADD_FILES_KEY,
-  IMPORT_ZIP_KEY,
-  EXPORT_ZIP_KEY,
-  DELETE_KEYS,
-  DOWN_KEY,
-  UP_KEY,
-  HOME_KEY,
-  END_KEY,
-  NAVIGATION_BACK_KEY,
-  NAVIGATION_FORWARD_KEY,
-  CREATE_FOLDER_MESSAGE,
-  RENAME_MESSAGE,
-  RESET_MESSAGE,
-  DOWNLOAD_MESSAGE,
-  DELETE_MESSAGE
+  KEYUP_EVENT_NAME
 } from "./../business/constants.js";
 
 const { FS } = fs;
@@ -88,268 +68,98 @@ function ZipManager() {
   const disabledRenameEntryButton = actionDisabled;
   const disabledDeleteEntryButton = actionDisabled;
 
+  const {
+    onHighlightPreviousEntry,
+    onHighlightNextEntry,
+    onHighlightFirstEntry,
+    onHighlightLastEntry,
+    onSetHighlightedEntry
+  } = getEntriesNavigationHandlers({
+    entries,
+    highlightedEntry,
+    setHighlightedEntry
+  });
+  const { onGoIntoFolder, onNavigateHistoryBack, onNavigateHistoryForward } =
+    getFolderNavigationHandlers({
+      history,
+      historyIndex,
+      selectedFolder,
+      setSelectedFolder,
+      setPreviousSelectedFolder,
+      setHistory,
+      setHistoryIndex
+    });
+  const { downloadFile, onDownloadFile, onDeleteDownloadEntry } =
+    getDownloadHandlers({
+      downloadId,
+      setDownloads,
+      setDownloadId,
+      downloaderRef
+    });
+  const { onCreateFolder, onAddFiles, onImportZipFile, onExportZipFile } =
+    getSelectedFolderHandlers({
+      selectedFolder,
+      updateSelectedFolder,
+      downloadFile
+    });
+  const {
+    onCopyEntry,
+    onCutEntry,
+    onPasteEntry,
+    onRenameEntry,
+    onDeleteEntry
+  } = getHighlightedEntryHandlers({
+    zipFilesystem,
+    history,
+    historyIndex,
+    highlightedEntry,
+    selectedFolder,
+    clipboardData,
+    setHistory,
+    setHistoryIndex,
+    setClipboardData,
+    setHighlightedEntry,
+    updateSelectedFolder
+  });
+  const { onReset } = getZipFilesystemHandlers({
+    setZipFilesystem
+  });
+  const { onResetClipboardData } = getClipboardHandlers({
+    setClipboardData
+  });
+  const { onActionEntry } = getActionHandlers({
+    highlightedEntry,
+    onGoIntoFolder,
+    onDownloadFile
+  });
+
   function handleKeyUp(event) {
-    if (event.ctrlKey) {
-      if (event.key === CREATE_FOLDER_KEY) {
-        onCreateFolder();
-      }
-      if (event.key === ADD_FILES_KEY) {
-        addFilesButtonRef.current.click();
-      }
-      if (event.key === IMPORT_ZIP_KEY) {
-        importZipButtonRef.current.click();
-      }
-      if (event.key === EXPORT_ZIP_KEY && disabledExportZipButton) {
-        onExportZipFile();
-      }
-      if (event.key === CUT_KEY && !disabledCutEntryButton) {
-        onCutEntry();
-      }
-      if (event.key === COPY_KEY && !disabledCopyEntryButton) {
-        onCopyEntry();
-      }
-      if (event.key === RENAME_KEY && !disabledRenameEntryButton) {
-        onRenameEntry();
-      }
-      if (event.key === PASTE_KEY && !disabledPasteEntryButton) {
-        onPasteEntry();
-      }
-    }
-    if (event.altKey) {
-      if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBackButton) {
-        onNavigateHistoryBack();
-      }
-      if (
-        event.key === NAVIGATION_FORWARD_KEY &&
-        !disabledHistoryForwardButton
-      ) {
-        onNavigateHistoryForward();
-      }
-    }
-    if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntryButton) {
-      onDeleteEntry();
-    }
-    if (event.key === ACTION_KEY) {
-      onActionEntry();
-    }
-    if (event.key === DOWN_KEY) {
-      onHighlightNextEntry();
-    }
-    if (event.key === UP_KEY) {
-      onHighlightPreviousEntry();
-    }
-    if (event.key === HOME_KEY) {
-      onHighlightFirstEntry();
-    }
-    if (event.key === END_KEY) {
-      onHighlightLastEntry();
-    }
-  }
-
-  function onCreateFolder() {
-    const folderName = prompt(CREATE_FOLDER_MESSAGE);
-    if (folderName) {
-      try {
-        selectedFolder.addDirectory(folderName);
-        updateSelectedFolder();
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-  }
-
-  function onAddFiles(files) {
-    files.forEach((file) => {
-      try {
-        return selectedFolder.addBlob(file.name, file);
-      } catch (error) {
-        alert(error.message);
-      }
+    onKeyUp({
+      event,
+      onCutEntry,
+      onCopyEntry,
+      onRenameEntry,
+      onPasteEntry,
+      onDeleteEntry,
+      onActionEntry,
+      onHighlightNextEntry,
+      onHighlightPreviousEntry,
+      onHighlightFirstEntry,
+      onHighlightLastEntry,
+      disabledCutEntryButton,
+      disabledCopyEntryButton,
+      disabledRenameEntryButton,
+      disabledPasteEntryButton,
+      disabledDeleteEntryButton,
+      onCreateFolder,
+      onExportZipFile,
+      addFilesButtonRef,
+      importZipButtonRef,
+      disabledExportZipButton,
+      onNavigateHistoryBack,
+      onNavigateHistoryForward,
+      disabledHistoryBackButton
     });
-    updateSelectedFolder();
-  }
-
-  function onCopyEntry() {
-    setClipboardData({
-      entry: highlightedEntry.clone(true)
-    });
-  }
-
-  function onCutEntry() {
-    setClipboardData({
-      entry: highlightedEntry,
-      cut: true
-    });
-  }
-
-  function onPasteEntry() {
-    try {
-      const { entry, cut } = clipboardData;
-      let clone;
-      if (!cut) {
-        clone = entry.clone(true);
-      }
-      zipFilesystem.move(entry, selectedFolder);
-      if (!cut) {
-        setClipboardData({ entry: clone });
-      }
-      updateSelectedFolder();
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  function onResetClipboardData() {
-    setClipboardData(null);
-  }
-
-  function onRenameEntry() {
-    try {
-      const entryName = prompt(RENAME_MESSAGE, highlightedEntry.name);
-      if (entryName && entryName !== highlightedEntry.name) {
-        highlightedEntry.rename(entryName);
-        updateSelectedFolder();
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  function onDeleteEntry() {
-    if (confirm(DELETE_MESSAGE)) {
-      zipFilesystem.remove(highlightedEntry);
-      updateHistoryData();
-      setHighlightedEntry(null);
-      updateSelectedFolder();
-    }
-  }
-
-  function updateHistoryData() {
-    let offsetIndex = 0;
-    let previousEntry;
-    const newHistory = history.filter((entry, indexEntry) => {
-      const entryRemoved =
-        previousEntry === entry ||
-        entry === highlightedEntry ||
-        entry.isDescendantOf(highlightedEntry);
-      if (entryRemoved) {
-        if (indexEntry <= historyIndex) {
-          offsetIndex++;
-        }
-      } else {
-        previousEntry = entry;
-      }
-      return !entryRemoved;
-    });
-    const newHistoryIndex = historyIndex - offsetIndex;
-    setHistory(newHistory);
-    setHistoryIndex(newHistoryIndex);
-  }
-
-  function onImportZipFile(zipFile) {
-    async function updateZipFile() {
-      try {
-        await selectedFolder.importBlob(zipFile);
-      } catch (error) {
-        alert(error.message);
-      }
-      updateSelectedFolder();
-    }
-
-    if (zipFile) {
-      updateZipFile();
-    }
-  }
-
-  function onExportZipFile() {
-    downloadFile(
-      selectedFolder.name
-        ? selectedFolder.name + ZIP_EXTENSION
-        : ROOT_ZIP_FILENAME,
-      { mimeType: DEFAULT_MIME_TYPE },
-      (options) => selectedFolder.exportBlob(options)
-    );
-  }
-
-  function onHighlightPreviousEntry() {
-    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
-    const previousEntry =
-      entries[(indexEntry - 1 + entries.length) % entries.length];
-    setHighlightedEntry(previousEntry);
-  }
-
-  function onHighlightNextEntry() {
-    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
-    const nextEntry = entries[(indexEntry + 1) % entries.length];
-    setHighlightedEntry(nextEntry);
-  }
-
-  function onHighlightFirstEntry() {
-    setHighlightedEntry(entries[0]);
-  }
-
-  function onHighlightLastEntry() {
-    setHighlightedEntry(entries[entries.length - 1]);
-  }
-
-  function onReset() {
-    if (confirm(RESET_MESSAGE)) {
-      setZipFilesystem(new FS());
-    }
-  }
-
-  function onSetHighlightedEntry(entry) {
-    setHighlightedEntry(entry);
-  }
-
-  function onGoIntoFolder(entry) {
-    const newHistory = [...history];
-    const newHistoryIndex = historyIndex + 1;
-    newHistory[newHistoryIndex] = entry;
-    setHistory(newHistory);
-    setHistoryIndex(newHistoryIndex);
-    setSelectedFolders(entry);
-  }
-
-  function onDownloadFile(file) {
-    downloadFile(file.name, {}, (options) =>
-      file.getBlob(DEFAULT_MIME_TYPE, options)
-    );
-  }
-
-  function onDeleteDownloadEntry(deletedDownload) {
-    setDownloads((downloads) =>
-      downloads.filter((download) => download.id !== deletedDownload.id)
-    );
-    deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
-  }
-
-  function onActionEntry(entry = highlightedEntry) {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
-    }
-  }
-
-  function onNavigateHistoryBack() {
-    onNavigateHistory(-1);
-  }
-
-  function onNavigateHistoryForward() {
-    onNavigateHistory(1);
-  }
-
-  function onNavigateHistory(offset) {
-    const newHistoryIndex = historyIndex + offset;
-    setHistoryIndex(newHistoryIndex);
-    const entry = history[newHistoryIndex];
-    setSelectedFolders(entry);
-  }
-
-  function setSelectedFolders(entry) {
-    setPreviousSelectedFolder(selectedFolder);
-    setSelectedFolder(entry);
   }
 
   function updateSelectedFolder() {
@@ -410,57 +220,6 @@ function ZipManager() {
   function registerKeyUpHandler() {
     addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
     return () => removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
-  }
-
-  async function downloadFile(name, options, blobGetter) {
-    name = prompt(DOWNLOAD_MESSAGE, name);
-    if (name) {
-      const controller = new AbortController();
-      const progressValue = null;
-      const progressMax = null;
-      const id = downloadId + 1;
-      setDownloadId(() => id);
-      const download = { id, name, controller, progressValue, progressMax };
-      setDownloads((downloads) => [download, ...downloads]);
-      const { signal } = controller;
-      const onprogress = (progressValue, progressMax) =>
-        onDownloadProgress(download.id, progressValue, progressMax);
-      Object.assign(options, {
-        signal,
-        onprogress,
-        bufferedWrite: true,
-        keepOrder: true
-      });
-      try {
-        const blob = await blobGetter(options);
-        downloadBlob(blob, downloaderRef.current, download.name);
-      } catch (error) {
-        const message = error.message || error;
-        if (
-          message !== CANCELLED_DOWNLOAD_MESSAGE &&
-          error.name !== ABORT_ERROR_NAME
-        ) {
-          alert(message);
-        }
-      } finally {
-        onDeleteDownloadEntry(download);
-      }
-    }
-  }
-
-  function onDownloadProgress(downloadId, progressValue, progressMax) {
-    setDownloads((downloads) =>
-      downloads.map((download) => {
-        if (download.id === downloadId) {
-          download = {
-            ...download,
-            progressValue,
-            progressMax
-          };
-        }
-        return download;
-      })
-    );
   }
 
   useEffect(registerKeyUpHandler);
