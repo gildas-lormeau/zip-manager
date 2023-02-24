@@ -50,12 +50,12 @@ function HistoryButtons({
 }
 
 function HistoryBackButton({
-  disabledHistoryBackButton,
+  disabled,
   onNavigateHistoryBack
 }) {
   return (
     <button
-      disabled={disabledHistoryBackButton}
+      disabled={disabled}
       onClick={onNavigateHistoryBack}
       title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_LEFT_KEY_LABEL}
     >
@@ -65,12 +65,12 @@ function HistoryBackButton({
 }
 
 function HistoryForwardButton({
-  disabledHistoryForwardButton,
+  disabled,
   onNavigateHistoryForward
 }) {
   return (
     <button
-      disabled={disabledHistoryForwardButton}
+      disabled={disabled}
       onClick={onNavigateHistoryForward}
       title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_RIGHT_KEY_LABEL}
     >
