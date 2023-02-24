@@ -144,7 +144,7 @@ function ZipManager() {
 
   function onCopyEntry() {
     setClipboardData({
-      entry: highlightedEntry.clone()
+      entry: highlightedEntry.clone(true)
     });
   }
 
@@ -160,7 +160,7 @@ function ZipManager() {
       const { entry, cut } = clipboardData;
       let clone;
       if (!cut) {
-        clone = entry.clone();
+        clone = entry.clone(true);
       }
       zipFilesystem.move(entry, selectedFolder);
       if (!cut) {
