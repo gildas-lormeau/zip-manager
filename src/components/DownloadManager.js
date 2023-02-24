@@ -15,7 +15,6 @@ function DownloadManager({ downloads, downloaderRef, onDeleteDownloadEntry }) {
           </li>
         ))}
       </ol>
-      {/* eslint-disable-next-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */}
       <a hidden ref={downloaderRef} />
     </div>
   );

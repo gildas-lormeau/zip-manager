@@ -1,3 +1,5 @@
+/* global window, URL */
+
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
   Object.assign(downloaderElement, { href, download });

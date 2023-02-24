@@ -1,3 +1,5 @@
+/* global AbortController */
+
 import "./styles/Base.css";
 import "./styles/Common.css";
 import "./styles/ListItem.css";

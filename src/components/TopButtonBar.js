@@ -1,3 +1,5 @@
+/* global MouseEvent */
+
 import "./styles/TopButtonBar.css";
 
 import { useRef } from "react";
