@@ -15,9 +15,10 @@ import {
 } from "./../business/constants.js";
 
 function TopButtonBar({
-  entries,
   addFilesButtonRef,
   importZipButtonRef,
+  disabledExportZipButton,
+  disabledResetButton,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
@@ -39,12 +40,12 @@ function TopButtonBar({
           importZipButtonRef={importZipButtonRef}
         />
         <ExportZipButton
-          disabled={!entries.length}
+          disabled={disabledExportZipButton}
           onExportZipFile={onExportZipFile}
         />
       </div>
       <div className="button-group">
-        <ResetButton disabled={!entries.length} onReset={onReset} />
+        <ResetButton disabled={disabledResetButton} onReset={onReset} />
       </div>
     </div>
   );
@@ -52,7 +53,10 @@ function TopButtonBar({
 
 function CreateFolderButton({ onCreateFolder }) {
   return (
-    <button onClick={onCreateFolder} title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CREATE_FOLDER_KEY}>
+    <button
+      onClick={onCreateFolder}
+      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CREATE_FOLDER_KEY}
+    >
       Create directory
     </button>
   );

@@ -9,9 +9,9 @@ import {
 } from "./../business/constants.js";
 
 function NavigationBar({
-  history,
-  historyIndex,
   selectedFolder,
+  disabledHistoryBackButton,
+  disabledHistoryForwardButton,
   onNavigateHistoryBack,
   onNavigateHistoryForward,
   onGoIntoFolder
@@ -19,8 +19,8 @@ function NavigationBar({
   return (
     <span className="navigation-bar">
       <HistoryButtons
-        history={history}
-        historyIndex={historyIndex}
+        disabledHistoryBackButton={disabledHistoryBackButton}
+        disabledHistoryForwardButton={disabledHistoryForwardButton}
         onNavigateHistoryBack={onNavigateHistoryBack}
         onNavigateHistoryForward={onNavigateHistoryForward}
       />
@@ -30,30 +30,32 @@ function NavigationBar({
 }
 
 function HistoryButtons({
-  history,
-  historyIndex,
+  disabledHistoryBackButton,
+  disabledHistoryForwardButton,
   onNavigateHistoryBack,
   onNavigateHistoryForward
 }) {
   return (
     <span className="history-buttons">
-      <BackButton
-        historyIndex={historyIndex}
+      <HistoryBackButton
+        disabled={disabledHistoryBackButton}
         onNavigateHistoryBack={onNavigateHistoryBack}
       />
-      <ForwardButton
-        history={history}
-        historyIndex={historyIndex}
+      <HistoryForwardButton
+        disabled={disabledHistoryForwardButton}
         onNavigateHistoryForward={onNavigateHistoryForward}
       />
     </span>
   );
 }
 
-function BackButton({ historyIndex, onNavigateHistoryBack }) {
+function HistoryBackButton({
+  disabledHistoryBackButton,
+  onNavigateHistoryBack
+}) {
   return (
     <button
-      disabled={!historyIndex}
+      disabled={disabledHistoryBackButton}
       onClick={onNavigateHistoryBack}
       title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_LEFT_KEY_LABEL}
     >
@@ -62,10 +64,13 @@ function BackButton({ historyIndex, onNavigateHistoryBack }) {
   );
 }
 
-function ForwardButton({ history, historyIndex, onNavigateHistoryForward }) {
+function HistoryForwardButton({
+  disabledHistoryForwardButton,
+  onNavigateHistoryForward
+}) {
   return (
     <button
-      disabled={historyIndex === history.length - 1}
+      disabled={disabledHistoryForwardButton}
       onClick={onNavigateHistoryForward}
       title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_RIGHT_KEY_LABEL}
     >

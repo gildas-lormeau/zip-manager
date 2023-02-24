@@ -72,24 +72,24 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
+  const entriesEmpty = !entries.length;
+  const actionDisabled =
+    !highlightedEntry || highlightedEntry === selectedFolder.parent;
+  const clipboardDataEmpty = !clipboardData;
+
+  const disabledExportZipButton = entriesEmpty;
+  const disabledResetButton = entriesEmpty;
+  const disabledHistoryBackButton = !historyIndex;
+  const disabledHistoryForwardButton = historyIndex === history.length - 1;
+  const disabledCopyEntryButton = actionDisabled;
+  const disabledCutEntryButton = actionDisabled;
+  const disabledPasteEntryButton = clipboardDataEmpty;
+  const disabledResetClipboardDataButton = clipboardDataEmpty;
+  const disabledRenameEntryButton = actionDisabled;
+  const disabledDeleteEntryButton = actionDisabled;
+
   function handleKeyUp(event) {
     if (event.ctrlKey) {
-      if (highlightedEntry) {
-        if (event.key === CUT_KEY) {
-          onCutEntry();
-        }
-        if (event.key === COPY_KEY) {
-          onCopyEntry();
-        }
-        if (event.key === RENAME_KEY) {
-          onRenameEntry();
-        }
-      }
-      if (clipboardData) {
-        if (event.key === PASTE_KEY) {
-          onPasteEntry();
-        }
-      }
       if (event.key === CREATE_FOLDER_KEY) {
         onCreateFolder();
       }
@@ -99,25 +99,34 @@ function ZipManager() {
       if (event.key === IMPORT_ZIP_KEY) {
         importZipButtonRef.current.click();
       }
-      if (entries.length) {
-        if (event.key === EXPORT_ZIP_KEY) {
-          onExportZipFile();
-        }
+      if (event.key === EXPORT_ZIP_KEY && disabledExportZipButton) {
+        onExportZipFile();
+      }
+      if (event.key === CUT_KEY && !disabledCutEntryButton) {
+        onCutEntry();
+      }
+      if (event.key === COPY_KEY && !disabledCopyEntryButton) {
+        onCopyEntry();
+      }
+      if (event.key === RENAME_KEY && !disabledRenameEntryButton) {
+        onRenameEntry();
+      }
+      if (event.key === PASTE_KEY && !disabledPasteEntryButton) {
+        onPasteEntry();
       }
     }
     if (event.altKey) {
-      if (historyIndex) {
-        if (event.key === NAVIGATION_BACK_KEY) {
-          onNavigateHistoryBack();
-        }
+      if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBackButton) {
+        onNavigateHistoryBack();
       }
-      if (historyIndex < history.length - 1) {
-        if (event.key === NAVIGATION_FORWARD_KEY) {
-          onNavigateHistoryForward();
-        }
+      if (
+        event.key === NAVIGATION_FORWARD_KEY &&
+        !disabledHistoryForwardButton
+      ) {
+        onNavigateHistoryForward();
       }
     }
-    if (DELETE_KEYS.includes(event.key)) {
+    if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntryButton) {
       onDeleteEntry();
     }
     if (event.key === ACTION_KEY) {
@@ -468,9 +477,10 @@ function ZipManager() {
   return (
     <div className="application">
       <TopButtonBar
-        entries={entries}
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
+        disabledExportZipButton={disabledExportZipButton}
+        disabledResetButton={disabledResetButton}
         onCreateFolder={onCreateFolder}
         onAddFiles={onAddFiles}
         onImportZipFile={onImportZipFile}
@@ -478,9 +488,9 @@ function ZipManager() {
         onReset={onReset}
       />
       <NavigationBar
-        history={history}
-        historyIndex={historyIndex}
         selectedFolder={selectedFolder}
+        disabledHistoryBackButton={disabledHistoryBackButton}
+        disabledHistoryForwardButton={disabledHistoryForwardButton}
         onNavigateHistoryBack={onNavigateHistoryBack}
         onNavigateHistoryForward={onNavigateHistoryForward}
         onGoIntoFolder={onGoIntoFolder}
@@ -496,9 +506,12 @@ function ZipManager() {
         onActionEntry={onActionEntry}
       />
       <BottomButtonBar
-        selectedFolder={selectedFolder}
-        highlightedEntry={highlightedEntry}
-        clipboardData={clipboardData}
+        disabledCopyEntryButton={disabledCopyEntryButton}
+        disabledCutEntryButton={disabledCutEntryButton}
+        disabledPasteEntryButton={disabledPasteEntryButton}
+        disabledResetClipboardDataButton={disabledResetClipboardDataButton}
+        disabledRenameEntryButton={disabledRenameEntryButton}
+        disabledDeleteEntryButton={disabledDeleteEntryButton}
         onCopyEntry={onCopyEntry}
         onCutEntry={onCutEntry}
         onPasteEntry={onPasteEntry}

@@ -11,9 +11,12 @@ import {
 } from "./../business/constants.js";
 
 function BottomButtonBar({
-  selectedFolder,
-  highlightedEntry,
-  clipboardData,
+  disabledCopyEntryButton,
+  disabledCutEntryButton,
+  disabledPasteEntryButton,
+  disabledResetClipboardDataButton,
+  disabledRenameEntryButton,
+  disabledDeleteEntryButton,
   onCopyEntry,
   onCutEntry,
   onPasteEntry,
@@ -21,30 +24,33 @@ function BottomButtonBar({
   onRenameEntry,
   onDeleteEntry
 }) {
-  const actionDisabled =
-    !highlightedEntry || highlightedEntry === selectedFolder.parent;
-
   return (
     <div className="button-bar button-bar-bottom">
       <div className="button-group">
-        <CopyEntryButton disabled={actionDisabled} onCopyEntry={onCopyEntry} />
-        <CutEntryButton disabled={actionDisabled} onCutEntry={onCutEntry} />
+        <CopyEntryButton
+          disabled={disabledCopyEntryButton}
+          onCopyEntry={onCopyEntry}
+        />
+        <CutEntryButton
+          disabled={disabledCutEntryButton}
+          onCutEntry={onCutEntry}
+        />
         <PasteEntryButton
-          disabled={!clipboardData}
+          disabled={disabledPasteEntryButton}
           onPasteEntry={onPasteEntry}
         />
         <ResetClipboardDataButton
-          disabled={!clipboardData}
+          disabled={disabledResetClipboardDataButton}
           onResetClipboardData={onResetClipboardData}
         />
       </div>
       <div className="button-group">
         <RenameEntryButton
-          disabled={actionDisabled}
+          disabled={disabledRenameEntryButton}
           onRenameEntry={onRenameEntry}
         />
         <DeleteEntryButton
-          disabled={actionDisabled}
+          disabled={disabledDeleteEntryButton}
           onDeleteEntry={onDeleteEntry}
         />
       </div>
