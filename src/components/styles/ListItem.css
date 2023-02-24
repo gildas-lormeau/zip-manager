@@ -1,4 +1,5 @@
 .list-item-button {
+  font-family: monospace;
   cursor: pointer;
   opacity: 0.75;
 }

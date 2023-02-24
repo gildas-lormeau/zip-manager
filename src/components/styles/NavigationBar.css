@@ -1,6 +1,30 @@
+.navigation-bar {
+  display: flex;
+  padding-block-end: 6px;
+}
+
+.history-buttons {
+  display: flex;
+  margin-inline-end: 2px;
+}
+
+.history-buttons button {
+  font-family: monospace;
+  margin-inline-end: 4px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
+  align-self: start;
+}
+
+.history-buttons button:not([disabled]) {
+  cursor: pointer;
+}
+
 .breadcrumb {
   display: inline-block;
   padding-block-end: 8px;
+  margin-block-end: -8px;
+  overflow: hidden;
 }
 
 .breadcrumb li {

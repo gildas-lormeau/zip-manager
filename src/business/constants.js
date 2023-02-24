@@ -25,10 +25,15 @@ const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
 const HOME_KEY = "Home";
 const END_KEY = "End";
+const NAVIGATION_BACK_KEY = "ArrowLeft";
+const NAVIGATION_FORWARD_KEY = "ArrowRight";
 
 const SHORTCUT_LABEL = "Shortcut: ";
 const CTRL_KEY_LABEL = "ctrl-";
+const ALT_KEY_LABEL = "alt-";
 const SPACE_KEY_LABEL = "space";
+const ARROW_LEFT_KEY_LABEL = "left";
+const ARROW_RIGHT_KEY_LABEL = "right";
 
 const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
 const RENAME_MESSAGE = "Please enter the entry name";
@@ -62,9 +67,14 @@ export {
   UP_KEY,
   HOME_KEY,
   END_KEY,
+  NAVIGATION_BACK_KEY,
+  NAVIGATION_FORWARD_KEY,
   SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
+  ALT_KEY_LABEL,
   SPACE_KEY_LABEL,
+  ARROW_LEFT_KEY_LABEL,
+  ARROW_RIGHT_KEY_LABEL,
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,

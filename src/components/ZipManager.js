@@ -19,7 +19,7 @@ import {
 } from "./../util/util.js";
 
 import TopButtonBar from "./TopButtonBar.js";
-import Breadcrumb from "./Breadcrumb.js";
+import NavigationBar from "./NavigationBar.js";
 import Entries from "./Entries.js";
 import BottomButtonBar from "./BottomButtonBar.js";
 import DownloadManager from "./DownloadManager.js";
@@ -45,6 +45,8 @@ import {
   UP_KEY,
   HOME_KEY,
   END_KEY,
+  NAVIGATION_BACK_KEY,
+  NAVIGATION_FORWARD_KEY,
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,
@@ -63,6 +65,8 @@ function ZipManager() {
   const [downloads, setDownloads] = useState([]);
   const [downloadId, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(0);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
@@ -98,6 +102,18 @@ function ZipManager() {
       if (entries.length) {
         if (event.key === EXPORT_ZIP_KEY) {
           onExportZipFile();
+        }
+      }
+    }
+    if (event.altKey) {
+      if (historyIndex) {
+        if (event.key === NAVIGATION_BACK_KEY) {
+          onNavigateHistoryBack();
+        }
+      }
+      if (historyIndex < history.length - 1) {
+        if (event.key === NAVIGATION_FORWARD_KEY) {
+          onNavigateHistoryForward();
         }
       }
     }
@@ -193,9 +209,32 @@ function ZipManager() {
   function onDeleteEntry() {
     if (confirm(DELETE_MESSAGE)) {
       zipFilesystem.remove(highlightedEntry);
+      updateHistoryData();
       setHighlightedEntry(null);
       updateSelectedFolder();
     }
+  }
+
+  function updateHistoryData() {
+    let offsetIndex = 0;
+    let previousEntry;
+    const newHistory = history.filter((entry, indexEntry) => {
+      const entryRemoved =
+        previousEntry === entry ||
+        entry === highlightedEntry ||
+        entry.isDescendantOf(highlightedEntry);
+      if (entryRemoved) {
+        if (indexEntry <= historyIndex) {
+          offsetIndex++;
+        }
+      } else {
+        previousEntry = entry;
+      }
+      return !entryRemoved;
+    });
+    const newHistoryIndex = historyIndex - offsetIndex;
+    setHistory(newHistory);
+    setHistoryIndex(newHistoryIndex);
   }
 
   function onImportZipFile(zipFile) {
@@ -255,8 +294,12 @@ function ZipManager() {
   }
 
   function onGoIntoFolder(entry) {
-    setPreviousSelectedFolder(selectedFolder);
-    setSelectedFolder(entry);
+    const newHistory = [...history];
+    const newHistoryIndex = historyIndex + 1;
+    newHistory[newHistoryIndex] = entry;
+    setHistory(newHistory);
+    setHistoryIndex(newHistoryIndex);
+    setSelectedFolders(entry);
   }
 
   function onDownloadFile(file) {
@@ -278,6 +321,26 @@ function ZipManager() {
     } else {
       onDownloadFile(entry);
     }
+  }
+
+  function onNavigateHistoryBack() {
+    onNavigateHistory(-1);
+  }
+
+  function onNavigateHistoryForward() {
+    onNavigateHistory(1);
+  }
+
+  function onNavigateHistory(offset) {
+    const newHistoryIndex = historyIndex + offset;
+    setHistoryIndex(newHistoryIndex);
+    const entry = history[newHistoryIndex];
+    setSelectedFolders(entry);
+  }
+
+  function setSelectedFolders(entry) {
+    setPreviousSelectedFolder(selectedFolder);
+    setSelectedFolder(entry);
   }
 
   function updateSelectedFolder() {
@@ -307,6 +370,8 @@ function ZipManager() {
     setPreviousSelectedFolder(null);
     setHighlightedEntry(null);
     setClipboardData(null);
+    setHistory([root]);
+    setHistoryIndex(0);
     setEntries([...root.children]);
   }
 
@@ -412,7 +477,14 @@ function ZipManager() {
         onExportZipFile={onExportZipFile}
         onReset={onReset}
       />
-      <Breadcrumb folder={selectedFolder} onGoIntoFolder={onGoIntoFolder} />
+      <NavigationBar
+        history={history}
+        historyIndex={historyIndex}
+        selectedFolder={selectedFolder}
+        onNavigateHistoryBack={onNavigateHistoryBack}
+        onNavigateHistoryForward={onNavigateHistoryForward}
+        onGoIntoFolder={onGoIntoFolder}
+      />
       <Entries
         entries={entries}
         selectedFolder={selectedFolder}
