@@ -391,7 +391,7 @@ function getActionHandlers({
   return { onActionEntry };
 }
 
-function onSelectedEntryKeyUp({
+function onHighlightedEntryKeyUp({
   event,
   onCutEntry,
   onCopyEntry,
@@ -532,7 +532,7 @@ function onKeyUp({
   addFilesButtonRef,
   importZipButtonRef
 }) {
-  onSelectedEntryKeyUp({
+  onHighlightedEntryKeyUp({
     event,
     onCutEntry,
     onCopyEntry,
