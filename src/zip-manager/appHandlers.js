@@ -10,7 +10,6 @@ import {
   RESET_MESSAGE,
   DELETE_MESSAGE
 } from "./constants.js";
-import { FS } from "./util.js";
 
 function getEntriesNavigationHandlers({
   entries,
@@ -293,10 +292,10 @@ function getHighlightedEntryHandlers({
   };
 }
 
-function getZipFilesystemHandlers({ setZipFilesystem }) {
+function getZipFilesystemHandlers({ createZipFileSystem, setZipFilesystem }) {
   function onReset() {
     if (confirm(RESET_MESSAGE)) {
-      setZipFilesystem(new FS());
+      setZipFilesystem(createZipFileSystem());
     }
   }
   return {

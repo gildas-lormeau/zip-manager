@@ -6,7 +6,7 @@ import "./styles/ZipManager.css";
 import { useEffect, useState, useRef } from "react";
 
 import * as constants from "./constants.js";
-import { getUtil, FS } from "./util.js";
+import { getUtil, createZipFileSystem } from "./util.js";
 import { getEffects } from "./effects.js";
 import {
   getEntriesNavigationHandlers,
@@ -27,7 +27,7 @@ import BottomButtonBar from "./components/BottomButtonBar.js";
 import DownloadManager from "./components/DownloadManager.js";
 
 function ZipManager() {
-  const [zipFilesystem, setZipFilesystem] = useState(new FS());
+  const [zipFilesystem, setZipFilesystem] = useState(createZipFileSystem());
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [previousSelectedFolder, setPreviousSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
@@ -141,6 +141,7 @@ function ZipManager() {
     updateSelectedFolder
   });
   const { onReset } = getZipFilesystemHandlers({
+    createZipFileSystem,
     setZipFilesystem
   });
   const { onResetClipboardData } = getClipboardHandlers({

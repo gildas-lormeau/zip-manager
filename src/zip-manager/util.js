@@ -67,4 +67,8 @@ function getUtil({ downloadId, setDownloadId, setDownloads, downloaderRef }) {
   };
 }
 
-export { getUtil, FS };
+function createZipFileSystem() {
+  return new FS();
+}
+
+export { getUtil, createZipFileSystem };
