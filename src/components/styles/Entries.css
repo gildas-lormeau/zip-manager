@@ -27,3 +27,9 @@
 .entries .entry-highlighted:focus {
   outline: none;
 }
+
+.entries .directory .entry-name::after {
+  content: "/";
+  padding-inline-start: 2px;
+  padding-inline-end: 2px;
+}
