@@ -379,10 +379,12 @@ function getActionHandlers({
   onDownloadFile
 }) {
   function onActionEntry(entry = highlightedEntry) {
-    if (entry.directory) {
-      onGoIntoFolder(entry);
-    } else {
-      onDownloadFile(entry);
+    if (entry) {
+      if (entry.directory) {
+        onGoIntoFolder(entry);
+      } else {
+        onDownloadFile(entry);
+      }
     }
   }
 
@@ -472,7 +474,6 @@ function onFolderNavigationKeyUp({
   disabledHistoryBackButton,
   disabledHistoryForwardButton
 }) {
-  
   if (event.altKey) {
     if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBackButton) {
       onNavigateHistoryBack();
