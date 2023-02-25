@@ -1,15 +1,12 @@
-/* global AbortController */
-
 import { fs } from "@zip.js/zip.js";
 
-import { downloadBlob, alert, confirm, prompt } from "./util/util.js";
+import { alert, confirm, prompt } from "./util/util.js";
 
 import {
   DEFAULT_MIME_TYPE,
   ZIP_EXTENSION,
   ROOT_ZIP_FILENAME,
   CANCELLED_DOWNLOAD_MESSAGE,
-  ABORT_ERROR_NAME,
   ACTION_KEY,
   CUT_KEY,
   COPY_KEY,
@@ -29,7 +26,6 @@ import {
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,
-  DOWNLOAD_MESSAGE,
   DELETE_MESSAGE
 } from "./ZipManagerConstants.js";
 
@@ -120,14 +116,12 @@ function getFolderNavigationHandlers({
 }
 
 function getDownloadHandlers({
-  downloadId,
   setDownloads,
-  setDownloadId,
-  downloaderRef
+  downloadFile
 }) {
   function onDownloadFile(file) {
     downloadFile(file.name, {}, (options) =>
-      file.getBlob(DEFAULT_MIME_TYPE, options)
+      onDeleteDownloadEntry(file.getBlob(DEFAULT_MIME_TYPE, options))
     );
   }
 
@@ -138,59 +132,7 @@ function getDownloadHandlers({
     deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
   }
 
-  async function downloadFile(name, options, blobGetter) {
-    name = prompt(DOWNLOAD_MESSAGE, name);
-    if (name) {
-      const controller = new AbortController();
-      const progressValue = null;
-      const progressMax = null;
-      const id = downloadId + 1;
-      setDownloadId(() => id);
-      const download = { id, name, controller, progressValue, progressMax };
-      setDownloads((downloads) => [download, ...downloads]);
-      const { signal } = controller;
-      const onprogress = (progressValue, progressMax) =>
-        onDownloadProgress(download.id, progressValue, progressMax);
-      Object.assign(options, {
-        signal,
-        onprogress,
-        bufferedWrite: true,
-        keepOrder: true
-      });
-      try {
-        const blob = await blobGetter(options);
-        downloadBlob(blob, downloaderRef.current, download.name);
-      } catch (error) {
-        const message = error.message || error;
-        if (
-          message !== CANCELLED_DOWNLOAD_MESSAGE &&
-          error.name !== ABORT_ERROR_NAME
-        ) {
-          alert(message);
-        }
-      } finally {
-        onDeleteDownloadEntry(download);
-      }
-    }
-  }
-
-  function onDownloadProgress(downloadId, progressValue, progressMax) {
-    setDownloads((downloads) =>
-      downloads.map((download) => {
-        if (download.id === downloadId) {
-          download = {
-            ...download,
-            progressValue,
-            progressMax
-          };
-        }
-        return download;
-      })
-    );
-  }
-
   return {
-    downloadFile,
     onDownloadFile,
     onDeleteDownloadEntry
   };

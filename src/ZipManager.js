@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from "react";
 import { fs } from "@zip.js/zip.js";
 
 import * as constants from "./ZipManagerConstants.js";
+import { getUtil } from "./ZipManagerUtil.js";
 import { getEffects } from "./ZipManagerEffects.js";
 import {
   getEntriesNavigationHandlers,
@@ -61,6 +62,12 @@ function ZipManager() {
   const disabledRenameEntryButton = actionDisabled;
   const disabledDeleteEntryButton = actionDisabled;
 
+  const { downloadFile } = getUtil({
+    downloadId,
+    setDownloadId,
+    setDownloads,
+    downloaderRef
+  });
   const {
     updateSelectedFolder,
     updateZipFilesystem,
@@ -104,13 +111,10 @@ function ZipManager() {
       setHistory,
       setHistoryIndex
     });
-  const { downloadFile, onDownloadFile, onDeleteDownloadEntry } =
-    getDownloadHandlers({
-      downloadId,
-      setDownloads,
-      setDownloadId,
-      downloaderRef
-    });
+  const { onDownloadFile, onDeleteDownloadEntry } = getDownloadHandlers({
+    setDownloads,
+    downloadFile
+  });
   const { onCreateFolder, onAddFiles, onImportZipFile, onExportZipFile } =
     getSelectedFolderHandlers({
       selectedFolder,
