@@ -26,7 +26,7 @@ function NavigationBar({
   } = constants);
 
   return (
-    <span className="navigation-bar">
+    <div className="navigation-bar">
       <HistoryButtons
         disabledHistoryBackButton={disabledHistoryBackButton}
         disabledHistoryForwardButton={disabledHistoryForwardButton}
@@ -34,7 +34,7 @@ function NavigationBar({
         onNavigateHistoryForward={onNavigateHistoryForward}
       />
       <Breadcrumb folder={selectedFolder} onGoIntoFolder={onGoIntoFolder} />
-    </span>
+    </div>
   );
 }
 
