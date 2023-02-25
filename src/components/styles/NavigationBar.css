@@ -30,12 +30,9 @@
 
 .breadcrumb li {
   display: inline-block;
+  margin-inline-start: 2px;
   margin-block-start: 2px;
   margin-block-end: 4px;
-}
-
-.breadcrumb li:first-child {
-  margin-inline-start: 2px;
 }
 
 .breadcrumb li .breadcrumb-item:first-of-type {
