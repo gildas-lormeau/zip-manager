@@ -5,7 +5,6 @@
 
 .history-buttons {
   display: flex;
-  margin-inline-end: 2px;
 }
 
 .history-buttons button {
@@ -23,13 +22,19 @@
 .breadcrumb {
   display: inline-block;
   padding-block-end: 8px;
+  margin-block-start: -2px;
   margin-block-end: -8px;
   overflow: hidden;
 }
 
 .breadcrumb li {
   display: inline-block;
+  margin-block-start: 2px;
   margin-block-end: 4px;
+}
+
+.breadcrumb li:first-child {
+  margin-inline-start: 2px;
 }
 
 .breadcrumb li .breadcrumb-item:first-of-type {
