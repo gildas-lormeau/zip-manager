@@ -1,5 +1,3 @@
-import { fs } from "@zip.js/zip.js";
-
 import { alert, confirm, prompt } from "./util/util.js";
 
 import {
@@ -28,8 +26,7 @@ import {
   RESET_MESSAGE,
   DELETE_MESSAGE
 } from "./ZipManagerConstants.js";
-
-const { FS } = fs;
+import { FS } from "./ZipManagerUtil.js";
 
 function getEntriesNavigationHandlers({
   entries,
@@ -115,10 +112,7 @@ function getFolderNavigationHandlers({
   };
 }
 
-function getDownloadHandlers({
-  setDownloads,
-  downloadFile
-}) {
+function getDownloadHandlers({ setDownloads, downloadFile }) {
   function onDownloadFile(file) {
     downloadFile(file.name, {}, (options) =>
       onDeleteDownloadEntry(file.getBlob(DEFAULT_MIME_TYPE, options))

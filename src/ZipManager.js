@@ -5,10 +5,9 @@ import "./styles/ButtonBar.css";
 import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
-import { fs } from "@zip.js/zip.js";
 
 import * as constants from "./ZipManagerConstants.js";
-import { getUtil } from "./ZipManagerUtil.js";
+import { getUtil, FS } from "./ZipManagerUtil.js";
 import { getEffects } from "./ZipManagerEffects.js";
 import {
   getEntriesNavigationHandlers,
@@ -27,8 +26,6 @@ import NavigationBar from "./components/NavigationBar.js";
 import Entries from "./components/Entries.js";
 import BottomButtonBar from "./components/BottomButtonBar.js";
 import DownloadManager from "./components/DownloadManager.js";
-
-const { FS } = fs;
 
 function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(new FS());

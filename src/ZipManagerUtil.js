@@ -1,19 +1,17 @@
 /* global AbortController */
 
+import { fs } from "@zip.js/zip.js";
+
 import {
   DOWNLOAD_MESSAGE,
   CANCELLED_DOWNLOAD_MESSAGE,
   ABORT_ERROR_NAME
 } from "./ZipManagerConstants.js";
-
 import { downloadBlob, alert, prompt } from "./util/util.js";
 
-function getUtil({
-  downloadId,
-  setDownloadId,
-  setDownloads,
-  downloaderRef
-}) {
+const { FS } = fs;
+
+function getUtil({ downloadId, setDownloadId, setDownloads, downloaderRef }) {
   async function downloadFile(name, options, blobGetter) {
     name = prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
@@ -69,4 +67,4 @@ function getUtil({
   };
 }
 
-export { getUtil };
+export { getUtil, FS };
