@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/ZipManager.js";
+import App from "./ZipManager.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,7 +1,7 @@
 import {
   addEventListener,
   removeEventListener
-} from "./../util/util.js";
+} from "./util/util.js";
 import { KEYUP_EVENT_NAME } from "./ZipManagerConstants.js";
 
 function getEffects({

@@ -7,6 +7,8 @@ import "./styles/ZipManager.css";
 import { useEffect, useState, useRef } from "react";
 import { fs } from "@zip.js/zip.js";
 
+import * as constants from "./ZipManagerConstants.js";
+import { getEffects } from "./ZipManagerEffects.js";
 import {
   getEntriesNavigationHandlers,
   getFolderNavigationHandlers,
@@ -19,12 +21,11 @@ import {
   onKeyUp
 } from "./ZipManagerHandlers.js";
 
-import TopButtonBar from "./TopButtonBar.js";
-import NavigationBar from "./NavigationBar.js";
-import Entries from "./Entries.js";
-import BottomButtonBar from "./BottomButtonBar.js";
-import DownloadManager from "./DownloadManager.js";
-import { getEffects } from "./ZipManagerEffects.js";
+import TopButtonBar from "./components/TopButtonBar.js";
+import NavigationBar from "./components/NavigationBar.js";
+import Entries from "./components/Entries.js";
+import BottomButtonBar from "./components/BottomButtonBar.js";
+import DownloadManager from "./components/DownloadManager.js";
 
 const { FS } = fs;
 
@@ -204,6 +205,7 @@ function ZipManager() {
         onImportZipFile={onImportZipFile}
         onExportZipFile={onExportZipFile}
         onReset={onReset}
+        constants={constants}
       />
       <NavigationBar
         selectedFolder={selectedFolder}
@@ -212,6 +214,7 @@ function ZipManager() {
         onNavigateHistoryBack={onNavigateHistoryBack}
         onNavigateHistoryForward={onNavigateHistoryForward}
         onGoIntoFolder={onGoIntoFolder}
+        constants={constants}
       />
       <Entries
         entries={entries}
@@ -222,6 +225,7 @@ function ZipManager() {
         onDownloadFile={onDownloadFile}
         onSetHighlightedEntry={onSetHighlightedEntry}
         onActionEntry={onActionEntry}
+        constants={constants}
       />
       <BottomButtonBar
         disabledCopyEntryButton={disabledCopyEntryButton}
@@ -236,11 +240,13 @@ function ZipManager() {
         onResetClipboardData={onResetClipboardData}
         onRenameEntry={onRenameEntry}
         onDeleteEntry={onDeleteEntry}
+        constants={constants}
       />
       <DownloadManager
         downloads={downloads}
         downloaderRef={downloaderRef}
         onDeleteDownloadEntry={onDeleteDownloadEntry}
+        constants={constants}
       />
     </div>
   );

@@ -7,7 +7,6 @@ const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const ABORT_ERROR_NAME = "AbortError";
 
 const KEYUP_EVENT_NAME = "keyup";
-const CLICK_EVENT_NAME = "click";
 
 const ACTION_KEY = " ";
 const ENTER_KEY = "Enter";
@@ -50,7 +49,6 @@ export {
   CANCELLED_DOWNLOAD_MESSAGE,
   ABORT_ERROR_NAME,
   KEYUP_EVENT_NAME,
-  CLICK_EVENT_NAME,
   ACTION_KEY,
   ENTER_KEY,
   TAB_KEY,

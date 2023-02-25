@@ -1,14 +1,12 @@
 import "./styles/BottomButtonBar.css";
 
-import {
-  SHORTCUT_LABEL,
+let SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
   COPY_KEY,
   CUT_KEY,
   PASTE_KEY,
   RENAME_KEY,
-  DELETE_KEYS
-} from "./ZipManagerConstants.js";
+  DELETE_KEYS;
 
 function BottomButtonBar({
   disabledCopyEntryButton,
@@ -22,8 +20,19 @@ function BottomButtonBar({
   onPasteEntry,
   onResetClipboardData,
   onRenameEntry,
-  onDeleteEntry
+  onDeleteEntry,
+  constants
 }) {
+  ({
+    SHORTCUT_LABEL,
+    CTRL_KEY_LABEL,
+    COPY_KEY,
+    CUT_KEY,
+    PASTE_KEY,
+    RENAME_KEY,
+    DELETE_KEYS
+  } = constants);
+
   return (
     <div className="button-bar button-bar-bottom">
       <div className="button-group">

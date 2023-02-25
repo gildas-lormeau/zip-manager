@@ -1,12 +1,11 @@
 import "./styles/NavigationBar.css";
-import {
-  ENTER_KEY,
+
+let ENTER_KEY,
   ROOT_FOLDER_LABEL,
   SHORTCUT_LABEL,
   ALT_KEY_LABEL,
   ARROW_LEFT_KEY_LABEL,
-  ARROW_RIGHT_KEY_LABEL
-} from "./ZipManagerConstants.js";
+  ARROW_RIGHT_KEY_LABEL;
 
 function NavigationBar({
   selectedFolder,
@@ -14,8 +13,18 @@ function NavigationBar({
   disabledHistoryForwardButton,
   onNavigateHistoryBack,
   onNavigateHistoryForward,
-  onGoIntoFolder
+  onGoIntoFolder,
+  constants
 }) {
+  ({
+    ENTER_KEY,
+    ROOT_FOLDER_LABEL,
+    SHORTCUT_LABEL,
+    ALT_KEY_LABEL,
+    ARROW_LEFT_KEY_LABEL,
+    ARROW_RIGHT_KEY_LABEL
+  } = constants);
+
   return (
     <span className="navigation-bar">
       <HistoryButtons
@@ -49,10 +58,7 @@ function HistoryButtons({
   );
 }
 
-function HistoryBackButton({
-  disabled,
-  onNavigateHistoryBack
-}) {
+function HistoryBackButton({ disabled, onNavigateHistoryBack }) {
   return (
     <button
       disabled={disabled}
@@ -64,10 +70,7 @@ function HistoryBackButton({
   );
 }
 
-function HistoryForwardButton({
-  disabled,
-  onNavigateHistoryForward
-}) {
+function HistoryForwardButton({ disabled, onNavigateHistoryForward }) {
   return (
     <button
       disabled={disabled}

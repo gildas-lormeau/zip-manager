@@ -1,18 +1,14 @@
-/* global MouseEvent */
-
 import "./styles/TopButtonBar.css";
 
 import { useRef } from "react";
-import {
-  SHORTCUT_LABEL,
+
+let SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
   CREATE_FOLDER_KEY,
-  CLICK_EVENT_NAME,
   ADD_FILES_KEY,
   IMPORT_ZIP_KEY,
   ZIP_EXTENSION,
-  EXPORT_ZIP_KEY
-} from "./ZipManagerConstants.js";
+  EXPORT_ZIP_KEY;
 
 function TopButtonBar({
   addFilesButtonRef,
@@ -23,8 +19,19 @@ function TopButtonBar({
   onAddFiles,
   onImportZipFile,
   onExportZipFile,
-  onReset
+  onReset,
+  constants
 }) {
+  ({
+    SHORTCUT_LABEL,
+    CTRL_KEY_LABEL,
+    CREATE_FOLDER_KEY,
+    ADD_FILES_KEY,
+    IMPORT_ZIP_KEY,
+    ZIP_EXTENSION,
+    EXPORT_ZIP_KEY
+  } = constants);
+
   return (
     <div className="button-bar">
       <div className="button-group">
@@ -75,7 +82,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
   }
 
   function dispatchEvent() {
-    current.dispatchEvent(new MouseEvent(CLICK_EVENT_NAME));
+    current.click();
   }
 
   return (
@@ -103,7 +110,7 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
   const { current } = fileInput;
 
   function dispatchEvent() {
-    current.dispatchEvent(new MouseEvent(CLICK_EVENT_NAME));
+    current.click();
   }
 
   return (

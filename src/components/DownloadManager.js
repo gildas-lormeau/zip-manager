@@ -1,8 +1,15 @@
 import "./styles/DownloadManager.css";
 
-import { ENTER_KEY } from "./ZipManagerConstants.js";
+let ENTER_KEY;
 
-function DownloadManager({ downloads, downloaderRef, onDeleteDownloadEntry }) {
+function DownloadManager({
+  downloads,
+  downloaderRef,
+  onDeleteDownloadEntry,
+  constants
+}) {
+  ({ ENTER_KEY } = constants);
+
   return (
     <div className="downloads">
       <ol>

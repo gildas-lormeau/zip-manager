@@ -2,7 +2,7 @@
 
 import { fs } from "@zip.js/zip.js";
 
-import { downloadBlob, alert, confirm, prompt } from "./../util/util.js";
+import { downloadBlob, alert, confirm, prompt } from "./util/util.js";
 
 import {
   DEFAULT_MIME_TYPE,

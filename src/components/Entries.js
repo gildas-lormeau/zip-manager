@@ -1,11 +1,6 @@
 import "./styles/Entries.css";
 
-import {
-  SHORTCUT_LABEL,
-  SPACE_KEY_LABEL,
-  PARENT_FOLDER_LABEL,
-  TAB_KEY,
-} from "./ZipManagerConstants.js";
+let SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY;
 
 function Entries({
   entries,
@@ -13,8 +8,12 @@ function Entries({
   highlightedEntry,
   highlightedEntryRef,
   onSetHighlightedEntry,
-  onActionEntry
+  onActionEntry,
+  constants
 }) {
+  ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY } =
+    constants);
+
   function getEntryClassName(entry) {
     const classes = [];
     if (entry.directory) {
