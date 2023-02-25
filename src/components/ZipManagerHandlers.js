@@ -472,11 +472,13 @@ function onFolderNavigationKeyUp({
   disabledHistoryBackButton,
   disabledHistoryForwardButton
 }) {
+  
   if (event.altKey) {
     if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBackButton) {
       onNavigateHistoryBack();
     }
     if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForwardButton) {
+      debugger
       onNavigateHistoryForward();
     }
   }
@@ -515,19 +517,20 @@ function onKeyUp({
   onHighlightPreviousEntry,
   onHighlightFirstEntry,
   onHighlightLastEntry,
+  onCreateFolder,
+  onExportZipFile,
+  onNavigateHistoryBack,
+  onNavigateHistoryForward,
   disabledCutEntryButton,
   disabledCopyEntryButton,
   disabledRenameEntryButton,
   disabledPasteEntryButton,
   disabledDeleteEntryButton,
-  onCreateFolder,
-  onExportZipFile,
-  addFilesButtonRef,
-  importZipButtonRef,
+  disabledHistoryBackButton,
+  disabledHistoryForwardButton,
   disabledExportZipButton,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
-  disabledHistoryBackButton
+  addFilesButtonRef,
+  importZipButtonRef
 }) {
   onSelectedEntryKeyUp({
     event,
@@ -559,7 +562,8 @@ function onKeyUp({
     event,
     onNavigateHistoryBack,
     onNavigateHistoryForward,
-    disabledHistoryBackButton
+    disabledHistoryBackButton,
+    disabledHistoryForwardButton
   });
   onEntryNavigationKeyUp({
     event,

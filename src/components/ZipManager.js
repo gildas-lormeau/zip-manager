@@ -146,19 +146,20 @@ function ZipManager() {
       onHighlightPreviousEntry,
       onHighlightFirstEntry,
       onHighlightLastEntry,
+      onCreateFolder,
+      onExportZipFile,
+      onNavigateHistoryBack,
+      onNavigateHistoryForward,
       disabledCutEntryButton,
       disabledCopyEntryButton,
       disabledRenameEntryButton,
       disabledPasteEntryButton,
       disabledDeleteEntryButton,
-      onCreateFolder,
-      onExportZipFile,
-      addFilesButtonRef,
-      importZipButtonRef,
+      disabledHistoryBackButton,
+      disabledHistoryForwardButton,
       disabledExportZipButton,
-      onNavigateHistoryBack,
-      onNavigateHistoryForward,
-      disabledHistoryBackButton
+      addFilesButtonRef,
+      importZipButtonRef
     });
   }
 
