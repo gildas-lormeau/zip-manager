@@ -35,7 +35,7 @@ function Entries({
     }
   }
 
-  useEffect(() => {
+  function computeEntriesHeight() {
     if (highlightedEntryRef && highlightedEntryRef.current) {
       entriesHeight.current = Math.max(
         Math.floor(
@@ -45,7 +45,9 @@ function Entries({
         1
       );
     }
-  });
+  }
+
+  useEffect(computeEntriesHeight);
 
   return (
     <ol className="entries" onKeyDown={handleKeyDown} ref={entriesRef}>
