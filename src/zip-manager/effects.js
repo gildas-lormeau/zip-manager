@@ -1,5 +1,5 @@
 import { addEventListener, removeEventListener } from "./util/util.js";
-import { KEYUP_EVENT_NAME } from "./ZipManagerConstants.js";
+import { KEYUP_EVENT_NAME } from "./constants.js";
 
 function getEffects({
   zipFilesystem,

@@ -6,7 +6,7 @@ import {
   DOWNLOAD_MESSAGE,
   CANCELLED_DOWNLOAD_MESSAGE,
   ABORT_ERROR_NAME
-} from "./ZipManagerConstants.js";
+} from "./constants.js";
 import { downloadBlob, alert, prompt } from "./util/util.js";
 
 const { FS } = fs;

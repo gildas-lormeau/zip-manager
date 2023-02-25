@@ -5,9 +5,9 @@ import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
 
-import * as constants from "./ZipManagerConstants.js";
-import { getUtil, FS } from "./ZipManagerUtil.js";
-import { getEffects } from "./ZipManagerEffects.js";
+import * as constants from "./constants.js";
+import { getUtil, FS } from "./util.js";
+import { getEffects } from "./effects.js";
 import {
   getEntriesNavigationHandlers,
   getFolderNavigationHandlers,
@@ -16,9 +16,9 @@ import {
   getActionHandlers,
   getZipFilesystemHandlers,
   getDownloadHandlers,
-  getClipboardHandlers,
-  onKeyUp
-} from "./ZipManagerHandlers.js";
+  getClipboardHandlers
+} from "./appHandlers.js";
+import { onKeyUp } from "./keyUpHandler.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
@@ -152,36 +152,37 @@ function ZipManager() {
     onDownloadFile
   });
 
+  const keyUpProps = {
+    onCutEntry,
+    onCopyEntry,
+    onRenameEntry,
+    onPasteEntry,
+    onDeleteEntry,
+    onActionEntry,
+    onHighlightNextEntry,
+    onHighlightPreviousEntry,
+    onHighlightPreviousPageEntry,
+    onHighlightNextPageEntry,
+    onHighlightFirstEntry,
+    onHighlightLastEntry,
+    onCreateFolder,
+    onExportZipFile,
+    onNavigateHistoryBack,
+    onNavigateHistoryForward,
+    disabledCutEntryButton,
+    disabledCopyEntryButton,
+    disabledRenameEntryButton,
+    disabledPasteEntryButton,
+    disabledDeleteEntryButton,
+    disabledHistoryBackButton,
+    disabledHistoryForwardButton,
+    disabledExportZipButton,
+    addFilesButtonRef,
+    importZipButtonRef
+  };
+
   function handleKeyUp(event) {
-    onKeyUp({
-      event,
-      onCutEntry,
-      onCopyEntry,
-      onRenameEntry,
-      onPasteEntry,
-      onDeleteEntry,
-      onActionEntry,
-      onHighlightNextEntry,
-      onHighlightPreviousEntry,
-      onHighlightPreviousPageEntry,
-      onHighlightNextPageEntry,
-      onHighlightFirstEntry,
-      onHighlightLastEntry,
-      onCreateFolder,
-      onExportZipFile,
-      onNavigateHistoryBack,
-      onNavigateHistoryForward,
-      disabledCutEntryButton,
-      disabledCopyEntryButton,
-      disabledRenameEntryButton,
-      disabledPasteEntryButton,
-      disabledDeleteEntryButton,
-      disabledHistoryBackButton,
-      disabledHistoryForwardButton,
-      disabledExportZipButton,
-      addFilesButtonRef,
-      importZipButtonRef
-    });
+    onKeyUp({ event, ...keyUpProps });
   }
 
   useEffect(registerKeyUpHandler);
