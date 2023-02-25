@@ -1,11 +1,14 @@
 import "./styles/Entries.css";
 
+import { useEffect, useRef } from "react";
+
 let SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY;
 
 function Entries({
   entries,
   selectedFolder,
   highlightedEntry,
+  entriesHeight,
   highlightedEntryRef,
   onSetHighlightedEntry,
   onActionEntry,
@@ -13,6 +16,7 @@ function Entries({
 }) {
   ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY } =
     constants);
+  const entriesRef = useRef(null);
 
   function getEntryClassName(entry) {
     const classes = [];
@@ -31,8 +35,20 @@ function Entries({
     }
   }
 
+  useEffect(() => {
+    if (highlightedEntryRef && highlightedEntryRef.current) {
+      entriesHeight.current = Math.max(
+        Math.floor(
+          entriesRef.current.offsetHeight /
+            highlightedEntryRef.current.offsetHeight
+        ),
+        1
+      );
+    }
+  });
+
   return (
-    <ol className="entries" onKeyDown={handleKeyDown}>
+    <ol className="entries" onKeyDown={handleKeyDown} ref={entriesRef}>
       {entries.map((entry) => {
         if (entry === highlightedEntry) {
           return (

@@ -38,6 +38,7 @@ function ZipManager() {
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const entriesHeight = useRef(0);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
@@ -90,12 +91,15 @@ function ZipManager() {
   const {
     onHighlightPreviousEntry,
     onHighlightNextEntry,
+    onHighlightPreviousPageEntry,
+    onHighlightNextPageEntry,
     onHighlightFirstEntry,
     onHighlightLastEntry,
     onSetHighlightedEntry
   } = getEntriesNavigationHandlers({
     entries,
     highlightedEntry,
+    entriesHeight,
     setHighlightedEntry
   });
   const { onGoIntoFolder, onNavigateHistoryBack, onNavigateHistoryForward } =
@@ -160,6 +164,8 @@ function ZipManager() {
       onActionEntry,
       onHighlightNextEntry,
       onHighlightPreviousEntry,
+      onHighlightPreviousPageEntry,
+      onHighlightNextPageEntry,
       onHighlightFirstEntry,
       onHighlightLastEntry,
       onCreateFolder,
@@ -221,6 +227,7 @@ function ZipManager() {
         entries={entries}
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
+        entriesHeight={entriesHeight}
         highlightedEntryRef={highlightedEntryRef}
         onGoIntoFolder={onGoIntoFolder}
         onDownloadFile={onDownloadFile}

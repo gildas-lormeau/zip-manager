@@ -22,6 +22,8 @@ const EXPORT_ZIP_KEY = "e";
 const DELETE_KEYS = ["Backspace", "Delete"];
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
+const PAGE_UP_KEY = "PageUp";
+const PAGE_DOWN_KEY = "PageDown";
 const HOME_KEY = "Home";
 const END_KEY = "End";
 const NAVIGATION_BACK_KEY = "ArrowLeft";
@@ -63,6 +65,8 @@ export {
   DELETE_KEYS,
   DOWN_KEY,
   UP_KEY,
+  PAGE_UP_KEY,
+  PAGE_DOWN_KEY,
   HOME_KEY,
   END_KEY,
   NAVIGATION_BACK_KEY,

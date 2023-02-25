@@ -17,6 +17,8 @@ import {
   DELETE_KEYS,
   DOWN_KEY,
   UP_KEY,
+  PAGE_UP_KEY,
+  PAGE_DOWN_KEY,
   HOME_KEY,
   END_KEY,
   NAVIGATION_BACK_KEY,
@@ -31,19 +33,34 @@ import { FS } from "./ZipManagerUtil.js";
 function getEntriesNavigationHandlers({
   entries,
   highlightedEntry,
+  entriesHeight,
   setHighlightedEntry
 }) {
   function onHighlightPreviousEntry() {
-    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
+    const indexEntry = getEntryIndex();
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
     setHighlightedEntry(previousEntry);
   }
 
   function onHighlightNextEntry() {
-    const indexEntry = entries.findIndex((entry) => entry === highlightedEntry);
+    const indexEntry = getEntryIndex();
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
+  }
+
+  function onHighlightPreviousPageEntry() {
+    const indexEntry = getEntryIndex();
+    const previousEntry =
+      entries[Math.max(indexEntry - entriesHeight.current, 0)];
+    setHighlightedEntry(previousEntry);
+  }
+
+  function onHighlightNextPageEntry() {
+    const indexEntry = getEntryIndex();
+    const previousEntry =
+      entries[Math.min(indexEntry + entriesHeight.current, entries.length - 1)];
+    setHighlightedEntry(previousEntry);
   }
 
   function onHighlightFirstEntry() {
@@ -58,9 +75,15 @@ function getEntriesNavigationHandlers({
     setHighlightedEntry(entry);
   }
 
+  function getEntryIndex() {
+    return entries.findIndex((entry) => entry === highlightedEntry);
+  }
+
   return {
     onHighlightPreviousEntry,
     onHighlightNextEntry,
+    onHighlightPreviousPageEntry,
+    onHighlightNextPageEntry,
     onHighlightFirstEntry,
     onHighlightLastEntry,
     onSetHighlightedEntry
@@ -337,6 +360,8 @@ function onHighlightedEntryKeyUp({
   onActionEntry,
   onHighlightNextEntry,
   onHighlightPreviousEntry,
+  onHighlightPreviousPageEntry,
+  onHighlightNextPageEntry,
   onHighlightFirstEntry,
   onHighlightLastEntry,
   disabledCutEntryButton,
@@ -367,6 +392,12 @@ function onHighlightedEntryKeyUp({
   }
   if (event.key === DOWN_KEY) {
     onHighlightNextEntry();
+  }
+  if (event.key === PAGE_UP_KEY) {
+    onHighlightPreviousPageEntry();
+  }
+  if (event.key === PAGE_DOWN_KEY) {
+    onHighlightNextPageEntry();
   }
   if (event.key === UP_KEY) {
     onHighlightPreviousEntry();
@@ -451,6 +482,8 @@ function onKeyUp({
   onActionEntry,
   onHighlightNextEntry,
   onHighlightPreviousEntry,
+  onHighlightPreviousPageEntry,
+  onHighlightNextPageEntry,
   onHighlightFirstEntry,
   onHighlightLastEntry,
   onCreateFolder,
@@ -479,6 +512,8 @@ function onKeyUp({
     onHighlightNextEntry,
     onHighlightPreviousEntry,
     onHighlightFirstEntry,
+    onHighlightPreviousPageEntry,
+    onHighlightNextPageEntry,
     onHighlightLastEntry,
     disabledCutEntryButton,
     disabledCopyEntryButton,
