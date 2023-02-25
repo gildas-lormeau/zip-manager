@@ -478,7 +478,6 @@ function onFolderNavigationKeyUp({
       onNavigateHistoryBack();
     }
     if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForwardButton) {
-      debugger
       onNavigateHistoryForward();
     }
   }
