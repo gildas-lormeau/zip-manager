@@ -31,7 +31,7 @@ import {
   RESET_MESSAGE,
   DOWNLOAD_MESSAGE,
   DELETE_MESSAGE
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 const { FS } = fs;
 

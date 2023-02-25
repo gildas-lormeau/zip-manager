@@ -8,7 +8,7 @@ import {
   PASTE_KEY,
   RENAME_KEY,
   DELETE_KEYS
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 function BottomButtonBar({
   disabledCopyEntryButton,

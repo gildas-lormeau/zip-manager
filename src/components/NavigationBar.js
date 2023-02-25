@@ -6,7 +6,7 @@ import {
   ALT_KEY_LABEL,
   ARROW_LEFT_KEY_LABEL,
   ARROW_RIGHT_KEY_LABEL
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 function NavigationBar({
   selectedFolder,

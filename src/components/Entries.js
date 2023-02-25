@@ -5,7 +5,7 @@ import {
   SPACE_KEY_LABEL,
   PARENT_FOLDER_LABEL,
   TAB_KEY,
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 function Entries({
   entries,

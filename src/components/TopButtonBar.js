@@ -12,7 +12,7 @@ import {
   IMPORT_ZIP_KEY,
   ZIP_EXTENSION,
   EXPORT_ZIP_KEY
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 function TopButtonBar({
   addFilesButtonRef,

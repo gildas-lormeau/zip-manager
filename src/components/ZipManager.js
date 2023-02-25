@@ -32,7 +32,7 @@ import DownloadManager from "./DownloadManager.js";
 
 import {
   KEYUP_EVENT_NAME
-} from "./../business/constants.js";
+} from "./ZipManagerConstants.js";
 
 const { FS } = fs;
 

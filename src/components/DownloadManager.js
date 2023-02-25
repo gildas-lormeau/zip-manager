@@ -1,6 +1,6 @@
 import "./styles/DownloadManager.css";
 
-import { ENTER_KEY } from "./../business/constants.js";
+import { ENTER_KEY } from "./ZipManagerConstants.js";
 
 function DownloadManager({ downloads, downloaderRef, onDeleteDownloadEntry }) {
   return (
