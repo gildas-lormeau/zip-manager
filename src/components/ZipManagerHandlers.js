@@ -461,7 +461,7 @@ function onSelectedFolderKeyUp({
     if (event.key === IMPORT_ZIP_KEY) {
       importZipButtonRef.current.click();
     }
-    if (event.key === EXPORT_ZIP_KEY && disabledExportZipButton) {
+    if (event.key === EXPORT_ZIP_KEY && !disabledExportZipButton) {
       onExportZipFile();
     }
   }
