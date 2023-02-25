@@ -13,6 +13,7 @@
   padding-inline-start: 8px;
   padding-inline-end: 8px;
   align-self: start;
+  height: 24px;
 }
 
 .history-buttons button:not([disabled]) {
