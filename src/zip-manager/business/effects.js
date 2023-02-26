@@ -2,7 +2,6 @@ function getEffects({
   zipFilesystem,
   entries,
   highlightedEntry,
-  highlightedEntryRef,
   selectedFolder,
   previousSelectedFolder,
   setEntries,
@@ -12,6 +11,7 @@ function getEffects({
   setClipboardData,
   setHistory,
   setHistoryIndex,
+  highlightedEntryElement,
   handleKeyUp,
   util,
   constants
@@ -51,12 +51,8 @@ function getEffects({
   }
 
   function updateHighlightedEntry() {
-    if (
-      highlightedEntry &&
-      highlightedEntryRef &&
-      highlightedEntryRef.current
-    ) {
-      highlightedEntryRef.current.focus();
+    if (highlightedEntry && highlightedEntryElement) {
+      highlightedEntryElement.focus();
     }
   }
 

@@ -85,7 +85,6 @@ function ZipManager() {
     zipFilesystem,
     entries,
     highlightedEntry,
-    highlightedEntryRef,
     selectedFolder,
     previousSelectedFolder,
     setEntries,
@@ -95,6 +94,7 @@ function ZipManager() {
     setClipboardData,
     setHistory,
     setHistoryIndex,
+    highlightedEntryElement: highlightedEntryRef && highlightedEntryRef.current,
     handleKeyUp,
     util,
     constants
