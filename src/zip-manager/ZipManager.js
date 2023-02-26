@@ -6,7 +6,7 @@ import "./styles/ZipManager.css";
 import { useEffect, useState, useRef } from "react";
 
 import * as util from "./helpers/util.js";
-import * as constants from "./constants.js";
+import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
 
 import { getUtil, createZipFileSystem } from "./helpers/helpers.js";
