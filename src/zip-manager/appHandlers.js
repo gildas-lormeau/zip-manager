@@ -323,7 +323,7 @@ function getClipboardHandlers({ setClipboardData }) {
 }
 
 function getActionHandlers({ highlightedEntry, goIntoFolder, downloadEntry }) {
-  function actionEntry(entry = highlightedEntry) {
+  function enterEntry(entry = highlightedEntry) {
     if (entry) {
       if (entry.directory) {
         goIntoFolder(entry);
@@ -333,7 +333,7 @@ function getActionHandlers({ highlightedEntry, goIntoFolder, downloadEntry }) {
     }
   }
 
-  return { actionEntry };
+  return { enterEntry };
 }
 
 export {

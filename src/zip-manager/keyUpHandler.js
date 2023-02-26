@@ -34,7 +34,7 @@ function onKeyUp({
   renameEntry,
   pasteEntry,
   deleteEntry,
-  actionEntry,
+  enterEntry,
   highlightNextEntry,
   highlightPreviousEntry,
   highlightPreviousPageEntry,
@@ -71,7 +71,7 @@ function onKeyUp({
     renameEntry,
     pasteEntry,
     deleteEntry,
-    actionEntry,
+    enterEntry,
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,
@@ -152,7 +152,7 @@ function onHighlightedEntryKeyUp({
   renameEntry,
   pasteEntry,
   deleteEntry,
-  actionEntry
+  enterEntry
 }) {
   if (event.ctrlKey) {
     if (event.key === CUT_KEY && !disabledCutEntry) {
@@ -172,7 +172,7 @@ function onHighlightedEntryKeyUp({
     deleteEntry();
   }
   if (event.key === ACTION_KEY) {
-    actionEntry();
+    enterEntry();
   }
 }
 

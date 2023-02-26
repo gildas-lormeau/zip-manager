@@ -150,7 +150,7 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardHandlers({
     setClipboardData
   });
-  const { actionEntry } = getActionHandlers({
+  const { enterEntry } = getActionHandlers({
     highlightedEntry,
     goIntoFolder,
     downloadEntry
@@ -170,7 +170,7 @@ function ZipManager() {
     renameEntry,
     pasteEntry,
     deleteEntry,
-    actionEntry,
+    enterEntry,
     highlightNextEntry,
     highlightPreviousEntry,
     highlightPreviousPageEntry,
@@ -235,7 +235,7 @@ function ZipManager() {
         onGoIntoFolder={goIntoFolder}
         onDownloadHighlightedEntry={downloadEntry}
         onHighlightEntry={highlightEntry}
-        onActionEntry={actionEntry}
+        onEnterEntry={enterEntry}
         highlightedEntryRef={highlightedEntryRef}
         constants={constants}
       />

@@ -11,7 +11,7 @@ function Entries({
   entriesHeight,
   highlightedEntryRef,
   onHighlightEntry,
-  onActionEntry,
+  onEnterEntry,
   constants
 }) {
   ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY } =
@@ -64,7 +64,7 @@ function Entries({
                 entry={entry}
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlightEntry}
-                onActionEntry={onActionEntry}
+                onEnterEntry={onEnterEntry}
               />
             </li>
           );
@@ -75,7 +75,7 @@ function Entries({
                 entry={entry}
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlightEntry}
-                onActionEntry={onActionEntry}
+                onEnterEntry={onEnterEntry}
               />
             </li>
           );
@@ -85,21 +85,21 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
+function Entry({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
   return (
     <>
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
         onSelectEntry={onSelectEntry}
-        onActionEntry={onActionEntry}
+        onEnterEntry={onEnterEntry}
       />
-      <EntryButton entry={entry} onActionEntry={onActionEntry} />
+      <EntryButton entry={entry} onEnterEntry={onEnterEntry} />
     </>
   );
 }
 
-function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
+function EntryName({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
   const entryLabel =
     entry === selectedFolder.parent ? PARENT_FOLDER_LABEL : entry.name;
 
@@ -108,7 +108,7 @@ function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
   }
 
   function handleDoubleClick() {
-    onActionEntry(entry);
+    onEnterEntry(entry);
   }
 
   return (
@@ -123,9 +123,9 @@ function EntryName({ entry, selectedFolder, onSelectEntry, onActionEntry }) {
   );
 }
 
-function EntryButton({ entry, onActionEntry }) {
+function EntryButton({ entry, onEnterEntry }) {
   function handleClick() {
-    onActionEntry(entry);
+    onEnterEntry(entry);
   }
 
   return (
