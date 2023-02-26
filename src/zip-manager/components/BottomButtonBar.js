@@ -135,9 +135,12 @@ function DeleteEntryButton({ disabled, onDeleteEntry, constants, messages }) {
     <button
       onClick={onDeleteEntry}
       disabled={disabled}
-      title={messages.SHORTCUT_LABEL + constants.DELETE_KEYS.map((key) => key).join(
-        messages.KEYS_SEPARATOR_LABEL
-      )}
+      title={
+        messages.SHORTCUT_LABEL +
+        constants.DELETE_KEYS.map((key) => key).join(
+          messages.KEYS_SEPARATOR_LABEL
+        )
+      }
     >
       {messages.DELETE_LABEL}
     </button>
