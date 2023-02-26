@@ -154,7 +154,7 @@ function EntryButton({ entry, onEnterEntry, constants, messages }) {
     <span
       className="list-item-button"
       onClick={handleClick}
-      title={constants.SHORTCUT_LABEL + messages.SPACE_KEY_LABEL}
+      title={messages.SHORTCUT_LABEL + messages.SPACE_KEY_LABEL}
     >
       {entry.directory
         ? messages.DOWNLOAD_BUTTON_LABEL
