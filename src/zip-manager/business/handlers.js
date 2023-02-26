@@ -123,10 +123,7 @@ function getHighlightedEntryHandlers({
   messages
 }) {
   const { DEFAULT_MIME_TYPE } = constants;
-  const {
-    RENAME_MESSAGE,
-    DELETE_MESSAGE
-  } = messages;
+  const { RENAME_MESSAGE, DELETE_MESSAGE } = messages;
 
   function copyEntry() {
     setClipboardData({
