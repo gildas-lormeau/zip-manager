@@ -265,6 +265,7 @@ function ZipManager() {
         onDeleteDownloadEntry={deleteDownloadEntry}
         downloaderRef={downloaderRef}
         constants={constants}
+        messages={messages}
       />
     </div>
   );

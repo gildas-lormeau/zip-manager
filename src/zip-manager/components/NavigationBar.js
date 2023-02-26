@@ -1,12 +1,5 @@
 import "./styles/NavigationBar.css";
 
-let ENTER_KEY,
-  ROOT_FOLDER_LABEL,
-  SHORTCUT_LABEL,
-  ALT_KEY_LABEL,
-  ARROW_LEFT_KEY_LABEL,
-  ARROW_RIGHT_KEY_LABEL;
-
 function NavigationBar({
   selectedFolder,
   disabledHistoryBackButton,
@@ -17,17 +10,6 @@ function NavigationBar({
   constants,
   messages
 }) {
-  ({
-    ENTER_KEY
-  } = constants);
-  ({
-    ROOT_FOLDER_LABEL,
-    SHORTCUT_LABEL,
-    ALT_KEY_LABEL,
-    ARROW_LEFT_KEY_LABEL,
-    ARROW_RIGHT_KEY_LABEL
-  } = messages);
-
   return (
     <div className="navigation-bar">
       <HistoryButtons
@@ -35,8 +17,14 @@ function NavigationBar({
         disabledHistoryForwardButton={disabledHistoryForwardButton}
         onNavigateHistoryBack={onNavigateHistoryBack}
         onNavigateHistoryForward={onNavigateHistoryForward}
+        messages={messages}
       />
-      <Breadcrumb folder={selectedFolder} onGoIntoFolder={onGoIntoFolder} />
+      <Breadcrumb
+        folder={selectedFolder}
+        onGoIntoFolder={onGoIntoFolder}
+        constants={constants}
+        messages={messages}
+      />
     </div>
   );
 }
@@ -45,47 +33,62 @@ function HistoryButtons({
   disabledHistoryBackButton,
   disabledHistoryForwardButton,
   onNavigateHistoryBack,
-  onNavigateHistoryForward
+  onNavigateHistoryForward,
+  messages
 }) {
   return (
     <span className="history-buttons">
       <HistoryBackButton
         disabled={disabledHistoryBackButton}
         onNavigateHistoryBack={onNavigateHistoryBack}
+        messages={messages}
       />
       <HistoryForwardButton
         disabled={disabledHistoryForwardButton}
         onNavigateHistoryForward={onNavigateHistoryForward}
+        messages={messages}
       />
     </span>
   );
 }
 
-function HistoryBackButton({ disabled, onNavigateHistoryBack }) {
+function HistoryBackButton({ disabled, onNavigateHistoryBack, messages }) {
   return (
     <button
       disabled={disabled}
       onClick={onNavigateHistoryBack}
-      title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_LEFT_KEY_LABEL}
+      title={
+        messages.SHORTCUT_LABEL +
+        messages.ALT_KEY_LABEL +
+        messages.ARROW_LEFT_KEY_LABEL
+      }
     >
-      &lt;
+      {messages.BACK_BUTTON_LABEL}
     </button>
   );
 }
 
-function HistoryForwardButton({ disabled, onNavigateHistoryForward }) {
+function HistoryForwardButton({
+  disabled,
+  onNavigateHistoryForward,
+  messages
+}) {
   return (
     <button
       disabled={disabled}
       onClick={onNavigateHistoryForward}
-      title={SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_RIGHT_KEY_LABEL}
+      title={
+        messages.SHORTCUT_LABEL +
+        messages.ALT_KEY_LABEL +
+        messages.ARROW_RIGHT_KEY_LABEL
+      }
     >
-      &gt;
+      {messages.FORWARD_BUTTON_LABEL}
     </button>
   );
 }
 
-function Breadcrumb({ folder, onGoIntoFolder }) {
+function Breadcrumb({ folder, onGoIntoFolder, constants, messages }) {
   const lastItemFolder = folder;
   const ancestors = getAncestors(folder);
   return (
@@ -96,6 +99,8 @@ function Breadcrumb({ folder, onGoIntoFolder }) {
             folder={folder}
             onGoIntoFolder={onGoIntoFolder}
             active={ancestors.length > 1 && folder !== lastItemFolder}
+            constants={constants}
+            messages={messages}
           />
         </li>
       ))}
@@ -115,7 +120,13 @@ function getAncestors(folder) {
   return ancestors;
 }
 
-function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
+function BreadcrumbItem({
+  folder,
+  onGoIntoFolder,
+  active,
+  constants,
+  messages
+}) {
   function getBreadcrumbItemClassName() {
     const classes = ["breadcrumb-item"];
     if (active) {
@@ -129,7 +140,7 @@ function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
   }
 
   function handleKeyUp({ event, folder }) {
-    if (event.key === ENTER_KEY) {
+    if (event.key === constants.ENTER_KEY) {
       handleClick(folder);
     }
   }
@@ -141,7 +152,7 @@ function BreadcrumbItem({ folder, onGoIntoFolder, active }) {
       onKeyUp={(event) => handleKeyUp({ event, folder })}
       tabIndex={active ? 0 : null}
     >
-      {folder.parent ? folder.name : ROOT_FOLDER_LABEL}
+      {folder.parent ? folder.name : messages.ROOT_FOLDER_LABEL}
     </span>
   );
 }

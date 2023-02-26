@@ -10,11 +10,28 @@ const SPACE_KEY_LABEL = "space";
 const ARROW_LEFT_KEY_LABEL = "left";
 const ARROW_RIGHT_KEY_LABEL = "right";
 
-const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
+const CREATE_FOLDER_MESSAGE = "Please enter the directory name";
 const RENAME_MESSAGE = "Please enter the entry name";
 const RESET_MESSAGE = "Please confirm the reset";
 const DOWNLOAD_MESSAGE = "Please enter the file name";
 const DELETE_MESSAGE = "Please confirm the deletion";
+
+const CREATE_FOLDER_BUTTON_LABEL = "Create directory";
+const ADD_FILES_BUTTON_LABEL = "Add files";
+const IMPORT_ZIP_BUTTON_LABEL = "Import zip file";
+const EXPORT_ZIP_BUTTON_LABEL = "Export zip file";
+const RESET_BUTTON_LABEL = "Reset";
+const BACK_BUTTON_LABEL = "<";
+const FORWARD_BUTTON_LABEL = ">";
+const DOWNLOAD_BUTTON_LABEL = "↵";
+const ENTER_FOLDER_BUTTON_LABEL = "↓";
+const COPY_LABEL = "Copy";
+const CUT_LABEL = "Cut";
+const PASTE_LABEL = "Paste";
+const RESET_CLIPBOARD_LABEL = "Reset clipboard";
+const RENAME_LABEL = "Rename";
+const DELETE_LABEL = "Delete";
+const CLOSE_BUTTON_LABEL = "✕";
 
 export {
   PARENT_FOLDER_LABEL,
@@ -31,5 +48,21 @@ export {
   RENAME_MESSAGE,
   RESET_MESSAGE,
   DOWNLOAD_MESSAGE,
-  DELETE_MESSAGE
+  DELETE_MESSAGE,
+  COPY_LABEL,
+  CUT_LABEL,
+  PASTE_LABEL,
+  RESET_CLIPBOARD_LABEL,
+  RENAME_LABEL,
+  DELETE_LABEL,
+  CLOSE_BUTTON_LABEL,
+  DOWNLOAD_BUTTON_LABEL,
+  ENTER_FOLDER_BUTTON_LABEL,
+  BACK_BUTTON_LABEL,
+  FORWARD_BUTTON_LABEL,
+  CREATE_FOLDER_BUTTON_LABEL,
+  ADD_FILES_BUTTON_LABEL,
+  IMPORT_ZIP_BUTTON_LABEL,
+  EXPORT_ZIP_BUTTON_LABEL,
+  RESET_BUTTON_LABEL
 };

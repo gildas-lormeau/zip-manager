@@ -2,14 +2,6 @@ import "./styles/TopButtonBar.css";
 
 import { useRef } from "react";
 
-let SHORTCUT_LABEL,
-  CTRL_KEY_LABEL,
-  CREATE_FOLDER_KEY,
-  ADD_FILES_KEY,
-  IMPORT_ZIP_KEY,
-  ZIP_EXTENSION,
-  EXPORT_ZIP_KEY;
-
 function TopButtonBar({
   addFilesButtonRef,
   importZipButtonRef,
@@ -23,56 +15,67 @@ function TopButtonBar({
   constants,
   messages
 }) {
-  ({
-    CREATE_FOLDER_KEY,
-    ADD_FILES_KEY,
-    IMPORT_ZIP_KEY,
-    EXPORT_ZIP_KEY
-  } = constants);
-  ({
-    SHORTCUT_LABEL,
-    CTRL_KEY_LABEL,
-    ZIP_EXTENSION
-  } = messages);
-
   return (
     <div className="button-bar">
       <div className="button-group">
-        <CreateFolderButton onCreateFolder={onCreateFolder} />
+        <CreateFolderButton
+          onCreateFolder={onCreateFolder}
+          constants={constants}
+          messages={messages}
+        />
         <AddFilesButton
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
+          constants={constants}
+          messages={messages}
         />
       </div>
       <div className="button-group">
         <ImportZipButton
           onImportZipFile={onImportZipFile}
           importZipButtonRef={importZipButtonRef}
+          constants={constants}
+          messages={messages}
         />
         <ExportZipButton
           disabled={disabledExportZipButton}
           onExportZipFile={onExportZipFile}
+          constants={constants}
+          messages={messages}
         />
       </div>
       <div className="button-group">
-        <ResetButton disabled={disabledResetButton} onReset={onReset} />
+        <ResetButton
+          disabled={disabledResetButton}
+          onReset={onReset}
+          messages={messages}
+        />
       </div>
     </div>
   );
 }
 
-function CreateFolderButton({ onCreateFolder }) {
+function CreateFolderButton({ onCreateFolder, constants, messages }) {
   return (
     <button
       onClick={onCreateFolder}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CREATE_FOLDER_KEY}
+      title={
+        messages.SHORTCUT_LABEL +
+        messages.CTRL_KEY_LABEL +
+        constants.CREATE_FOLDER_KEY
+      }
     >
-      Create directory
+      {messages.CREATE_FOLDER_BUTTON_LABEL}
     </button>
   );
 }
 
-function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
+function AddFilesButton({
+  addFilesButtonRef,
+  onAddFiles,
+  constants,
+  messages
+}) {
   const fileInputRef = useRef(null);
   const { current } = fileInputRef;
 
@@ -93,9 +96,13 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
       <button
         onClick={dispatchEvent}
         ref={addFilesButtonRef}
-        title={SHORTCUT_LABEL + CTRL_KEY_LABEL + ADD_FILES_KEY}
+        title={
+          messages.SHORTCUT_LABEL +
+          messages.CTRL_KEY_LABEL +
+          constants.ADD_FILES_KEY
+        }
       >
-        Add files
+        {messages.ADD_FILES_BUTTON_LABEL}
       </button>
       <input
         onChange={handleChange}
@@ -108,7 +115,12 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles }) {
   );
 }
 
-function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
+function ImportZipButton({
+  importZipButtonRef,
+  onImportZipFile,
+  constants,
+  messages
+}) {
   const fileInput = useRef(null);
   const { current } = fileInput;
 
@@ -121,37 +133,45 @@ function ImportZipButton({ importZipButtonRef, onImportZipFile }) {
       <button
         onClick={dispatchEvent}
         ref={importZipButtonRef}
-        title={SHORTCUT_LABEL + CTRL_KEY_LABEL + IMPORT_ZIP_KEY}
+        title={
+          messages.SHORTCUT_LABEL +
+          messages.CTRL_KEY_LABEL +
+          constants.IMPORT_ZIP_KEY
+        }
       >
-        Import zip file
+        {messages.IMPORT_ZIP_BUTTON_LABEL}
       </button>
       <input
         onChange={({ target }) => onImportZipFile(target.files[0])}
         ref={fileInput}
         type="file"
-        accept={ZIP_EXTENSION}
+        accept={messages.ZIP_EXTENSION}
         hidden
       />
     </>
   );
 }
 
-function ExportZipButton({ disabled, onExportZipFile }) {
+function ExportZipButton({ disabled, onExportZipFile, constants, messages }) {
   return (
     <button
       onClick={onExportZipFile}
       disabled={disabled}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + EXPORT_ZIP_KEY}
+      title={
+        messages.SHORTCUT_LABEL +
+        messages.CTRL_KEY_LABEL +
+        constants.EXPORT_ZIP_KEY
+      }
     >
-      Export zip file
+      {messages.EXPORT_ZIP_BUTTON_LABEL}
     </button>
   );
 }
 
-function ResetButton({ disabled, onReset }) {
+function ResetButton({ disabled, onReset, messages }) {
   return (
     <button onClick={onReset} disabled={disabled}>
-      Reset
+      {messages.RESET_BUTTON_LABEL}
     </button>
   );
 }

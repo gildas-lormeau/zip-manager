@@ -1,15 +1,12 @@
 import "./styles/DownloadManager.css";
 
-let ENTER_KEY;
-
 function DownloadManager({
   downloads,
   downloaderRef,
   onDeleteDownloadEntry,
-  constants
+  constants,
+  messages
 }) {
-  ({ ENTER_KEY } = constants);
-
   return (
     <div className="downloads">
       <ol>
@@ -18,6 +15,8 @@ function DownloadManager({
             <DownloadEntry
               download={download}
               onDeleteDownloadEntry={onDeleteDownloadEntry}
+              constants={constants}
+              messages={messages}
             />
           </li>
         ))}
@@ -27,19 +26,31 @@ function DownloadManager({
   );
 }
 
-function DownloadEntry({ download, onDeleteDownloadEntry }) {
+function DownloadEntry({
+  download,
+  onDeleteDownloadEntry,
+  constants,
+  messages
+}) {
   return (
     <>
       <DownloadEntryInfo
         download={download}
         onDeleteDownloadEntry={onDeleteDownloadEntry}
+        constants={constants}
+        messages={messages}
       />
       <DownloadEntryProgress download={download} />
     </>
   );
 }
 
-function DownloadEntryInfo({ download, onDeleteDownloadEntry }) {
+function DownloadEntryInfo({
+  download,
+  onDeleteDownloadEntry,
+  constants,
+  messages
+}) {
   return (
     <div className="download-entry">
       <span className="list-item-name download-entry-name">
@@ -48,18 +59,25 @@ function DownloadEntryInfo({ download, onDeleteDownloadEntry }) {
       <DeleteDownloadEntryButton
         download={download}
         onDeleteDownloadEntry={onDeleteDownloadEntry}
+        constants={constants}
+        messages={messages}
       />
     </div>
   );
 }
 
-function DeleteDownloadEntryButton({ download, onDeleteDownloadEntry }) {
+function DeleteDownloadEntryButton({
+  download,
+  onDeleteDownloadEntry,
+  constants,
+  messages
+}) {
   function handleClick() {
     onDeleteDownloadEntry(download);
   }
 
   function handleKeyUp(event) {
-    if (event.key === ENTER_KEY) {
+    if (event.key === constants.ENTER_KEY) {
       handleClick();
     }
   }
@@ -71,7 +89,7 @@ function DeleteDownloadEntryButton({ download, onDeleteDownloadEntry }) {
       onKeyUp={handleKeyUp}
       tabIndex={0}
     >
-      ✕
+      {messages.CLOSE_BUTTON_LABEL}
     </span>
   );
 }

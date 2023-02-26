@@ -2,8 +2,6 @@ import "./styles/Entries.css";
 
 import { useEffect, useRef } from "react";
 
-let SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY;
-
 function Entries({
   entries,
   selectedFolder,
@@ -15,9 +13,6 @@ function Entries({
   constants,
   messages
 }) {
-  ({ TAB_KEY } = constants);
-  ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL } = messages);
-
   const entriesRef = useRef(null);
 
   function getEntryClassName(entry) {
@@ -32,7 +27,7 @@ function Entries({
   }
 
   function handleKeyDown(event) {
-    if (event.key !== TAB_KEY) {
+    if (event.key !== constants.TAB_KEY) {
       event.preventDefault();
     }
   }
@@ -67,6 +62,8 @@ function Entries({
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlightEntry}
                 onEnterEntry={onEnterEntry}
+                constants={constants}
+                messages={messages}
               />
             </li>
           );
@@ -78,6 +75,8 @@ function Entries({
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlightEntry}
                 onEnterEntry={onEnterEntry}
+                constants={constants}
+                messages={messages}
               />
             </li>
           );
@@ -87,7 +86,14 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
+function Entry({
+  entry,
+  selectedFolder,
+  onSelectEntry,
+  onEnterEntry,
+  constants,
+  messages
+}) {
   return (
     <>
       <EntryName
@@ -95,15 +101,29 @@ function Entry({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
         selectedFolder={selectedFolder}
         onSelectEntry={onSelectEntry}
         onEnterEntry={onEnterEntry}
+        messages={messages}
       />
-      <EntryButton entry={entry} onEnterEntry={onEnterEntry} />
+      <EntryButton
+        entry={entry}
+        onEnterEntry={onEnterEntry}
+        constants={constants}
+        messages={messages}
+      />
     </>
   );
 }
 
-function EntryName({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
+function EntryName({
+  entry,
+  selectedFolder,
+  onSelectEntry,
+  onEnterEntry,
+  messages
+}) {
   const entryLabel =
-    entry === selectedFolder.parent ? PARENT_FOLDER_LABEL : entry.name;
+    entry === selectedFolder.parent
+      ? messages.PARENT_FOLDER_LABEL
+      : entry.name;
 
   function handleClick() {
     onSelectEntry(entry);
@@ -125,7 +145,7 @@ function EntryName({ entry, selectedFolder, onSelectEntry, onEnterEntry }) {
   );
 }
 
-function EntryButton({ entry, onEnterEntry }) {
+function EntryButton({ entry, onEnterEntry, constants, messages }) {
   function handleClick() {
     onEnterEntry(entry);
   }
@@ -134,9 +154,11 @@ function EntryButton({ entry, onEnterEntry }) {
     <span
       className="list-item-button"
       onClick={handleClick}
-      title={SHORTCUT_LABEL + SPACE_KEY_LABEL}
+      title={constants.SHORTCUT_LABEL + messages.SPACE_KEY_LABEL}
     >
-      {entry.directory ? "↵" : "↓"}
+      {entry.directory
+        ? messages.DOWNLOAD_BUTTON_LABEL
+        : messages.ENTER_FOLDER_BUTTON_LABEL}
     </span>
   );
 }

@@ -1,13 +1,5 @@
 import "./styles/BottomButtonBar.css";
 
-let SHORTCUT_LABEL,
-  CTRL_KEY_LABEL,
-  COPY_KEY,
-  CUT_KEY,
-  PASTE_KEY,
-  RENAME_KEY,
-  DELETE_KEYS;
-
 function BottomButtonBar({
   disabledCopyEntryButton,
   disabledCutEntryButton,
@@ -24,116 +16,128 @@ function BottomButtonBar({
   constants,
   messages
 }) {
-  ({
-    COPY_KEY,
-    CUT_KEY,
-    PASTE_KEY,
-    RENAME_KEY,
-    DELETE_KEYS
-  } = constants);
-  ({
-    SHORTCUT_LABEL,
-    CTRL_KEY_LABEL
-  } = messages);
-
   return (
     <div className="button-bar button-bar-bottom">
       <div className="button-group">
         <CopyEntryButton
           disabled={disabledCopyEntryButton}
           onCopyEntry={onCopyEntry}
+          constants={constants}
+          messages={messages}
         />
         <CutEntryButton
           disabled={disabledCutEntryButton}
           onCutEntry={onCutEntry}
+          constants={constants}
+          messages={messages}
         />
         <PasteEntryButton
           disabled={disabledPasteEntryButton}
           onPasteEntry={onPasteEntry}
+          constants={constants}
+          messages={messages}
         />
         <ResetClipboardDataButton
           disabled={disabledResetClipboardDataButton}
           onResetClipboardData={onResetClipboardData}
+          constants={constants}
+          messages={messages}
         />
       </div>
       <div className="button-group">
         <RenameEntryButton
           disabled={disabledRenameEntryButton}
           onRenameEntry={onRenameEntry}
+          constants={constants}
+          messages={messages}
         />
         <DeleteEntryButton
           disabled={disabledDeleteEntryButton}
           onDeleteEntry={onDeleteEntry}
+          constants={constants}
+          messages={messages}
         />
       </div>
     </div>
   );
 }
 
-function CopyEntryButton({ disabled, onCopyEntry }) {
+function CopyEntryButton({ disabled, onCopyEntry, constants, messages }) {
   return (
     <button
       onClick={onCopyEntry}
       disabled={disabled}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + COPY_KEY}
+      title={
+        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.COPY_KEY
+      }
     >
-      Copy
+      {messages.COPY_LABEL}
     </button>
   );
 }
 
-function CutEntryButton({ disabled, onCutEntry }) {
+function CutEntryButton({ disabled, onCutEntry, constants, messages }) {
   return (
     <button
       onClick={onCutEntry}
       disabled={disabled}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + CUT_KEY}
+      title={
+        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.CUT_KEY
+      }
     >
-      Cut
+      {messages.CUT_LABEL}
     </button>
   );
 }
 
-function PasteEntryButton({ disabled, onPasteEntry }) {
+function PasteEntryButton({ disabled, onPasteEntry, constants, messages }) {
   return (
     <button
       onClick={onPasteEntry}
       disabled={disabled}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + PASTE_KEY}
+      title={
+        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.PASTE_KEY
+      }
     >
-      Paste
+      {messages.PASTE_LABEL}
     </button>
   );
 }
 
-function ResetClipboardDataButton({ disabled, onResetClipboardData }) {
+function ResetClipboardDataButton({
+  disabled,
+  onResetClipboardData,
+  messages
+}) {
   return (
     <button onClick={onResetClipboardData} disabled={disabled}>
-      Reset clipboard
+      {messages.RESET_CLIPBOARD_LABEL}
     </button>
   );
 }
 
-function RenameEntryButton({ disabled, onRenameEntry }) {
+function RenameEntryButton({ disabled, onRenameEntry, constants, messages }) {
   return (
     <button
       onClick={onRenameEntry}
       disabled={disabled}
-      title={SHORTCUT_LABEL + CTRL_KEY_LABEL + RENAME_KEY}
+      title={
+        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.RENAME_KEY
+      }
     >
-      Rename
+      {messages.RENAME_LABEL}
     </button>
   );
 }
 
-function DeleteEntryButton({ disabled, onDeleteEntry }) {
+function DeleteEntryButton({ disabled, onDeleteEntry, constants, messages }) {
   return (
     <button
       onClick={onDeleteEntry}
       disabled={disabled}
-      title={DELETE_KEYS.map((key) => key).join(", ")}
+      title={constants.DELETE_KEYS.map((key) => key).join(", ")}
     >
-      Delete
+      {messages.DELETE_LABEL}
     </button>
   );
 }
