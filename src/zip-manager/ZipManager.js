@@ -22,7 +22,7 @@ import {
   getDownloadHandlers,
   getClipboardHandlers
 } from "./business/handlers.js";
-import { getKeyUpHandler } from "./business/keyboardHandlers.js";
+import { getKeyUpHandler } from "./business/keyboard-handlers.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
