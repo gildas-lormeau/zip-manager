@@ -87,14 +87,14 @@ function AddFilesButton({
     }
   }
 
-  function dispatchEvent() {
+  function handleClick() {
     current.click();
   }
 
   return (
     <>
       <button
-        onClick={dispatchEvent}
+        onClick={handleClick}
         ref={addFilesButtonRef}
         title={
           messages.SHORTCUT_LABEL +
@@ -124,14 +124,14 @@ function ImportZipButton({
   const fileInput = useRef(null);
   const { current } = fileInput;
 
-  function dispatchEvent() {
+  function handleClick() {
     current.click();
   }
 
   return (
     <>
       <button
-        onClick={dispatchEvent}
+        onClick={handleClick}
         ref={importZipButtonRef}
         title={
           messages.SHORTCUT_LABEL +
