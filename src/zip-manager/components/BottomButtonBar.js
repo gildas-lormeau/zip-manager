@@ -139,7 +139,7 @@ function DeleteEntryButton({ disabled, onDeleteEntry, constants, messages }) {
         messages.KEYS_SEPARATOR_LABEL
       )}
     >
-      {messages.DELETE_LABEL}
+      {messages.SHORTCUT_LABEL + messages.DELETE_LABEL}
     </button>
   );
 }
