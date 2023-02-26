@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from "react";
 
 import * as util from "./util/util.js";
 import * as constants from "./constants.js";
-import * as messages from "./messages.js";
+import * as messages from "./messages/en-US.js";
 
 import { getUtil, createZipFileSystem } from "./helpers/helpers.js";
 import { getEffects } from "./business/effects.js";
