@@ -203,8 +203,8 @@ function ZipManager() {
     exportZipFile,
     navigateHistoryBack,
     navigateHistoryForward,
-    addFilesButtonRef,
-    importZipButtonRef,
+    addFilesButton: addFilesButtonRef.current,
+    importZipButton: importZipButtonRef.current,
     constants
   });
 

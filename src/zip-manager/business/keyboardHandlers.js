@@ -25,8 +25,8 @@ function getKeyUpHandler({
   exportZipFile,
   navigateHistoryBack,
   navigateHistoryForward,
-  addFilesButtonRef,
-  importZipButtonRef,
+  addFilesButton,
+  importZipButton,
   constants
 }) {
   const {
@@ -85,8 +85,8 @@ function getKeyUpHandler({
       event,
       createFolder,
       exportZipFile,
-      addFilesButtonRef,
-      importZipButtonRef,
+      addFilesButton,
+      importZipButton,
       disabledExportZip
     });
   }
@@ -183,8 +183,8 @@ function getKeyUpHandler({
     event,
     createFolder,
     exportZipFile,
-    addFilesButtonRef,
-    importZipButtonRef,
+    addFilesButton,
+    importZipButton,
     disabledExportZip
   }) {
     if (event.ctrlKey) {
@@ -192,10 +192,10 @@ function getKeyUpHandler({
         createFolder();
       }
       if (event.key === ADD_FILES_KEY) {
-        addFilesButtonRef.current.click();
+        addFilesButton.click();
       }
       if (event.key === IMPORT_ZIP_KEY) {
-        importZipButtonRef.current.click();
+        importZipButton.click();
       }
       if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
         exportZipFile();
