@@ -20,8 +20,8 @@ import {
   getZipFilesystemHandlers,
   getDownloadHandlers,
   getClipboardHandlers
-} from "./business/appHandlers.js";
-import { getKeyUpHandler } from "./business/keyUpHandler.js";
+} from "./business/handlers.js";
+import { getKeyUpHandler } from "./business/keyboardHandlers.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
