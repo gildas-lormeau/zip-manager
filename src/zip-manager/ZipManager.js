@@ -48,16 +48,16 @@ function ZipManager() {
     !highlightedEntry || highlightedEntry === selectedFolder.parent;
   const clipboardDataEmpty = !clipboardData;
 
-  const disabledExportZipButton = entriesEmpty;
-  const disabledResetButton = entriesEmpty;
-  const disabledHistoryBackButton = !historyIndex;
-  const disabledHistoryForwardButton = historyIndex === history.length - 1;
-  const disabledCopyEntryButton = actionDisabled;
-  const disabledCutEntryButton = actionDisabled;
-  const disabledPasteEntryButton = clipboardDataEmpty;
-  const disabledResetClipboardDataButton = clipboardDataEmpty;
-  const disabledRenameEntryButton = actionDisabled;
-  const disabledDeleteEntryButton = actionDisabled;
+  const disabledExportZip = entriesEmpty;
+  const disabledReset = entriesEmpty;
+  const disabledHistoryBack = !historyIndex;
+  const disabledHistoryForward = historyIndex === history.length - 1;
+  const disabledCopyEntry = actionDisabled;
+  const disabledCutEntry = actionDisabled;
+  const disabledPasteEntry = clipboardDataEmpty;
+  const disabledResetClipboardData = clipboardDataEmpty;
+  const disabledRenameEntry = actionDisabled;
+  const disabledDeleteEntry = actionDisabled;
 
   const { downloadFile } = getUtil({
     downloadId,
@@ -170,14 +170,14 @@ function ZipManager() {
     onExportZipFile,
     onNavigateHistoryBack,
     onNavigateHistoryForward,
-    disabledCutEntryButton,
-    disabledCopyEntryButton,
-    disabledRenameEntryButton,
-    disabledPasteEntryButton,
-    disabledDeleteEntryButton,
-    disabledHistoryBackButton,
-    disabledHistoryForwardButton,
-    disabledExportZipButton,
+    disabledCutEntry,
+    disabledCopyEntry,
+    disabledRenameEntry,
+    disabledPasteEntry,
+    disabledDeleteEntry,
+    disabledHistoryBack,
+    disabledHistoryForward,
+    disabledExportZip,
     addFilesButtonRef,
     importZipButtonRef
   };
@@ -206,8 +206,8 @@ function ZipManager() {
       <TopButtonBar
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
-        disabledExportZipButton={disabledExportZipButton}
-        disabledResetButton={disabledResetButton}
+        disabledExportZipButton={disabledExportZip}
+        disabledResetButton={disabledReset}
         onCreateFolder={onCreateFolder}
         onAddFiles={onAddFiles}
         onImportZipFile={onImportZipFile}
@@ -217,8 +217,8 @@ function ZipManager() {
       />
       <NavigationBar
         selectedFolder={selectedFolder}
-        disabledHistoryBackButton={disabledHistoryBackButton}
-        disabledHistoryForwardButton={disabledHistoryForwardButton}
+        disabledHistoryBackButton={disabledHistoryBack}
+        disabledHistoryForwardButton={disabledHistoryForward}
         onNavigateHistoryBack={onNavigateHistoryBack}
         onNavigateHistoryForward={onNavigateHistoryForward}
         onGoIntoFolder={onGoIntoFolder}
@@ -237,12 +237,12 @@ function ZipManager() {
         constants={constants}
       />
       <BottomButtonBar
-        disabledCopyEntryButton={disabledCopyEntryButton}
-        disabledCutEntryButton={disabledCutEntryButton}
-        disabledPasteEntryButton={disabledPasteEntryButton}
-        disabledResetClipboardDataButton={disabledResetClipboardDataButton}
-        disabledRenameEntryButton={disabledRenameEntryButton}
-        disabledDeleteEntryButton={disabledDeleteEntryButton}
+        disabledCopyEntryButton={disabledCopyEntry}
+        disabledCutEntryButton={disabledCutEntry}
+        disabledPasteEntryButton={disabledPasteEntry}
+        disabledResetClipboardDataButton={disabledResetClipboardData}
+        disabledRenameEntryButton={disabledRenameEntry}
+        disabledDeleteEntryButton={disabledDeleteEntry}
         onCopyEntry={onCopyEntry}
         onCutEntry={onCutEntry}
         onPasteEntry={onPasteEntry}

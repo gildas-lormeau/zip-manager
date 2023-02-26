@@ -37,14 +37,14 @@ function onKeyUp({
   onExportZipFile,
   onNavigateHistoryBack,
   onNavigateHistoryForward,
-  disabledCutEntryButton,
-  disabledCopyEntryButton,
-  disabledRenameEntryButton,
-  disabledPasteEntryButton,
-  disabledDeleteEntryButton,
-  disabledHistoryBackButton,
-  disabledHistoryForwardButton,
-  disabledExportZipButton,
+  disabledCutEntry,
+  disabledCopyEntry,
+  disabledRenameEntry,
+  disabledPasteEntry,
+  disabledDeleteEntry,
+  disabledHistoryBack,
+  disabledHistoryForward,
+  disabledExportZip,
   addFilesButtonRef,
   importZipButtonRef
 }) {
@@ -62,11 +62,11 @@ function onKeyUp({
     onHighlightPreviousPageEntry,
     onHighlightNextPageEntry,
     onHighlightLastEntry,
-    disabledCutEntryButton,
-    disabledCopyEntryButton,
-    disabledRenameEntryButton,
-    disabledPasteEntryButton,
-    disabledDeleteEntryButton
+    disabledCutEntry,
+    disabledCopyEntry,
+    disabledRenameEntry,
+    disabledPasteEntry,
+    disabledDeleteEntry
   });
   onSelectedFolderKeyUp({
     event,
@@ -74,14 +74,14 @@ function onKeyUp({
     onExportZipFile,
     addFilesButtonRef,
     importZipButtonRef,
-    disabledExportZipButton
+    disabledExportZip
   });
   onFolderNavigationKeyUp({
     event,
     onNavigateHistoryBack,
     onNavigateHistoryForward,
-    disabledHistoryBackButton,
-    disabledHistoryForwardButton
+    disabledHistoryBack,
+    disabledHistoryForward
   });
   onEntryNavigationKeyUp({
     event,
@@ -106,27 +106,27 @@ function onHighlightedEntryKeyUp({
   onHighlightNextPageEntry,
   onHighlightFirstEntry,
   onHighlightLastEntry,
-  disabledCutEntryButton,
-  disabledCopyEntryButton,
-  disabledRenameEntryButton,
-  disabledPasteEntryButton,
-  disabledDeleteEntryButton
+  disabledCutEntry,
+  disabledCopyEntry,
+  disabledRenameEntry,
+  disabledPasteEntry,
+  disabledDeleteEntry
 }) {
   if (event.ctrlKey) {
-    if (event.key === CUT_KEY && !disabledCutEntryButton) {
+    if (event.key === CUT_KEY && !disabledCutEntry) {
       onCutEntry();
     }
-    if (event.key === COPY_KEY && !disabledCopyEntryButton) {
+    if (event.key === COPY_KEY && !disabledCopyEntry) {
       onCopyEntry();
     }
-    if (event.key === RENAME_KEY && !disabledRenameEntryButton) {
+    if (event.key === RENAME_KEY && !disabledRenameEntry) {
       onRenameEntry();
     }
-    if (event.key === PASTE_KEY && !disabledPasteEntryButton) {
+    if (event.key === PASTE_KEY && !disabledPasteEntry) {
       onPasteEntry();
     }
   }
-  if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntryButton) {
+  if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntry) {
     onDeleteEntry();
   }
   if (event.key === ACTION_KEY) {
@@ -158,7 +158,7 @@ function onSelectedFolderKeyUp({
   onExportZipFile,
   addFilesButtonRef,
   importZipButtonRef,
-  disabledExportZipButton
+  disabledExportZip
 }) {
   if (event.ctrlKey) {
     if (event.key === CREATE_FOLDER_KEY) {
@@ -170,7 +170,7 @@ function onSelectedFolderKeyUp({
     if (event.key === IMPORT_ZIP_KEY) {
       importZipButtonRef.current.click();
     }
-    if (event.key === EXPORT_ZIP_KEY && !disabledExportZipButton) {
+    if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
       onExportZipFile();
     }
   }
@@ -180,14 +180,14 @@ function onFolderNavigationKeyUp({
   event,
   onNavigateHistoryBack,
   onNavigateHistoryForward,
-  disabledHistoryBackButton,
-  disabledHistoryForwardButton
+  disabledHistoryBack,
+  disabledHistoryForward
 }) {
   if (event.altKey) {
-    if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBackButton) {
+    if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBack) {
       onNavigateHistoryBack();
     }
-    if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForwardButton) {
+    if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForward) {
       onNavigateHistoryForward();
     }
   }
