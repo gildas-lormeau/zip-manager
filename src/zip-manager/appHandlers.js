@@ -83,6 +83,7 @@ function getFolderNavigationHandlers({
   function goIntoFolder(entry) {
     const newHistory = [...history];
     const newHistoryIndex = historyIndex + 1;
+    newHistory.length = newHistoryIndex + 1;
     newHistory[newHistoryIndex] = entry;
     setHistory(newHistory);
     setHistoryIndex(newHistoryIndex);
