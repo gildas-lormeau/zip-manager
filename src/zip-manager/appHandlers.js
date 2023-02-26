@@ -1,18 +1,3 @@
-import { alert, confirm, prompt } from "./util/util.js";
-
-import {
-  DEFAULT_MIME_TYPE,
-  CANCELLED_DOWNLOAD_MESSAGE
-} from "./constants.js";
-import {
-  ZIP_EXTENSION,
-  ROOT_ZIP_FILENAME,
-  CREATE_FOLDER_MESSAGE,
-  RENAME_MESSAGE,
-  RESET_MESSAGE,
-  DELETE_MESSAGE
-} from "./messages.js";
-
 function getEntriesNavigationHandlers({
   entries,
   highlightedEntry,
@@ -132,8 +117,17 @@ function getHighlightedEntryHandlers({
   setHighlightedEntry,
   deleteDownloadEntry,
   updateSelectedFolder,
-  downloadFile
+  downloadFile,
+  util,
+  constants,
+  messages
 }) {
+  const { DEFAULT_MIME_TYPE } = constants;
+  const {
+    RENAME_MESSAGE,
+    DELETE_MESSAGE
+  } = messages;
+
   function copyEntry() {
     setClipboardData({
       entry: highlightedEntry.clone(true)
@@ -160,24 +154,24 @@ function getHighlightedEntryHandlers({
       }
       updateSelectedFolder();
     } catch (error) {
-      alert(error.message);
+      util.alert(error.message);
     }
   }
 
   function renameEntry() {
     try {
-      const entryName = prompt(RENAME_MESSAGE, highlightedEntry.name);
+      const entryName = util.prompt(RENAME_MESSAGE, highlightedEntry.name);
       if (entryName && entryName !== highlightedEntry.name) {
         highlightedEntry.rename(entryName);
         updateSelectedFolder();
       }
     } catch (error) {
-      alert(error.message);
+      util.alert(error.message);
     }
   }
 
   function deleteEntry() {
-    if (confirm(DELETE_MESSAGE)) {
+    if (util.confirm(DELETE_MESSAGE)) {
       zipFilesystem.remove(highlightedEntry);
       updateHistoryData();
       setHighlightedEntry(null);
@@ -229,16 +223,22 @@ function getSelectedFolderHandlers({
   selectedFolder,
   updateSelectedFolder,
   deleteDownloadEntry,
-  downloadFile
+  downloadFile,
+  util,
+  constants,
+  messages
 }) {
+  const { DEFAULT_MIME_TYPE } = constants;
+  const { ZIP_EXTENSION, ROOT_ZIP_FILENAME, CREATE_FOLDER_MESSAGE } = messages;
+
   function createFolder() {
-    const folderName = prompt(CREATE_FOLDER_MESSAGE);
+    const folderName = util.prompt(CREATE_FOLDER_MESSAGE);
     if (folderName) {
       try {
         selectedFolder.addDirectory(folderName);
         updateSelectedFolder();
       } catch (error) {
-        alert(error.message);
+        util.alert(error.message);
       }
     }
   }
@@ -248,7 +248,7 @@ function getSelectedFolderHandlers({
       try {
         return selectedFolder.addBlob(file.name, file);
       } catch (error) {
-        alert(error.message);
+        util.alert(error.message);
       }
     });
     updateSelectedFolder();
@@ -259,7 +259,7 @@ function getSelectedFolderHandlers({
       try {
         await selectedFolder.importBlob(zipFile);
       } catch (error) {
-        alert(error.message);
+        util.alert(error.message);
       }
       updateSelectedFolder();
     }
@@ -291,7 +291,8 @@ function getSelectedFolderHandlers({
   };
 }
 
-function getDownloadHandlers({ setDownloads }) {
+function getDownloadHandlers({ setDownloads, constants }) {
+  const { CANCELLED_DOWNLOAD_MESSAGE } = constants;
   function deleteDownloadEntry(deletedDownload) {
     setDownloads((downloads) =>
       downloads.filter((download) => download.id !== deletedDownload.id)
@@ -304,9 +305,15 @@ function getDownloadHandlers({ setDownloads }) {
   };
 }
 
-function getZipFilesystemHandlers({ createZipFileSystem, setZipFilesystem }) {
+function getZipFilesystemHandlers({
+  createZipFileSystem,
+  setZipFilesystem,
+  util,
+  messages
+}) {
+  const { RESET_MESSAGE } = messages;
   function reset() {
-    if (confirm(RESET_MESSAGE)) {
+    if (util.confirm(RESET_MESSAGE)) {
       setZipFilesystem(createZipFileSystem());
     }
   }

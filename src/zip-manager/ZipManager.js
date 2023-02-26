@@ -5,6 +5,7 @@ import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
 
+import * as util from "./util/util.js";
 import * as constants from "./constants.js";
 import * as messages from "./messages.js";
 
@@ -114,14 +115,18 @@ function ZipManager() {
       setHistoryIndex
     });
   const { deleteDownloadEntry } = getDownloadHandlers({
-    setDownloads
+    setDownloads,
+    constants
   });
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderHandlers({
       selectedFolder,
       updateSelectedFolder,
       deleteDownloadEntry,
-      downloadFile
+      downloadFile,
+      util,
+      constants,
+      messages
     });
   const {
     copyEntry,
@@ -143,11 +148,16 @@ function ZipManager() {
     setHighlightedEntry,
     updateSelectedFolder,
     deleteDownloadEntry,
-    downloadFile
+    downloadFile,
+    util,
+    constants,
+    messages
   });
   const { reset } = getZipFilesystemHandlers({
     createZipFileSystem,
-    setZipFilesystem
+    setZipFilesystem,
+    util,
+    messages
   });
   const { resetClipboardData } = getClipboardHandlers({
     setClipboardData
