@@ -2,6 +2,7 @@ const PARENT_FOLDER_LABEL = "..";
 const ROOT_FOLDER_LABEL = "[root]";
 const ZIP_EXTENSION = ".zip";
 const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
+const KEYS_SEPARATOR_LABEL = ", ";
 
 const SHORTCUT_LABEL = "Shortcut: ";
 const CTRL_KEY_LABEL = "ctrl-";
