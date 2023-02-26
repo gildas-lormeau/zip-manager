@@ -10,6 +10,7 @@ import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
 
 import { getUtil, createZipFileSystem } from "./helpers/helpers.js";
+import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
 import {
   getEntriesNavigationHandlers,
@@ -46,22 +47,6 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const entriesEmpty = !entries.length;
-  const actionDisabled =
-    !highlightedEntry || highlightedEntry === selectedFolder.parent;
-  const clipboardDataEmpty = !clipboardData;
-
-  const disabledExportZip = entriesEmpty;
-  const disabledReset = entriesEmpty;
-  const disabledHistoryBack = !historyIndex;
-  const disabledHistoryForward = historyIndex === history.length - 1;
-  const disabledCopyEntry = actionDisabled;
-  const disabledCutEntry = actionDisabled;
-  const disabledPasteEntry = clipboardDataEmpty;
-  const disabledResetClipboardData = clipboardDataEmpty;
-  const disabledRenameEntry = actionDisabled;
-  const disabledDeleteEntry = actionDisabled;
-
   const { downloadFile } = getUtil({
     downloadId,
     setDownloadId,
@@ -70,6 +55,25 @@ function ZipManager() {
     util,
     constants,
     messages
+  });
+  const {
+    disabledExportZip,
+    disabledReset,
+    disabledHistoryBack,
+    disabledHistoryForward,
+    disabledCopyEntry,
+    disabledCutEntry,
+    disabledPasteEntry,
+    disabledResetClipboardData,
+    disabledRenameEntry,
+    disabledDeleteEntry
+  } = getUIState({
+    entries,
+    highlightedEntry,
+    selectedFolder,
+    clipboardData,
+    historyIndex,
+    history
   });
   const {
     updateSelectedFolder,
