@@ -4,7 +4,15 @@ import { fs } from "@zip.js/zip.js";
 
 const { FS } = fs;
 
-function getUtil({ downloadId, setDownloadId, setDownloads, downloaderRef, util, constants, messages }) {
+function getUtil({
+  downloadId,
+  setDownloadId,
+  setDownloads,
+  downloaderRef,
+  util,
+  constants,
+  messages
+}) {
   const { ABORT_ERROR_NAME, CANCELLED_DOWNLOAD_MESSAGE } = constants;
   const { DOWNLOAD_MESSAGE } = messages;
 
