@@ -48,6 +48,22 @@ function onKeyUp({
   addFilesButtonRef,
   importZipButtonRef
 }) {
+  onEntriesNavigationKeyUp({
+    event,
+    onHighlightNextEntry,
+    onHighlightPreviousEntry,
+    onHighlightPreviousPageEntry,
+    onHighlightNextPageEntry,
+    onHighlightFirstEntry,
+    onHighlightLastEntry
+  });
+  onFolderNavigationKeyUp({
+    event,
+    onNavigateHistoryBack,
+    onNavigateHistoryForward,
+    disabledHistoryBack,
+    disabledHistoryForward
+  });
   onHighlightedEntryKeyUp({
     event,
     onCutEntry,
@@ -56,12 +72,6 @@ function onKeyUp({
     onPasteEntry,
     onDeleteEntry,
     onActionEntry,
-    onHighlightNextEntry,
-    onHighlightPreviousEntry,
-    onHighlightFirstEntry,
-    onHighlightPreviousPageEntry,
-    onHighlightNextPageEntry,
-    onHighlightLastEntry,
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,
@@ -76,20 +86,58 @@ function onKeyUp({
     importZipButtonRef,
     disabledExportZip
   });
-  onFolderNavigationKeyUp({
-    event,
-    onNavigateHistoryBack,
-    onNavigateHistoryForward,
-    disabledHistoryBack,
-    disabledHistoryForward
-  });
-  onEntryNavigationKeyUp({
-    event,
-    onHighlightNextEntry,
-    onHighlightPreviousEntry,
-    onHighlightFirstEntry,
-    onHighlightLastEntry
-  });
+}
+
+function onEntriesNavigationKeyUp({
+  event,
+  onHighlightPreviousEntry,
+  onHighlightNextEntry,
+  onHighlightPreviousPageEntry,
+  onHighlightNextPageEntry,
+  onHighlightFirstEntry,
+  onHighlightLastEntry
+}) {
+  if (event.key === DOWN_KEY) {
+    onHighlightNextEntry();
+  }
+  if (event.key === UP_KEY) {
+    onHighlightPreviousEntry();
+  }
+  if (event.key === HOME_KEY) {
+    onHighlightFirstEntry();
+  }
+  if (event.key === END_KEY) {
+    onHighlightLastEntry();
+  }
+  if (event.key === PAGE_UP_KEY) {
+    onHighlightPreviousPageEntry();
+  }
+  if (event.key === PAGE_DOWN_KEY) {
+    onHighlightNextPageEntry();
+  }
+  if (event.key === HOME_KEY) {
+    onHighlightFirstEntry();
+  }
+  if (event.key === END_KEY) {
+    onHighlightLastEntry();
+  }
+}
+
+function onFolderNavigationKeyUp({
+  event,
+  onNavigateHistoryBack,
+  onNavigateHistoryForward,
+  disabledHistoryBack,
+  disabledHistoryForward
+}) {
+  if (event.altKey) {
+    if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBack) {
+      onNavigateHistoryBack();
+    }
+    if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForward) {
+      onNavigateHistoryForward();
+    }
+  }
 }
 
 function onHighlightedEntryKeyUp({
@@ -100,12 +148,6 @@ function onHighlightedEntryKeyUp({
   onPasteEntry,
   onDeleteEntry,
   onActionEntry,
-  onHighlightNextEntry,
-  onHighlightPreviousEntry,
-  onHighlightPreviousPageEntry,
-  onHighlightNextPageEntry,
-  onHighlightFirstEntry,
-  onHighlightLastEntry,
   disabledCutEntry,
   disabledCopyEntry,
   disabledRenameEntry,
@@ -132,24 +174,6 @@ function onHighlightedEntryKeyUp({
   if (event.key === ACTION_KEY) {
     onActionEntry();
   }
-  if (event.key === DOWN_KEY) {
-    onHighlightNextEntry();
-  }
-  if (event.key === PAGE_UP_KEY) {
-    onHighlightPreviousPageEntry();
-  }
-  if (event.key === PAGE_DOWN_KEY) {
-    onHighlightNextPageEntry();
-  }
-  if (event.key === UP_KEY) {
-    onHighlightPreviousEntry();
-  }
-  if (event.key === HOME_KEY) {
-    onHighlightFirstEntry();
-  }
-  if (event.key === END_KEY) {
-    onHighlightLastEntry();
-  }
 }
 
 function onSelectedFolderKeyUp({
@@ -173,44 +197,6 @@ function onSelectedFolderKeyUp({
     if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
       onExportZipFile();
     }
-  }
-}
-
-function onFolderNavigationKeyUp({
-  event,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
-  disabledHistoryBack,
-  disabledHistoryForward
-}) {
-  if (event.altKey) {
-    if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBack) {
-      onNavigateHistoryBack();
-    }
-    if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForward) {
-      onNavigateHistoryForward();
-    }
-  }
-}
-
-function onEntryNavigationKeyUp({
-  event,
-  onHighlightNextEntry,
-  onHighlightPreviousEntry,
-  onHighlightFirstEntry,
-  onHighlightLastEntry
-}) {
-  if (event.key === DOWN_KEY) {
-    onHighlightNextEntry();
-  }
-  if (event.key === UP_KEY) {
-    onHighlightPreviousEntry();
-  }
-  if (event.key === HOME_KEY) {
-    onHighlightFirstEntry();
-  }
-  if (event.key === END_KEY) {
-    onHighlightLastEntry();
   }
 }
 

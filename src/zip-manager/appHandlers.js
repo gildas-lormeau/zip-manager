@@ -116,87 +116,6 @@ function getFolderNavigationHandlers({
   };
 }
 
-function getDownloadHandlers({ setDownloads, downloadFile }) {
-  function onDownloadFile(file) {
-    downloadFile(file.name, {}, (options) =>
-      onDeleteDownloadEntry(file.getBlob(DEFAULT_MIME_TYPE, options))
-    );
-  }
-
-  function onDeleteDownloadEntry(deletedDownload) {
-    setDownloads((downloads) =>
-      downloads.filter((download) => download.id !== deletedDownload.id)
-    );
-    deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
-  }
-
-  return {
-    onDownloadFile,
-    onDeleteDownloadEntry
-  };
-}
-
-function getSelectedFolderHandlers({
-  selectedFolder,
-  updateSelectedFolder,
-  downloadFile
-}) {
-  function onCreateFolder() {
-    const folderName = prompt(CREATE_FOLDER_MESSAGE);
-    if (folderName) {
-      try {
-        selectedFolder.addDirectory(folderName);
-        updateSelectedFolder();
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-  }
-
-  function onAddFiles(files) {
-    files.forEach((file) => {
-      try {
-        return selectedFolder.addBlob(file.name, file);
-      } catch (error) {
-        alert(error.message);
-      }
-    });
-    updateSelectedFolder();
-  }
-
-  function onImportZipFile(zipFile) {
-    async function updateZipFile() {
-      try {
-        await selectedFolder.importBlob(zipFile);
-      } catch (error) {
-        alert(error.message);
-      }
-      updateSelectedFolder();
-    }
-
-    if (zipFile) {
-      updateZipFile();
-    }
-  }
-
-  function onExportZipFile() {
-    downloadFile(
-      selectedFolder.name
-        ? selectedFolder.name + ZIP_EXTENSION
-        : ROOT_ZIP_FILENAME,
-      { mimeType: DEFAULT_MIME_TYPE },
-      (options) => selectedFolder.exportBlob(options)
-    );
-  }
-
-  return {
-    onCreateFolder,
-    onAddFiles,
-    onImportZipFile,
-    onExportZipFile
-  };
-}
-
 function getHighlightedEntryHandlers({
   zipFilesystem,
   history,
@@ -292,6 +211,87 @@ function getHighlightedEntryHandlers({
   };
 }
 
+function getSelectedFolderHandlers({
+  selectedFolder,
+  updateSelectedFolder,
+  downloadFile
+}) {
+  function onCreateFolder() {
+    const folderName = prompt(CREATE_FOLDER_MESSAGE);
+    if (folderName) {
+      try {
+        selectedFolder.addDirectory(folderName);
+        updateSelectedFolder();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  }
+
+  function onAddFiles(files) {
+    files.forEach((file) => {
+      try {
+        return selectedFolder.addBlob(file.name, file);
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+    updateSelectedFolder();
+  }
+
+  function onImportZipFile(zipFile) {
+    async function updateZipFile() {
+      try {
+        await selectedFolder.importBlob(zipFile);
+      } catch (error) {
+        alert(error.message);
+      }
+      updateSelectedFolder();
+    }
+
+    if (zipFile) {
+      updateZipFile();
+    }
+  }
+
+  function onExportZipFile() {
+    downloadFile(
+      selectedFolder.name
+        ? selectedFolder.name + ZIP_EXTENSION
+        : ROOT_ZIP_FILENAME,
+      { mimeType: DEFAULT_MIME_TYPE },
+      (options) => selectedFolder.exportBlob(options)
+    );
+  }
+
+  return {
+    onCreateFolder,
+    onAddFiles,
+    onImportZipFile,
+    onExportZipFile
+  };
+}
+
+function getDownloadHandlers({ setDownloads, downloadFile }) {
+  function onDownloadFile(file) {
+    downloadFile(file.name, {}, (options) =>
+      onDeleteDownloadEntry(file.getBlob(DEFAULT_MIME_TYPE, options))
+    );
+  }
+
+  function onDeleteDownloadEntry(deletedDownload) {
+    setDownloads((downloads) =>
+      downloads.filter((download) => download.id !== deletedDownload.id)
+    );
+    deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
+  }
+
+  return {
+    onDownloadFile,
+    onDeleteDownloadEntry
+  };
+}
+
 function getZipFilesystemHandlers({ createZipFileSystem, setZipFilesystem }) {
   function onReset() {
     if (confirm(RESET_MESSAGE)) {
@@ -334,10 +334,10 @@ function getActionHandlers({
 export {
   getEntriesNavigationHandlers,
   getFolderNavigationHandlers,
-  getSelectedFolderHandlers,
   getHighlightedEntryHandlers,
-  getActionHandlers,
-  getZipFilesystemHandlers,
+  getSelectedFolderHandlers,
   getDownloadHandlers,
-  getClipboardHandlers
+  getZipFilesystemHandlers,
+  getClipboardHandlers,
+  getActionHandlers
 };
