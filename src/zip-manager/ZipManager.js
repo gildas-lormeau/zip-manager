@@ -9,8 +9,8 @@ import * as util from "./util/util.js";
 import * as constants from "./constants.js";
 import * as messages from "./messages.js";
 
-import { getUtil, createZipFileSystem } from "./util.js";
-import { getEffects } from "./effects.js";
+import { getUtil, createZipFileSystem } from "./helpers/helpers.js";
+import { getEffects } from "./business/effects.js";
 import {
   getEntriesNavigationHandlers,
   getFolderNavigationHandlers,
@@ -66,7 +66,10 @@ function ZipManager() {
     downloadId,
     setDownloadId,
     setDownloads,
-    downloaderRef
+    downloaderRef,
+    util,
+    constants,
+    messages
   });
   const {
     updateSelectedFolder,
@@ -88,7 +91,9 @@ function ZipManager() {
     setClipboardData,
     setHistory,
     setHistoryIndex,
-    handleKeyUp
+    handleKeyUp,
+    util,
+    constants
   });
   const {
     highlightPreviousEntry,

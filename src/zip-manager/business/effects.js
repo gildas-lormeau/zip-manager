@@ -1,6 +1,3 @@
-import { addEventListener, removeEventListener } from "./util/util.js";
-import { KEYUP_EVENT_NAME } from "./constants.js";
-
 function getEffects({
   zipFilesystem,
   entries,
@@ -15,8 +12,13 @@ function getEffects({
   setClipboardData,
   setHistory,
   setHistoryIndex,
-  handleKeyUp
+  handleKeyUp,
+  updateZipFilesystem,
+  util,
+  constants
 }) {
+  const { KEYUP_EVENT_NAME } = constants;
+
   function updateSelectedFolder() {
     if (selectedFolder) {
       const { parent, children } = selectedFolder;
@@ -73,8 +75,8 @@ function getEffects({
   }
 
   function registerKeyUpHandler() {
-    addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
-    return () => removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    util.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    return () => util.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
   }
 
   return {
