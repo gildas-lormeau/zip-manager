@@ -13,7 +13,6 @@ function getEffects({
   setHistory,
   setHistoryIndex,
   handleKeyUp,
-  updateZipFilesystem,
   util,
   constants
 }) {
