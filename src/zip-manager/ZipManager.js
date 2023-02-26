@@ -173,6 +173,8 @@ function ZipManager() {
     downloadEntry
   });
   const keyUpHandler = getKeyUpHandler({
+    highlightedEntry,
+    selectedFolder,
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,

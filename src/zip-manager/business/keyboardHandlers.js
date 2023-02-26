@@ -1,4 +1,6 @@
 function getKeyUpHandler({
+  highlightedEntry,
+  selectedFolder,
   disabledCutEntry,
   disabledCopyEntry,
   disabledRenameEntry,
@@ -173,7 +175,7 @@ function getKeyUpHandler({
       deleteEntry();
     }
     if (event.key === ACTION_KEY) {
-      enterEntry();
+      enterEntry(highlightedEntry, selectedFolder);
     }
   }
 

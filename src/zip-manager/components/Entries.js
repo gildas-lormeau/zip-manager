@@ -105,8 +105,8 @@ function Entry({
       />
       <EntryButton
         entry={entry}
+        selectedFolder={selectedFolder}
         onEnterEntry={onEnterEntry}
-        constants={constants}
         messages={messages}
       />
     </>
@@ -130,7 +130,7 @@ function EntryName({
   }
 
   function handleDoubleClick() {
-    onEnterEntry(entry);
+    onEnterEntry(entry, selectedFolder);
   }
 
   return (
@@ -145,9 +145,9 @@ function EntryName({
   );
 }
 
-function EntryButton({ entry, onEnterEntry, constants, messages }) {
+function EntryButton({ entry, selectedFolder, onEnterEntry, messages }) {
   function handleClick() {
-    onEnterEntry(entry);
+    onEnterEntry(entry, selectedFolder);
   }
 
   return (
