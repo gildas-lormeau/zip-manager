@@ -20,7 +20,7 @@ import {
   getDownloadHandlers,
   getClipboardHandlers
 } from "./appHandlers.js";
-import { onKeyUp } from "./keyUpHandler.js";
+import { getKeyUpHandler } from "./keyUpHandler.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
@@ -157,8 +157,7 @@ function ZipManager() {
     goIntoFolder,
     downloadEntry
   });
-
-  const keyUpProps = {
+  const keyUpHandler = getKeyUpHandler({
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,
@@ -184,11 +183,12 @@ function ZipManager() {
     navigateHistoryBack,
     navigateHistoryForward,
     addFilesButtonRef,
-    importZipButtonRef
-  };
+    importZipButtonRef,
+    constants
+  });
 
   function handleKeyUp(event) {
-    onKeyUp({ event, ...keyUpProps });
+    keyUpHandler.handleKeyUp(event);
   }
 
   useEffect(registerKeyUpHandler);
