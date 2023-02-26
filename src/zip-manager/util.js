@@ -32,7 +32,7 @@ function getUtil({ downloadId, setDownloadId, setDownloads, downloaderRef }) {
         keepOrder: true
       });
       try {
-        const blob = await blobGetter(options);
+        const blob = await blobGetter(download, options);
         downloadBlob(blob, downloaderRef.current, download.name);
       } catch (error) {
         const message = error.message || error;

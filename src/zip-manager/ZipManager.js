@@ -88,20 +88,20 @@ function ZipManager() {
     handleKeyUp
   });
   const {
-    onHighlightPreviousEntry,
-    onHighlightNextEntry,
-    onHighlightPreviousPageEntry,
-    onHighlightNextPageEntry,
-    onHighlightFirstEntry,
-    onHighlightLastEntry,
-    onSetHighlightedEntry
+    highlightPreviousEntry,
+    highlightNextEntry,
+    highlightPreviousPageEntry,
+    highlightNextPageEntry,
+    highlightFirstEntry,
+    highlightLastEntry,
+    highlightEntry
   } = getEntriesNavigationHandlers({
     entries,
     highlightedEntry,
     entriesHeight,
     setHighlightedEntry
   });
-  const { onGoIntoFolder, onNavigateHistoryBack, onNavigateHistoryForward } =
+  const { goIntoFolder, navigateHistoryBack, navigateHistoryForward } =
     getFolderNavigationHandlers({
       history,
       historyIndex,
@@ -111,22 +111,23 @@ function ZipManager() {
       setHistory,
       setHistoryIndex
     });
-  const { onDownloadFile, onDeleteDownloadEntry } = getDownloadHandlers({
-    setDownloads,
-    downloadFile
+  const { deleteDownloadEntry } = getDownloadHandlers({
+    setDownloads
   });
-  const { onCreateFolder, onAddFiles, onImportZipFile, onExportZipFile } =
+  const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderHandlers({
       selectedFolder,
       updateSelectedFolder,
+      deleteDownloadEntry,
       downloadFile
     });
   const {
-    onCopyEntry,
-    onCutEntry,
-    onPasteEntry,
-    onRenameEntry,
-    onDeleteEntry
+    copyEntry,
+    cutEntry,
+    pasteEntry,
+    renameEntry,
+    deleteEntry,
+    downloadEntry
   } = getHighlightedEntryHandlers({
     zipFilesystem,
     history,
@@ -138,38 +139,24 @@ function ZipManager() {
     setHistoryIndex,
     setClipboardData,
     setHighlightedEntry,
-    updateSelectedFolder
+    updateSelectedFolder,
+    deleteDownloadEntry,
+    downloadFile
   });
-  const { onReset } = getZipFilesystemHandlers({
+  const { reset } = getZipFilesystemHandlers({
     createZipFileSystem,
     setZipFilesystem
   });
-  const { onResetClipboardData } = getClipboardHandlers({
+  const { resetClipboardData } = getClipboardHandlers({
     setClipboardData
   });
-  const { onActionEntry } = getActionHandlers({
+  const { actionEntry } = getActionHandlers({
     highlightedEntry,
-    onGoIntoFolder,
-    onDownloadFile
+    goIntoFolder,
+    downloadEntry
   });
 
   const keyUpProps = {
-    onCutEntry,
-    onCopyEntry,
-    onRenameEntry,
-    onPasteEntry,
-    onDeleteEntry,
-    onActionEntry,
-    onHighlightNextEntry,
-    onHighlightPreviousEntry,
-    onHighlightPreviousPageEntry,
-    onHighlightNextPageEntry,
-    onHighlightFirstEntry,
-    onHighlightLastEntry,
-    onCreateFolder,
-    onExportZipFile,
-    onNavigateHistoryBack,
-    onNavigateHistoryForward,
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,
@@ -178,6 +165,22 @@ function ZipManager() {
     disabledHistoryBack,
     disabledHistoryForward,
     disabledExportZip,
+    cutEntry,
+    copyEntry,
+    renameEntry,
+    pasteEntry,
+    deleteEntry,
+    actionEntry,
+    highlightNextEntry,
+    highlightPreviousEntry,
+    highlightPreviousPageEntry,
+    highlightNextPageEntry,
+    highlightFirstEntry,
+    highlightLastEntry,
+    createFolder,
+    exportZipFile,
+    navigateHistoryBack,
+    navigateHistoryForward,
     addFilesButtonRef,
     importZipButtonRef
   };
@@ -204,24 +207,24 @@ function ZipManager() {
   return (
     <div className="application">
       <TopButtonBar
-        addFilesButtonRef={addFilesButtonRef}
-        importZipButtonRef={importZipButtonRef}
         disabledExportZipButton={disabledExportZip}
         disabledResetButton={disabledReset}
-        onCreateFolder={onCreateFolder}
-        onAddFiles={onAddFiles}
-        onImportZipFile={onImportZipFile}
-        onExportZipFile={onExportZipFile}
-        onReset={onReset}
+        onCreateFolder={createFolder}
+        onAddFiles={addFiles}
+        onImportZipFile={importZipFile}
+        onExportZipFile={exportZipFile}
+        onReset={reset}
+        addFilesButtonRef={addFilesButtonRef}
+        importZipButtonRef={importZipButtonRef}
         constants={constants}
       />
       <NavigationBar
         selectedFolder={selectedFolder}
         disabledHistoryBackButton={disabledHistoryBack}
         disabledHistoryForwardButton={disabledHistoryForward}
-        onNavigateHistoryBack={onNavigateHistoryBack}
-        onNavigateHistoryForward={onNavigateHistoryForward}
-        onGoIntoFolder={onGoIntoFolder}
+        onNavigateHistoryBack={navigateHistoryBack}
+        onNavigateHistoryForward={navigateHistoryForward}
+        onGoIntoFolder={goIntoFolder}
         constants={constants}
       />
       <Entries
@@ -229,11 +232,11 @@ function ZipManager() {
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
         entriesHeight={entriesHeight}
+        onGoIntoFolder={goIntoFolder}
+        onDownloadHighlightedEntry={downloadEntry}
+        onHighlightEntry={highlightEntry}
+        onActionEntry={actionEntry}
         highlightedEntryRef={highlightedEntryRef}
-        onGoIntoFolder={onGoIntoFolder}
-        onDownloadFile={onDownloadFile}
-        onSetHighlightedEntry={onSetHighlightedEntry}
-        onActionEntry={onActionEntry}
         constants={constants}
       />
       <BottomButtonBar
@@ -243,18 +246,18 @@ function ZipManager() {
         disabledResetClipboardDataButton={disabledResetClipboardData}
         disabledRenameEntryButton={disabledRenameEntry}
         disabledDeleteEntryButton={disabledDeleteEntry}
-        onCopyEntry={onCopyEntry}
-        onCutEntry={onCutEntry}
-        onPasteEntry={onPasteEntry}
-        onResetClipboardData={onResetClipboardData}
-        onRenameEntry={onRenameEntry}
-        onDeleteEntry={onDeleteEntry}
+        onCopyEntry={copyEntry}
+        onCutEntry={cutEntry}
+        onPasteEntry={pasteEntry}
+        onResetClipboardData={resetClipboardData}
+        onRenameEntry={renameEntry}
+        onDeleteEntry={deleteEntry}
         constants={constants}
       />
       <DownloadManager
         downloads={downloads}
+        onDeleteDownloadEntry={deleteDownloadEntry}
         downloaderRef={downloaderRef}
-        onDeleteDownloadEntry={onDeleteDownloadEntry}
         constants={constants}
       />
     </div>

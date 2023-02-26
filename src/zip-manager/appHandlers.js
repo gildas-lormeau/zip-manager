@@ -17,42 +17,42 @@ function getEntriesNavigationHandlers({
   entriesHeight,
   setHighlightedEntry
 }) {
-  function onHighlightPreviousEntry() {
+  function highlightPreviousEntry() {
     const indexEntry = getEntryIndex();
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
     setHighlightedEntry(previousEntry);
   }
 
-  function onHighlightNextEntry() {
+  function highlightNextEntry() {
     const indexEntry = getEntryIndex();
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
   }
 
-  function onHighlightPreviousPageEntry() {
+  function highlightPreviousPageEntry() {
     const indexEntry = getEntryIndex();
     const previousEntry =
       entries[Math.max(indexEntry - entriesHeight.current, 0)];
     setHighlightedEntry(previousEntry);
   }
 
-  function onHighlightNextPageEntry() {
+  function highlightNextPageEntry() {
     const indexEntry = getEntryIndex();
     const previousEntry =
       entries[Math.min(indexEntry + entriesHeight.current, entries.length - 1)];
     setHighlightedEntry(previousEntry);
   }
 
-  function onHighlightFirstEntry() {
+  function highlightFirstEntry() {
     setHighlightedEntry(entries[0]);
   }
 
-  function onHighlightLastEntry() {
+  function highlightLastEntry() {
     setHighlightedEntry(entries[entries.length - 1]);
   }
 
-  function onSetHighlightedEntry(entry) {
+  function highlightEntry(entry) {
     setHighlightedEntry(entry);
   }
 
@@ -61,13 +61,13 @@ function getEntriesNavigationHandlers({
   }
 
   return {
-    onHighlightPreviousEntry,
-    onHighlightNextEntry,
-    onHighlightPreviousPageEntry,
-    onHighlightNextPageEntry,
-    onHighlightFirstEntry,
-    onHighlightLastEntry,
-    onSetHighlightedEntry
+    highlightPreviousEntry,
+    highlightNextEntry,
+    highlightPreviousPageEntry,
+    highlightNextPageEntry,
+    highlightFirstEntry,
+    highlightLastEntry,
+    highlightEntry
   };
 }
 
@@ -80,7 +80,7 @@ function getFolderNavigationHandlers({
   setHistory,
   setHistoryIndex
 }) {
-  function onGoIntoFolder(entry) {
+  function goIntoFolder(entry) {
     const newHistory = [...history];
     const newHistoryIndex = historyIndex + 1;
     newHistory[newHistoryIndex] = entry;
@@ -89,15 +89,15 @@ function getFolderNavigationHandlers({
     setSelectedFolders(entry);
   }
 
-  function onNavigateHistoryBack() {
-    onNavigateHistory(-1);
+  function navigateHistoryBack() {
+    navigateHistory(-1);
   }
 
-  function onNavigateHistoryForward() {
-    onNavigateHistory(1);
+  function navigateHistoryForward() {
+    navigateHistory(1);
   }
 
-  function onNavigateHistory(offset) {
+  function navigateHistory(offset) {
     const newHistoryIndex = historyIndex + offset;
     setHistoryIndex(newHistoryIndex);
     const entry = history[newHistoryIndex];
@@ -110,9 +110,9 @@ function getFolderNavigationHandlers({
   }
 
   return {
-    onGoIntoFolder,
-    onNavigateHistoryBack,
-    onNavigateHistoryForward
+    goIntoFolder,
+    navigateHistoryBack,
+    navigateHistoryForward
   };
 }
 
@@ -127,22 +127,24 @@ function getHighlightedEntryHandlers({
   setHistoryIndex,
   setClipboardData,
   setHighlightedEntry,
-  updateSelectedFolder
+  deleteDownloadEntry,
+  updateSelectedFolder,
+  downloadFile
 }) {
-  function onCopyEntry() {
+  function copyEntry() {
     setClipboardData({
       entry: highlightedEntry.clone(true)
     });
   }
 
-  function onCutEntry() {
+  function cutEntry() {
     setClipboardData({
       entry: highlightedEntry,
       cut: true
     });
   }
 
-  function onPasteEntry() {
+  function pasteEntry() {
     try {
       const { entry, cut } = clipboardData;
       let clone;
@@ -159,7 +161,7 @@ function getHighlightedEntryHandlers({
     }
   }
 
-  function onRenameEntry() {
+  function renameEntry() {
     try {
       const entryName = prompt(RENAME_MESSAGE, highlightedEntry.name);
       if (entryName && entryName !== highlightedEntry.name) {
@@ -171,13 +173,21 @@ function getHighlightedEntryHandlers({
     }
   }
 
-  function onDeleteEntry() {
+  function deleteEntry() {
     if (confirm(DELETE_MESSAGE)) {
       zipFilesystem.remove(highlightedEntry);
       updateHistoryData();
       setHighlightedEntry(null);
       updateSelectedFolder();
     }
+  }
+
+  function downloadEntry(entry) {
+    downloadFile(entry.name, {}, async (download, options) => {
+      const blob = await entry.getBlob(DEFAULT_MIME_TYPE, options);
+      deleteDownloadEntry(download);
+      return blob;
+    });
   }
 
   function updateHistoryData() {
@@ -203,20 +213,22 @@ function getHighlightedEntryHandlers({
   }
 
   return {
-    onCopyEntry,
-    onCutEntry,
-    onPasteEntry,
-    onRenameEntry,
-    onDeleteEntry
+    copyEntry,
+    cutEntry,
+    pasteEntry,
+    renameEntry,
+    deleteEntry,
+    downloadEntry
   };
 }
 
 function getSelectedFolderHandlers({
   selectedFolder,
   updateSelectedFolder,
+  deleteDownloadEntry,
   downloadFile
 }) {
-  function onCreateFolder() {
+  function createFolder() {
     const folderName = prompt(CREATE_FOLDER_MESSAGE);
     if (folderName) {
       try {
@@ -228,7 +240,7 @@ function getSelectedFolderHandlers({
     }
   }
 
-  function onAddFiles(files) {
+  function addFiles(files) {
     files.forEach((file) => {
       try {
         return selectedFolder.addBlob(file.name, file);
@@ -239,7 +251,7 @@ function getSelectedFolderHandlers({
     updateSelectedFolder();
   }
 
-  function onImportZipFile(zipFile) {
+  function importZipFile(zipFile) {
     async function updateZipFile() {
       try {
         await selectedFolder.importBlob(zipFile);
@@ -254,32 +266,30 @@ function getSelectedFolderHandlers({
     }
   }
 
-  function onExportZipFile() {
+  function exportZipFile() {
     downloadFile(
       selectedFolder.name
         ? selectedFolder.name + ZIP_EXTENSION
         : ROOT_ZIP_FILENAME,
       { mimeType: DEFAULT_MIME_TYPE },
-      (options) => selectedFolder.exportBlob(options)
+      async (download, options) => {
+        const blob = await selectedFolder.exportBlob(options);
+        deleteDownloadEntry(download);
+        return blob;
+      }
     );
   }
 
   return {
-    onCreateFolder,
-    onAddFiles,
-    onImportZipFile,
-    onExportZipFile
+    createFolder,
+    addFiles,
+    importZipFile,
+    exportZipFile
   };
 }
 
-function getDownloadHandlers({ setDownloads, downloadFile }) {
-  function onDownloadFile(file) {
-    downloadFile(file.name, {}, (options) =>
-      onDeleteDownloadEntry(file.getBlob(DEFAULT_MIME_TYPE, options))
-    );
-  }
-
-  function onDeleteDownloadEntry(deletedDownload) {
+function getDownloadHandlers({ setDownloads }) {
+  function deleteDownloadEntry(deletedDownload) {
     setDownloads((downloads) =>
       downloads.filter((download) => download.id !== deletedDownload.id)
     );
@@ -287,48 +297,43 @@ function getDownloadHandlers({ setDownloads, downloadFile }) {
   }
 
   return {
-    onDownloadFile,
-    onDeleteDownloadEntry
+    deleteDownloadEntry
   };
 }
 
 function getZipFilesystemHandlers({ createZipFileSystem, setZipFilesystem }) {
-  function onReset() {
+  function reset() {
     if (confirm(RESET_MESSAGE)) {
       setZipFilesystem(createZipFileSystem());
     }
   }
   return {
-    onReset
+    reset
   };
 }
 
 function getClipboardHandlers({ setClipboardData }) {
-  function onResetClipboardData() {
+  function resetClipboardData() {
     setClipboardData(null);
   }
 
   return {
-    onResetClipboardData
+    resetClipboardData
   };
 }
 
-function getActionHandlers({
-  highlightedEntry,
-  onGoIntoFolder,
-  onDownloadFile
-}) {
-  function onActionEntry(entry = highlightedEntry) {
+function getActionHandlers({ highlightedEntry, goIntoFolder, downloadEntry }) {
+  function actionEntry(entry = highlightedEntry) {
     if (entry) {
       if (entry.directory) {
-        onGoIntoFolder(entry);
+        goIntoFolder(entry);
       } else {
-        onDownloadFile(entry);
+        downloadEntry(entry);
       }
     }
   }
 
-  return { onActionEntry };
+  return { actionEntry };
 }
 
 export {

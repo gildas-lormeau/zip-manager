@@ -21,22 +21,6 @@ import {
 
 function onKeyUp({
   event,
-  onCutEntry,
-  onCopyEntry,
-  onRenameEntry,
-  onPasteEntry,
-  onDeleteEntry,
-  onActionEntry,
-  onHighlightNextEntry,
-  onHighlightPreviousEntry,
-  onHighlightPreviousPageEntry,
-  onHighlightNextPageEntry,
-  onHighlightFirstEntry,
-  onHighlightLastEntry,
-  onCreateFolder,
-  onExportZipFile,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
   disabledCutEntry,
   disabledCopyEntry,
   disabledRenameEntry,
@@ -45,33 +29,49 @@ function onKeyUp({
   disabledHistoryBack,
   disabledHistoryForward,
   disabledExportZip,
+  cutEntry,
+  copyEntry,
+  renameEntry,
+  pasteEntry,
+  deleteEntry,
+  actionEntry,
+  highlightNextEntry,
+  highlightPreviousEntry,
+  highlightPreviousPageEntry,
+  highlightNextPageEntry,
+  highlightFirstEntry,
+  highlightLastEntry,
+  createFolder,
+  exportZipFile,
+  navigateHistoryBack,
+  navigateHistoryForward,
   addFilesButtonRef,
   importZipButtonRef
 }) {
   onEntriesNavigationKeyUp({
     event,
-    onHighlightNextEntry,
-    onHighlightPreviousEntry,
-    onHighlightPreviousPageEntry,
-    onHighlightNextPageEntry,
-    onHighlightFirstEntry,
-    onHighlightLastEntry
+    highlightNextEntry,
+    highlightPreviousEntry,
+    highlightPreviousPageEntry,
+    highlightNextPageEntry,
+    highlightFirstEntry,
+    highlightLastEntry
   });
   onFolderNavigationKeyUp({
     event,
-    onNavigateHistoryBack,
-    onNavigateHistoryForward,
+    navigateHistoryBack,
+    navigateHistoryForward,
     disabledHistoryBack,
     disabledHistoryForward
   });
   onHighlightedEntryKeyUp({
     event,
-    onCutEntry,
-    onCopyEntry,
-    onRenameEntry,
-    onPasteEntry,
-    onDeleteEntry,
-    onActionEntry,
+    cutEntry,
+    copyEntry,
+    renameEntry,
+    pasteEntry,
+    deleteEntry,
+    actionEntry,
     disabledCutEntry,
     disabledCopyEntry,
     disabledRenameEntry,
@@ -80,8 +80,8 @@ function onKeyUp({
   });
   onSelectedFolderKeyUp({
     event,
-    onCreateFolder,
-    onExportZipFile,
+    createFolder,
+    exportZipFile,
     addFilesButtonRef,
     importZipButtonRef,
     disabledExportZip
@@ -90,103 +90,103 @@ function onKeyUp({
 
 function onEntriesNavigationKeyUp({
   event,
-  onHighlightPreviousEntry,
-  onHighlightNextEntry,
-  onHighlightPreviousPageEntry,
-  onHighlightNextPageEntry,
-  onHighlightFirstEntry,
-  onHighlightLastEntry
+  highlightPreviousEntry,
+  highlightNextEntry,
+  highlightPreviousPageEntry,
+  highlightNextPageEntry,
+  highlightFirstEntry,
+  highlightLastEntry
 }) {
   if (event.key === DOWN_KEY) {
-    onHighlightNextEntry();
+    highlightNextEntry();
   }
   if (event.key === UP_KEY) {
-    onHighlightPreviousEntry();
+    highlightPreviousEntry();
   }
   if (event.key === HOME_KEY) {
-    onHighlightFirstEntry();
+    highlightFirstEntry();
   }
   if (event.key === END_KEY) {
-    onHighlightLastEntry();
+    highlightLastEntry();
   }
   if (event.key === PAGE_UP_KEY) {
-    onHighlightPreviousPageEntry();
+    highlightPreviousPageEntry();
   }
   if (event.key === PAGE_DOWN_KEY) {
-    onHighlightNextPageEntry();
+    highlightNextPageEntry();
   }
   if (event.key === HOME_KEY) {
-    onHighlightFirstEntry();
+    highlightFirstEntry();
   }
   if (event.key === END_KEY) {
-    onHighlightLastEntry();
+    highlightLastEntry();
   }
 }
 
 function onFolderNavigationKeyUp({
   event,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
+  navigateHistoryBack,
+  navigateHistoryForward,
   disabledHistoryBack,
   disabledHistoryForward
 }) {
   if (event.altKey) {
     if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBack) {
-      onNavigateHistoryBack();
+      navigateHistoryBack();
     }
     if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForward) {
-      onNavigateHistoryForward();
+      navigateHistoryForward();
     }
   }
 }
 
 function onHighlightedEntryKeyUp({
   event,
-  onCutEntry,
-  onCopyEntry,
-  onRenameEntry,
-  onPasteEntry,
-  onDeleteEntry,
-  onActionEntry,
   disabledCutEntry,
   disabledCopyEntry,
   disabledRenameEntry,
   disabledPasteEntry,
-  disabledDeleteEntry
+  disabledDeleteEntry,
+  cutEntry,
+  copyEntry,
+  renameEntry,
+  pasteEntry,
+  deleteEntry,
+  actionEntry
 }) {
   if (event.ctrlKey) {
     if (event.key === CUT_KEY && !disabledCutEntry) {
-      onCutEntry();
+      cutEntry();
     }
     if (event.key === COPY_KEY && !disabledCopyEntry) {
-      onCopyEntry();
+      copyEntry();
     }
     if (event.key === RENAME_KEY && !disabledRenameEntry) {
-      onRenameEntry();
+      renameEntry();
     }
     if (event.key === PASTE_KEY && !disabledPasteEntry) {
-      onPasteEntry();
+      pasteEntry();
     }
   }
   if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntry) {
-    onDeleteEntry();
+    deleteEntry();
   }
   if (event.key === ACTION_KEY) {
-    onActionEntry();
+    actionEntry();
   }
 }
 
 function onSelectedFolderKeyUp({
   event,
-  onCreateFolder,
-  onExportZipFile,
+  createFolder,
+  exportZipFile,
   addFilesButtonRef,
   importZipButtonRef,
   disabledExportZip
 }) {
   if (event.ctrlKey) {
     if (event.key === CREATE_FOLDER_KEY) {
-      onCreateFolder();
+      createFolder();
     }
     if (event.key === ADD_FILES_KEY) {
       addFilesButtonRef.current.click();
@@ -195,7 +195,7 @@ function onSelectedFolderKeyUp({
       importZipButtonRef.current.click();
     }
     if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
-      onExportZipFile();
+      exportZipFile();
     }
   }
 }

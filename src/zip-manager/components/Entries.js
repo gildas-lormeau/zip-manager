@@ -10,7 +10,7 @@ function Entries({
   highlightedEntry,
   entriesHeight,
   highlightedEntryRef,
-  onSetHighlightedEntry,
+  onHighlightEntry,
   onActionEntry,
   constants
 }) {
@@ -63,7 +63,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onSetHighlightedEntry}
+                onSelectEntry={onHighlightEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
@@ -74,7 +74,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onSetHighlightedEntry}
+                onSelectEntry={onHighlightEntry}
                 onActionEntry={onActionEntry}
               />
             </li>
