@@ -29,12 +29,6 @@ function Entries({
     return classes.join(" ");
   }
 
-  function handleKeyDown(event) {
-    if (event.key !== TAB_KEY) {
-      event.preventDefault();
-    }
-  }
-
   function computeEntriesHeight() {
     if (highlightedEntryRef && highlightedEntryRef.current) {
       entriesHeight.current = Math.max(
@@ -50,7 +44,7 @@ function Entries({
   useEffect(computeEntriesHeight);
 
   return (
-    <ol className="entries" onKeyDown={handleKeyDown} ref={entriesRef}>
+    <ol className="entries" ref={entriesRef}>
       {entries.map((entry) => {
         if (entry === highlightedEntry) {
           return (
