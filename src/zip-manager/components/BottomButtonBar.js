@@ -21,17 +21,20 @@ function BottomButtonBar({
   onResetClipboardData,
   onRenameEntry,
   onDeleteEntry,
-  constants
+  constants,
+  messages
 }) {
   ({
-    SHORTCUT_LABEL,
-    CTRL_KEY_LABEL,
     COPY_KEY,
     CUT_KEY,
     PASTE_KEY,
     RENAME_KEY,
     DELETE_KEYS
   } = constants);
+  ({
+    SHORTCUT_LABEL,
+    CTRL_KEY_LABEL
+  } = messages);
 
   return (
     <div className="button-bar button-bar-bottom">

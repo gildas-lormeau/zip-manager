@@ -2,11 +2,8 @@
 
 import { fs } from "@zip.js/zip.js";
 
-import {
-  DOWNLOAD_MESSAGE,
-  CANCELLED_DOWNLOAD_MESSAGE,
-  ABORT_ERROR_NAME
-} from "./constants.js";
+import { ABORT_ERROR_NAME, CANCELLED_DOWNLOAD_MESSAGE } from "./constants.js";
+import { DOWNLOAD_MESSAGE } from "./messages.js";
 import { downloadBlob, alert, prompt } from "./util/util.js";
 
 const { FS } = fs;

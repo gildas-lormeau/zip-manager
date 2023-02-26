@@ -20,17 +20,20 @@ function TopButtonBar({
   onImportZipFile,
   onExportZipFile,
   onReset,
-  constants
+  constants,
+  messages
 }) {
   ({
-    SHORTCUT_LABEL,
-    CTRL_KEY_LABEL,
     CREATE_FOLDER_KEY,
     ADD_FILES_KEY,
     IMPORT_ZIP_KEY,
-    ZIP_EXTENSION,
     EXPORT_ZIP_KEY
   } = constants);
+  ({
+    SHORTCUT_LABEL,
+    CTRL_KEY_LABEL,
+    ZIP_EXTENSION
+  } = messages);
 
   return (
     <div className="button-bar">

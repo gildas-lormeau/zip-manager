@@ -14,16 +14,19 @@ function NavigationBar({
   onNavigateHistoryBack,
   onNavigateHistoryForward,
   onGoIntoFolder,
-  constants
+  constants,
+  messages
 }) {
   ({
-    ENTER_KEY,
+    ENTER_KEY
+  } = constants);
+  ({
     ROOT_FOLDER_LABEL,
     SHORTCUT_LABEL,
     ALT_KEY_LABEL,
     ARROW_LEFT_KEY_LABEL,
     ARROW_RIGHT_KEY_LABEL
-  } = constants);
+  } = messages);
 
   return (
     <div className="navigation-bar">

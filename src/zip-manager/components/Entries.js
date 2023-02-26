@@ -12,10 +12,12 @@ function Entries({
   highlightedEntryRef,
   onHighlightEntry,
   onEnterEntry,
-  constants
+  constants,
+  messages
 }) {
-  ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL, TAB_KEY } =
-    constants);
+  ({ TAB_KEY } = constants);
+  ({ SHORTCUT_LABEL, SPACE_KEY_LABEL, PARENT_FOLDER_LABEL } = messages);
+
   const entriesRef = useRef(null);
 
   function getEntryClassName(entry) {

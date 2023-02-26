@@ -6,6 +6,8 @@ import "./styles/ZipManager.css";
 import { useEffect, useState, useRef } from "react";
 
 import * as constants from "./constants.js";
+import * as messages from "./messages.js";
+
 import { getUtil, createZipFileSystem } from "./util.js";
 import { getEffects } from "./effects.js";
 import {
@@ -217,6 +219,7 @@ function ZipManager() {
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
         constants={constants}
+        messages={messages}
       />
       <NavigationBar
         selectedFolder={selectedFolder}
@@ -226,6 +229,7 @@ function ZipManager() {
         onNavigateHistoryForward={navigateHistoryForward}
         onGoIntoFolder={goIntoFolder}
         constants={constants}
+        messages={messages}
       />
       <Entries
         entries={entries}
@@ -238,6 +242,7 @@ function ZipManager() {
         onEnterEntry={enterEntry}
         highlightedEntryRef={highlightedEntryRef}
         constants={constants}
+        messages={messages}
       />
       <BottomButtonBar
         disabledCopyEntryButton={disabledCopyEntry}
@@ -253,6 +258,7 @@ function ZipManager() {
         onRenameEntry={renameEntry}
         onDeleteEntry={deleteEntry}
         constants={constants}
+        messages={messages}
       />
       <DownloadManager
         downloads={downloads}

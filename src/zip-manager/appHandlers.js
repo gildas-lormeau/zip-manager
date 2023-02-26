@@ -2,14 +2,16 @@ import { alert, confirm, prompt } from "./util/util.js";
 
 import {
   DEFAULT_MIME_TYPE,
+  CANCELLED_DOWNLOAD_MESSAGE
+} from "./constants.js";
+import {
   ZIP_EXTENSION,
   ROOT_ZIP_FILENAME,
-  CANCELLED_DOWNLOAD_MESSAGE,
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,
   DELETE_MESSAGE
-} from "./constants.js";
+} from "./messages.js";
 
 function getEntriesNavigationHandlers({
   entries,
