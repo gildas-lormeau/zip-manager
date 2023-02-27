@@ -105,29 +105,31 @@ function getKeyUpHandler({
       highlightLast
     }
   ) {
-    if (event.key === DOWN_KEY) {
-      highlightNext();
-    }
-    if (event.key === UP_KEY) {
-      highlightPrevious();
-    }
-    if (event.key === HOME_KEY) {
-      highlightFirst();
-    }
-    if (event.key === END_KEY) {
-      highlightLast();
-    }
-    if (event.key === PAGE_UP_KEY) {
-      highlightPreviousPage();
-    }
-    if (event.key === PAGE_DOWN_KEY) {
-      highlightNextPage();
-    }
-    if (event.key === HOME_KEY) {
-      highlightFirst();
-    }
-    if (event.key === END_KEY) {
-      highlightLast();
+    if (!event.altKey && !event.ctrlKey) {
+      if (event.key === DOWN_KEY) {
+        highlightNext();
+      }
+      if (event.key === UP_KEY) {
+        highlightPrevious();
+      }
+      if (event.key === HOME_KEY) {
+        highlightFirst();
+      }
+      if (event.key === END_KEY) {
+        highlightLast();
+      }
+      if (event.key === PAGE_UP_KEY) {
+        highlightPreviousPage();
+      }
+      if (event.key === PAGE_DOWN_KEY) {
+        highlightNextPage();
+      }
+      if (event.key === HOME_KEY) {
+        highlightFirst();
+      }
+      if (event.key === END_KEY) {
+        highlightLast();
+      }
     }
   }
 
@@ -149,16 +151,18 @@ function getKeyUpHandler({
         navigateForward();
       }
     }
-    if (event.key === LEFT_KEY && selectedFolder.parent) {
-      goIntoFolder(selectedFolder.parent, selectedFolder);
-    }
-    if (
-      event.key === RIGHT_KEY &&
-      highlightedEntry &&
-      highlightedEntry.directory &&
-      highlightedEntry !== selectedFolder.parent
-    ) {
-      goIntoFolder(highlightedEntry, selectedFolder);
+    if (!event.altKey && !event.ctrlKey) {
+      if (event.key === LEFT_KEY && selectedFolder.parent) {
+        goIntoFolder(selectedFolder.parent, selectedFolder);
+      }
+      if (
+        event.key === RIGHT_KEY &&
+        highlightedEntry &&
+        highlightedEntry.directory &&
+        highlightedEntry !== selectedFolder.parent
+      ) {
+        goIntoFolder(highlightedEntry, selectedFolder);
+      }
     }
   }
 
@@ -192,12 +196,14 @@ function getKeyUpHandler({
         paste();
       }
     }
-    if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
-      remove();
-    }
-    if (event.key === ACTION_KEY) {
-      enter(highlightedEntry, selectedFolder);
-      event.preventDefault();
+    if (!event.altKey && !event.ctrlKey) {
+      if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
+        remove();
+      }
+      if (event.key === ACTION_KEY) {
+        enter(highlightedEntry, selectedFolder);
+        event.preventDefault();
+      }
     }
   }
 
