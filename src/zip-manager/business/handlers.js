@@ -67,10 +67,10 @@ function getFolderNavigationHandlers({
   setHistory,
   setHistoryIndex
 }) {
-  function goIntoFolder(entry, sourceEntry) {
+  function goIntoFolder(entry, selectedFolder) {
     const newHistory = [...history];
     const newHistoryIndex = historyIndex + 1;
-    if (entry.isDescendantOf(sourceEntry)) {
+    if (entry.isDescendantOf(selectedFolder)) {
       newHistory.length = newHistoryIndex + 1;
     }
     newHistory[newHistoryIndex] = entry;
@@ -332,10 +332,10 @@ function getClipboardHandlers({ setClipboardData }) {
 }
 
 function getActionHandlers({ highlightedEntry, goIntoFolder, downloadEntry }) {
-  function enterEntry(entry = highlightedEntry, sourceEntry) {
+  function enterEntry(entry = highlightedEntry, selectedFolder) {
     if (entry) {
       if (entry.directory) {
-        goIntoFolder(entry, sourceEntry);
+        goIntoFolder(entry, selectedFolder);
       } else {
         downloadEntry(entry);
       }
