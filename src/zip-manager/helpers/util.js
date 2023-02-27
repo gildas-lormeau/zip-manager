@@ -47,7 +47,7 @@ function resetValue(inputElement) {
   inputElement.value = "";
 }
 
-function createController() {
+function createAbortController() {
   return new AbortController();
 }
 
@@ -64,7 +64,7 @@ function downloadAborted(error) {
 
 export {
   downloadBlob,
-  createController,
+  createAbortController,
   abortDownload,
   downloadAborted,
   alert,

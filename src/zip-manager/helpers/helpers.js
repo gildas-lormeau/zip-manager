@@ -15,7 +15,7 @@ function getHelpers({
   async function downloadFile(name, options, blobGetter) {
     name = util.prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
-      const controller = util.createController();
+      const controller = util.createAbortController();
       const progressValue = null;
       const progressMax = null;
       const id = downloadId + 1;
