@@ -174,6 +174,7 @@ function getKeyUpHandler({
     }
     if (event.key === ACTION_KEY) {
       enter(highlightedEntry, selectedFolder);
+      event.preventDefault();
     }
   }
 
