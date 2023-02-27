@@ -53,7 +53,6 @@ function ZipManager() {
     setDownloads,
     downloaderElement: downloaderRef.current,
     util,
-    constants,
     messages
   });
   const {
@@ -125,7 +124,7 @@ function ZipManager() {
     });
   const { abortDownload } = getDownloadHandlers({
     setDownloads,
-    constants
+    util
   });
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderHandlers({

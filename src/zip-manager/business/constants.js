@@ -1,6 +1,4 @@
 const DEFAULT_MIME_TYPE = "application/octet-stream";
-const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
-const ABORT_ERROR_NAME = "AbortError";
 const KEYUP_EVENT_NAME = "keyup";
 
 const ACTION_KEY = " ";
@@ -28,8 +26,6 @@ const FORWARD_KEY = "ArrowRight";
 
 export {
   DEFAULT_MIME_TYPE,
-  CANCELLED_DOWNLOAD_MESSAGE,
-  ABORT_ERROR_NAME,
   KEYUP_EVENT_NAME,
   ACTION_KEY,
   ENTER_KEY,

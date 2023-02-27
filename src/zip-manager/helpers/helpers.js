@@ -1,5 +1,3 @@
-/* global AbortController */
-
 import { fs } from "@zip.js/zip.js";
 
 const { FS } = fs;
@@ -10,16 +8,14 @@ function getUtil({
   setDownloads,
   downloaderElement,
   util,
-  constants,
   messages
 }) {
-  const { ABORT_ERROR_NAME, CANCELLED_DOWNLOAD_MESSAGE } = constants;
   const { DOWNLOAD_MESSAGE } = messages;
 
   async function downloadFile(name, options, blobGetter) {
     name = util.prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
-      const controller = new AbortController();
+      const controller = util.createController();
       const progressValue = null;
       const progressMax = null;
       const id = downloadId + 1;
@@ -39,12 +35,8 @@ function getUtil({
         const blob = await blobGetter(download, options);
         util.downloadBlob(blob, downloaderElement, download.name);
       } catch (error) {
-        const message = error.message || error;
-        if (
-          message !== CANCELLED_DOWNLOAD_MESSAGE &&
-          error.name !== ABORT_ERROR_NAME
-        ) {
-          util.alert(message);
+        if (!util.downloadAborted(error)) {
+          util.alert(error.message || error);
         }
       }
       return download;

@@ -289,13 +289,12 @@ function getSelectedFolderHandlers({
   };
 }
 
-function getDownloadHandlers({ setDownloads, constants }) {
-  const { CANCELLED_DOWNLOAD_MESSAGE } = constants;
+function getDownloadHandlers({ setDownloads, util }) {
   function abortDownload(deletedDownload) {
     setDownloads((downloads) =>
       downloads.filter((download) => download.id !== deletedDownload.id)
     );
-    deletedDownload.controller.abort(CANCELLED_DOWNLOAD_MESSAGE);
+    util.abortDownload(deletedDownload.controller);
   }
 
   return {
