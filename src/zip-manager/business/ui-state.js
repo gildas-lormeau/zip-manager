@@ -12,26 +12,26 @@ function getUIState({
   const clipboardDataEmpty = !clipboardData;
   const disabledExportZip = entriesEmpty;
   const disabledReset = entriesEmpty;
-  const disabledHistoryBack = !historyIndex;
-  const disabledHistoryForward = historyIndex === history.length - 1;
-  const disabledCopyEntry = actionDisabled;
-  const disabledCutEntry = actionDisabled;
-  const disabledPasteEntry = clipboardDataEmpty;
+  const disabledBack = !historyIndex;
+  const disabledForward = historyIndex === history.length - 1;
+  const disabledCopy = actionDisabled;
+  const disabledCut = actionDisabled;
+  const disabledPaste = clipboardDataEmpty;
   const disabledResetClipboardData = clipboardDataEmpty;
-  const disabledRenameEntry = actionDisabled;
-  const disabledDeleteEntry = actionDisabled;
+  const disabledRename = actionDisabled;
+  const disabledDelete = actionDisabled;
 
   return {
     disabledExportZip,
     disabledReset,
-    disabledHistoryBack,
-    disabledHistoryForward,
-    disabledCopyEntry,
-    disabledCutEntry,
-    disabledPasteEntry,
+    disabledBack,
+    disabledForward,
+    disabledCopy,
+    disabledCut,
+    disabledPaste,
     disabledResetClipboardData,
-    disabledRenameEntry,
-    disabledDeleteEntry
+    disabledRename,
+    disabledDelete
   };
 }
 

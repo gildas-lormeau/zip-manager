@@ -2,10 +2,10 @@ import "./styles/NavigationBar.css";
 
 function NavigationBar({
   selectedFolder,
-  disabledHistoryBackButton,
-  disabledHistoryForwardButton,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
+  disabledBackButton,
+  disabledForwardButton,
+  onNavigateBack,
+  onNavigateForward,
   onGoIntoFolder,
   constants,
   messages
@@ -13,10 +13,10 @@ function NavigationBar({
   return (
     <div className="navigation-bar">
       <HistoryButtons
-        disabledHistoryBackButton={disabledHistoryBackButton}
-        disabledHistoryForwardButton={disabledHistoryForwardButton}
-        onNavigateHistoryBack={onNavigateHistoryBack}
-        onNavigateHistoryForward={onNavigateHistoryForward}
+        disabledBackButton={disabledBackButton}
+        disabledForwardButton={disabledForwardButton}
+        onNavigateBack={onNavigateBack}
+        onNavigateForward={onNavigateForward}
         messages={messages}
       />
       <Breadcrumb
@@ -30,33 +30,33 @@ function NavigationBar({
 }
 
 function HistoryButtons({
-  disabledHistoryBackButton,
-  disabledHistoryForwardButton,
-  onNavigateHistoryBack,
-  onNavigateHistoryForward,
+  disabledBackButton,
+  disabledForwardButton,
+  onNavigateBack,
+  onNavigateForward,
   messages
 }) {
   return (
     <span className="history-buttons">
-      <HistoryBackButton
-        disabled={disabledHistoryBackButton}
-        onNavigateHistoryBack={onNavigateHistoryBack}
+      <BackButton
+        disabled={disabledBackButton}
+        onNavigateBack={onNavigateBack}
         messages={messages}
       />
-      <HistoryForwardButton
-        disabled={disabledHistoryForwardButton}
-        onNavigateHistoryForward={onNavigateHistoryForward}
+      <ForwardButton
+        disabled={disabledForwardButton}
+        onNavigateForward={onNavigateForward}
         messages={messages}
       />
     </span>
   );
 }
 
-function HistoryBackButton({ disabled, onNavigateHistoryBack, messages }) {
+function BackButton({ disabled, onNavigateBack, messages }) {
   return (
     <button
       disabled={disabled}
-      onClick={onNavigateHistoryBack}
+      onClick={onNavigateBack}
       title={
         messages.SHORTCUT_LABEL +
         messages.ALT_KEY_LABEL +
@@ -68,15 +68,11 @@ function HistoryBackButton({ disabled, onNavigateHistoryBack, messages }) {
   );
 }
 
-function HistoryForwardButton({
-  disabled,
-  onNavigateHistoryForward,
-  messages
-}) {
+function ForwardButton({ disabled, onNavigateForward, messages }) {
   return (
     <button
       disabled={disabled}
-      onClick={onNavigateHistoryForward}
+      onClick={onNavigateForward}
       title={
         messages.SHORTCUT_LABEL +
         messages.ALT_KEY_LABEL +

@@ -8,7 +8,7 @@ function Entries({
   highlightedEntry,
   entriesHeight,
   highlightedEntryRef,
-  onHighlightEntry,
+  onHighlight,
   onEnterEntry,
   constants,
   messages
@@ -60,7 +60,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onHighlightEntry}
+                onSelectEntry={onHighlight}
                 onEnterEntry={onEnterEntry}
                 constants={constants}
                 messages={messages}
@@ -73,7 +73,7 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onHighlightEntry}
+                onSelectEntry={onHighlight}
                 onEnterEntry={onEnterEntry}
                 constants={constants}
                 messages={messages}
@@ -121,9 +121,7 @@ function EntryName({
   messages
 }) {
   const entryLabel =
-    entry === selectedFolder.parent
-      ? messages.PARENT_FOLDER_LABEL
-      : entry.name;
+    entry === selectedFolder.parent ? messages.PARENT_FOLDER_LABEL : entry.name;
 
   function handleClick() {
     onSelectEntry(entry);

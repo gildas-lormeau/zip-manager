@@ -4,41 +4,41 @@ function getEntriesNavigationHandlers({
   entriesHeight,
   setHighlightedEntry
 }) {
-  function highlightPreviousEntry() {
+  function highlightPrevious() {
     const indexEntry = getEntryIndex();
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
     setHighlightedEntry(previousEntry);
   }
 
-  function highlightNextEntry() {
+  function highlightNext() {
     const indexEntry = getEntryIndex();
     const nextEntry = entries[(indexEntry + 1) % entries.length];
     setHighlightedEntry(nextEntry);
   }
 
-  function highlightPreviousPageEntry() {
+  function highlightPreviousPage() {
     const indexEntry = getEntryIndex();
     const previousEntry = entries[Math.max(indexEntry - entriesHeight, 0)];
     setHighlightedEntry(previousEntry);
   }
 
-  function highlightNextPageEntry() {
+  function highlightNextPage() {
     const indexEntry = getEntryIndex();
     const previousEntry =
       entries[Math.min(indexEntry + entriesHeight, entries.length - 1)];
     setHighlightedEntry(previousEntry);
   }
 
-  function highlightFirstEntry() {
+  function highlightFirst() {
     setHighlightedEntry(entries[0]);
   }
 
-  function highlightLastEntry() {
+  function highlightLast() {
     setHighlightedEntry(entries[entries.length - 1]);
   }
 
-  function highlightEntry(entry) {
+  function highlight(entry) {
     setHighlightedEntry(entry);
   }
 
@@ -47,13 +47,13 @@ function getEntriesNavigationHandlers({
   }
 
   return {
-    highlightPreviousEntry,
-    highlightNextEntry,
-    highlightPreviousPageEntry,
-    highlightNextPageEntry,
-    highlightFirstEntry,
-    highlightLastEntry,
-    highlightEntry
+    highlightPrevious,
+    highlightNext,
+    highlightPreviousPage,
+    highlightNextPage,
+    highlightFirst,
+    highlightLast,
+    highlight
   };
 }
 
@@ -78,11 +78,11 @@ function getFolderNavigationHandlers({
     setSelectedFolders(entry);
   }
 
-  function navigateHistoryBack() {
+  function navigateBack() {
     navigateHistory(-1);
   }
 
-  function navigateHistoryForward() {
+  function navigateForward() {
     navigateHistory(1);
   }
 
@@ -100,8 +100,8 @@ function getFolderNavigationHandlers({
 
   return {
     goIntoFolder,
-    navigateHistoryBack,
-    navigateHistoryForward
+    navigateBack,
+    navigateForward
   };
 }
 
@@ -116,7 +116,7 @@ function getHighlightedEntryHandlers({
   setHistoryIndex,
   setClipboardData,
   setHighlightedEntry,
-  deleteDownloadEntry,
+  abortDownload,
   updateSelectedFolder,
   downloadFile,
   util,
@@ -126,20 +126,20 @@ function getHighlightedEntryHandlers({
   const { DEFAULT_MIME_TYPE } = constants;
   const { RENAME_MESSAGE, DELETE_MESSAGE } = messages;
 
-  function copyEntry() {
+  function copy() {
     setClipboardData({
       entry: highlightedEntry.clone(true)
     });
   }
 
-  function cutEntry() {
+  function cut() {
     setClipboardData({
       entry: highlightedEntry,
       cut: true
     });
   }
 
-  function pasteEntry() {
+  function paste() {
     try {
       const { entry, cut } = clipboardData;
       let clone;
@@ -156,7 +156,7 @@ function getHighlightedEntryHandlers({
     }
   }
 
-  function renameEntry() {
+  function rename() {
     try {
       const entryName = util.prompt(RENAME_MESSAGE, highlightedEntry.name);
       if (entryName && entryName !== highlightedEntry.name) {
@@ -168,7 +168,7 @@ function getHighlightedEntryHandlers({
     }
   }
 
-  function deleteEntry() {
+  function remove() {
     if (util.confirm(DELETE_MESSAGE)) {
       zipFilesystem.remove(highlightedEntry);
       updateHistoryData();
@@ -177,10 +177,10 @@ function getHighlightedEntryHandlers({
     }
   }
 
-  function downloadEntry(entry) {
+  function download(entry) {
     downloadFile(entry.name, {}, async (download, options) => {
       const blob = await entry.getBlob(DEFAULT_MIME_TYPE, options);
-      deleteDownloadEntry(download);
+      abortDownload(download);
       return blob;
     });
   }
@@ -208,19 +208,19 @@ function getHighlightedEntryHandlers({
   }
 
   return {
-    copyEntry,
-    cutEntry,
-    pasteEntry,
-    renameEntry,
-    deleteEntry,
-    downloadEntry
+    copy,
+    cut,
+    paste,
+    rename,
+    remove,
+    download
   };
 }
 
 function getSelectedFolderHandlers({
   selectedFolder,
   updateSelectedFolder,
-  deleteDownloadEntry,
+  abortDownload,
   downloadFile,
   util,
   constants,
@@ -275,7 +275,7 @@ function getSelectedFolderHandlers({
       { mimeType: DEFAULT_MIME_TYPE },
       async (download, options) => {
         const blob = await selectedFolder.exportBlob(options);
-        deleteDownloadEntry(download);
+        abortDownload(download);
         return blob;
       }
     );
@@ -291,7 +291,7 @@ function getSelectedFolderHandlers({
 
 function getDownloadHandlers({ setDownloads, constants }) {
   const { CANCELLED_DOWNLOAD_MESSAGE } = constants;
-  function deleteDownloadEntry(deletedDownload) {
+  function abortDownload(deletedDownload) {
     setDownloads((downloads) =>
       downloads.filter((download) => download.id !== deletedDownload.id)
     );
@@ -299,7 +299,7 @@ function getDownloadHandlers({ setDownloads, constants }) {
   }
 
   return {
-    deleteDownloadEntry
+    abortDownload
   };
 }
 
@@ -330,18 +330,18 @@ function getClipboardHandlers({ setClipboardData }) {
   };
 }
 
-function getActionHandlers({ highlightedEntry, goIntoFolder, downloadEntry }) {
-  function enterEntry(entry = highlightedEntry, selectedFolder) {
+function getActionHandlers({ highlightedEntry, goIntoFolder, download }) {
+  function enter(entry = highlightedEntry, selectedFolder) {
     if (entry) {
       if (entry.directory) {
         goIntoFolder(entry, selectedFolder);
       } else {
-        downloadEntry(entry);
+        download(entry);
       }
     }
   }
 
-  return { enterEntry };
+  return { enter };
 }
 
 export {

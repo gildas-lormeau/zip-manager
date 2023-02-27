@@ -1,18 +1,18 @@
 import "./styles/BottomButtonBar.css";
 
 function BottomButtonBar({
-  disabledCopyEntryButton,
+  disabledCopyButton,
   disabledCutEntryButton,
-  disabledPasteEntryButton,
+  disabledPasteButton,
   disabledResetClipboardDataButton,
-  disabledRenameEntryButton,
-  disabledDeleteEntryButton,
-  onCopyEntry,
-  onCutEntry,
-  onPasteEntry,
+  disabledRenameButton,
+  disabledDeleteButton,
+  onCopy,
+  onCut,
+  onPaste,
   onResetClipboardData,
-  onRenameEntry,
-  onDeleteEntry,
+  onRename,
+  onRemove,
   constants,
   messages
 }) {
@@ -20,20 +20,20 @@ function BottomButtonBar({
     <div className="button-bar button-bar-bottom">
       <div className="button-group">
         <CopyEntryButton
-          disabled={disabledCopyEntryButton}
-          onCopyEntry={onCopyEntry}
+          disabled={disabledCopyButton}
+          onCopy={onCopy}
           constants={constants}
           messages={messages}
         />
         <CutEntryButton
           disabled={disabledCutEntryButton}
-          onCutEntry={onCutEntry}
+          onCut={onCut}
           constants={constants}
           messages={messages}
         />
         <PasteEntryButton
-          disabled={disabledPasteEntryButton}
-          onPasteEntry={onPasteEntry}
+          disabled={disabledPasteButton}
+          onPaste={onPaste}
           constants={constants}
           messages={messages}
         />
@@ -46,14 +46,14 @@ function BottomButtonBar({
       </div>
       <div className="button-group">
         <RenameEntryButton
-          disabled={disabledRenameEntryButton}
-          onRenameEntry={onRenameEntry}
+          disabled={disabledRenameButton}
+          onRename={onRename}
           constants={constants}
           messages={messages}
         />
         <DeleteEntryButton
-          disabled={disabledDeleteEntryButton}
-          onDeleteEntry={onDeleteEntry}
+          disabled={disabledDeleteButton}
+          onRemove={onRemove}
           constants={constants}
           messages={messages}
         />
@@ -62,10 +62,10 @@ function BottomButtonBar({
   );
 }
 
-function CopyEntryButton({ disabled, onCopyEntry, constants, messages }) {
+function CopyEntryButton({ disabled, onCopy, constants, messages }) {
   return (
     <button
-      onClick={onCopyEntry}
+      onClick={onCopy}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.COPY_KEY
@@ -76,10 +76,10 @@ function CopyEntryButton({ disabled, onCopyEntry, constants, messages }) {
   );
 }
 
-function CutEntryButton({ disabled, onCutEntry, constants, messages }) {
+function CutEntryButton({ disabled, onCut, constants, messages }) {
   return (
     <button
-      onClick={onCutEntry}
+      onClick={onCut}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.CUT_KEY
@@ -90,10 +90,10 @@ function CutEntryButton({ disabled, onCutEntry, constants, messages }) {
   );
 }
 
-function PasteEntryButton({ disabled, onPasteEntry, constants, messages }) {
+function PasteEntryButton({ disabled, onPaste, constants, messages }) {
   return (
     <button
-      onClick={onPasteEntry}
+      onClick={onPaste}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.PASTE_KEY
@@ -116,10 +116,10 @@ function ResetClipboardDataButton({
   );
 }
 
-function RenameEntryButton({ disabled, onRenameEntry, constants, messages }) {
+function RenameEntryButton({ disabled, onRename, constants, messages }) {
   return (
     <button
-      onClick={onRenameEntry}
+      onClick={onRename}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.RENAME_KEY
@@ -130,10 +130,10 @@ function RenameEntryButton({ disabled, onRenameEntry, constants, messages }) {
   );
 }
 
-function DeleteEntryButton({ disabled, onDeleteEntry, constants, messages }) {
+function DeleteEntryButton({ disabled, onRemove, constants, messages }) {
   return (
     <button
-      onClick={onDeleteEntry}
+      onClick={onRemove}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL +

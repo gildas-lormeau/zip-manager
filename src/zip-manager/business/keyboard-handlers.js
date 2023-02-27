@@ -1,30 +1,30 @@
 function getKeyUpHandler({
   highlightedEntry,
   selectedFolder,
-  disabledCutEntry,
-  disabledCopyEntry,
-  disabledRenameEntry,
-  disabledPasteEntry,
-  disabledDeleteEntry,
-  disabledHistoryBack,
-  disabledHistoryForward,
+  disabledCut,
+  disabledCopy,
+  disabledRename,
+  disabledPaste,
+  disabledDelete,
+  disabledBack,
+  disabledForward,
   disabledExportZip,
-  cutEntry,
-  copyEntry,
-  renameEntry,
-  pasteEntry,
-  deleteEntry,
-  enterEntry,
-  highlightNextEntry,
-  highlightPreviousEntry,
-  highlightPreviousPageEntry,
-  highlightNextPageEntry,
-  highlightFirstEntry,
-  highlightLastEntry,
+  cut,
+  copy,
+  rename,
+  paste,
+  remove,
+  enter,
+  highlightNext,
+  highlightPrevious,
+  highlightPreviousPage,
+  highlightNextPage,
+  highlightFirst,
+  highlightLast,
   createFolder,
   exportZipFile,
-  navigateHistoryBack,
-  navigateHistoryForward,
+  navigateBack,
+  navigateForward,
   addFilesButton,
   importZipButton,
   constants
@@ -46,37 +46,37 @@ function getKeyUpHandler({
     PAGE_DOWN_KEY,
     HOME_KEY,
     END_KEY,
-    NAVIGATION_BACK_KEY,
-    NAVIGATION_FORWARD_KEY
+    BACK_KEY,
+    FORWARD_KEY
   } = constants;
 
   function handleKeyUp(event) {
     entriesNavigationHandler(event, {
-      highlightNextEntry,
-      highlightPreviousEntry,
-      highlightPreviousPageEntry,
-      highlightNextPageEntry,
-      highlightFirstEntry,
-      highlightLastEntry
+      highlightNext,
+      highlightPrevious,
+      highlightPreviousPage,
+      highlightNextPage,
+      highlightFirst,
+      highlightLast
     });
     folderNavigationHandler(event, {
-      navigateHistoryBack,
-      navigateHistoryForward,
-      disabledHistoryBack,
-      disabledHistoryForward
+      navigateBack,
+      navigateForward,
+      disabledBack,
+      disabledForward
     });
     highlightedEntryHandler(event, {
-      cutEntry,
-      copyEntry,
-      renameEntry,
-      pasteEntry,
-      deleteEntry,
-      enterEntry,
-      disabledCutEntry,
-      disabledCopyEntry,
-      disabledRenameEntry,
-      disabledPasteEntry,
-      disabledDeleteEntry
+      cut,
+      copy,
+      rename,
+      paste,
+      remove,
+      enter,
+      disabledCut,
+      disabledCopy,
+      disabledRename,
+      disabledPaste,
+      disabledDelete
     });
     selectedFolderHandler(event, {
       event,
@@ -91,55 +91,50 @@ function getKeyUpHandler({
   function entriesNavigationHandler(
     event,
     {
-      highlightPreviousEntry,
-      highlightNextEntry,
-      highlightPreviousPageEntry,
-      highlightNextPageEntry,
-      highlightFirstEntry,
-      highlightLastEntry
+      highlightPrevious,
+      highlightNext,
+      highlightPreviousPage,
+      highlightNextPage,
+      highlightFirst,
+      highlightLast
     }
   ) {
     if (event.key === DOWN_KEY) {
-      highlightNextEntry();
+      highlightNext();
     }
     if (event.key === UP_KEY) {
-      highlightPreviousEntry();
+      highlightPrevious();
     }
     if (event.key === HOME_KEY) {
-      highlightFirstEntry();
+      highlightFirst();
     }
     if (event.key === END_KEY) {
-      highlightLastEntry();
+      highlightLast();
     }
     if (event.key === PAGE_UP_KEY) {
-      highlightPreviousPageEntry();
+      highlightPreviousPage();
     }
     if (event.key === PAGE_DOWN_KEY) {
-      highlightNextPageEntry();
+      highlightNextPage();
     }
     if (event.key === HOME_KEY) {
-      highlightFirstEntry();
+      highlightFirst();
     }
     if (event.key === END_KEY) {
-      highlightLastEntry();
+      highlightLast();
     }
   }
 
   function folderNavigationHandler(
     event,
-    {
-      navigateHistoryBack,
-      navigateHistoryForward,
-      disabledHistoryBack,
-      disabledHistoryForward
-    }
+    { navigateBack, navigateForward, disabledBack, disabledForward }
   ) {
     if (event.altKey) {
-      if (event.key === NAVIGATION_BACK_KEY && !disabledHistoryBack) {
-        navigateHistoryBack();
+      if (event.key === BACK_KEY && !disabledBack) {
+        navigateBack();
       }
-      if (event.key === NAVIGATION_FORWARD_KEY && !disabledHistoryForward) {
-        navigateHistoryForward();
+      if (event.key === FORWARD_KEY && !disabledForward) {
+        navigateForward();
       }
     }
   }
@@ -147,38 +142,38 @@ function getKeyUpHandler({
   function highlightedEntryHandler(
     event,
     {
-      disabledCutEntry,
-      disabledCopyEntry,
-      disabledRenameEntry,
-      disabledPasteEntry,
-      disabledDeleteEntry,
-      cutEntry,
-      copyEntry,
-      renameEntry,
-      pasteEntry,
-      deleteEntry,
-      enterEntry
+      disabledCut,
+      disabledCopy,
+      disabledRename,
+      disabledPaste,
+      disabledDelete,
+      cut,
+      copy,
+      rename,
+      paste,
+      remove,
+      enter
     }
   ) {
     if (event.ctrlKey) {
-      if (event.key === CUT_KEY && !disabledCutEntry) {
-        cutEntry();
+      if (event.key === CUT_KEY && !disabledCut) {
+        cut();
       }
-      if (event.key === COPY_KEY && !disabledCopyEntry) {
-        copyEntry();
+      if (event.key === COPY_KEY && !disabledCopy) {
+        copy();
       }
-      if (event.key === RENAME_KEY && !disabledRenameEntry) {
-        renameEntry();
+      if (event.key === RENAME_KEY && !disabledRename) {
+        rename();
       }
-      if (event.key === PASTE_KEY && !disabledPasteEntry) {
-        pasteEntry();
+      if (event.key === PASTE_KEY && !disabledPaste) {
+        paste();
       }
     }
-    if (DELETE_KEYS.includes(event.key) && !disabledDeleteEntry) {
-      deleteEntry();
+    if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
+      remove();
     }
     if (event.key === ACTION_KEY) {
-      enterEntry(highlightedEntry, selectedFolder);
+      enter(highlightedEntry, selectedFolder);
     }
   }
 

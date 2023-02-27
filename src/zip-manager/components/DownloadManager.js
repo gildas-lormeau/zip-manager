@@ -3,7 +3,7 @@ import "./styles/DownloadManager.css";
 function DownloadManager({
   downloads,
   downloaderRef,
-  onDeleteDownloadEntry,
+  onAbortDownload,
   constants,
   messages
 }) {
@@ -14,29 +14,24 @@ function DownloadManager({
           <li key={download.id}>
             <DownloadEntry
               download={download}
-              onDeleteDownloadEntry={onDeleteDownloadEntry}
+              onAbortDownload={onAbortDownload}
               constants={constants}
               messages={messages}
             />
           </li>
         ))}
       </ol>
-      <a hidden ref={downloaderRef} />
+      <a hidden ref={downloaderRef}></a>
     </div>
   );
 }
 
-function DownloadEntry({
-  download,
-  onDeleteDownloadEntry,
-  constants,
-  messages
-}) {
+function DownloadEntry({ download, onAbortDownload, constants, messages }) {
   return (
     <>
       <DownloadEntryInfo
         download={download}
-        onDeleteDownloadEntry={onDeleteDownloadEntry}
+        onAbortDownload={onAbortDownload}
         constants={constants}
         messages={messages}
       />
@@ -45,12 +40,7 @@ function DownloadEntry({
   );
 }
 
-function DownloadEntryInfo({
-  download,
-  onDeleteDownloadEntry,
-  constants,
-  messages
-}) {
+function DownloadEntryInfo({ download, onAbortDownload, constants, messages }) {
   return (
     <div className="download-entry">
       <span className="list-item-name download-entry-name">
@@ -58,7 +48,7 @@ function DownloadEntryInfo({
       </span>
       <DeleteDownloadEntryButton
         download={download}
-        onDeleteDownloadEntry={onDeleteDownloadEntry}
+        onAbortDownload={onAbortDownload}
         constants={constants}
         messages={messages}
       />
@@ -68,12 +58,12 @@ function DownloadEntryInfo({
 
 function DeleteDownloadEntryButton({
   download,
-  onDeleteDownloadEntry,
+  onAbortDownload,
   constants,
   messages
 }) {
   function handleClick() {
-    onDeleteDownloadEntry(download);
+    onAbortDownload(download);
   }
 
   function handleKeyUp(event) {

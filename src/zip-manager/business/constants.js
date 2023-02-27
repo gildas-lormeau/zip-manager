@@ -22,8 +22,8 @@ const PAGE_UP_KEY = "PageUp";
 const PAGE_DOWN_KEY = "PageDown";
 const HOME_KEY = "Home";
 const END_KEY = "End";
-const NAVIGATION_BACK_KEY = "ArrowLeft";
-const NAVIGATION_FORWARD_KEY = "ArrowRight";
+const BACK_KEY = "ArrowLeft";
+const FORWARD_KEY = "ArrowRight";
 
 export {
   DEFAULT_MIME_TYPE,
@@ -48,6 +48,6 @@ export {
   PAGE_DOWN_KEY,
   HOME_KEY,
   END_KEY,
-  NAVIGATION_BACK_KEY,
-  NAVIGATION_FORWARD_KEY
+  BACK_KEY,
+  FORWARD_KEY
 };
