@@ -150,7 +150,7 @@ function getKeyUpHandler({
       }
     }
     if (event.key === LEFT_KEY && selectedFolder.parent) {
-      goIntoFolder(selectedFolder.parent);
+      goIntoFolder(selectedFolder.parent, selectedFolder);
     }
     if (
       event.key === RIGHT_KEY &&
