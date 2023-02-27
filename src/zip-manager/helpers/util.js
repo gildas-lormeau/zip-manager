@@ -2,6 +2,7 @@
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
+const KEYUP_EVENT_NAME = "keyup";
 
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
@@ -22,12 +23,12 @@ function prompt(message, defaultValue) {
   return window.prompt(message, defaultValue);
 }
 
-function addEventListener(type, listener, options) {
-  window.addEventListener(type, listener, options);
+function addKeyListener(listener) {
+  window.addEventListener(KEYUP_EVENT_NAME, listener);
 }
 
-function removeEventListener(type, listener, options) {
-  window.removeEventListener(type, listener, options);
+function removeKeyListener(listener) {
+  window.removeEventListener(KEYUP_EVENT_NAME, listener);
 }
 
 function setFocus(element) {
@@ -63,6 +64,6 @@ export {
   prompt,
   setFocus,
   dispatchClick,
-  addEventListener,
-  removeEventListener
+  addKeyListener,
+  removeKeyListener
 };

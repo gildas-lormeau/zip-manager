@@ -13,11 +13,8 @@ function getEffects({
   setHistoryIndex,
   highlightedEntryElement,
   handleKeyUp,
-  util,
-  constants
+  util
 }) {
-  const { KEYUP_EVENT_NAME } = constants;
-
   function updateSelectedFolder() {
     if (selectedFolder) {
       const { parent, children } = selectedFolder;
@@ -70,8 +67,8 @@ function getEffects({
   }
 
   function registerKeyUpHandler() {
-    util.addEventListener(KEYUP_EVENT_NAME, handleKeyUp);
-    return () => util.removeEventListener(KEYUP_EVENT_NAME, handleKeyUp);
+    util.addKeyListener(handleKeyUp);
+    return () => util.removeKeyListener(handleKeyUp);
   }
 
   return {

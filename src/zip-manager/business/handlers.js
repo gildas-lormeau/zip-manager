@@ -1,3 +1,5 @@
+const DEFAULT_MIME_TYPE = "application/octet-stream";
+
 function getEntriesNavigationHandlers({
   entries,
   highlightedEntry,
@@ -120,10 +122,8 @@ function getHighlightedEntryHandlers({
   updateSelectedFolder,
   downloadFile,
   util,
-  constants,
   messages
 }) {
-  const { DEFAULT_MIME_TYPE } = constants;
   const { RENAME_MESSAGE, DELETE_MESSAGE } = messages;
 
   function copy() {

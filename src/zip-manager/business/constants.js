@@ -1,6 +1,3 @@
-const DEFAULT_MIME_TYPE = "application/octet-stream";
-const KEYUP_EVENT_NAME = "keyup";
-
 const ACTION_KEY = " ";
 const ENTER_KEY = "Enter";
 const TAB_KEY = "Tab";
@@ -25,8 +22,6 @@ const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
 
 export {
-  DEFAULT_MIME_TYPE,
-  KEYUP_EVENT_NAME,
   ACTION_KEY,
   ENTER_KEY,
   TAB_KEY,

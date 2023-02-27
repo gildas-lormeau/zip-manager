@@ -95,8 +95,7 @@ function ZipManager() {
     setHistoryIndex,
     highlightedEntryElement: highlightedEntryRef && highlightedEntryRef.current,
     handleKeyUp,
-    util,
-    constants
+    util
   });
   const {
     highlightPrevious,
@@ -152,7 +151,6 @@ function ZipManager() {
       removeDownload,
       downloadFile,
       util,
-      constants,
       messages
     });
   const { reset } = getZipFilesystemHandlers({
