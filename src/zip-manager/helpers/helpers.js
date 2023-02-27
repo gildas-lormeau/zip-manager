@@ -36,7 +36,7 @@ function getUtil({
         util.downloadBlob(blob, downloaderElement, download.name);
       } catch (error) {
         if (!util.downloadAborted(error)) {
-          util.alert(error.message || error);
+          util.alert(error);
         }
       }
       return download;
