@@ -122,7 +122,7 @@ function ZipManager() {
       setHistory,
       setHistoryIndex
     });
-  const { abortDownload } = getDownloadHandlers({
+  const { abortDownload, removeDownload } = getDownloadHandlers({
     setDownloads,
     util
   });
@@ -130,7 +130,7 @@ function ZipManager() {
     getSelectedFolderHandlers({
       selectedFolder,
       updateSelectedFolder,
-      abortDownload,
+      removeDownload,
       downloadFile,
       util,
       constants,
@@ -149,7 +149,7 @@ function ZipManager() {
       setClipboardData,
       setHighlightedEntry,
       updateSelectedFolder,
-      abortDownload,
+      removeDownload,
       downloadFile,
       util,
       constants,

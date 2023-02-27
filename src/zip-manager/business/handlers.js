@@ -116,7 +116,7 @@ function getHighlightedEntryHandlers({
   setHistoryIndex,
   setClipboardData,
   setHighlightedEntry,
-  abortDownload,
+  removeDownload,
   updateSelectedFolder,
   downloadFile,
   util,
@@ -180,7 +180,7 @@ function getHighlightedEntryHandlers({
   function download(entry) {
     downloadFile(entry.name, {}, async (download, options) => {
       const blob = await entry.getBlob(DEFAULT_MIME_TYPE, options);
-      abortDownload(download);
+      removeDownload(download);
       return blob;
     });
   }
@@ -220,7 +220,7 @@ function getHighlightedEntryHandlers({
 function getSelectedFolderHandlers({
   selectedFolder,
   updateSelectedFolder,
-  abortDownload,
+  removeDownload,
   downloadFile,
   util,
   constants,
@@ -275,7 +275,7 @@ function getSelectedFolderHandlers({
       { mimeType: DEFAULT_MIME_TYPE },
       async (download, options) => {
         const blob = await selectedFolder.exportBlob(options);
-        abortDownload(download);
+        removeDownload(download);
         return blob;
       }
     );
@@ -291,13 +291,18 @@ function getSelectedFolderHandlers({
 
 function getDownloadHandlers({ setDownloads, util }) {
   function abortDownload(deletedDownload) {
-    setDownloads((downloads) =>
-      downloads.filter((download) => download.id !== deletedDownload.id)
-    );
+    removeDownload(deletedDownload);
     util.abortDownload(deletedDownload.controller);
   }
 
+  function removeDownload(deletedDownload) {
+    setDownloads((downloads) =>
+      downloads.filter((download) => download.id !== deletedDownload.id)
+    );
+  }
+
   return {
+    removeDownload,
     abortDownload
   };
 }
