@@ -110,7 +110,7 @@ function ZipManager() {
   } = getEntriesNavigationHandlers({
     entries,
     highlightedEntry,
-    entriesHeight,
+    entriesHeight: entriesHeight.current,
     setHighlightedEntry
   });
   const { goIntoFolder, navigateHistoryBack, navigateHistoryForward } =
