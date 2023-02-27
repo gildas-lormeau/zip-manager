@@ -51,7 +51,7 @@ function ZipManager() {
     downloadId,
     setDownloadId,
     setDownloads,
-    downloaderRef,
+    downloaderElement: downloaderRef.current,
     util,
     constants,
     messages

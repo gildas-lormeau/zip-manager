@@ -8,7 +8,7 @@ function getUtil({
   downloadId,
   setDownloadId,
   setDownloads,
-  downloaderRef,
+  downloaderElement,
   util,
   constants,
   messages
@@ -37,7 +37,7 @@ function getUtil({
       });
       try {
         const blob = await blobGetter(download, options);
-        util.downloadBlob(blob, downloaderRef.current, download.name);
+        util.downloadBlob(blob, downloaderElement, download.name);
       } catch (error) {
         const message = error.message || error;
         if (
