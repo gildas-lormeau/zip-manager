@@ -152,6 +152,7 @@ function getKeyUpHandler({
     }
     if (
       event.key === RIGHT_KEY &&
+      highlightedEntry &&
       highlightedEntry.directory &&
       highlightedEntry !== selectedFolder.parent
     ) {
