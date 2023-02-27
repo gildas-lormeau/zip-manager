@@ -200,6 +200,7 @@ function ZipManager() {
     goIntoFolder,
     addFilesButton: addFilesButtonRef.current,
     importZipButton: importZipButtonRef.current,
+    util,
     constants
   });
 
@@ -234,6 +235,7 @@ function ZipManager() {
         onReset={reset}
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
+        util={util}
         constants={constants}
         messages={messages}
       />

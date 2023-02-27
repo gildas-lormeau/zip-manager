@@ -12,6 +12,7 @@ function TopButtonBar({
   onImportZipFile,
   onExportZipFile,
   onReset,
+  util,
   constants,
   messages
 }) {
@@ -26,6 +27,7 @@ function TopButtonBar({
         <AddFilesButton
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
+          util={util}
           constants={constants}
           messages={messages}
         />
@@ -34,6 +36,7 @@ function TopButtonBar({
         <ImportZipButton
           onImportZipFile={onImportZipFile}
           importZipButtonRef={importZipButtonRef}
+          util={util}
           constants={constants}
           messages={messages}
         />
@@ -73,6 +76,7 @@ function CreateFolderButton({ onCreateFolder, constants, messages }) {
 function AddFilesButton({
   addFilesButtonRef,
   onAddFiles,
+  util,
   constants,
   messages
 }) {
@@ -88,7 +92,7 @@ function AddFilesButton({
   }
 
   function handleClick() {
-    current.click();
+    util.dispatchClick(current);
   }
 
   return (
@@ -118,6 +122,7 @@ function AddFilesButton({
 function ImportZipButton({
   importZipButtonRef,
   onImportZipFile,
+  util,
   constants,
   messages
 }) {
@@ -125,7 +130,7 @@ function ImportZipButton({
   const { current } = fileInput;
 
   function handleClick() {
-    current.click();
+    util.dispatchClick(current);
   }
 
   return (

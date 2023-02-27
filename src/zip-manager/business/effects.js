@@ -52,7 +52,7 @@ function getEffects({
 
   function updateHighlightedEntry() {
     if (highlightedEntry && highlightedEntryElement) {
-      highlightedEntryElement.focus();
+      util.setFocus(highlightedEntryElement);
     }
   }
 

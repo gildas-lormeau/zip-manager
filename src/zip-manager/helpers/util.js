@@ -3,7 +3,7 @@
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
   Object.assign(downloaderElement, { href, download });
-  downloaderElement.click();
+  dispatchClick(downloaderElement);
   URL.revokeObjectURL(href);
 }
 
@@ -27,11 +27,21 @@ function removeEventListener(type, listener, options) {
   window.removeEventListener(type, listener, options);
 }
 
+function setFocus(element) {
+  element.focus();
+}
+
+function dispatchClick(element) {
+  element.click();
+}
+
 export {
   downloadBlob,
   alert,
   confirm,
   prompt,
+  setFocus,
+  dispatchClick,
   addEventListener,
   removeEventListener
 };
