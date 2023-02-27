@@ -25,6 +25,7 @@ function getKeyUpHandler({
   exportZipFile,
   navigateBack,
   navigateForward,
+  goIntoFolder,
   addFilesButton,
   importZipButton,
   constants
@@ -42,6 +43,8 @@ function getKeyUpHandler({
     DELETE_KEYS,
     DOWN_KEY,
     UP_KEY,
+    LEFT_KEY,
+    RIGHT_KEY,
     PAGE_UP_KEY,
     PAGE_DOWN_KEY,
     HOME_KEY,
@@ -62,6 +65,7 @@ function getKeyUpHandler({
     folderNavigationHandler(event, {
       navigateBack,
       navigateForward,
+      goIntoFolder,
       disabledBack,
       disabledForward
     });
@@ -127,7 +131,13 @@ function getKeyUpHandler({
 
   function folderNavigationHandler(
     event,
-    { navigateBack, navigateForward, disabledBack, disabledForward }
+    {
+      navigateBack,
+      navigateForward,
+      goIntoFolder,
+      disabledBack,
+      disabledForward
+    }
   ) {
     if (event.altKey) {
       if (event.key === BACK_KEY && !disabledBack) {
@@ -136,6 +146,16 @@ function getKeyUpHandler({
       if (event.key === FORWARD_KEY && !disabledForward) {
         navigateForward();
       }
+    }
+    if (event.key === LEFT_KEY && selectedFolder.parent) {
+      goIntoFolder(selectedFolder.parent);
+    }
+    if (
+      event.key === RIGHT_KEY &&
+      highlightedEntry.directory &&
+      highlightedEntry !== selectedFolder.parent
+    ) {
+      goIntoFolder(highlightedEntry, selectedFolder);
     }
   }
 

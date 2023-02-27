@@ -197,6 +197,7 @@ function ZipManager() {
     exportZipFile,
     navigateBack,
     navigateForward,
+    goIntoFolder,
     addFilesButton: addFilesButtonRef.current,
     importZipButton: importZipButtonRef.current,
     constants
