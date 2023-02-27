@@ -62,7 +62,6 @@ function Entries({
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlight}
                 onEnterEntry={onEnterEntry}
-                constants={constants}
                 messages={messages}
               />
             </li>
@@ -75,7 +74,6 @@ function Entries({
                 selectedFolder={selectedFolder}
                 onSelectEntry={onHighlight}
                 onEnterEntry={onEnterEntry}
-                constants={constants}
                 messages={messages}
               />
             </li>
@@ -91,7 +89,6 @@ function Entry({
   selectedFolder,
   onSelectEntry,
   onEnterEntry,
-  constants,
   messages
 }) {
   return (
