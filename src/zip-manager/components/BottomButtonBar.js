@@ -2,7 +2,7 @@ import "./styles/BottomButtonBar.css";
 
 function BottomButtonBar({
   disabledCopyButton,
-  disabledCutEntryButton,
+  disabledCutButton,
   disabledPasteButton,
   disabledResetClipboardDataButton,
   disabledRenameButton,
@@ -26,7 +26,7 @@ function BottomButtonBar({
           messages={messages}
         />
         <CutEntryButton
-          disabled={disabledCutEntryButton}
+          disabled={disabledCutButton}
           onCut={onCut}
           constants={constants}
           messages={messages}
