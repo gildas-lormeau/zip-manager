@@ -71,7 +71,7 @@ function CopyEntryButton({ disabled, onCopyEntry, constants, messages }) {
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.COPY_KEY
       }
     >
-      {messages.COPY_LABEL}
+      {messages.COPY_BUTTON_LABEL}
     </button>
   );
 }
@@ -85,7 +85,7 @@ function CutEntryButton({ disabled, onCutEntry, constants, messages }) {
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.CUT_KEY
       }
     >
-      {messages.CUT_LABEL}
+      {messages.CUT_BUTTON_LABEL}
     </button>
   );
 }
@@ -99,7 +99,7 @@ function PasteEntryButton({ disabled, onPasteEntry, constants, messages }) {
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.PASTE_KEY
       }
     >
-      {messages.PASTE_LABEL}
+      {messages.PASTE_BUTTON_LABEL}
     </button>
   );
 }
@@ -111,7 +111,7 @@ function ResetClipboardDataButton({
 }) {
   return (
     <button onClick={onResetClipboardData} disabled={disabled}>
-      {messages.RESET_CLIPBOARD_LABEL}
+      {messages.RESET_CLIPBOARD_BUTTON_LABEL}
     </button>
   );
 }
@@ -125,7 +125,7 @@ function RenameEntryButton({ disabled, onRenameEntry, constants, messages }) {
         messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.RENAME_KEY
       }
     >
-      {messages.RENAME_LABEL}
+      {messages.RENAME_BUTTON_LABEL}
     </button>
   );
 }
@@ -142,7 +142,7 @@ function DeleteEntryButton({ disabled, onDeleteEntry, constants, messages }) {
         )
       }
     >
-      {messages.DELETE_LABEL}
+      {messages.DELETE_BUTTON_LABEL}
     </button>
   );
 }
