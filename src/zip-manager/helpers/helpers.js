@@ -2,7 +2,7 @@ import { fs } from "@zip.js/zip.js";
 
 const { FS } = fs;
 
-function getUtil({
+function getHelpers({
   downloadId,
   setDownloadId,
   setDownloads,
@@ -67,4 +67,4 @@ function createZipFileSystem() {
   return new FS();
 }
 
-export { getUtil, createZipFileSystem };
+export { getHelpers, createZipFileSystem };

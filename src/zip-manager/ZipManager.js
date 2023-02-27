@@ -9,7 +9,7 @@ import * as util from "./helpers/util.js";
 import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
 
-import { getUtil, createZipFileSystem } from "./helpers/helpers.js";
+import { getHelpers, createZipFileSystem } from "./helpers/helpers.js";
 import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
 import {
@@ -47,7 +47,7 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const { downloadFile } = getUtil({
+  const { downloadFile } = getHelpers({
     downloadId,
     setDownloadId,
     setDownloads,
