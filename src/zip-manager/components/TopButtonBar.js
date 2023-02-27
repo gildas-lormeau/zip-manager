@@ -85,10 +85,10 @@ function AddFilesButton({
 
   function handleChange({ target }) {
     const files = Array.from(target.files);
-    current.value = "";
     if (files.length) {
       onAddFiles(files);
     }
+    util.resetValue(current);
   }
 
   function handleClick() {
@@ -126,8 +126,13 @@ function ImportZipButton({
   constants,
   messages
 }) {
-  const fileInput = useRef(null);
-  const { current } = fileInput;
+  const fileInputRef = useRef(null);
+  const { current } = fileInputRef;
+
+  function handleChange({ target }) {
+    onImportZipFile(target.files[0]);
+    util.resetValue(current);
+  }
 
   function handleClick() {
     util.dispatchClick(current);
@@ -147,8 +152,8 @@ function ImportZipButton({
         {messages.IMPORT_ZIP_BUTTON_LABEL}
       </button>
       <input
-        onChange={({ target }) => onImportZipFile(target.files[0])}
-        ref={fileInput}
+        onChange={handleChange}
+        ref={fileInputRef}
         type="file"
         accept={messages.ZIP_EXTENSION}
         hidden

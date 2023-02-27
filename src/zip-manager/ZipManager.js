@@ -256,6 +256,7 @@ function ZipManager() {
         onHighlight={highlight}
         onEnterEntry={enter}
         highlightedEntryRef={highlightedEntryRef}
+        util={util}
         constants={constants}
         messages={messages}
       />

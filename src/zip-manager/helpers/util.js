@@ -39,6 +39,14 @@ function dispatchClick(element) {
   element.click();
 }
 
+function getHeight(element) {
+  return element.offsetHeight;
+}
+
+function resetValue(inputElement) {
+  inputElement.value = "";
+}
+
 function createController() {
   return new AbortController();
 }
@@ -64,6 +72,8 @@ export {
   prompt,
   setFocus,
   dispatchClick,
+  resetValue,
   addKeyListener,
-  removeKeyListener
+  removeKeyListener,
+  getHeight
 };

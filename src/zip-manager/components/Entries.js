@@ -10,6 +10,7 @@ function Entries({
   highlightedEntryRef,
   onHighlight,
   onEnterEntry,
+  util,
   constants,
   messages
 }) {
@@ -36,8 +37,8 @@ function Entries({
     if (highlightedEntryRef && highlightedEntryRef.current) {
       entriesHeight.current = Math.max(
         Math.floor(
-          entriesRef.current.offsetHeight /
-            highlightedEntryRef.current.offsetHeight
+          util.getHeight(entriesRef.current) /
+            util.getHeight(highlightedEntryRef.current)
         ),
         1
       );
