@@ -1,6 +1,14 @@
+:root {
+  --page-color: lightgray;
+  --bg-color: white;
+  --text-color: black;
+  --highlighted-text-color: white;
+  --accent-color: gray;
+}
+
 body {
   font-weight: 400;
-  background-color: lightgray;
+  background-color: var(--page-color);
   min-width: 360px;
   max-width: max(1024px, 75vw);
   margin-inline-start: auto;
@@ -14,6 +22,7 @@ ol {
 }
 
 button {
+  border: solid var(--accent-color) .5px;
   user-select: none;
 }
 

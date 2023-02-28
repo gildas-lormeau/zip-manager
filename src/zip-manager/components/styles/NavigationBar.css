@@ -63,5 +63,5 @@
 
 .breadcrumb .breadcrumb-item-active {
   cursor: pointer;
-  border-block-end: dotted gray 2px;
+  border-block-end: dotted var(--accent-color) 2px;
 }
