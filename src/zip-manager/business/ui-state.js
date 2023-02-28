@@ -25,6 +25,7 @@ function getUIState({
     !highlightedEntry ||
     !highlightedEntry.directory ||
     highlightedEntry === selectedFolder.parent;
+  const disabledEnter = !highlightedEntry;
 
   return {
     disabledExportZip,
@@ -38,7 +39,8 @@ function getUIState({
     disabledRename,
     disabledDelete,
     disabledGoIntoParentFolder,
-    disabledGoIntoChildFolder
+    disabledGoIntoChildFolder,
+    disabledEnter
   };
 }
 

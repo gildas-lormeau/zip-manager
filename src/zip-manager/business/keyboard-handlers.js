@@ -11,6 +11,7 @@ function getKeyUpHandler({
   disabledExportZip,
   disabledGoIntoParentFolder,
   disabledGoIntoChildFolder,
+  disabledEnter,
   cut,
   copy,
   rename,
@@ -85,7 +86,8 @@ function getKeyUpHandler({
       disabledCopy,
       disabledRename,
       disabledPaste,
-      disabledDelete
+      disabledDelete,
+      disabledEnter
     });
     selectedFolderHandler(event, {
       event,
@@ -174,6 +176,7 @@ function getKeyUpHandler({
       disabledRename,
       disabledPaste,
       disabledDelete,
+      disabledEnter,
       cut,
       copy,
       rename,
@@ -200,7 +203,7 @@ function getKeyUpHandler({
       if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
         remove();
       }
-      if (event.key === ACTION_KEY) {
+      if (event.key === ACTION_KEY && !disabledEnter) {
         enter(highlightedEntry);
         event.preventDefault();
       }

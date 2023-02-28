@@ -336,12 +336,10 @@ function getClipboardHandlers({ setClipboardData }) {
 
 function getActionHandlers({ highlightedEntry, goIntoFolder, download }) {
   function enter(entry = highlightedEntry) {
-    if (entry) {
-      if (entry.directory) {
-        goIntoFolder(entry);
-      } else {
-        download(entry);
-      }
+    if (entry.directory) {
+      goIntoFolder(entry);
+    } else {
+      download(entry);
     }
   }
 
