@@ -16,7 +16,7 @@ function BottomButtonBar({
   messages
 }) {
   return (
-    <div className="button-bar button-bar-bottom" role="toolbar">
+    <div className="button-bar button-bar-bottom" role="toolbar" aria-label="Highlighted entry commands">
       <div className="button-group">
         <CopyEntryButton
           disabled={disabledCopyButton}
