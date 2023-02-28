@@ -80,7 +80,7 @@ function Breadcrumb({ folder, onGoIntoFolder, constants, messages }) {
   const lastItemFolder = folder;
   const ancestors = getAncestors(folder);
   return (
-    <nav className="breadcrumb">
+    <nav className="breadcrumb" aria-label="Ancestors">
       <ol>
         {ancestors.map((folder) => (
           <li key={folder.id}>
