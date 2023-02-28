@@ -11,11 +11,7 @@ function NavigationBar({
   messages
 }) {
   return (
-    <div
-      className="navigation-bar"
-      role="toolbar"
-      aria-label="History commands"
-    >
+    <div className="navigation-bar" role="toolbar">
       <HistoryButtons
         disabledBackButton={disabledBackButton}
         disabledForwardButton={disabledForwardButton}
@@ -41,7 +37,7 @@ function HistoryButtons({
   messages
 }) {
   return (
-    <span className="history-buttons">
+    <span className="history-buttons" aria-label="History commands">
       <BackButton
         disabled={disabledBackButton}
         onNavigateBack={onNavigateBack}
