@@ -16,7 +16,7 @@ function TopButtonBar({
   messages
 }) {
   return (
-    <div className="button-bar">
+    <div className="button-bar" role="toolbar">
       <div className="button-group">
         <CreateFolderButton
           onCreateFolder={onCreateFolder}

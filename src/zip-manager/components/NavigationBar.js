@@ -11,7 +11,7 @@ function NavigationBar({
   messages
 }) {
   return (
-    <div className="navigation-bar">
+    <div className="navigation-bar" role="toolbar">
       <HistoryButtons
         disabledBackButton={disabledBackButton}
         disabledForwardButton={disabledForwardButton}
@@ -80,19 +80,22 @@ function Breadcrumb({ folder, onGoIntoFolder, constants, messages }) {
   const lastItemFolder = folder;
   const ancestors = getAncestors(folder);
   return (
-    <ol className="breadcrumb">
-      {ancestors.map((folder) => (
-        <li key={folder.id}>
-          <BreadcrumbItem
-            folder={folder}
-            onGoIntoFolder={onGoIntoFolder}
-            active={ancestors.length > 1 && folder !== lastItemFolder}
-            constants={constants}
-            messages={messages}
-          />
-        </li>
-      ))}
-    </ol>
+    <nav className="breadcrumb">
+      <ol>
+        {ancestors.map((folder) => (
+          <li key={folder.id}>
+            <BreadcrumbItem
+              folder={folder}
+              onGoIntoFolder={onGoIntoFolder}
+              active={ancestors.length > 1 && folder !== lastItemFolder}
+              isSelectedFolder={folder === lastItemFolder}
+              constants={constants}
+              messages={messages}
+            />
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }
 
@@ -112,6 +115,7 @@ function BreadcrumbItem({
   folder,
   onGoIntoFolder,
   active,
+  isSelectedFolder,
   constants,
   messages
 }) {
@@ -137,6 +141,7 @@ function BreadcrumbItem({
     <span
       className={getBreadcrumbItemClassName()}
       role="button"
+      aria-current={isSelectedFolder ? "location" : null}
       onClick={handleClick}
       onKeyUp={(event) => handleKeyUp({ event, folder })}
       tabIndex={active ? 0 : null}

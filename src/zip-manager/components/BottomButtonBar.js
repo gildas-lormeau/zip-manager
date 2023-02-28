@@ -16,7 +16,7 @@ function BottomButtonBar({
   messages
 }) {
   return (
-    <div className="button-bar button-bar-bottom">
+    <div className="button-bar button-bar-bottom" role="toolbar">
       <div className="button-group">
         <CopyEntryButton
           disabled={disabledCopyButton}
