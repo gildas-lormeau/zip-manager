@@ -44,7 +44,7 @@ function getEffects({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    setEntries([...root.children]);
+    updateSelectedFolder();
   }
 
   function updateHighlightedEntry() {
