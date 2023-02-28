@@ -48,45 +48,42 @@ function Entries({
   useEffect(computeEntriesHeight);
 
   return (
-    <ol
-      className="entries"
-      aria-label="Folder entries"
-      onKeyDown={handleKeyDown}
-      ref={entriesRef}
-    >
-      {entries.map((entry) => {
-        if (entry === highlightedEntry) {
-          return (
-            <li
-              key={entry.id}
-              ref={highlightedEntryRef}
-              className={getEntryClassName(entry)}
-              tabIndex={0}
-            >
-              <Entry
-                entry={entry}
-                selectedFolder={selectedFolder}
-                onHighlight={onHighlight}
-                onEnter={onEnter}
-                messages={messages}
-              />
-            </li>
-          );
-        } else {
-          return (
-            <li key={entry.id} className={getEntryClassName(entry)}>
-              <Entry
-                entry={entry}
-                selectedFolder={selectedFolder}
-                onHighlight={onHighlight}
-                onEnter={onEnter}
-                messages={messages}
-              />
-            </li>
-          );
-        }
-      })}
-    </ol>
+    <div className="entries" aria-label="Folder entries">
+      <ol onKeyDown={handleKeyDown} ref={entriesRef}>
+        {entries.map((entry) => {
+          if (entry === highlightedEntry) {
+            return (
+              <li
+                key={entry.id}
+                ref={highlightedEntryRef}
+                className={getEntryClassName(entry)}
+                tabIndex={0}
+              >
+                <Entry
+                  entry={entry}
+                  selectedFolder={selectedFolder}
+                  onHighlight={onHighlight}
+                  onEnter={onEnter}
+                  messages={messages}
+                />
+              </li>
+            );
+          } else {
+            return (
+              <li key={entry.id} className={getEntryClassName(entry)}>
+                <Entry
+                  entry={entry}
+                  selectedFolder={selectedFolder}
+                  onHighlight={onHighlight}
+                  onEnter={onEnter}
+                  messages={messages}
+                />
+              </li>
+            );
+          }
+        })}
+      </ol>
+    </div>
   );
 }
 

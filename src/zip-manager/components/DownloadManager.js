@@ -8,8 +8,8 @@ function DownloadManager({
   messages
 }) {
   return (
-    <div className="downloads">
-      <ol aria-label="Downloads">
+    <div className="downloads" aria-label="Downloads">
+      <ol>
         {downloads.map((download) => (
           <li key={download.id}>
             <DownloadEntry
