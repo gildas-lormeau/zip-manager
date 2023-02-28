@@ -16,7 +16,11 @@ function TopButtonBar({
   messages
 }) {
   return (
-    <div className="button-bar" role="toolbar" aria-label="Selected directory commands">
+    <div
+      className="button-bar"
+      role="toolbar"
+      aria-label="Selected directory commands"
+    >
       <div className="button-group">
         <CreateFolderButton
           onCreateFolder={onCreateFolder}
