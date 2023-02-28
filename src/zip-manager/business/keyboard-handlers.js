@@ -158,10 +158,10 @@ function getKeyUpHandler({
     }
     if (!event.altKey && !event.ctrlKey) {
       if (event.key === LEFT_KEY && !disabledGoIntoParentFolder) {
-        goIntoFolder(selectedFolder.parent, selectedFolder);
+        goIntoFolder(selectedFolder.parent);
       }
       if (event.key === RIGHT_KEY && !disabledGoIntoChildFolder) {
-        goIntoFolder(highlightedEntry, selectedFolder);
+        goIntoFolder(highlightedEntry);
       }
     }
   }
@@ -201,7 +201,7 @@ function getKeyUpHandler({
         remove();
       }
       if (event.key === ACTION_KEY) {
-        enter(highlightedEntry, selectedFolder);
+        enter(highlightedEntry);
         event.preventDefault();
       }
     }
