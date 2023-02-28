@@ -48,7 +48,12 @@ function Entries({
   useEffect(computeEntriesHeight);
 
   return (
-    <ol className="entries" onKeyDown={handleKeyDown} ref={entriesRef}>
+    <ol
+      className="entries"
+      aria-label="Folder entries"
+      onKeyDown={handleKeyDown}
+      ref={entriesRef}
+    >
       {entries.map((entry) => {
         if (entry === highlightedEntry) {
           return (

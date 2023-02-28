@@ -9,7 +9,7 @@ function DownloadManager({
 }) {
   return (
     <div className="downloads">
-      <ol>
+      <ol aria-label="Downloads">
         {downloads.map((download) => (
           <li key={download.id}>
             <DownloadEntry
