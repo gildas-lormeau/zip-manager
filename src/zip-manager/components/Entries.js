@@ -6,10 +6,10 @@ function Entries({
   entries,
   selectedFolder,
   highlightedEntry,
-  entriesHeightRef,
-  highlightedEntryRef,
   onHighlight,
   onEnterEntry,
+  entriesHeightRef,
+  highlightedEntryRef,
   util,
   constants,
   messages

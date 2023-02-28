@@ -256,8 +256,6 @@ function ZipManager() {
         entries={entries}
         selectedFolder={selectedFolder}
         highlightedEntry={highlightedEntry}
-        onGoIntoFolder={goIntoFolder}
-        onDownload={download}
         onHighlight={highlight}
         onEnterEntry={enter}
         highlightedEntryRef={highlightedEntryRef}
