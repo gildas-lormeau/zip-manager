@@ -1,5 +1,6 @@
 .application {
   background-color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   height: calc(100dvh - 50px);
