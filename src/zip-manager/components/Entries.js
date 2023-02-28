@@ -7,7 +7,7 @@ function Entries({
   selectedFolder,
   highlightedEntry,
   onHighlight,
-  onEnterEntry,
+  onEnter,
   entriesHeightRef,
   highlightedEntryRef,
   util,
@@ -61,8 +61,8 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onHighlight}
-                onEnterEntry={onEnterEntry}
+                onHighlight={onHighlight}
+                onEnter={onEnter}
                 messages={messages}
               />
             </li>
@@ -73,8 +73,8 @@ function Entries({
               <Entry
                 entry={entry}
                 selectedFolder={selectedFolder}
-                onSelectEntry={onHighlight}
-                onEnterEntry={onEnterEntry}
+                onHighlight={onHighlight}
+                onEnter={onEnter}
                 messages={messages}
               />
             </li>
@@ -88,8 +88,8 @@ function Entries({
 function Entry({
   entry,
   selectedFolder,
-  onSelectEntry,
-  onEnterEntry,
+  onHighlight,
+  onEnter,
   messages
 }) {
   return (
@@ -97,14 +97,13 @@ function Entry({
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onSelectEntry={onSelectEntry}
-        onEnterEntry={onEnterEntry}
+        onHighlight={onHighlight}
+        onEnter={onEnter}
         messages={messages}
       />
       <EntryButton
         entry={entry}
-        selectedFolder={selectedFolder}
-        onEnterEntry={onEnterEntry}
+        onEnter={onEnter}
         messages={messages}
       />
     </>
@@ -114,19 +113,19 @@ function Entry({
 function EntryName({
   entry,
   selectedFolder,
-  onSelectEntry,
-  onEnterEntry,
+  onHighlight,
+  onEnter,
   messages
 }) {
   const entryLabel =
     entry === selectedFolder.parent ? messages.PARENT_FOLDER_LABEL : entry.name;
 
   function handleClick() {
-    onSelectEntry(entry);
+    onHighlight(entry);
   }
 
   function handleDoubleClick() {
-    onEnterEntry(entry, selectedFolder);
+    onEnter(entry);
   }
 
   return (
@@ -141,9 +140,9 @@ function EntryName({
   );
 }
 
-function EntryButton({ entry, selectedFolder, onEnterEntry, messages }) {
+function EntryButton({ entry, onEnter, messages }) {
   function handleClick() {
-    onEnterEntry(entry, selectedFolder);
+    onEnter(entry);
   }
 
   return (
