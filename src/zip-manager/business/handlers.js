@@ -3,7 +3,7 @@ const DEFAULT_MIME_TYPE = "application/octet-stream";
 function getEntriesNavigationHandlers({
   entries,
   highlightedEntry,
-  entriesHeight,
+  getEntriesHeight,
   setHighlightedEntry
 }) {
   function highlightPrevious() {
@@ -21,14 +21,14 @@ function getEntriesNavigationHandlers({
 
   function highlightPreviousPage() {
     const indexEntry = getEntryIndex();
-    const previousEntry = entries[Math.max(indexEntry - entriesHeight, 0)];
+    const previousEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
     setHighlightedEntry(previousEntry);
   }
 
   function highlightNextPage() {
     const indexEntry = getEntryIndex();
     const previousEntry =
-      entries[Math.min(indexEntry + entriesHeight, entries.length - 1)];
+      entries[Math.min(indexEntry + getEntriesHeight(), entries.length - 1)];
     setHighlightedEntry(previousEntry);
   }
 

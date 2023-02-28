@@ -11,7 +11,7 @@ function getEffects({
   setClipboardData,
   setHistory,
   setHistoryIndex,
-  highlightedEntryElement,
+  getHighlightedEntryElement,
   handleKeyUp,
   util
 }) {
@@ -48,7 +48,8 @@ function getEffects({
   }
 
   function updateHighlightedEntry() {
-    if (highlightedEntry && highlightedEntryElement) {
+    const highlightedEntryElement = getHighlightedEntryElement();
+    if (highlightedEntryElement) {
       util.setFocus(highlightedEntryElement);
     }
   }

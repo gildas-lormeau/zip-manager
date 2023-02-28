@@ -96,7 +96,7 @@ function ZipManager() {
     setClipboardData,
     setHistory,
     setHistoryIndex,
-    highlightedEntryElement: highlightedEntryRef && highlightedEntryRef.current,
+    getHighlightedEntryElement: () => highlightedEntryRef.current,
     handleKeyUp,
     util
   });
@@ -111,7 +111,7 @@ function ZipManager() {
   } = getEntriesNavigationHandlers({
     entries,
     highlightedEntry,
-    entriesHeight: entriesHeightRef.current,
+    getEntriesHeight: () => entriesHeightRef.current,
     setHighlightedEntry
   });
   const { goIntoFolder, navigateBack, navigateForward } =
