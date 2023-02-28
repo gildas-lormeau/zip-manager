@@ -3,6 +3,7 @@
   --bg-color: white;
   --text-color: black;
   --highlighted-text-color: white;
+  --bg-button-color: lightgray;
   --accent-color: gray;
 }
 
@@ -24,6 +25,9 @@ ol {
 button {
   border: solid var(--accent-color) .5px;
   user-select: none;
+  background-color: var(--bg-button-color);
+  color: var(--text-color);
+  font-size: .8rem;
 }
 
 @media (prefers-color-scheme: dark) {
