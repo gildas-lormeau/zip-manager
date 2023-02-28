@@ -7,8 +7,7 @@
   margin-inline-end: 4px;
   margin-block-end: 4px;
   padding: 8px;
-  padding-inline-start: 12px;
-  padding-inline-end: 12px;
+  padding-inline: 12px;
 }
 
 .button-bar button:not([disabled]) {

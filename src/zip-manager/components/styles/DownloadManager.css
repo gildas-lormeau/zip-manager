@@ -19,8 +19,7 @@
 }
 
 .downloads .download-entry-abort-button {
-  padding-inline-start: 4px;
-  padding-inline-end: 4px;
+  padding-inline: 4px;
 }
 
 .downloads li progress {

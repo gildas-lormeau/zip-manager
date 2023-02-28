@@ -10,8 +10,7 @@
 .history-buttons button {
   font-family: monospace;
   margin-inline-end: 4px;
-  padding-inline-start: 8px;
-  padding-inline-end: 8px;
+  padding-inline: 8px;
   align-self: start;
   height: 24px;
 }

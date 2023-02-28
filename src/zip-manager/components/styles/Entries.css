@@ -10,8 +10,7 @@
 }
 
 .entries li > * {
-  margin-inline-start: 2px;
-  margin-inline-end: 2px;
+  margin-inline: 2px;
 }
 
 .entries .entry-name {
@@ -30,6 +29,5 @@
 
 .entries .directory .entry-name::after {
   content: "/";
-  padding-inline-start: 2px;
-  padding-inline-end: 2px;
+  padding-inline: 2px;
 }
