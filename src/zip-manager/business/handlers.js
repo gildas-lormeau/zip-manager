@@ -262,9 +262,7 @@ function getSelectedFolderHandlers({
       updateSelectedFolder();
     }
 
-    if (zipFile) {
-      updateZipFile();
-    }
+    updateZipFile();
   }
 
   function exportZipFile() {
