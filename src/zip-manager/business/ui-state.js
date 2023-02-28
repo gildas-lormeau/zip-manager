@@ -21,7 +21,7 @@ function getUIState({
   const disabledRename = actionDisabled;
   const disabledDelete = actionDisabled;
   const disabledGoIntoParentFolder = !selectedFolder || !selectedFolder.parent;
-  const disabledGoIntoHighlightedFolder =
+  const disabledGoIntoChildFolder =
     !highlightedEntry ||
     !highlightedEntry.directory ||
     highlightedEntry === selectedFolder.parent;
@@ -38,7 +38,7 @@ function getUIState({
     disabledRename,
     disabledDelete,
     disabledGoIntoParentFolder,
-    disabledGoIntoHighlightedFolder
+    disabledGoIntoChildFolder
   };
 }
 

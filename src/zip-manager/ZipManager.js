@@ -67,7 +67,7 @@ function ZipManager() {
     disabledRename,
     disabledDelete,
     disabledGoIntoParentFolder,
-    disabledGoIntoHighlightedFolder
+    disabledGoIntoChildFolder
   } = getUIState({
     entries,
     highlightedEntry,
@@ -181,7 +181,7 @@ function ZipManager() {
     disabledForward,
     disabledExportZip,
     disabledGoIntoParentFolder,
-    disabledGoIntoHighlightedFolder,
+    disabledGoIntoChildFolder,
     cut,
     copy,
     rename,
