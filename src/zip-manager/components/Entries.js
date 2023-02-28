@@ -6,7 +6,7 @@ function Entries({
   entries,
   selectedFolder,
   highlightedEntry,
-  entriesHeight,
+  entriesHeightRef,
   highlightedEntryRef,
   onHighlight,
   onEnterEntry,
@@ -35,7 +35,7 @@ function Entries({
 
   function computeEntriesHeight() {
     if (highlightedEntryRef && highlightedEntryRef.current) {
-      entriesHeight.current = Math.max(
+      entriesHeightRef.current = Math.max(
         Math.floor(
           util.getHeight(entriesRef.current) /
             util.getHeight(highlightedEntryRef.current)
