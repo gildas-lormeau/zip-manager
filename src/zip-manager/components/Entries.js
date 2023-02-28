@@ -95,20 +95,18 @@ function Entry({ entry, selectedFolder, onHighlight, onEnter, messages }) {
         onEnter={onEnter}
         messages={messages}
       />
-      <EntryButton entry={entry} onEnter={onEnter} messages={messages} />
+      <EntryButton
+        entry={entry}
+        selectedFolder={selectedFolder}
+        onEnter={onEnter}
+        messages={messages}
+      />
     </>
   );
 }
 
-function EntryName({
-  entry,
-  selectedFolder,
-  onHighlight,
-  onEnter,
-  messages
-}) {
-  const entryLabel =
-    entry === selectedFolder.parent ? messages.PARENT_FOLDER_LABEL : entry.name;
+function EntryName({ entry, selectedFolder, onHighlight, onEnter, messages }) {
+  const entryIsParentFolder = entry === selectedFolder.parent;
 
   function handleClick() {
     onHighlight(entry);
@@ -121,16 +119,26 @@ function EntryName({
   return (
     <span
       className="list-item-name entry-name"
-      title={entryLabel}
+      title={entryIsParentFolder ? messages.PARENT_FOLDER_TOOLTIP : entry.name}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
-      {entryLabel}
+      {entryIsParentFolder ? messages.PARENT_FOLDER_LABEL : entry.name}
     </span>
   );
 }
 
-function EntryButton({ entry, onEnter, messages }) {
+function EntryButton({ entry, selectedFolder, onEnter, messages }) {
+  function getEntryButtonTitle() {
+    const keys = [messages.SPACE_KEY_LABEL];
+    if (entry === selectedFolder.parent) {
+      keys.push(messages.ARROW_LEFT_KEY_LABEL);
+    } else if (entry.directory) {
+      keys.push(messages.ARROW_RIGHT_KEY_LABEL);
+    }
+    return messages.SHORTCUT_LABEL + keys.join(messages.KEYS_SEPARATOR_LABEL);
+  }
+
   function handleClick() {
     onEnter(entry);
   }
@@ -139,7 +147,7 @@ function EntryButton({ entry, onEnter, messages }) {
     <span
       className="list-item-button"
       onClick={handleClick}
-      title={messages.SHORTCUT_LABEL + messages.SPACE_KEY_LABEL}
+      title={getEntryButtonTitle()}
     >
       {entry.directory
         ? messages.DOWNLOAD_BUTTON_LABEL

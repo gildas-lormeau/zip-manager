@@ -3,6 +3,7 @@ const ROOT_FOLDER_LABEL = "[root]";
 const ZIP_EXTENSION = ".zip";
 const ROOT_ZIP_FILENAME = "Download" + ZIP_EXTENSION;
 const KEYS_SEPARATOR_LABEL = ", ";
+const PARENT_FOLDER_TOOLTIP = "Parent directory";
 
 const SHORTCUT_LABEL = "Shortcut: ";
 const CTRL_KEY_LABEL = "ctrl-";
@@ -38,6 +39,7 @@ export {
   ZIP_EXTENSION,
   ROOT_ZIP_FILENAME,
   PARENT_FOLDER_LABEL,
+  PARENT_FOLDER_TOOLTIP,
   ROOT_FOLDER_LABEL,
   SHORTCUT_LABEL,
   CTRL_KEY_LABEL,
