@@ -11,6 +11,7 @@ const ALT_KEY_LABEL = "alt-";
 const SPACE_KEY_LABEL = "space";
 const ARROW_LEFT_KEY_LABEL = "left";
 const ARROW_RIGHT_KEY_LABEL = "right";
+const DELETE_KEY_LABELS = ["backspace", "delete"];
 
 const CREATE_FOLDER_MESSAGE = "Please enter the directory name";
 const RENAME_MESSAGE = "Please enter the entry name";
@@ -47,6 +48,7 @@ export {
   SPACE_KEY_LABEL,
   ARROW_LEFT_KEY_LABEL,
   ARROW_RIGHT_KEY_LABEL,
+  DELETE_KEY_LABELS,
   CREATE_FOLDER_MESSAGE,
   RENAME_MESSAGE,
   RESET_MESSAGE,

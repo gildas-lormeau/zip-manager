@@ -54,7 +54,6 @@ function BottomButtonBar({
         <DeleteEntryButton
           disabled={disabledDeleteButton}
           onRemove={onRemove}
-          constants={constants}
           messages={messages}
         />
       </div>
@@ -130,14 +129,14 @@ function RenameEntryButton({ disabled, onRename, constants, messages }) {
   );
 }
 
-function DeleteEntryButton({ disabled, onRemove, constants, messages }) {
+function DeleteEntryButton({ disabled, onRemove, messages }) {
   return (
     <button
       onClick={onRemove}
       disabled={disabled}
       title={
         messages.SHORTCUT_LABEL +
-        constants.DELETE_KEYS.map((key) => key).join(
+        messages.DELETE_KEY_LABELS.map((key) => key).join(
           messages.KEYS_SEPARATOR_LABEL
         )
       }
