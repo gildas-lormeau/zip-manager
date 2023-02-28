@@ -65,7 +65,9 @@ function ZipManager() {
     disabledPaste,
     disabledResetClipboardData,
     disabledRename,
-    disabledDelete
+    disabledDelete,
+    disabledGoIntoParentFolder,
+    disabledGoIntoHighlightedFolder
   } = getUIState({
     entries,
     highlightedEntry,
@@ -178,6 +180,8 @@ function ZipManager() {
     disabledBack,
     disabledForward,
     disabledExportZip,
+    disabledGoIntoParentFolder,
+    disabledGoIntoHighlightedFolder,
     cut,
     copy,
     rename,

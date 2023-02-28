@@ -20,6 +20,11 @@ function getUIState({
   const disabledResetClipboardData = clipboardDataEmpty;
   const disabledRename = actionDisabled;
   const disabledDelete = actionDisabled;
+  const disabledGoIntoParentFolder = !selectedFolder || !selectedFolder.parent;
+  const disabledGoIntoHighlightedFolder =
+    !highlightedEntry ||
+    !highlightedEntry.directory ||
+    highlightedEntry === selectedFolder.parent;
 
   return {
     disabledExportZip,
@@ -31,7 +36,9 @@ function getUIState({
     disabledPaste,
     disabledResetClipboardData,
     disabledRename,
-    disabledDelete
+    disabledDelete,
+    disabledGoIntoParentFolder,
+    disabledGoIntoHighlightedFolder
   };
 }
 

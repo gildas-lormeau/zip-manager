@@ -9,6 +9,8 @@ function getKeyUpHandler({
   disabledBack,
   disabledForward,
   disabledExportZip,
+  disabledGoIntoParentFolder,
+  disabledGoIntoHighlightedFolder,
   cut,
   copy,
   rename,
@@ -68,7 +70,9 @@ function getKeyUpHandler({
       navigateForward,
       goIntoFolder,
       disabledBack,
-      disabledForward
+      disabledForward,
+      disabledGoIntoParentFolder,
+      disabledGoIntoHighlightedFolder
     });
     highlightedEntryHandler(event, {
       cut,
@@ -140,7 +144,8 @@ function getKeyUpHandler({
       navigateForward,
       goIntoFolder,
       disabledBack,
-      disabledForward
+      disabledForward,
+      disabledGoIntoParentFolder
     }
   ) {
     if (event.altKey) {
@@ -152,15 +157,10 @@ function getKeyUpHandler({
       }
     }
     if (!event.altKey && !event.ctrlKey) {
-      if (event.key === LEFT_KEY && selectedFolder.parent) {
+      if (event.key === LEFT_KEY && !disabledGoIntoParentFolder) {
         goIntoFolder(selectedFolder.parent, selectedFolder);
       }
-      if (
-        event.key === RIGHT_KEY &&
-        highlightedEntry &&
-        highlightedEntry.directory &&
-        highlightedEntry !== selectedFolder.parent
-      ) {
+      if (event.key === RIGHT_KEY && !disabledGoIntoHighlightedFolder) {
         goIntoFolder(highlightedEntry, selectedFolder);
       }
     }
