@@ -53,7 +53,7 @@ function TopButtonBar({
   );
 }
 
-function CreateFolderButton({ onCreateFolder, constants, messages }) {
+function CreateFolderButton({ onCreateFolder, messages }) {
   return (
     <button
       onClick={onCreateFolder}
