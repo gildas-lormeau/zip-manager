@@ -57,11 +57,7 @@ function BackButton({ disabled, onNavigateBack, messages }) {
     <button
       disabled={disabled}
       onClick={onNavigateBack}
-      title={
-        messages.SHORTCUT_LABEL +
-        messages.ALT_KEY_LABEL +
-        messages.ARROW_LEFT_KEY_LABEL
-      }
+      title={messages.BACK_BUTTON_TOOLTIP}
     >
       {messages.BACK_BUTTON_LABEL}
     </button>
@@ -73,11 +69,7 @@ function ForwardButton({ disabled, onNavigateForward, messages }) {
     <button
       disabled={disabled}
       onClick={onNavigateForward}
-      title={
-        messages.SHORTCUT_LABEL +
-        messages.ALT_KEY_LABEL +
-        messages.ARROW_RIGHT_KEY_LABEL
-      }
+      title={messages.FORWARD_BUTTON_TOOLTIP}
     >
       {messages.FORWARD_BUTTON_LABEL}
     </button>

@@ -13,7 +13,6 @@ function TopButtonBar({
   onExportZipFile,
   onReset,
   util,
-  constants,
   messages
 }) {
   return (
@@ -21,14 +20,12 @@ function TopButtonBar({
       <div className="button-group">
         <CreateFolderButton
           onCreateFolder={onCreateFolder}
-          constants={constants}
           messages={messages}
         />
         <AddFilesButton
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
           util={util}
-          constants={constants}
           messages={messages}
         />
       </div>
@@ -37,13 +34,11 @@ function TopButtonBar({
           onImportZipFile={onImportZipFile}
           importZipButtonRef={importZipButtonRef}
           util={util}
-          constants={constants}
           messages={messages}
         />
         <ExportZipButton
           disabled={disabledExportZipButton}
           onExportZipFile={onExportZipFile}
-          constants={constants}
           messages={messages}
         />
       </div>
@@ -62,24 +57,14 @@ function CreateFolderButton({ onCreateFolder, constants, messages }) {
   return (
     <button
       onClick={onCreateFolder}
-      title={
-        messages.SHORTCUT_LABEL +
-        messages.CTRL_KEY_LABEL +
-        constants.CREATE_FOLDER_KEY
-      }
+      title={messages.CREATE_FOLDER_BUTTON_TOOLTIP}
     >
       {messages.CREATE_FOLDER_BUTTON_LABEL}
     </button>
   );
 }
 
-function AddFilesButton({
-  addFilesButtonRef,
-  onAddFiles,
-  util,
-  constants,
-  messages
-}) {
+function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
   const fileInputRef = useRef(null);
   const { current } = fileInputRef;
 
@@ -100,11 +85,7 @@ function AddFilesButton({
       <button
         onClick={handleClick}
         ref={addFilesButtonRef}
-        title={
-          messages.SHORTCUT_LABEL +
-          messages.CTRL_KEY_LABEL +
-          constants.ADD_FILES_KEY
-        }
+        title={messages.ADD_FILES_BUTTON_TOOLTIP}
       >
         {messages.ADD_FILES_BUTTON_LABEL}
       </button>
@@ -123,7 +104,6 @@ function ImportZipButton({
   importZipButtonRef,
   onImportZipFile,
   util,
-  constants,
   messages
 }) {
   const fileInputRef = useRef(null);
@@ -143,11 +123,7 @@ function ImportZipButton({
       <button
         onClick={handleClick}
         ref={importZipButtonRef}
-        title={
-          messages.SHORTCUT_LABEL +
-          messages.CTRL_KEY_LABEL +
-          constants.IMPORT_ZIP_KEY
-        }
+        title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
       >
         {messages.IMPORT_ZIP_BUTTON_LABEL}
       </button>
@@ -162,16 +138,12 @@ function ImportZipButton({
   );
 }
 
-function ExportZipButton({ disabled, onExportZipFile, constants, messages }) {
+function ExportZipButton({ disabled, onExportZipFile, messages }) {
   return (
     <button
       onClick={onExportZipFile}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL +
-        messages.CTRL_KEY_LABEL +
-        constants.EXPORT_ZIP_KEY
-      }
+      title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
     >
       {messages.EXPORT_ZIP_BUTTON_LABEL}
     </button>

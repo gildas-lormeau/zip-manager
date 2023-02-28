@@ -13,7 +13,6 @@ function BottomButtonBar({
   onResetClipboardData,
   onRename,
   onRemove,
-  constants,
   messages
 }) {
   return (
@@ -22,25 +21,21 @@ function BottomButtonBar({
         <CopyEntryButton
           disabled={disabledCopyButton}
           onCopy={onCopy}
-          constants={constants}
           messages={messages}
         />
         <CutEntryButton
           disabled={disabledCutButton}
           onCut={onCut}
-          constants={constants}
           messages={messages}
         />
         <PasteEntryButton
           disabled={disabledPasteButton}
           onPaste={onPaste}
-          constants={constants}
           messages={messages}
         />
         <ResetClipboardDataButton
           disabled={disabledResetClipboardDataButton}
           onResetClipboardData={onResetClipboardData}
-          constants={constants}
           messages={messages}
         />
       </div>
@@ -48,7 +43,6 @@ function BottomButtonBar({
         <RenameEntryButton
           disabled={disabledRenameButton}
           onRename={onRename}
-          constants={constants}
           messages={messages}
         />
         <DeleteEntryButton
@@ -61,42 +55,36 @@ function BottomButtonBar({
   );
 }
 
-function CopyEntryButton({ disabled, onCopy, constants, messages }) {
+function CopyEntryButton({ disabled, onCopy, messages }) {
   return (
     <button
       onClick={onCopy}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.COPY_KEY
-      }
+      title={messages.COPY_BUTTON_TOOLTIP}
     >
       {messages.COPY_BUTTON_LABEL}
     </button>
   );
 }
 
-function CutEntryButton({ disabled, onCut, constants, messages }) {
+function CutEntryButton({ disabled, onCut, messages }) {
   return (
     <button
       onClick={onCut}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.CUT_KEY
-      }
+      title={messages.CUT_BUTTON_TOOLTIP}
     >
       {messages.CUT_BUTTON_LABEL}
     </button>
   );
 }
 
-function PasteEntryButton({ disabled, onPaste, constants, messages }) {
+function PasteEntryButton({ disabled, onPaste, messages }) {
   return (
     <button
       onClick={onPaste}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.PASTE_KEY
-      }
+      title={messages.PASTE_BUTTON_TOOLTIP}
     >
       {messages.PASTE_BUTTON_LABEL}
     </button>
@@ -115,14 +103,12 @@ function ResetClipboardDataButton({
   );
 }
 
-function RenameEntryButton({ disabled, onRename, constants, messages }) {
+function RenameEntryButton({ disabled, onRename, messages }) {
   return (
     <button
       onClick={onRename}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL + messages.CTRL_KEY_LABEL + constants.RENAME_KEY
-      }
+      title={messages.RENAME_BUTTON_TOOLTIP}
     >
       {messages.RENAME_BUTTON_LABEL}
     </button>
@@ -134,12 +120,7 @@ function DeleteEntryButton({ disabled, onRemove, messages }) {
     <button
       onClick={onRemove}
       disabled={disabled}
-      title={
-        messages.SHORTCUT_LABEL +
-        messages.DELETE_KEY_LABELS.map((key) => key).join(
-          messages.KEYS_SEPARATOR_LABEL
-        )
-      }
+      title={messages.DELETE_BUTTON_TOOLTIP}
     >
       {messages.DELETE_BUTTON_LABEL}
     </button>

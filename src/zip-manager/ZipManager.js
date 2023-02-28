@@ -239,7 +239,6 @@ function ZipManager() {
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
         util={util}
-        constants={constants}
         messages={messages}
       />
       <NavigationBar
@@ -277,7 +276,6 @@ function ZipManager() {
         onResetClipboardData={resetClipboardData}
         onRename={rename}
         onRemove={remove}
-        constants={constants}
         messages={messages}
       />
       <DownloadManager
