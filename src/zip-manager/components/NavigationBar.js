@@ -136,6 +136,7 @@ function BreadcrumbItem({
   return (
     <span
       className={getBreadcrumbItemClassName()}
+      role="button"
       onClick={handleClick}
       onKeyUp={(event) => handleKeyUp({ event, folder })}
       tabIndex={active ? 0 : null}
