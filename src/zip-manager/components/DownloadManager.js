@@ -74,7 +74,7 @@ function DeleteDownloadEntryButton({
 
   return (
     <span
-      className="list-item-button"
+      className="list-item-button download-entry-abort-button"
       onClick={handleClick}
       onKeyUp={handleKeyUp}
       tabIndex={0}

@@ -18,7 +18,13 @@
   flex: 1;
 }
 
+.downloads .download-entry-abort-button {
+  padding-inline-start: 4px;
+  padding-inline-end: 4px;
+}
+
 .downloads li progress {
+  margin-block-start: 4px;
   width: 100%;
   height: 12px;
   accent-color: gray;
