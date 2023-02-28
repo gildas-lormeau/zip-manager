@@ -79,7 +79,7 @@ function DeleteDownloadEntryButton({
       onKeyUp={handleKeyUp}
       tabIndex={0}
     >
-      {messages.DELETE_DOWNLOAD_ENTRY_BUTTON_LABEL}
+      {messages.ABORT_DOWNLOAD_BUTTON_LABEL}
     </span>
   );
 }
