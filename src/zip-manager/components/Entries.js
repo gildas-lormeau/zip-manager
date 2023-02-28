@@ -85,13 +85,7 @@ function Entries({
   );
 }
 
-function Entry({
-  entry,
-  selectedFolder,
-  onHighlight,
-  onEnter,
-  messages
-}) {
+function Entry({ entry, selectedFolder, onHighlight, onEnter, messages }) {
   return (
     <>
       <EntryName
@@ -101,11 +95,7 @@ function Entry({
         onEnter={onEnter}
         messages={messages}
       />
-      <EntryButton
-        entry={entry}
-        onEnter={onEnter}
-        messages={messages}
-      />
+      <EntryButton entry={entry} onEnter={onEnter} messages={messages} />
     </>
   );
 }
