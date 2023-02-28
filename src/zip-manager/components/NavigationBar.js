@@ -11,7 +11,11 @@ function NavigationBar({
   messages
 }) {
   return (
-    <div className="navigation-bar" role="toolbar">
+    <div
+      className="navigation-bar"
+      role="toolbar"
+      aria-label="History commands"
+    >
       <HistoryButtons
         disabledBackButton={disabledBackButton}
         disabledForwardButton={disabledForwardButton}
