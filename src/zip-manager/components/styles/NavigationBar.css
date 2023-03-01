@@ -45,10 +45,11 @@
 
 .breadcrumb .breadcrumb-item {
   padding-block-end: 2px;
-  border-block-end: dotted transparent 2px;
   opacity: 0.75;
   font-weight: 400;
   white-space: nowrap;
+  text-decoration: underline dotted transparent 1.5px;
+  text-underline-offset: 6px;
 }
 
 .breadcrumb li:last-of-type .breadcrumb-item {
@@ -62,5 +63,5 @@
 
 .breadcrumb .breadcrumb-item-active {
   cursor: pointer;
-  border-block-end: dotted var(--accent-color) 2px;
+  text-decoration-color: var(--accent-color);
 }
