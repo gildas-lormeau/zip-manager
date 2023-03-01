@@ -1,12 +1,13 @@
 :root {
-  --page-color: lightgray;
-  --bg-color: white;
-  --text-color: black;
-  --highlighted-text-color: white;
-  --bg-button-color: lightgray;
-  --disabled-button-color: dimgray;
-  --bg-disabled-button-color: whitesmoke;
   --accent-color: gray;
+  --page-color: color-mix(in srgb, var(--accent-color) 10%, lightgray);;
+  --bg-color: color-mix(in srgb, var(--accent-color) 5%, white);
+  --text-color: color-mix(in srgb, var(--accent-color) 90%, black);
+  --highlighted-text-color: color-mix(in srgb, var(--accent-color) 10%, white);
+  --button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+  --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, white);
+  --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, white);
+  --bg-disabled-button-color: color-mix(in srgb, var(--accent-color) 10%, whitesmoke);;
 }
 
 body {
@@ -28,7 +29,7 @@ button {
   border: solid var(--accent-color) .5px;
   user-select: none;
   background-color: var(--bg-button-color);
-  color: var(--text-color);
+  color: var(--button-color);
   font-size: .8rem;
 }
 
