@@ -31,7 +31,7 @@ function removeKeyListener(listener) {
   window.removeEventListener(KEYUP_EVENT_NAME, listener);
 }
 
-function setFocus(element) {
+function highlight(element) {
   element.focus();
 }
 
@@ -70,7 +70,7 @@ export {
   alert,
   confirm,
   prompt,
-  setFocus,
+  highlight,
   dispatchClick,
   resetValue,
   addKeyListener,

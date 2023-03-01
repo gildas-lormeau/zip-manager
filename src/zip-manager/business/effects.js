@@ -50,7 +50,7 @@ function getEffects({
   function updateHighlightedEntry() {
     const highlightedEntryElement = getHighlightedEntryElement();
     if (highlightedEntryElement) {
-      util.setFocus(highlightedEntryElement);
+      util.highlight(highlightedEntryElement);
     }
   }
 
