@@ -4,6 +4,8 @@
   --text-color: black;
   --highlighted-text-color: white;
   --bg-button-color: lightgray;
+  --disabled-button-color: dimgray;
+  --bg-disabled-button-color: whitesmoke;
   --accent-color: gray;
 }
 
@@ -28,6 +30,11 @@ button {
   background-color: var(--bg-button-color);
   color: var(--text-color);
   font-size: .8rem;
+}
+
+button:disabled {
+  color: var(--disabled-button-color);
+  background-color: var(--bg-disabled-button-color);
 }
 
 @media (prefers-color-scheme: dark) {
