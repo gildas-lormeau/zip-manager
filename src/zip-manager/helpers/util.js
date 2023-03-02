@@ -1,8 +1,9 @@
-/* global window, URL, AbortController */
+/* global window, document, URL, AbortController, localStorage */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
+const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
 
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
@@ -62,6 +63,20 @@ function downloadAborted(error) {
   );
 }
 
+function setAccentColor(color) {
+  document.documentElement.style.setProperty(
+    "--" + ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+    color
+  );
+  localStorage.setItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
+}
+
+function getAccentColor(defaultColor) {
+  return (
+    localStorage.getItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME) || defaultColor
+  );
+}
+
 export {
   downloadBlob,
   createAbortController,
@@ -75,5 +90,7 @@ export {
   resetValue,
   addKeyListener,
   removeKeyListener,
-  getHeight
+  getHeight,
+  setAccentColor,
+  getAccentColor
 };

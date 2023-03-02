@@ -3,10 +3,18 @@
   flex-wrap: wrap;
 }
 
-.button-bar button {
+.button-bar button, .button-bar input[type=color] {
   margin-block-end: 4px;
+  height: 32px;
+}
+
+.button-bar button {
   padding: 8px;
   padding-inline: 12px;
+}
+
+.button-bar input[type=color] {
+  padding: 2px;
 }
 
 .button-bar button:not([disabled]) {

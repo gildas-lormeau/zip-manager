@@ -4,7 +4,9 @@ function getUIState({
   selectedFolder,
   clipboardData,
   historyIndex,
-  history
+  history,
+  util,
+  constants
 }) {
   const entriesEmpty = !entries.length;
   const actionDisabled =
@@ -26,6 +28,7 @@ function getUIState({
     !highlightedEntry.directory ||
     highlightedEntry === selectedFolder.parent;
   const disabledEnter = !highlightedEntry;
+  const accentColor = util.getAccentColor(constants.DEFAULT_ACCENT_COLOR);
 
   return {
     disabledExportZip,
@@ -40,7 +43,8 @@ function getUIState({
     disabledDelete,
     disabledGoIntoParentFolder,
     disabledGoIntoChildFolder,
-    disabledEnter
+    disabledEnter,
+    accentColor
   };
 }
 

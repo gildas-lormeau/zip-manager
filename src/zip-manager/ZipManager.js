@@ -23,6 +23,7 @@ import {
   getClipboardHandlers
 } from "./business/handlers.js";
 import { getKeyUpHandler } from "./business/keyboard-handlers.js";
+import { getUIHandlers } from "./business/ui-handlers";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
@@ -68,14 +69,17 @@ function ZipManager() {
     disabledDelete,
     disabledGoIntoParentFolder,
     disabledGoIntoChildFolder,
-    disabledEnter
+    disabledEnter,
+    accentColor
   } = getUIState({
     entries,
     highlightedEntry,
     selectedFolder,
     clipboardData,
     historyIndex,
-    history
+    history,
+    util,
+    constants
   });
   const {
     updateSelectedFolder,
@@ -98,6 +102,9 @@ function ZipManager() {
     setHistoryIndex,
     getHighlightedEntryElement: () => highlightedEntryRef.current,
     handleKeyUp,
+    util
+  });
+  const { setAccentColor } = getUIHandlers({
     util
   });
   const {
@@ -231,11 +238,13 @@ function ZipManager() {
       <TopButtonBar
         disabledExportZipButton={disabledExportZip}
         disabledResetButton={disabledReset}
+        accentColor={accentColor}
         onCreateFolder={createFolder}
         onAddFiles={addFiles}
         onImportZipFile={importZipFile}
         onExportZipFile={exportZipFile}
         onReset={reset}
+        onSetAccentColor={setAccentColor}
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
         util={util}

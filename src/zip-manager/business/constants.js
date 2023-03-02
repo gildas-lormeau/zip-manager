@@ -20,6 +20,7 @@ const HOME_KEY = "Home";
 const END_KEY = "End";
 const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
+const DEFAULT_ACCENT_COLOR = "#888888";
 
 export {
   ACTION_KEY,
@@ -43,5 +44,6 @@ export {
   HOME_KEY,
   END_KEY,
   BACK_KEY,
-  FORWARD_KEY
+  FORWARD_KEY,
+  DEFAULT_ACCENT_COLOR
 };

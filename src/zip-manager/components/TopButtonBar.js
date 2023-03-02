@@ -3,21 +3,23 @@ import "./styles/TopButtonBar.css";
 import { useRef } from "react";
 
 function TopButtonBar({
-  addFilesButtonRef,
-  importZipButtonRef,
   disabledExportZipButton,
   disabledResetButton,
+  accentColor,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
   onExportZipFile,
   onReset,
+  onSetAccentColor,
+  addFilesButtonRef,
+  importZipButtonRef,
   util,
   messages
 }) {
   return (
     <div
-      className="button-bar"
+      className="button-bar button-bar button-bar-top"
       role="toolbar"
       aria-label="Selected directory commands"
     >
@@ -52,6 +54,12 @@ function TopButtonBar({
           onReset={onReset}
           messages={messages}
         />
+      </div>
+      <div className="button-group">
+        <AccentColorPickerButton
+          accentColor={accentColor}
+          onSetAccentColor={onSetAccentColor}
+        ></AccentColorPickerButton>
       </div>
     </div>
   );
@@ -159,6 +167,22 @@ function ResetButton({ disabled, onReset, messages }) {
     <button onClick={onReset} disabled={disabled}>
       {messages.RESET_BUTTON_LABEL}
     </button>
+  );
+}
+
+function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
+  const colorInputRef = useRef(null);
+
+  function handleChange() {
+    onSetAccentColor(colorInputRef.current.value);
+  }
+
+  if (colorInputRef && colorInputRef.current) {
+    colorInputRef.current.value = accentColor;
+    onSetAccentColor(accentColor);
+  }
+  return (
+    <input type="color" onChange={handleChange} ref={colorInputRef}></input>
   );
 }
 
