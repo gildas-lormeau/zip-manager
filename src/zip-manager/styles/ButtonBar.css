@@ -4,7 +4,7 @@
 }
 
 .button-bar button, .button-bar input[type=color] {
-  margin-block-end: 4px;
+  margin-block-end: 8px;
   height: 32px;
 }
 
