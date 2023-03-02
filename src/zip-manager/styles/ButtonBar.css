@@ -1,6 +1,7 @@
-.button-bar {
+.application .button-bar {
   display: flex;
   flex-wrap: wrap;
+  padding-block-end: 0;
 }
 
 .button-bar button, .button-bar input[type=color] {
