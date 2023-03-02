@@ -161,6 +161,7 @@ function ZipManager() {
       removeDownload,
       downloadFile,
       util,
+      constants,
       messages
     });
   const { reset } = getZipFilesystemHandlers({
@@ -248,6 +249,7 @@ function ZipManager() {
         addFilesButtonRef={addFilesButtonRef}
         importZipButtonRef={importZipButtonRef}
         util={util}
+        constants={constants}
         messages={messages}
       />
       <NavigationBar

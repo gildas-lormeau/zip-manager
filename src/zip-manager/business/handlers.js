@@ -1,5 +1,3 @@
-const DEFAULT_MIME_TYPE = "application/octet-stream";
-
 function getEntriesNavigationHandlers({
   entries,
   highlightedEntry,
@@ -122,8 +120,10 @@ function getHighlightedEntryHandlers({
   updateSelectedFolder,
   downloadFile,
   util,
+  constants,
   messages
 }) {
+  const { DEFAULT_MIME_TYPE } = constants;
   const { RENAME_MESSAGE, DELETE_MESSAGE } = messages;
 
   function copy() {
@@ -226,8 +226,8 @@ function getSelectedFolderHandlers({
   constants,
   messages
 }) {
-  const { DEFAULT_MIME_TYPE } = constants;
-  const { ZIP_EXTENSION, ROOT_ZIP_FILENAME, CREATE_FOLDER_MESSAGE } = messages;
+  const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
+  const { ROOT_ZIP_FILENAME, CREATE_FOLDER_MESSAGE } = messages;
 
   function createFolder() {
     const folderName = util.prompt(CREATE_FOLDER_MESSAGE);

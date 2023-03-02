@@ -4,6 +4,11 @@ const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
+const ZIP_EXTENSION = ".zip";
+const ZIP_MIME_TYPE = "application/zip";
+const MIME_TYPES = {
+  [ZIP_EXTENSION]: ZIP_MIME_TYPE
+};
 
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
@@ -77,6 +82,34 @@ function getAccentColor(defaultColor) {
   );
 }
 
+async function showOpenFilePicker({ multiple, description, extension }) {
+  let excludeAcceptAllOption = Boolean(extension);
+  try {
+    const options = {
+      excludeAcceptAllOption,
+      multiple
+    };
+    if (excludeAcceptAllOption) {
+      Object.assign(options, {
+        types: [
+          {
+            description,
+            accept: {
+              [MIME_TYPES[extension]]: [extension]
+            }
+          }
+        ]
+      });
+    }
+    const fileHandles = await window.showOpenFilePicker(options);
+    return Promise.all(fileHandles.map((fileHandle) => fileHandle.getFile()));
+  } catch (error) {
+    if (error.name !== ABORT_ERROR_NAME) {
+      throw error;
+    }
+  }
+}
+
 export {
   downloadBlob,
   createAbortController,
@@ -92,5 +125,6 @@ export {
   removeKeyListener,
   getHeight,
   setAccentColor,
-  getAccentColor
+  getAccentColor,
+  showOpenFilePicker
 };

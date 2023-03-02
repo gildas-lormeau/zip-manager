@@ -15,6 +15,7 @@ function TopButtonBar({
   addFilesButtonRef,
   importZipButtonRef,
   util,
+  constants,
   messages
 }) {
   return (
@@ -40,6 +41,7 @@ function TopButtonBar({
           onImportZipFile={onImportZipFile}
           importZipButtonRef={importZipButtonRef}
           util={util}
+          constants={constants}
           messages={messages}
         />
         <ExportZipButton
@@ -89,7 +91,19 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
   }
 
   function handleClick() {
-    util.dispatchClick(current);
+    async function showOpenFilePicker() {
+      try {
+        onAddFiles(
+          await util.showOpenFilePicker({
+            multiple: true
+          })
+        );
+      } catch (error) {
+        util.dispatchClick(current);
+      }
+    }
+
+    showOpenFilePicker();
   }
 
   return (
@@ -116,8 +130,10 @@ function ImportZipButton({
   importZipButtonRef,
   onImportZipFile,
   util,
+  constants,
   messages
 }) {
+  const { ZIP_EXTENSION } = constants;
   const fileInputRef = useRef(null);
   const { current } = fileInputRef;
 
@@ -127,7 +143,23 @@ function ImportZipButton({
   }
 
   function handleClick() {
-    util.dispatchClick(current);
+    async function showOpenFilePicker() {
+      try {
+        onImportZipFile(
+          (
+            await util.showOpenFilePicker({
+              multiple: false,
+              description: messages.ZIP_FILES_DESCRIPTION_LABEL,
+              extension: ZIP_EXTENSION
+            })
+          )[0]
+        );
+      } catch (error) {
+        util.dispatchClick(current);
+      }
+    }
+
+    showOpenFilePicker();
   }
 
   return (

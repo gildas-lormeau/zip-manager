@@ -21,6 +21,8 @@ const END_KEY = "End";
 const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
 const DEFAULT_ACCENT_COLOR = "#888888";
+const DEFAULT_MIME_TYPE = "application/octet-stream";
+const ZIP_EXTENSION = ".zip";
 
 export {
   ACTION_KEY,
@@ -45,5 +47,7 @@ export {
   END_KEY,
   BACK_KEY,
   FORWARD_KEY,
-  DEFAULT_ACCENT_COLOR
+  DEFAULT_ACCENT_COLOR,
+  DEFAULT_MIME_TYPE,
+  ZIP_EXTENSION
 };
