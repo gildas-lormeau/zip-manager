@@ -40,6 +40,7 @@ input[type="color"] {
 button:disabled {
   color: var(--disabled-button-color);
   background-color: var(--bg-disabled-button-color);
+  opacity: .5;
 }
 
 @media (prefers-color-scheme: dark) {
