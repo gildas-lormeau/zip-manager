@@ -36,7 +36,8 @@
 
 .breadcrumb li::after {
   content: "/";
-  padding-inline-start: 2px;
+  padding-inline-start: 3px;
+  padding-inline-end: 1px;
 }
 
 .breadcrumb li .breadcrumb-item:first-of-type {
@@ -50,6 +51,11 @@
   white-space: nowrap;
   text-decoration: underline dotted transparent 1.5px;
   text-underline-offset: 6px;
+}
+
+.breadcrumb .breadcrumb-item:focus-visible {
+  outline-offset: -1px;
+  text-decoration: none;
 }
 
 .breadcrumb li:last-of-type .breadcrumb-item {
