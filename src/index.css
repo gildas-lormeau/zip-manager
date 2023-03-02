@@ -14,10 +14,15 @@ code {
 
 .source-link {
   text-align: center;
+  color: black;
+}
+
+a, a:visited {
+  color: inherit;
 }
 
 @media (prefers-color-scheme: dark) {
   .source-link {
-    filter: invert(1);
+    color: white;
   }
 }
