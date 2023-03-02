@@ -1,6 +1,6 @@
 :root {
   --page-color: color-mix(in srgb, var(--accent-color) 10%, lightgray);
-  --bg-color: color-mix(in srgb, var(--accent-color) 5%, white);
+  --bg-color: color-mix(in srgb, var(--accent-color) 10%, white);
   --text-color: color-mix(in srgb, var(--accent-color) 90%, black);
   --highlighted-text-color: color-mix(in srgb, var(--accent-color) 10%, white);
   --button-color: color-mix(in srgb, var(--accent-color) 50%, black);
@@ -46,7 +46,7 @@ button:disabled {
 @media (prefers-color-scheme: dark) {
   :root {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, dimgray);
-    --bg-color: color-mix(in srgb, var(--accent-color) 5%, black);
+    --bg-color: color-mix(in srgb, var(--accent-color) 10%, black);
     --text-color: color-mix(in srgb, var(--accent-color) 90%, white);
     --highlighted-text-color: color-mix(in srgb, var(--accent-color) 10%, black);
     --button-color: color-mix(in srgb, var(--accent-color) 50%, white);
