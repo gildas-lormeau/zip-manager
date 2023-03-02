@@ -66,7 +66,7 @@ button:disabled {
     --bg-color: black;
     --text-color: gray;
     --highlighted-text-color: black;
-    --button-color: lightgray;
+    --button-color: black;
     --bg-button-color: var(--accent-color);
     --disabled-button-color: white;
     --bg-disabled-button-color: black;
