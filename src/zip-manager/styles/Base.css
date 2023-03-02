@@ -1,4 +1,3 @@
-
 :root {
   --page-color: lightgray;
   --bg-color: white;
@@ -22,11 +21,11 @@
     );
     --button-color: color-mix(in srgb, var(--accent-color) 50%, black);
     --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, white);
-    --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, white);
+    --disabled-button-color: color-mix(in srgb, var(--accent-color) 70%, white);
     --bg-disabled-button-color: color-mix(
       in srgb,
-      var(--accent-color) 10%,
-      whitesmoke
+      var(--accent-color) 20%,
+      white
     );
   }
 }
@@ -62,7 +61,6 @@ button:disabled {
 }
 
 @media (prefers-color-scheme: dark) {
-
   :root {
     --page-color: dimgray;
     --bg-color: black;
@@ -73,7 +71,6 @@ button:disabled {
     --disabled-button-color: white;
     --bg-disabled-button-color: black;
   }
-  
 
   @supports (color: color-mix(in srgb, red 0%, red)) {
     :root {
