@@ -9,7 +9,8 @@
 }
 
 .button-bar-top input[type="color"] {
-  width: 32px;
+  height: 16px;
+  width: 16px;
 }
 
 .button-bar-top .button-group {
