@@ -22,7 +22,7 @@
   .application {
     margin: 0;
     border-width: 0;
-    margin-block-end: 4px;;
+    margin-block-end: 4px;
     height: calc(100dvh - 30px);
   }
 
