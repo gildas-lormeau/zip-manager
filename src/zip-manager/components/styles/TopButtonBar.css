@@ -11,6 +11,7 @@
 .button-bar-top input[type="color"] {
   height: 16px;
   width: 16px;
+  align-self: flex-end;
 }
 
 .button-bar-top .button-group {
