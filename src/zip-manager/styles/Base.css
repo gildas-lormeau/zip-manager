@@ -53,8 +53,8 @@ button:disabled {
     --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
     --bg-disabled-button-color: color-mix(
       in srgb,
-      var(--accent-color) 10%,
-      lightgray
+      var(--accent-color) 20%,
+      black
     );
   }
 }
