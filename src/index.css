@@ -15,3 +15,9 @@ code {
 .source-link {
   text-align: center;
 }
+
+@media (prefers-color-scheme: dark) {
+  .source-link {
+    filter: invert(1);
+  }
+}
