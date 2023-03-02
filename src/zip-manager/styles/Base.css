@@ -43,7 +43,18 @@ button:disabled {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    filter: invert(1);
+  :root {
+    --page-color: color-mix(in srgb, var(--accent-color) 10%, arkgray);
+    --bg-color: color-mix(in srgb, var(--accent-color) 5%, black);
+    --text-color: color-mix(in srgb, var(--accent-color) 90%, white);
+    --highlighted-text-color: color-mix(in srgb, var(--accent-color) 10%, black);
+    --button-color: color-mix(in srgb, var(--accent-color) 50%, white);
+    --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    --bg-disabled-button-color: color-mix(
+      in srgb,
+      var(--accent-color) 10%,
+      whitesmoke
+    );
   }
 }
