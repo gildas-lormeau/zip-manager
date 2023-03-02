@@ -17,7 +17,8 @@ code {
   color: black;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: inherit;
 }
 
