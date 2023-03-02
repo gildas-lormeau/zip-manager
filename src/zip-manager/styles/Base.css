@@ -54,7 +54,7 @@ button:disabled {
     --bg-disabled-button-color: color-mix(
       in srgb,
       var(--accent-color) 10%,
-      whitesmoke
+      lightgray
     );
   }
 }
