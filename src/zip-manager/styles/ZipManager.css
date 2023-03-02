@@ -17,3 +17,16 @@
 .application > :last-child {
   border-block-end: none;
 }
+
+@media (max-width: 640px) {
+  .application {
+    margin: 0;
+    border-width: 0;
+    margin-block-end: 4px;;
+    height: calc(100dvh - 30px);
+  }
+
+  .application > :last-child {
+    border-block-end: solid var(--accent-color) 1px;
+  }
+}
