@@ -83,7 +83,7 @@ function getAccentColor(defaultColor) {
 }
 
 async function showOpenFilePicker({ multiple, description, extension }) {
-  let excludeAcceptAllOption = Boolean(extension);
+  const excludeAcceptAllOption = Boolean(extension);
   try {
     const options = {
       excludeAcceptAllOption,
