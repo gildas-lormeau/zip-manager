@@ -64,6 +64,7 @@ function Entries({
                   selectedFolder={selectedFolder}
                   onHighlight={onHighlight}
                   onEnter={onEnter}
+                  util={util}
                   messages={messages}
                 />
               </li>
@@ -76,6 +77,7 @@ function Entries({
                   selectedFolder={selectedFolder}
                   onHighlight={onHighlight}
                   onEnter={onEnter}
+                  util={util}
                   messages={messages}
                 />
               </li>
@@ -87,7 +89,14 @@ function Entries({
   );
 }
 
-function Entry({ entry, selectedFolder, onHighlight, onEnter, messages }) {
+function Entry({
+  entry,
+  selectedFolder,
+  onHighlight,
+  onEnter,
+  util,
+  messages
+}) {
   return (
     <>
       <EntryName
@@ -95,6 +104,7 @@ function Entry({ entry, selectedFolder, onHighlight, onEnter, messages }) {
         selectedFolder={selectedFolder}
         onHighlight={onHighlight}
         onEnter={onEnter}
+        util={util}
         messages={messages}
       />
       <EntryButton
@@ -107,8 +117,46 @@ function Entry({ entry, selectedFolder, onHighlight, onEnter, messages }) {
   );
 }
 
-function EntryName({ entry, selectedFolder, onHighlight, onEnter, messages }) {
+function EntryName({
+  entry,
+  selectedFolder,
+  onHighlight,
+  onEnter,
+  util,
+  messages
+}) {
+  const {
+    PARENT_FOLDER_TOOLTIP,
+    LAST_MOD_DATE_LABEL,
+    SIZE_LABEL,
+    COMPRESSED_SIZE_LABEL,
+    UNCOMPRESSED_SIZE_LABEL
+  } = messages;
   const entryIsParentFolder = entry === selectedFolder.parent;
+
+  function getEntryNameTitle() {
+    const tooltip = [entryIsParentFolder ? PARENT_FOLDER_TOOLTIP : entry.name];
+    if (entry.data) {
+      const { compressedSize, lastModified, lastModDate, size } = entry.data;
+      const uncompressedSize = size || entry.data.uncompressedSize;
+      tooltip.push(
+        LAST_MOD_DATE_LABEL +
+          util.formatDate(
+            lastModified === undefined ? lastModDate : new Date(lastModified)
+          )
+      );
+      if (uncompressedSize && compressedSize) {
+        tooltip.push(COMPRESSED_SIZE_LABEL + util.formatSize(compressedSize));
+      }
+      if (uncompressedSize) {
+        tooltip.push(
+          (compressedSize ? UNCOMPRESSED_SIZE_LABEL : SIZE_LABEL) +
+            util.formatSize(uncompressedSize)
+        );
+      }
+    }
+    return tooltip.join("\n");
+  }
 
   function handleClick() {
     onHighlight(entry);
@@ -121,7 +169,7 @@ function EntryName({ entry, selectedFolder, onHighlight, onEnter, messages }) {
   return (
     <span
       className="list-item-name entry-name"
-      title={entryIsParentFolder ? messages.PARENT_FOLDER_TOOLTIP : entry.name}
+      title={getEntryNameTitle()}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >

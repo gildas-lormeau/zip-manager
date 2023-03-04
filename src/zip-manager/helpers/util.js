@@ -1,4 +1,4 @@
-/* global window, document, URL, AbortController, localStorage */
+/* global window, document, URL, AbortController, Intl, localStorage */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
@@ -6,9 +6,29 @@ const KEYUP_EVENT_NAME = "keyup";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
 const ZIP_EXTENSION = ".zip";
 const ZIP_MIME_TYPE = "application/zip";
+const EN_US_LANGUAGE_ID = "en-US";
 const MIME_TYPES = {
   [ZIP_EXTENSION]: ZIP_MIME_TYPE
 };
+const SIZE_NUMBER_FORMATS = [
+  "byte",
+  "kilobyte",
+  "megabyte",
+  "gigabyte",
+  "terabyte",
+  "petabyte"
+].map(
+  (unit) =>
+    new Intl.NumberFormat(EN_US_LANGUAGE_ID, {
+      style: "unit",
+      maximumFractionDigits: 1,
+      unit
+    })
+);
+const DATE_TIME_FORMAT = new Intl.DateTimeFormat(EN_US_LANGUAGE_ID, {
+  dateStyle: "short",
+  timeStyle: "short"
+});
 
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
@@ -110,6 +130,19 @@ async function showOpenFilePicker({ multiple, description, extension }) {
   }
 }
 
+function formatSize(number) {
+  let indexNumberFormat = 0;
+  while (number > 1000) {
+    number = number / 1000;
+    indexNumberFormat++;
+  }
+  return SIZE_NUMBER_FORMATS[indexNumberFormat].format(number);
+}
+
+function formatDate(date) {
+  return DATE_TIME_FORMAT.format(date);
+}
+
 export {
   downloadBlob,
   createAbortController,
@@ -126,5 +159,7 @@ export {
   getHeight,
   setAccentColor,
   getAccentColor,
-  showOpenFilePicker
+  showOpenFilePicker,
+  formatSize,
+  formatDate
 };
