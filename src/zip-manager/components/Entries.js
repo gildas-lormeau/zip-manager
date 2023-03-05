@@ -36,7 +36,7 @@ function Entries({
   function computeEntriesHeight() {
     if (highlightedEntryRef && highlightedEntryRef.current) {
       entriesHeightRef.current = Math.max(
-        Math.floor(
+        Math.ceil(
           util.getHeight(entriesRef.current) /
             util.getHeight(highlightedEntryRef.current)
         ),
@@ -48,8 +48,8 @@ function Entries({
   useEffect(computeEntriesHeight);
 
   return (
-    <div className="entries" aria-label="Folder entries">
-      <ol onKeyDown={handleKeyDown} ref={entriesRef}>
+    <div className="entries" aria-label="Folder entries" ref={entriesRef}>
+      <ol onKeyDown={handleKeyDown}>
         {entries.map((entry) => {
           if (entry === highlightedEntry) {
             return (
