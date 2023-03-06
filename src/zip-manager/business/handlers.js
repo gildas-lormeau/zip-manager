@@ -19,15 +19,15 @@ function getEntriesNavigationHandlers({
 
   function highlightPreviousPage() {
     const indexEntry = getEntryIndex();
-    const nextEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
-    setHighlightedEntry(nextEntry);
+    const previousEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
+    setHighlightedEntry(previousEntry);
   }
 
   function highlightNextPage() {
     const indexEntry = getEntryIndex();
-    const previousEntry =
+    const nextEntry =
       entries[Math.min(indexEntry + getEntriesHeight(), entries.length - 1)];
-    setHighlightedEntry(previousEntry);
+    setHighlightedEntry(nextEntry);
   }
 
   function highlightFirst() {
