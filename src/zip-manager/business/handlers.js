@@ -19,8 +19,8 @@ function getEntriesNavigationHandlers({
 
   function highlightPreviousPage() {
     const indexEntry = getEntryIndex();
-    const previousEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
-    setHighlightedEntry(previousEntry);
+    const nextEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
+    setHighlightedEntry(nextEntry);
   }
 
   function highlightNextPage() {
