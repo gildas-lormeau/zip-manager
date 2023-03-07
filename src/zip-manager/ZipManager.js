@@ -229,7 +229,6 @@ function ZipManager() {
   });
 
   useKeyUp(handleKeyUp);
-  // useEffect(registerKeyUpHandler);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateSelectedFolder, [selectedFolder]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
