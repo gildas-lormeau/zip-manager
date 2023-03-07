@@ -9,7 +9,7 @@ function getUIState({
   constants
 }) {
   const entriesEmpty = !entries.length;
-  const actionDisabled =
+  const parentFolderHighlighted =
     !highlightedIds.length ||
     (selectedFolder.parent &&
       highlightedIds.includes(selectedFolder.parent.id));
@@ -18,12 +18,12 @@ function getUIState({
   const disabledReset = entriesEmpty;
   const disabledBack = !historyIndex;
   const disabledForward = historyIndex === history.length - 1;
-  const disabledCopy = actionDisabled;
-  const disabledCut = actionDisabled;
+  const disabledCopy = parentFolderHighlighted;
+  const disabledCut = parentFolderHighlighted;
   const disabledPaste = clipboardDataEmpty;
   const disabledResetClipboardData = clipboardDataEmpty;
-  const disabledRename = highlightedIds.length !== 1 || actionDisabled;
-  const disabledDelete = actionDisabled;
+  const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
+  const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
   const accentColor = util.getAccentColor(constants.DEFAULT_ACCENT_COLOR);
 
