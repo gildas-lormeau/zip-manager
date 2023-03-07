@@ -10,6 +10,7 @@ import * as util from "./helpers/util.js";
 import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
 
+import { getCommon } from "./business/common.js";
 import { getHelpers, createZipFileSystem } from "./helpers/helpers.js";
 import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
@@ -82,20 +83,22 @@ function ZipManager() {
     util,
     constants
   });
-  const { updateSelectedFolder, updateZipFilesystem, updateHighlightedEntry } =
-    getEffects({
-      zipFilesystem,
-      selectedFolder,
-      setPreviousHighlightedEntry,
-      setEntries,
-      setSelectedFolder,
-      setHighlightedIds,
-      setClipboardData,
-      setHistory,
-      setHistoryIndex,
-      getHighlightedEntryElement: () => highlightedEntryRef.current,
-      util
-    });
+  const { updateSelectedFolder } = getCommon({
+    selectedFolder,
+    setEntries
+  });
+  const { updateHighlightedEntry, updateZipFilesystem } = getEffects({
+    zipFilesystem,
+    setPreviousHighlightedEntry,
+    setSelectedFolder,
+    setHighlightedIds,
+    setClipboardData,
+    setHistory,
+    setHistoryIndex,
+    getHighlightedEntryElement: () => highlightedEntryRef.current,
+    updateSelectedFolder,
+    util
+  });
   const { setAccentColor } = getUIHandlers({
     util
   });
@@ -135,7 +138,8 @@ function ZipManager() {
       setSelectedFolder,
       setHistory,
       setHistoryIndex,
-      setHighlightedIds
+      setHighlightedIds,
+      updateSelectedFolder
     });
   const { abortDownload, removeDownload } = getDownloadHandlers({
     setDownloads,
@@ -229,8 +233,6 @@ function ZipManager() {
   });
 
   useKeyUp(handleKeyUp);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(updateSelectedFolder, [selectedFolder]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateZipFilesystem, [zipFilesystem]);
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,37 +1,15 @@
 function getEffects({
   zipFilesystem,
-  selectedFolder,
   setPreviousHighlightedEntry,
-  setEntries,
   setSelectedFolder,
   setHighlightedIds,
   setClipboardData,
   setHistory,
   setHistoryIndex,
   getHighlightedEntryElement,
+  updateSelectedFolder,
   util
 }) {
-  function updateSelectedFolder() {
-    if (selectedFolder) {
-      const { parent, children } = selectedFolder;
-      const folders = filterChildren(children, true);
-      const files = filterChildren(children, false);
-      const ancestors = [];
-      if (parent) {
-        ancestors.push(parent);
-      }
-      setEntries([...ancestors, ...folders, ...files]);
-    }
-  }
-
-  function filterChildren(children, isDirectory) {
-    return children
-      .filter((child) => Boolean(child.directory) === isDirectory)
-      .sort((previousChild, nextChild) =>
-        previousChild.name.localeCompare(nextChild.name)
-      );
-  }
-
   function updateZipFilesystem() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
@@ -40,7 +18,7 @@ function getEffects({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    updateSelectedFolder();
+    updateSelectedFolder(root);
   }
 
   function updateHighlightedEntry() {
@@ -51,7 +29,6 @@ function getEffects({
   }
 
   return {
-    updateSelectedFolder,
     updateZipFilesystem,
     updateHighlightedEntry
   };

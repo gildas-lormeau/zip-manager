@@ -242,7 +242,8 @@ function getFolderNavigationHandlers({
   setSelectedFolder,
   setHistory,
   setHistoryIndex,
-  setHighlightedIds
+  setHighlightedIds,
+  updateSelectedFolder
 }) {
   function goIntoFolder(entry) {
     const newHistory = [...history];
@@ -255,6 +256,7 @@ function getFolderNavigationHandlers({
     setHistoryIndex(newHistoryIndex);
     setHighlightedIds([selectedFolder.id]);
     setSelectedFolder(entry);
+    updateSelectedFolder(entry);
   }
 
   function navigateBack() {
@@ -271,6 +273,7 @@ function getFolderNavigationHandlers({
     const entry = history[newHistoryIndex];
     setHighlightedIds([selectedFolder.id]);
     setSelectedFolder(entry);
+    updateSelectedFolder(entry);
   }
 
   return {
