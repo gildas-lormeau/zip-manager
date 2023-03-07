@@ -4,6 +4,7 @@ import "./styles/ButtonBar.css";
 import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
+import { useKeyUp } from "./hooks.js";
 
 import * as util from "./helpers/util.js";
 import * as constants from "./business/constants.js";
@@ -81,25 +82,20 @@ function ZipManager() {
     util,
     constants
   });
-  const {
-    updateSelectedFolder,
-    updateZipFilesystem,
-    updateHighlightedEntry,
-    registerKeyUpHandler
-  } = getEffects({
-    zipFilesystem,
-    selectedFolder,
-    setPreviousHighlightedEntry,
-    setEntries,
-    setSelectedFolder,
-    setHighlightedIds,
-    setClipboardData,
-    setHistory,
-    setHistoryIndex,
-    getHighlightedEntryElement: () => highlightedEntryRef.current,
-    handleKeyUp,
-    util
-  });
+  const { updateSelectedFolder, updateZipFilesystem, updateHighlightedEntry } =
+    getEffects({
+      zipFilesystem,
+      selectedFolder,
+      setPreviousHighlightedEntry,
+      setEntries,
+      setSelectedFolder,
+      setHighlightedIds,
+      setClipboardData,
+      setHistory,
+      setHistoryIndex,
+      getHighlightedEntryElement: () => highlightedEntryRef.current,
+      util
+    });
   const { setAccentColor } = getUIHandlers({
     util
   });
@@ -232,11 +228,8 @@ function ZipManager() {
     constants
   });
 
-  function handleKeyUp(event) {
-    keyUpHandler.handleKeyUp(event);
-  }
-
-  useEffect(registerKeyUpHandler);
+  useKeyUp((event) => keyUpHandler.handleKeyUp(event));
+  // useEffect(registerKeyUpHandler);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateSelectedFolder, [selectedFolder]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -244,7 +237,7 @@ function ZipManager() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateHighlightedEntry, [highlightedIds]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  
+
   return (
     <div className="application">
       <TopButtonBar

@@ -9,7 +9,6 @@ function getEffects({
   setHistory,
   setHistoryIndex,
   getHighlightedEntryElement,
-  handleKeyUp,
   util
 }) {
   function updateSelectedFolder() {
@@ -51,16 +50,10 @@ function getEffects({
     }
   }
 
-  function registerKeyUpHandler() {
-    util.addKeyListener(handleKeyUp);
-    return () => util.removeKeyListener(handleKeyUp);
-  }
-
   return {
     updateSelectedFolder,
     updateZipFilesystem,
-    updateHighlightedEntry,
-    registerKeyUpHandler
+    updateHighlightedEntry
   };
 }
 
