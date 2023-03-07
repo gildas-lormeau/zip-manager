@@ -186,7 +186,7 @@ function ZipManager() {
     goIntoFolder,
     download
   });
-  const keyUpHandler = getKeyUpHandler({
+  const { handleKeyUp } = getKeyUpHandler({
     highlightedIds,
     selectedFolder,
     disabledCut,
@@ -228,7 +228,7 @@ function ZipManager() {
     constants
   });
 
-  useKeyUp((event) => keyUpHandler.handleKeyUp(event));
+  useKeyUp(handleKeyUp);
   // useEffect(registerKeyUpHandler);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateSelectedFolder, [selectedFolder]);
