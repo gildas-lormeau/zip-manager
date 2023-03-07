@@ -1,49 +1,217 @@
 function getEntriesNavigationHandlers({
   entries,
-  highlightedEntry,
+  previousHighlightedEntry,
+  highlightedIds,
+  toggleNavigationDirection,
   getEntriesHeight,
-  setHighlightedEntry
+  setHighlightedIds,
+  setPreviousHighlightedEntry,
+  setToggleNavigationDirection
 }) {
   function highlightPrevious() {
-    const indexEntry = getEntryIndex();
+    const indexEntry = getHighlightedEntryIndex();
     const previousEntry =
       entries[(indexEntry - 1 + entries.length) % entries.length];
-    setHighlightedEntry(previousEntry);
+    highlightEntry(previousEntry);
   }
 
   function highlightNext() {
-    const indexEntry = getEntryIndex();
+    const indexEntry = getHighlightedEntryIndex();
     const nextEntry = entries[(indexEntry + 1) % entries.length];
-    setHighlightedEntry(nextEntry);
+    highlightEntry(nextEntry);
   }
 
   function highlightPreviousPage() {
-    const indexEntry = getEntryIndex();
-    const previousEntry = entries[Math.max(indexEntry - getEntriesHeight(), 0)];
-    setHighlightedEntry(previousEntry);
+    const indexEntry = getHighlightedEntryIndex();
+    const previousEntry = getPreviousPageEntry(indexEntry);
+    highlightEntry(previousEntry);
   }
 
   function highlightNextPage() {
-    const indexEntry = getEntryIndex();
-    const nextEntry =
-      entries[Math.min(indexEntry + getEntriesHeight(), entries.length - 1)];
-    setHighlightedEntry(nextEntry);
+    const indexEntry = getHighlightedEntryIndex();
+    const nextEntry = getNextPageEntry(indexEntry);
+    highlightEntry(nextEntry);
   }
 
   function highlightFirst() {
-    setHighlightedEntry(entries[0]);
+    highlightEntry(entries[0]);
   }
 
   function highlightLast() {
-    setHighlightedEntry(entries[entries.length - 1]);
+    highlightEntry(entries[entries.length - 1]);
   }
 
   function highlight(entry) {
-    setHighlightedEntry(entry);
+    highlightEntry(entry);
   }
 
-  function getEntryIndex() {
-    return entries.findIndex((entry) => entry === highlightedEntry);
+  function highlightEntries(entries) {
+    setPreviousHighlightedEntry(entries[entries.length - 1]);
+    setToggleNavigationDirection(0);
+    setHighlightedIds(entries.map((entry) => entry.id));
+  }
+
+  function highlightAll() {
+    setPreviousHighlightedEntry(entries[0]);
+    setToggleNavigationDirection(0);
+    setHighlightedIds(entries.map((entry) => entry.id));
+  }
+
+  function toggle(entry) {
+    let newIds = getToggledHighlightedIds(highlightedIds, entry);
+    setPreviousHighlightedEntry(entry);
+    setToggleNavigationDirection(0);
+    setHighlightedIds(newIds);
+  }
+
+  function highlightEntry(entry) {
+    setPreviousHighlightedEntry(entry);
+    setToggleNavigationDirection(0);
+    setHighlightedIds([entry.id]);
+  }
+
+  function toggleRange(
+    targetEntry,
+    previousHighlightedEntryIndex = getPreviousHighlightedEntryIndex()
+  ) {
+    const highlightedEntryIndex = entries.findIndex(
+      (entry) => entry.id === targetEntry.id
+    );
+    let newIds = [...highlightedIds];
+    if (previousHighlightedEntryIndex < highlightedEntryIndex) {
+      for (
+        let indexEntry = previousHighlightedEntryIndex + 1;
+        indexEntry <= highlightedEntryIndex;
+        indexEntry++
+      ) {
+        newIds = getToggledHighlightedIds(newIds, entries[indexEntry]);
+      }
+    } else if (previousHighlightedEntryIndex > highlightedEntryIndex) {
+      for (
+        let indexEntry = previousHighlightedEntryIndex - 1;
+        indexEntry >= highlightedEntryIndex;
+        indexEntry--
+      ) {
+        newIds = getToggledHighlightedIds(newIds, entries[indexEntry]);
+      }
+    }
+    setPreviousHighlightedEntry(targetEntry);
+    setToggleNavigationDirection(0);
+    setHighlightedIds(newIds);
+  }
+
+  function getToggledHighlightedIds(highlightedIds, entry) {
+    if (highlightedIds.includes(entry.id)) {
+      if (highlightedIds.length > 1) {
+        return highlightedIds.filter((id) => id !== entry.id);
+      }
+    } else {
+      return [...highlightedIds, entry.id];
+    }
+    return highlightedIds;
+  }
+
+  function togglePrevious() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      if (indexEntry > 0) {
+        const previousEntry = entries[indexEntry - 1];
+        toggle(
+          toggleNavigationDirection !== 1
+            ? previousEntry
+            : previousHighlightedEntry
+        );
+        setToggleNavigationDirection(-1);
+      }
+    }
+  }
+
+  function toggleNext() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      if (indexEntry < entries.length - 1) {
+        const nextEntry = entries[indexEntry + 1];
+        toggle(
+          toggleNavigationDirection !== -1
+            ? nextEntry
+            : previousHighlightedEntry
+        );
+        setToggleNavigationDirection(1);
+      }
+    }
+  }
+
+  function togglePreviousPage() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      const previousPageEntry = getPreviousPageEntry(indexEntry);
+      if (toggleNavigationDirection !== 1) {
+        toggleRange(previousPageEntry);
+      } else {
+        toggleRange(previousPageEntry, indexEntry + 1);
+      }
+      setToggleNavigationDirection(-1);
+    }
+  }
+
+  function toggleNextPage() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      const nextPageEntry = getNextPageEntry(indexEntry);
+      if (toggleNavigationDirection !== -1) {
+        toggleRange(nextPageEntry);
+      } else {
+        toggleRange(nextPageEntry, indexEntry - 1);
+      }
+      setToggleNavigationDirection(1);
+    }
+  }
+
+  function toggleFirst() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      const firstEntry = entries[0];
+      if (toggleNavigationDirection !== 1) {
+        toggleRange(firstEntry);
+      } else {
+        toggleRange(firstEntry, indexEntry + 1);
+      }
+      setToggleNavigationDirection(-1);
+    }
+  }
+
+  function toggleLast() {
+    if (previousHighlightedEntry) {
+      const indexEntry = getPreviousHighlightedEntryIndex();
+      const lastEntry = entries[entries.length - 1];
+      if (toggleNavigationDirection !== -1) {
+        toggleRange(lastEntry);
+      } else {
+        toggleRange(lastEntry, indexEntry - 1);
+      }
+      setToggleNavigationDirection(1);
+    }
+  }
+
+  function getPreviousPageEntry(indexEntry) {
+    return entries[Math.max(indexEntry - getEntriesHeight(), 0)];
+  }
+
+  function getNextPageEntry(indexEntry) {
+    return entries[
+      Math.min(indexEntry + getEntriesHeight(), entries.length - 1)
+    ];
+  }
+
+  function getPreviousHighlightedEntryIndex() {
+    return entries.findIndex(
+      (highlightedEntry) => highlightedEntry === previousHighlightedEntry
+    );
+  }
+
+  function getHighlightedEntryIndex() {
+    const entryId = highlightedIds[highlightedIds.length - 1];
+    return entries.findIndex((entry) => entry.id === entryId);
   }
 
   return {
@@ -53,7 +221,17 @@ function getEntriesNavigationHandlers({
     highlightNextPage,
     highlightFirst,
     highlightLast,
-    highlight
+    highlight,
+    highlightEntries,
+    highlightAll,
+    toggle,
+    toggleRange,
+    togglePrevious,
+    toggleNext,
+    togglePreviousPage,
+    toggleNextPage,
+    toggleFirst,
+    toggleLast
   };
 }
 
@@ -62,9 +240,9 @@ function getFolderNavigationHandlers({
   historyIndex,
   selectedFolder,
   setSelectedFolder,
-  setPreviousSelectedFolder,
   setHistory,
-  setHistoryIndex
+  setHistoryIndex,
+  setHighlightedIds
 }) {
   function goIntoFolder(entry) {
     const newHistory = [...history];
@@ -75,7 +253,8 @@ function getFolderNavigationHandlers({
     newHistory[newHistoryIndex] = entry;
     setHistory(newHistory);
     setHistoryIndex(newHistoryIndex);
-    setSelectedFolders(entry);
+    setHighlightedIds([selectedFolder.id]);
+    setSelectedFolder(entry);
   }
 
   function navigateBack() {
@@ -90,11 +269,7 @@ function getFolderNavigationHandlers({
     const newHistoryIndex = historyIndex + offset;
     setHistoryIndex(newHistoryIndex);
     const entry = history[newHistoryIndex];
-    setSelectedFolders(entry);
-  }
-
-  function setSelectedFolders(entry) {
-    setPreviousSelectedFolder(selectedFolder);
+    setHighlightedIds([selectedFolder.id]);
     setSelectedFolder(entry);
   }
 
@@ -107,15 +282,17 @@ function getFolderNavigationHandlers({
 
 function getHighlightedEntryHandlers({
   zipFilesystem,
+  entries,
   history,
   historyIndex,
-  highlightedEntry,
+  highlightedIds,
   selectedFolder,
   clipboardData,
   setHistory,
   setHistoryIndex,
   setClipboardData,
-  setHighlightedEntry,
+  setHighlightedIds,
+  setPreviousHighlightedEntry,
   removeDownload,
   updateSelectedFolder,
   downloadFile,
@@ -128,28 +305,35 @@ function getHighlightedEntryHandlers({
 
   function copy() {
     setClipboardData({
-      entry: highlightedEntry.clone(true)
+      entries: highlightedIds.map((entryId) =>
+        zipFilesystem.getById(entryId).clone(true)
+      )
     });
   }
 
   function cut() {
     setClipboardData({
-      entry: highlightedEntry,
+      entries: highlightedIds.map((entryId) => zipFilesystem.getById(entryId)),
       cut: true
     });
   }
 
   function paste() {
     try {
-      const { entry, cut } = clipboardData;
-      let clone;
-      if (!cut) {
-        clone = entry.clone(true);
+      const { entries, cut } = clipboardData;
+      if (cut) {
+        entries.forEach((entry) => {
+          zipFilesystem.move(entry, selectedFolder);
+        });
+      } else {
+        const clones = entries.map((entry) => {
+          let clone = entry.clone(true);
+          zipFilesystem.move(entry, selectedFolder);
+          return clone;
+        });
+        setClipboardData({ entries: clones });
       }
-      zipFilesystem.move(entry, selectedFolder);
-      if (!cut) {
-        setClipboardData({ entry: clone });
-      }
+      setHighlightedIds(entries.map((entry) => entry.id));
       updateSelectedFolder();
     } catch (error) {
       util.alert(error.message);
@@ -158,6 +342,7 @@ function getHighlightedEntryHandlers({
 
   function rename() {
     try {
+      const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
       const entryName = util.prompt(RENAME_MESSAGE, highlightedEntry.name);
       if (entryName && entryName !== highlightedEntry.name) {
         highlightedEntry.rename(entryName);
@@ -170,9 +355,39 @@ function getHighlightedEntryHandlers({
 
   function remove() {
     if (util.confirm(DELETE_MESSAGE)) {
-      zipFilesystem.remove(highlightedEntry);
+      highlightedIds.forEach((id) =>
+        zipFilesystem.remove(zipFilesystem.getById(id))
+      );
+      if (selectedFolder.children.length) {
+        const indexEntry = Math.max(
+          ...entries
+            .map((entry, index) => ({ entry, index }))
+            .filter(({ entry }) => highlightedIds.includes(entry.id))
+            .map(({ index }) => index)
+        );
+        let indexNextEntry = indexEntry;
+        while (
+          indexNextEntry < entries.length &&
+          highlightedIds.includes(entries[indexNextEntry].id)
+        ) {
+          indexNextEntry++;
+        }
+        if (indexNextEntry === entries.length) {
+          indexNextEntry = indexEntry;
+          while (
+            indexNextEntry >= 0 &&
+            highlightedIds.includes(entries[indexNextEntry].id)
+          ) {
+            indexNextEntry--;
+          }
+        }
+        setPreviousHighlightedEntry(entries[indexNextEntry]);
+        setHighlightedIds([entries[indexNextEntry].id]);
+      } else {
+        setPreviousHighlightedEntry(null);
+        setHighlightedIds([]);
+      }
       updateHistoryData();
-      setHighlightedEntry(null);
       updateSelectedFolder();
     }
   }
@@ -188,6 +403,9 @@ function getHighlightedEntryHandlers({
   function updateHistoryData() {
     let offsetIndex = 0;
     let previousEntry;
+    const highlightedEntry = entries.find(
+      (entry) => entry.id === highlightedIds[0]
+    );
     const newHistory = history.filter((entry, indexEntry) => {
       const entryRemoved =
         previousEntry === entry ||
@@ -220,6 +438,7 @@ function getHighlightedEntryHandlers({
 function getSelectedFolderHandlers({
   selectedFolder,
   updateSelectedFolder,
+  highlightEntries,
   removeDownload,
   downloadFile,
   util,
@@ -233,7 +452,8 @@ function getSelectedFolderHandlers({
     const folderName = util.prompt(CREATE_FOLDER_MESSAGE);
     if (folderName) {
       try {
-        selectedFolder.addDirectory(folderName);
+        const entry = selectedFolder.addDirectory(folderName);
+        highlightEntries([entry]);
         updateSelectedFolder();
       } catch (error) {
         util.alert(error.message);
@@ -242,22 +462,33 @@ function getSelectedFolderHandlers({
   }
 
   function addFiles(files) {
+    const addedEntries = [];
     files.forEach((file) => {
       try {
-        return selectedFolder.addBlob(file.name, file);
+        addedEntries.push(selectedFolder.addBlob(file.name, file));
       } catch (error) {
         util.alert(error.message);
       }
     });
+    if (addedEntries.length) {
+      highlightEntries(addedEntries);
+    }
     updateSelectedFolder();
   }
 
   function importZipFile(zipFile) {
     async function updateZipFile() {
+      const children = [...selectedFolder.children];
       try {
         await selectedFolder.importBlob(zipFile);
       } catch (error) {
         util.alert(error.message);
+      }
+      const addedEntries = selectedFolder.children.filter(
+        (entry) => !children.includes(entry)
+      );
+      if (addedEntries.length) {
+        highlightEntries(addedEntries);
       }
       updateSelectedFolder();
     }
@@ -332,8 +563,8 @@ function getClipboardHandlers({ setClipboardData }) {
   };
 }
 
-function getActionHandlers({ highlightedEntry, goIntoFolder, download }) {
-  function enter(entry = highlightedEntry) {
+function getActionHandlers({ goIntoFolder, download }) {
+  function enter(entry) {
     if (entry.directory) {
       goIntoFolder(entry);
     } else {

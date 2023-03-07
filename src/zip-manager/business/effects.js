@@ -1,13 +1,10 @@
 function getEffects({
   zipFilesystem,
-  entries,
-  highlightedEntry,
   selectedFolder,
-  previousSelectedFolder,
+  setPreviousHighlightedEntry,
   setEntries,
   setSelectedFolder,
-  setPreviousSelectedFolder,
-  setHighlightedEntry,
+  setHighlightedIds,
   setClipboardData,
   setHistory,
   setHistoryIndex,
@@ -39,8 +36,8 @@ function getEffects({
   function updateZipFilesystem() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
-    setPreviousSelectedFolder(null);
-    setHighlightedEntry(null);
+    setHighlightedIds([]);
+    setPreviousHighlightedEntry(null);
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
@@ -54,19 +51,6 @@ function getEffects({
     }
   }
 
-  function updateDefaultHighlightedEntry() {
-    if (
-      (selectedFolder && previousSelectedFolder === selectedFolder.parent) ||
-      (previousSelectedFolder &&
-        previousSelectedFolder.parent === selectedFolder)
-    ) {
-      setPreviousSelectedFolder(null);
-      setHighlightedEntry(previousSelectedFolder);
-    } else if (!highlightedEntry || !entries.includes(highlightedEntry)) {
-      setHighlightedEntry(entries[0]);
-    }
-  }
-
   function registerKeyUpHandler() {
     util.addKeyListener(handleKeyUp);
     return () => util.removeKeyListener(handleKeyUp);
@@ -76,7 +60,6 @@ function getEffects({
     updateSelectedFolder,
     updateZipFilesystem,
     updateHighlightedEntry,
-    updateDefaultHighlightedEntry,
     registerKeyUpHandler
   };
 }

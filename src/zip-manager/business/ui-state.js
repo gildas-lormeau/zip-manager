@@ -1,6 +1,6 @@
 function getUIState({
   entries,
-  highlightedEntry,
+  highlightedIds,
   selectedFolder,
   clipboardData,
   historyIndex,
@@ -10,7 +10,9 @@ function getUIState({
 }) {
   const entriesEmpty = !entries.length;
   const actionDisabled =
-    !highlightedEntry || highlightedEntry === selectedFolder.parent;
+    !highlightedIds.length ||
+    (selectedFolder.parent &&
+      highlightedIds.includes(selectedFolder.parent.id));
   const clipboardDataEmpty = !clipboardData;
   const disabledExportZip = entriesEmpty;
   const disabledReset = entriesEmpty;
@@ -20,14 +22,9 @@ function getUIState({
   const disabledCut = actionDisabled;
   const disabledPaste = clipboardDataEmpty;
   const disabledResetClipboardData = clipboardDataEmpty;
-  const disabledRename = actionDisabled;
+  const disabledRename = highlightedIds.length !== 1 || actionDisabled;
   const disabledDelete = actionDisabled;
-  const disabledGoIntoParentFolder = !selectedFolder || !selectedFolder.parent;
-  const disabledGoIntoChildFolder =
-    !highlightedEntry ||
-    !highlightedEntry.directory ||
-    highlightedEntry === selectedFolder.parent;
-  const disabledEnter = !highlightedEntry;
+  const disabledEnter = highlightedIds.length !== 1;
   const accentColor = util.getAccentColor(constants.DEFAULT_ACCENT_COLOR);
 
   return {
@@ -41,8 +38,6 @@ function getUIState({
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledGoIntoParentFolder,
-    disabledGoIntoChildFolder,
     disabledEnter,
     accentColor
   };

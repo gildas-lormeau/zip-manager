@@ -1,5 +1,5 @@
 function getKeyUpHandler({
-  highlightedEntry,
+  highlightedIds,
   selectedFolder,
   disabledCut,
   disabledCopy,
@@ -9,8 +9,6 @@ function getKeyUpHandler({
   disabledBack,
   disabledForward,
   disabledExportZip,
-  disabledGoIntoParentFolder,
-  disabledGoIntoChildFolder,
   disabledEnter,
   cut,
   copy,
@@ -24,6 +22,13 @@ function getKeyUpHandler({
   highlightNextPage,
   highlightFirst,
   highlightLast,
+  highlightAll,
+  togglePrevious,
+  toggleNext,
+  togglePreviousPage,
+  toggleNextPage,
+  toggleFirst,
+  toggleLast,
   createFolder,
   exportZipFile,
   navigateBack,
@@ -44,6 +49,7 @@ function getKeyUpHandler({
     ADD_FILES_KEY,
     IMPORT_ZIP_KEY,
     EXPORT_ZIP_KEY,
+    SELECT_ALL_KEY,
     DELETE_KEYS,
     DOWN_KEY,
     UP_KEY,
@@ -64,16 +70,21 @@ function getKeyUpHandler({
       highlightPreviousPage,
       highlightNextPage,
       highlightFirst,
-      highlightLast
+      highlightLast,
+      highlightAll,
+      togglePrevious,
+      toggleNext,
+      togglePreviousPage,
+      toggleNextPage,
+      toggleFirst,
+      toggleLast
     });
     folderNavigationHandler(event, {
       navigateBack,
       navigateForward,
       goIntoFolder,
       disabledBack,
-      disabledForward,
-      disabledGoIntoParentFolder,
-      disabledGoIntoChildFolder
+      disabledForward
     });
     highlightedEntryHandler(event, {
       cut,
@@ -108,10 +119,39 @@ function getKeyUpHandler({
       highlightPreviousPage,
       highlightNextPage,
       highlightFirst,
-      highlightLast
+      highlightLast,
+      togglePrevious,
+      toggleNext,
+      togglePreviousPage,
+      toggleNextPage
     }
   ) {
-    if (!event.altKey && !event.ctrlKey) {
+    if (event.ctrlKey) {
+      if (event.key === SELECT_ALL_KEY) {
+        highlightAll();
+      }
+    }
+    if (event.shiftKey) {
+      if (event.key === DOWN_KEY) {
+        toggleNext();
+      }
+      if (event.key === UP_KEY) {
+        togglePrevious();
+      }
+      if (event.key === PAGE_UP_KEY) {
+        togglePreviousPage();
+      }
+      if (event.key === PAGE_DOWN_KEY) {
+        toggleNextPage();
+      }
+      if (event.key === HOME_KEY) {
+        toggleFirst();
+      }
+      if (event.key === END_KEY) {
+        toggleLast();
+      }
+    }
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       if (event.key === DOWN_KEY) {
         highlightNext();
       }
@@ -146,8 +186,7 @@ function getKeyUpHandler({
       navigateForward,
       goIntoFolder,
       disabledBack,
-      disabledForward,
-      disabledGoIntoParentFolder
+      disabledForward
     }
   ) {
     if (event.altKey) {
@@ -158,12 +197,15 @@ function getKeyUpHandler({
         navigateForward();
       }
     }
-    if (!event.altKey && !event.ctrlKey) {
-      if (event.key === LEFT_KEY && !disabledGoIntoParentFolder) {
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
+      if (event.key === LEFT_KEY && selectedFolder.parent) {
         goIntoFolder(selectedFolder.parent);
       }
-      if (event.key === RIGHT_KEY && !disabledGoIntoChildFolder) {
-        goIntoFolder(highlightedEntry);
+      if (event.key === RIGHT_KEY && highlightedIds.length === 1) {
+        const highlightedEntry = getHighlightedEntry();
+        if (highlightedEntry.directory) {
+          goIntoFolder(highlightedEntry);
+        }
       }
     }
   }
@@ -199,12 +241,12 @@ function getKeyUpHandler({
         paste();
       }
     }
-    if (!event.altKey && !event.ctrlKey) {
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
       if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
         remove();
       }
       if (event.key === ACTION_KEY && !disabledEnter) {
-        enter(highlightedEntry);
+        enter(getHighlightedEntry() || selectedFolder.parent);
         event.preventDefault();
       }
     }
@@ -235,6 +277,12 @@ function getKeyUpHandler({
         exportZipFile();
       }
     }
+  }
+
+  function getHighlightedEntry() {
+    return selectedFolder.children.find(
+      (entry) => entry.id === highlightedIds[highlightedIds.length - 1]
+    );
   }
 
   return {

@@ -5,8 +5,10 @@ import { useEffect, useRef } from "react";
 function Entries({
   entries,
   selectedFolder,
-  highlightedEntry,
+  highlightedIds,
   onHighlight,
+  onToggle,
+  onToggleRange,
   onEnter,
   entriesHeightRef,
   highlightedEntryRef,
@@ -21,7 +23,7 @@ function Entries({
     if (entry.directory) {
       classes.push("directory");
     }
-    if (entry === highlightedEntry) {
+    if (highlightedIds.includes(entry.id)) {
       classes.push("entry-highlighted");
     }
     return classes.join(" ");
@@ -51,11 +53,15 @@ function Entries({
     <div className="entries" aria-label="Folder entries" ref={entriesRef}>
       <ol onKeyDown={handleKeyDown}>
         {entries.map((entry) => {
-          if (entry === highlightedEntry) {
+          if (highlightedIds.includes(entry.id)) {
             return (
               <li
                 key={entry.id}
-                ref={highlightedEntryRef}
+                ref={
+                  highlightedIds[highlightedIds.length - 1] === entry.id
+                    ? highlightedEntryRef
+                    : null
+                }
                 className={getEntryClassName(entry)}
                 tabIndex={0}
               >
@@ -63,6 +69,8 @@ function Entries({
                   entry={entry}
                   selectedFolder={selectedFolder}
                   onHighlight={onHighlight}
+                  onToggle={onToggle}
+                  onToggleRange={onToggleRange}
                   onEnter={onEnter}
                   util={util}
                   messages={messages}
@@ -76,6 +84,8 @@ function Entries({
                   entry={entry}
                   selectedFolder={selectedFolder}
                   onHighlight={onHighlight}
+                  onToggle={onToggle}
+                  onToggleRange={onToggleRange}
                   onEnter={onEnter}
                   util={util}
                   messages={messages}
@@ -93,6 +103,8 @@ function Entry({
   entry,
   selectedFolder,
   onHighlight,
+  onToggle,
+  onToggleRange,
   onEnter,
   util,
   messages
@@ -103,6 +115,8 @@ function Entry({
         entry={entry}
         selectedFolder={selectedFolder}
         onHighlight={onHighlight}
+        onToggle={onToggle}
+        onToggleRange={onToggleRange}
         onEnter={onEnter}
         util={util}
         messages={messages}
@@ -121,6 +135,8 @@ function EntryName({
   entry,
   selectedFolder,
   onHighlight,
+  onToggle,
+  onToggleRange,
   onEnter,
   util,
   messages
@@ -158,12 +174,20 @@ function EntryName({
     return tooltip.join("\n");
   }
 
-  function handleClick() {
-    onHighlight(entry);
+  function handleClick(event) {
+    if (event.metaKey) {
+      onToggle(entry);
+    } else if (event.shiftKey) {
+      onToggleRange(entry);
+    } else {
+      onHighlight(entry);
+    }
   }
 
-  function handleDoubleClick() {
-    onEnter(entry);
+  function handleDoubleClick(event) {
+    if (!event.metaKey) {
+      onEnter(entry);
+    }
   }
 
   return (

@@ -34,9 +34,11 @@ import DownloadManager from "./components/DownloadManager.js";
 function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(createZipFileSystem());
   const [selectedFolder, setSelectedFolder] = useState(null);
-  const [previousSelectedFolder, setPreviousSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
-  const [highlightedEntry, setHighlightedEntry] = useState(null);
+  const [highlightedIds, setHighlightedIds] = useState([]);
+  const [previousHighlightedEntry, setPreviousHighlightedEntry] =
+    useState(null);
+  const [toggleNavigationDirection, setToggleNavigationDirection] = useState(0);
   const [downloads, setDownloads] = useState([]);
   const [downloadId, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
@@ -67,13 +69,11 @@ function ZipManager() {
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledGoIntoParentFolder,
-    disabledGoIntoChildFolder,
     disabledEnter,
     accentColor
   } = getUIState({
     entries,
-    highlightedEntry,
+    highlightedIds,
     selectedFolder,
     clipboardData,
     historyIndex,
@@ -85,18 +85,14 @@ function ZipManager() {
     updateSelectedFolder,
     updateZipFilesystem,
     updateHighlightedEntry,
-    updateDefaultHighlightedEntry,
     registerKeyUpHandler
   } = getEffects({
     zipFilesystem,
-    entries,
-    highlightedEntry,
     selectedFolder,
-    previousSelectedFolder,
+    setPreviousHighlightedEntry,
     setEntries,
     setSelectedFolder,
-    setPreviousSelectedFolder,
-    setHighlightedEntry,
+    setHighlightedIds,
     setClipboardData,
     setHistory,
     setHistoryIndex,
@@ -114,12 +110,26 @@ function ZipManager() {
     highlightNextPage,
     highlightFirst,
     highlightLast,
-    highlight
+    highlight,
+    highlightEntries,
+    highlightAll,
+    toggle,
+    toggleRange,
+    togglePrevious,
+    toggleNext,
+    togglePreviousPage,
+    toggleNextPage,
+    toggleFirst,
+    toggleLast
   } = getEntriesNavigationHandlers({
     entries,
-    highlightedEntry,
+    previousHighlightedEntry,
+    highlightedIds,
+    toggleNavigationDirection,
     getEntriesHeight: () => entriesHeightRef.current,
-    setHighlightedEntry
+    setHighlightedIds,
+    setPreviousHighlightedEntry,
+    setToggleNavigationDirection
   });
   const { goIntoFolder, navigateBack, navigateForward } =
     getFolderNavigationHandlers({
@@ -127,9 +137,9 @@ function ZipManager() {
       historyIndex,
       selectedFolder,
       setSelectedFolder,
-      setPreviousSelectedFolder,
       setHistory,
-      setHistoryIndex
+      setHistoryIndex,
+      setHighlightedIds
     });
   const { abortDownload, removeDownload } = getDownloadHandlers({
     setDownloads,
@@ -139,6 +149,7 @@ function ZipManager() {
     getSelectedFolderHandlers({
       selectedFolder,
       updateSelectedFolder,
+      highlightEntries,
       removeDownload,
       downloadFile,
       util,
@@ -148,17 +159,19 @@ function ZipManager() {
   const { copy, cut, paste, rename, remove, download } =
     getHighlightedEntryHandlers({
       zipFilesystem,
+      entries,
       history,
       historyIndex,
-      highlightedEntry,
+      highlightedIds,
       selectedFolder,
       clipboardData,
       setHistory,
       setHistoryIndex,
       setClipboardData,
-      setHighlightedEntry,
-      updateSelectedFolder,
+      setHighlightedIds,
+      setPreviousHighlightedEntry,
       removeDownload,
+      updateSelectedFolder,
       downloadFile,
       util,
       constants,
@@ -174,12 +187,11 @@ function ZipManager() {
     setClipboardData
   });
   const { enter } = getActionHandlers({
-    highlightedEntry,
     goIntoFolder,
     download
   });
   const keyUpHandler = getKeyUpHandler({
-    highlightedEntry,
+    highlightedIds,
     selectedFolder,
     disabledCut,
     disabledCopy,
@@ -189,8 +201,6 @@ function ZipManager() {
     disabledBack,
     disabledForward,
     disabledExportZip,
-    disabledGoIntoParentFolder,
-    disabledGoIntoChildFolder,
     disabledEnter,
     cut,
     copy,
@@ -204,6 +214,13 @@ function ZipManager() {
     highlightNextPage,
     highlightFirst,
     highlightLast,
+    highlightAll,
+    togglePrevious,
+    toggleNext,
+    togglePreviousPage,
+    toggleNextPage,
+    toggleFirst,
+    toggleLast,
     createFolder,
     exportZipFile,
     navigateBack,
@@ -225,15 +242,9 @@ function ZipManager() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateZipFilesystem, [zipFilesystem]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(updateHighlightedEntry, [highlightedEntry]);
+  useEffect(updateHighlightedEntry, [highlightedIds]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(updateDefaultHighlightedEntry, [
-    entries,
-    highlightedEntry,
-    previousSelectedFolder,
-    selectedFolder
-  ]);
-
+  
   return (
     <div className="application">
       <TopButtonBar
@@ -265,8 +276,10 @@ function ZipManager() {
       <Entries
         entries={entries}
         selectedFolder={selectedFolder}
-        highlightedEntry={highlightedEntry}
+        highlightedIds={highlightedIds}
         onHighlight={highlight}
+        onToggle={toggle}
+        onToggleRange={toggleRange}
         onEnter={enter}
         highlightedEntryRef={highlightedEntryRef}
         entriesHeightRef={entriesHeightRef}
