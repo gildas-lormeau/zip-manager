@@ -145,15 +145,14 @@ function ImportZipButton({
   function handleClick() {
     async function showOpenFilePicker() {
       try {
-        onImportZipFile(
-          (
-            await util.showOpenFilePicker({
-              multiple: false,
-              description: messages.ZIP_FILES_DESCRIPTION_LABEL,
-              extension: ZIP_EXTENSION
-            })
-          )[0]
-        );
+        const files = await util.showOpenFilePicker({
+          multiple: false,
+          description: messages.ZIP_FILES_DESCRIPTION_LABEL,
+          extension: ZIP_EXTENSION
+        });
+        if (files.length) {
+          onImportZipFile(files[0]);
+        }
       } catch (error) {
         util.dispatchClick(current);
       }

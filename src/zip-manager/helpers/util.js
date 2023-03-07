@@ -124,7 +124,9 @@ async function showOpenFilePicker({ multiple, description, extension }) {
     const fileHandles = await window.showOpenFilePicker(options);
     return Promise.all(fileHandles.map((fileHandle) => fileHandle.getFile()));
   } catch (error) {
-    if (error.name !== ABORT_ERROR_NAME) {
+    if (error.name === ABORT_ERROR_NAME) {
+      return [];
+    } else {
       throw error;
     }
   }
