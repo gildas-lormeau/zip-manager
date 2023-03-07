@@ -7,8 +7,16 @@
 .button-bar button, .button-bar input[type=color] {
   margin-block-end: 8px;
   height: 32px;
+  opacity: .85;
 }
 
+.button-bar button:not([disabled]):active, .button-bar input[type=color]:not([disabled]):active {
+  border: solid var(----text-color) .5px;
+}
+
+.button-bar button:not([disabled]):hover, .button-bar input[type=color]:not([disabled]):hover {
+  opacity: 1;
+}
 .button-bar button {
   padding: 8px;
   padding-inline: 12px;
