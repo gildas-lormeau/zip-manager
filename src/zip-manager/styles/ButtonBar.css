@@ -13,7 +13,7 @@
 
 .button-bar button:not([disabled]):active,
 .button-bar input[type="color"]:not([disabled]):active {
-  border: solid var(----text-color) 0.5px;
+  border: solid var(--text-color) 0.5px;
 }
 
 .button-bar button:not([disabled]):hover,
