@@ -59,4 +59,4 @@ function getHelpers({
   };
 }
 
-export { getHelpers };
+export default getHelpers;

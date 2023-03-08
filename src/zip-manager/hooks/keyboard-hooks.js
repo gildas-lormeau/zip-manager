@@ -13,4 +13,4 @@ function getKeyboardHooks({ addKeyListener, removeKeyListener }) {
   return { useKeyUp };
 }
 
-export { getKeyboardHooks };
+export default getKeyboardHooks;
