@@ -96,7 +96,7 @@ function ZipManager() {
     selectedFolder,
     setEntries
   });
-  const { updateHighlightedEntry, updateZipFilesystem } = getEffects({
+  const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
     zipFilesystem,
     setPreviousHighlightedEntry,
     setToggleNavigationDirection,
@@ -241,7 +241,7 @@ function ZipManager() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateZipFilesystem, [zipFilesystem]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(updateHighlightedEntry, [highlightedIds]);
+  useEffect(updateHighlightedEntries, [highlightedIds]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (

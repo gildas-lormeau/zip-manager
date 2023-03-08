@@ -23,7 +23,7 @@ function getEffects({
     updateSelectedFolder(root);
   }
 
-  function updateHighlightedEntry() {
+  function updateHighlightedEntries() {
     const highlightedEntryElement = getHighlightedEntryElement();
     if (highlightedEntryElement) {
       util.highlight(highlightedEntryElement);
@@ -32,7 +32,7 @@ function getEffects({
 
   return {
     updateZipFilesystem,
-    updateHighlightedEntry
+    updateHighlightedEntries
   };
 }
 
