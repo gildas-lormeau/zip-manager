@@ -24,7 +24,7 @@ import { getAppHandlers } from "./business/features/app.js";
 import { getFilesystemHandlers } from "./business/features/filesystem.js";
 import { getDownloadsHandlers } from "./business/features/downloads.js";
 import { getClipboardHandlers } from "./business/features/clipboard.js";
-import { getKeyboardHandler } from "./business/features/keyboard.js";
+import { getKeyboardHandlers } from "./business/features/keyboard.js";
 import { getUIHandlers } from "./business/features/ui.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
@@ -193,7 +193,7 @@ function ZipManager() {
     goIntoFolder,
     download
   });
-  const { handleKeyUp } = getKeyboardHandler({
+  const { handleKeyUp } = getKeyboardHandlers({
     highlightedIds,
     selectedFolder,
     disabledCut,
