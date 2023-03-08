@@ -43,7 +43,7 @@ function getHelpers({
         if (zipService.passwordNeeded(error)) {
           const password = util.prompt(ENTER_PASSWORD_MESSAGE);
           if (password) {
-            options.password = password;
+            options.readerOptions = { password };
             await executeDownload(download, options, blobGetter);
           } else {
             removeDownload(download);
