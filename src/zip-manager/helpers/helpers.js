@@ -1,7 +1,3 @@
-import { fs } from "@zip.js/zip.js";
-
-const { FS } = fs;
-
 function getHelpers({
   downloadId,
   setDownloadId,
@@ -63,8 +59,4 @@ function getHelpers({
   };
 }
 
-function createZipFileSystem() {
-  return new FS();
-}
-
-export { getHelpers, createZipFileSystem };
+export { getHelpers };
