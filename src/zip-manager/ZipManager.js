@@ -9,9 +9,10 @@ import { useKeyUp } from "./hooks.js";
 import * as util from "./helpers/util.js";
 import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
+import * as zipService from "./services/zip-service.js";
 
 import { getCommon } from "./business/common.js";
-import { getHelpers, createZipFileSystem } from "./helpers/helpers.js";
+import { getHelpers } from "./helpers/helpers.js";
 import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
 import {
@@ -34,7 +35,9 @@ import BottomButtonBar from "./components/BottomButtonBar.js";
 import DownloadManager from "./components/DownloadManager.js";
 
 function ZipManager() {
-  const [zipFilesystem, setZipFilesystem] = useState(createZipFileSystem());
+  const [zipFilesystem, setZipFilesystem] = useState(
+    zipService.createZipFileSystem()
+  );
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
   const [highlightedIds, setHighlightedIds] = useState([]);
@@ -179,7 +182,7 @@ function ZipManager() {
       messages
     });
   const { reset } = getZipFilesystemHandlers({
-    createZipFileSystem,
+    zipService,
     setZipFilesystem,
     util,
     messages

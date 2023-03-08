@@ -540,7 +540,7 @@ function getDownloadHandlers({ setDownloads, util }) {
 }
 
 function getZipFilesystemHandlers({
-  createZipFileSystem,
+  zipService,
   setZipFilesystem,
   util,
   messages
@@ -548,7 +548,7 @@ function getZipFilesystemHandlers({
   const { RESET_MESSAGE } = messages;
   function reset() {
     if (util.confirm(RESET_MESSAGE)) {
-      setZipFilesystem(createZipFileSystem());
+      setZipFilesystem(zipService.createZipFileSystem());
     }
   }
   return {
