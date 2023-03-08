@@ -46,7 +46,7 @@ function ZipManager() {
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
-  const entriesHeightRef = useRef(0);
+  const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
@@ -90,6 +90,7 @@ function ZipManager() {
   const { updateHighlightedEntry, updateZipFilesystem } = getEffects({
     zipFilesystem,
     setPreviousHighlightedEntry,
+    setToggleNavigationDirection,
     setSelectedFolder,
     setHighlightedIds,
     setClipboardData,

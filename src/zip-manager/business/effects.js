@@ -1,6 +1,7 @@
 function getEffects({
   zipFilesystem,
   setPreviousHighlightedEntry,
+  setToggleNavigationDirection,
   setSelectedFolder,
   setHighlightedIds,
   setClipboardData,
@@ -15,6 +16,7 @@ function getEffects({
     setSelectedFolder(root);
     setHighlightedIds([]);
     setPreviousHighlightedEntry(null);
+    setToggleNavigationDirection(0);
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
