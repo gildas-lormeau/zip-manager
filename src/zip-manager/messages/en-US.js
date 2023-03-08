@@ -35,6 +35,7 @@ const RENAME_MESSAGE = "Please enter the entry name";
 const RESET_MESSAGE = "Please confirm the reset";
 const DOWNLOAD_MESSAGE = "Please enter the file name";
 const DELETE_MESSAGE = "Please confirm the deletion";
+const ENTER_PASSWORD_MESSAGE = "Enter password";
 
 const CREATE_FOLDER_BUTTON_LABEL = "Create directory";
 const ADD_FILES_BUTTON_LABEL = "Add files";
@@ -79,6 +80,7 @@ export {
   RESET_MESSAGE,
   DOWNLOAD_MESSAGE,
   DELETE_MESSAGE,
+  ENTER_PASSWORD_MESSAGE,
   ROOT_FOLDER_LABEL,
   PARENT_FOLDER_LABEL,
   COPY_BUTTON_LABEL,

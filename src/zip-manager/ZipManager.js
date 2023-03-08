@@ -55,11 +55,17 @@ function ZipManager() {
   const importZipButtonRef = useRef(null);
 
   const { useKeyUp } = getKeyboardHooks(util);
+  const { abortDownload, removeDownload } = getDownloadsHandlers({
+    setDownloads,
+    util
+  });
   const { downloadFile } = getHelpers({
     downloadId,
     setDownloadId,
     setDownloads,
+    removeDownload,
     downloaderElement: downloaderRef.current,
+    zipService,
     util,
     messages
   });
@@ -143,10 +149,6 @@ function ZipManager() {
     setHistoryIndex,
     setHighlightedIds,
     updateSelectedFolder
-  });
-  const { abortDownload, removeDownload } = getDownloadsHandlers({
-    setDownloads,
-    util
   });
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderHandlers({

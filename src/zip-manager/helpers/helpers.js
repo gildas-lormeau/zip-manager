@@ -2,11 +2,13 @@ function getHelpers({
   downloadId,
   setDownloadId,
   setDownloads,
+  removeDownload,
   downloaderElement,
+  zipService,
   util,
   messages
 }) {
-  const { DOWNLOAD_MESSAGE } = messages;
+  const { DOWNLOAD_MESSAGE, ENTER_PASSWORD_MESSAGE } = messages;
 
   async function downloadFile(name, options, blobGetter) {
     name = util.prompt(DOWNLOAD_MESSAGE, name);
@@ -27,15 +29,31 @@ function getHelpers({
         bufferedWrite: true,
         keepOrder: true
       });
-      try {
-        const blob = await blobGetter(download, options);
-        util.downloadBlob(blob, downloaderElement, download.name);
-      } catch (error) {
-        if (!util.downloadAborted(error)) {
+      await executeDownload(download, options, blobGetter);
+      return download;
+    }
+  }
+
+  async function executeDownload(download, options, blobGetter) {
+    try {
+      const blob = await blobGetter(download, options);
+      util.downloadBlob(blob, downloaderElement, download.name);
+    } catch (error) {
+      if (!util.downloadAborted(error)) {
+        if (zipService.passwordNeeded(error)) {
+          const password = util.prompt(ENTER_PASSWORD_MESSAGE);
+          if (password) {
+            options.password = password;
+            await executeDownload(download, options, blobGetter);
+          } else {
+            removeDownload(download);
+            util.alert(error);
+          }
+        } else {
+          removeDownload(download);
           util.alert(error);
         }
       }
-      return download;
     }
   }
 
