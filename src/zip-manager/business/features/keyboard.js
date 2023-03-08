@@ -1,4 +1,4 @@
-function getKeyUpHandler({
+function getKeyboardHandler({
   highlightedIds,
   selectedFolder,
   disabledCut,
@@ -290,4 +290,4 @@ function getKeyUpHandler({
   };
 }
 
-export { getKeyUpHandler };
+export { getKeyboardHandler };

@@ -1,4 +1,4 @@
-function getCommon({ selectedFolder, setEntries }) {
+function getCommonHandlers({ selectedFolder, setEntries }) {
   function updateSelectedFolder(folder = selectedFolder) {
     if (folder) {
       const { parent, children } = folder;
@@ -25,4 +25,4 @@ function getCommon({ selectedFolder, setEntries }) {
   };
 }
 
-export { getCommon };
+export { getCommonHandlers };

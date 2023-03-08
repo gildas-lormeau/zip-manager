@@ -11,22 +11,21 @@ import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
 import * as zipService from "./services/zip-service.js";
 
-import { getCommon } from "./business/common.js";
 import { getHelpers } from "./helpers/helpers.js";
 import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
-import {
-  getEntriesNavigationHandlers,
-  getFolderNavigationHandlers,
-  getSelectedFolderHandlers,
-  getHighlightedEntryHandlers,
-  getActionHandlers,
-  getZipFilesystemHandlers,
-  getDownloadHandlers,
-  getClipboardHandlers
-} from "./business/handlers.js";
-import { getKeyUpHandler } from "./business/keyboard-handlers.js";
-import { getUIHandlers } from "./business/ui-handlers";
+
+import { getCommonHandlers } from "./business/features/common.js";
+import { getEntriesHandlers } from "./business/features/entries.js";
+import { getFoldersHandlers } from "./business/features/folders.js";
+import { getSelectedFolderHandlers } from "./business/features/selected-folder.js";
+import { getHighlightedEntriesHandlers } from "./business/features/highlighted-entries.js";
+import { getAppHandlers } from "./business/features/app.js";
+import { getFilesystemHandlers } from "./business/features/filesystem.js";
+import { getDownloadsHandlers } from "./business/features/downloads.js";
+import { getClipboardHandlers } from "./business/features/clipboard.js";
+import { getKeyboardHandler } from "./business/features/keyboard.js";
+import { getUIHandlers } from "./business/features/ui.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
@@ -86,7 +85,7 @@ function ZipManager() {
     util,
     constants
   });
-  const { updateSelectedFolder } = getCommon({
+  const { updateSelectedFolder } = getCommonHandlers({
     selectedFolder,
     setEntries
   });
@@ -124,7 +123,7 @@ function ZipManager() {
     toggleNextPage,
     toggleFirst,
     toggleLast
-  } = getEntriesNavigationHandlers({
+  } = getEntriesHandlers({
     entries,
     previousHighlightedEntry,
     highlightedIds,
@@ -134,18 +133,17 @@ function ZipManager() {
     setPreviousHighlightedEntry,
     setToggleNavigationDirection
   });
-  const { goIntoFolder, navigateBack, navigateForward } =
-    getFolderNavigationHandlers({
-      history,
-      historyIndex,
-      selectedFolder,
-      setSelectedFolder,
-      setHistory,
-      setHistoryIndex,
-      setHighlightedIds,
-      updateSelectedFolder
-    });
-  const { abortDownload, removeDownload } = getDownloadHandlers({
+  const { goIntoFolder, navigateBack, navigateForward } = getFoldersHandlers({
+    history,
+    historyIndex,
+    selectedFolder,
+    setSelectedFolder,
+    setHistory,
+    setHistoryIndex,
+    setHighlightedIds,
+    updateSelectedFolder
+  });
+  const { abortDownload, removeDownload } = getDownloadsHandlers({
     setDownloads,
     util
   });
@@ -161,7 +159,7 @@ function ZipManager() {
       messages
     });
   const { copy, cut, paste, rename, remove, download } =
-    getHighlightedEntryHandlers({
+    getHighlightedEntriesHandlers({
       zipFilesystem,
       entries,
       history,
@@ -181,7 +179,7 @@ function ZipManager() {
       constants,
       messages
     });
-  const { reset } = getZipFilesystemHandlers({
+  const { reset } = getFilesystemHandlers({
     zipService,
     setZipFilesystem,
     util,
@@ -190,11 +188,11 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardHandlers({
     setClipboardData
   });
-  const { enter } = getActionHandlers({
+  const { enter } = getAppHandlers({
     goIntoFolder,
     download
   });
-  const { handleKeyUp } = getKeyUpHandler({
+  const { handleKeyUp } = getKeyboardHandler({
     highlightedIds,
     selectedFolder,
     disabledCut,
