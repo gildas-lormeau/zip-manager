@@ -4,17 +4,17 @@ import "./styles/ButtonBar.css";
 import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
-import { useKeyUp } from "./hooks.js";
 
 import * as util from "./helpers/util.js";
-import * as constants from "./business/constants.js";
 import * as messages from "./messages/en-US.js";
-import * as zipService from "./services/zip-service.js";
 
 import { getHelpers } from "./helpers/helpers.js";
+import { getKeyboardHooks } from "./hooks/keyboard-hooks.js";
+import * as zipService from "./services/zip-service.js";
+
+import * as constants from "./business/constants.js";
 import { getUIState } from "./business/ui-state.js";
 import { getEffects } from "./business/effects.js";
-
 import { getCommonHandlers } from "./business/features/common.js";
 import { getEntriesHandlers } from "./business/features/entries.js";
 import { getFoldersHandlers } from "./business/features/folders.js";
@@ -54,6 +54,7 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
+  const { useKeyUp } = getKeyboardHooks({ util });
   const { downloadFile } = getHelpers({
     downloadId,
     setDownloadId,
