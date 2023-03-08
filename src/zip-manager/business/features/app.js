@@ -10,4 +10,4 @@ function getAppHandlers({ goIntoFolder, download }) {
   return { enter };
 }
 
-export { getAppHandlers };
+export default getAppHandlers;

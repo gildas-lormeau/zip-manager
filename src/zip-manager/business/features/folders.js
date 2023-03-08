@@ -46,4 +46,4 @@ function getFoldersHandlers({
   };
 }
 
-export { getFoldersHandlers };
+export default getFoldersHandlers;

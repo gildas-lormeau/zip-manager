@@ -25,4 +25,4 @@ function getCommonHandlers({ selectedFolder, setEntries }) {
   };
 }
 
-export { getCommonHandlers };
+export default getCommonHandlers;

@@ -15,4 +15,4 @@ function getFilesystemHandlers({
   };
 }
 
-export { getFilesystemHandlers };
+export default getFilesystemHandlers;

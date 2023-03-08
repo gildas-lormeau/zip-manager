@@ -153,4 +153,4 @@ function getHighlightedEntriesHandlers({
   };
 }
 
-export { getHighlightedEntriesHandlers };
+export default getHighlightedEntriesHandlers;

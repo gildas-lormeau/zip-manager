@@ -36,4 +36,4 @@ function getEffects({
   };
 }
 
-export { getEffects };
+export default getEffects;

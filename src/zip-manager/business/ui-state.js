@@ -43,4 +43,4 @@ function getUIState({
   };
 }
 
-export { getUIState };
+export default getUIState;

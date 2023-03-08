@@ -81,4 +81,4 @@ function getSelectedFolderHandlers({
   };
 }
 
-export { getSelectedFolderHandlers };
+export default getSelectedFolderHandlers;

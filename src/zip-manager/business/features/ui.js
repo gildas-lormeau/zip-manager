@@ -8,4 +8,4 @@ function getUIHandlers({ util }) {
   };
 }
 
-export { getUIHandlers };
+export default getUIHandlers;

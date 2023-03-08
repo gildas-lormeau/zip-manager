@@ -290,4 +290,4 @@ function getKeyboardHandlers({
   };
 }
 
-export { getKeyboardHandlers };
+export default getKeyboardHandlers;

@@ -16,4 +16,4 @@ function getDownloadsHandlers({ setDownloads, util }) {
   };
 }
 
-export { getDownloadsHandlers };
+export default getDownloadsHandlers;

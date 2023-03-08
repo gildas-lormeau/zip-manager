@@ -8,4 +8,4 @@ function getClipboardHandlers({ setClipboardData }) {
   };
 }
 
-export { getClipboardHandlers };
+export default getClipboardHandlers;

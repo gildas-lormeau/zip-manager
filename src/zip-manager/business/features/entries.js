@@ -235,4 +235,4 @@ function getEntriesHandlers({
   };
 }
 
-export { getEntriesHandlers };
+export default getEntriesHandlers;
