@@ -54,7 +54,7 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const { useKeyUp } = getKeyboardHooks({ util });
+  const { useKeyUp } = getKeyboardHooks(util);
   const { downloadFile } = getHelpers({
     downloadId,
     setDownloadId,
