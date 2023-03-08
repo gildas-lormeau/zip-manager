@@ -64,7 +64,7 @@ function getKeyboardHandler({
   } = constants;
 
   function handleKeyUp(event) {
-    entriesNavigationHandler(event, {
+    entriesHandler(event, {
       highlightNext,
       highlightPrevious,
       highlightPreviousPage,
@@ -79,14 +79,14 @@ function getKeyboardHandler({
       toggleFirst,
       toggleLast
     });
-    folderNavigationHandler(event, {
+    foldersHandler(event, {
       navigateBack,
       navigateForward,
       goIntoFolder,
       disabledBack,
       disabledForward
     });
-    highlightedEntryHandler(event, {
+    highlightedEntriesHandler(event, {
       cut,
       copy,
       rename,
@@ -111,7 +111,7 @@ function getKeyboardHandler({
     });
   }
 
-  function entriesNavigationHandler(
+  function entriesHandler(
     event,
     {
       highlightPrevious,
@@ -179,7 +179,7 @@ function getKeyboardHandler({
     }
   }
 
-  function folderNavigationHandler(
+  function foldersHandler(
     event,
     {
       navigateBack,
@@ -210,7 +210,7 @@ function getKeyboardHandler({
     }
   }
 
-  function highlightedEntryHandler(
+  function highlightedEntriesHandler(
     event,
     {
       disabledCut,
