@@ -1,6 +1,6 @@
 {
   "short_name": "Zip Manager",
-  "name": "Read/Edit/Write zip files",
+  "name": "Zip Manager: Read/Edit/Write zip files",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
