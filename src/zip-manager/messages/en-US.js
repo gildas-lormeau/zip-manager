@@ -40,8 +40,8 @@ const ENTER_PASSWORD_MESSAGE = "Enter password";
 
 const CREATE_FOLDER_BUTTON_LABEL = "Create directory";
 const ADD_FILES_BUTTON_LABEL = "Add files";
-const IMPORT_ZIP_BUTTON_LABEL = "Import zip file";
-const EXPORT_ZIP_BUTTON_LABEL = "Export zip file";
+const IMPORT_ZIP_BUTTON_LABEL = "Import zip";
+const EXPORT_ZIP_BUTTON_LABEL = "Export zip";
 const SET_ZIP_PASSWORD_BUTTON_LABEL = "Set password";
 const RESET_BUTTON_LABEL = "Reset";
 const BACK_BUTTON_LABEL = "<";
