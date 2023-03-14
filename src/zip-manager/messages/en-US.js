@@ -2,7 +2,7 @@ const PARENT_FOLDER_LABEL = "..";
 const ROOT_FOLDER_LABEL = "[root]";
 const ROOT_ZIP_FILENAME = "Download.zip";
 const KEYS_SEPARATOR_LABEL = ", ";
-const PARENT_FOLDER_TOOLTIP = "Parent folder";
+const PARENT_FOLDER_TOOLTIP = "Parent directory";
 
 const SHORTCUT_LABEL = "Shortcut: ";
 const CTRL_KEY_LABEL = "ctrl-";
@@ -31,14 +31,14 @@ const BACK_BUTTON_TOOLTIP =
 const FORWARD_BUTTON_TOOLTIP =
   SHORTCUT_LABEL + ALT_KEY_LABEL + ARROW_RIGHT_KEY_LABEL;
 
-const CREATE_FOLDER_MESSAGE = "Please enter the folder name";
+const CREATE_FOLDER_MESSAGE = "Please enter the directory name";
 const RENAME_MESSAGE = "Please enter the entry name";
 const RESET_MESSAGE = "Please confirm the reset";
 const DOWNLOAD_MESSAGE = "Please enter the file name";
 const DELETE_MESSAGE = "Please confirm the deletion";
 const ENTER_PASSWORD_MESSAGE = "Enter password";
 
-const CREATE_FOLDER_BUTTON_LABEL = "Create folder";
+const CREATE_FOLDER_BUTTON_LABEL = "Create directory";
 const ADD_FILES_BUTTON_LABEL = "Add files";
 const IMPORT_ZIP_BUTTON_LABEL = "Import zip file";
 const EXPORT_ZIP_BUTTON_LABEL = "Export zip file";
