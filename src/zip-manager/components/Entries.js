@@ -50,6 +50,9 @@ function Entries({
   }
 
   function handleTouchStart() {
+    if (touchEndTimeout.current) {
+      util.clearTimeout(touchEndTimeout.current);
+    }
     touchEndTimeout.current = util.setTimeout(() => {
       touchEndTimeout.current = null;
       setSelectModeEnabled(!selectModeEnabled);
@@ -73,6 +76,8 @@ function Entries({
     <div className="entries" aria-label="Folder entries" ref={entriesRef}>
       <ol
         onKeyDown={handleKeyDown}
+        onMouseDown={handleTouchStart}
+        onMouseUp={handleTouchEnd}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onContextMenu={handleContextMenu}
