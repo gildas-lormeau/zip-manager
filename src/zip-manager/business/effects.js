@@ -1,5 +1,6 @@
 function getEffects({
   zipFilesystem,
+  setPassword,
   setPreviousHighlightedEntry,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -21,6 +22,7 @@ function getEffects({
     setHistory([root]);
     setHistoryIndex(0);
     updateSelectedFolder(root);
+    setPassword("");
   }
 
   function updateHighlightedEntries() {

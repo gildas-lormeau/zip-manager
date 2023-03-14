@@ -101,6 +101,7 @@ function ZipManager() {
   });
   const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
     zipFilesystem,
+    setPassword:  (password) => passwordRef.current = password, 
     setPreviousHighlightedEntry,
     setToggleNavigationDirection,
     setSelectedFolder,
