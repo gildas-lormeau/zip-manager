@@ -1,6 +1,6 @@
 import "./styles/Entries.css";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Entries({
   entries,
@@ -17,6 +17,8 @@ function Entries({
   messages
 }) {
   const entriesRef = useRef(null);
+  const [selectModeEnabled, setSelectModeEnabled] = useState(false);
+  const touchEndTimeout = useRef(null);
 
   function getEntryClassName(entry) {
     const classes = [];
@@ -47,11 +49,34 @@ function Entries({
     }
   }
 
+  function handleTouchStart() {
+    touchEndTimeout.current = util.setTimeout(() => {
+      touchEndTimeout.current = null;
+      setSelectModeEnabled(!selectModeEnabled);
+    }, constants.LONG_TOUCH_DELAY);
+  }
+
+  function handleTouchEnd() {
+    if (touchEndTimeout.current) {
+      util.clearTimeout(touchEndTimeout.current);
+      touchEndTimeout.current = null;
+    }
+  }
+
+  function handleContextMenu(event) {
+    event.preventDefault();
+  }
+
   useEffect(computeEntriesHeight);
 
   return (
     <div className="entries" aria-label="Folder entries" ref={entriesRef}>
-      <ol onKeyDown={handleKeyDown}>
+      <ol
+        onKeyDown={handleKeyDown}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onContextMenu={handleContextMenu}
+      >
         {entries.map((entry) => {
           if (highlightedIds.includes(entry.id)) {
             return (
@@ -68,6 +93,8 @@ function Entries({
                 <Entry
                   entry={entry}
                   selectedFolder={selectedFolder}
+                  highlighted={true}
+                  selectModeEnabled={selectModeEnabled}
                   onHighlight={onHighlight}
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
@@ -83,6 +110,8 @@ function Entries({
                 <Entry
                   entry={entry}
                   selectedFolder={selectedFolder}
+                  highlighted={false}
+                  selectModeEnabled={selectModeEnabled}
                   onHighlight={onHighlight}
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
@@ -102,6 +131,8 @@ function Entries({
 function Entry({
   entry,
   selectedFolder,
+  highlighted,
+  selectModeEnabled,
   onHighlight,
   onToggle,
   onToggleRange,
@@ -111,10 +142,20 @@ function Entry({
 }) {
   return (
     <>
+      {selectModeEnabled && (
+        <input
+          className="entry-select"
+          type="checkbox"
+          checked={highlighted}
+          onChange={() => onToggle(entry)}
+        ></input>
+      )}
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onHighlight={onHighlight}
+        onHighlight={() =>
+          selectModeEnabled ? onToggle(entry) : onHighlight(entry)
+        }
         onToggle={onToggle}
         onToggleRange={onToggleRange}
         onEnter={onEnter}

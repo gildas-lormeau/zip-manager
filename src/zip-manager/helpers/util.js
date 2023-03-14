@@ -145,6 +145,14 @@ function formatDate(date) {
   return DATE_TIME_FORMAT.format(date);
 }
 
+function setTimeout(callback, delay, ...args) {
+  return window.setTimeout(callback, delay, ...args);
+}
+
+function clearTimeout(id) {
+  return window.clearTimeout(id);
+}
+
 export {
   downloadBlob,
   createAbortController,
@@ -163,5 +171,7 @@ export {
   getAccentColor,
   showOpenFilePicker,
   formatSize,
-  formatDate
+  formatDate,
+  setTimeout,
+  clearTimeout
 };

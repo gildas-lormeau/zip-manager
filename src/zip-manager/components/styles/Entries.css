@@ -14,6 +14,11 @@
   margin-inline: 2px;
 }
 
+.entries .entry-select {
+  accent-color: var(--bg-color);
+  margin-inline: 4px;
+}
+
 .entries .entry-name {
   flex: 1;
   cursor: pointer;

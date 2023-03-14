@@ -24,6 +24,7 @@ const FORWARD_KEY = "ArrowRight";
 const DEFAULT_ACCENT_COLOR = "#888888";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const ZIP_EXTENSION = ".zip";
+const LONG_TOUCH_DELAY = 1000;
 
 export {
   ACTION_KEY,
@@ -51,5 +52,6 @@ export {
   FORWARD_KEY,
   DEFAULT_ACCENT_COLOR,
   DEFAULT_MIME_TYPE,
-  ZIP_EXTENSION
+  ZIP_EXTENSION,
+  LONG_TOUCH_DELAY
 };
