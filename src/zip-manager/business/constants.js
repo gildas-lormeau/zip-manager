@@ -9,6 +9,7 @@ const CREATE_FOLDER_KEY = "d";
 const ADD_FILES_KEY = "f";
 const IMPORT_ZIP_KEY = "i";
 const EXPORT_ZIP_KEY = "e";
+const SET_ZIP_PASSWORD_KEY = "p";
 const SELECT_ALL_KEY = "a";
 const DELETE_KEYS = ["Backspace", "Delete"];
 const DOWN_KEY = "ArrowDown";
@@ -38,6 +39,7 @@ export {
   ADD_FILES_KEY,
   IMPORT_ZIP_KEY,
   EXPORT_ZIP_KEY,
+  SET_ZIP_PASSWORD_KEY,
   SELECT_ALL_KEY,
   DELETE_KEYS,
   DOWN_KEY,

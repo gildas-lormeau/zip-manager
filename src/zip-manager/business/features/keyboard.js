@@ -9,6 +9,7 @@ function getKeyboardHandlers({
   disabledBack,
   disabledForward,
   disabledExportZip,
+  disabledSetZipPassword,
   disabledEnter,
   cut,
   copy,
@@ -31,6 +32,7 @@ function getKeyboardHandlers({
   toggleLast,
   createFolder,
   exportZipFile,
+  setZipPassword,
   navigateBack,
   navigateForward,
   goIntoFolder,
@@ -49,6 +51,7 @@ function getKeyboardHandlers({
     ADD_FILES_KEY,
     IMPORT_ZIP_KEY,
     EXPORT_ZIP_KEY,
+    SET_ZIP_PASSWORD_KEY,
     SELECT_ALL_KEY,
     DELETE_KEYS,
     DOWN_KEY,
@@ -275,6 +278,9 @@ function getKeyboardHandlers({
       }
       if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
         exportZipFile();
+      }
+      if (event.key === SET_ZIP_PASSWORD_KEY && !disabledSetZipPassword) {
+        setZipPassword();
       }
     }
   }

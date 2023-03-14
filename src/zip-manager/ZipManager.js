@@ -49,6 +49,7 @@ function ZipManager() {
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const passwordRef = useRef("");
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
@@ -72,6 +73,7 @@ function ZipManager() {
   });
   const {
     disabledExportZip,
+    disabledSetZipPassword,
     disabledReset,
     disabledBack,
     disabledForward,
@@ -154,6 +156,7 @@ function ZipManager() {
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderHandlers({
       selectedFolder,
+      getPassword: () => passwordRef.current,
       updateSelectedFolder,
       highlightEntries,
       removeDownload,
@@ -192,13 +195,17 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardHandlers({
     setClipboardData
   });
-  const { enter } = getAppHandlers({
+  const { enter, setZipPassword } = getAppHandlers({
+    setPassword: (password) => passwordRef.current = password,
     goIntoFolder,
-    download
+    download,
+    util,
+    messages
   });
   const { handleKeyUp } = getKeyboardHandlers({
     highlightedIds,
     selectedFolder,
+    disabledSetZipPassword,
     disabledCut,
     disabledCopy,
     disabledRename,
@@ -229,6 +236,7 @@ function ZipManager() {
     toggleLast,
     createFolder,
     exportZipFile,
+    setZipPassword,
     navigateBack,
     navigateForward,
     goIntoFolder,
@@ -250,11 +258,13 @@ function ZipManager() {
       <div className="application">
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
+          disabledSetZipPasswordButton={disabledSetZipPassword}
           disabledResetButton={disabledReset}
           onCreateFolder={createFolder}
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
           onExportZipFile={exportZipFile}
+          onSetZipPassword={setZipPassword}
           onReset={reset}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}

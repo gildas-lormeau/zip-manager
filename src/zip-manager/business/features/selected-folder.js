@@ -1,5 +1,6 @@
 function getSelectedFolderHandlers({
   selectedFolder,
+  getPassword,
   updateSelectedFolder,
   highlightEntries,
   removeDownload,
@@ -66,7 +67,10 @@ function getSelectedFolderHandlers({
         : ROOT_ZIP_FILENAME,
       { mimeType: DEFAULT_MIME_TYPE },
       async (download, options) => {
-        const blob = await selectedFolder.exportBlob(options);
+        const blob = await selectedFolder.exportBlob({
+          ...options,
+          password: getPassword()
+        });
         removeDownload(download);
         return blob;
       }
