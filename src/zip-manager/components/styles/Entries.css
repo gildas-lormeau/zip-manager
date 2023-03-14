@@ -16,7 +16,10 @@
 
 .entries .entry-select {
   accent-color: var(--bg-color);
+  margin: 0;
   margin-inline: 4px;
+  align-self: center;
+  max-height: 1em;
 }
 
 .entries .entry-name {
