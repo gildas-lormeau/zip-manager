@@ -12,7 +12,13 @@
 }
 
 .icon {
-  filter: brightness(0);
+  color: var(--button-color);
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+.icon:hover {
+  opacity: 1;
 }
 
 a,
@@ -20,20 +26,9 @@ a:visited {
   color: inherit;
 }
 
-.info-bar input[type="color"] {
-  margin-inline-start: 0;
-  margin-inline-end: 8px;
-  height: 16px;
-  width: 16px;
-}
-
 @media (prefers-color-scheme: dark) {
   .source-link {
     color: white;
-  }
-
-  .icon {
-    filter: brightness(0) invert(1);
   }
 }
 

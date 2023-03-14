@@ -309,7 +309,11 @@ function ZipManager() {
           messages={messages}
         />
       </div>
-      <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
+      <InfoBar
+        accentColor={accentColor}
+        onSetAccentColor={setAccentColor}
+        util={util}
+      />
     </>
   );
 }

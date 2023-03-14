@@ -45,8 +45,7 @@ ol {
   list-style: none;
 }
 
-button,
-input[type="color"] {
+button {
   border: solid var(--accent-color) 0.5px;
   user-select: none;
   background-color: var(--bg-button-color);
