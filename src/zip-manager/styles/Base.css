@@ -51,6 +51,7 @@ button {
   background-color: var(--bg-button-color);
   color: var(--button-color);
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 button:disabled {
