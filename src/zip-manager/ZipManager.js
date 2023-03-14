@@ -32,6 +32,7 @@ import NavigationBar from "./components/NavigationBar.js";
 import Entries from "./components/Entries.js";
 import BottomButtonBar from "./components/BottomButtonBar.js";
 import DownloadManager from "./components/DownloadManager.js";
+import InfoBar from "./components/InfoBar";
 
 function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(
@@ -245,70 +246,71 @@ function ZipManager() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (
-    <div className="application">
-      <TopButtonBar
-        disabledExportZipButton={disabledExportZip}
-        disabledResetButton={disabledReset}
-        accentColor={accentColor}
-        onCreateFolder={createFolder}
-        onAddFiles={addFiles}
-        onImportZipFile={importZipFile}
-        onExportZipFile={exportZipFile}
-        onReset={reset}
-        onSetAccentColor={setAccentColor}
-        addFilesButtonRef={addFilesButtonRef}
-        importZipButtonRef={importZipButtonRef}
-        util={util}
-        constants={constants}
-        messages={messages}
-      />
-      <NavigationBar
-        selectedFolder={selectedFolder}
-        disabledBackButton={disabledBack}
-        disabledForwardButton={disabledForward}
-        onNavigateBack={navigateBack}
-        onNavigateForward={navigateForward}
-        onGoIntoFolder={goIntoFolder}
-        constants={constants}
-        messages={messages}
-      />
-      <Entries
-        entries={entries}
-        selectedFolder={selectedFolder}
-        highlightedIds={highlightedIds}
-        onHighlight={highlight}
-        onToggle={toggle}
-        onToggleRange={toggleRange}
-        onEnter={enter}
-        highlightedEntryRef={highlightedEntryRef}
-        entriesHeightRef={entriesHeightRef}
-        util={util}
-        constants={constants}
-        messages={messages}
-      />
-      <BottomButtonBar
-        disabledCopyButton={disabledCopy}
-        disabledCutButton={disabledCut}
-        disabledPasteButton={disabledPaste}
-        disabledResetClipboardDataButton={disabledResetClipboardData}
-        disabledRenameButton={disabledRename}
-        disabledDeleteButton={disabledDelete}
-        onCopy={copy}
-        onCut={cut}
-        onPaste={paste}
-        onResetClipboardData={resetClipboardData}
-        onRename={rename}
-        onRemove={remove}
-        messages={messages}
-      />
-      <DownloadManager
-        downloads={downloads}
-        onAbortDownload={abortDownload}
-        downloaderRef={downloaderRef}
-        constants={constants}
-        messages={messages}
-      />
-    </div>
+    <>
+      <div className="application">
+        <TopButtonBar
+          disabledExportZipButton={disabledExportZip}
+          disabledResetButton={disabledReset}
+          onCreateFolder={createFolder}
+          onAddFiles={addFiles}
+          onImportZipFile={importZipFile}
+          onExportZipFile={exportZipFile}
+          onReset={reset}
+          addFilesButtonRef={addFilesButtonRef}
+          importZipButtonRef={importZipButtonRef}
+          util={util}
+          constants={constants}
+          messages={messages}
+        />
+        <NavigationBar
+          selectedFolder={selectedFolder}
+          disabledBackButton={disabledBack}
+          disabledForwardButton={disabledForward}
+          onNavigateBack={navigateBack}
+          onNavigateForward={navigateForward}
+          onGoIntoFolder={goIntoFolder}
+          constants={constants}
+          messages={messages}
+        />
+        <Entries
+          entries={entries}
+          selectedFolder={selectedFolder}
+          highlightedIds={highlightedIds}
+          onHighlight={highlight}
+          onToggle={toggle}
+          onToggleRange={toggleRange}
+          onEnter={enter}
+          highlightedEntryRef={highlightedEntryRef}
+          entriesHeightRef={entriesHeightRef}
+          util={util}
+          constants={constants}
+          messages={messages}
+        />
+        <BottomButtonBar
+          disabledCopyButton={disabledCopy}
+          disabledCutButton={disabledCut}
+          disabledPasteButton={disabledPaste}
+          disabledResetClipboardDataButton={disabledResetClipboardData}
+          disabledRenameButton={disabledRename}
+          disabledDeleteButton={disabledDelete}
+          onCopy={copy}
+          onCut={cut}
+          onPaste={paste}
+          onResetClipboardData={resetClipboardData}
+          onRename={rename}
+          onRemove={remove}
+          messages={messages}
+        />
+        <DownloadManager
+          downloads={downloads}
+          onAbortDownload={abortDownload}
+          downloaderRef={downloaderRef}
+          constants={constants}
+          messages={messages}
+        />
+      </div>
+      <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
+    </>
   );
 }
 

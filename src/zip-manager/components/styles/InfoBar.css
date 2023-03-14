@@ -1,0 +1,48 @@
+.info-bar {
+  display: flex;
+}
+
+.source-link {
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: center;
+  color: black;
+  margin-inline-start: 12px;
+  margin-inline-end: 6px;
+}
+
+.icon {
+  filter: brightness(0);
+}
+
+a,
+a:visited {
+  color: inherit;
+}
+
+.info-bar input[type="color"] {
+  margin-inline-start: 0;
+  margin-inline-end: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .source-link {
+    color: white;
+  }
+
+  .icon {
+    filter: brightness(0) invert(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .source-link {
+    font-size: 0.8rem;
+  }
+
+  .info-bar {
+    padding-block-start: 2px;
+  }
+}

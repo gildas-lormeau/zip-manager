@@ -2,16 +2,9 @@
   justify-content: flex-start;
 }
 
-.button-bar-top button,
-.button-bar-top input[type="color"] {
+.button-bar-top button {
   margin-inline-start: 0;
   margin-inline-end: 6px;
-}
-
-.button-bar-top input[type="color"] {
-  height: 16px;
-  width: 16px;
-  align-self: flex-end;
 }
 
 .button-bar-top .button-group {

@@ -11,27 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.source-link {
-  text-align: center;
-  color: black;
-}
-
-.icon {
-  filter: brightness(0);
-}
-
-a,
-a:visited {
-  color: inherit;
-}
-
-@media (prefers-color-scheme: dark) {
-  .source-link {
-    color: white;
-  }
-
-  .icon {
-    filter: brightness(0) invert(1);
-  }
-}
