@@ -49,7 +49,7 @@
   font-weight: 400;
   white-space: nowrap;
   text-decoration: underline dotted transparent 1.5px;
-  text-underline-offset: 6px;
+  text-underline-offset: 5px;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {
