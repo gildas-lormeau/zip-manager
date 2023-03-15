@@ -36,7 +36,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, util }) {
   return (
     <>
       <span className="icon" onClick={handleClick}>
-        ♥︎
+      ♡
       </span>
       <input
         type="color"
