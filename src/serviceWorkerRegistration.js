@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* global window, process, navigator, URL, fetch */
 
 // This optional code is used to register a service worker.
