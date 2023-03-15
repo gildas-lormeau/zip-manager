@@ -5,10 +5,10 @@ import "./styles/ZipManager.css";
 
 import { useEffect, useState, useRef } from "react";
 
-import * as util from "./helpers/util.js";
+import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
 
-import getHelpers from "./helpers/helpers.js";
+import getHelpers from "./misc/helpers.js";
 import getKeyboardHooks from "./hooks/keyboard-hooks.js";
 import * as zipService from "./services/zip-service.js";
 
