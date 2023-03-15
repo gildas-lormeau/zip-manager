@@ -26,7 +26,7 @@ function getUIState({
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
-  const accentColor = util.getAccentColor(constants.DEFAULT_ACCENT_COLOR);
+  const accentColor = util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
 
   return {
     disabledExportZip,

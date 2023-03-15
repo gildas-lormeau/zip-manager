@@ -88,7 +88,7 @@ function downloadAborted(error) {
   );
 }
 
-function setAccentColor(color) {
+function saveAccentColor(color) {
   document.documentElement.style.setProperty(
     "--" + ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
     color
@@ -96,7 +96,7 @@ function setAccentColor(color) {
   localStorage.setItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
 }
 
-function getAccentColor(defaultColor) {
+function restoreAccentColor(defaultColor) {
   return (
     localStorage.getItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME) || defaultColor
   );
@@ -167,8 +167,8 @@ export {
   addKeyListener,
   removeKeyListener,
   getHeight,
-  setAccentColor,
-  getAccentColor,
+  saveAccentColor,
+  restoreAccentColor,
   showOpenFilePicker,
   formatSize,
   formatDate,
