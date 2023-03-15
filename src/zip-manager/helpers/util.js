@@ -134,7 +134,7 @@ async function showOpenFilePicker({ multiple, description, extension }) {
 
 function formatSize(number) {
   let indexNumberFormat = 0;
-  while (number > 1000) {
+  while (number > 1000 && indexNumberFormat < SIZE_NUMBER_FORMATS.length - 1) {
     number = number / 1000;
     indexNumberFormat++;
   }
