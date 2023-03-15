@@ -21,8 +21,8 @@ function getEffects({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    updateSelectedFolder(root);
     setPassword("");
+    updateSelectedFolder(root);
   }
 
   function updateHighlightedEntries() {
