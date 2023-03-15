@@ -101,7 +101,7 @@ function ZipManager() {
   });
   const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
     zipFilesystem,
-    setPassword:  (password) => passwordRef.current = password, 
+    setPassword: (password) => (passwordRef.current = password),
     setPreviousHighlightedEntry,
     setToggleNavigationDirection,
     setSelectedFolder,
@@ -197,7 +197,7 @@ function ZipManager() {
     setClipboardData
   });
   const { enter, setZipPassword } = getAppHandlers({
-    setPassword: (password) => passwordRef.current = password,
+    setPassword: (password) => (passwordRef.current = password),
     goIntoFolder,
     download,
     util,

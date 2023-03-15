@@ -1,4 +1,10 @@
-function getAppHandlers({ setPassword, goIntoFolder, download, util, messages }) {
+function getAppHandlers({
+  setPassword,
+  goIntoFolder,
+  download,
+  util,
+  messages
+}) {
   const { ENTER_PASSWORD_MESSAGE } = messages;
   function enter(entry) {
     if (entry.directory) {
