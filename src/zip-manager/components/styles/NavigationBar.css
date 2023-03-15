@@ -27,10 +27,14 @@
   overflow: hidden;
 }
 
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .breadcrumb li {
-  display: inline-block;
   margin-inline-start: 2px;
-  vertical-align: middle;
+  margin-block-start: 2px;
 }
 
 .breadcrumb li::after {
