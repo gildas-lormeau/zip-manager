@@ -69,6 +69,8 @@ function getSelectedFolderHandlers({
       async (download, options) => {
         const blob = await selectedFolder.exportBlob({
           ...options,
+          bufferedWrite: true,
+          keepOrder: true,
           password: getPassword()
         });
         removeDownload(download);

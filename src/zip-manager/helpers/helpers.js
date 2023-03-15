@@ -23,13 +23,11 @@ function getHelpers({
       const { signal } = controller;
       const onprogress = (progressValue, progressMax) =>
         onDownloadProgress(download.id, progressValue, progressMax);
-      Object.assign(options, {
-        signal,
-        onprogress,
-        bufferedWrite: true,
-        keepOrder: true
-      });
-      await executeDownload(download, options, blobGetter);
+      await executeDownload(
+        download,
+        { ...options, signal, onprogress },
+        blobGetter
+      );
       return download;
     }
   }
