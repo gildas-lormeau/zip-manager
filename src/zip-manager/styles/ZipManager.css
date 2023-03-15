@@ -10,7 +10,6 @@
 
 .application > * {
   padding: 8px;
-  padding-block-end: 4px;
   border-block-end: solid var(--accent-color) 1px;
 }
 

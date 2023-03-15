@@ -1,7 +1,6 @@
 .entries {
   flex: 1;
   overflow: auto;
-  padding-block-end: 8px;
 }
 
 .entries li {
