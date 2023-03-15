@@ -21,7 +21,9 @@ function DownloadManager({
           </li>
         ))}
       </ol>
-      <a hidden ref={downloaderRef}></a>
+      <a hidden ref={downloaderRef} href="about:blank">
+        {}
+      </a>
     </div>
   );
 }
