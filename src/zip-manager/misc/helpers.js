@@ -1,4 +1,5 @@
 function getHelpers({
+  zipFilesystem,
   downloadId,
   setDownloadId,
   setDownloads,
@@ -8,7 +9,11 @@ function getHelpers({
   util,
   messages
 }) {
-  const { DOWNLOAD_MESSAGE, ENTER_PASSWORD_MESSAGE } = messages;
+  const {
+    DOWNLOAD_MESSAGE,
+    ENTER_PASSWORD_MESSAGE,
+    ENTER_ENTRY_PASSWORD_MESSAGE
+  } = messages;
 
   async function downloadFile(name, options, blobGetter) {
     name = util.prompt(DOWNLOAD_MESSAGE, name);
@@ -39,7 +44,15 @@ function getHelpers({
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          const password = util.prompt(ENTER_PASSWORD_MESSAGE);
+          let password;
+          if (error.entryId === undefined) {
+            password = util.prompt(ENTER_PASSWORD_MESSAGE);
+          } else {
+            const entry = zipFilesystem.getById(error.entryId);
+            password = util.prompt(
+              ENTER_ENTRY_PASSWORD_MESSAGE + entry.getFullname()
+            );
+          }
           if (password) {
             options.readerOptions = { password };
             await executeDownload(download, options, blobGetter);

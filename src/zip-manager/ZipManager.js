@@ -62,6 +62,7 @@ function ZipManager() {
     util
   });
   const { downloadFile } = getHelpers({
+    zipFilesystem,
     downloadId,
     setDownloadId,
     setDownloads,
