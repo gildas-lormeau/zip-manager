@@ -49,7 +49,7 @@ function Entries({
     }
   }
 
-  function handleTouchStart() {
+  function setTouchEndEventTimeout() {
     if (touchEndTimeout.current) {
       util.clearTimeout(touchEndTimeout.current);
     }
@@ -59,7 +59,7 @@ function Entries({
     }, constants.LONG_TOUCH_DELAY);
   }
 
-  function handleTouchEnd() {
+  function clearTouchEndEventTimeout() {
     if (touchEndTimeout.current) {
       util.clearTimeout(touchEndTimeout.current);
       touchEndTimeout.current = null;
@@ -76,10 +76,12 @@ function Entries({
     <div className="entries" aria-label="Folder entries" ref={entriesRef}>
       <ol
         onKeyDown={handleKeyDown}
-        onMouseDown={handleTouchStart}
-        onMouseUp={handleTouchEnd}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        onMouseDown={setTouchEndEventTimeout}
+        onMouseMove={clearTouchEndEventTimeout}
+        onMouseUp={clearTouchEndEventTimeout}
+        onTouchStart={setTouchEndEventTimeout}
+        onTouchMove={clearTouchEndEventTimeout}
+        onTouchEnd={clearTouchEndEventTimeout}
         onContextMenu={handleContextMenu}
       >
         {entries.map((entry) => {
