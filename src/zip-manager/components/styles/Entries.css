@@ -1,5 +1,6 @@
 .entries {
-  flex: 1;
+  height: 70vh;
+  resize: vertical;
   overflow: auto;
 }
 
