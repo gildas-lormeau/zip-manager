@@ -3,6 +3,7 @@
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
+const BEFORE_UNLOAD_EVENT_NAME = "beforeunload";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
 const ZIP_EXTENSION = ".zip";
 const ZIP_MIME_TYPE = "application/zip";
@@ -55,6 +56,14 @@ function addKeyListener(listener) {
 
 function removeKeyListener(listener) {
   window.removeEventListener(KEYUP_EVENT_NAME, listener);
+}
+
+function addUnloadListener(listener) {
+  window.addEventListener(BEFORE_UNLOAD_EVENT_NAME, listener);
+}
+
+function removeUnloadListener(listener) {
+  window.removeEventListener(BEFORE_UNLOAD_EVENT_NAME, listener);
 }
 
 function highlight(element) {
@@ -166,6 +175,8 @@ export {
   resetValue,
   addKeyListener,
   removeKeyListener,
+  addUnloadListener,
+  removeUnloadListener,
   getHeight,
   saveAccentColor,
   restoreAccentColor,

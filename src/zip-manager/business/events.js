@@ -1,4 +1,6 @@
-function getKeyboardHandlers({
+function getEventHandlers({
+  zipFilesystem,
+  downloads,
   highlightedIds,
   selectedFolder,
   disabledCut,
@@ -291,9 +293,17 @@ function getKeyboardHandlers({
     );
   }
 
+  function handlePageUnload(event) {
+    if (zipFilesystem.children.length || downloads.length) {
+      event.preventDefault();
+      event.returnValue = "";
+    }
+  }
+
   return {
+    handlePageUnload,
     handleKeyUp
   };
 }
 
-export default getKeyboardHandlers;
+export default getEventHandlers;

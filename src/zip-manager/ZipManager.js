@@ -9,7 +9,7 @@ import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
 
 import getHelpers from "./misc/helpers.js";
-import getKeyboardHooks from "./hooks/keyboard-hooks.js";
+import getHooks from "./hooks/hooks.js";
 import * as zipService from "./services/zip-service.js";
 
 import * as constants from "./business/constants.js";
@@ -24,7 +24,7 @@ import getAppHandlers from "./business/features/app.js";
 import getFilesystemHandlers from "./business/features/filesystem.js";
 import getDownloadsHandlers from "./business/features/downloads.js";
 import getClipboardHandlers from "./business/features/clipboard.js";
-import getKeyboardHandlers from "./business/features/keyboard.js";
+import getEventHandlers from "./business/events.js";
 import getUIHandlers from "./business/features/ui.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
@@ -56,7 +56,7 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const { useKeyUp } = getKeyboardHooks(util);
+  const { useKeyUp, usePageUnload } = getHooks(util);
   const { abortDownload, removeDownload } = getDownloadsHandlers({
     setDownloads,
     util
@@ -204,7 +204,9 @@ function ZipManager() {
     util,
     messages
   });
-  const { handleKeyUp } = getKeyboardHandlers({
+  const { handleKeyUp, handlePageUnload } = getEventHandlers({
+    zipFilesystem,
+    downloads,
     highlightedIds,
     selectedFolder,
     disabledSetZipPassword,
@@ -248,12 +250,13 @@ function ZipManager() {
     constants
   });
 
+  usePageUnload(handlePageUnload);
   useKeyUp(handleKeyUp);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateZipFilesystem, [zipFilesystem]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateHighlightedEntries, [highlightedIds]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (
     <>
