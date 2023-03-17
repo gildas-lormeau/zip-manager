@@ -19,10 +19,22 @@
 }
 
 .button-bar button {
-  padding: 8px;
   padding-inline: 12px;
 }
 
 .button-bar button:not([disabled]) {
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+
+  .button-bar button {
+    margin-block-end: 8px;
+    height: 28px;
+  }
+  
+  .button-bar button {
+    padding-inline: 8px;
+  }
+
 }
