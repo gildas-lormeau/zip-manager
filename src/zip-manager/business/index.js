@@ -4,4 +4,4 @@ import getEffects from "./effects.js";
 import getEventHandlers from "./events.js";
 import * as features from "./features/index.js";
 
-export { constants, getUIState, getEffects, getEventHandlers, features };
+export { constants, features, getUIState, getEffects, getEventHandlers };
