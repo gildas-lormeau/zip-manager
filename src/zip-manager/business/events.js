@@ -178,7 +178,7 @@ function getEventHandlers({
       if (event.key === PAGE_DOWN_KEY) {
         highlightNextPage();
       }
-      if (event.key.length === 1) {
+      if (event.key.length === 1 && event.key !== ACTION_KEY) {
         highlightLetter(event.key);
       }
     }
