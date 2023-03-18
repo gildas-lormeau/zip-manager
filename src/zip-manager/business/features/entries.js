@@ -42,8 +42,10 @@ function getEntriesFeatures({
   }
 
   function highlightFirstLetter(letter) {
-    const filteredEntries = entries.filter((entry) =>
-      entry.name.toLocaleLowerCase().startsWith(letter.toLocaleLowerCase())
+    const filteredEntries = entries.filter(
+      (entry) =>
+        entry.name &&
+        entry.name.toLocaleLowerCase().startsWith(letter.toLocaleLowerCase())
     );
     if (filteredEntries.length) {
       const firstEntry = filteredEntries[0];
