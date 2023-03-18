@@ -17,7 +17,7 @@ function getFoldersFeatures({
     newHistory[newHistoryIndex] = entry;
     setHistory(newHistory);
     setHistoryIndex(newHistoryIndex);
-    setHighlightedIds([selectedFolder.id]);
+    highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
     updateSelectedFolder(entry);
   }
@@ -34,9 +34,25 @@ function getFoldersFeatures({
     const newHistoryIndex = historyIndex + offset;
     setHistoryIndex(newHistoryIndex);
     const entry = history[newHistoryIndex];
-    setHighlightedIds([selectedFolder.id]);
+    highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
     updateSelectedFolder(entry);
+  }
+
+  function highlightEntry(selectedFolder, entry) {
+    if (
+      selectedFolder.children.includes(entry) ||
+      entry.children.includes(selectedFolder)
+    ) {
+      setHighlightedIds([selectedFolder.id]);
+    } else {
+      const highlightedEntry = entry.children.find((child) =>
+        selectedFolder.isDescendantOf(child)
+      );
+      setHighlightedIds(
+        highlightedEntry ? [highlightedEntry.id] : [entry.parent.id]
+      );
+    }
   }
 
   return {
