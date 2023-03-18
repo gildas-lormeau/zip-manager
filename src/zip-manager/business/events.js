@@ -175,12 +175,6 @@ function getEventHandlers({
       if (event.key === PAGE_DOWN_KEY) {
         highlightNextPage();
       }
-      if (event.key === HOME_KEY) {
-        highlightFirst();
-      }
-      if (event.key === END_KEY) {
-        highlightLast();
-      }
     }
   }
 
