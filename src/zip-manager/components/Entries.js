@@ -6,10 +6,13 @@ function Entries({
   entries,
   selectedFolder,
   highlightedIds,
+  deltaEntriesHeight,
+  entriesHeight,
   onHighlight,
   onToggle,
   onToggleRange,
   onEnter,
+  onSetEntriesHeight,
   entriesHeightRef,
   highlightedEntryRef,
   util,
@@ -37,7 +40,13 @@ function Entries({
     }
   }
 
-  function computeEntriesHeight() {
+  function getEntriesStyle() {
+    if (entriesHeight) {
+      return { height: entriesHeight + deltaEntriesHeight + "px" };
+    }
+  }
+
+  function computeEntriesListHeight() {
     if (highlightedEntryRef && highlightedEntryRef.current) {
       entriesHeightRef.current = Math.max(
         Math.ceil(
@@ -47,6 +56,10 @@ function Entries({
         1
       );
     }
+  }
+
+  function computeEntriesHeight() {
+    onSetEntriesHeight(util.getHeight(entriesRef.current));
   }
 
   function setTouchEndEventTimeout() {
@@ -74,10 +87,23 @@ function Entries({
     event.preventDefault();
   }
 
-  useEffect(computeEntriesHeight);
+  function registerResizeHandler() {
+    util.addResizeListener(computeEntriesHeight);
+    return () => util.removeResizeListener(computeEntriesHeight);
+  }
+
+  useEffect(computeEntriesListHeight);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(computeEntriesHeight, []);
+  useEffect(registerResizeHandler);
 
   return (
-    <div className="entries" aria-label="Folder entries" ref={entriesRef}>
+    <div
+      className="entries"
+      aria-label="Folder entries"
+      ref={entriesRef}
+      style={getEntriesStyle()}
+    >
       <ol
         onKeyDown={handleKeyDown}
         onMouseDown={setTouchEndEventTimeout}

@@ -1,5 +1,7 @@
 import "./styles/BottomButtonBar.css";
 
+import { useRef } from "react";
+
 function BottomButtonBar({
   disabledCopyButton,
   disabledCutButton,
@@ -13,13 +15,35 @@ function BottomButtonBar({
   onResetClipboardData,
   onRename,
   onRemove,
+  onMove,
+  onStopMove,
   messages
 }) {
+  const previousTouchClientY = useRef(0);
+
+  function handleTouchMove(event) {
+    const { clientY } = event.changedTouches[0];
+    if (previousTouchClientY.current) {
+      const deltaY = clientY - previousTouchClientY.current;
+      onMove(deltaY);
+    } else {
+      previousTouchClientY.current = clientY;
+    }
+  }
+
+  function handleTouchEnd() {
+    previousTouchClientY.current = 0;
+    onStopMove();
+  }
+
   return (
     <div
       className="button-bar button-bar-bottom"
       role="toolbar"
       aria-label="Highlighted entry commands"
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onContextMenu={(event) => event.preventDefault()}
     >
       <div className="button-group">
         <CopyEntryButton

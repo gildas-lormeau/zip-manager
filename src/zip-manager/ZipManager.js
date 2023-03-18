@@ -41,6 +41,8 @@ function ZipManager() {
   );
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
+  const [entriesHeight, setEntriesHeight] = useState(0);
+  const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
   const [previousHighlightedEntry, setPreviousHighlightedEntry] =
     useState(null);
@@ -171,15 +173,25 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
-  const { enter, setZipPassword, getAccentColor, saveAccentColor } =
-    getAppFeatures({
-      setExportPassword,
-      goIntoFolder,
-      download,
-      util,
-      constants,
-      messages
-    });
+  const {
+    enter,
+    setZipPassword,
+    saveAccentColor,
+    getAccentColor,
+    resizeEntries,
+    stopResizeEntries
+  } = getAppFeatures({
+    entriesHeight,
+    entriesDeltaHeight,
+    setExportPassword,
+    setEntriesHeight,
+    setEntriesDeltaHeight,
+    goIntoFolder,
+    download,
+    util,
+    constants,
+    messages
+  });
   const {
     disabledExportZip,
     disabledSetZipPassword,
@@ -307,10 +319,13 @@ function ZipManager() {
           entries={entries}
           selectedFolder={selectedFolder}
           highlightedIds={highlightedIds}
+          entriesHeight={entriesHeight}
+          deltaEntriesHeight={entriesDeltaHeight}
           onHighlight={highlight}
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enter}
+          onSetEntriesHeight={setEntriesHeight}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
           util={util}
@@ -330,6 +345,8 @@ function ZipManager() {
           onResetClipboardData={resetClipboardData}
           onRename={rename}
           onRemove={remove}
+          onMove={resizeEntries}
+          onStopMove={stopResizeEntries}
           messages={messages}
         />
         <DownloadManager

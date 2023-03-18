@@ -1,5 +1,9 @@
 function getAppFeatures({
+  entriesHeight,
+  entriesDeltaHeight,
   setExportPassword,
+  setEntriesHeight,
+  setEntriesDeltaHeight,
   goIntoFolder,
   download,
   util,
@@ -28,7 +32,23 @@ function getAppFeatures({
     return util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
   }
 
-  return { enter, setZipPassword, saveAccentColor, getAccentColor };
+  function resizeEntries(deltaY) {
+    setEntriesDeltaHeight(deltaY);
+  }
+
+  function stopResizeEntries() {
+    setEntriesHeight(entriesHeight + entriesDeltaHeight);
+    setEntriesDeltaHeight(0);
+  }
+
+  return {
+    enter,
+    setZipPassword,
+    saveAccentColor,
+    getAccentColor,
+    resizeEntries,
+    stopResizeEntries
+  };
 }
 
 export default getAppFeatures;
