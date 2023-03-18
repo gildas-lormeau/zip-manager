@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./zip-manager/ZipManager.js";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

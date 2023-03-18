@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar.js";
 import Entries from "./Entries.js";
 import BottomButtonBar from "./BottomButtonBar.js";
 import DownloadManager from "./DownloadManager.js";
-import InfoBar from "./InfoBar";
+import InfoBar from "./InfoBar.js";
 
 export {
   TopButtonBar,
