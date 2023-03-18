@@ -50,9 +50,7 @@ function Entries({
   }
 
   function setTouchEndEventTimeout() {
-    if (touchEndTimeout.current) {
-      util.clearTimeout(touchEndTimeout.current);
-    }
+    clearTouchEndEventTimeout();
     touchEndTimeout.current = util.setTimeout(() => {
       touchEndTimeout.current = null;
       setSelectModeEnabled(!selectModeEnabled);
