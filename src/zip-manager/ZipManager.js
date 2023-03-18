@@ -5,9 +5,9 @@ import { useEffect, useState, useRef } from "react";
 import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
 import getHelpers from "./misc/helpers.js";
-import getHooks from "./hooks/hooks.js";
 import * as zipService from "./services/zip-service.js";
 
+import getHooks from "./hooks/hooks.js";
 import {
   constants,
   features,
