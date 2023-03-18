@@ -10,10 +10,10 @@ import * as zipService from "./services/zip-service.js";
 
 import {
   constants,
+  features,
   getUIState,
   getEffects,
-  getEventHandlers,
-  features
+  getEventHandlers
 } from "./business/index.js";
 import {
   TopButtonBar,
