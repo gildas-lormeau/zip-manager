@@ -41,6 +41,22 @@ function getEntriesFeatures({
     highlightEntry(entries[entries.length - 1]);
   }
 
+  function highlightLetter(letter) {
+    const filteredEntries = entries.filter((entry) =>
+      entry.name.toLowerCase().startsWith(letter.toLowerCase())
+    );
+    if (filteredEntries.length) {
+      const firstEntry = filteredEntries[0];
+      if (filteredEntries.length === 1) {
+        highlightEntry(firstEntry);
+      } else {
+        setPreviousHighlightedEntry(firstEntry);
+        setToggleNavigationDirection(1);
+        setHighlightedIds(filteredEntries.reverse().map((entry) => entry.id));
+      }
+    }
+  }
+
   function highlight(entry) {
     highlightEntry(entry);
   }
@@ -221,6 +237,7 @@ function getEntriesFeatures({
     highlightNextPage,
     highlightFirst,
     highlightLast,
+    highlightLetter,
     highlight,
     highlightEntries,
     highlightAll,

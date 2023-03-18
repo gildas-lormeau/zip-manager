@@ -25,6 +25,7 @@ function getEventHandlers({
   highlightNextPage,
   highlightFirst,
   highlightLast,
+  highlightLetter,
   highlightAll,
   togglePrevious,
   toggleNext,
@@ -76,6 +77,7 @@ function getEventHandlers({
       highlightNextPage,
       highlightFirst,
       highlightLast,
+      highlightLetter,
       highlightAll,
       togglePrevious,
       toggleNext,
@@ -125,6 +127,7 @@ function getEventHandlers({
       highlightNextPage,
       highlightFirst,
       highlightLast,
+      highlightLetter,
       togglePrevious,
       toggleNext,
       togglePreviousPage,
@@ -174,6 +177,9 @@ function getEventHandlers({
       }
       if (event.key === PAGE_DOWN_KEY) {
         highlightNextPage();
+      }
+      if (event.key.length === 1) {
+        highlightLetter(event.key);
       }
     }
   }
