@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 function InfoBar({ accentColor, onSetAccentColor, util }) {
   return (
-    <div className="info-bar">
+    <footer className="info-bar">
       <div className="source-link">
         {"Source code on "}
         <a href="https://github.com/gildas-lormeau/zipjs-react-app">GitHub</a>
@@ -16,7 +16,7 @@ function InfoBar({ accentColor, onSetAccentColor, util }) {
         ></AccentColorPickerButton>
         {" in Rennes"}
       </div>
-    </div>
+    </footer>
   );
 }
 
