@@ -1,22 +1,29 @@
-import "./styles/Base.css";
-import "./styles/ListItem.css";
-import "./styles/ButtonBar.css";
-import "./styles/ZipManager.css";
+import "./styles/index.css";
 
 import { useEffect, useState, useRef } from "react";
 
 import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
-
 import getHelpers from "./misc/helpers.js";
 import getHooks from "./hooks/hooks.js";
 import * as zipService from "./services/zip-service.js";
 
-import * as constants from "./business/constants.js";
-import getUIState from "./business/ui-state.js";
-import getEffects from "./business/effects.js";
-import getEventHandlers from "./business/events.js";
 import {
+  constants,
+  getUIState,
+  getEffects,
+  getEventHandlers,
+  features
+} from "./business/index.js";
+import {
+  TopButtonBar,
+  NavigationBar,
+  Entries,
+  BottomButtonBar,
+  DownloadManager,
+  InfoBar
+} from "./components/index.js";
+const {
   getCommonFeatures,
   getEntriesFeatures,
   getFoldersFeatures,
@@ -27,14 +34,7 @@ import {
   getClipboardFeatures,
   getUIFeatures,
   getAppFeatures
-} from "./business/features/index.js";
-
-import TopButtonBar from "./components/TopButtonBar.js";
-import NavigationBar from "./components/NavigationBar.js";
-import Entries from "./components/Entries.js";
-import BottomButtonBar from "./components/BottomButtonBar.js";
-import DownloadManager from "./components/DownloadManager.js";
-import InfoBar from "./components/InfoBar";
+} = features;
 
 function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(
