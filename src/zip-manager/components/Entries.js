@@ -16,8 +16,8 @@ function Entries({
   constants,
   messages
 }) {
-  const entriesRef = useRef(null);
   const [selectModeEnabled, setSelectModeEnabled] = useState(false);
+  const entriesRef = useRef(null);
   const touchEndTimeout = useRef(null);
 
   function getEntryClassName(entry) {
