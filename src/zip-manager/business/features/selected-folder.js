@@ -67,14 +67,19 @@ function getSelectedFolderFeatures({
         : ROOT_ZIP_FILENAME,
       { mimeType: DEFAULT_MIME_TYPE },
       async (download, options) => {
-        const blob = await selectedFolder.exportBlob({
-          ...options,
-          bufferedWrite: true,
-          keepOrder: true,
-          password: getPassword()
-        });
-        removeDownload(download);
-        return blob;
+        try {
+          const blob = await selectedFolder.exportBlob({
+            ...options,
+            bufferedWrite: true,
+            keepOrder: true,
+            password: getPassword()
+          });
+          return blob;
+        } catch (error) {
+          util.alert(error);
+        } finally {
+          removeDownload(download);
+        }
       }
     );
   }

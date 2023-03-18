@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 
 import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
-import getHelpers from "./misc/helpers.js";
 import * as zipService from "./services/zip-service.js";
 
 import getHooks from "./hooks/hooks.js";
@@ -58,24 +57,21 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const { updateSelectedFolder } = getCommonFeatures({
-    selectedFolder,
-    setEntries
-  });
-  const { abortDownload, removeDownload } = getDownloadsFeatures({
-    setDownloads,
-    util
-  });
-  const { downloadFile } = getHelpers({
+  const { downloadFile, updateSelectedFolder } = getCommonFeatures({
     zipFilesystem,
     downloadId,
+    selectedFolder,
     setDownloadId,
     setDownloads,
-    removeDownload,
+    setEntries,
     downloaderElement: downloaderRef.current,
     zipService,
     util,
     messages
+  });
+  const { abortDownload, removeDownload } = getDownloadsFeatures({
+    setDownloads,
+    util
   });
   const {
     highlightPrevious,
@@ -158,14 +154,15 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
-  const { enter, setZipPassword, getAccentColor, saveAccentColor } = getAppFeatures({
-    setPassword: (password) => (passwordRef.current = password),
-    goIntoFolder,
-    download,
-    util,
-    constants,
-    messages
-  });
+  const { enter, setZipPassword, getAccentColor, saveAccentColor } =
+    getAppFeatures({
+      setPassword: (password) => (passwordRef.current = password),
+      goIntoFolder,
+      download,
+      util,
+      constants,
+      messages
+    });
   const {
     disabledExportZip,
     disabledSetZipPassword,
