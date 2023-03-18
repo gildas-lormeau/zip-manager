@@ -27,4 +27,4 @@ function getHooks({
   return { useKeyUp, usePageUnload };
 }
 
-export default getHooks;
+export { getHooks };

@@ -6,7 +6,7 @@ import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
 import * as zipService from "./services/zip-service.js";
 
-import getHooks from "./hooks/hooks.js";
+import { getHooks } from "./hooks/hooks.js";
 import {
   constants,
   features,
