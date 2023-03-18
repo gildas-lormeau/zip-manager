@@ -37,7 +37,7 @@ function getSelectedFolderFeatures({
       }
     });
     if (addedEntries.length) {
-      highlightEntries(addedEntries);
+      highlightSortedEntries(addedEntries);
     }
     updateSelectedFolder();
   }
@@ -54,12 +54,20 @@ function getSelectedFolderFeatures({
         (entry) => !children.includes(entry)
       );
       if (addedEntries.length) {
-        highlightEntries(addedEntries);
+        highlightSortedEntries(addedEntries);
       }
       updateSelectedFolder();
     }
 
     updateZipFile();
+  }
+
+  function highlightSortedEntries(entries) {
+    highlightEntries(
+      entries.sort((previousChild, nextChild) =>
+        nextChild.name.localeCompare(previousChild.name)
+      )
+    );
   }
 
   function exportZipFile() {
