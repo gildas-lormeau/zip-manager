@@ -128,7 +128,9 @@ function BreadcrumbItem({
   }
 
   function handleClick() {
-    onGoIntoFolder(folder);
+    if (active) {
+      onGoIntoFolder(folder);
+    }
   }
 
   function handleKeyUp({ event, folder }) {
