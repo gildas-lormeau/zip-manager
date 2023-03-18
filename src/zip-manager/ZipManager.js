@@ -23,6 +23,7 @@ import {
   DownloadManager,
   InfoBar
 } from "./components/index.js";
+
 const {
   getCommonFeatures,
   getEntriesFeatures,
