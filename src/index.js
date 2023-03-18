@@ -6,7 +6,7 @@ import "./index.css";
 import App from "./zip-manager/ZipManager.js";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration.js";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.body);
 root.render(
   <React.StrictMode>
     <App />
