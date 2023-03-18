@@ -57,10 +57,16 @@ function Entries({
     }, constants.LONG_TOUCH_DELAY);
   }
 
-  function clearTouchEndEventTimeout() {
+  function clearTouchEndEventTimeout(event) {
     if (touchEndTimeout.current) {
       util.clearTimeout(touchEndTimeout.current);
       touchEndTimeout.current = null;
+    }
+  }
+
+  function handleMouseMove(event) {
+    if (event.movementX > 1 || event.movementY > 1) {
+      clearTouchEndEventTimeout();
     }
   }
 
@@ -75,7 +81,7 @@ function Entries({
       <ol
         onKeyDown={handleKeyDown}
         onMouseDown={setTouchEndEventTimeout}
-        onMouseMove={clearTouchEndEventTimeout}
+        onMouseMove={handleMouseMove}
         onMouseUp={clearTouchEndEventTimeout}
         onTouchStart={setTouchEndEventTimeout}
         onTouchMove={clearTouchEndEventTimeout}
