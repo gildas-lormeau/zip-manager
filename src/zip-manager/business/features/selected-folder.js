@@ -1,6 +1,8 @@
 function getSelectedFolderFeatures({
   selectedFolder,
-  getPassword,
+  getImportPassword,
+  getExportPassword,
+  setImportPassword,
   updateSelectedFolder,
   highlightEntries,
   removeDownload,
@@ -61,27 +63,34 @@ function getSelectedFolderFeatures({
   }
 
   function exportZipFile() {
-    downloadFile(
-      selectedFolder.name
-        ? selectedFolder.name + ZIP_EXTENSION
-        : ROOT_ZIP_FILENAME,
-      { mimeType: DEFAULT_MIME_TYPE },
-      async (download, options) => {
-        try {
-          const blob = await selectedFolder.exportBlob({
-            ...options,
-            bufferedWrite: true,
-            keepOrder: true,
-            password: getPassword()
-          });
-          return blob;
-        } catch (error) {
-          util.alert(error);
-        } finally {
-          removeDownload(download);
-        }
+    async function exportZipFile() {
+      try {
+        await downloadFile(
+          selectedFolder.name
+            ? selectedFolder.name + ZIP_EXTENSION
+            : ROOT_ZIP_FILENAME,
+          { mimeType: DEFAULT_MIME_TYPE },
+          getImportPassword(),
+          setImportPassword,
+          async (download, options) => {
+            try {
+              return await selectedFolder.exportBlob({
+                ...options,
+                bufferedWrite: true,
+                keepOrder: true,
+                password: getExportPassword()
+              });
+            } finally {
+              removeDownload(download);
+            }
+          }
+        );
+      } catch (error) {
+        util.alert(error.message);
       }
-    );
+    }
+
+    exportZipFile();
   }
 
   return {

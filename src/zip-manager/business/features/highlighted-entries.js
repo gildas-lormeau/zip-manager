@@ -6,11 +6,13 @@ function getHighlightedEntriesFeatures({
   highlightedIds,
   selectedFolder,
   clipboardData,
+  getImportPassword,
   setHistory,
   setHistoryIndex,
   setClipboardData,
   setHighlightedIds,
   setPreviousHighlightedEntry,
+  setImportPassword,
   removeDownload,
   updateSelectedFolder,
   downloadFile,
@@ -111,11 +113,27 @@ function getHighlightedEntriesFeatures({
   }
 
   function download(entry) {
-    downloadFile(entry.name, {}, async (download, options) => {
-      const blob = await entry.getBlob(DEFAULT_MIME_TYPE, options);
-      removeDownload(download);
-      return blob;
-    });
+    async function download() {
+      try {
+        await downloadFile(
+          entry.name,
+          {},
+          getImportPassword(),
+          setImportPassword,
+          async (download, options) => {
+            try {
+              return await entry.getBlob(DEFAULT_MIME_TYPE, options);
+            } finally {
+              removeDownload(download);
+            }
+          }
+        );
+      } catch (error) {
+        util.alert(error.message);
+      }
+    }
+
+    download();
   }
 
   function updateHistoryData() {

@@ -1,5 +1,5 @@
 function getAppFeatures({
-  setPassword,
+  setExportPassword,
   goIntoFolder,
   download,
   util,
@@ -17,7 +17,7 @@ function getAppFeatures({
 
   function setZipPassword() {
     const password = util.prompt(ENTER_PASSWORD_MESSAGE);
-    setPassword(password);
+    setExportPassword(password);
   }
 
   function saveAccentColor(color) {

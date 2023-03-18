@@ -50,12 +50,25 @@ function ZipManager() {
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
-  const passwordRef = useRef("");
+  const importPasswordRef = useRef("");
+  const exportPasswordRef = useRef("");
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
+
+  const setImportPassword = (password) =>
+    (importPasswordRef.current = password);
+  const setExportPassword = (password) =>
+    (exportPasswordRef.current = password);
+  const getImportPassword = () => importPasswordRef.current;
+  const getExportPassword = () => exportPasswordRef.current;
+  const getHighlightedEntryElement = () => highlightedEntryRef.current;
+  const getEntriesHeight = () => entriesHeightRef.current;
+  const downloaderElement = downloaderRef.current;
+  const addFilesButton = addFilesButtonRef.current;
+  const importZipButton = importZipButtonRef.current;
 
   const { downloadFile, updateSelectedFolder } = getCommonFeatures({
     zipFilesystem,
@@ -64,7 +77,7 @@ function ZipManager() {
     setDownloadId,
     setDownloads,
     setEntries,
-    downloaderElement: downloaderRef.current,
+    downloaderElement,
     zipService,
     util,
     messages
@@ -93,7 +106,7 @@ function ZipManager() {
     previousHighlightedEntry,
     highlightedIds,
     toggleNavigationDirection,
-    getEntriesHeight: () => entriesHeightRef.current,
+    getEntriesHeight,
     setHighlightedIds,
     setPreviousHighlightedEntry,
     setToggleNavigationDirection
@@ -115,7 +128,9 @@ function ZipManager() {
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderFeatures({
       selectedFolder,
-      getPassword: () => passwordRef.current,
+      getImportPassword,
+      getExportPassword,
+      setImportPassword,
       updateSelectedFolder,
       highlightEntries,
       removeDownload,
@@ -133,11 +148,13 @@ function ZipManager() {
       highlightedIds,
       selectedFolder,
       clipboardData,
+      getImportPassword,
       setHistory,
       setHistoryIndex,
       setClipboardData,
       setHighlightedIds,
       setPreviousHighlightedEntry,
+      setImportPassword,
       removeDownload,
       updateSelectedFolder,
       downloadFile,
@@ -156,7 +173,7 @@ function ZipManager() {
   });
   const { enter, setZipPassword, getAccentColor, saveAccentColor } =
     getAppFeatures({
-      setPassword: (password) => (passwordRef.current = password),
+      setExportPassword,
       goIntoFolder,
       download,
       util,
@@ -227,15 +244,16 @@ function ZipManager() {
     navigateBack,
     navigateForward,
     goIntoFolder,
-    addFilesButton: addFilesButtonRef.current,
-    importZipButton: importZipButtonRef.current,
+    addFilesButton,
+    importZipButton,
     util,
     constants
   });
   const { useKeyUp, usePageUnload } = getHooks(util);
   const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
     zipFilesystem,
-    setPassword: (password) => (passwordRef.current = password),
+    setImportPassword,
+    setExportPassword,
     setPreviousHighlightedEntry,
     setToggleNavigationDirection,
     setSelectedFolder,
@@ -243,7 +261,7 @@ function ZipManager() {
     setClipboardData,
     setHistory,
     setHistoryIndex,
-    getHighlightedEntryElement: () => highlightedEntryRef.current,
+    getHighlightedEntryElement,
     updateSelectedFolder,
     util
   });

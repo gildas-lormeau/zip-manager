@@ -37,7 +37,13 @@ function getCommonFeatures({
       );
   }
 
-  async function downloadFile(name, options, blobGetter) {
+  async function downloadFile(
+    name,
+    options,
+    importPassword,
+    setImportPassword,
+    blobGetter
+  ) {
     name = util.prompt(DOWNLOAD_MESSAGE, name);
     if (name) {
       const controller = util.createAbortController();
@@ -53,33 +59,63 @@ function getCommonFeatures({
       await executeDownload(
         download,
         { ...options, signal, onprogress },
+        importPassword,
+        setImportPassword,
         blobGetter
       );
       return download;
     }
   }
 
-  async function executeDownload(download, options, blobGetter) {
+  async function executeDownload(
+    download,
+    options,
+    importPassword,
+    setImportPassword,
+    blobGetter
+  ) {
     try {
       const blob = await blobGetter(download, options);
       util.downloadBlob(blob, downloaderElement, download.name);
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          let password;
-          if (error.entryId === undefined) {
-            password = util.prompt(ENTER_PASSWORD_MESSAGE);
-          } else {
-            const entry = zipFilesystem.getById(error.entryId);
-            password = util.prompt(
-              ENTER_ENTRY_PASSWORD_MESSAGE + entry.getFullname()
+          if (
+            importPassword &&
+            (!options.readerOptions ||
+              options.readerOptions.password !== importPassword)
+          ) {
+            options.readerOptions = { importPassword };
+            await executeDownload(
+              download,
+              options,
+              importPassword,
+              setImportPassword,
+              blobGetter
             );
-          }
-          if (password) {
-            options.readerOptions = { password };
-            await executeDownload(download, options, blobGetter);
           } else {
-            throw error;
+            let password;
+            if (error.entryId === undefined) {
+              password = util.prompt(ENTER_PASSWORD_MESSAGE);
+            } else {
+              const entry = zipFilesystem.getById(error.entryId);
+              password = util.prompt(
+                ENTER_ENTRY_PASSWORD_MESSAGE + entry.getFullname()
+              );
+            }
+            if (password) {
+              options.readerOptions = { password };
+              await executeDownload(
+                download,
+                options,
+                importPassword,
+                setImportPassword,
+                blobGetter
+              );
+              setImportPassword(importPassword);
+            } else {
+              throw error;
+            }
           }
         } else {
           throw error;

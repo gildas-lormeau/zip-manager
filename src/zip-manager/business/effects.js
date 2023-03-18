@@ -1,6 +1,7 @@
 function getEffects({
   zipFilesystem,
-  setPassword,
+  setExportPassword,
+  setImportPassword,
   setPreviousHighlightedEntry,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -21,7 +22,8 @@ function getEffects({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    setPassword("");
+    setExportPassword("");
+    setImportPassword("");
     updateSelectedFolder(root);
   }
 
