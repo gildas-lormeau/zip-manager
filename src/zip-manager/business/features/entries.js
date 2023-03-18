@@ -51,7 +51,7 @@ function getEntriesFeatures({
         highlightEntry(firstEntry);
       } else {
         setPreviousHighlightedEntry(firstEntry);
-        setToggleNavigationDirection(1);
+        setToggleNavigationDirection(0);
         setHighlightedIds(filteredEntries.reverse().map((entry) => entry.id));
       }
     }
