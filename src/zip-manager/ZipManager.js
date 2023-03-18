@@ -33,7 +33,6 @@ const {
   getFilesystemFeatures,
   getDownloadsFeatures,
   getClipboardFeatures,
-  getUIFeatures,
   getAppFeatures
 } = features;
 
@@ -59,7 +58,10 @@ function ZipManager() {
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
-  const { useKeyUp, usePageUnload } = getHooks(util);
+  const { updateSelectedFolder } = getCommonFeatures({
+    selectedFolder,
+    setEntries
+  });
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
     util
@@ -74,51 +76,6 @@ function ZipManager() {
     zipService,
     util,
     messages
-  });
-  const {
-    disabledExportZip,
-    disabledSetZipPassword,
-    disabledReset,
-    disabledBack,
-    disabledForward,
-    disabledCopy,
-    disabledCut,
-    disabledPaste,
-    disabledResetClipboardData,
-    disabledRename,
-    disabledDelete,
-    disabledEnter,
-    accentColor
-  } = getUIState({
-    entries,
-    highlightedIds,
-    selectedFolder,
-    clipboardData,
-    historyIndex,
-    history,
-    util,
-    constants
-  });
-  const { updateSelectedFolder } = getCommonFeatures({
-    selectedFolder,
-    setEntries
-  });
-  const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
-    zipFilesystem,
-    setPassword: (password) => (passwordRef.current = password),
-    setPreviousHighlightedEntry,
-    setToggleNavigationDirection,
-    setSelectedFolder,
-    setHighlightedIds,
-    setClipboardData,
-    setHistory,
-    setHistoryIndex,
-    getHighlightedEntryElement: () => highlightedEntryRef.current,
-    updateSelectedFolder,
-    util
-  });
-  const { setAccentColor } = getUIFeatures({
-    util
   });
   const {
     highlightPrevious,
@@ -201,12 +158,36 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
-  const { enter, setZipPassword } = getAppFeatures({
+  const { enter, setZipPassword, getAccentColor, saveAccentColor } = getAppFeatures({
     setPassword: (password) => (passwordRef.current = password),
     goIntoFolder,
     download,
     util,
+    constants,
     messages
+  });
+  const {
+    disabledExportZip,
+    disabledSetZipPassword,
+    disabledReset,
+    disabledBack,
+    disabledForward,
+    disabledCopy,
+    disabledCut,
+    disabledPaste,
+    disabledResetClipboardData,
+    disabledRename,
+    disabledDelete,
+    disabledEnter,
+    accentColor
+  } = getUIState({
+    entries,
+    highlightedIds,
+    selectedFolder,
+    clipboardData,
+    historyIndex,
+    history,
+    getAccentColor
   });
   const { handleKeyUp, handlePageUnload } = getEventHandlers({
     zipFilesystem,
@@ -253,6 +234,21 @@ function ZipManager() {
     importZipButton: importZipButtonRef.current,
     util,
     constants
+  });
+  const { useKeyUp, usePageUnload } = getHooks(util);
+  const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
+    zipFilesystem,
+    setPassword: (password) => (passwordRef.current = password),
+    setPreviousHighlightedEntry,
+    setToggleNavigationDirection,
+    setSelectedFolder,
+    setHighlightedIds,
+    setClipboardData,
+    setHistory,
+    setHistoryIndex,
+    getHighlightedEntryElement: () => highlightedEntryRef.current,
+    updateSelectedFolder,
+    util
   });
 
   usePageUnload(handlePageUnload);
@@ -331,7 +327,7 @@ function ZipManager() {
       </div>
       <InfoBar
         accentColor={accentColor}
-        onSetAccentColor={setAccentColor}
+        onSetAccentColor={saveAccentColor}
         util={util}
       />
     </>

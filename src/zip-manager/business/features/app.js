@@ -3,6 +3,7 @@ function getAppFeatures({
   goIntoFolder,
   download,
   util,
+  constants,
   messages
 }) {
   const { ENTER_PASSWORD_MESSAGE } = messages;
@@ -19,7 +20,15 @@ function getAppFeatures({
     setPassword(password);
   }
 
-  return { enter, setZipPassword };
+  function saveAccentColor(color) {
+    util.saveAccentColor(color);
+  }
+
+  function getAccentColor() {
+    return util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
+  }
+
+  return { enter, setZipPassword, saveAccentColor, getAccentColor };
 }
 
 export default getAppFeatures;

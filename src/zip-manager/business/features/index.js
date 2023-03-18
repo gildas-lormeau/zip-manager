@@ -7,7 +7,6 @@ import getAppFeatures from "./app.js";
 import getFilesystemFeatures from "./filesystem.js";
 import getDownloadsFeatures from "./downloads.js";
 import getClipboardFeatures from "./clipboard.js";
-import getUIFeatures from "./ui.js";
 
 export {
   getCommonFeatures,
@@ -18,6 +17,5 @@ export {
   getAppFeatures,
   getFilesystemFeatures,
   getDownloadsFeatures,
-  getClipboardFeatures,
-  getUIFeatures
+  getClipboardFeatures
 };
