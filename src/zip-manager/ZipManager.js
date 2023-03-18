@@ -276,7 +276,7 @@ function ZipManager() {
 
   return (
     <>
-      <div className="application">
+      <main className="application">
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledSetZipPasswordButton={disabledSetZipPassword}
@@ -339,7 +339,7 @@ function ZipManager() {
           constants={constants}
           messages={messages}
         />
-      </div>
+      </main>
       <InfoBar
         accentColor={accentColor}
         onSetAccentColor={saveAccentColor}
