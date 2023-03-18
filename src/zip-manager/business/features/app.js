@@ -1,4 +1,4 @@
-function getAppHandlers({
+function getAppFeatures({
   setPassword,
   goIntoFolder,
   download,
@@ -22,4 +22,4 @@ function getAppHandlers({
   return { enter, setZipPassword };
 }
 
-export default getAppHandlers;
+export default getAppFeatures;

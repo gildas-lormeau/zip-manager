@@ -15,17 +15,19 @@ import * as zipService from "./services/zip-service.js";
 import * as constants from "./business/constants.js";
 import getUIState from "./business/ui-state.js";
 import getEffects from "./business/effects.js";
-import getCommonHandlers from "./business/features/common.js";
-import getEntriesHandlers from "./business/features/entries.js";
-import getFoldersHandlers from "./business/features/folders.js";
-import getSelectedFolderHandlers from "./business/features/selected-folder.js";
-import getHighlightedEntriesHandlers from "./business/features/highlighted-entries.js";
-import getAppHandlers from "./business/features/app.js";
-import getFilesystemHandlers from "./business/features/filesystem.js";
-import getDownloadsHandlers from "./business/features/downloads.js";
-import getClipboardHandlers from "./business/features/clipboard.js";
 import getEventHandlers from "./business/events.js";
-import getUIHandlers from "./business/features/ui.js";
+import {
+  getCommonFeatures,
+  getEntriesFeatures,
+  getFoldersFeatures,
+  getSelectedFolderFeatures,
+  getHighlightedEntriesFeatures,
+  getFilesystemFeatures,
+  getDownloadsFeatures,
+  getClipboardFeatures,
+  getUIFeatures,
+  getAppFeatures
+} from "./business/features/index.js";
 
 import TopButtonBar from "./components/TopButtonBar.js";
 import NavigationBar from "./components/NavigationBar.js";
@@ -57,7 +59,7 @@ function ZipManager() {
   const importZipButtonRef = useRef(null);
 
   const { useKeyUp, usePageUnload } = getHooks(util);
-  const { abortDownload, removeDownload } = getDownloadsHandlers({
+  const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
     util
   });
@@ -96,7 +98,7 @@ function ZipManager() {
     util,
     constants
   });
-  const { updateSelectedFolder } = getCommonHandlers({
+  const { updateSelectedFolder } = getCommonFeatures({
     selectedFolder,
     setEntries
   });
@@ -114,7 +116,7 @@ function ZipManager() {
     updateSelectedFolder,
     util
   });
-  const { setAccentColor } = getUIHandlers({
+  const { setAccentColor } = getUIFeatures({
     util
   });
   const {
@@ -135,7 +137,7 @@ function ZipManager() {
     toggleNextPage,
     toggleFirst,
     toggleLast
-  } = getEntriesHandlers({
+  } = getEntriesFeatures({
     entries,
     previousHighlightedEntry,
     highlightedIds,
@@ -145,7 +147,7 @@ function ZipManager() {
     setPreviousHighlightedEntry,
     setToggleNavigationDirection
   });
-  const { goIntoFolder, navigateBack, navigateForward } = getFoldersHandlers({
+  const { goIntoFolder, navigateBack, navigateForward } = getFoldersFeatures({
     history,
     historyIndex,
     selectedFolder,
@@ -156,7 +158,7 @@ function ZipManager() {
     updateSelectedFolder
   });
   const { createFolder, addFiles, importZipFile, exportZipFile } =
-    getSelectedFolderHandlers({
+    getSelectedFolderFeatures({
       selectedFolder,
       getPassword: () => passwordRef.current,
       updateSelectedFolder,
@@ -168,7 +170,7 @@ function ZipManager() {
       messages
     });
   const { copy, cut, paste, rename, remove, download } =
-    getHighlightedEntriesHandlers({
+    getHighlightedEntriesFeatures({
       zipFilesystem,
       entries,
       history,
@@ -188,16 +190,16 @@ function ZipManager() {
       constants,
       messages
     });
-  const { reset } = getFilesystemHandlers({
+  const { reset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
     util,
     messages
   });
-  const { resetClipboardData } = getClipboardHandlers({
+  const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
-  const { enter, setZipPassword } = getAppHandlers({
+  const { enter, setZipPassword } = getAppFeatures({
     setPassword: (password) => (passwordRef.current = password),
     goIntoFolder,
     download,

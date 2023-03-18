@@ -1,0 +1,23 @@
+import getCommonFeatures from "./common.js";
+import getEntriesFeatures from "./entries.js";
+import getFoldersFeatures from "./folders.js";
+import getSelectedFolderFeatures from "./selected-folder.js";
+import getHighlightedEntriesFeatures from "./highlighted-entries.js";
+import getAppFeatures from "./app.js";
+import getFilesystemFeatures from "./filesystem.js";
+import getDownloadsFeatures from "./downloads.js";
+import getClipboardFeatures from "./clipboard.js";
+import getUIFeatures from "./ui.js";
+
+export {
+  getCommonFeatures,
+  getEntriesFeatures,
+  getFoldersFeatures,
+  getSelectedFolderFeatures,
+  getHighlightedEntriesFeatures,
+  getAppFeatures,
+  getFilesystemFeatures,
+  getDownloadsFeatures,
+  getClipboardFeatures,
+  getUIFeatures
+};

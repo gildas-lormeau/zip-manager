@@ -1,4 +1,4 @@
-function getDownloadsHandlers({ setDownloads, util }) {
+function getDownloadsFeatures({ setDownloads, util }) {
   function abortDownload(deletedDownload) {
     removeDownload(deletedDownload);
     util.abortDownload(deletedDownload.controller);
@@ -16,4 +16,4 @@ function getDownloadsHandlers({ setDownloads, util }) {
   };
 }
 
-export default getDownloadsHandlers;
+export default getDownloadsFeatures;

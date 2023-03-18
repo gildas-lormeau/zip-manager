@@ -1,4 +1,4 @@
-function getSelectedFolderHandlers({
+function getSelectedFolderFeatures({
   selectedFolder,
   getPassword,
   updateSelectedFolder,
@@ -87,4 +87,4 @@ function getSelectedFolderHandlers({
   };
 }
 
-export default getSelectedFolderHandlers;
+export default getSelectedFolderFeatures;

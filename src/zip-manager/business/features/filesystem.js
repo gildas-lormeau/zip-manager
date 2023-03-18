@@ -1,4 +1,4 @@
-function getFilesystemHandlers({
+function getFilesystemFeatures({
   zipService,
   setZipFilesystem,
   util,
@@ -15,4 +15,4 @@ function getFilesystemHandlers({
   };
 }
 
-export default getFilesystemHandlers;
+export default getFilesystemFeatures;

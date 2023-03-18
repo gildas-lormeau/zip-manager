@@ -1,4 +1,4 @@
-function getUIHandlers({ util }) {
+function getUIFeatures({ util }) {
   function setAccentColor(color) {
     util.saveAccentColor(color);
   }
@@ -8,4 +8,4 @@ function getUIHandlers({ util }) {
   };
 }
 
-export default getUIHandlers;
+export default getUIFeatures;

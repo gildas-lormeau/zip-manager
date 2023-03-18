@@ -1,4 +1,4 @@
-function getCommonHandlers({ selectedFolder, setEntries }) {
+function getCommonFeatures({ selectedFolder, setEntries }) {
   function updateSelectedFolder(folder = selectedFolder) {
     if (folder) {
       const { parent, children } = folder;
@@ -25,4 +25,4 @@ function getCommonHandlers({ selectedFolder, setEntries }) {
   };
 }
 
-export default getCommonHandlers;
+export default getCommonFeatures;

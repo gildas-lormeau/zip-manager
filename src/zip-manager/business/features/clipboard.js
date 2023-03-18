@@ -1,4 +1,4 @@
-function getClipboardHandlers({ setClipboardData }) {
+function getClipboardFeatures({ setClipboardData }) {
   function resetClipboardData() {
     setClipboardData(null);
   }
@@ -8,4 +8,4 @@ function getClipboardHandlers({ setClipboardData }) {
   };
 }
 
-export default getClipboardHandlers;
+export default getClipboardFeatures;

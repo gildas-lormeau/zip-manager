@@ -1,4 +1,4 @@
-function getFoldersHandlers({
+function getFoldersFeatures({
   history,
   historyIndex,
   selectedFolder,
@@ -46,4 +46,4 @@ function getFoldersHandlers({
   };
 }
 
-export default getFoldersHandlers;
+export default getFoldersFeatures;

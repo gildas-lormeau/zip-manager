@@ -1,4 +1,4 @@
-function getEntriesHandlers({
+function getEntriesFeatures({
   entries,
   previousHighlightedEntry,
   highlightedIds,
@@ -235,4 +235,4 @@ function getEntriesHandlers({
   };
 }
 
-export default getEntriesHandlers;
+export default getEntriesFeatures;

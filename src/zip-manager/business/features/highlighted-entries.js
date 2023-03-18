@@ -1,4 +1,4 @@
-function getHighlightedEntriesHandlers({
+function getHighlightedEntriesFeatures({
   zipFilesystem,
   entries,
   history,
@@ -153,4 +153,4 @@ function getHighlightedEntriesHandlers({
   };
 }
 
-export default getHighlightedEntriesHandlers;
+export default getHighlightedEntriesFeatures;
