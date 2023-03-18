@@ -178,6 +178,8 @@ function getEventHandlers({
       if (event.key === PAGE_DOWN_KEY) {
         highlightNextPage();
       }
+    }
+    if (!event.altKey && !event.ctrlKey) {
       if (event.key.length === 1 && event.key !== ACTION_KEY) {
         highlightFirstLetter(event.key);
       }
