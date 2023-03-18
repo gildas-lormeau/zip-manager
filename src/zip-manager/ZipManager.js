@@ -69,10 +69,6 @@ function ZipManager() {
     util,
     messages
   });
-  const { abortDownload, removeDownload } = getDownloadsFeatures({
-    setDownloads,
-    util
-  });
   const {
     highlightPrevious,
     highlightNext,
@@ -111,6 +107,10 @@ function ZipManager() {
     setHistoryIndex,
     setHighlightedIds,
     updateSelectedFolder
+  });
+  const { abortDownload, removeDownload } = getDownloadsFeatures({
+    setDownloads,
+    util
   });
   const { createFolder, addFiles, importZipFile, exportZipFile } =
     getSelectedFolderFeatures({
