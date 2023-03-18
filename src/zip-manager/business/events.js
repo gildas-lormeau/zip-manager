@@ -25,7 +25,7 @@ function getEventHandlers({
   highlightNextPage,
   highlightFirst,
   highlightLast,
-  highlightLetter,
+  highlightFirstLetter,
   highlightAll,
   togglePrevious,
   toggleNext,
@@ -77,7 +77,7 @@ function getEventHandlers({
       highlightNextPage,
       highlightFirst,
       highlightLast,
-      highlightLetter,
+      highlightFirstLetter,
       highlightAll,
       togglePrevious,
       toggleNext,
@@ -127,7 +127,7 @@ function getEventHandlers({
       highlightNextPage,
       highlightFirst,
       highlightLast,
-      highlightLetter,
+      highlightFirstLetter,
       togglePrevious,
       toggleNext,
       togglePreviousPage,
@@ -179,7 +179,7 @@ function getEventHandlers({
         highlightNextPage();
       }
       if (event.key.length === 1 && event.key !== ACTION_KEY) {
-        highlightLetter(event.key);
+        highlightFirstLetter(event.key);
       }
     }
   }

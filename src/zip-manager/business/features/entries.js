@@ -41,7 +41,7 @@ function getEntriesFeatures({
     highlightEntry(entries[entries.length - 1]);
   }
 
-  function highlightLetter(letter) {
+  function highlightFirstLetter(letter) {
     const filteredEntries = entries.filter((entry) =>
       entry.name.toLowerCase().startsWith(letter.toLowerCase())
     );
@@ -237,7 +237,7 @@ function getEntriesFeatures({
     highlightNextPage,
     highlightFirst,
     highlightLast,
-    highlightLetter,
+    highlightFirstLetter,
     highlight,
     highlightEntries,
     highlightAll,
