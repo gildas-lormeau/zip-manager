@@ -208,7 +208,7 @@ function getEventHandlers({
       }
       if (event.key === RIGHT_KEY && highlightedIds.length === 1) {
         const highlightedEntry = getHighlightedEntry();
-        if (highlightedEntry.directory) {
+        if (highlightedEntry && highlightedEntry.directory) {
           goIntoFolder(highlightedEntry);
         }
       }
