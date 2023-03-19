@@ -1,15 +1,21 @@
 {
   "short_name": "Zip Manager",
   "name": "Zip Manager: Read/Edit/Write zip files",
-  "start_url": ".",
-  "display": "standalone",
+  "description": "Read, edit and write zip files.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "icons": [
     {
-      "src": "icon.webp",
-      "sizes": "48x48",
-      "type": "image/webp"
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ]
 }
