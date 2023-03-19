@@ -191,6 +191,10 @@ function Entry({
   util,
   messages
 }) {
+  function onHighlightEntry() {
+    selectModeEnabled ? onToggle(entry) : onHighlight(entry);
+  }
+
   return (
     <>
       {selectModeEnabled && (
@@ -204,9 +208,8 @@ function Entry({
       <EntryName
         entry={entry}
         selectedFolder={selectedFolder}
-        onHighlight={() =>
-          selectModeEnabled ? onToggle(entry) : onHighlight(entry)
-        }
+        selectModeEnabled={selectModeEnabled}
+        onHighlight={onHighlightEntry}
         onToggle={onToggle}
         onToggleRange={onToggleRange}
         onEnter={onEnter}
@@ -226,6 +229,7 @@ function Entry({
 function EntryName({
   entry,
   selectedFolder,
+  selectModeEnabled,
   onHighlight,
   onToggle,
   onToggleRange,
@@ -277,7 +281,7 @@ function EntryName({
   }
 
   function handleDoubleClick(event) {
-    if (!event.metaKey) {
+    if (!selectModeEnabled && !event.metaKey) {
       onEnter(entry);
     }
   }
