@@ -19,6 +19,17 @@
   opacity: 1;
 }
 
+.info-bar input[type=color] {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  padding: 0;
+  border-width: 0;
+  background-color: transparent;
+  width: 5px;
+  height: 5px;
+}
+
 a,
 a:visited {
   color: inherit;

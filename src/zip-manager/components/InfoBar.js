@@ -43,7 +43,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
         type="color"
         onChange={handleChange}
         ref={colorInputRef}
-        hidden
       ></input>
     </>
   );
