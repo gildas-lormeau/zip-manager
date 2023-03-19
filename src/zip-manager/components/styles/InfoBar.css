@@ -20,7 +20,7 @@
   opacity: 1;
 }
 
-.info-bar input[type=color] {
+.info-bar input[type="color"] {
   position: absolute;
   right: 3px;
   bottom: 3px;

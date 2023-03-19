@@ -32,13 +32,11 @@
 }
 
 @media (max-width: 640px) {
-
   .button-bar button {
     height: 28px;
   }
-  
+
   .button-bar button {
     padding-inline: 8px;
   }
-
 }
