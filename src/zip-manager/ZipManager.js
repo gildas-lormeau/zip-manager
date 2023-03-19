@@ -302,7 +302,7 @@ function ZipManager() {
 
   return (
     <>
-      <main className={"application " + colorScheme}>
+      <main className={colorScheme || null}>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledSetZipPasswordButton={disabledSetZipPassword}

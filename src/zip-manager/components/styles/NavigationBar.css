@@ -1,6 +1,5 @@
 .navigation-bar {
   display: flex;
-  padding-block-end: 8px;
 }
 
 .history-buttons {
@@ -20,11 +19,9 @@
 }
 
 .breadcrumb {
-  display: inline-block;
-  padding-block-end: 8px;
   margin-block-start: -2px;
-  margin-block-end: -8px;
-  overflow: hidden;
+  margin-inline-start: -4px;
+  width: calc(100% - 56px);
 }
 
 .breadcrumb ol {
@@ -34,7 +31,10 @@
 
 .breadcrumb li {
   margin-inline-start: 2px;
-  margin-block-start: 3px;
+  padding-block: 2px;
+  padding-inline-start: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .breadcrumb li::after {
@@ -43,17 +43,12 @@
   padding-inline-end: 1px;
 }
 
-.breadcrumb li .breadcrumb-item:first-of-type {
-  padding-inline-start: 0;
-}
-
 .breadcrumb .breadcrumb-item {
-  padding-block-end: 2px;
   opacity: 0.75;
   font-weight: 400;
-  white-space: nowrap;
   text-decoration: underline dotted transparent 1.5px;
-  text-underline-offset: 5px;
+  text-underline-offset: 4px;
+  white-space: nowrap;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {

@@ -1,4 +1,4 @@
-.application {
+main {
   background-color: var(--bg-color);
   color: var(--text-color);
   display: flex;
@@ -8,24 +8,24 @@
   border: solid var(--accent-color) 1px;
 }
 
-.application > * {
+main > * {
   padding: 8px;
   border-block-end: solid var(--accent-color) 1px;
 }
 
-.application > :last-child {
+main > :last-child {
   border-block-end: none;
 }
 
 @media (max-width: 1024px), (display-mode: standalone) {
-  .application {
+  main {
     margin: 0;
     border-width: 0;
     margin-block-end: 4px;
     height: calc(100dvh - 30px);
   }
 
-  .application > :last-child {
+  main > :last-child {
     border-block-end: solid var(--accent-color) 1px;
   }
 }
