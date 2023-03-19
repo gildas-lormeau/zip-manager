@@ -17,7 +17,7 @@
   border-block-end: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .application {
     margin: 0;
     border-width: 0;
