@@ -8,6 +8,7 @@
   text-align: center;
   color: black;
   padding-block-start: 1px;
+  margin-inline-start: 8px;
 }
 
 .icon {
@@ -21,13 +22,11 @@
 }
 
 .info-bar input[type="color"] {
-  position: absolute;
-  right: 4px;
-  bottom: 4px;
   width: 8px;
   height: 8px;
   padding: 0;
   border-width: 0;
+  margin-inline-start: 4px;
   filter: opacity(0);
 }
 

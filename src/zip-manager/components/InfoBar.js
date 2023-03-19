@@ -13,7 +13,6 @@ function InfoBar({ accentColor, onSetAccentColor }) {
           accentColor={accentColor}
           onSetAccentColor={onSetAccentColor}
         ></AccentColorPickerButton>
-        {" in Rennes"}
       </div>
     </footer>
   );
@@ -39,6 +38,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
       <span className="icon" onClick={handleClick}>
         ♡
       </span>
+      {" in Rennes"}
       <input type="color" onChange={handleChange} ref={colorInputRef}></input>
     </>
   );
