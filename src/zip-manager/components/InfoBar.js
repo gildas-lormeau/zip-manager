@@ -1,6 +1,6 @@
 import "./styles/InfoBar.css";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function InfoBar({ accentColor, onSetAccentColor }) {
   return (
@@ -30,6 +30,8 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
     onSetAccentColor(colorInputRef.current.value);
   }
 
+  useEffect(() => (colorInputRef.current.value = accentColor), [accentColor]);
+
   return (
     <>
       <span className="icon" onClick={handleClick}>
@@ -38,7 +40,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
       <input
         type="color"
         onChange={handleChange}
-        defaultValue={accentColor}
         ref={colorInputRef}
         hidden
       ></input>
