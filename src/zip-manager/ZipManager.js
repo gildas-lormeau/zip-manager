@@ -357,10 +357,7 @@ function ZipManager() {
           messages={messages}
         />
       </main>
-      <InfoBar
-        accentColor={accentColor}
-        onSetAccentColor={saveAccentColor}
-      />
+      <InfoBar accentColor={accentColor} onSetAccentColor={saveAccentColor} />
     </>
   );
 }
