@@ -14,7 +14,11 @@
   :root {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, lightgray);
     --bg-color: color-mix(in srgb, var(--accent-color) 10%, white);
-    --checkbox-accent-color: color-mix(in srgb, var(--accent-color) 75%, var(--bg-color));
+    --checkbox-accent-color: color-mix(
+      in srgb,
+      var(--accent-color) 75%,
+      var(--bg-color)
+    );
     --text-color: color-mix(in srgb, var(--accent-color) 90%, black);
     --highlighted-text-color: color-mix(
       in srgb,
@@ -79,7 +83,11 @@ button:disabled {
     :root {
       --page-color: color-mix(in srgb, var(--accent-color) 10%, dimgray);
       --bg-color: color-mix(in srgb, var(--accent-color) 10%, black);
-      --checkbox-accent-color: color-mix(in srgb, var(--accent-color) 75%, var(--bg-color));
+      --checkbox-accent-color: color-mix(
+        in srgb,
+        var(--accent-color) 75%,
+        var(--bg-color)
+      );
       --text-color: color-mix(in srgb, var(--accent-color) 90%, white);
       --highlighted-text-color: color-mix(
         in srgb,
