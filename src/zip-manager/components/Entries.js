@@ -8,6 +8,7 @@ function Entries({
   highlightedIds,
   deltaEntriesHeight,
   entriesHeight,
+  onAddFiles,
   onHighlight,
   onToggle,
   onToggleRange,
@@ -87,6 +88,17 @@ function Entries({
     event.preventDefault();
   }
 
+  function handleDragOver(event) {
+    event.preventDefault();
+  }
+
+  function handleDrop(event) {
+    if (event.dataTransfer.files) {
+      event.preventDefault();
+      onAddFiles(Array.from(event.dataTransfer.files));
+    }
+  }
+
   function registerResizeHandler() {
     util.addResizeListener(computeEntriesHeight);
     return () => util.removeResizeListener(computeEntriesHeight);
@@ -103,6 +115,8 @@ function Entries({
       aria-label="Folder entries"
       ref={entriesRef}
       style={getEntriesStyle()}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       <ol
         onKeyDown={handleKeyDown}

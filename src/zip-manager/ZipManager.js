@@ -335,6 +335,7 @@ function ZipManager() {
           highlightedIds={highlightedIds}
           entriesHeight={entriesHeight}
           deltaEntriesHeight={entriesDeltaHeight}
+          onAddFiles={addFiles}
           onHighlight={highlight}
           onToggle={toggle}
           onToggleRange={toggleRange}
