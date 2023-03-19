@@ -1,5 +1,6 @@
 .entries {
   height: 60vh;
+  min-height: 5vh;
   resize: vertical;
   overflow: auto;
 }
