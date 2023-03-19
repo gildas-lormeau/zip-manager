@@ -60,11 +60,6 @@ body {
   margin-inline-end: auto;
 }
 
-body,
-body * {
-  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
-}
-
 ol {
   margin: 0;
   padding: 0;
