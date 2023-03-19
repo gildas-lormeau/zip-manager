@@ -18,11 +18,24 @@ function TopButtonBar({
   constants,
   messages
 }) {
+  function handleDragOver(event) {
+    event.preventDefault();
+  }
+
+  function handleDrop(event) {
+    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+      event.preventDefault();
+      onImportZipFile(event.dataTransfer.files[0]);
+    }
+  }
+
   return (
     <div
       className="button-bar button-bar button-bar-top"
       role="toolbar"
       aria-label="Selected directory commands"
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       <div className="button-group">
         <CreateFolderButton
