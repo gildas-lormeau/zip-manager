@@ -7,6 +7,7 @@
   flex: 1;
   text-align: center;
   color: black;
+  padding-block-start: 1px;
 }
 
 .icon {
@@ -44,6 +45,7 @@ a:visited {
 @media (max-width: 640px) {
   .source-link {
     font-size: 0.8rem;
+    padding-block-start: 0;
   }
 
   .info-bar {
