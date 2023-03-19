@@ -2,23 +2,7 @@
   justify-content: flex-start;
 }
 
-.button-bar-top button {
-  margin-inline-start: 0;
-  margin-inline-end: 6px;
-}
-
-.button-bar-top .button-group {
-  margin-inline-start: 0;
-  margin-inline-end: 4px;
-}
-
 .button-bar-top .button-group:last-of-type {
-  display: flex;
   flex: 1;
   justify-content: flex-end;
-  margin-inline-end: 0;
-}
-
-.button-bar-top .button-group:last-of-type :last-child {
-  margin-inline-end: 0;
 }

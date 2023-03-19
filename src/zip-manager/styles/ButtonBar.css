@@ -1,11 +1,16 @@
 .application .button-bar {
   display: flex;
   flex-wrap: wrap;
-  padding-block-end: 0;
+  column-gap: 10px;
+  row-gap: 8px;
+}
+
+.button-bar .button-group {
+  display: flex;
+  column-gap: 6px;
 }
 
 .button-bar button {
-  margin-block-end: 8px;
   height: 32px;
   opacity: 0.85;
 }
@@ -29,7 +34,6 @@
 @media (max-width: 640px) {
 
   .button-bar button {
-    margin-block-end: 8px;
     height: 28px;
   }
   

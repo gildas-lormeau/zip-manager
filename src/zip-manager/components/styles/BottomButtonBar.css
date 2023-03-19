@@ -2,13 +2,3 @@
   justify-content: flex-end;
   touch-action: none;
 }
-
-.button-bar-bottom button {
-  margin-inline-start: 6px;
-  margin-inline-end: 0;
-}
-
-.button-bar-bottom .button-group {
-  margin-inline-start: 4px;
-  margin-inline-end: 0;
-}
