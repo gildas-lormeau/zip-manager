@@ -15,7 +15,7 @@
 }
 
 .entries .entry-select {
-  accent-color: var(--bg-color);
+  accent-color: var(--checkbox-accent-color);
   margin: 0;
   margin-inline: 4px;
   align-self: center;
