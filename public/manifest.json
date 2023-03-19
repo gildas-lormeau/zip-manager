@@ -1,6 +1,6 @@
 {
   "short_name": "Zip Manager",
-  "name": "Zip Manager: Read/Edit/Write zip files",
+  "name": "Zip Manager",
   "description": "Read, edit and write zip files.",
   "start_url": "./index.html",
   "display": "fullscreen",
