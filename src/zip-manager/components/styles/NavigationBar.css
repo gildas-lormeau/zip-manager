@@ -19,22 +19,22 @@
 }
 
 .breadcrumb {
+  display: flex;
+  width: calc(100% - 60px);
   margin-block-start: -2px;
-  margin-inline-start: -4px;
-  width: calc(100% - 56px);
 }
 
 .breadcrumb ol {
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .breadcrumb li {
-  margin-inline-start: 2px;
+  display: flex;
   padding-block: 2px;
   padding-inline-start: 2px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .breadcrumb li::after {
@@ -44,11 +44,14 @@
 }
 
 .breadcrumb .breadcrumb-item {
+  padding-block-end: 2px;
   opacity: 0.75;
   font-weight: 400;
   text-decoration: underline dotted transparent 1.5px;
   text-underline-offset: 4px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {
