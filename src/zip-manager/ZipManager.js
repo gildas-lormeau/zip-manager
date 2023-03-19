@@ -360,7 +360,6 @@ function ZipManager() {
       <InfoBar
         accentColor={accentColor}
         onSetAccentColor={saveAccentColor}
-        util={util}
       />
     </>
   );

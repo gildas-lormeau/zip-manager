@@ -2,7 +2,7 @@ import "./styles/InfoBar.css";
 
 import { useEffect, useRef } from "react";
 
-function InfoBar({ accentColor, onSetAccentColor, util }) {
+function InfoBar({ accentColor, onSetAccentColor }) {
   return (
     <footer className="info-bar">
       <div className="source-link">
@@ -12,7 +12,6 @@ function InfoBar({ accentColor, onSetAccentColor, util }) {
         <AccentColorPickerButton
           accentColor={accentColor}
           onSetAccentColor={onSetAccentColor}
-          util={util}
         ></AccentColorPickerButton>
         {" in Rennes"}
       </div>
@@ -20,11 +19,11 @@ function InfoBar({ accentColor, onSetAccentColor, util }) {
   );
 }
 
-function AccentColorPickerButton({ accentColor, onSetAccentColor, util }) {
+function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
   const colorInputRef = useRef(null);
 
   function handleClick() {
-    util.dispatchClick(colorInputRef.current);
+    colorInputRef.current.showPicker();
   }
 
   function handleChange() {
