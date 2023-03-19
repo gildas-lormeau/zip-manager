@@ -162,3 +162,9 @@ button:disabled {
     }
   }
 }
+
+@media (display-mode: standalone) {
+  body {
+    max-width: none;
+  }
+}
