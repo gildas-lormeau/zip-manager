@@ -1,4 +1,4 @@
-:root {
+:root .light {
   --page-color: rgb(0, 0, 0);
   --bg-color: white;
   --checkbox-accent-color: var(--accent-color);
@@ -10,8 +10,23 @@
   --bg-disabled-button-color: white;
 }
 
-@supports (color: color-mix(in srgb, red 0%, red)) {
+@media (prefers-color-scheme: light) {
   :root {
+    --page-color: rgb(0, 0, 0);
+    --bg-color: white;
+    --checkbox-accent-color: var(--accent-color);
+    --text-color: black;
+    --highlighted-text-color: white;
+    --button-color: white;
+    --bg-button-color: var(--accent-color);
+    --disabled-button-color: gray;
+    --bg-disabled-button-color: white;
+  }
+}
+
+@supports (color: color-mix(in srgb, red 0%, red)) {
+  :root,
+  :root .light {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, lightgray);
     --bg-color: color-mix(in srgb, var(--accent-color) 10%, white);
     --checkbox-accent-color: color-mix(
@@ -45,6 +60,11 @@ body {
   margin-inline-end: auto;
 }
 
+body,
+body * {
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+
 ol {
   margin: 0;
   padding: 0;
@@ -64,6 +84,44 @@ button:disabled {
   color: var(--disabled-button-color);
   background-color: var(--bg-disabled-button-color);
   opacity: 0.5;
+}
+
+:root .dark {
+  --page-color: dimgray;
+  --bg-color: black;
+  --checkbox-accent-color: var(--accent-color);
+  --text-color: gray;
+  --highlighted-text-color: black;
+  --button-color: black;
+  --bg-button-color: var(--accent-color);
+  --disabled-button-color: white;
+  --bg-disabled-button-color: black;
+}
+
+@supports (color: color-mix(in srgb, red 0%, red)) {
+  :root .dark {
+    --page-color: color-mix(in srgb, var(--accent-color) 10%, dimgray);
+    --bg-color: color-mix(in srgb, var(--accent-color) 10%, black);
+    --checkbox-accent-color: color-mix(
+      in srgb,
+      var(--accent-color) 75%,
+      var(--bg-color)
+    );
+    --text-color: color-mix(in srgb, var(--accent-color) 90%, white);
+    --highlighted-text-color: color-mix(
+      in srgb,
+      var(--accent-color) 10%,
+      black
+    );
+    --button-color: color-mix(in srgb, var(--accent-color) 50%, white);
+    --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    --bg-disabled-button-color: color-mix(
+      in srgb,
+      var(--accent-color) 20%,
+      black
+    );
+  }
 }
 
 @media (prefers-color-scheme: dark) {

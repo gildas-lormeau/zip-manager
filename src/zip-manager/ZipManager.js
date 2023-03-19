@@ -52,6 +52,8 @@ function ZipManager() {
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const [accentColor, setAccentColor] = useState(null);
+  const [colorScheme, setColorScheme] = useState("");
   const importPasswordRef = useRef("");
   const exportPasswordRef = useRef("");
   const entriesHeightRef = useRef(null);
@@ -177,7 +179,7 @@ function ZipManager() {
     enter,
     setZipPassword,
     saveAccentColor,
-    getAccentColor,
+    restoreAccentColor,
     resizeEntries,
     stopResizeEntries
   } = getAppFeatures({
@@ -204,16 +206,14 @@ function ZipManager() {
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledEnter,
-    accentColor
+    disabledEnter
   } = getUIState({
     entries,
     highlightedIds,
     selectedFolder,
     clipboardData,
     historyIndex,
-    history,
-    getAccentColor
+    history
   });
   const { handleKeyUp, handlePageUnload } = getEventHandlers({
     zipFilesystem,
@@ -262,8 +262,16 @@ function ZipManager() {
     constants
   });
   const { useKeyUp, usePageUnload } = getHooks(util);
-  const { updateHighlightedEntries, updateZipFilesystem } = getEffects({
+  const {
+    updateHighlightedEntries,
+    updateZipFilesystem,
+    initAccentColor,
+    updateAccentColor
+  } = getEffects({
     zipFilesystem,
+    accentColor,
+    setAccentColor,
+    setColorScheme,
     setImportPassword,
     setExportPassword,
     setPreviousHighlightedEntry,
@@ -275,6 +283,8 @@ function ZipManager() {
     setHistoryIndex,
     getHighlightedEntryElement,
     updateSelectedFolder,
+    restoreAccentColor,
+    saveAccentColor,
     util
   });
 
@@ -285,10 +295,14 @@ function ZipManager() {
   useEffect(updateZipFilesystem, [zipFilesystem]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateHighlightedEntries, [highlightedIds]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(initAccentColor, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(updateAccentColor, [accentColor]);
 
   return (
     <>
-      <main className="application">
+      <main className={"application " + colorScheme}>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledSetZipPasswordButton={disabledSetZipPassword}
@@ -357,7 +371,7 @@ function ZipManager() {
           messages={messages}
         />
       </main>
-      <InfoBar accentColor={accentColor} onSetAccentColor={saveAccentColor} />
+      <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
     </>
   );
 }

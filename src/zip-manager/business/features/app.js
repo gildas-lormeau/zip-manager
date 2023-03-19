@@ -28,7 +28,7 @@ function getAppFeatures({
     util.saveAccentColor(color);
   }
 
-  function getAccentColor() {
+  function restoreAccentColor() {
     return util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
   }
 
@@ -45,7 +45,7 @@ function getAppFeatures({
     enter,
     setZipPassword,
     saveAccentColor,
-    getAccentColor,
+    restoreAccentColor,
     resizeEntries,
     stopResizeEntries
   };

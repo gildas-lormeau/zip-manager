@@ -4,8 +4,7 @@ function getUIState({
   selectedFolder,
   clipboardData,
   historyIndex,
-  history,
-  getAccentColor
+  history
 }) {
   const entriesEmpty = !entries.length;
   const parentFolderHighlighted =
@@ -25,7 +24,6 @@ function getUIState({
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
-  const accentColor = getAccentColor();
 
   return {
     disabledExportZip,
@@ -39,8 +37,7 @@ function getUIState({
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledEnter,
-    accentColor
+    disabledEnter
   };
 }
 

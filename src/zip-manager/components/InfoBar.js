@@ -1,6 +1,6 @@
 import "./styles/InfoBar.css";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 function InfoBar({ accentColor, onSetAccentColor }) {
   return (
@@ -30,8 +30,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
     onSetAccentColor(colorInputRef.current.value);
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => onSetAccentColor(accentColor), [accentColor]);
   return (
     <>
       <span className="icon" onClick={handleClick}>
