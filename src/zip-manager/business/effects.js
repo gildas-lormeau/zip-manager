@@ -35,7 +35,7 @@ function getEffects({
   function updateHighlightedEntries() {
     const highlightedEntryElement = getHighlightedEntryElement();
     if (highlightedEntryElement) {
-      util.highlight(highlightedEntryElement);
+      util.scrollIntoView(highlightedEntryElement);
     }
   }
 

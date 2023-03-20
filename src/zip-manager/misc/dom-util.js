@@ -75,8 +75,8 @@ function removeResizeListener(listener) {
   window.removeEventListener(RESIZE_EVENT_NAME, listener);
 }
 
-function highlight(element) {
-  element.focus();
+function scrollIntoView(element) {
+  element.scrollIntoView({ block: "nearest" });
 }
 
 function dispatchClick(element) {
@@ -179,7 +179,7 @@ export {
   alert,
   confirm,
   prompt,
-  highlight,
+  scrollIntoView,
   dispatchClick,
   resetValue,
   addKeyListener,
