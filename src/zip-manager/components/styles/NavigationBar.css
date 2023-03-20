@@ -30,20 +30,19 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  column-gap: 1px;
 }
 
 .breadcrumb li {
   display: flex;
-  padding-block: 2px;
   padding-inline-start: 2px;
   overflow: hidden;
   align-items: center;
+  column-gap: 3px;
 }
 
 .breadcrumb li::after {
   content: "/";
-  padding-inline-start: 3px;
-  padding-inline-end: 1px;
 }
 
 .breadcrumb .breadcrumb-item {
