@@ -35,6 +35,7 @@
   padding-block: 2px;
   padding-inline-start: 2px;
   overflow: hidden;
+  align-items: center;
 }
 
 .breadcrumb li::after {
