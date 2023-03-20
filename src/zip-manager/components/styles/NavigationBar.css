@@ -36,13 +36,13 @@
   padding-block: 2px;
   padding-inline-start: 2px;
   overflow: hidden;
+  align-items: center;
 }
 
 .breadcrumb li::after {
   content: "/";
   padding-inline-start: 3px;
   padding-inline-end: 1px;
-  display: inline-block;
   margin-block-end: 1px;
 }
 
