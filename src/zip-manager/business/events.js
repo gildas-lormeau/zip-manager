@@ -302,9 +302,25 @@ function getEventHandlers({
     }
   }
 
+  function handleKeyDown(event) {
+    if (!event.altKey && !event.ctrlKey && !event.shiftKey) {
+      if (
+        event.key === DOWN_KEY ||
+        event.key === UP_KEY ||
+        event.key === PAGE_DOWN_KEY ||
+        event.key === PAGE_UP_KEY ||
+        event.key === HOME_KEY ||
+        event.key === END_KEY
+      ) {
+        event.preventDefault();
+      }
+    }
+  }
+
   return {
     handlePageUnload,
-    handleKeyUp
+    handleKeyUp,
+    handleKeyDown
   };
 }
 

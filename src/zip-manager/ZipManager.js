@@ -215,7 +215,7 @@ function ZipManager() {
     historyIndex,
     history
   });
-  const { handleKeyUp, handlePageUnload } = getEventHandlers({
+  const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
     downloads,
     highlightedIds,
@@ -261,7 +261,7 @@ function ZipManager() {
     util,
     constants
   });
-  const { useKeyUp, usePageUnload } = getHooks(util);
+  const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
   const {
     updateHighlightedEntries,
     updateZipFilesystem,
@@ -290,6 +290,7 @@ function ZipManager() {
 
   usePageUnload(handlePageUnload);
   useKeyUp(handleKeyUp);
+  useKeyDown(handleKeyDown);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateZipFilesystem, [zipFilesystem]);

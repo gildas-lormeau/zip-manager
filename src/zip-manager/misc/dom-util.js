@@ -3,6 +3,7 @@
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
+const KEYDOWN_EVENT_NAME = "keydown";
 const BEFORE_UNLOAD_EVENT_NAME = "beforeunload";
 const RESIZE_EVENT_NAME = "resize";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
@@ -51,12 +52,20 @@ function prompt(message, defaultValue) {
   return window.prompt(message, defaultValue);
 }
 
-function addKeyListener(listener) {
+function addKeyUpListener(listener) {
   window.addEventListener(KEYUP_EVENT_NAME, listener);
 }
 
-function removeKeyListener(listener) {
+function removeKeyUpListener(listener) {
   window.removeEventListener(KEYUP_EVENT_NAME, listener);
+}
+
+function addKeyDownListener(listener) {
+  window.addEventListener(KEYDOWN_EVENT_NAME, listener);
+}
+
+function removeKeyDownListener(listener) {
+  window.removeEventListener(KEYDOWN_EVENT_NAME, listener);
 }
 
 function addUnloadListener(listener) {
@@ -182,8 +191,10 @@ export {
   scrollIntoView,
   dispatchClick,
   resetValue,
-  addKeyListener,
-  removeKeyListener,
+  addKeyUpListener,
+  removeKeyUpListener,
+  addKeyDownListener,
+  removeKeyDownListener,
   addUnloadListener,
   removeUnloadListener,
   addResizeListener,
