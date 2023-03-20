@@ -316,6 +316,7 @@ function EntryButton({ entry, selectedFolder, onEnter, messages }) {
   return (
     <span
       className="list-item-button"
+      role="button"
       onClick={handleClick}
       title={getEntryButtonTitle()}
     >
