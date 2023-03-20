@@ -9,6 +9,7 @@
   display: flex;
   padding: 4px;
   user-select: none;
+  outline: none;
 }
 
 .entries li > * {
@@ -31,7 +32,6 @@
 .entries .entry-highlighted {
   background-color: var(--accent-color);
   color: var(--highlighted-text-color);
-  outline: none;
 }
 
 .entries .directory .entry-name::after {
