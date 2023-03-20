@@ -8,6 +8,6 @@ body {
 }
 
 @font-face {
-  font-family: "KosugiMaru";
-  src: url("/public/fonts/KosugiMaru-Regular.ttf");
+  font-family: "Exo";
+  src: url("/public/fonts/Exo-VariableFont_wght.ttf");
 }
