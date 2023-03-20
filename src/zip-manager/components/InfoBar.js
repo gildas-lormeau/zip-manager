@@ -30,7 +30,9 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
   }
 
   useEffect(() => {
-    colorInputRef.current.value = accentColor;
+    if (accentColor) {
+      colorInputRef.current.value = accentColor;
+    }
   }, [accentColor]);
 
   return (
