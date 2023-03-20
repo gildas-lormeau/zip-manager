@@ -6,3 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@font-face {
+  font-family: "KosugiMaru";
+  src: url("/public/fonts/KosugiMaru-Regular.ttf");
+}

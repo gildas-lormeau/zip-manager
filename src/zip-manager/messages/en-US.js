@@ -1,5 +1,5 @@
 const PARENT_FOLDER_LABEL = "..";
-const ROOT_FOLDER_LABEL = "[root]";
+const ROOT_FOLDER_LABEL = "<root>";
 const ROOT_ZIP_FILENAME = "Download.zip";
 const KEYS_SEPARATOR_LABEL = ", ";
 const PARENT_FOLDER_TOOLTIP = "Parent directory";

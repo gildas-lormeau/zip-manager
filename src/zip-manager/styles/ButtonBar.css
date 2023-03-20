@@ -25,6 +25,7 @@
 
 .button-bar button {
   padding-inline: 12px;
+  font-family: "KosugiMaru";
 }
 
 .button-bar button:not([disabled]) {
