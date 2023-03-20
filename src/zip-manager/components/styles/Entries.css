@@ -3,6 +3,7 @@
   min-height: 5vh;
   resize: vertical;
   overflow: auto;
+  box-sizing: border-box;
 }
 
 .entries li {
