@@ -6,19 +6,20 @@
   box-sizing: border-box;
 }
 
+.entries ol {
+  flex-direction: column;
+}
+
 .entries li {
-  display: flex;
   padding: 4px;
   user-select: none;
   outline: none;
   column-gap: 4px;
-  align-items: center;
 }
 
 .entries .entry-select {
   accent-color: var(--checkbox-accent-color);
   margin: 0;
-  align-self: center;
   max-height: 1em;
 }
 

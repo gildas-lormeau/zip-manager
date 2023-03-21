@@ -27,18 +27,15 @@
 }
 
 .breadcrumb ol {
-  display: flex;
   flex-wrap: wrap;
   overflow: hidden;
   column-gap: 1px;
 }
 
 .breadcrumb li {
-  display: flex;
   padding-block: 2px;
   padding-inline-start: 2px;
   overflow: hidden;
-  align-items: center;
   column-gap: 3px;
 }
 

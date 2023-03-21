@@ -5,15 +5,14 @@
 }
 
 .downloads ol {
-  display: flex;
   flex-direction: column;
   row-gap: 8px;
 }
 
 .downloads li {
-  display: flex;
   flex-direction: column;
   row-gap: 6px;
+  align-items: normal;
 }
 
 .downloads .download-entry {
