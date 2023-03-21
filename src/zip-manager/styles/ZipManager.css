@@ -1,10 +1,20 @@
-main {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+html {
+  height: 100%;
+}
+
+body {
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - 46px);
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 8px;
+  margin-block-end: 0;
   border: solid var(--accent-color) 1px;
 }
 
@@ -21,8 +31,6 @@ main > :last-child {
   main {
     margin: 0;
     border-width: 0;
-    margin-block-end: 4px;
-    height: calc(100dvh - 30px);
   }
 
   main > :last-child {

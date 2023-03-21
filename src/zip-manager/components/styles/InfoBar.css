@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-block: 8px
 }
 
 .source-link {
   display: flex;
-  align-items: center;
   white-space: pre-wrap;
   font-size: 0.9rem;
   color: black;
