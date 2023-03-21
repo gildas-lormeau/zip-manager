@@ -2,6 +2,8 @@
   font-family: monospace;
   cursor: pointer;
   opacity: 0.75;
+  padding-inline: 4px;
+  padding-block: 2px;
 }
 
 .list-item-button:hover {

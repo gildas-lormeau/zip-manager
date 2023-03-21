@@ -24,10 +24,6 @@
   flex: 1;
 }
 
-.downloads .download-entry-abort-button {
-  padding-inline: 4px;
-}
-
 .downloads li progress {
   width: 100%;
   height: 12px;
