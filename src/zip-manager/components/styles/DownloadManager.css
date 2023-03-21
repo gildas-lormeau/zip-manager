@@ -1,6 +1,7 @@
 .downloads {
   min-height: 5vh;
   overflow: auto;
+  flex: 1;
 }
 
 .downloads ol {
