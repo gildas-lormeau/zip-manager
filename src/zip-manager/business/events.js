@@ -59,6 +59,7 @@ function getEventHandlers({
       toggleNextPage,
       toggleFirst,
       toggleLast,
+      util,
       constants
     });
     onFoldersKeyUp(event, {
@@ -69,6 +70,7 @@ function getEventHandlers({
       navigateBack,
       navigateForward,
       goIntoFolder,
+      util,
       constants
     });
     onHighlightedEntriesKeyUp(event, {
@@ -78,12 +80,13 @@ function getEventHandlers({
       highlightedIds,
       remove,
       enter,
+      util,
       constants
     });
   }
 
   function handleKeyDown(event) {
-    onEntriesKeyDown(event, { highlightAll, constants });
+    onEntriesKeyDown(event, { highlightAll, util, constants });
     onHighlightedEntriesKeyDown(event, {
       disabledCut,
       disabledCopy,
@@ -93,6 +96,7 @@ function getEventHandlers({
       copy,
       rename,
       paste,
+      util,
       constants
     });
     onSelectedFolderKeyDown(event, {
@@ -138,6 +142,7 @@ function onEntriesKeyUp(
     toggleNextPage,
     toggleFirst,
     toggleLast,
+    util,
     constants
   }
 ) {
@@ -170,7 +175,7 @@ function onEntriesKeyUp(
       toggleLast();
     }
   }
-  if (!event.altKey && !crtrlModifierPressd(event) && !event.shiftKey) {
+  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (event.key === DOWN_KEY) {
       highlightNext();
     }
@@ -190,7 +195,7 @@ function onEntriesKeyUp(
       highlightNextPage();
     }
   }
-  if (!event.altKey && !crtrlModifierPressd(event)) {
+  if (!event.altKey && !modifierKeyPressed(event, util)) {
     if (event.key.length === 1 && event.key !== ACTION_KEY) {
       highlightFirstLetter(event.key);
     }
@@ -207,6 +212,7 @@ function onFoldersKeyUp(
     navigateBack,
     navigateForward,
     goIntoFolder,
+    util,
     constants
   }
 ) {
@@ -219,7 +225,7 @@ function onFoldersKeyUp(
       navigateForward();
     }
   }
-  if (!event.altKey && !crtrlModifierPressd(event) && !event.shiftKey) {
+  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (event.key === LEFT_KEY && selectedFolder.parent) {
       goIntoFolder(selectedFolder.parent);
     }
@@ -244,11 +250,12 @@ function onHighlightedEntriesKeyUp(
     highlightedIds,
     remove,
     enter,
+    util,
     constants
   }
 ) {
   const { ACTION_KEY, DELETE_KEYS } = constants;
-  if (!event.altKey && !crtrlModifierPressd(event) && !event.shiftKey) {
+  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
       remove();
     }
@@ -262,7 +269,7 @@ function onHighlightedEntriesKeyUp(
   }
 }
 
-function onEntriesKeyDown(event, { highlightAll, constants }) {
+function onEntriesKeyDown(event, { highlightAll, util, constants }) {
   const {
     SELECT_ALL_KEY,
     DOWN_KEY,
@@ -272,12 +279,12 @@ function onEntriesKeyDown(event, { highlightAll, constants }) {
     HOME_KEY,
     END_KEY
   } = constants;
-  if (crtrlModifierPressd(event)) {
+  if (modifierKeyPressed(event, util)) {
     if (event.key === SELECT_ALL_KEY) {
       highlightAll();
     }
   }
-  if (!event.altKey && !crtrlModifierPressd(event) && !event.shiftKey) {
+  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (
       event.key === DOWN_KEY ||
       event.key === UP_KEY ||
@@ -302,11 +309,12 @@ function onHighlightedEntriesKeyDown(
     copy,
     rename,
     paste,
+    util,
     constants
   }
 ) {
   const { CUT_KEY, COPY_KEY, RENAME_KEY, PASTE_KEY } = constants;
-  if (crtrlModifierPressd(event)) {
+  if (modifierKeyPressed(event, util)) {
     if (event.key === CUT_KEY && !disabledCut) {
       event.preventDefault();
       cut();
@@ -347,7 +355,7 @@ function onSelectedFolderKeyDown(
     EXPORT_ZIP_KEY,
     SET_ZIP_PASSWORD_KEY
   } = constants;
-  if (crtrlModifierPressd(event)) {
+  if (modifierKeyPressed(event, util)) {
     if (event.key === CREATE_FOLDER_KEY) {
       event.preventDefault();
       createFolder();
@@ -377,8 +385,8 @@ function getHighlightedEntry({ selectedFolder, highlightedIds }) {
   );
 }
 
-function crtrlModifierPressd(event) {
-  return event.ctrlKey;
+function modifierKeyPressed(event, { isMacOSPlatform }) {
+  return isMacOSPlatform() ? event.metaKey : event.ctrlKey;
 }
 
 export default getEventHandlers;

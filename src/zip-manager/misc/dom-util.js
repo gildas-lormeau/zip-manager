@@ -32,6 +32,7 @@ const DATE_TIME_FORMAT = new Intl.DateTimeFormat(EN_US_LANGUAGE_ID, {
   dateStyle: "short",
   timeStyle: "short"
 });
+const MACOS_PLATFORMS = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
 
 function downloadBlob(blob, downloaderElement, download) {
   const href = URL.createObjectURL(blob);
@@ -180,6 +181,12 @@ function clearTimeout(id) {
   return window.clearTimeout(id);
 }
 
+function isMacOSPlatform() {
+  // eslint-disable-next-line no-unused-expressions
+  const { platform } = window.navigator;
+  return platform !== undefined && MACOS_PLATFORMS.includes(platform);
+}
+
 export {
   downloadBlob,
   createAbortController,
@@ -206,5 +213,6 @@ export {
   formatSize,
   formatDate,
   setTimeout,
-  clearTimeout
+  clearTimeout,
+  isMacOSPlatform
 };

@@ -5,7 +5,7 @@ const KEYS_SEPARATOR_LABEL = ", ";
 const PARENT_FOLDER_TOOLTIP = "Parent directory";
 
 const SHORTCUT_LABEL = "Shortcut: ";
-const CTRL_KEY_LABEL = "ctrl-";
+const CTRL_KEY_LABEL = "⌘/ctrl-";
 const ALT_KEY_LABEL = "alt-";
 const SPACE_KEY_LABEL = "space";
 const ARROW_LEFT_KEY_LABEL = "left";
