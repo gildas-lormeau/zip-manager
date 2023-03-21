@@ -288,12 +288,14 @@ function EntryName({
 
   return (
     <span
-      className="list-item-name entry-name"
+      className="entry-name"
       title={getEntryNameTitle()}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
-      {entryIsParentFolder ? messages.PARENT_FOLDER_LABEL : entry.name}
+      <span className="list-item-name">
+        {entryIsParentFolder ? messages.PARENT_FOLDER_LABEL : entry.name}
+      </span>
     </span>
   );
 }

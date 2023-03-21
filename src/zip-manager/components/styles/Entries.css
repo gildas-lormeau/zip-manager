@@ -11,22 +11,20 @@
   padding: 4px;
   user-select: none;
   outline: none;
-}
-
-.entries li > * {
-  margin-inline: 2px;
+  column-gap: 4px;
 }
 
 .entries .entry-select {
   accent-color: var(--checkbox-accent-color);
   margin: 0;
-  margin-inline: 4px;
   align-self: center;
   max-height: 1em;
 }
 
 .entries .entry-name {
-  flex: 1;
+  display: flex;
+  overflow: hidden;
+  column-gap: 2px;
   cursor: pointer;
 }
 
@@ -37,5 +35,4 @@
 
 .entries .directory .entry-name::after {
   content: "/";
-  padding-inline: 2px;
 }

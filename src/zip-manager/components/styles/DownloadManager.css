@@ -4,11 +4,16 @@
   overflow: auto;
 }
 
+.downloads ol {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
 .downloads li {
   display: flex;
   flex-direction: column;
-  padding: 4px;
-  padding-block-end: 8px;
+  row-gap: 6px;
 }
 
 .downloads .download-entry {
@@ -24,7 +29,6 @@
 }
 
 .downloads li progress {
-  margin-block-start: 4px;
   width: 100%;
   height: 12px;
   accent-color: var(--accent-color);
