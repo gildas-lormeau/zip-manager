@@ -88,6 +88,11 @@ button:disabled {
   opacity: 0.5;
 }
 
+a,
+a:visited {
+  color: inherit;
+}
+
 :root .dark {
   --page-color: dimgray;
   --bg-color: black;

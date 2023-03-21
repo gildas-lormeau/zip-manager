@@ -1,13 +1,17 @@
 .info-bar {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .source-link {
+  display: flex;
+  align-items: center;
+  white-space: pre-wrap;
   font-size: 0.9rem;
   flex: 1;
-  text-align: center;
   color: black;
-  margin-inline-start: 14px;
+  margin-inline-start: 18px;
 }
 
 .icon {
@@ -25,13 +29,8 @@
   height: 14px;
   padding: 0;
   border-width: 0;
-  margin-inline-start: 4px;
+  margin-inline-start: 8px;
   filter: opacity(0);
-}
-
-a,
-a:visited {
-  color: inherit;
 }
 
 @media (prefers-color-scheme: dark) {
