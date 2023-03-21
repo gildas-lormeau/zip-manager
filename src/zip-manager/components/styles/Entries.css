@@ -12,6 +12,7 @@
   user-select: none;
   outline: none;
   column-gap: 4px;
+  align-items: center;
 }
 
 .entries .entry-select {
