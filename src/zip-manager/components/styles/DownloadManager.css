@@ -1,5 +1,5 @@
 .downloads {
-  min-height: 5vh;
+  min-block-size: 5vh;
   overflow: auto;
   flex: 1;
 }
@@ -24,6 +24,6 @@
 }
 
 .downloads li progress {
-  height: 12px;
+  block-size: 12px;
   accent-color: var(--accent-color);
 }

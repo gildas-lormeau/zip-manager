@@ -1,6 +1,6 @@
 .entries {
-  height: 60vh;
-  min-height: 5vh;
+  block-size: 60vh;
+  min-block-size: 5vh;
   resize: vertical;
   overflow: auto;
   box-sizing: border-box;
@@ -20,7 +20,7 @@
 .entries .entry-select {
   accent-color: var(--checkbox-accent-color);
   margin: 0;
-  max-height: 1em;
+  max-block-size: 1em;
 }
 
 .entries .entry-name {

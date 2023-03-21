@@ -11,7 +11,7 @@
 }
 
 .button-bar button {
-  height: 32px;
+  block-size: 32px;
   opacity: 0.85;
 }
 
@@ -34,7 +34,7 @@
 
 @media (max-width: 640px) {
   .button-bar button {
-    height: 28px;
+    block-size: 28px;
   }
 
   .button-bar button {

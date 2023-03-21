@@ -12,7 +12,7 @@
   font-family: monospace;
   padding-inline: 8px;
   align-self: start;
-  height: 24px;
+  block-size: 24px;
 }
 
 .history-buttons button:not([disabled]) {

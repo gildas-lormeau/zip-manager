@@ -10,7 +10,7 @@
   white-space: pre-wrap;
   font-size: 0.9rem;
   color: black;
-  margin-inline-start: 18px;
+  margin-inline-start: 20px;
 }
 
 .icon {
@@ -24,8 +24,8 @@
 }
 
 .info-bar input[type="color"] {
-  width: 14px;
-  height: 14px;
+  inline-size: 16px;
+  block-size: 16px;
   padding: 0;
   border-width: 0;
   margin-inline-start: 8px;
