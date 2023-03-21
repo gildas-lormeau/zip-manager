@@ -25,6 +25,7 @@
   display: flex;
   overflow: hidden;
   column-gap: 2px;
+  flex: 1;
   cursor: pointer;
 }
 
