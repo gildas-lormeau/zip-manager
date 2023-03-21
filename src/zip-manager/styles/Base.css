@@ -51,60 +51,6 @@
   }
 }
 
-body {
-  font-weight: 400;
-  background-color: var(--page-color);
-  min-width: 360px;
-  max-width: max(1024px, 75vw);
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  font-family: "Exo";
-}
-
-ol {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-ol li {
-  display: flex;
-  align-items: center;
-}
-
-button {
-  border: solid var(--accent-color) 0.5px;
-  user-select: none;
-  background-color: var(--bg-button-color);
-  color: var(--button-color);
-  font-size: 0.8rem;
-  white-space: nowrap;
-}
-
-button:disabled {
-  color: var(--disabled-button-color);
-  background-color: var(--bg-disabled-button-color);
-  opacity: 0.5;
-}
-
-a,
-a:visited {
-  color: inherit;
-}
-
-:root .dark {
-  --page-color: dimgray;
-  --bg-color: black;
-  --checkbox-accent-color: var(--accent-color);
-  --text-color: gray;
-  --highlighted-text-color: black;
-  --button-color: black;
-  --bg-button-color: var(--accent-color);
-  --disabled-button-color: white;
-  --bg-disabled-button-color: black;
-}
-
 @supports (color: color-mix(in srgb, red 0%, red)) {
   :root .dark {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, black);
@@ -173,6 +119,60 @@ a:visited {
       );
     }
   }
+}
+
+:root .dark {
+  --page-color: dimgray;
+  --bg-color: black;
+  --checkbox-accent-color: var(--accent-color);
+  --text-color: gray;
+  --highlighted-text-color: black;
+  --button-color: black;
+  --bg-button-color: var(--accent-color);
+  --disabled-button-color: white;
+  --bg-disabled-button-color: black;
+}
+
+body {
+  font-weight: 400;
+  background-color: var(--page-color);
+  min-width: 360px;
+  max-width: max(1024px, 75vw);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  font-family: "Exo";
+}
+
+ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ol li {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  border: solid var(--accent-color) 0.5px;
+  user-select: none;
+  background-color: var(--bg-button-color);
+  color: var(--button-color);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+button:disabled {
+  color: var(--disabled-button-color);
+  background-color: var(--bg-disabled-button-color);
+  opacity: 0.5;
+}
+
+a,
+a:visited {
+  color: inherit;
 }
 
 @media (display-mode: standalone) {
