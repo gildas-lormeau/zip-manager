@@ -11,6 +11,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  flex: 1;
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 8px;
