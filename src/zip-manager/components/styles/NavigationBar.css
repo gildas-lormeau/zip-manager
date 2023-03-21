@@ -21,7 +21,7 @@
 
 .breadcrumb {
   display: flex;
-  width: calc(100% - 60px);
+  overflow: hidden;
   margin-block-start: -2px;
   line-height: 21px;
 }
