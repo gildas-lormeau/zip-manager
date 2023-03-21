@@ -1,5 +1,4 @@
 .downloads {
-  flex: 1;
   min-height: 5vh;
   overflow: auto;
 }
