@@ -281,6 +281,7 @@ function onEntriesKeyDown(event, { highlightAll, util, constants }) {
   } = constants;
   if (modifierKeyPressed(event, util)) {
     if (event.key === SELECT_ALL_KEY) {
+      event.preventDefault();
       highlightAll();
     }
   }
