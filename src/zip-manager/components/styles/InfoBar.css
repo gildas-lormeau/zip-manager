@@ -6,9 +6,8 @@
 }
 
 .source-link {
-  display: flex;
-  white-space: pre-wrap;
-  font-size: 0.9em;
+  display: inline;
+  font-size: min(0.8em, 3.5vw);
   color: black;
   margin-inline-start: 2ch;
 }
@@ -24,7 +23,7 @@
 }
 
 .info-bar input[type="color"] {
-  inline-size: 2ch;
+  inline-size: 2.25ch;
   block-size: 1.25em;
   padding: 0;
   border-width: 0;
@@ -35,11 +34,5 @@
 @media (prefers-color-scheme: dark) {
   .source-link {
     color: white;
-  }
-}
-
-@media (max-width: 80ch) {
-  .source-link {
-    font-size: 0.8em;
   }
 }
