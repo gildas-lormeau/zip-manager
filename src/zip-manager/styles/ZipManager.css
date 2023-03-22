@@ -4,29 +4,29 @@ main {
   flex: 1;
   background-color: var(--bg-color);
   color: var(--text-color);
-  margin: 8px;
+  margin: .5em;
   margin-block-end: 0;
-  border: solid var(--accent-color) 1px;
-  block-size: calc(100dvh - 50px);
+  border: solid var(--accent-color) .05em;
+  block-size: calc(100dvh - 3.25em);
 }
 
 main > * {
-  padding: 8px;
-  border-block-end: solid var(--accent-color) 1px;
+  padding: .5em;
+  border-block-end: solid var(--accent-color) .05em;
 }
 
 main > :last-child {
   border-block-end: none;
 }
 
-@media (max-width: 1024px), (display-mode: standalone) {
+@media (max-width: 128ch), (display-mode: standalone) {
   main {
     margin: 0;
     border-width: 0;
-    block-size: calc(100dvh - 40px);
+    block-size: calc(100dvh - 2.5em);
   }
 
   main > :last-child {
-    border-block-end: solid var(--accent-color) 1px;
+    border-block-end: solid var(--accent-color) .05em;
   }
 }

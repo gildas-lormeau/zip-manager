@@ -1,22 +1,18 @@
 .button-bar {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 12px;
-  row-gap: 8px;
+  column-gap: 1ch;
+  row-gap: .5em;
 }
 
 .button-bar .button-group {
   display: flex;
-  column-gap: 8px;
+  column-gap: .75ch;
 }
 
 .button-bar button {
-  block-size: 32px;
+  block-size: 2.5em;
   opacity: 0.85;
-}
-
-.button-bar button:not([disabled]):active {
-  border: solid var(--text-color) 0.5px;
 }
 
 .button-bar button:not([disabled]):hover {
@@ -24,7 +20,7 @@
 }
 
 .button-bar button {
-  padding-inline: 12px;
+  padding-inline: 1.5ch;
   font-family: "Exo";
 }
 
@@ -32,12 +28,12 @@
   cursor: pointer;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 80ch) {
   .button-bar button {
-    block-size: 28px;
+    block-size: 2.25em;
   }
 
   .button-bar button {
-    padding-inline: 8px;
+    padding-inline: 1ch;
   }
 }

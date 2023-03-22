@@ -6,12 +6,12 @@
 
 .downloads ol {
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: .75em;
 }
 
 .downloads li {
   flex-direction: column;
-  row-gap: 6px;
+  row-gap: 0.25em;
   align-items: normal;
 }
 
@@ -25,6 +25,6 @@
 
 .downloads li progress {
   width: 100%;
-  block-size: 12px;
+  block-size: 1em;
   accent-color: var(--accent-color);
 }

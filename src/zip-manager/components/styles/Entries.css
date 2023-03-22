@@ -11,10 +11,10 @@
 }
 
 .entries li {
-  padding: 4px;
+  padding: .25em;
   user-select: none;
   outline: none;
-  column-gap: 4px;
+  column-gap: .75ch;
 }
 
 .entries .entry-select {
@@ -26,7 +26,7 @@
 .entries .entry-name {
   display: flex;
   overflow: hidden;
-  column-gap: 2px;
+  column-gap: .25ch;
   flex: 1;
   cursor: pointer;
 }
