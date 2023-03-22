@@ -7,7 +7,9 @@
 
 .button-bar .button-group {
   display: flex;
+  flex-wrap: wrap;
   column-gap: .75ch;
+  row-gap: .5em;
 }
 
 .button-bar button {
