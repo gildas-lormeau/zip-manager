@@ -8,6 +8,7 @@ main {
   margin-block-end: 0;
   border: solid var(--accent-color) .05em;
   block-size: calc(100dvh - 3.25em);
+  min-block-size: 20em;
 }
 
 main > * {
