@@ -3,7 +3,7 @@
   cursor: pointer;
   opacity: 0.75;
   padding-inline: .5ch;
-  padding-block: .25ch;
+  padding-block: .2em;
 }
 
 .list-item-button:hover {
