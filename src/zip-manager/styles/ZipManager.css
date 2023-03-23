@@ -1,3 +1,8 @@
+body {
+  max-inline-size: 85vw;
+  margin-inline: auto;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -20,7 +25,11 @@ main > :last-child {
   border-block-end: none;
 }
 
-@media (orientation: portrait), (display-mode: standalone) {
+@media (max-aspect-ratio: 1.75), (display-mode: standalone) {
+  body {
+    max-inline-size: 100vw;
+  }
+
   main {
     margin: 0;
     border-width: 0;
@@ -29,5 +38,11 @@ main > :last-child {
 
   main > :last-child {
     border-block-end: solid var(--accent-color) .05em;
+  }
+}
+
+@media (max-width: 20ch) {
+  main {
+    block-size: auto;
   }
 }

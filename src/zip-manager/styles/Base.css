@@ -136,9 +136,6 @@
 body {
   font-weight: 400;
   background-color: var(--page-color);
-  max-inline-size: max(100ch, 75vw);
-  margin-inline-start: auto;
-  margin-inline-end: auto;
   font-family: "Exo";
 }
 

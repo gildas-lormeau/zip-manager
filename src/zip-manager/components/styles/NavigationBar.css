@@ -71,3 +71,9 @@
   cursor: pointer;
   text-decoration-color: var(--accent-color);
 }
+
+@media (max-width: 40ch) {
+  .navigation-bar {
+    font-size: .7em;
+  }
+}
