@@ -9,7 +9,7 @@
   display: inline;
   font-size: min(0.8em, 3.5vw);
   color: black;
-  margin-inline-start: 2ch;
+  margin-inline-start: 4ch;
 }
 
 .icon {
