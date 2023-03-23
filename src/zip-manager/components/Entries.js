@@ -8,6 +8,7 @@ function Entries({
   highlightedIds,
   deltaEntriesHeight,
   entriesHeight,
+  clipboardData,
   onAddFiles,
   onHighlight,
   onToggle,
@@ -31,6 +32,9 @@ function Entries({
     }
     if (highlightedIds.includes(entry.id)) {
       classes.push("entry-highlighted");
+    }
+    if (clipboardData && clipboardData.cut && clipboardData.entries.includes(entry)) {
+      classes.push("entry-cut");
     }
     return classes.join(" ");
   }
