@@ -20,7 +20,7 @@ main > :last-child {
   border-block-end: none;
 }
 
-@media (max-width: 128ch), (display-mode: standalone) {
+@media (orientation: portrait), (display-mode: standalone) {
   main {
     margin: 0;
     border-width: 0;
