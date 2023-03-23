@@ -51,6 +51,18 @@
   }
 }
 
+:root .dark {
+  --page-color: dimgray;
+  --bg-color: black;
+  --checkbox-accent-color: var(--accent-color);
+  --text-color: gray;
+  --highlighted-text-color: black;
+  --button-color: black;
+  --bg-button-color: var(--accent-color);
+  --disabled-button-color: white;
+  --bg-disabled-button-color: black;
+}
+
 @supports (color: color-mix(in srgb, red 0%, red)) {
   :root .dark {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, black);
@@ -119,18 +131,6 @@
       );
     }
   }
-}
-
-:root .dark {
-  --page-color: dimgray;
-  --bg-color: black;
-  --checkbox-accent-color: var(--accent-color);
-  --text-color: gray;
-  --highlighted-text-color: black;
-  --button-color: black;
-  --bg-button-color: var(--accent-color);
-  --disabled-button-color: white;
-  --bg-disabled-button-color: black;
 }
 
 body {
