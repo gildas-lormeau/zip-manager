@@ -37,7 +37,7 @@
   padding-block: .15em;
   padding-inline-start: .25ch;
   overflow: hidden;
-  column-gap: .25ch;
+  column-gap: .5ch;
 }
 
 .breadcrumb li::after {
