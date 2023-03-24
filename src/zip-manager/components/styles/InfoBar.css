@@ -77,6 +77,14 @@
   }
 }
 
+.light .source-link {
+  color: black;
+}
+
+.dark .source-link {
+  color: white;
+}
+
 @media (prefers-color-scheme: dark) {
   .source-link {
     color: white;

@@ -1,6 +1,9 @@
-body {
-  max-inline-size: 85vw;
-  margin-inline: auto;
+.main-container {
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--page-color);
 }
 
 main {
@@ -12,7 +15,8 @@ main {
   margin: .5em;
   margin-block-end: 0;
   border: solid var(--accent-color) .05em;
-  block-size: calc(100dvh - 3.25em);
+  
+  inline-size: 85vw;
   min-block-size: 20em;
 }
 
@@ -26,14 +30,13 @@ main > :last-child {
 }
 
 @media (max-aspect-ratio: 1.75), (display-mode: standalone) {
-  body {
-    max-inline-size: 100vw;
+  main {
+    inline-size: 100vw;
   }
 
   main {
     margin: 0;
     border-width: 0;
-    block-size: calc(100dvh - 2.5em);
   }
 
   main > :last-child {

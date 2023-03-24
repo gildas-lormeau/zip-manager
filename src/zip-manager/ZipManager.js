@@ -305,8 +305,8 @@ function ZipManager() {
   useEffect(updateAccentColor, [accentColor]);
 
   return (
-    <>
-      <main className={colorScheme || null}>
+    <div className={"main-container " + colorScheme}>
+      <main>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledSetZipPasswordButton={disabledSetZipPassword}
@@ -379,7 +379,7 @@ function ZipManager() {
         />
       </main>
       <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
-    </>
+    </div>
   );
 }
 
