@@ -31,7 +31,11 @@ function getSelectedFolderFeatures({
     const addedEntries = [];
     files.forEach((file) => {
       try {
-        addedEntries.push(selectedFolder.addBlob(file.name, file));
+        addedEntries.push(
+          selectedFolder.addBlob(file.name, file, {
+            lastModDate: new Date(file.lastModified)
+          })
+        );
       } catch (error) {
         util.alert(error.message);
       }
