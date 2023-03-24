@@ -4,6 +4,7 @@ function getAppFeatures({
   setExportPassword,
   setEntriesHeight,
   setEntriesDeltaHeight,
+  getEntriesElementHeight,
   goIntoFolder,
   download,
   util,
@@ -37,7 +38,13 @@ function getAppFeatures({
   }
 
   function stopResizeEntries() {
-    setEntriesHeight(entriesHeight + entriesDeltaHeight);
+    const entriesElementHeight = getEntriesElementHeight();
+    setEntriesHeight(
+      Math.max(
+        Math.min(entriesHeight + entriesDeltaHeight, entriesElementHeight),
+        entriesElementHeight
+      )
+    );
     setEntriesDeltaHeight(0);
   }
 

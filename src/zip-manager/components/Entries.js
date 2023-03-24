@@ -15,6 +15,7 @@ function Entries({
   onToggleRange,
   onEnter,
   onSetEntriesHeight,
+  entriesRef,
   entriesHeightRef,
   highlightedEntryRef,
   util,
@@ -22,7 +23,6 @@ function Entries({
   messages
 }) {
   const [selectModeEnabled, setSelectModeEnabled] = useState(false);
-  const entriesRef = useRef(null);
   const touchEndTimeout = useRef(null);
 
   function getEntryClassName(entry) {

@@ -56,12 +56,14 @@ function ZipManager() {
   const [colorScheme, setColorScheme] = useState("");
   const importPasswordRef = useRef("");
   const exportPasswordRef = useRef("");
+  const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const addFilesButtonRef = useRef(null);
   const importZipButtonRef = useRef(null);
 
+  const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
   const setImportPassword = (password) =>
     (importPasswordRef.current = password);
   const setExportPassword = (password) =>
@@ -188,6 +190,7 @@ function ZipManager() {
     setExportPassword,
     setEntriesHeight,
     setEntriesDeltaHeight,
+    getEntriesElementHeight,
     goIntoFolder,
     download,
     util,
@@ -343,6 +346,7 @@ function ZipManager() {
           onToggleRange={toggleRange}
           onEnter={enter}
           onSetEntriesHeight={setEntriesHeight}
+          entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
           util={util}
