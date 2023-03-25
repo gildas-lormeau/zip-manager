@@ -16,7 +16,7 @@ function getEventHandlers({
   copy,
   promptRename,
   paste,
-  remove,
+  deleteEntry,
   enter,
   highlightNext,
   highlightPrevious,
@@ -77,7 +77,7 @@ function getEventHandlers({
         disabledEnter,
         selectedFolder,
         highlightedIds,
-        remove,
+        deleteEntry,
         enter,
         util,
         constants
@@ -248,7 +248,7 @@ function onHighlightedEntriesKeyUp(
     disabledEnter,
     selectedFolder,
     highlightedIds,
-    remove,
+    deleteEntry,
     enter,
     util,
     constants
@@ -257,7 +257,7 @@ function onHighlightedEntriesKeyUp(
   const { ACTION_KEY, DELETE_KEYS } = constants;
   if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
-      remove();
+      deleteEntry();
     }
     if (event.key === ACTION_KEY && !disabledEnter) {
       enter(

@@ -17,6 +17,7 @@ function getHighlightedEntriesFeatures({
   setExtractDialogOpened,
   setRenameFilename,
   setRenameDialogOpened,
+  setDeleteEntryDialogOpened,
   removeDownload,
   updateSelectedFolder,
   downloadFile,
@@ -25,7 +26,6 @@ function getHighlightedEntriesFeatures({
   messages
 }) {
   const { DEFAULT_MIME_TYPE } = constants;
-  const { DELETE_MESSAGE } = messages;
 
   function copy() {
     setClipboardData({
@@ -82,43 +82,45 @@ function getHighlightedEntriesFeatures({
     }
   }
 
-  function remove() {
-    if (util.confirm(DELETE_MESSAGE)) {
-      highlightedIds.forEach((id) =>
-        zipFilesystem.remove(zipFilesystem.getById(id))
+  function confirmDeleteEntry() {
+    setDeleteEntryDialogOpened(true);
+  }
+
+  function deleteEntry() {
+    highlightedIds.forEach((id) =>
+      zipFilesystem.remove(zipFilesystem.getById(id))
+    );
+    if (selectedFolder.children.length) {
+      const indexEntry = Math.max(
+        ...entries
+          .map((entry, index) => ({ entry, index }))
+          .filter(({ entry }) => highlightedIds.includes(entry.id))
+          .map(({ index }) => index)
       );
-      if (selectedFolder.children.length) {
-        const indexEntry = Math.max(
-          ...entries
-            .map((entry, index) => ({ entry, index }))
-            .filter(({ entry }) => highlightedIds.includes(entry.id))
-            .map(({ index }) => index)
-        );
-        let indexNextEntry = indexEntry;
+      let indexNextEntry = indexEntry;
+      while (
+        indexNextEntry < entries.length &&
+        highlightedIds.includes(entries[indexNextEntry].id)
+      ) {
+        indexNextEntry++;
+      }
+      if (indexNextEntry === entries.length) {
+        indexNextEntry = indexEntry;
         while (
-          indexNextEntry < entries.length &&
+          indexNextEntry >= 0 &&
           highlightedIds.includes(entries[indexNextEntry].id)
         ) {
-          indexNextEntry++;
+          indexNextEntry--;
         }
-        if (indexNextEntry === entries.length) {
-          indexNextEntry = indexEntry;
-          while (
-            indexNextEntry >= 0 &&
-            highlightedIds.includes(entries[indexNextEntry].id)
-          ) {
-            indexNextEntry--;
-          }
-        }
-        setPreviousHighlightedEntry(entries[indexNextEntry]);
-        setHighlightedIds([entries[indexNextEntry].id]);
-      } else {
-        setPreviousHighlightedEntry(null);
-        setHighlightedIds([]);
       }
-      updateHistoryData();
-      updateSelectedFolder();
+      setPreviousHighlightedEntry(entries[indexNextEntry]);
+      setHighlightedIds([entries[indexNextEntry].id]);
+    } else {
+      setPreviousHighlightedEntry(null);
+      setHighlightedIds([]);
     }
+    updateHistoryData();
+    updateSelectedFolder();
   }
 
   function promptExtract() {
@@ -181,7 +183,8 @@ function getHighlightedEntriesFeatures({
     paste,
     promptRename,
     rename,
-    remove,
+    confirmDeleteEntry,
+    deleteEntry,
     promptExtract,
     extract
   };

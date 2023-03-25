@@ -24,7 +24,9 @@ import {
   ExportZipDialog,
   ExtractDialog,
   RenameDialog,
-  CreateFolderDialog
+  CreateFolderDialog,
+  ResetDialog,
+  DeleteEntryDialog
 } from "./components/index.js";
 
 const {
@@ -71,6 +73,8 @@ function ZipManager() {
   const [createFolderDialogOpened, setCreateFolderDialogOpened] =
     useState(false);
   const [createFolderName, setCreateFolderName] = useState("");
+  const [deleteEntryDialogOpened, setDeleteEntryDialogOpened] = useState(false);
+  const [resetDialogOpened, setResetDialogOpened] = useState(false);
 
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -90,6 +94,8 @@ function ZipManager() {
   const closeExtractDialog = () => setExtractDialogOpened(false);
   const closeExportZipDialog = () => setExportZipDialogOpened(false);
   const closeCreateFolderDialog = () => setCreateFolderDialogOpened(false);
+  const closeResetDialog = () => setResetDialogOpened(false);
+  const closeDeleteEntryDialog = () => setDeleteEntryDialogOpened(false);
 
   const { downloadFile, updateSelectedFolder } = getCommonFeatures({
     downloadId,
@@ -171,7 +177,8 @@ function ZipManager() {
     paste,
     promptRename,
     rename,
-    remove,
+    confirmDeleteEntry,
+    deleteEntry,
     promptExtract,
     extract
   } = getHighlightedEntriesFeatures({
@@ -193,6 +200,7 @@ function ZipManager() {
     setExtractDialogOpened,
     setRenameFilename,
     setRenameDialogOpened,
+    setDeleteEntryDialogOpened,
     removeDownload,
     updateSelectedFolder,
     downloadFile,
@@ -200,9 +208,10 @@ function ZipManager() {
     constants,
     messages
   });
-  const { reset } = getFilesystemFeatures({
+  const { confirmReset, reset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
+    setResetDialogOpened,
     util,
     messages
   });
@@ -264,7 +273,7 @@ function ZipManager() {
     copy,
     promptRename,
     paste,
-    remove,
+    confirmDeleteEntry,
     enter,
     highlightNext,
     highlightPrevious,
@@ -338,7 +347,7 @@ function ZipManager() {
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
           onExportZipFile={promptExportZip}
-          onReset={reset}
+          onReset={confirmReset}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}
           util={util}
@@ -387,7 +396,7 @@ function ZipManager() {
           onPaste={paste}
           onResetClipboardData={resetClipboardData}
           onRename={promptRename}
-          onRemove={remove}
+          onRemove={confirmDeleteEntry}
           onMove={resizeEntries}
           onStopMove={stopResizeEntries}
           messages={messages}
@@ -430,6 +439,18 @@ function ZipManager() {
         filename={renameFilename}
         onRename={rename}
         onClose={closeRenameDialog}
+        messages={messages}
+      />
+      <ResetDialog
+        open={resetDialogOpened}
+        onReset={reset}
+        onClose={closeResetDialog}
+        messages={messages}
+      />
+      <DeleteEntryDialog
+        open={deleteEntryDialogOpened}
+        onDeleteEntry={deleteEntry}
+        onClose={closeDeleteEntryDialog}
         messages={messages}
       />
     </div>

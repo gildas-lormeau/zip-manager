@@ -1,16 +1,20 @@
 function getFilesystemFeatures({
   zipService,
   setZipFilesystem,
+  setResetDialogOpened,
   util,
   messages
 }) {
-  const { RESET_MESSAGE } = messages;
-  function reset() {
-    if (util.confirm(RESET_MESSAGE)) {
-      setZipFilesystem(zipService.createZipFileSystem());
-    }
+  function confirmReset() {
+    setResetDialogOpened(true);
   }
+
+  function reset() {
+    setZipFilesystem(zipService.createZipFileSystem());
+  }
+
   return {
+    confirmReset,
     reset
   };
 }

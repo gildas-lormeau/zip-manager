@@ -8,6 +8,8 @@ import ExportZipDialog from "./ExportZipDialog.js";
 import ExtractDialog from "./ExtractDialog.js";
 import RenameDialog from "./RenameDialog.js";
 import CreateFolderDialog from "./CreateFolderDialog.js";
+import ResetDialog from "./ResetDialog.js";
+import DeleteEntryDialog from "./DeleteEntryDialog.js";
 
 export {
   TopButtonBar,
@@ -19,5 +21,7 @@ export {
   ExportZipDialog,
   ExtractDialog,
   RenameDialog,
-  CreateFolderDialog
+  CreateFolderDialog,
+  ResetDialog,
+  DeleteEntryDialog
 };
