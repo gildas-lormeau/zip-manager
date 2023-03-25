@@ -9,7 +9,7 @@
 }
 
 dialog {
-  position: absolute;
+  top: -40%;
   width: min(40ch, 75dvw);
   background-color: var(--page-color);
   color: var(--text-color);
