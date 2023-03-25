@@ -3,10 +3,6 @@ import { useEffect, useRef } from "react";
 function DeleteEntryDialog({ open, onDeleteEntry, onClose, messages }) {
   const dialogRef = useRef(null);
 
-  function handleSubmit() {
-    onDeleteEntry();
-  }
-
   function handleReset() {
     dialogRef.current.close();
   }
@@ -18,7 +14,7 @@ function DeleteEntryDialog({ open, onDeleteEntry, onClose, messages }) {
   }, [open]);
   return (
     <dialog ref={dialogRef} onClose={onClose}>
-      <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
+      <form method="dialog" onSubmit={onDeleteEntry} onReset={handleReset}>
         <div>{messages.DELETE_ENTRY_TITLE}</div>
         <p>
           <label>{messages.DELETE_ENTRY_MESSAGE}</label>

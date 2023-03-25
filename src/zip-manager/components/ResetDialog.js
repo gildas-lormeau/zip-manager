@@ -3,10 +3,6 @@ import { useEffect, useRef } from "react";
 function ResetDialog({ open, onReset, onClose, messages }) {
   const dialogRef = useRef(null);
 
-  function handleSubmit() {
-    onReset();
-  }
-
   function handleReset() {
     dialogRef.current.close();
   }
@@ -18,7 +14,7 @@ function ResetDialog({ open, onReset, onClose, messages }) {
   }, [open]);
   return (
     <dialog ref={dialogRef} onClose={onClose}>
-      <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
+      <form method="dialog" onSubmit={onReset} onReset={handleReset}>
         <div>{messages.RESET_TITLE}</div>
         <p>
           <label>{messages.RESET_MESSAGE}</label>
