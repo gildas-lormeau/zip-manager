@@ -285,7 +285,7 @@ function onEntriesKeyDown(event, { highlightAll, util, constants }) {
       highlightAll();
     }
   }
-  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
+  if (!event.altKey && !modifierKeyPressed(event, util)) {
     if (
       event.key === DOWN_KEY ||
       event.key === UP_KEY ||
