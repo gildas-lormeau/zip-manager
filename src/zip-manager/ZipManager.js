@@ -90,6 +90,7 @@ function ZipManager() {
   const downloaderElement = downloaderRef.current;
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
+  const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
   const {
     downloadFile,
@@ -161,7 +162,7 @@ function ZipManager() {
     closePromptExportZip
   } = getSelectedFolderFeatures({
     selectedFolder,
-    rootZipFilename: messages.ROOT_ZIP_FILENAME,
+    rootZipFilename,
     setExportZipDialogOpened,
     setExportZipFilename,
     setExportZipPassword,
