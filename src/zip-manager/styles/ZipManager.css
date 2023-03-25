@@ -29,7 +29,41 @@ main > :last-child {
   border-block-end: none;
 }
 
-@media (max-aspect-ratio: 1.75), (display-mode: standalone) {
+@media (orientation: portrait) {
+  main {
+    inline-size: 100vw;
+  }
+
+  main {
+    margin: 0;
+    border-width: 0;
+  }
+
+  main > :last-child {
+    border-block-end: solid var(--accent-color) .05em;
+  }
+}
+
+@supports (aspect-ratio: 1.75) {
+
+  @media (max-aspect-ratio: 1.75) {
+    main {
+      inline-size: 100vw;
+    }
+
+    main {
+      margin: 0;
+      border-width: 0;
+    }
+
+    main > :last-child {
+      border-block-end: solid var(--accent-color) .05em;
+    }
+  }
+
+}
+
+@media (display-mode: standalone) {
   main {
     inline-size: 100vw;
   }
