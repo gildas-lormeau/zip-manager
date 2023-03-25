@@ -1,17 +1,16 @@
 dialog::backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
   background-color: white;
   opacity: 0.85;
 }
 
 dialog {
-  top: -40%;
+  top: 7.5em;
   width: min(40ch, 75dvw);
   background-color: var(--page-color);
   color: var(--text-color);
   border: solid var(--accent-color) 0.1em;
+  margin: 0px;
+  margin-inline: auto;
 }
 
 dialog input {
