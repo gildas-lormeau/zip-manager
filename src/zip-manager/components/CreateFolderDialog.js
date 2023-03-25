@@ -16,14 +16,18 @@ function CreateFolderDialog({ open, onCreateFolder, onClose, messages }) {
     dialogRef.current.close();
   }
 
+  function handleClose() {
+    setFolderNameValue("");
+    onClose();
+  }
+
   useEffect(() => {
     if (!dialogRef.current.open && open) {
-      setFolderNameValue("");
       dialogRef.current.showModal();
     }
   }, [open]);
   return (
-    <dialog ref={dialogRef} onClose={onClose}>
+    <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
         <div>{messages.CREATE_FOLDER_TITLE}</div>
         <p>

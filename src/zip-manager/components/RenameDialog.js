@@ -20,6 +20,7 @@ function RenameDialog({ open, filename, onRename, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
+    setFilenameValue("");
     onClose();
   }
 

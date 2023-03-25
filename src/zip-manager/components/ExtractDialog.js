@@ -33,6 +33,8 @@ function ExtractDialog({
 
   function handleClose() {
     filenameTextSelected.current = false;
+    setFilenameValue("");
+    setPasswordValue("");
     onClose();
   }
 
