@@ -5,7 +5,6 @@ function getSelectedFolderFeatures({
   setExportZipFilename,
   setExportZipPassword,
   setCreateFolderDialogOpened,
-  setCreateFolderName,
   updateSelectedFolder,
   highlightEntries,
   removeDownload,
@@ -16,7 +15,6 @@ function getSelectedFolderFeatures({
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
 
   function promptCreateFolder() {
-    setCreateFolderName("");
     setCreateFolderDialogOpened(true);
   }
 

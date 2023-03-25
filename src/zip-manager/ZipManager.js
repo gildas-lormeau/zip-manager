@@ -72,7 +72,6 @@ function ZipManager() {
   const [renameFilename, setRenameFilename] = useState("");
   const [createFolderDialogOpened, setCreateFolderDialogOpened] =
     useState(false);
-  const [createFolderName, setCreateFolderName] = useState("");
   const [deleteEntryDialogOpened, setDeleteEntryDialogOpened] = useState(false);
   const [resetDialogOpened, setResetDialogOpened] = useState(false);
   const [errorMessageDialogOpened, setErrorMessageDialogOpened] =
@@ -169,7 +168,6 @@ function ZipManager() {
     setExportZipFilename,
     setExportZipPassword,
     setCreateFolderDialogOpened,
-    setCreateFolderName,
     updateSelectedFolder,
     highlightEntries,
     removeDownload,
@@ -415,7 +413,6 @@ function ZipManager() {
       <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
       <CreateFolderDialog
         open={createFolderDialogOpened}
-        folderName={createFolderName}
         onCreateFolder={createFolder}
         onClose={closeCreateFolderDialog}
         messages={messages}
