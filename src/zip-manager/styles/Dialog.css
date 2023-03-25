@@ -20,8 +20,9 @@ dialog input {
   background-color: var(--bg-color);
   color: var(--text-color);
   border: solid var(--accent-color) 0.05em;
-  height: 1.75em;
+  height: 1.8em;
   padding-inline: 0.75ch;
+  font-size: 1em;
 }
 
 dialog form {
