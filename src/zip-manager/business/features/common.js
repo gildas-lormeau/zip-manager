@@ -4,6 +4,8 @@ function getCommonFeatures({
   setDownloadId,
   setDownloads,
   setEntries,
+  setErrorMessageDialogOpened,
+  setErrorMessage,
   downloaderElement,
   util
 }) {
@@ -69,9 +71,15 @@ function getCommonFeatures({
     );
   }
 
+  function displayError(message) {
+    setErrorMessage(message);
+    setErrorMessageDialogOpened(true);
+  }
+
   return {
     downloadFile,
-    updateSelectedFolder
+    updateSelectedFolder,
+    displayError
   };
 }
 

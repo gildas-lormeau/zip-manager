@@ -26,7 +26,8 @@ import {
   RenameDialog,
   CreateFolderDialog,
   ResetDialog,
-  DeleteEntryDialog
+  DeleteEntryDialog,
+  ErrorMessageDialog
 } from "./components/index.js";
 
 const {
@@ -60,7 +61,6 @@ function ZipManager() {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [accentColor, setAccentColor] = useState(null);
   const [colorScheme, setColorScheme] = useState("");
-
   const [exportZipDialogOpened, setExportZipDialogOpened] = useState(false);
   const [exportZipFilename, setExportZipFilename] = useState("");
   const [exportZipPassword, setExportZipPassword] = useState("");
@@ -75,7 +75,9 @@ function ZipManager() {
   const [createFolderName, setCreateFolderName] = useState("");
   const [deleteEntryDialogOpened, setDeleteEntryDialogOpened] = useState(false);
   const [resetDialogOpened, setResetDialogOpened] = useState(false);
-
+  const [errorMessageDialogOpened, setErrorMessageDialogOpened] =
+    useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -96,16 +98,20 @@ function ZipManager() {
   const closeCreateFolderDialog = () => setCreateFolderDialogOpened(false);
   const closeResetDialog = () => setResetDialogOpened(false);
   const closeDeleteEntryDialog = () => setDeleteEntryDialogOpened(false);
+  const closeErrorMessageDialog = () => setErrorMessageDialogOpened(false);
 
-  const { downloadFile, updateSelectedFolder } = getCommonFeatures({
-    downloadId,
-    selectedFolder,
-    setDownloadId,
-    setDownloads,
-    setEntries,
-    downloaderElement,
-    util
-  });
+  const { downloadFile, updateSelectedFolder, displayError } =
+    getCommonFeatures({
+      downloadId,
+      selectedFolder,
+      setDownloadId,
+      setDownloads,
+      setEntries,
+      setErrorMessageDialogOpened,
+      setErrorMessage,
+      downloaderElement,
+      util
+    });
   const {
     highlightPrevious,
     highlightNext,
@@ -158,6 +164,7 @@ function ZipManager() {
     exportZip
   } = getSelectedFolderFeatures({
     selectedFolder,
+    rootZipFilename: messages.ROOT_ZIP_FILENAME,
     setExportZipDialogOpened,
     setExportZipFilename,
     setExportZipPassword,
@@ -167,9 +174,8 @@ function ZipManager() {
     highlightEntries,
     removeDownload,
     downloadFile,
-    util,
-    constants,
-    messages
+    displayError,
+    constants
   });
   const {
     copy,
@@ -204,16 +210,13 @@ function ZipManager() {
     removeDownload,
     updateSelectedFolder,
     downloadFile,
-    util,
-    constants,
-    messages
+    displayError,
+    constants
   });
   const { confirmReset, reset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
-    setResetDialogOpened,
-    util,
-    messages
+    setResetDialogOpened
   });
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
@@ -451,6 +454,12 @@ function ZipManager() {
         open={deleteEntryDialogOpened}
         onDeleteEntry={deleteEntry}
         onClose={closeDeleteEntryDialog}
+        messages={messages}
+      />
+      <ErrorMessageDialog
+        open={errorMessageDialogOpened}
+        onClose={closeErrorMessageDialog}
+        message={errorMessage}
         messages={messages}
       />
     </div>

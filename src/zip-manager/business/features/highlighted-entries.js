@@ -21,9 +21,8 @@ function getHighlightedEntriesFeatures({
   removeDownload,
   updateSelectedFolder,
   downloadFile,
-  util,
-  constants,
-  messages
+  displayError,
+  constants
 }) {
   const { DEFAULT_MIME_TYPE } = constants;
 
@@ -60,7 +59,7 @@ function getHighlightedEntriesFeatures({
       setHighlightedIds(entries.map((entry) => entry.id));
       updateSelectedFolder();
     } catch (error) {
-      util.alert(error.message);
+      displayError(error.message);
     }
   }
 
@@ -78,7 +77,7 @@ function getHighlightedEntriesFeatures({
         updateSelectedFolder();
       }
     } catch (error) {
-      util.alert(error.message);
+      displayError(error.message);
     }
   }
 
@@ -145,7 +144,7 @@ function getHighlightedEntriesFeatures({
           }
         });
       } catch (error) {
-        util.alert(error.message);
+        displayError(error.message);
       }
     }
 

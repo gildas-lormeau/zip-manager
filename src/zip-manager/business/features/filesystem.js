@@ -1,9 +1,7 @@
 function getFilesystemFeatures({
   zipService,
   setZipFilesystem,
-  setResetDialogOpened,
-  util,
-  messages
+  setResetDialogOpened
 }) {
   function confirmReset() {
     setResetDialogOpened(true);

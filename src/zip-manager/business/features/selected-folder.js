@@ -1,5 +1,6 @@
 function getSelectedFolderFeatures({
   selectedFolder,
+  rootZipFilename,
   setExportZipDialogOpened,
   setExportZipFilename,
   setExportZipPassword,
@@ -9,12 +10,10 @@ function getSelectedFolderFeatures({
   highlightEntries,
   removeDownload,
   downloadFile,
-  util,
-  constants,
-  messages
+  displayError,
+  constants
 }) {
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
-  const { ROOT_ZIP_FILENAME } = messages;
 
   function promptCreateFolder() {
     setCreateFolderName("");
@@ -27,7 +26,7 @@ function getSelectedFolderFeatures({
       highlightEntries([entry]);
       updateSelectedFolder();
     } catch (error) {
-      util.alert(error.message);
+      displayError(error.message);
     }
   }
 
@@ -41,7 +40,7 @@ function getSelectedFolderFeatures({
           })
         );
       } catch (error) {
-        util.alert(error.message);
+        displayError(error.message);
       }
     });
     if (addedEntries.length) {
@@ -56,7 +55,7 @@ function getSelectedFolderFeatures({
       try {
         await selectedFolder.importBlob(zipFile);
       } catch (error) {
-        util.alert(error.message);
+        displayError(error.message);
       }
       const addedEntries = selectedFolder.children.filter(
         (entry) => !children.includes(entry)
@@ -82,7 +81,7 @@ function getSelectedFolderFeatures({
     setExportZipFilename(
       selectedFolder.name
         ? selectedFolder.name + ZIP_EXTENSION
-        : ROOT_ZIP_FILENAME
+        : rootZipFilename
     );
     setExportZipPassword("");
     setExportZipDialogOpened(true);
@@ -108,7 +107,7 @@ function getSelectedFolderFeatures({
           }
         );
       } catch (error) {
-        util.alert(error.message);
+        displayError(error.message);
       }
     }
 

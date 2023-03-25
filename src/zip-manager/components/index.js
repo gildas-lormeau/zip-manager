@@ -10,6 +10,7 @@ import RenameDialog from "./RenameDialog.js";
 import CreateFolderDialog from "./CreateFolderDialog.js";
 import ResetDialog from "./ResetDialog.js";
 import DeleteEntryDialog from "./DeleteEntryDialog.js";
+import ErrorMessageDialog from "./ErrorMessageDialog.js";
 
 export {
   TopButtonBar,
@@ -23,5 +24,6 @@ export {
   RenameDialog,
   CreateFolderDialog,
   ResetDialog,
-  DeleteEntryDialog
+  DeleteEntryDialog,
+  ErrorMessageDialog
 };
