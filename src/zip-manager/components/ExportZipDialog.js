@@ -52,40 +52,37 @@ function ExportZipDialog({
     }
   }, [filenameValue]);
   return (
-    <>
-      <div className="dialog-backdrop" hidden={!open}></div>
-      <dialog ref={dialogRef} onClose={handleClose}>
-        <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
-          <div>{messages.EXPORT_ZIP_TITLE}</div>
-          <p>
-            <label>
-              {messages.EXPORT_ZIP_FILENAME_LABEL}
-              <input
-                value={filenameValue}
-                required
-                onChange={handleChangeFilename}
-                ref={filenameInputRef}
-              ></input>
-            </label>
-            <label>
-              {messages.EXPORT_ZIP_PASSWORD_LABEL}
-              <input
-                type="password"
-                autoComplete="off"
-                value={passwordValue}
-                onChange={handleChangePassword}
-              ></input>
-            </label>
-          </p>
-          <div className="button-bar">
-            <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-            <button type="submit">
-              {messages.EXPORT_ZIP_DIALOG_BUTTON_LABEL}
-            </button>
-          </div>
-        </form>
-      </dialog>
-    </>
+    <dialog ref={dialogRef} onClose={handleClose}>
+      <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
+        <div>{messages.EXPORT_ZIP_TITLE}</div>
+        <p>
+          <label>
+            {messages.EXPORT_ZIP_FILENAME_LABEL}
+            <input
+              value={filenameValue}
+              required
+              onChange={handleChangeFilename}
+              ref={filenameInputRef}
+            ></input>
+          </label>
+          <label>
+            {messages.EXPORT_ZIP_PASSWORD_LABEL}
+            <input
+              type="password"
+              autoComplete="off"
+              value={passwordValue}
+              onChange={handleChangePassword}
+            ></input>
+          </label>
+        </p>
+        <div className="button-bar">
+          <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
+          <button type="submit">
+            {messages.EXPORT_ZIP_DIALOG_BUTTON_LABEL}
+          </button>
+        </div>
+      </form>
+    </dialog>
   );
 }
 

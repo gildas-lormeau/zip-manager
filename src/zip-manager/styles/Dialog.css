@@ -1,11 +1,9 @@
-.dialog-backdrop {
+dialog::backdrop {
   position: absolute;
   top: 0;
   left: 0;
   background-color: white;
   opacity: 0.85;
-  width: 100dvw;
-  height: 100dvh;
 }
 
 dialog {
@@ -58,7 +56,7 @@ dialog .button-bar {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dialog-backdrop {
+  dialog::backdrop {
     background-color: black;
   }
 }

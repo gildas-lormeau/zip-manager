@@ -50,41 +50,36 @@ function ExtractDialog({
     }
   }, [filenameValue]);
   return (
-    <>
-      <div className="dialog-backdrop" hidden={!open}></div>
-      <dialog ref={dialogRef} onClose={handleClose}>
-        <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
-          <div>{messages.EXTRACT_TITLE}</div>
-          <p>
-            <label>
-              {messages.EXTRACT_FILENAME_LABEL}
-              <input
-                value={filenameValue}
-                required
-                onChange={handleChangeFilename}
-                ref={filenameInputRef}
-              ></input>
-            </label>
-            <label style={{ display: passwordDisabled ? "none" : "inherit" }}>
-              {messages.EXTRACT_PASSWORD_LABEL}
-              <input
-                type="password"
-                autoComplete="off"
-                value={passwordValue}
-                required={!passwordDisabled}
-                onChange={handleChangePassword}
-              ></input>
-            </label>
-          </p>
-          <div className="button-bar">
-            <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-            <button type="submit">
-              {messages.EXTRACT_DIALOG_BUTTON_LABEL}
-            </button>
-          </div>
-        </form>
-      </dialog>
-    </>
+    <dialog ref={dialogRef} onClose={handleClose}>
+      <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
+        <div>{messages.EXTRACT_TITLE}</div>
+        <p>
+          <label>
+            {messages.EXTRACT_FILENAME_LABEL}
+            <input
+              value={filenameValue}
+              required
+              onChange={handleChangeFilename}
+              ref={filenameInputRef}
+            ></input>
+          </label>
+          <label style={{ display: passwordDisabled ? "none" : "inherit" }}>
+            {messages.EXTRACT_PASSWORD_LABEL}
+            <input
+              type="password"
+              autoComplete="off"
+              value={passwordValue}
+              required={!passwordDisabled}
+              onChange={handleChangePassword}
+            ></input>
+          </label>
+        </p>
+        <div className="button-bar">
+          <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
+          <button type="submit">{messages.EXTRACT_DIALOG_BUTTON_LABEL}</button>
+        </div>
+      </form>
+    </dialog>
   );
 }
 
