@@ -92,7 +92,7 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
     if (files.length) {
       onAddFiles(files);
     }
-    util.resetValue(current);
+    current.value = "";
   }
 
   function handleClick() {
@@ -144,7 +144,7 @@ function ImportZipButton({
 
   function handleChange({ target }) {
     onImportZipFile(target.files[0]);
-    util.resetValue(current);
+    current.value = "";
   }
 
   function handleClick() {

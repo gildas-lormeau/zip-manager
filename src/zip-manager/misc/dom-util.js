@@ -41,14 +41,6 @@ function downloadBlob(blob, downloaderElement, download) {
   URL.revokeObjectURL(href);
 }
 
-function alert(message) {
-  return window.alert(message);
-}
-
-function confirm(message) {
-  return window.confirm(message);
-}
-
 function addKeyUpListener(listener) {
   window.addEventListener(KEYUP_EVENT_NAME, listener);
 }
@@ -91,10 +83,6 @@ function dispatchClick(element) {
 
 function getHeight(element) {
   return element.offsetHeight;
-}
-
-function resetValue(inputElement) {
-  inputElement.value = "";
 }
 
 function createAbortController() {
@@ -188,11 +176,8 @@ export {
   createAbortController,
   abortDownload,
   downloadAborted,
-  alert,
-  confirm,
   scrollIntoView,
   dispatchClick,
-  resetValue,
   addKeyUpListener,
   removeKeyUpListener,
   addKeyDownListener,
