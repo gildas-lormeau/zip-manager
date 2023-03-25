@@ -170,6 +170,10 @@ a:visited {
   color: inherit;
 }
 
+:focus {
+  outline: 1px solid var(--button-color);
+}
+
 @media (display-mode: standalone) {
   body {
     max-inline-size: none;
