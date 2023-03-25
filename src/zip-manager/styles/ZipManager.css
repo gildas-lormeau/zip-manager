@@ -12,17 +12,17 @@ main {
   flex: 1;
   background-color: var(--bg-color);
   color: var(--text-color);
-  margin: .5em;
+  margin: 0.5em;
   margin-block-end: 0;
-  border: solid var(--accent-color) .05em;
-  
+  border: solid var(--accent-color) 0.05em;
+
   inline-size: 85vw;
   min-block-size: 20em;
 }
 
 main > * {
-  padding: .5em;
-  border-block-end: solid var(--accent-color) .05em;
+  padding: 0.5em;
+  border-block-end: solid var(--accent-color) 0.05em;
 }
 
 main > :last-child {
@@ -40,12 +40,11 @@ main > :last-child {
   }
 
   main > :last-child {
-    border-block-end: solid var(--accent-color) .05em;
+    border-block-end: solid var(--accent-color) 0.05em;
   }
 }
 
 @supports (aspect-ratio: 1.75) {
-
   @media (max-aspect-ratio: 1.75) {
     main {
       inline-size: 100vw;
@@ -57,10 +56,9 @@ main > :last-child {
     }
 
     main > :last-child {
-      border-block-end: solid var(--accent-color) .05em;
+      border-block-end: solid var(--accent-color) 0.05em;
     }
   }
-
 }
 
 @media (display-mode: standalone) {
@@ -74,7 +72,7 @@ main > :last-child {
   }
 
   main > :last-child {
-    border-block-end: solid var(--accent-color) .05em;
+    border-block-end: solid var(--accent-color) 0.05em;
   }
 }
 
