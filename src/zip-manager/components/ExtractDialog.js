@@ -10,6 +10,8 @@ function ExtractDialog({
   messages
 }) {
   const dialogRef = useRef(null);
+  const filenameInputRef = useRef(null);
+  const filenameTextSelected = useRef(false);
   const [filenameValue, setFilenameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
@@ -29,6 +31,11 @@ function ExtractDialog({
     dialogRef.current.close();
   }
 
+  function handleClose() {
+    filenameTextSelected.current = false;
+    onClose();
+  }
+
   useEffect(() => {
     if (!dialogRef.current.open && open) {
       setFilenameValue(filename);
@@ -36,10 +43,16 @@ function ExtractDialog({
       dialogRef.current.showModal();
     }
   }, [open, filename, password]);
+  useEffect(() => {
+    if (!filenameTextSelected.current && filenameValue) {
+      filenameTextSelected.current = true;
+      filenameInputRef.current.select();
+    }
+  }, [filenameValue]);
   return (
     <>
       <div className="dialog-backdrop" hidden={!open}></div>
-      <dialog ref={dialogRef} onClose={onClose}>
+      <dialog ref={dialogRef} onClose={handleClose}>
         <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
           <div>{messages.EXTRACT_TITLE}</div>
           <p>
@@ -49,6 +62,7 @@ function ExtractDialog({
                 value={filenameValue}
                 required
                 onChange={handleChangeFilename}
+                ref={filenameInputRef}
               ></input>
             </label>
             <label style={{ display: passwordDisabled ? "none" : "inherit" }}>

@@ -9,6 +9,8 @@ function ExportZipDialog({
   messages
 }) {
   const dialogRef = useRef(null);
+  const filenameInputRef = useRef(null);
+  const filenameTextSelected = useRef(false);
   const [filenameValue, setFilenameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
@@ -28,17 +30,31 @@ function ExportZipDialog({
     dialogRef.current.close();
   }
 
+  function handleClose() {
+    filenameTextSelected.current = false;
+    onClose();
+  }
+
   useEffect(() => {
     if (!dialogRef.current.open && open) {
       setFilenameValue(filename);
       setPasswordValue(password);
       dialogRef.current.showModal();
+      if (filename) {
+        filenameInputRef.current.select();
+      }
     }
   }, [open, filename, password]);
+  useEffect(() => {
+    if (!filenameTextSelected.current && filenameValue) {
+      filenameTextSelected.current = true;
+      filenameInputRef.current.select();
+    }
+  }, [filenameValue]);
   return (
     <>
       <div className="dialog-backdrop" hidden={!open}></div>
-      <dialog ref={dialogRef} onClose={onClose}>
+      <dialog ref={dialogRef} onClose={handleClose}>
         <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
           <div>{messages.EXPORT_ZIP_TITLE}</div>
           <p>
@@ -48,6 +64,7 @@ function ExportZipDialog({
                 value={filenameValue}
                 required
                 onChange={handleChangeFilename}
+                ref={filenameInputRef}
               ></input>
             </label>
             <label>

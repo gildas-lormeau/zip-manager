@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 function RenameDialog({ open, filename, onRename, onClose, messages }) {
   const dialogRef = useRef(null);
+  const filenameInputRef = useRef(null);
+  const filenameTextSelected = useRef(false);
   const [filenameValue, setFilenameValue] = useState("");
 
   function handleChangeFilename(event) {
@@ -16,16 +18,30 @@ function RenameDialog({ open, filename, onRename, onClose, messages }) {
     dialogRef.current.close();
   }
 
+  function handleClose() {
+    filenameTextSelected.current = false;
+    onClose();
+  }
+
   useEffect(() => {
     if (!dialogRef.current.open && open) {
       setFilenameValue(filename);
       dialogRef.current.showModal();
+      if (filename) {
+        filenameInputRef.current.select();
+      }
     }
   }, [open, filename]);
+  useEffect(() => {
+    if (!filenameTextSelected.current && filenameValue) {
+      filenameTextSelected.current = true;
+      filenameInputRef.current.select();
+    }
+  }, [filenameValue]);
   return (
     <>
       <div className="dialog-backdrop" hidden={!open}></div>
-      <dialog ref={dialogRef} onClose={onClose}>
+      <dialog ref={dialogRef} onClose={handleClose}>
         <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
           <div>{messages.RENAME_TITLE}</div>
           <p>
@@ -35,6 +51,7 @@ function RenameDialog({ open, filename, onRename, onClose, messages }) {
                 value={filenameValue}
                 required
                 onChange={handleChangeFilename}
+                ref={filenameInputRef}
               ></input>
             </label>
           </p>
