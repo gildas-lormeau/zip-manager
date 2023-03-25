@@ -3,7 +3,7 @@ function getFilesystemFeatures({
   setZipFilesystem,
   setResetDialogOpened
 }) {
-  function confirmReset() {
+  function openConfirmReset() {
     setResetDialogOpened(true);
   }
 
@@ -11,9 +11,14 @@ function getFilesystemFeatures({
     setZipFilesystem(zipService.createZipFileSystem());
   }
 
+  function closeConfirmReset() {
+    setResetDialogOpened(false);
+  }
+
   return {
-    confirmReset,
-    reset
+    openConfirmReset,
+    reset,
+    closeConfirmReset
   };
 }
 

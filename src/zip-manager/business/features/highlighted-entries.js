@@ -21,7 +21,7 @@ function getHighlightedEntriesFeatures({
   removeDownload,
   updateSelectedFolder,
   downloadFile,
-  displayError,
+  openDisplayError,
   constants
 }) {
   const { DEFAULT_MIME_TYPE } = constants;
@@ -59,11 +59,11 @@ function getHighlightedEntriesFeatures({
       setHighlightedIds(entries.map((entry) => entry.id));
       updateSelectedFolder();
     } catch (error) {
-      displayError(error.message);
+      openDisplayError(error.message);
     }
   }
 
-  function promptRename() {
+  function openPromptRename() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
     setRenameFilename(highlightedEntry.name);
     setRenameDialogOpened(true);
@@ -77,11 +77,14 @@ function getHighlightedEntriesFeatures({
         updateSelectedFolder();
       }
     } catch (error) {
-      displayError(error.message);
+      openDisplayError(error.message);
     }
   }
+  function closePromptRename() {
+    setRenameDialogOpened(false);
+  }
 
-  function confirmDeleteEntry() {
+  function openConfirmDeleteEntry() {
     setDeleteEntryDialogOpened(true);
   }
 
@@ -122,7 +125,11 @@ function getHighlightedEntriesFeatures({
     updateSelectedFolder();
   }
 
-  function promptExtract() {
+  function closeConfirmDeleteEntry() {
+    setDeleteEntryDialogOpened(false);
+  }
+
+  function openPromptExtract() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
     const encrypted = highlightedEntry.data.encrypted;
     setExtractFilename(highlightedEntry.name);
@@ -144,11 +151,15 @@ function getHighlightedEntriesFeatures({
           }
         });
       } catch (error) {
-        displayError(error.message);
+        openDisplayError(error.message);
       }
     }
 
     download();
+  }
+
+  function closePromptExtract() {
+    setExtractDialogOpened(false);
   }
 
   function updateHistoryData() {
@@ -180,12 +191,15 @@ function getHighlightedEntriesFeatures({
     copy,
     cut,
     paste,
-    promptRename,
+    openPromptRename,
     rename,
-    confirmDeleteEntry,
+    closePromptRename,
+    openConfirmDeleteEntry,
     deleteEntry,
-    promptExtract,
-    extract
+    closeConfirmDeleteEntry,
+    openPromptExtract,
+    extract,
+    closePromptExtract
   };
 }
 

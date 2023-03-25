@@ -5,7 +5,7 @@ function getAppFeatures({
   setEntriesDeltaHeight,
   getEntriesElementHeight,
   goIntoFolder,
-  promptExtract,
+  openPromptExtract,
   util,
   constants
 }) {
@@ -13,7 +13,7 @@ function getAppFeatures({
     if (entry.directory) {
       goIntoFolder(entry);
     } else {
-      promptExtract(entry);
+      openPromptExtract(entry);
     }
   }
 

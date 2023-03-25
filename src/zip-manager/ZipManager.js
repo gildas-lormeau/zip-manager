@@ -91,26 +91,22 @@ function ZipManager() {
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
 
-  const closeRenameDialog = () => setRenameDialogOpened(false);
-  const closeExtractDialog = () => setExtractDialogOpened(false);
-  const closeExportZipDialog = () => setExportZipDialogOpened(false);
-  const closeCreateFolderDialog = () => setCreateFolderDialogOpened(false);
-  const closeResetDialog = () => setResetDialogOpened(false);
-  const closeDeleteEntryDialog = () => setDeleteEntryDialogOpened(false);
-  const closeErrorMessageDialog = () => setErrorMessageDialogOpened(false);
-
-  const { downloadFile, updateSelectedFolder, displayError } =
-    getCommonFeatures({
-      downloadId,
-      selectedFolder,
-      setDownloadId,
-      setDownloads,
-      setEntries,
-      setErrorMessageDialogOpened,
-      setErrorMessage,
-      downloaderElement,
-      util
-    });
+  const {
+    downloadFile,
+    updateSelectedFolder,
+    openDisplayError,
+    closeDisplayError
+  } = getCommonFeatures({
+    downloadId,
+    selectedFolder,
+    setDownloadId,
+    setDownloads,
+    setEntries,
+    setErrorMessageDialogOpened,
+    setErrorMessage,
+    downloaderElement,
+    util
+  });
   const {
     highlightPrevious,
     highlightNext,
@@ -155,12 +151,14 @@ function ZipManager() {
     util
   });
   const {
-    promptCreateFolder,
+    openPromptCreateFolder,
     createFolder,
+    closePromptCreateFolder,
     addFiles,
     importZipFile,
-    promptExportZip,
-    exportZip
+    openPromptExportZip,
+    exportZip,
+    closePromptExportZip
   } = getSelectedFolderFeatures({
     selectedFolder,
     rootZipFilename: messages.ROOT_ZIP_FILENAME,
@@ -172,19 +170,22 @@ function ZipManager() {
     highlightEntries,
     removeDownload,
     downloadFile,
-    displayError,
+    openDisplayError,
     constants
   });
   const {
     copy,
     cut,
     paste,
-    promptRename,
+    openPromptRename,
     rename,
-    confirmDeleteEntry,
+    closePromptRename,
+    openConfirmDeleteEntry,
     deleteEntry,
-    promptExtract,
-    extract
+    closeConfirmDeleteEntry,
+    openPromptExtract,
+    extract,
+    closePromptExtract
   } = getHighlightedEntriesFeatures({
     zipFilesystem,
     entries,
@@ -208,10 +209,10 @@ function ZipManager() {
     removeDownload,
     updateSelectedFolder,
     downloadFile,
-    displayError,
+    openDisplayError,
     constants
   });
-  const { confirmReset, reset } = getFilesystemFeatures({
+  const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
     setResetDialogOpened
@@ -232,7 +233,7 @@ function ZipManager() {
     setEntriesDeltaHeight,
     getEntriesElementHeight,
     goIntoFolder,
-    promptExtract,
+    openPromptExtract,
     util,
     constants
   });
@@ -272,9 +273,9 @@ function ZipManager() {
     disabledEnter,
     cut,
     copy,
-    promptRename,
+    openPromptRename,
     paste,
-    confirmDeleteEntry,
+    openConfirmDeleteEntry,
     enter,
     highlightNext,
     highlightPrevious,
@@ -290,8 +291,8 @@ function ZipManager() {
     toggleNextPage,
     toggleFirst,
     toggleLast,
-    promptCreateFolder,
-    promptExportZip,
+    openPromptCreateFolder,
+    openPromptExportZip,
     navigateBack,
     navigateForward,
     goIntoFolder,
@@ -344,11 +345,11 @@ function ZipManager() {
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledResetButton={disabledReset}
-          onCreateFolder={promptCreateFolder}
+          onCreateFolder={openPromptCreateFolder}
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
-          onExportZipFile={promptExportZip}
-          onReset={confirmReset}
+          onExportZipFile={openPromptExportZip}
+          onReset={openConfirmReset}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}
           util={util}
@@ -396,8 +397,8 @@ function ZipManager() {
           onCut={cut}
           onPaste={paste}
           onResetClipboardData={resetClipboardData}
-          onRename={promptRename}
-          onRemove={confirmDeleteEntry}
+          onRename={openPromptRename}
+          onRemove={openConfirmDeleteEntry}
           onMove={resizeEntries}
           onStopMove={stopResizeEntries}
           messages={messages}
@@ -414,7 +415,7 @@ function ZipManager() {
       <CreateFolderDialog
         open={createFolderDialogOpened}
         onCreateFolder={createFolder}
-        onClose={closeCreateFolderDialog}
+        onClose={closePromptCreateFolder}
         messages={messages}
       />
       <ExportZipDialog
@@ -422,7 +423,7 @@ function ZipManager() {
         filename={exportZipFilename}
         password={exportZipPassword}
         onExportZip={exportZip}
-        onClose={closeExportZipDialog}
+        onClose={closePromptExportZip}
         messages={messages}
       />
       <ExtractDialog
@@ -431,31 +432,31 @@ function ZipManager() {
         password={extractPassword}
         passwordDisabled={extractPasswordDisabled}
         onExtract={extract}
-        onClose={closeExtractDialog}
+        onClose={closePromptExtract}
         messages={messages}
       />
       <RenameDialog
         open={renameDialogOpened}
         filename={renameFilename}
         onRename={rename}
-        onClose={closeRenameDialog}
+        onClose={closePromptRename}
         messages={messages}
       />
       <ResetDialog
         open={resetDialogOpened}
         onReset={reset}
-        onClose={closeResetDialog}
+        onClose={closeConfirmReset}
         messages={messages}
       />
       <DeleteEntryDialog
         open={deleteEntryDialogOpened}
         onDeleteEntry={deleteEntry}
-        onClose={closeDeleteEntryDialog}
+        onClose={closeConfirmDeleteEntry}
         messages={messages}
       />
       <ErrorMessageDialog
         open={errorMessageDialogOpened}
-        onClose={closeErrorMessageDialog}
+        onClose={closeDisplayError}
         message={errorMessage}
         messages={messages}
       />

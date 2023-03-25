@@ -71,15 +71,20 @@ function getCommonFeatures({
     );
   }
 
-  function displayError(message) {
+  function openDisplayError(message) {
     setErrorMessage(message);
     setErrorMessageDialogOpened(true);
+  }
+
+  function closeDisplayError() {
+    setErrorMessageDialogOpened(false);
   }
 
   return {
     downloadFile,
     updateSelectedFolder,
-    displayError
+    openDisplayError,
+    closeDisplayError
   };
 }
 

@@ -9,12 +9,12 @@ function getSelectedFolderFeatures({
   highlightEntries,
   removeDownload,
   downloadFile,
-  displayError,
+  openDisplayError,
   constants
 }) {
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
 
-  function promptCreateFolder() {
+  function openPromptCreateFolder() {
     setCreateFolderDialogOpened(true);
   }
 
@@ -24,8 +24,12 @@ function getSelectedFolderFeatures({
       highlightEntries([entry]);
       updateSelectedFolder();
     } catch (error) {
-      displayError(error.message);
+      openDisplayError(error.message);
     }
+  }
+
+  function closePromptCreateFolder() {
+    setCreateFolderDialogOpened(false);
   }
 
   function addFiles(files) {
@@ -38,7 +42,7 @@ function getSelectedFolderFeatures({
           })
         );
       } catch (error) {
-        displayError(error.message);
+        openDisplayError(error.message);
       }
     });
     if (addedEntries.length) {
@@ -53,7 +57,7 @@ function getSelectedFolderFeatures({
       try {
         await selectedFolder.importBlob(zipFile);
       } catch (error) {
-        displayError(error.message);
+        openDisplayError(error.message);
       }
       const addedEntries = selectedFolder.children.filter(
         (entry) => !children.includes(entry)
@@ -75,7 +79,7 @@ function getSelectedFolderFeatures({
     );
   }
 
-  function promptExportZip() {
+  function openPromptExportZip() {
     setExportZipFilename(
       selectedFolder.name
         ? selectedFolder.name + ZIP_EXTENSION
@@ -83,6 +87,10 @@ function getSelectedFolderFeatures({
     );
     setExportZipPassword("");
     setExportZipDialogOpened(true);
+  }
+
+  function closePromptExportZip() {
+    setExportZipDialogOpened(false);
   }
 
   function exportZip({ filename, password }) {
@@ -105,7 +113,7 @@ function getSelectedFolderFeatures({
           }
         );
       } catch (error) {
-        displayError(error.message);
+        openDisplayError(error.message);
       }
     }
 
@@ -113,12 +121,14 @@ function getSelectedFolderFeatures({
   }
 
   return {
-    promptCreateFolder,
+    openPromptCreateFolder,
     createFolder,
+    closePromptCreateFolder,
     addFiles,
     importZipFile,
-    promptExportZip,
-    exportZip
+    openPromptExportZip,
+    exportZip,
+    closePromptExportZip
   };
 }
 

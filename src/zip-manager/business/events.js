@@ -14,7 +14,7 @@ function getEventHandlers({
   disabledEnter,
   cut,
   copy,
-  promptRename,
+  openPromptRename,
   paste,
   deleteEntry,
   enter,
@@ -32,8 +32,8 @@ function getEventHandlers({
   toggleNextPage,
   toggleFirst,
   toggleLast,
-  promptCreateFolder,
-  promptExportZip,
+  openPromptCreateFolder,
+  openPromptExportZip,
   navigateBack,
   navigateForward,
   goIntoFolder,
@@ -95,15 +95,15 @@ function getEventHandlers({
         disabledPaste,
         cut,
         copy,
-        promptRename,
+        openPromptRename,
         paste,
         util,
         constants
       });
       onSelectedFolderKeyDown(event, {
         disabledExportZip,
-        promptCreateFolder,
-        promptExportZip,
+        openPromptCreateFolder,
+        openPromptExportZip,
         addFilesButton,
         importZipButton,
         util,
@@ -308,7 +308,7 @@ function onHighlightedEntriesKeyDown(
     disabledPaste,
     cut,
     copy,
-    promptRename,
+    openPromptRename,
     paste,
     util,
     constants
@@ -326,7 +326,7 @@ function onHighlightedEntriesKeyDown(
     }
     if (event.key === RENAME_KEY && !disabledRename) {
       event.preventDefault();
-      promptRename();
+      openPromptRename();
     }
     if (event.key === PASTE_KEY && !disabledPaste) {
       event.preventDefault();
@@ -338,8 +338,8 @@ function onHighlightedEntriesKeyDown(
 function onSelectedFolderKeyDown(
   event,
   {
-    promptCreateFolder,
-    promptExportZip,
+    openPromptCreateFolder,
+    openPromptExportZip,
     addFilesButton,
     importZipButton,
     disabledExportZip,
@@ -352,7 +352,7 @@ function onSelectedFolderKeyDown(
   if (modifierKeyPressed(event, util)) {
     if (event.key === CREATE_FOLDER_KEY) {
       event.preventDefault();
-      promptCreateFolder();
+      openPromptCreateFolder();
     }
     if (event.key === ADD_FILES_KEY) {
       event.preventDefault();
@@ -364,7 +364,7 @@ function onSelectedFolderKeyDown(
     }
     if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
       event.preventDefault();
-      promptExportZip();
+      openPromptExportZip();
     }
   }
 }
