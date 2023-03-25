@@ -3,8 +3,6 @@ function getEffects({
   accentColor,
   setAccentColor,
   setColorScheme,
-  setExportPassword,
-  setImportPassword,
   setPreviousHighlightedEntry,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -27,8 +25,6 @@ function getEffects({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    setExportPassword("");
-    setImportPassword("");
     updateSelectedFolder(root);
   }
 

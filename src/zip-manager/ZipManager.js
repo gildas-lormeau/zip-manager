@@ -20,7 +20,11 @@ import {
   Entries,
   BottomButtonBar,
   DownloadManager,
-  InfoBar
+  InfoBar,
+  ExportZipDialog,
+  ExtractDialog,
+  RenameDialog,
+  CreateFolderDialog
 } from "./components/index.js";
 
 const {
@@ -54,8 +58,20 @@ function ZipManager() {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [accentColor, setAccentColor] = useState(null);
   const [colorScheme, setColorScheme] = useState("");
-  const importPasswordRef = useRef("");
-  const exportPasswordRef = useRef("");
+
+  const [exportZipDialogOpened, setExportZipDialogOpened] = useState(false);
+  const [exportZipFilename, setExportZipFilename] = useState("");
+  const [exportZipPassword, setExportZipPassword] = useState("");
+  const [extractDialogOpened, setExtractDialogOpened] = useState(false);
+  const [extractFilename, setExtractFilename] = useState("");
+  const [extractPassword, setExtractPassword] = useState("");
+  const [extractPasswordDisabled, setExtractPasswordDisabled] = useState(true);
+  const [renameDialogOpened, setRenameDialogOpened] = useState(false);
+  const [renameFilename, setRenameFilename] = useState("");
+  const [createFolderDialogOpened, setCreateFolderDialogOpened] =
+    useState(false);
+  const [createFolderName, setCreateFolderName] = useState("");
+
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -64,29 +80,25 @@ function ZipManager() {
   const importZipButtonRef = useRef(null);
 
   const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
-  const setImportPassword = (password) =>
-    (importPasswordRef.current = password);
-  const setExportPassword = (password) =>
-    (exportPasswordRef.current = password);
-  const getImportPassword = () => importPasswordRef.current;
-  const getExportPassword = () => exportPasswordRef.current;
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
   const downloaderElement = downloaderRef.current;
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
 
+  const closeRenameDialog = () => setRenameDialogOpened(false);
+  const closeExtractDialog = () => setExtractDialogOpened(false);
+  const closeExportZipDialog = () => setExportZipDialogOpened(false);
+  const closeCreateFolderDialog = () => setCreateFolderDialogOpened(false);
+
   const { downloadFile, updateSelectedFolder } = getCommonFeatures({
-    zipFilesystem,
     downloadId,
     selectedFolder,
     setDownloadId,
     setDownloads,
     setEntries,
     downloaderElement,
-    zipService,
-    util,
-    messages
+    util
   });
   const {
     highlightPrevious,
@@ -131,43 +143,63 @@ function ZipManager() {
     setDownloads,
     util
   });
-  const { createFolder, addFiles, importZipFile, exportZipFile } =
-    getSelectedFolderFeatures({
-      selectedFolder,
-      getImportPassword,
-      getExportPassword,
-      setImportPassword,
-      updateSelectedFolder,
-      highlightEntries,
-      removeDownload,
-      downloadFile,
-      util,
-      constants,
-      messages
-    });
-  const { copy, cut, paste, rename, remove, download } =
-    getHighlightedEntriesFeatures({
-      zipFilesystem,
-      entries,
-      history,
-      historyIndex,
-      highlightedIds,
-      selectedFolder,
-      clipboardData,
-      getImportPassword,
-      setHistory,
-      setHistoryIndex,
-      setClipboardData,
-      setHighlightedIds,
-      setPreviousHighlightedEntry,
-      setImportPassword,
-      removeDownload,
-      updateSelectedFolder,
-      downloadFile,
-      util,
-      constants,
-      messages
-    });
+  const {
+    promptCreateFolder,
+    createFolder,
+    addFiles,
+    importZipFile,
+    promptExportZip,
+    exportZip
+  } = getSelectedFolderFeatures({
+    selectedFolder,
+    setExportZipDialogOpened,
+    setExportZipFilename,
+    setExportZipPassword,
+    setCreateFolderDialogOpened,
+    setCreateFolderName,
+    updateSelectedFolder,
+    highlightEntries,
+    removeDownload,
+    downloadFile,
+    util,
+    constants,
+    messages
+  });
+  const {
+    copy,
+    cut,
+    paste,
+    promptRename,
+    rename,
+    remove,
+    promptExtract,
+    extract
+  } = getHighlightedEntriesFeatures({
+    zipFilesystem,
+    entries,
+    history,
+    historyIndex,
+    highlightedIds,
+    selectedFolder,
+    clipboardData,
+    setHistory,
+    setHistoryIndex,
+    setClipboardData,
+    setHighlightedIds,
+    setPreviousHighlightedEntry,
+    setExtractFilename,
+    setExtractPassword,
+    setExtractPasswordDisabled,
+    setExtractDialogOpened,
+    setRenameFilename,
+    setRenameDialogOpened,
+    removeDownload,
+    updateSelectedFolder,
+    downloadFile,
+    util,
+    constants,
+    messages
+  });
   const { reset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
@@ -179,7 +211,6 @@ function ZipManager() {
   });
   const {
     enter,
-    setZipPassword,
     saveAccentColor,
     restoreAccentColor,
     resizeEntries,
@@ -187,19 +218,16 @@ function ZipManager() {
   } = getAppFeatures({
     entriesHeight,
     entriesDeltaHeight,
-    setExportPassword,
     setEntriesHeight,
     setEntriesDeltaHeight,
     getEntriesElementHeight,
     goIntoFolder,
-    download,
+    promptExtract,
     util,
-    constants,
-    messages
+    constants
   });
   const {
     disabledExportZip,
-    disabledSetZipPassword,
     disabledReset,
     disabledBack,
     disabledForward,
@@ -223,7 +251,6 @@ function ZipManager() {
     downloads,
     highlightedIds,
     selectedFolder,
-    disabledSetZipPassword,
     disabledCut,
     disabledCopy,
     disabledRename,
@@ -235,7 +262,7 @@ function ZipManager() {
     disabledEnter,
     cut,
     copy,
-    rename,
+    promptRename,
     paste,
     remove,
     enter,
@@ -253,9 +280,8 @@ function ZipManager() {
     toggleNextPage,
     toggleFirst,
     toggleLast,
-    createFolder,
-    exportZipFile,
-    setZipPassword,
+    promptCreateFolder,
+    promptExportZip,
     navigateBack,
     navigateForward,
     goIntoFolder,
@@ -275,8 +301,6 @@ function ZipManager() {
     accentColor,
     setAccentColor,
     setColorScheme,
-    setImportPassword,
-    setExportPassword,
     setPreviousHighlightedEntry,
     setToggleNavigationDirection,
     setSelectedFolder,
@@ -309,13 +333,11 @@ function ZipManager() {
       <main>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
-          disabledSetZipPasswordButton={disabledSetZipPassword}
           disabledResetButton={disabledReset}
-          onCreateFolder={createFolder}
+          onCreateFolder={promptCreateFolder}
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
-          onExportZipFile={exportZipFile}
-          onSetZipPassword={setZipPassword}
+          onExportZipFile={promptExportZip}
           onReset={reset}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}
@@ -364,7 +386,7 @@ function ZipManager() {
           onCut={cut}
           onPaste={paste}
           onResetClipboardData={resetClipboardData}
-          onRename={rename}
+          onRename={promptRename}
           onRemove={remove}
           onMove={resizeEntries}
           onStopMove={stopResizeEntries}
@@ -379,6 +401,37 @@ function ZipManager() {
         />
       </main>
       <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
+      <CreateFolderDialog
+        open={createFolderDialogOpened}
+        folderName={createFolderName}
+        onCreateFolder={createFolder}
+        onClose={closeCreateFolderDialog}
+        messages={messages}
+      />
+      <ExportZipDialog
+        open={exportZipDialogOpened}
+        filename={exportZipFilename}
+        password={exportZipPassword}
+        onExportZip={exportZip}
+        onClose={closeExportZipDialog}
+        messages={messages}
+      />
+      <ExtractDialog
+        open={extractDialogOpened}
+        filename={extractFilename}
+        password={extractPassword}
+        passwordDisabled={extractPasswordDisabled}
+        onExtract={extract}
+        onClose={closeExtractDialog}
+        messages={messages}
+      />
+      <RenameDialog
+        open={renameDialogOpened}
+        filename={renameFilename}
+        onRename={rename}
+        onClose={closeRenameDialog}
+        messages={messages}
+      />
     </div>
   );
 }

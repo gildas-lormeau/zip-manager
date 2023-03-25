@@ -1,21 +1,12 @@
 function getCommonFeatures({
-  zipFilesystem,
   downloadId,
   selectedFolder,
   setDownloadId,
   setDownloads,
   setEntries,
   downloaderElement,
-  zipService,
-  util,
-  messages
+  util
 }) {
-  const {
-    DOWNLOAD_MESSAGE,
-    ENTER_PASSWORD_MESSAGE,
-    ENTER_ENTRY_PASSWORD_MESSAGE
-  } = messages;
-
   function updateSelectedFolder(folder = selectedFolder) {
     if (folder) {
       const { parent, children } = folder;
@@ -37,91 +28,30 @@ function getCommonFeatures({
       );
   }
 
-  async function downloadFile(
-    name,
-    options,
-    importPassword,
-    setImportPassword,
-    blobGetter
-  ) {
-    name = util.prompt(DOWNLOAD_MESSAGE, name);
-    if (name) {
-      const controller = util.createAbortController();
-      const progressValue = null;
-      const progressMax = null;
-      const id = downloadId + 1;
-      setDownloadId(() => id);
-      const download = { id, name, controller, progressValue, progressMax };
-      setDownloads((downloads) => [download, ...downloads]);
-      const { signal } = controller;
-      const onprogress = (progressValue, progressMax) =>
-        onDownloadProgress(download.id, progressValue, progressMax);
-      await executeDownload(
-        download,
-        { ...options, signal, onprogress },
-        importPassword,
-        setImportPassword,
-        blobGetter
-      );
-      return download;
-    }
-  }
-
-  async function executeDownload(
-    download,
-    options,
-    importPassword,
-    setImportPassword,
-    blobGetter
-  ) {
+  async function downloadFile(name, options, blobGetter) {
+    const controller = util.createAbortController();
+    const progressValue = null;
+    const progressMax = null;
+    const id = downloadId + 1;
+    setDownloadId(() => id);
+    const download = { id, name, controller, progressValue, progressMax };
+    setDownloads((downloads) => [download, ...downloads]);
+    const { signal } = controller;
+    const onprogress = (progressValue, progressMax) =>
+      onDownloadProgress(download.id, progressValue, progressMax);
     try {
-      const blob = await blobGetter(download, options);
+      const blob = await blobGetter(download, {
+        ...options,
+        signal,
+        onprogress
+      });
       util.downloadBlob(blob, downloaderElement, download.name);
     } catch (error) {
       if (!util.downloadAborted(error)) {
-        if (zipService.passwordNeeded(error)) {
-          if (
-            importPassword &&
-            (!options.readerOptions ||
-              options.readerOptions.password !== importPassword)
-          ) {
-            options.readerOptions = { importPassword };
-            await executeDownload(
-              download,
-              options,
-              importPassword,
-              setImportPassword,
-              blobGetter
-            );
-          } else {
-            let password;
-            if (error.entryId === undefined) {
-              password = util.prompt(ENTER_PASSWORD_MESSAGE);
-            } else {
-              const entry = zipFilesystem.getById(error.entryId);
-              password = util.prompt(
-                ENTER_ENTRY_PASSWORD_MESSAGE + entry.getFullname()
-              );
-            }
-            if (password) {
-              options.readerOptions = { password };
-              await executeDownload(
-                download,
-                options,
-                importPassword,
-                setImportPassword,
-                blobGetter
-              );
-              setImportPassword(importPassword);
-            } else {
-              throw error;
-            }
-          }
-        } else {
-          throw error;
-        }
+        throw error;
       }
     }
+    return download;
   }
 
   function onDownloadProgress(downloadId, progressValue, progressMax) {

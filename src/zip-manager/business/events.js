@@ -11,11 +11,10 @@ function getEventHandlers({
   disabledBack,
   disabledForward,
   disabledExportZip,
-  disabledSetZipPassword,
   disabledEnter,
   cut,
   copy,
-  rename,
+  promptRename,
   paste,
   remove,
   enter,
@@ -33,9 +32,8 @@ function getEventHandlers({
   toggleNextPage,
   toggleFirst,
   toggleLast,
-  createFolder,
-  exportZipFile,
-  setZipPassword,
+  promptCreateFolder,
+  promptExportZip,
   navigateBack,
   navigateForward,
   goIntoFolder,
@@ -45,71 +43,73 @@ function getEventHandlers({
   constants
 }) {
   function handleKeyUp(event) {
-    onEntriesKeyUp(event, {
-      highlightPrevious,
-      highlightNext,
-      highlightPreviousPage,
-      highlightNextPage,
-      highlightFirst,
-      highlightLast,
-      highlightFirstLetter,
-      togglePrevious,
-      toggleNext,
-      togglePreviousPage,
-      toggleNextPage,
-      toggleFirst,
-      toggleLast,
-      util,
-      constants
-    });
-    onFoldersKeyUp(event, {
-      disabledBack,
-      disabledForward,
-      selectedFolder,
-      highlightedIds,
-      navigateBack,
-      navigateForward,
-      goIntoFolder,
-      util,
-      constants
-    });
-    onHighlightedEntriesKeyUp(event, {
-      disabledDelete,
-      disabledEnter,
-      selectedFolder,
-      highlightedIds,
-      remove,
-      enter,
-      util,
-      constants
-    });
+    if (!event.target.closest("dialog")) {
+      onEntriesKeyUp(event, {
+        highlightPrevious,
+        highlightNext,
+        highlightPreviousPage,
+        highlightNextPage,
+        highlightFirst,
+        highlightLast,
+        highlightFirstLetter,
+        togglePrevious,
+        toggleNext,
+        togglePreviousPage,
+        toggleNextPage,
+        toggleFirst,
+        toggleLast,
+        util,
+        constants
+      });
+      onFoldersKeyUp(event, {
+        disabledBack,
+        disabledForward,
+        selectedFolder,
+        highlightedIds,
+        navigateBack,
+        navigateForward,
+        goIntoFolder,
+        util,
+        constants
+      });
+      onHighlightedEntriesKeyUp(event, {
+        disabledDelete,
+        disabledEnter,
+        selectedFolder,
+        highlightedIds,
+        remove,
+        enter,
+        util,
+        constants
+      });
+    }
   }
 
   function handleKeyDown(event) {
-    onEntriesKeyDown(event, { highlightAll, util, constants });
-    onHighlightedEntriesKeyDown(event, {
-      disabledCut,
-      disabledCopy,
-      disabledRename,
-      disabledPaste,
-      cut,
-      copy,
-      rename,
-      paste,
-      util,
-      constants
-    });
-    onSelectedFolderKeyDown(event, {
-      disabledExportZip,
-      disabledSetZipPassword,
-      createFolder,
-      exportZipFile,
-      setZipPassword,
-      addFilesButton,
-      importZipButton,
-      util,
-      constants
-    });
+    if (!event.target.closest("dialog")) {
+      onEntriesKeyDown(event, { highlightAll, util, constants });
+      onHighlightedEntriesKeyDown(event, {
+        disabledCut,
+        disabledCopy,
+        disabledRename,
+        disabledPaste,
+        cut,
+        copy,
+        promptRename,
+        paste,
+        util,
+        constants
+      });
+      onSelectedFolderKeyDown(event, {
+        disabledExportZip,
+        promptCreateFolder,
+        promptExportZip,
+        addFilesButton,
+        importZipButton,
+        util,
+        constants
+      });
+    }
   }
 
   function handlePageUnload(event) {
@@ -308,7 +308,7 @@ function onHighlightedEntriesKeyDown(
     disabledPaste,
     cut,
     copy,
-    rename,
+    promptRename,
     paste,
     util,
     constants
@@ -326,7 +326,7 @@ function onHighlightedEntriesKeyDown(
     }
     if (event.key === RENAME_KEY && !disabledRename) {
       event.preventDefault();
-      rename();
+      promptRename();
     }
     if (event.key === PASTE_KEY && !disabledPaste) {
       event.preventDefault();
@@ -338,28 +338,21 @@ function onHighlightedEntriesKeyDown(
 function onSelectedFolderKeyDown(
   event,
   {
-    createFolder,
-    exportZipFile,
-    setZipPassword,
+    promptCreateFolder,
+    promptExportZip,
     addFilesButton,
     importZipButton,
     disabledExportZip,
-    disabledSetZipPassword,
     util,
     constants
   }
 ) {
-  const {
-    CREATE_FOLDER_KEY,
-    ADD_FILES_KEY,
-    IMPORT_ZIP_KEY,
-    EXPORT_ZIP_KEY,
-    SET_ZIP_PASSWORD_KEY
-  } = constants;
+  const { CREATE_FOLDER_KEY, ADD_FILES_KEY, IMPORT_ZIP_KEY, EXPORT_ZIP_KEY } =
+    constants;
   if (modifierKeyPressed(event, util)) {
     if (event.key === CREATE_FOLDER_KEY) {
       event.preventDefault();
-      createFolder();
+      promptCreateFolder();
     }
     if (event.key === ADD_FILES_KEY) {
       event.preventDefault();
@@ -371,11 +364,7 @@ function onSelectedFolderKeyDown(
     }
     if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
       event.preventDefault();
-      exportZipFile();
-    }
-    if (event.key === SET_ZIP_PASSWORD_KEY && !disabledSetZipPassword) {
-      event.preventDefault();
-      setZipPassword();
+      promptExportZip();
     }
   }
 }

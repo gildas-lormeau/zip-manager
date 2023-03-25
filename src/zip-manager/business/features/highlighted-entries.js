@@ -6,13 +6,17 @@ function getHighlightedEntriesFeatures({
   highlightedIds,
   selectedFolder,
   clipboardData,
-  getImportPassword,
   setHistory,
   setHistoryIndex,
   setClipboardData,
   setHighlightedIds,
   setPreviousHighlightedEntry,
-  setImportPassword,
+  setExtractFilename,
+  setExtractPassword,
+  setExtractPasswordDisabled,
+  setExtractDialogOpened,
+  setRenameFilename,
+  setRenameDialogOpened,
   removeDownload,
   updateSelectedFolder,
   downloadFile,
@@ -21,7 +25,7 @@ function getHighlightedEntriesFeatures({
   messages
 }) {
   const { DEFAULT_MIME_TYPE } = constants;
-  const { RENAME_MESSAGE, DELETE_MESSAGE } = messages;
+  const { DELETE_MESSAGE } = messages;
 
   function copy() {
     setClipboardData({
@@ -60,12 +64,17 @@ function getHighlightedEntriesFeatures({
     }
   }
 
-  function rename() {
+  function promptRename() {
+    const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
+    setRenameFilename(highlightedEntry.name);
+    setRenameDialogOpened(true);
+  }
+
+  function rename({ filename }) {
     try {
       const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
-      const entryName = util.prompt(RENAME_MESSAGE, highlightedEntry.name);
-      if (entryName && entryName !== highlightedEntry.name) {
-        highlightedEntry.rename(entryName);
+      if (filename !== highlightedEntry.name) {
+        highlightedEntry.rename(filename);
         updateSelectedFolder();
       }
     } catch (error) {
@@ -112,22 +121,27 @@ function getHighlightedEntriesFeatures({
     }
   }
 
-  function download(entry) {
+  function promptExtract() {
+    const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
+    const encrypted = highlightedEntry.data.encrypted;
+    setExtractFilename(highlightedEntry.name);
+    setExtractPasswordDisabled(!encrypted);
+    setExtractPassword("");
+    setExtractDialogOpened(true);
+  }
+
+  function extract({ filename, password }) {
     async function download() {
       try {
-        await downloadFile(
-          entry.name,
-          {},
-          getImportPassword(),
-          setImportPassword,
-          async (download, options) => {
-            try {
-              return await entry.getBlob(DEFAULT_MIME_TYPE, options);
-            } finally {
-              removeDownload(download);
-            }
+        const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
+        await downloadFile(filename, {}, async (download, options) => {
+          try {
+            options.password = password;
+            return await highlightedEntry.getBlob(DEFAULT_MIME_TYPE, options);
+          } finally {
+            removeDownload(download);
           }
-        );
+        });
       } catch (error) {
         util.alert(error.message);
       }
@@ -165,9 +179,11 @@ function getHighlightedEntriesFeatures({
     copy,
     cut,
     paste,
+    promptRename,
     rename,
     remove,
-    download
+    promptExtract,
+    extract
   };
 }
 

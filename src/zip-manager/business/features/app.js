@@ -1,28 +1,20 @@
 function getAppFeatures({
   entriesHeight,
   entriesDeltaHeight,
-  setExportPassword,
   setEntriesHeight,
   setEntriesDeltaHeight,
   getEntriesElementHeight,
   goIntoFolder,
-  download,
+  promptExtract,
   util,
-  constants,
-  messages
+  constants
 }) {
-  const { ENTER_PASSWORD_MESSAGE } = messages;
   function enter(entry) {
     if (entry.directory) {
       goIntoFolder(entry);
     } else {
-      download(entry);
+      promptExtract(entry);
     }
-  }
-
-  function setZipPassword() {
-    const password = util.prompt(ENTER_PASSWORD_MESSAGE);
-    setExportPassword(password);
   }
 
   function saveAccentColor(color) {
@@ -50,7 +42,6 @@ function getAppFeatures({
 
   return {
     enter,
-    setZipPassword,
     saveAccentColor,
     restoreAccentColor,
     resizeEntries,

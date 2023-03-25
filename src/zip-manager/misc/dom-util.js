@@ -49,10 +49,6 @@ function confirm(message) {
   return window.confirm(message);
 }
 
-function prompt(message, defaultValue) {
-  return window.prompt(message, defaultValue);
-}
-
 function addKeyUpListener(listener) {
   window.addEventListener(KEYUP_EVENT_NAME, listener);
 }
@@ -194,7 +190,6 @@ export {
   downloadAborted,
   alert,
   confirm,
-  prompt,
   scrollIntoView,
   dispatchClick,
   resetValue,

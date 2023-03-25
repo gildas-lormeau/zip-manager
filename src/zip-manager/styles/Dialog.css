@@ -1,0 +1,63 @@
+.dialog-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  opacity: 0.75;
+  width: 100vw;
+  height: 100vh;
+}
+
+dialog {
+  position: absolute;
+  width: min(40ch, 75dvw);
+  background-color: var(--page-color);
+  color: var(--text-color);
+  border: solid var(--accent-color) 0.1em;
+}
+
+dialog input {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: solid var(--accent-color) 0.05em;
+  height: 1.75em;
+  padding-inline: 0.75ch;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25em;
+}
+
+dialog form p {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  margin: 0;
+}
+
+dialog label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+
+dialog .button-bar {
+  margin-block-start: .5em;
+  align-self: end;
+}
+
+.light .dialog-backdrop {
+  background-color: white;
+}
+
+.dark .dialog-backdrop {
+  background-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dialog-backdrop {
+    background-color: black;
+  }
+}

@@ -13,7 +13,6 @@ function getUIState({
       highlightedIds.includes(selectedFolder.parent.id));
   const clipboardDataEmpty = !clipboardData;
   const disabledExportZip = entriesEmpty;
-  const disabledSetZipPassword = entriesEmpty;
   const disabledReset = entriesEmpty;
   const disabledBack = !historyIndex;
   const disabledForward = historyIndex === history.length - 1;
@@ -27,7 +26,6 @@ function getUIState({
 
   return {
     disabledExportZip,
-    disabledSetZipPassword,
     disabledReset,
     disabledBack,
     disabledForward,

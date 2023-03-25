@@ -1,8 +1,10 @@
 function getSelectedFolderFeatures({
   selectedFolder,
-  getImportPassword,
-  getExportPassword,
-  setImportPassword,
+  setExportZipDialogOpened,
+  setExportZipFilename,
+  setExportZipPassword,
+  setCreateFolderDialogOpened,
+  setCreateFolderName,
   updateSelectedFolder,
   highlightEntries,
   removeDownload,
@@ -12,18 +14,20 @@ function getSelectedFolderFeatures({
   messages
 }) {
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
-  const { ROOT_ZIP_FILENAME, CREATE_FOLDER_MESSAGE } = messages;
+  const { ROOT_ZIP_FILENAME } = messages;
 
-  function createFolder() {
-    const folderName = util.prompt(CREATE_FOLDER_MESSAGE);
-    if (folderName) {
-      try {
-        const entry = selectedFolder.addDirectory(folderName);
-        highlightEntries([entry]);
-        updateSelectedFolder();
-      } catch (error) {
-        util.alert(error.message);
-      }
+  function promptCreateFolder() {
+    setCreateFolderName("");
+    setCreateFolderDialogOpened(true);
+  }
+
+  function createFolder({ folderName }) {
+    try {
+      const entry = selectedFolder.addDirectory(folderName);
+      highlightEntries([entry]);
+      updateSelectedFolder();
+    } catch (error) {
+      util.alert(error.message);
     }
   }
 
@@ -74,23 +78,29 @@ function getSelectedFolderFeatures({
     );
   }
 
-  function exportZipFile() {
-    async function exportZipFile() {
+  function promptExportZip() {
+    setExportZipFilename(
+      selectedFolder.name
+        ? selectedFolder.name + ZIP_EXTENSION
+        : ROOT_ZIP_FILENAME
+    );
+    setExportZipPassword("");
+    setExportZipDialogOpened(true);
+  }
+
+  function exportZip({ filename, password }) {
+    async function exportZip() {
       try {
         await downloadFile(
-          selectedFolder.name
-            ? selectedFolder.name + ZIP_EXTENSION
-            : ROOT_ZIP_FILENAME,
+          filename,
           { mimeType: DEFAULT_MIME_TYPE },
-          getImportPassword(),
-          setImportPassword,
           async (download, options) => {
             try {
               return await selectedFolder.exportBlob({
                 ...options,
                 bufferedWrite: true,
                 keepOrder: true,
-                password: getExportPassword()
+                password
               });
             } finally {
               removeDownload(download);
@@ -102,14 +112,16 @@ function getSelectedFolderFeatures({
       }
     }
 
-    exportZipFile();
+    exportZip();
   }
 
   return {
+    promptCreateFolder,
     createFolder,
     addFiles,
     importZipFile,
-    exportZipFile
+    promptExportZip,
+    exportZip
   };
 }
 

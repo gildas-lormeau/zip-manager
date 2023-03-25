@@ -4,13 +4,11 @@ import { useRef } from "react";
 
 function TopButtonBar({
   disabledExportZipButton,
-  disabledSetZipPasswordButton,
   disabledResetButton,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
   onExportZipFile,
-  onSetZipPassword,
   onReset,
   addFilesButtonRef,
   importZipButtonRef,
@@ -60,11 +58,6 @@ function TopButtonBar({
         <ExportZipButton
           disabled={disabledExportZipButton}
           onExportZipFile={onExportZipFile}
-          messages={messages}
-        />
-        <SetZipPasswordButton
-          disabled={disabledSetZipPasswordButton}
-          onSetZipPassword={onSetZipPassword}
           messages={messages}
         />
       </div>
@@ -201,18 +194,6 @@ function ExportZipButton({ disabled, onExportZipFile, messages }) {
       title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
     >
       {messages.EXPORT_ZIP_BUTTON_LABEL}
-    </button>
-  );
-}
-
-function SetZipPasswordButton({ disabled, onSetZipPassword, messages }) {
-  return (
-    <button
-      onClick={onSetZipPassword}
-      disabled={disabled}
-      title={messages.SET_ZIP_PASSWORD_BUTTON_TOOLTIP}
-    >
-      {messages.SET_ZIP_PASSWORD_BUTTON_LABEL}
     </button>
   );
 }

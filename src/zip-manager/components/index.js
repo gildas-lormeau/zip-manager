@@ -4,6 +4,10 @@ import Entries from "./Entries.js";
 import BottomButtonBar from "./BottomButtonBar.js";
 import DownloadManager from "./DownloadManager.js";
 import InfoBar from "./InfoBar.js";
+import ExportZipDialog from "./ExportZipDialog.js";
+import ExtractDialog from "./ExtractDialog.js";
+import RenameDialog from "./RenameDialog.js";
+import CreateFolderDialog from "./CreateFolderDialog.js";
 
 export {
   TopButtonBar,
@@ -11,5 +15,9 @@ export {
   Entries,
   BottomButtonBar,
   DownloadManager,
-  InfoBar
+  InfoBar,
+  ExportZipDialog,
+  ExtractDialog,
+  RenameDialog,
+  CreateFolderDialog
 };
