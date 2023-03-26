@@ -4,19 +4,19 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
   const dialogRef = useRef(null);
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
-  const [filenameValue, setFilenameValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [filename, setFilename] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleChangeFilename(event) {
-    setFilenameValue(event.target.value);
+    setFilename(event.target.value);
   }
 
   function handleChangePassword(event) {
-    setPasswordValue(event.target.value);
+    setPassword(event.target.value);
   }
 
   function handleSubmit() {
-    onExtract({ filename: filenameValue, password: passwordValue });
+    onExtract({ filename, password });
   }
 
   function handleReset() {
@@ -25,8 +25,8 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
-    setFilenameValue("");
-    setPasswordValue("");
+    setFilename("");
+    setPassword("");
     onClose();
   }
 
@@ -34,18 +34,18 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
     if (extractDialog) {
       const { opened, filename, password } = extractDialog;
       if (!dialogRef.current.open && opened) {
-        setFilenameValue(filename);
-        setPasswordValue(password);
+        setFilename(filename);
+        setPassword(password);
         dialogRef.current.showModal();
       }
     }
   }, [extractDialog]);
   useEffect(() => {
-    if (!filenameTextSelected.current && filenameValue) {
+    if (!filenameTextSelected.current && filename) {
       filenameTextSelected.current = true;
       filenameInputRef.current.select();
     }
-  }, [filenameValue]);
+  }, [filename]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
@@ -54,7 +54,7 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
           <label>
             {messages.EXTRACT_FILENAME_LABEL}
             <input
-              value={filenameValue}
+              value={filename}
               required
               onChange={handleChangeFilename}
               ref={filenameInputRef}
@@ -69,7 +69,7 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
             <input
               type="password"
               autoComplete="off"
-              value={passwordValue}
+              value={password}
               required={!extractDialog?.passwordDisabled}
               onChange={handleChangePassword}
             ></input>

@@ -7,10 +7,10 @@ function PasswordDialog({
   messages
 }) {
   const dialogRef = useRef(null);
-  const [passwordValue, setPasswordValue] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleChangePassword(event) {
-    setPasswordValue(event.target.value);
+    setPassword(event.target.value);
   }
 
   function handleReset() {
@@ -18,8 +18,8 @@ function PasswordDialog({
   }
 
   function handleClose() {
-    onSetPassword({ password: passwordValue });
-    setPasswordValue("");
+    onSetPassword({ password });
+    setPassword("");
     onClose();
   }
 
@@ -38,7 +38,7 @@ function PasswordDialog({
             <input
               type="password"
               autoComplete="off"
-              value={passwordValue}
+              value={password}
               required
               onChange={handleChangePassword}
             ></input>

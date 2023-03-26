@@ -4,14 +4,14 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
   const dialogRef = useRef(null);
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
-  const [filenameValue, setFilenameValue] = useState("");
+  const [filename, setFilename] = useState("");
 
   function handleChangeFilename(event) {
-    setFilenameValue(event.target.value);
+    setFilename(event.target.value);
   }
 
   function handleSubmit() {
-    onRename({ filename: filenameValue });
+    onRename({ filename });
   }
 
   function handleReset() {
@@ -20,7 +20,7 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
-    setFilenameValue("");
+    setFilename("");
     onClose();
   }
 
@@ -28,7 +28,7 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
     if (renameDialog) {
       const { opened, filename } = renameDialog;
       if (!dialogRef.current.open && opened) {
-        setFilenameValue(filename);
+        setFilename(filename);
         dialogRef.current.showModal();
         if (filename) {
           filenameInputRef.current.select();
@@ -37,11 +37,11 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
     }
   }, [renameDialog]);
   useEffect(() => {
-    if (!filenameTextSelected.current && filenameValue) {
+    if (!filenameTextSelected.current && filename) {
       filenameTextSelected.current = true;
       filenameInputRef.current.select();
     }
-  }, [filenameValue]);
+  }, [filename]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
@@ -50,7 +50,7 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
           <label>
             {messages.RENAME_FILENAME_LABEL}
             <input
-              value={filenameValue}
+              value={filename}
               required
               onChange={handleChangeFilename}
               ref={filenameInputRef}

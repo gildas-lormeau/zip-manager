@@ -7,14 +7,14 @@ function CreateFolderDialog({
   messages
 }) {
   const dialogRef = useRef(null);
-  const [folderNameValue, setFolderNameValue] = useState("");
+  const [folderName, setFolderName] = useState("");
 
   function handleChangeFilename(event) {
-    setFolderNameValue(event.target.value);
+    setFolderName(event.target.value);
   }
 
   function handleSubmit() {
-    onCreateFolder({ folderName: folderNameValue });
+    onCreateFolder({ folderName });
   }
 
   function handleReset() {
@@ -22,7 +22,7 @@ function CreateFolderDialog({
   }
 
   function handleClose() {
-    setFolderNameValue("");
+    setFolderName("");
     onClose();
   }
 
@@ -39,7 +39,7 @@ function CreateFolderDialog({
           <label>
             {messages.CREATE_FOLDER_NAME_LABEL}
             <input
-              value={folderNameValue}
+              value={folderName}
               required
               onChange={handleChangeFilename}
             ></input>

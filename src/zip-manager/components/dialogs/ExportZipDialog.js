@@ -4,19 +4,19 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
   const dialogRef = useRef(null);
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
-  const [filenameValue, setFilenameValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [filename, setFilename] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleChangeFilename(event) {
-    setFilenameValue(event.target.value);
+    setFilename(event.target.value);
   }
 
   function handleChangePassword(event) {
-    setPasswordValue(event.target.value);
+    setPassword(event.target.value);
   }
 
   function handleSubmit() {
-    onExportZip({ filename: filenameValue, password: passwordValue });
+    onExportZip({ filename, password });
   }
 
   function handleReset() {
@@ -25,8 +25,8 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
-    setFilenameValue("");
-    setPasswordValue("");
+    setFilename("");
+    setPassword("");
     onClose();
   }
 
@@ -34,8 +34,8 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
     if (exportZipDialog) {
       const { opened, filename, password } = exportZipDialog;
       if (!dialogRef.current.open && opened) {
-        setFilenameValue(filename);
-        setPasswordValue(password);
+        setFilename(filename);
+        setPassword(password);
         dialogRef.current.showModal();
         if (filename) {
           filenameInputRef.current.select();
@@ -44,11 +44,11 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
     }
   }, [exportZipDialog]);
   useEffect(() => {
-    if (!filenameTextSelected.current && filenameValue) {
+    if (!filenameTextSelected.current && filename) {
       filenameTextSelected.current = true;
       filenameInputRef.current.select();
     }
-  }, [filenameValue]);
+  }, [filename]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
@@ -57,7 +57,7 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
           <label>
             {messages.EXPORT_ZIP_FILENAME_LABEL}
             <input
-              value={filenameValue}
+              value={filename}
               required
               onChange={handleChangeFilename}
               ref={filenameInputRef}
@@ -68,7 +68,7 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
             <input
               type="password"
               autoComplete="off"
-              value={passwordValue}
+              value={password}
               onChange={handleChangePassword}
             ></input>
           </label>
