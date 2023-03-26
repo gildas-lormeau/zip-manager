@@ -8,7 +8,7 @@ function ResetDialog({ resetDialog, onReset, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && resetDialog.opened) {
+    if (!dialogRef.current.open && resetDialog?.opened) {
       dialogRef.current.showModal();
     }
   }, [resetDialog]);

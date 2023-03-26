@@ -31,11 +31,13 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
   }
 
   useEffect(() => {
-    const { opened, filename, password } = extractDialog;
-    if (!dialogRef.current.open && opened) {
-      setFilenameValue(filename);
-      setPasswordValue(password);
-      dialogRef.current.showModal();
+    if (extractDialog) {
+      const { opened, filename, password } = extractDialog;
+      if (!dialogRef.current.open && opened) {
+        setFilenameValue(filename);
+        setPasswordValue(password);
+        dialogRef.current.showModal();
+      }
     }
   }, [extractDialog]);
   useEffect(() => {
@@ -60,7 +62,7 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
           </label>
           <label
             style={{
-              display: extractDialog.passwordDisabled ? "none" : "inherit"
+              display: extractDialog?.passwordDisabled ? "none" : "inherit"
             }}
           >
             {messages.EXTRACT_PASSWORD_LABEL}
@@ -68,7 +70,7 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
               type="password"
               autoComplete="off"
               value={passwordValue}
-              required={!extractDialog.passwordDisabled}
+              required={!extractDialog?.passwordDisabled}
               onChange={handleChangePassword}
             ></input>
           </label>

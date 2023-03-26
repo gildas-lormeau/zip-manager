@@ -31,13 +31,15 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
   }
 
   useEffect(() => {
-    const { opened, filename, password } = exportZipDialog;
-    if (!dialogRef.current.open && opened) {
-      setFilenameValue(filename);
-      setPasswordValue(password);
-      dialogRef.current.showModal();
-      if (filename) {
-        filenameInputRef.current.select();
+    if (exportZipDialog) {
+      const { opened, filename, password } = exportZipDialog;
+      if (!dialogRef.current.open && opened) {
+        setFilenameValue(filename);
+        setPasswordValue(password);
+        dialogRef.current.showModal();
+        if (filename) {
+          filenameInputRef.current.select();
+        }
       }
     }
   }, [exportZipDialog]);

@@ -25,12 +25,14 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
   }
 
   useEffect(() => {
-    const { opened, filename } = renameDialog;
-    if (!dialogRef.current.open && opened) {
-      setFilenameValue(filename);
-      dialogRef.current.showModal();
-      if (filename) {
-        filenameInputRef.current.select();
+    if (renameDialog) {
+      const { opened, filename } = renameDialog;
+      if (!dialogRef.current.open && opened) {
+        setFilenameValue(filename);
+        dialogRef.current.showModal();
+        if (filename) {
+          filenameInputRef.current.select();
+        }
       }
     }
   }, [renameDialog]);

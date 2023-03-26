@@ -62,40 +62,14 @@ function ZipManager() {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [accentColor, setAccentColor] = useState(null);
   const [colorScheme, setColorScheme] = useState("");
-  const [exportZipDialog, setExportZipDialog] = useState({
-    opened: false,
-    filename: "",
-    password: ""
-  });
-  const [extractDialog, setExtractDialog] = useState({
-    opened: false,
-    filename: "",
-    password: "",
-    passwordDisabled: false
-  });
-  const [renameDialog, setRenameDialog] = useState({
-    opened: false,
-    filename: ""
-  });
-  const [createFolderDialog, setCreateFolderDialog] = useState({
-    opened: false
-  });
-  const [deleteEntryDialog, setDeleteEntryDialog] = useState({
-    opened: false
-  });
-  const [resetDialog, setResetDialog] = useState({
-    opened: false
-  });
-  const [errorMessageDialog, setErrorMessageDialog] = useState({
-    opened: false,
-    message: ""
-  });
-  const [errorMessage, setErrorMessage] = useState({
-    opened: false
-  });
-  const [importPasswordDialog, setImportPasswordDialog] = useState({
-    opened: false
-  });
+  const [exportZipDialog, setExportZipDialog] = useState(null);
+  const [extractDialog, setExtractDialog] = useState(null);
+  const [renameDialog, setRenameDialog] = useState(null);
+  const [createFolderDialog, setCreateFolderDialog] = useState(null);
+  const [deleteEntryDialog, setDeleteEntryDialog] = useState(null);
+  const [resetDialog, setResetDialog] = useState(null);
+  const [errorMessageDialog, setErrorMessageDialog] = useState(null);
+  const [importPasswordDialog, setImportPasswordDialog] = useState(null);
   const importPasswordCallbackRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -129,7 +103,6 @@ function ZipManager() {
     setDownloads,
     setEntries,
     setErrorMessageDialog,
-    setErrorMessage,
     setImportPasswordDialog,
     setImportPasswordCallback,
     downloaderElement,
@@ -474,7 +447,6 @@ function ZipManager() {
       <ErrorMessageDialog
         errorMessageDialog={errorMessageDialog}
         onClose={closeDisplayError}
-        message={errorMessage}
         messages={messages}
       />
       <ImportPasswordDialog
