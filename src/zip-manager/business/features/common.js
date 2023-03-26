@@ -98,10 +98,7 @@ function getCommonFeatures({
   }
 
   function closeDisplayError() {
-    setErrorMessageDialog({
-      message: "",
-      opened: false
-    });
+    setErrorMessageDialog(null);
   }
 
   return {

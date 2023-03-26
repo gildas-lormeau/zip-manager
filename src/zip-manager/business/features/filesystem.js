@@ -12,7 +12,7 @@ function getFilesystemFeatures({
   }
 
   function closeConfirmReset() {
-    setResetDialog({ opened: false });
+    setResetDialog(null);
   }
 
   return {

@@ -28,7 +28,7 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptCreateFolder() {
-    setCreateFolderDialog({ opened: false });
+    setCreateFolderDialog(null);
   }
 
   function addFiles(files) {
@@ -89,7 +89,7 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptExportZip() {
-    setExportZipDialog({ opened: false, filename: "", password: "" });
+    setExportZipDialog(null);
   }
 
   function exportZip({ filename, password }) {
@@ -120,9 +120,7 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptImportPassword() {
-    setImportPasswordDialog({
-      opened: false
-    });
+    setImportPasswordDialog(null);
   }
 
   return {

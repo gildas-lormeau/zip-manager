@@ -79,10 +79,7 @@ function getHighlightedEntriesFeatures({
     }
   }
   function closePromptRename() {
-    setRenameDialog({
-      filename: "",
-      opened: false
-    });
+    setRenameDialog(null);
   }
 
   function openConfirmDeleteEntry() {
@@ -127,7 +124,7 @@ function getHighlightedEntriesFeatures({
   }
 
   function closeConfirmDeleteEntry() {
-    setDeleteEntryDialog({ opened: false });
+    setDeleteEntryDialog(null);
   }
 
   function openPromptExtract() {
@@ -162,12 +159,7 @@ function getHighlightedEntriesFeatures({
   }
 
   function closePromptExtract() {
-    setExtractDialog({
-      opened: false,
-      filename: "",
-      password: "",
-      passwordDisabled: true
-    });
+    setExtractDialog(null);
   }
 
   function updateHistoryData() {
