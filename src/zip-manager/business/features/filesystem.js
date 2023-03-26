@@ -4,7 +4,7 @@ function getFilesystemFeatures({
   setResetDialog
 }) {
   function openConfirmReset() {
-    setResetDialog({ opened: true });
+    setResetDialog({});
   }
 
   function reset() {

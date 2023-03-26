@@ -27,7 +27,7 @@ function CreateFolderDialog({
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && createFolderDialog?.opened) {
+    if (!dialogRef.current.open && createFolderDialog) {
       dialogRef.current.showModal();
     }
   }, [createFolderDialog]);

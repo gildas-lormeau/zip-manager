@@ -4,7 +4,7 @@ function ErrorMessageDialog({ errorMessageDialog, onClose, messages }) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
-    if (!dialogRef.current.open && errorMessageDialog?.opened) {
+    if (!dialogRef.current.open && errorMessageDialog) {
       dialogRef.current.showModal();
     }
   }, [errorMessageDialog]);

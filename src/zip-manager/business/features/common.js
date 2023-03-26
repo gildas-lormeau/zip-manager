@@ -58,7 +58,7 @@ function getCommonFeatures({
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          setImportPasswordDialog({ opened: true });
+          setImportPasswordDialog({});
           const password = await new Promise((resolve) =>
             setImportPasswordCallback(resolve)
           );
@@ -92,8 +92,7 @@ function getCommonFeatures({
 
   function openDisplayError(message) {
     setErrorMessageDialog({
-      message,
-      opened: true
+      message
     });
   }
 

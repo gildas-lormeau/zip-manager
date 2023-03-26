@@ -62,8 +62,7 @@ function getHighlightedEntriesFeatures({
   function openPromptRename() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
     setRenameDialog({
-      filename: highlightedEntry.name,
-      opened: true
+      filename: highlightedEntry.name
     });
   }
 
@@ -83,7 +82,7 @@ function getHighlightedEntriesFeatures({
   }
 
   function openConfirmDeleteEntry() {
-    setDeleteEntryDialog({ opened: true });
+    setDeleteEntryDialog({});
   }
 
   function deleteEntry() {
@@ -133,8 +132,7 @@ function getHighlightedEntriesFeatures({
     setExtractDialog({
       filename: highlightedEntry.name,
       password: "",
-      passwordDisabled: !encrypted,
-      opened: true
+      passwordDisabled: !encrypted
     });
   }
 

@@ -14,7 +14,7 @@ function getSelectedFolderFeatures({
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
 
   function openPromptCreateFolder() {
-    setCreateFolderDialog({ opened: true });
+    setCreateFolderDialog({});
   }
 
   function createFolder({ folderName }) {
@@ -83,8 +83,7 @@ function getSelectedFolderFeatures({
       filename: selectedFolder.name
         ? selectedFolder.name + ZIP_EXTENSION
         : rootZipFilename,
-      password: "",
-      opened: true
+      password: ""
     });
   }
 

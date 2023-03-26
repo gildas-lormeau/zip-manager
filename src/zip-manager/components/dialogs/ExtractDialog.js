@@ -32,8 +32,8 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
 
   useEffect(() => {
     if (extractDialog) {
-      const { opened, filename, password } = extractDialog;
-      if (!dialogRef.current.open && opened) {
+      const { filename, password } = extractDialog;
+      if (!dialogRef.current.open) {
         setFilename(filename);
         setPassword(password);
         dialogRef.current.showModal();

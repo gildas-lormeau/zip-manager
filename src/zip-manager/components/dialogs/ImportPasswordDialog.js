@@ -24,7 +24,7 @@ function PasswordDialog({
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && importPasswordDialog?.opened) {
+    if (!dialogRef.current.open && importPasswordDialog) {
       dialogRef.current.showModal();
     }
   }, [importPasswordDialog]);

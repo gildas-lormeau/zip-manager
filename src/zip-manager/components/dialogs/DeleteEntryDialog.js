@@ -13,7 +13,7 @@ function DeleteEntryDialog({
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && deleteEntryDialog?.opened) {
+    if (!dialogRef.current.open && deleteEntryDialog) {
       dialogRef.current.showModal();
     }
   }, [deleteEntryDialog]);

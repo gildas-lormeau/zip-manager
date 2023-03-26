@@ -32,8 +32,8 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
 
   useEffect(() => {
     if (exportZipDialog) {
-      const { opened, filename, password } = exportZipDialog;
-      if (!dialogRef.current.open && opened) {
+      const { filename, password } = exportZipDialog;
+      if (!dialogRef.current.open) {
         setFilename(filename);
         setPassword(password);
         dialogRef.current.showModal();
