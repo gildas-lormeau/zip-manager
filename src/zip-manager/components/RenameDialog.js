@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function RenameDialog({ open, filename, onRename, onClose, messages }) {
+function RenameDialog({ renameDialog, onRename, onClose, messages }) {
   const dialogRef = useRef(null);
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
@@ -25,14 +25,15 @@ function RenameDialog({ open, filename, onRename, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && open) {
+    const { opened, filename } = renameDialog;
+    if (!dialogRef.current.open && opened) {
       setFilenameValue(filename);
       dialogRef.current.showModal();
       if (filename) {
         filenameInputRef.current.select();
       }
     }
-  }, [open, filename]);
+  }, [renameDialog]);
   useEffect(() => {
     if (!filenameTextSelected.current && filenameValue) {
       filenameTextSelected.current = true;

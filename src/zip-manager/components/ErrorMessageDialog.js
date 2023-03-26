@@ -1,19 +1,24 @@
 import { useEffect, useRef } from "react";
 
-function ErrorMessageDialog({ open, message, onClose, messages }) {
+function ErrorMessageDialog({
+  errorMessageDialog,
+  message,
+  onClose,
+  messages
+}) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
-    if (!dialogRef.current.open && open) {
+    if (!dialogRef.current.open && errorMessageDialog.opened) {
       dialogRef.current.showModal();
     }
-  }, [open]);
+  }, [errorMessageDialog]);
   return (
     <dialog ref={dialogRef} onClose={onClose}>
       <form method="dialog">
         <div>{messages.ERROR_DIALOG_TITLE}</div>
         <p>
-          <label>{message}</label>
+          <label>{errorMessageDialog.message}</label>
         </p>
         <div className="button-bar">
           <button type="submit">{messages.DIALOG_OK_BUTTON_LABEL}</button>

@@ -62,24 +62,40 @@ function ZipManager() {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [accentColor, setAccentColor] = useState(null);
   const [colorScheme, setColorScheme] = useState("");
-  const [exportZipDialogOpened, setExportZipDialogOpened] = useState(false);
-  const [exportZipFilename, setExportZipFilename] = useState("");
-  const [exportZipPassword, setExportZipPassword] = useState("");
-  const [extractDialogOpened, setExtractDialogOpened] = useState(false);
-  const [extractFilename, setExtractFilename] = useState("");
-  const [extractPassword, setExtractPassword] = useState("");
-  const [extractPasswordDisabled, setExtractPasswordDisabled] = useState(true);
-  const [renameDialogOpened, setRenameDialogOpened] = useState(false);
-  const [renameFilename, setRenameFilename] = useState("");
-  const [createFolderDialogOpened, setCreateFolderDialogOpened] =
-    useState(false);
-  const [deleteEntryDialogOpened, setDeleteEntryDialogOpened] = useState(false);
-  const [resetDialogOpened, setResetDialogOpened] = useState(false);
-  const [errorMessageDialogOpened, setErrorMessageDialogOpened] =
-    useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [importPasswordDialogOpened, setImportPasswordDialogOpened] =
-    useState(false);
+  const [exportZipDialog, setExportZipDialog] = useState({
+    opened: false,
+    filename: "",
+    password: ""
+  });
+  const [extractDialog, setExtractDialog] = useState({
+    opened: false,
+    filename: "",
+    password: "",
+    passwordDisabled: false
+  });
+  const [renameDialog, setRenameDialog] = useState({
+    opened: false,
+    filename: ""
+  });
+  const [createFolderDialog, setCreateFolderDialog] = useState({
+    opened: false
+  });
+  const [deleteEntryDialog, setDeleteEntryDialog] = useState({
+    opened: false
+  });
+  const [resetDialog, setResetDialog] = useState({
+    opened: false
+  });
+  const [errorMessageDialog, setErrorMessageDialog] = useState({
+    opened: false,
+    message: ""
+  });
+  const [errorMessage, setErrorMessage] = useState({
+    opened: false
+  });
+  const [importPasswordDialog, setImportPasswordDialog] = useState({
+    opened: false
+  });
   const importPasswordCallbackRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -112,9 +128,9 @@ function ZipManager() {
     setDownloadId,
     setDownloads,
     setEntries,
-    setErrorMessageDialogOpened,
+    setErrorMessageDialog,
     setErrorMessage,
-    setImportPasswordDialogOpened,
+    setImportPasswordDialog,
     setImportPasswordCallback,
     downloaderElement,
     zipService,
@@ -175,10 +191,8 @@ function ZipManager() {
   } = getSelectedFolderFeatures({
     selectedFolder,
     rootZipFilename,
-    setExportZipDialogOpened,
-    setExportZipFilename,
-    setExportZipPassword,
-    setCreateFolderDialogOpened,
+    setExportZipDialog,
+    setCreateFolderDialog,
     updateSelectedFolder,
     highlightEntries,
     removeDownload,
@@ -212,13 +226,9 @@ function ZipManager() {
     setClipboardData,
     setHighlightedIds,
     setPreviousHighlightedEntry,
-    setExtractFilename,
-    setExtractPassword,
-    setExtractPasswordDisabled,
-    setExtractDialogOpened,
-    setRenameFilename,
-    setRenameDialogOpened,
-    setDeleteEntryDialogOpened,
+    setExtractDialog,
+    setRenameDialog,
+    setDeleteEntryDialog,
     removeDownload,
     updateSelectedFolder,
     downloadFile,
@@ -228,7 +238,7 @@ function ZipManager() {
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     zipService,
     setZipFilesystem,
-    setResetDialogOpened
+    setResetDialog
   });
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
@@ -426,55 +436,49 @@ function ZipManager() {
       </main>
       <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
       <CreateFolderDialog
-        open={createFolderDialogOpened}
+        createFolderDialog={createFolderDialog}
         onCreateFolder={createFolder}
         onClose={closePromptCreateFolder}
         messages={messages}
       />
       <ExportZipDialog
-        open={exportZipDialogOpened}
-        filename={exportZipFilename}
-        password={exportZipPassword}
+        exportZipDialog={exportZipDialog}
         onExportZip={exportZip}
         onClose={closePromptExportZip}
         messages={messages}
       />
       <ExtractDialog
-        open={extractDialogOpened}
-        filename={extractFilename}
-        password={extractPassword}
-        passwordDisabled={extractPasswordDisabled}
+        extractDialog={extractDialog}
         onExtract={extract}
         onClose={closePromptExtract}
         messages={messages}
       />
       <RenameDialog
-        open={renameDialogOpened}
-        filename={renameFilename}
+        renameDialog={renameDialog}
         onRename={rename}
         onClose={closePromptRename}
         messages={messages}
       />
       <ResetDialog
-        open={resetDialogOpened}
+        resetDialog={resetDialog}
         onReset={reset}
         onClose={closeConfirmReset}
         messages={messages}
       />
       <DeleteEntryDialog
-        open={deleteEntryDialogOpened}
+        deleteEntryDialog={deleteEntryDialog}
         onDeleteEntry={deleteEntry}
         onClose={closeConfirmDeleteEntry}
         messages={messages}
       />
       <ErrorMessageDialog
-        open={errorMessageDialogOpened}
+        errorMessageDialog={errorMessageDialog}
         onClose={closeDisplayError}
         message={errorMessage}
         messages={messages}
       />
       <ImportPasswordDialog
-        open={importPasswordDialogOpened}
+        importPasswordDialog={importPasswordDialog}
         onSetPassword={setImportPassword}
         onClose={closePromptImportPassword}
         messages={messages}

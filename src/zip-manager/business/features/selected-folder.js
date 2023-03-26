@@ -1,10 +1,8 @@
 function getSelectedFolderFeatures({
   selectedFolder,
   rootZipFilename,
-  setExportZipDialogOpened,
-  setExportZipFilename,
-  setExportZipPassword,
-  setCreateFolderDialogOpened,
+  setExportZipDialog,
+  setCreateFolderDialog,
   updateSelectedFolder,
   highlightEntries,
   removeDownload,
@@ -15,7 +13,7 @@ function getSelectedFolderFeatures({
   const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
 
   function openPromptCreateFolder() {
-    setCreateFolderDialogOpened(true);
+    setCreateFolderDialog({ opened: true });
   }
 
   function createFolder({ folderName }) {
@@ -29,7 +27,7 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptCreateFolder() {
-    setCreateFolderDialogOpened(false);
+    setCreateFolderDialog({ opened: false });
   }
 
   function addFiles(files) {
@@ -80,17 +78,17 @@ function getSelectedFolderFeatures({
   }
 
   function openPromptExportZip() {
-    setExportZipFilename(
-      selectedFolder.name
+    setExportZipDialog({
+      filename: selectedFolder.name
         ? selectedFolder.name + ZIP_EXTENSION
-        : rootZipFilename
-    );
-    setExportZipPassword("");
-    setExportZipDialogOpened(true);
+        : rootZipFilename,
+      password: "",
+      opened: true
+    });
   }
 
   function closePromptExportZip() {
-    setExportZipDialogOpened(false);
+    setExportZipDialog({ opened: false, filename: "", password: "" });
   }
 
   function exportZip({ filename, password }) {

@@ -11,13 +11,9 @@ function getHighlightedEntriesFeatures({
   setClipboardData,
   setHighlightedIds,
   setPreviousHighlightedEntry,
-  setExtractFilename,
-  setExtractPassword,
-  setExtractPasswordDisabled,
-  setExtractDialogOpened,
-  setRenameFilename,
-  setRenameDialogOpened,
-  setDeleteEntryDialogOpened,
+  setExtractDialog,
+  setRenameDialog,
+  setDeleteEntryDialog,
   removeDownload,
   updateSelectedFolder,
   downloadFile,
@@ -65,8 +61,10 @@ function getHighlightedEntriesFeatures({
 
   function openPromptRename() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
-    setRenameFilename(highlightedEntry.name);
-    setRenameDialogOpened(true);
+    setRenameDialog({
+      filename: highlightedEntry.name,
+      opened: true
+    });
   }
 
   function rename({ filename }) {
@@ -81,11 +79,14 @@ function getHighlightedEntriesFeatures({
     }
   }
   function closePromptRename() {
-    setRenameDialogOpened(false);
+    setRenameDialog({
+      filename: "",
+      opened: false
+    });
   }
 
   function openConfirmDeleteEntry() {
-    setDeleteEntryDialogOpened(true);
+    setDeleteEntryDialog({ opened: true });
   }
 
   function deleteEntry() {
@@ -126,16 +127,18 @@ function getHighlightedEntriesFeatures({
   }
 
   function closeConfirmDeleteEntry() {
-    setDeleteEntryDialogOpened(false);
+    setDeleteEntryDialog({ opened: false });
   }
 
   function openPromptExtract() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
     const encrypted = highlightedEntry.data.encrypted;
-    setExtractFilename(highlightedEntry.name);
-    setExtractPasswordDisabled(!encrypted);
-    setExtractPassword("");
-    setExtractDialogOpened(true);
+    setExtractDialog({
+      filename: highlightedEntry.name,
+      password: "",
+      passwordDisabled: !encrypted,
+      opened: true
+    });
   }
 
   function extract({ filename, password }) {
@@ -159,7 +162,12 @@ function getHighlightedEntriesFeatures({
   }
 
   function closePromptExtract() {
-    setExtractDialogOpened(false);
+    setExtractDialog({
+      opened: false,
+      filename: "",
+      password: "",
+      passwordDisabled: true
+    });
   }
 
   function updateHistoryData() {

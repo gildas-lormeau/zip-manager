@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-function CreateFolderDialog({ open, onCreateFolder, onClose, messages }) {
+function CreateFolderDialog({
+  createFolderDialog,
+  onCreateFolder,
+  onClose,
+  messages
+}) {
   const dialogRef = useRef(null);
   const [folderNameValue, setFolderNameValue] = useState("");
 
@@ -22,10 +27,10 @@ function CreateFolderDialog({ open, onCreateFolder, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && open) {
+    if (!dialogRef.current.open && createFolderDialog.opened) {
       dialogRef.current.showModal();
     }
-  }, [open]);
+  }, [createFolderDialog]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>

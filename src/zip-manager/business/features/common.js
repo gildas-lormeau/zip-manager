@@ -4,9 +4,8 @@ function getCommonFeatures({
   setDownloadId,
   setDownloads,
   setEntries,
-  setErrorMessageDialogOpened,
-  setErrorMessage,
-  setImportPasswordDialogOpened,
+  setErrorMessageDialog,
+  setImportPasswordDialog,
   setImportPasswordCallback,
   downloaderElement,
   zipService,
@@ -59,7 +58,7 @@ function getCommonFeatures({
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          setImportPasswordDialogOpened(true);
+          setImportPasswordDialog({ opened: true });
           const password = await new Promise((resolve) =>
             setImportPasswordCallback(resolve)
           );
@@ -92,16 +91,23 @@ function getCommonFeatures({
   }
 
   function openDisplayError(message) {
-    setErrorMessage(message);
-    setErrorMessageDialogOpened(true);
+    setErrorMessageDialog({
+      message,
+      opened: true
+    });
   }
 
   function closeDisplayError() {
-    setErrorMessageDialogOpened(false);
+    setErrorMessageDialog({
+      message: "",
+      opened: false
+    });
   }
 
   function closePromptImportPassword() {
-    setImportPasswordDialogOpened(false);
+    setImportPasswordDialog({
+      opened: false
+    });
   }
 
   return {
