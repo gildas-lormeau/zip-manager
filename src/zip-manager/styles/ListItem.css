@@ -4,6 +4,7 @@
   opacity: 0.75;
   padding-inline: .5ch;
   padding-block: .2em;
+  user-select: none;
 }
 
 .list-item-button:hover {
