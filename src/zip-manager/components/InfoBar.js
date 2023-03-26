@@ -48,7 +48,12 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
       >
         Rennes
       </a>
-      <input type="color" onChange={handleChange} ref={colorInputRef}></input>
+      <input
+        type="color"
+        onChange={handleChange}
+        ref={colorInputRef}
+        tabIndex={-1}
+      ></input>
     </>
   );
 }
