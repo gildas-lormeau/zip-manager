@@ -1,11 +1,6 @@
 import { useEffect, useRef } from "react";
 
-function ErrorMessageDialog({
-  errorMessageDialog,
-  message,
-  onClose,
-  messages
-}) {
+function ErrorMessageDialog({ errorMessageDialog, onClose, messages }) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
