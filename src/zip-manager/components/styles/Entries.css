@@ -12,7 +12,6 @@
 
 .entries li {
   padding: .25em;
-  user-select: none;
   outline: none;
   column-gap: .75ch;
 }
@@ -25,10 +24,15 @@
 
 .entries .entry-name {
   display: flex;
+  user-select: none;
   overflow: hidden;
   column-gap: .25ch;
   flex: 1;
   cursor: pointer;
+}
+
+.entries .entry-select + .entry-name {
+  user-select: inherit;
 }
 
 .entries .entry-highlighted {
