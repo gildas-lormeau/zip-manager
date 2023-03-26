@@ -40,7 +40,14 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
       <span className="icon" onClick={handleClick}>
         ♡
       </span>
-      {" in Rennes"}
+      {" in "}
+      <a
+        href="https://en.wikipedia.org/wiki/Rennes"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Rennes
+      </a>
       <input type="color" onChange={handleChange} ref={colorInputRef}></input>
     </>
   );
