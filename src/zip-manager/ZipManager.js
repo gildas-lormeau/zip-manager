@@ -98,6 +98,7 @@ function ZipManager() {
     openDisplayError,
     closeDisplayError
   } = getCommonFeatures({
+    zipFilesystem,
     downloadId,
     selectedFolder,
     setDownloadId,
@@ -106,6 +107,7 @@ function ZipManager() {
     setErrorMessageDialogOpened,
     setErrorMessage,
     downloaderElement,
+    zipService,
     util
   });
   const {

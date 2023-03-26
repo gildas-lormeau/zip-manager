@@ -1,4 +1,5 @@
 function getCommonFeatures({
+  zipFilesystem,
   downloadId,
   selectedFolder,
   setDownloadId,
@@ -6,7 +7,9 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialogOpened,
   setErrorMessage,
+  setEntryPasswordDialogOpened,
   downloaderElement,
+  zipService,
   util
 }) {
   function updateSelectedFolder(folder = selectedFolder) {
@@ -38,22 +41,49 @@ function getCommonFeatures({
     setDownloadId(() => id);
     const download = { id, name, controller, progressValue, progressMax };
     setDownloads((downloads) => [download, ...downloads]);
-    const { signal } = controller;
-    const onprogress = (progressValue, progressMax) =>
-      onDownloadProgress(download.id, progressValue, progressMax);
     try {
-      const blob = await blobGetter(download, {
-        ...options,
-        signal,
-        onprogress
-      });
-      util.downloadBlob(blob, downloaderElement, download.name);
+      await executeDownload(download, options, blobGetter);
     } catch (error) {
       if (!util.downloadAborted(error)) {
-        throw error;
+        if (zipService.passwordNeeded(error)) {
+          let password;
+          if (error.entryId === undefined) {
+            password = promptPassword();
+          } else {
+            const entry = zipFilesystem.getById(error.entryId);
+            password = promptPassword(entry.getFullname());
+          }
+          if (password) {
+            options.readerOptions = { password };
+            await executeDownload(download, options, blobGetter);
+          } else {
+            throw error;
+          }
+        } else {
+          throw error;
+        }
       }
     }
     return download;
+  }
+
+  async function executeDownload(download, options, blobGetter) {
+    const { signal } = download.controller;
+    const onprogress = (progressValue, progressMax) =>
+      onDownloadProgress(download.id, progressValue, progressMax);
+    const blob = await blobGetter(download, {
+      ...options,
+      signal,
+      onprogress
+    });
+    util.downloadBlob(blob, downloaderElement, download.name);
+  }
+
+  function promptPassword(filename) {
+    // eslint-disable-next-line no-undef
+    return window.prompt(
+      "Enter password" + (filename ? " of " + filename : "") + ":"
+    );
   }
 
   function onDownloadProgress(downloadId, progressValue, progressMax) {
