@@ -4,14 +4,14 @@ import Entries from "./Entries.js";
 import BottomButtonBar from "./BottomButtonBar.js";
 import DownloadManager from "./DownloadManager.js";
 import InfoBar from "./InfoBar.js";
-import ExportZipDialog from "./ExportZipDialog.js";
-import ExtractDialog from "./ExtractDialog.js";
-import RenameDialog from "./RenameDialog.js";
-import CreateFolderDialog from "./CreateFolderDialog.js";
-import ResetDialog from "./ResetDialog.js";
-import DeleteEntryDialog from "./DeleteEntryDialog.js";
-import ErrorMessageDialog from "./ErrorMessageDialog.js";
-import ImportPasswordDialog from "./ImportPasswordDialog.js";
+import ExportZipDialog from "./dialogs/ExportZipDialog.js";
+import ExtractDialog from "./dialogs/ExtractDialog.js";
+import RenameDialog from "./dialogs/RenameDialog.js";
+import CreateFolderDialog from "./dialogs/CreateFolderDialog.js";
+import ResetDialog from "./dialogs/ResetDialog.js";
+import DeleteEntryDialog from "./dialogs/DeleteEntryDialog.js";
+import ErrorMessageDialog from "./dialogs/ErrorMessageDialog.js";
+import ImportPasswordDialog from "./dialogs/ImportPasswordDialog.js";
 
 export {
   TopButtonBar,
