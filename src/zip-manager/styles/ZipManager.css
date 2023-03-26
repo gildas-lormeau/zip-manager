@@ -15,7 +15,6 @@ main {
   margin: 0.5em;
   margin-block-end: 0;
   border: solid var(--accent-color) 0.05em;
-
   inline-size: 85vw;
   min-block-size: 20em;
 }
