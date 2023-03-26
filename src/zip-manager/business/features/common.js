@@ -1,5 +1,4 @@
 function getCommonFeatures({
-  zipFilesystem,
   downloadId,
   selectedFolder,
   setDownloadId,
@@ -7,7 +6,8 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialogOpened,
   setErrorMessage,
-  setEntryPasswordDialogOpened,
+  setImportPasswordDialogOpened,
+  setImportPasswordCallback,
   downloaderElement,
   zipService,
   util
@@ -41,18 +41,28 @@ function getCommonFeatures({
     setDownloadId(() => id);
     const download = { id, name, controller, progressValue, progressMax };
     setDownloads((downloads) => [download, ...downloads]);
+    await executeDownload(download, options, blobGetter);
+    return download;
+  }
+
+  async function executeDownload(download, options, blobGetter) {
+    const { signal } = download.controller;
+    const onprogress = (progressValue, progressMax) =>
+      onDownloadProgress(download.id, progressValue, progressMax);
     try {
-      await executeDownload(download, options, blobGetter);
+      const blob = await blobGetter(download, {
+        ...options,
+        signal,
+        onprogress
+      });
+      util.downloadBlob(blob, downloaderElement, download.name);
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          let password;
-          if (error.entryId === undefined) {
-            password = promptPassword();
-          } else {
-            const entry = zipFilesystem.getById(error.entryId);
-            password = promptPassword(entry.getFullname());
-          }
+          setImportPasswordDialogOpened(true);
+          const password = await new Promise((resolve) =>
+            setImportPasswordCallback(resolve)
+          );
           if (password) {
             options.readerOptions = { password };
             await executeDownload(download, options, blobGetter);
@@ -64,26 +74,6 @@ function getCommonFeatures({
         }
       }
     }
-    return download;
-  }
-
-  async function executeDownload(download, options, blobGetter) {
-    const { signal } = download.controller;
-    const onprogress = (progressValue, progressMax) =>
-      onDownloadProgress(download.id, progressValue, progressMax);
-    const blob = await blobGetter(download, {
-      ...options,
-      signal,
-      onprogress
-    });
-    util.downloadBlob(blob, downloaderElement, download.name);
-  }
-
-  function promptPassword(filename) {
-    // eslint-disable-next-line no-undef
-    return window.prompt(
-      "Enter password" + (filename ? " of " + filename : "") + ":"
-    );
   }
 
   function onDownloadProgress(downloadId, progressValue, progressMax) {
@@ -110,11 +100,16 @@ function getCommonFeatures({
     setErrorMessageDialogOpened(false);
   }
 
+  function closePromptImportPassword() {
+    setImportPasswordDialogOpened(false);
+  }
+
   return {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError
+    closeDisplayError,
+    closePromptImportPassword
   };
 }
 

@@ -11,6 +11,7 @@ import CreateFolderDialog from "./CreateFolderDialog.js";
 import ResetDialog from "./ResetDialog.js";
 import DeleteEntryDialog from "./DeleteEntryDialog.js";
 import ErrorMessageDialog from "./ErrorMessageDialog.js";
+import ImportPasswordDialog from "./ImportPasswordDialog.js";
 
 export {
   TopButtonBar,
@@ -25,5 +26,6 @@ export {
   CreateFolderDialog,
   ResetDialog,
   DeleteEntryDialog,
-  ErrorMessageDialog
+  ErrorMessageDialog,
+  ImportPasswordDialog
 };

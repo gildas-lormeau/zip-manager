@@ -27,7 +27,8 @@ import {
   CreateFolderDialog,
   ResetDialog,
   DeleteEntryDialog,
-  ErrorMessageDialog
+  ErrorMessageDialog,
+  ImportPasswordDialog
 } from "./components/index.js";
 
 const {
@@ -77,6 +78,9 @@ function ZipManager() {
   const [errorMessageDialogOpened, setErrorMessageDialogOpened] =
     useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [importPasswordDialogOpened, setImportPasswordDialogOpened] =
+    useState(false);
+  const importPasswordCallbackRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -91,14 +95,18 @@ function ZipManager() {
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
+  const setImportPassword = ({ password }) =>
+    importPasswordCallbackRef.current(password);
+  const setImportPasswordCallback = (callback) =>
+    (importPasswordCallbackRef.current = callback);
 
   const {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError
+    closeDisplayError,
+    closePromptImportPassword
   } = getCommonFeatures({
-    zipFilesystem,
     downloadId,
     selectedFolder,
     setDownloadId,
@@ -106,6 +114,8 @@ function ZipManager() {
     setEntries,
     setErrorMessageDialogOpened,
     setErrorMessage,
+    setImportPasswordDialogOpened,
+    setImportPasswordCallback,
     downloaderElement,
     zipService,
     util
@@ -461,6 +471,12 @@ function ZipManager() {
         open={errorMessageDialogOpened}
         onClose={closeDisplayError}
         message={errorMessage}
+        messages={messages}
+      />
+      <ImportPasswordDialog
+        open={importPasswordDialogOpened}
+        onSetPassword={setImportPassword}
+        onClose={closePromptImportPassword}
         messages={messages}
       />
     </div>
