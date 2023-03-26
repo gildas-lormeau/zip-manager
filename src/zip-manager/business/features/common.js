@@ -104,18 +104,11 @@ function getCommonFeatures({
     });
   }
 
-  function closePromptImportPassword() {
-    setImportPasswordDialog({
-      opened: false
-    });
-  }
-
   return {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError,
-    closePromptImportPassword
+    closeDisplayError
   };
 }
 

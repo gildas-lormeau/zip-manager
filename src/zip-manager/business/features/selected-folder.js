@@ -1,6 +1,7 @@
 function getSelectedFolderFeatures({
   selectedFolder,
   rootZipFilename,
+  setImportPasswordDialog,
   setExportZipDialog,
   setCreateFolderDialog,
   updateSelectedFolder,
@@ -118,6 +119,12 @@ function getSelectedFolderFeatures({
     exportZip();
   }
 
+  function closePromptImportPassword() {
+    setImportPasswordDialog({
+      opened: false
+    });
+  }
+
   return {
     openPromptCreateFolder,
     createFolder,
@@ -126,7 +133,8 @@ function getSelectedFolderFeatures({
     importZipFile,
     openPromptExportZip,
     exportZip,
-    closePromptExportZip
+    closePromptExportZip,
+    closePromptImportPassword
   };
 }
 

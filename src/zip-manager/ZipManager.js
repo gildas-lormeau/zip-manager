@@ -94,8 +94,7 @@ function ZipManager() {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError,
-    closePromptImportPassword
+    closeDisplayError
   } = getCommonFeatures({
     downloadId,
     selectedFolder,
@@ -160,10 +159,12 @@ function ZipManager() {
     importZipFile,
     openPromptExportZip,
     exportZip,
-    closePromptExportZip
+    closePromptExportZip,
+    closePromptImportPassword
   } = getSelectedFolderFeatures({
     selectedFolder,
     rootZipFilename,
+    setImportPasswordDialog,
     setExportZipDialog,
     setCreateFolderDialog,
     updateSelectedFolder,
