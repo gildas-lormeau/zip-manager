@@ -138,11 +138,6 @@ body {
   font-family: "Exo";
 }
 
-* {
-  transition-property: background-color, border-color, outline-color, color;
-  transition-duration: 750ms;
-}
-
 ol {
   display: flex;
   margin: 0;
