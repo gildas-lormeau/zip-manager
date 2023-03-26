@@ -30,9 +30,6 @@ function RenameDialog({ renameDialog, onRename, onClose, messages }) {
       if (!dialogRef.current.open && opened) {
         setFilename(filename);
         dialogRef.current.showModal();
-        if (filename) {
-          filenameInputRef.current.select();
-        }
       }
     }
   }, [renameDialog]);

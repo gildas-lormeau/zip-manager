@@ -37,9 +37,6 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
         setFilename(filename);
         setPassword(password);
         dialogRef.current.showModal();
-        if (filename) {
-          filenameInputRef.current.select();
-        }
       }
     }
   }, [exportZipDialog]);
