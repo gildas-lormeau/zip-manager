@@ -72,7 +72,7 @@ const DELETE_ENTRY_MESSAGE = "Please confirm the deletion";
 const DELETE_ENTRY_DIALOG_BUTTON_LABEL = "Delete";
 const ZIP_FILES_DESCRIPTION_LABEL = "Zip files";
 const IMPORT_PASSWORD_DIALOG_TITLE = "Enter password";
-const IMPORT_PASSWORD_DIALOG_LABEL = "Paswword:";
+const IMPORT_PASSWORD_DIALOG_LABEL = "Password:";
 
 export {
   ROOT_ZIP_FILENAME,
