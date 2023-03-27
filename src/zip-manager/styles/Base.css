@@ -13,7 +13,8 @@
 }
 
 @media (prefers-color-scheme: light) {
-  :root, ::backdrop  {
+  :root,
+  ::backdrop {
     --page-color: gainsboro;
     --bg-color: white;
     --basic-bg-color: white;
@@ -96,7 +97,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root, ::backdrop {
+  :root,
+  ::backdrop {
     --page-color: #333;
     --bg-color: black;
     --basic-bg-color: black;
@@ -159,7 +161,7 @@ ol li {
 }
 
 button {
-  border: solid var(--accent-color) .05em;
+  border: solid var(--accent-color) 0.05em;
   user-select: none;
   background-color: var(--bg-button-color);
   color: var(--button-color);

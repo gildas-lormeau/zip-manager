@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-block: .6em;
+  margin-block: 0.6em;
 }
 
 .info-bar .source-link {
   display: inline;
-  font-size: .9em;
+  font-size: 0.9em;
   color: var(--basic-text-color);
   margin-inline-start: 2ch;
 }
@@ -34,27 +34,27 @@
 
 @media (max-width: 128ch), (display-mode: standalone) {
   .info-bar .source-link {
-    font-size: .8em
+    font-size: 0.8em;
   }
 }
 
 @media (max-width: 64ch) {
   .info-bar {
-    margin-block: .6em;
+    margin-block: 0.6em;
   }
 
   .info-bar .source-link {
-    font-size: .8em
+    font-size: 0.8em;
   }
 }
 
 @media (max-width: 48ch) {
   .info-bar {
-    margin-block: .7em;
+    margin-block: 0.7em;
   }
 
   .info-bar .source-link {
-    font-size: .7em
+    font-size: 0.7em;
   }
 
   .info-bar input[type="color"] {
@@ -64,11 +64,11 @@
 
 @media (max-width: 40ch) {
   .info-bar {
-    margin-block: .3em;
+    margin-block: 0.3em;
   }
 
   .info-bar .source-link {
-    font-size: .6em
+    font-size: 0.6em;
   }
 
   .info-bar input[type="color"] {

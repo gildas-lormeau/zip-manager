@@ -1,11 +1,11 @@
 .navigation-bar {
   display: flex;
-  column-gap: .75ch;
+  column-gap: 0.75ch;
 }
 
 .history-buttons {
   display: flex;
-  column-gap: .75ch;
+  column-gap: 0.75ch;
 }
 
 .history-buttons button {
@@ -23,21 +23,21 @@
 .breadcrumb {
   display: flex;
   overflow: hidden;
-  margin-block-start: -.05em;
+  margin-block-start: -0.05em;
   line-height: 1.35em;
 }
 
 .breadcrumb ol {
   flex-wrap: wrap;
   overflow: hidden;
-  column-gap: .125ch;
+  column-gap: 0.125ch;
 }
 
 .breadcrumb li {
-  padding-block: .15em;
-  padding-inline-start: .25ch;
+  padding-block: 0.15em;
+  padding-inline-start: 0.25ch;
   overflow: hidden;
-  column-gap: .5ch;
+  column-gap: 0.5ch;
 }
 
 .breadcrumb li::after {
@@ -47,8 +47,8 @@
 .breadcrumb .breadcrumb-item {
   opacity: 0.75;
   font-weight: 400;
-  text-decoration: underline dotted transparent .1em;
-  text-underline-offset: .25em;
+  text-decoration: underline dotted transparent 0.1em;
+  text-underline-offset: 0.25em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -74,6 +74,6 @@
 
 @media (max-width: 40ch) {
   .navigation-bar > * {
-    font-size: .7em;
+    font-size: 0.7em;
   }
 }

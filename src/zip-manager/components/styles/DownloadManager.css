@@ -6,7 +6,7 @@
 
 .downloads ol {
   flex-direction: column;
-  row-gap: .75em;
+  row-gap: 0.75em;
 }
 
 .downloads li {
