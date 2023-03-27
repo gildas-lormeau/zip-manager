@@ -13,7 +13,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
+  :root, ::backdrop  {
     --page-color: gainsboro;
     --bg-color: white;
     --basic-bg-color: white;
@@ -96,7 +96,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root, ::backdrop {
     --page-color: #333;
     --bg-color: black;
     --basic-bg-color: black;
