@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function PasswordDialog({
-  importPasswordDialog,
-  onSetPassword,
-  onClose,
-  messages
-}) {
+function PasswordDialog({ data, onSetPassword, onClose, messages }) {
   const dialogRef = useRef(null);
   const [password, setPassword] = useState("");
 
@@ -23,10 +18,10 @@ function PasswordDialog({
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && importPasswordDialog) {
+    if (!dialogRef.current.open && data) {
       dialogRef.current.showModal();
     }
-  }, [importPasswordDialog]);
+  }, [data]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onReset={handleReset}>

@@ -1,11 +1,6 @@
 import { useEffect, useRef } from "react";
 
-function DeleteEntryDialog({
-  deleteEntryDialog,
-  onDeleteEntry,
-  onClose,
-  messages
-}) {
+function DeleteEntryDialog({ data, onDeleteEntry, onClose, messages }) {
   const dialogRef = useRef(null);
 
   function handleReset() {
@@ -13,10 +8,10 @@ function DeleteEntryDialog({
   }
 
   useEffect(() => {
-    if (!dialogRef.current.open && deleteEntryDialog) {
+    if (!dialogRef.current.open && data) {
       dialogRef.current.showModal();
     }
-  }, [deleteEntryDialog]);
+  }, [data]);
   return (
     <dialog ref={dialogRef} onClose={onClose}>
       <form method="dialog" onSubmit={onDeleteEntry} onReset={handleReset}>

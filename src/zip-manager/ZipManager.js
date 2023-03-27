@@ -410,48 +410,48 @@ function ZipManager() {
       </main>
       <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
       <CreateFolderDialog
-        createFolderDialog={createFolderDialog}
+        data={createFolderDialog}
         onCreateFolder={createFolder}
         onClose={closePromptCreateFolder}
         messages={messages}
       />
       <ExportZipDialog
-        exportZipDialog={exportZipDialog}
+        data={exportZipDialog}
         onExportZip={exportZip}
         onClose={closePromptExportZip}
         messages={messages}
       />
       <ExtractDialog
-        extractDialog={extractDialog}
+        data={extractDialog}
         onExtract={extract}
         onClose={closePromptExtract}
         messages={messages}
       />
       <RenameDialog
-        renameDialog={renameDialog}
+        data={renameDialog}
         onRename={rename}
         onClose={closePromptRename}
         messages={messages}
       />
       <ResetDialog
-        resetDialog={resetDialog}
+        data={resetDialog}
         onReset={reset}
         onClose={closeConfirmReset}
         messages={messages}
       />
       <DeleteEntryDialog
-        deleteEntryDialog={deleteEntryDialog}
+        data={deleteEntryDialog}
         onDeleteEntry={deleteEntry}
         onClose={closeConfirmDeleteEntry}
         messages={messages}
       />
       <ErrorMessageDialog
-        errorMessageDialog={errorMessageDialog}
+        data={errorMessageDialog}
         onClose={closeDisplayError}
         messages={messages}
       />
       <ImportPasswordDialog
-        importPasswordDialog={importPasswordDialog}
+        data={importPasswordDialog}
         onSetPassword={setImportPassword}
         onClose={closePromptImportPassword}
         messages={messages}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
+function ExportZipDialog({ data, onExportZip, onClose, messages }) {
   const dialogRef = useRef(null);
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
@@ -29,15 +29,15 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (exportZipDialog) {
-      const { filename, password } = exportZipDialog;
+    if (data) {
+      const { filename, password } = data;
       if (!dialogRef.current.open) {
         setFilename(filename);
         setPassword(password);
         dialogRef.current.showModal();
       }
     }
-  }, [exportZipDialog]);
+  }, [data]);
   useEffect(() => {
     if (!filenameTextSelected.current && filename) {
       filenameTextSelected.current = true;
