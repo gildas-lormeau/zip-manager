@@ -8,7 +8,7 @@
 .source-link {
   display: inline;
   font-size: .9em;
-  color: black;
+  color: var(--basic-text-color);
   margin-inline-start: 2ch;
 }
 
@@ -73,19 +73,5 @@
 
   .info-bar input[type="color"] {
     inline-size: 1ch;
-  }
-}
-
-.light .source-link {
-  color: black;
-}
-
-.dark .source-link {
-  color: white;
-}
-
-@media (prefers-color-scheme: dark) {
-  .source-link {
-    color: white;
   }
 }

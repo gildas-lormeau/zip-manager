@@ -1,8 +1,10 @@
 :root .light {
   --page-color: rgb(0, 0, 0);
   --bg-color: white;
+  --basic-bg-color: white;
   --checkbox-accent-color: var(--accent-color);
   --text-color: black;
+  --basic-text-color: black;
   --highlighted-text-color: white;
   --button-color: white;
   --bg-button-color: var(--accent-color);
@@ -14,8 +16,10 @@
   :root {
     --page-color: rgb(0, 0, 0);
     --bg-color: white;
+    --basic-bg-color: white;
     --checkbox-accent-color: var(--accent-color);
     --text-color: black;
+    --basic-text-color: black;
     --highlighted-text-color: white;
     --button-color: white;
     --bg-button-color: var(--accent-color);
@@ -54,8 +58,10 @@
 :root .dark {
   --page-color: dimgray;
   --bg-color: black;
+  --basic-bg-color: black;
   --checkbox-accent-color: var(--accent-color);
   --text-color: gray;
+  --basic-text-color: white;
   --highlighted-text-color: black;
   --button-color: black;
   --bg-button-color: var(--accent-color);
@@ -93,8 +99,10 @@
   :root {
     --page-color: dimgray;
     --bg-color: black;
+    --basic-bg-color: black;
     --checkbox-accent-color: var(--accent-color);
     --text-color: gray;
+    --basic-text-color: white;
     --highlighted-text-color: black;
     --button-color: black;
     --bg-button-color: var(--accent-color);

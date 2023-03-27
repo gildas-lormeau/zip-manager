@@ -1,5 +1,5 @@
 dialog::backdrop {
-  background-color: white;
+  background-color: var(--basic-bg-color);
   opacity: 0.85;
 }
 
@@ -44,18 +44,4 @@ dialog label {
 dialog .button-bar {
   margin-block-start: .5em;
   align-self: end;
-}
-
-.light .dialog-backdrop {
-  background-color: white;
-}
-
-.dark .dialog-backdrop {
-  background-color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  dialog::backdrop {
-    background-color: black;
-  }
 }
