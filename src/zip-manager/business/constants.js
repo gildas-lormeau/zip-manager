@@ -25,6 +25,17 @@ const DEFAULT_ACCENT_COLOR = "#3ab000";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const ZIP_EXTENSION = ".zip";
 const LONG_TOUCH_DELAY = 750;
+const CREATE_FOLDER_BUTTON_NAME = "create-folder-button";
+const ADD_FILES_BUTTON_NAME = "add-files-button";
+const IMPORT_ZIP_BUTTON_NAME = "import-zip-button";
+const EXPORT_ZIP_BUTTON_NAME = "export-zip-button";
+const COPY_BUTTON_NAME = "copy-button";
+const CUT_BUTTON_NAME = "cut-button";
+const PASTE_BUTTON_NAME = "paste-button";
+const RENAME_BUTTON_NAME = "rename-button";
+const DELETE_ENTRY_BUTTON_NAME = "delete-entry-button";
+const BACK_BUTTON_NAME = "back-button";
+const FORWARD_BUTTON_NAME = "forward-button";
 
 export {
   ACTION_KEY,
@@ -53,5 +64,16 @@ export {
   DEFAULT_ACCENT_COLOR,
   DEFAULT_MIME_TYPE,
   ZIP_EXTENSION,
-  LONG_TOUCH_DELAY
+  LONG_TOUCH_DELAY,
+  CREATE_FOLDER_BUTTON_NAME,
+  ADD_FILES_BUTTON_NAME,
+  IMPORT_ZIP_BUTTON_NAME,
+  EXPORT_ZIP_BUTTON_NAME,
+  COPY_BUTTON_NAME,
+  CUT_BUTTON_NAME,
+  PASTE_BUTTON_NAME,
+  RENAME_BUTTON_NAME,
+  DELETE_ENTRY_BUTTON_NAME,
+  BACK_BUTTON_NAME,
+  FORWARD_BUTTON_NAME
 };

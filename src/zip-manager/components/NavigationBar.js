@@ -1,12 +1,16 @@
 import "./styles/NavigationBar.css";
 
+import Button from "./Button.js";
+
 function NavigationBar({
   selectedFolder,
   disabledBackButton,
   disabledForwardButton,
+  flashingButton,
   onNavigateBack,
   onNavigateForward,
   onGoIntoFolder,
+  onFlashingAnimationEnd,
   constants,
   messages
 }) {
@@ -15,8 +19,11 @@ function NavigationBar({
       <HistoryButtons
         disabledBackButton={disabledBackButton}
         disabledForwardButton={disabledForwardButton}
+        flashingButton={flashingButton}
         onNavigateBack={onNavigateBack}
         onNavigateForward={onNavigateForward}
+        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        constants={constants}
         messages={messages}
       />
       <Breadcrumb
@@ -32,47 +39,74 @@ function NavigationBar({
 function HistoryButtons({
   disabledBackButton,
   disabledForwardButton,
+  flashingButton,
   onNavigateBack,
   onNavigateForward,
+  onFlashingAnimationEnd,
+  constants,
   messages
 }) {
   return (
     <span className="history-buttons" aria-label="History commands">
       <BackButton
         disabled={disabledBackButton}
+        flashingButton={flashingButton}
         onNavigateBack={onNavigateBack}
+        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        constants={constants}
         messages={messages}
       />
       <ForwardButton
         disabled={disabledForwardButton}
+        flashingButton={flashingButton}
         onNavigateForward={onNavigateForward}
+        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        constants={constants}
         messages={messages}
       />
     </span>
   );
 }
 
-function BackButton({ disabled, onNavigateBack, messages }) {
+function BackButton({
+  disabled,
+  flashingButton,
+  onNavigateBack,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      disabled={disabled}
-      onClick={onNavigateBack}
+    <Button
+      name={constants.BACK_BUTTON_NAME}
       title={messages.BACK_BUTTON_TOOLTIP}
-    >
-      {messages.BACK_BUTTON_LABEL}
-    </button>
+      label={messages.BACK_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onNavigateBack}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
-function ForwardButton({ disabled, onNavigateForward, messages }) {
+function ForwardButton({
+  disabled,
+  flashingButton,
+  onNavigateForward,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      disabled={disabled}
-      onClick={onNavigateForward}
+    <Button
+      name={constants.FORWARD_BUTTON_NAME}
       title={messages.FORWARD_BUTTON_TOOLTIP}
-    >
-      {messages.FORWARD_BUTTON_LABEL}
-    </button>
+      label={messages.FORWARD_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onNavigateForward}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 

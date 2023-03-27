@@ -2,6 +2,8 @@ import "./styles/BottomButtonBar.css";
 
 import { useRef } from "react";
 
+import Button from "./Button.js";
+
 function BottomButtonBar({
   disabledCopyButton,
   disabledCutButton,
@@ -9,6 +11,7 @@ function BottomButtonBar({
   disabledResetClipboardDataButton,
   disabledRenameButton,
   disabledDeleteButton,
+  flashingButton,
   onCopy,
   onCut,
   onPaste,
@@ -17,6 +20,8 @@ function BottomButtonBar({
   onRemove,
   onMove,
   onStopMove,
+  onFlashingAnimationEnd,
+  constants,
   messages
 }) {
   const previousTouchClientY = useRef(0);
@@ -48,17 +53,26 @@ function BottomButtonBar({
       <div className="button-group">
         <CopyEntryButton
           disabled={disabledCopyButton}
+          flashingButton={flashingButton}
           onCopy={onCopy}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
         <CutEntryButton
           disabled={disabledCutButton}
+          flashingButton={flashingButton}
           onCut={onCut}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
         <PasteEntryButton
           disabled={disabledPasteButton}
+          flashingButton={flashingButton}
           onPaste={onPaste}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
         <ResetClipboardDataButton
@@ -70,12 +84,18 @@ function BottomButtonBar({
       <div className="button-group">
         <RenameEntryButton
           disabled={disabledRenameButton}
+          flashingButton={flashingButton}
           onRename={onRename}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
         <DeleteEntryButton
           disabled={disabledDeleteButton}
+          flashingButton={flashingButton}
           onRemove={onRemove}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
       </div>
@@ -83,39 +103,66 @@ function BottomButtonBar({
   );
 }
 
-function CopyEntryButton({ disabled, onCopy, messages }) {
+function CopyEntryButton({
+  disabled,
+  flashingButton,
+  onCopy,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onCopy}
-      disabled={disabled}
+    <Button
+      name={constants.COPY_BUTTON_NAME}
       title={messages.COPY_BUTTON_TOOLTIP}
-    >
-      {messages.COPY_BUTTON_LABEL}
-    </button>
+      label={messages.COPY_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onCopy}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
-function CutEntryButton({ disabled, onCut, messages }) {
+function CutEntryButton({
+  disabled,
+  flashingButton,
+  onCut,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onCut}
-      disabled={disabled}
+    <Button
+      name={constants.CUT_BUTTON_NAME}
       title={messages.CUT_BUTTON_TOOLTIP}
-    >
-      {messages.CUT_BUTTON_LABEL}
-    </button>
+      label={messages.CUT_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onCut}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
-function PasteEntryButton({ disabled, onPaste, messages }) {
+function PasteEntryButton({
+  disabled,
+  flashingButton,
+  onPaste,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onPaste}
-      disabled={disabled}
+    <Button
+      name={constants.PASTE_BUTTON_NAME}
       title={messages.PASTE_BUTTON_TOOLTIP}
-    >
-      {messages.PASTE_BUTTON_LABEL}
-    </button>
+      label={messages.PASTE_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onPaste}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
@@ -131,27 +178,45 @@ function ResetClipboardDataButton({
   );
 }
 
-function RenameEntryButton({ disabled, onRename, messages }) {
+function RenameEntryButton({
+  disabled,
+  flashingButton,
+  onRename,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onRename}
-      disabled={disabled}
+    <Button
+      name={constants.RENAME_BUTTON_NAME}
       title={messages.RENAME_BUTTON_TOOLTIP}
-    >
-      {messages.RENAME_BUTTON_LABEL}
-    </button>
+      label={messages.RENAME_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onRename}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
-function DeleteEntryButton({ disabled, onRemove, messages }) {
+function DeleteEntryButton({
+  disabled,
+  flashingButton,
+  onRemove,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onRemove}
-      disabled={disabled}
+    <Button
+      name={constants.DELETE_ENTRY_BUTTON_NAME}
       title={messages.DELETE_BUTTON_TOOLTIP}
-    >
-      {messages.DELETE_BUTTON_LABEL}
-    </button>
+      label={messages.DELETE_BUTTON_LABEL}
+      disabled={disabled}
+      flashingButton={flashingButton}
+      onClick={onRemove}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 

@@ -2,14 +2,18 @@ import "./styles/TopButtonBar.css";
 
 import { useRef } from "react";
 
+import Button from "./Button.js";
+
 function TopButtonBar({
   disabledExportZipButton,
   disabledResetButton,
+  flashingButton,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
   onExportZipFile,
   onReset,
+  onFlashingAnimationEnd,
   addFilesButtonRef,
   importZipButtonRef,
   util,
@@ -37,19 +41,27 @@ function TopButtonBar({
     >
       <div className="button-group">
         <CreateFolderButton
+          flashingButton={flashingButton}
           onCreateFolder={onCreateFolder}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
         <AddFilesButton
+          flashingButton={flashingButton}
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
           util={util}
+          constants={constants}
           messages={messages}
         />
       </div>
       <div className="button-group">
         <ImportZipButton
+          flashingButton={flashingButton}
           onImportZipFile={onImportZipFile}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
           importZipButtonRef={importZipButtonRef}
           util={util}
           constants={constants}
@@ -57,7 +69,10 @@ function TopButtonBar({
         />
         <ExportZipButton
           disabled={disabledExportZipButton}
+          flashingButton={flashingButton}
           onExportZipFile={onExportZipFile}
+          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          constants={constants}
           messages={messages}
         />
       </div>
@@ -72,18 +87,34 @@ function TopButtonBar({
   );
 }
 
-function CreateFolderButton({ onCreateFolder, messages }) {
+function CreateFolderButton({
+  flashingButton,
+  onCreateFolder,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onCreateFolder}
+    <Button
+      name={constants.CREATE_FOLDER_BUTTON_NAME}
       title={messages.CREATE_FOLDER_BUTTON_TOOLTIP}
-    >
-      {messages.CREATE_FOLDER_BUTTON_LABEL}
-    </button>
+      label={messages.CREATE_FOLDER_BUTTON_LABEL}
+      flashingButton={flashingButton}
+      onClick={onCreateFolder}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 
-function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
+function AddFilesButton({
+  flashingButton,
+  addFilesButtonRef,
+  onAddFiles,
+  onFlashingAnimationEnd,
+  util,
+  constants,
+  messages
+}) {
   const fileInputRef = useRef(null);
   const { current } = fileInputRef;
 
@@ -110,16 +141,17 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
 
     showOpenFilePicker();
   }
-
   return (
     <>
-      <button
-        onClick={handleClick}
-        ref={addFilesButtonRef}
+      <Button
+        name={constants.ADD_FILES_BUTTON_NAME}
         title={messages.ADD_FILES_BUTTON_TOOLTIP}
-      >
-        {messages.ADD_FILES_BUTTON_LABEL}
-      </button>
+        label={messages.ADD_FILES_BUTTON_LABEL}
+        flashingButton={flashingButton}
+        onClick={handleClick}
+        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        buttonRef={addFilesButtonRef}
+      />
       <input
         onChange={handleChange}
         ref={fileInputRef}
@@ -132,8 +164,10 @@ function AddFilesButton({ addFilesButtonRef, onAddFiles, util, messages }) {
 }
 
 function ImportZipButton({
+  flashingButton,
   importZipButtonRef,
   onImportZipFile,
+  onFlashingAnimationEnd,
   util,
   constants,
   messages
@@ -168,13 +202,15 @@ function ImportZipButton({
 
   return (
     <>
-      <button
-        onClick={handleClick}
-        ref={importZipButtonRef}
+      <Button
+        name={constants.IMPORT_ZIP_BUTTON_NAME}
+        buttonRef={importZipButtonRef}
         title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
-      >
-        {messages.IMPORT_ZIP_BUTTON_LABEL}
-      </button>
+        label={messages.IMPORT_ZIP_BUTTON_LABEL}
+        flashingButton={flashingButton}
+        onClick={handleClick}
+        onFlashingAnimationEnd={onFlashingAnimationEnd}
+      />
       <input
         onChange={handleChange}
         ref={fileInputRef}
@@ -186,15 +222,24 @@ function ImportZipButton({
   );
 }
 
-function ExportZipButton({ disabled, onExportZipFile, messages }) {
+function ExportZipButton({
+  disabled,
+  flashingButton,
+  onExportZipFile,
+  onFlashingAnimationEnd,
+  constants,
+  messages
+}) {
   return (
-    <button
-      onClick={onExportZipFile}
+    <Button
+      name={constants.EXPORT_ZIP_BUTTON_NAME}
       disabled={disabled}
       title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
-    >
-      {messages.EXPORT_ZIP_BUTTON_LABEL}
-    </button>
+      label={messages.EXPORT_ZIP_BUTTON_LABEL}
+      flashingButton={flashingButton}
+      onClick={onExportZipFile}
+      onFlashingAnimationEnd={onFlashingAnimationEnd}
+    />
   );
 }
 

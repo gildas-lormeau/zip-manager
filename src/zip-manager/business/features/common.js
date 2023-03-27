@@ -6,6 +6,7 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialog,
   setImportPasswordDialog,
+  setFlashingButton,
   downloaderElement,
   zipService,
   util
@@ -98,11 +99,16 @@ function getCommonFeatures({
     setErrorMessageDialog(null);
   }
 
+  function resetFlashingButton() {
+    setFlashingButton(null);
+  }
+
   return {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError
+    closeDisplayError,
+    resetFlashingButton
   };
 }
 

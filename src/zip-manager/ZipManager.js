@@ -70,6 +70,7 @@ function ZipManager() {
   const [resetDialog, setResetDialog] = useState(null);
   const [errorMessageDialog, setErrorMessageDialog] = useState(null);
   const [importPasswordDialog, setImportPasswordDialog] = useState(null);
+  const [flashingButton, setFlashingButton] = useState(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -89,7 +90,8 @@ function ZipManager() {
     downloadFile,
     updateSelectedFolder,
     openDisplayError,
-    closeDisplayError
+    closeDisplayError,
+    resetFlashingButton
   } = getCommonFeatures({
     downloadId,
     selectedFolder,
@@ -98,6 +100,7 @@ function ZipManager() {
     setEntries,
     setErrorMessageDialog,
     setImportPasswordDialog,
+    setFlashingButton,
     downloaderElement,
     zipService,
     util
@@ -289,6 +292,7 @@ function ZipManager() {
     goIntoFolder,
     addFilesButton,
     importZipButton,
+    setFlashingButton,
     util,
     constants
   });
@@ -336,11 +340,13 @@ function ZipManager() {
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledResetButton={disabledReset}
+          flashingButton={flashingButton}
           onCreateFolder={openPromptCreateFolder}
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
           onExportZipFile={openPromptExportZip}
           onReset={openConfirmReset}
+          onFlashingAnimationEnd={resetFlashingButton}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}
           util={util}
@@ -351,9 +357,11 @@ function ZipManager() {
           selectedFolder={selectedFolder}
           disabledBackButton={disabledBack}
           disabledForwardButton={disabledForward}
+          flashingButton={flashingButton}
           onNavigateBack={navigateBack}
           onNavigateForward={navigateForward}
           onGoIntoFolder={goIntoFolder}
+          onFlashingAnimationEnd={resetFlashingButton}
           constants={constants}
           messages={messages}
         />
@@ -384,6 +392,7 @@ function ZipManager() {
           disabledResetClipboardDataButton={disabledResetClipboardData}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
+          flashingButton={flashingButton}
           onCopy={copy}
           onCut={cut}
           onPaste={paste}
@@ -392,6 +401,8 @@ function ZipManager() {
           onRemove={openConfirmDeleteEntry}
           onMove={resizeEntries}
           onStopMove={stopResizeEntries}
+          onFlashingAnimationEnd={resetFlashingButton}
+          constants={constants}
           messages={messages}
         />
         <DownloadManager

@@ -173,6 +173,22 @@ button:disabled {
   opacity: 0.5;
 }
 
+button.flashing-button {
+  animation-name: flashing-button-animation;
+  animation-duration: 0.2s;
+}
+
+@keyframes flashing-button-animation {
+  0% {
+    opacity: 0.85;
+    outline: 0;
+  }
+  50% {
+    opacity: 1;
+    outline: 1px solid var(--button-color);
+  }
+}
+
 a,
 a:visited {
   color: inherit;
