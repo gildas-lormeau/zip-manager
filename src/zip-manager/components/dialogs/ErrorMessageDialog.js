@@ -11,7 +11,7 @@ function ErrorMessageDialog({ errorMessageDialog, onClose, messages }) {
   return (
     <dialog ref={dialogRef} onClose={onClose}>
       <form method="dialog">
-        <div>{messages.ERROR_DIALOG_TITLE}</div>
+        <div>{messages.ERROR_TITLE}</div>
         <p>
           <label>{errorMessageDialog?.message}</label>
         </p>

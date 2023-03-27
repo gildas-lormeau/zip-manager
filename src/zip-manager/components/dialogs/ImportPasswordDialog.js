@@ -30,10 +30,10 @@ function PasswordDialog({
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
       <form method="dialog" onReset={handleReset}>
-        <div>{messages.IMPORT_PASSWORD_DIALOG_TITLE}</div>
+        <div>{messages.IMPORT_PASSWORD_TITLE}</div>
         <p>
           <label>
-            {messages.IMPORT_PASSWORD_DIALOG_LABEL}
+            {messages.IMPORT_PASSWORD_LABEL}
             <input
               type="password"
               autoComplete="off"
