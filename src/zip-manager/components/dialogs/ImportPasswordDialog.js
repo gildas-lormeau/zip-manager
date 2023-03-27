@@ -19,7 +19,6 @@ function PasswordDialog({
 
   function handleClose() {
     onSetPassword({ password });
-    setPassword("");
     onClose();
   }
 

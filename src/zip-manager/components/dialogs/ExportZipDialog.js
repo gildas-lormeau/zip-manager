@@ -25,8 +25,6 @@ function ExportZipDialog({ exportZipDialog, onExportZip, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
-    setFilename("");
-    setPassword("");
     onClose();
   }
 

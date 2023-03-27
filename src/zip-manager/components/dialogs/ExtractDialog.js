@@ -25,8 +25,6 @@ function ExtractDialog({ extractDialog, onExtract, onClose, messages }) {
 
   function handleClose() {
     filenameTextSelected.current = false;
-    setFilename("");
-    setPassword("");
     onClose();
   }
 
