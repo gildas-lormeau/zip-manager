@@ -1,7 +1,7 @@
 .button-bar {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 1ch;
+  column-gap: 1.25ch;
   row-gap: .5em;
 }
 
