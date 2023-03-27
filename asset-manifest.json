@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://gildas-lormeau.github.io/zipjs-react-app/static/css/main.75af7a7f.css",
-    "main.js": "https://gildas-lormeau.github.io/zipjs-react-app/static/js/main.1873f1c3.js",
+    "main.css": "https://gildas-lormeau.github.io/zipjs-react-app/static/css/main.ee7dd82f.css",
+    "main.js": "https://gildas-lormeau.github.io/zipjs-react-app/static/js/main.b068db6f.js",
     "static/media/Exo-VariableFont_wght.ttf": "https://gildas-lormeau.github.io/zipjs-react-app/static/media/Exo-VariableFont_wght.4c04cd875557390e68c2.ttf",
     "service-worker.js": "https://gildas-lormeau.github.io/zipjs-react-app/service-worker.js",
     "index.html": "https://gildas-lormeau.github.io/zipjs-react-app/index.html",
-    "main.75af7a7f.css.map": "https://gildas-lormeau.github.io/zipjs-react-app/static/css/main.75af7a7f.css.map",
-    "main.1873f1c3.js.map": "https://gildas-lormeau.github.io/zipjs-react-app/static/js/main.1873f1c3.js.map"
+    "main.ee7dd82f.css.map": "https://gildas-lormeau.github.io/zipjs-react-app/static/css/main.ee7dd82f.css.map",
+    "main.b068db6f.js.map": "https://gildas-lormeau.github.io/zipjs-react-app/static/js/main.b068db6f.js.map"
   },
   "entrypoints": [
-    "static/css/main.75af7a7f.css",
-    "static/js/main.1873f1c3.js"
+    "static/css/main.ee7dd82f.css",
+    "static/js/main.b068db6f.js"
   ]
 }
