@@ -6,7 +6,6 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialog,
   setImportPasswordDialog,
-  setImportPasswordCallback,
   downloaderElement,
   zipService,
   util
@@ -58,9 +57,8 @@ function getCommonFeatures({
     } catch (error) {
       if (!util.downloadAborted(error)) {
         if (zipService.passwordNeeded(error)) {
-          setImportPasswordDialog({});
-          const password = await new Promise((resolve) =>
-            setImportPasswordCallback(resolve)
+          const { password } = await new Promise((resolve) =>
+            setImportPasswordDialog({ onSetImportPassword: resolve })
           );
           if (password) {
             options.readerOptions = { password };

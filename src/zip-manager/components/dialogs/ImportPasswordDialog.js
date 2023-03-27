@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function PasswordDialog({ data, onSetPassword, onClose, messages }) {
+function PasswordDialog({ data, onClose, messages }) {
   const dialogRef = useRef(null);
   const [password, setPassword] = useState("");
 
@@ -13,7 +13,8 @@ function PasswordDialog({ data, onSetPassword, onClose, messages }) {
   }
 
   function handleClose() {
-    onSetPassword({ password });
+    setPassword("");
+    data.onSetImportPassword({ password });
     onClose();
   }
 

@@ -70,7 +70,6 @@ function ZipManager() {
   const [resetDialog, setResetDialog] = useState(null);
   const [errorMessageDialog, setErrorMessageDialog] = useState(null);
   const [importPasswordDialog, setImportPasswordDialog] = useState(null);
-  const importPasswordCallbackRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -85,10 +84,6 @@ function ZipManager() {
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
-  const setImportPassword = ({ password }) =>
-    importPasswordCallbackRef.current(password);
-  const setImportPasswordCallback = (callback) =>
-    (importPasswordCallbackRef.current = callback);
 
   const {
     downloadFile,
@@ -103,7 +98,6 @@ function ZipManager() {
     setEntries,
     setErrorMessageDialog,
     setImportPasswordDialog,
-    setImportPasswordCallback,
     downloaderElement,
     zipService,
     util
@@ -452,7 +446,6 @@ function ZipManager() {
       />
       <ImportPasswordDialog
         data={importPasswordDialog}
-        onSetPassword={setImportPassword}
         onClose={closePromptImportPassword}
         messages={messages}
       />
