@@ -1,9 +1,9 @@
 :root .light {
-  --page-color: rgb(0, 0, 0);
+  --page-color: gainsboro;
   --bg-color: white;
   --basic-bg-color: white;
   --checkbox-accent-color: var(--accent-color);
-  --text-color: black;
+  --text-color: #333;
   --basic-text-color: black;
   --highlighted-text-color: white;
   --button-color: white;
@@ -14,11 +14,11 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --page-color: rgb(0, 0, 0);
+    --page-color: gainsboro;
     --bg-color: white;
     --basic-bg-color: white;
     --checkbox-accent-color: var(--accent-color);
-    --text-color: black;
+    --text-color: #333;
     --basic-text-color: black;
     --highlighted-text-color: white;
     --button-color: white;
@@ -56,11 +56,11 @@
 }
 
 :root .dark {
-  --page-color: dimgray;
+  --page-color: #333;
   --bg-color: black;
   --basic-bg-color: black;
   --checkbox-accent-color: var(--accent-color);
-  --text-color: gray;
+  --text-color: gainsboro;
   --basic-text-color: white;
   --highlighted-text-color: black;
   --button-color: black;
@@ -97,11 +97,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --page-color: dimgray;
+    --page-color: #333;
     --bg-color: black;
     --basic-bg-color: black;
     --checkbox-accent-color: var(--accent-color);
-    --text-color: gray;
+    --text-color: gainsboro;
     --basic-text-color: white;
     --highlighted-text-color: black;
     --button-color: black;
