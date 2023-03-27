@@ -204,12 +204,12 @@ function ImportZipButton({
     <>
       <Button
         name={constants.IMPORT_ZIP_BUTTON_NAME}
-        buttonRef={importZipButtonRef}
         title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
         label={messages.IMPORT_ZIP_BUTTON_LABEL}
         flashingButton={flashingButton}
         onClick={handleClick}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
+        buttonRef={importZipButtonRef}
       />
       <input
         onChange={handleChange}
@@ -233,9 +233,9 @@ function ExportZipButton({
   return (
     <Button
       name={constants.EXPORT_ZIP_BUTTON_NAME}
-      disabled={disabled}
       title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
       label={messages.EXPORT_ZIP_BUTTON_LABEL}
+      disabled={disabled}
       flashingButton={flashingButton}
       onClick={onExportZipFile}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
