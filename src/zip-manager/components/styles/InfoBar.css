@@ -5,20 +5,20 @@
   margin-block: .6em;
 }
 
-.source-link {
+.info-bar .source-link {
   display: inline;
   font-size: .9em;
   color: var(--basic-text-color);
   margin-inline-start: 2ch;
 }
 
-.icon {
+.info-bar .icon {
   color: var(--accent-color);
   opacity: 0.85;
   cursor: pointer;
 }
 
-.icon:hover {
+.info-bar .icon:hover {
   opacity: 1;
 }
 
@@ -33,7 +33,7 @@
 }
 
 @media (max-width: 128ch), (display-mode: standalone) {
-  .source-link {
+  .info-bar .source-link {
     font-size: .8em
   }
 }
@@ -43,7 +43,7 @@
     margin-block: .6em;
   }
 
-  .source-link {
+  .info-bar .source-link {
     font-size: .8em
   }
 }
@@ -53,7 +53,7 @@
     margin-block: .7em;
   }
 
-  .source-link {
+  .info-bar .source-link {
     font-size: .7em
   }
 
@@ -67,7 +67,7 @@
     margin-block: .3em;
   }
 
-  .source-link {
+  .info-bar .source-link {
     font-size: .6em
   }
 
