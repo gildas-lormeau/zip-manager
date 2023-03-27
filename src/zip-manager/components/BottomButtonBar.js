@@ -209,7 +209,7 @@ function DeleteEntryButton({
 }) {
   return (
     <Button
-      name={constants.DELETE_ENTRY_BUTTON_NAME}
+      name={constants.DELETE_BUTTON_NAME}
       title={messages.DELETE_BUTTON_TOOLTIP}
       label={messages.DELETE_BUTTON_LABEL}
       disabled={disabled}

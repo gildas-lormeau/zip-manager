@@ -33,7 +33,7 @@ const COPY_BUTTON_NAME = "copy-button";
 const CUT_BUTTON_NAME = "cut-button";
 const PASTE_BUTTON_NAME = "paste-button";
 const RENAME_BUTTON_NAME = "rename-button";
-const DELETE_ENTRY_BUTTON_NAME = "delete-entry-button";
+const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
 
@@ -73,7 +73,7 @@ export {
   CUT_BUTTON_NAME,
   PASTE_BUTTON_NAME,
   RENAME_BUTTON_NAME,
-  DELETE_ENTRY_BUTTON_NAME,
+  DELETE_BUTTON_NAME,
   BACK_BUTTON_NAME,
   FORWARD_BUTTON_NAME
 };

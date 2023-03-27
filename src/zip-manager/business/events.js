@@ -274,11 +274,11 @@ function onHighlightedEntriesKeyUp(
     constants
   }
 ) {
-  const { ACTION_KEY, DELETE_KEYS, DELETE_ENTRY_BUTTON_NAME } = constants;
+  const { ACTION_KEY, DELETE_KEYS, DELETE_BUTTON_NAME } = constants;
   if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
       setFlashingButton({
-        name: DELETE_ENTRY_BUTTON_NAME,
+        name: DELETE_BUTTON_NAME,
         callback: openConfirmDeleteEntry
       });
     }
