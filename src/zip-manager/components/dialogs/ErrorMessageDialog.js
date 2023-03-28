@@ -1,4 +1,4 @@
-import Dialog from "./Dialog";
+import Dialog from "./Dialog.js";
 
 function ErrorMessageDialog({ data, onClose, messages }) {
   return (

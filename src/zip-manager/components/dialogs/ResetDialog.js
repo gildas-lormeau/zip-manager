@@ -1,4 +1,4 @@
-import Dialog from "./Dialog";
+import Dialog from "./Dialog.js";
 
 function ResetDialog({ data, onReset, onClose, messages }) {
   return (
