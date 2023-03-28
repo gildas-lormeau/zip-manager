@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import Dialog from "./Dialog.js";
+
+import { useState } from "react";
 
 function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
-  const dialogRef = useRef(null);
   const [folderName, setFolderName] = useState("");
 
   function handleChangeFilename(event) {
@@ -12,42 +13,35 @@ function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
     onCreateFolder({ folderName });
   }
 
-  function handleReset() {
-    dialogRef.current.close();
-  }
-
   function handleClose() {
     setFolderName("");
     onClose();
   }
 
-  useEffect(() => {
-    if (!dialogRef.current.open && data) {
-      dialogRef.current.showModal();
-    }
-  }, [data]);
   return (
-    <dialog ref={dialogRef} onClose={handleClose}>
-      <form method="dialog" onSubmit={handleSubmit} onReset={handleReset}>
-        <div>{messages.CREATE_FOLDER_TITLE}</div>
-        <p>
-          <label>
-            {messages.CREATE_FOLDER_NAME_LABEL}
-            <input
-              value={folderName}
-              required
-              onChange={handleChangeFilename}
-            ></input>
-          </label>
-        </p>
-        <div className="button-bar">
-          <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-          <button type="submit">
-            {messages.CREATE_FOLDER_DIALOG_BUTTON_LABEL}
-          </button>
-        </div>
-      </form>
-    </dialog>
+    <Dialog
+      data={data}
+      title={messages.CREATE_FOLDER_TITLE}
+      onClose={handleClose}
+      onSubmit={handleSubmit}
+    >
+      <p>
+        <label>
+          {messages.CREATE_FOLDER_NAME_LABEL}
+          <input
+            value={folderName}
+            required
+            onChange={handleChangeFilename}
+          ></input>
+        </label>
+      </p>
+      <div className="button-bar">
+        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
+        <button type="submit">
+          {messages.CREATE_FOLDER_DIALOG_BUTTON_LABEL}
+        </button>
+      </div>
+    </Dialog>
   );
 }
 

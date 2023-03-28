@@ -1,32 +1,23 @@
-import { useEffect, useRef } from "react";
+import Dialog from "./Dialog";
 
 function DeleteEntryDialog({ data, onDeleteEntry, onClose, messages }) {
-  const dialogRef = useRef(null);
-
-  function handleReset() {
-    dialogRef.current.close();
-  }
-
-  useEffect(() => {
-    if (!dialogRef.current.open && data) {
-      dialogRef.current.showModal();
-    }
-  }, [data]);
   return (
-    <dialog ref={dialogRef} onClose={onClose}>
-      <form method="dialog" onSubmit={onDeleteEntry} onReset={handleReset}>
-        <div>{messages.DELETE_ENTRY_TITLE}</div>
-        <p>
-          <label>{messages.DELETE_ENTRY_MESSAGE}</label>
-        </p>
-        <div className="button-bar">
-          <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-          <button type="submit">
-            {messages.DELETE_ENTRY_DIALOG_BUTTON_LABEL}
-          </button>
-        </div>
-      </form>
-    </dialog>
+    <Dialog
+      data={data}
+      title={messages.DELETE_ENTRY_TITLE}
+      onClose={onClose}
+      onSubmit={onDeleteEntry}
+    >
+      <p>
+        <label>{messages.DELETE_ENTRY_MESSAGE}</label>
+      </p>
+      <div className="button-bar">
+        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
+        <button type="submit">
+          {messages.DELETE_ENTRY_DIALOG_BUTTON_LABEL}
+        </button>
+      </div>
+    </Dialog>
   );
 }
 
