@@ -41,39 +41,35 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.EXPORT_ZIP_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.EXTRACT_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
       onSubmit={handleSubmit}
       onClose={handleClose}
     >
-      <p>
-        <label>
-          {messages.EXTRACT_FILENAME_LABEL}
-          <input
-            value={filename}
-            required
-            onChange={handleChangeFilename}
-            ref={filenameInputRef}
-          ></input>
-        </label>
-        <label
-          style={{
-            display: data?.passwordDisabled ? "none" : "inherit"
-          }}
-        >
-          {messages.EXTRACT_PASSWORD_LABEL}
-          <input
-            type="password"
-            autoComplete="off"
-            value={password}
-            required={!data?.passwordDisabled}
-            onChange={handleChangePassword}
-          ></input>
-        </label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">{messages.EXTRACT_DIALOG_BUTTON_LABEL}</button>
-      </div>
+      <label>
+        {messages.EXTRACT_FILENAME_LABEL}
+        <input
+          value={filename}
+          required
+          onChange={handleChangeFilename}
+          ref={filenameInputRef}
+        ></input>
+      </label>
+      <label
+        style={{
+          display: data?.passwordDisabled ? "none" : "inherit"
+        }}
+      >
+        {messages.EXTRACT_PASSWORD_LABEL}
+        <input
+          type="password"
+          autoComplete="off"
+          value={password}
+          required={!data?.passwordDisabled}
+          onChange={handleChangePassword}
+        ></input>
+      </label>
     </Dialog>
   );
 }

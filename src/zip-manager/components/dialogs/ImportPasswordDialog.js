@@ -19,24 +19,20 @@ function PasswordDialog({ data, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.IMPORT_PASSWORD_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.DIALOG_OK_BUTTON_LABEL}
       onClose={handleClose}
     >
-      <p>
-        <label>
-          {messages.IMPORT_PASSWORD_LABEL}
-          <input
-            type="password"
-            autoComplete="off"
-            value={password}
-            required
-            onChange={handleChangePassword}
-          ></input>
-        </label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">{messages.DIALOG_OK_BUTTON_LABEL}</button>
-      </div>
+      <label>
+        {messages.IMPORT_PASSWORD_LABEL}
+        <input
+          type="password"
+          autoComplete="off"
+          value={password}
+          required
+          onChange={handleChangePassword}
+        ></input>
+      </label>
     </Dialog>
   );
 }

@@ -1,6 +1,15 @@
 import { useEffect, useRef } from "react";
 
-function Dialog({ data, title, children, onOpen, onSubmit, onClose }) {
+function Dialog({
+  data,
+  title,
+  resetLabel,
+  submitLabel,
+  children,
+  onOpen,
+  onSubmit,
+  onClose
+}) {
   const dialogRef = useRef(null);
 
   function handleReset() {
@@ -19,7 +28,11 @@ function Dialog({ data, title, children, onOpen, onSubmit, onClose }) {
     <dialog ref={dialogRef} onClose={onClose}>
       <form method="dialog" onSubmit={onSubmit} onReset={handleReset}>
         <div>{title}</div>
-        {children}
+        <p>{children}</p>
+        <div className="button-bar">
+          {resetLabel && <button type="reset">{resetLabel}</button>}
+          <button type="submit">{submitLabel}</button>
+        </div>
       </form>
     </dialog>
   );

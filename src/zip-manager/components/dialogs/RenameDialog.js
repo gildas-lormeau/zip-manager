@@ -35,25 +35,21 @@ function RenameDialog({ data, onRename, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.RENAME_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.RENAME_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
     >
-      <p>
-        <label>
-          {messages.RENAME_FILENAME_LABEL}
-          <input
-            value={filename}
-            required
-            onChange={handleChangeFilename}
-            ref={filenameInputRef}
-          ></input>
-        </label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">{messages.RENAME_DIALOG_BUTTON_LABEL}</button>
-      </div>
+      <label>
+        {messages.RENAME_FILENAME_LABEL}
+        <input
+          value={filename}
+          required
+          onChange={handleChangeFilename}
+          ref={filenameInputRef}
+        ></input>
+      </label>
     </Dialog>
   );
 }

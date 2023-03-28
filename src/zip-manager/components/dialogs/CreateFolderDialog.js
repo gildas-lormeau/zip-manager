@@ -22,25 +22,19 @@ function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.CREATE_FOLDER_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.CREATE_FOLDER_DIALOG_BUTTON_LABEL}
       onClose={handleClose}
       onSubmit={handleSubmit}
     >
-      <p>
-        <label>
-          {messages.CREATE_FOLDER_NAME_LABEL}
-          <input
-            value={folderName}
-            required
-            onChange={handleChangeFilename}
-          ></input>
-        </label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">
-          {messages.CREATE_FOLDER_DIALOG_BUTTON_LABEL}
-        </button>
-      </div>
+      <label>
+        {messages.CREATE_FOLDER_NAME_LABEL}
+        <input
+          value={folderName}
+          required
+          onChange={handleChangeFilename}
+        ></input>
+      </label>
     </Dialog>
   );
 }

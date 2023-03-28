@@ -5,16 +5,12 @@ function ResetDialog({ data, onReset, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.RESET_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.RESET_DIALOG_BUTTON_LABEL}
       onClose={onClose}
       onSubmit={onReset}
     >
-      <p>
-        <label>{messages.RESET_MESSAGE}</label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">{messages.RESET_DIALOG_BUTTON_LABEL}</button>
-      </div>
+      <label>{messages.RESET_MESSAGE}</label>
     </Dialog>
   );
 }

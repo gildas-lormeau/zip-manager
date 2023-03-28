@@ -41,34 +41,30 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.EXPORT_ZIP_TITLE}
+      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      submitLabel={messages.EXPORT_ZIP_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
       onClose={handleClose}
       onSubmit={handleSubmit}
     >
-      <p>
-        <label>
-          {messages.EXPORT_ZIP_FILENAME_LABEL}
-          <input
-            value={filename}
-            required
-            onChange={handleChangeFilename}
-            ref={filenameInputRef}
-          ></input>
-        </label>
-        <label>
-          {messages.EXPORT_ZIP_PASSWORD_LABEL}
-          <input
-            type="password"
-            autoComplete="off"
-            value={password}
-            onChange={handleChangePassword}
-          ></input>
-        </label>
-      </p>
-      <div className="button-bar">
-        <button type="reset">{messages.DIALOG_CANCEL_BUTTON_LABEL}</button>
-        <button type="submit">{messages.EXPORT_ZIP_DIALOG_BUTTON_LABEL}</button>
-      </div>
+      <label>
+        {messages.EXPORT_ZIP_FILENAME_LABEL}
+        <input
+          value={filename}
+          required
+          onChange={handleChangeFilename}
+          ref={filenameInputRef}
+        ></input>
+      </label>
+      <label>
+        {messages.EXPORT_ZIP_PASSWORD_LABEL}
+        <input
+          type="password"
+          autoComplete="off"
+          value={password}
+          onChange={handleChangePassword}
+        ></input>
+      </label>
     </Dialog>
   );
 }
