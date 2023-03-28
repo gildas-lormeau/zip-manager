@@ -81,8 +81,6 @@ function ZipManager() {
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
   const downloaderElement = downloaderRef.current;
-  const addFilesButton = addFilesButtonRef.current;
-  const importZipButton = importZipButtonRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
   const appClassName = ("main-container " + colorScheme).trim();
 
