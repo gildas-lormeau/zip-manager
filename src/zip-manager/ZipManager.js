@@ -334,7 +334,7 @@ function ZipManager() {
   useEffect(updateAccentColor, [accentColor]);
 
   return (
-    <div className={"main-container " + colorScheme}>
+    <div className={("main-container " + colorScheme).trim()}>
       <main>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
