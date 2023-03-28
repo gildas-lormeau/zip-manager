@@ -172,9 +172,11 @@ function ResetClipboardDataButton({
   messages
 }) {
   return (
-    <button onClick={onResetClipboardData} disabled={disabled}>
-      {messages.RESET_CLIPBOARD_BUTTON_LABEL}
-    </button>
+    <Button
+      label={messages.RESET_CLIPBOARD_BUTTON_LABEL}
+      disabled={disabled}
+      onClick={onResetClipboardData}
+    />
   );
 }
 

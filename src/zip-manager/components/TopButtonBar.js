@@ -245,9 +245,11 @@ function ExportZipButton({
 
 function ResetButton({ disabled, onReset, messages }) {
   return (
-    <button onClick={onReset} disabled={disabled}>
-      {messages.RESET_BUTTON_LABEL}
-    </button>
+    <Button
+      label={messages.RESET_BUTTON_LABEL}
+      disabled={disabled}
+      onClick={onReset}
+    />
   );
 }
 
