@@ -121,6 +121,7 @@ function Entries({
     <div
       className="entries"
       aria-label="Folder entries"
+      role="navigation"
       ref={entriesRef}
       style={getEntriesStyle()}
       onDragOver={handleDragOver}
@@ -326,7 +327,6 @@ function EntryButton({ entry, selectedFolder, onEnter, messages }) {
   return (
     <span
       className="list-item-button"
-      role="button"
       onClick={handleClick}
       title={getEntryButtonTitle()}
     >

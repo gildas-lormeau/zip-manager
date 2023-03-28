@@ -8,7 +8,7 @@ function DownloadManager({
   messages
 }) {
   return (
-    <div className="downloads" aria-label="Downloads">
+    <div className="downloads" aria-label="Downloads" role="navigation">
       <ol>
         {downloads.map((download) => (
           <li key={download.id}>

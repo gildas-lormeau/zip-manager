@@ -7,6 +7,7 @@ function Button({
   title,
   label,
   disabled,
+  ariaLabel,
   clickedButtonName,
   onClick,
   onClickedButton
@@ -29,6 +30,7 @@ function Button({
       className={className}
       title={title}
       disabled={disabled}
+      aria-label={ariaLabel}
       onClick={onClick}
       onAnimationEnd={handleAnimationEnd}
     >
