@@ -99,7 +99,7 @@ function getCommonFeatures({
     setErrorMessageDialog(null);
   }
 
-  function resetFlashingButton() {
+  function resetClickedButtonName() {
     setClickedButtonName(null);
   }
 
@@ -108,7 +108,7 @@ function getCommonFeatures({
     updateSelectedFolder,
     openDisplayError,
     closeDisplayError,
-    resetFlashingButton
+    resetClickedButtonName
   };
 }
 

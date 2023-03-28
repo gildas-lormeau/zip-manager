@@ -89,7 +89,7 @@ function ZipManager() {
     updateSelectedFolder,
     openDisplayError,
     closeDisplayError,
-    resetFlashingButton
+    resetClickedButtonName
   } = getCommonFeatures({
     downloadId,
     selectedFolder,
@@ -333,7 +333,7 @@ function ZipManager() {
           onImportZipFile={importZipFile}
           onExportZipFile={openPromptExportZip}
           onReset={openConfirmReset}
-          onFlashingAnimationEnd={resetFlashingButton}
+          onClickedButton={resetClickedButtonName}
           addFilesButtonRef={addFilesButtonRef}
           importZipButtonRef={importZipButtonRef}
           util={util}
@@ -348,7 +348,7 @@ function ZipManager() {
           onNavigateBack={navigateBack}
           onNavigateForward={navigateForward}
           onGoIntoFolder={goIntoFolder}
-          onFlashingAnimationEnd={resetFlashingButton}
+          onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}
         />
@@ -388,7 +388,7 @@ function ZipManager() {
           onRemove={openConfirmDeleteEntry}
           onMove={resizeEntries}
           onStopMove={stopResizeEntries}
-          onFlashingAnimationEnd={resetFlashingButton}
+          onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}
         />

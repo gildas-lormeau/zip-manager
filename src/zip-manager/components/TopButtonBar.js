@@ -13,7 +13,7 @@ function TopButtonBar({
   onImportZipFile,
   onExportZipFile,
   onReset,
-  onFlashingAnimationEnd,
+  onClickedButton,
   addFilesButtonRef,
   importZipButtonRef,
   util,
@@ -43,7 +43,7 @@ function TopButtonBar({
         <CreateFolderButton
           clickedButtonName={clickedButtonName}
           onCreateFolder={onCreateFolder}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -51,7 +51,7 @@ function TopButtonBar({
           clickedButtonName={clickedButtonName}
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           util={util}
           constants={constants}
           messages={messages}
@@ -61,7 +61,7 @@ function TopButtonBar({
         <ImportZipButton
           clickedButtonName={clickedButtonName}
           onImportZipFile={onImportZipFile}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           importZipButtonRef={importZipButtonRef}
           util={util}
           constants={constants}
@@ -71,7 +71,7 @@ function TopButtonBar({
           disabled={disabledExportZipButton}
           clickedButtonName={clickedButtonName}
           onExportZipFile={onExportZipFile}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -90,7 +90,7 @@ function TopButtonBar({
 function CreateFolderButton({
   clickedButtonName,
   onCreateFolder,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -101,7 +101,7 @@ function CreateFolderButton({
       label={messages.CREATE_FOLDER_BUTTON_LABEL}
       clickedButtonName={clickedButtonName}
       onClick={onCreateFolder}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -110,7 +110,7 @@ function AddFilesButton({
   clickedButtonName,
   addFilesButtonRef,
   onAddFiles,
-  onFlashingAnimationEnd,
+  onClickedButton,
   util,
   constants,
   messages
@@ -149,7 +149,7 @@ function AddFilesButton({
         label={messages.ADD_FILES_BUTTON_LABEL}
         clickedButtonName={clickedButtonName}
         onClick={handleClick}
-        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        onClickedButton={onClickedButton}
         buttonRef={addFilesButtonRef}
       />
       <input
@@ -167,7 +167,7 @@ function ImportZipButton({
   clickedButtonName,
   importZipButtonRef,
   onImportZipFile,
-  onFlashingAnimationEnd,
+  onClickedButton,
   util,
   constants,
   messages
@@ -208,7 +208,7 @@ function ImportZipButton({
         label={messages.IMPORT_ZIP_BUTTON_LABEL}
         clickedButtonName={clickedButtonName}
         onClick={handleClick}
-        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        onClickedButton={onClickedButton}
         buttonRef={importZipButtonRef}
       />
       <input
@@ -226,7 +226,7 @@ function ExportZipButton({
   disabled,
   clickedButtonName,
   onExportZipFile,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -238,7 +238,7 @@ function ExportZipButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onExportZipFile}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }

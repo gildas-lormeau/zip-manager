@@ -20,7 +20,7 @@ function BottomButtonBar({
   onRemove,
   onMove,
   onStopMove,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -55,7 +55,7 @@ function BottomButtonBar({
           disabled={disabledCopyButton}
           clickedButtonName={clickedButtonName}
           onCopy={onCopy}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -63,7 +63,7 @@ function BottomButtonBar({
           disabled={disabledCutButton}
           clickedButtonName={clickedButtonName}
           onCut={onCut}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -71,7 +71,7 @@ function BottomButtonBar({
           disabled={disabledPasteButton}
           clickedButtonName={clickedButtonName}
           onPaste={onPaste}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -86,7 +86,7 @@ function BottomButtonBar({
           disabled={disabledRenameButton}
           clickedButtonName={clickedButtonName}
           onRename={onRename}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -94,7 +94,7 @@ function BottomButtonBar({
           disabled={disabledDeleteButton}
           clickedButtonName={clickedButtonName}
           onRemove={onRemove}
-          onFlashingAnimationEnd={onFlashingAnimationEnd}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
@@ -107,7 +107,7 @@ function CopyEntryButton({
   disabled,
   clickedButtonName,
   onCopy,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -119,7 +119,7 @@ function CopyEntryButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onCopy}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -128,7 +128,7 @@ function CutEntryButton({
   disabled,
   clickedButtonName,
   onCut,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -140,7 +140,7 @@ function CutEntryButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onCut}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -149,7 +149,7 @@ function PasteEntryButton({
   disabled,
   clickedButtonName,
   onPaste,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -161,7 +161,7 @@ function PasteEntryButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onPaste}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -184,7 +184,7 @@ function RenameEntryButton({
   disabled,
   clickedButtonName,
   onRename,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -196,7 +196,7 @@ function RenameEntryButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onRename}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -205,7 +205,7 @@ function DeleteEntryButton({
   disabled,
   clickedButtonName,
   onRemove,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -217,7 +217,7 @@ function DeleteEntryButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onRemove}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }

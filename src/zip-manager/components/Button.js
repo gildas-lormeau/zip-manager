@@ -9,14 +9,14 @@ function Button({
   disabled,
   clickedButtonName,
   onClick,
-  onFlashingAnimationEnd,
+  onClickedButton,
   buttonRef
 }) {
   const [className, setClassName] = useState(null);
 
   function handleAnimationEnd() {
     setClassName(null);
-    onFlashingAnimationEnd();
+    onClickedButton();
     onClick();
   }
 

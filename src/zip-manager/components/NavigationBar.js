@@ -10,7 +10,7 @@ function NavigationBar({
   onNavigateBack,
   onNavigateForward,
   onGoIntoFolder,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -22,7 +22,7 @@ function NavigationBar({
         clickedButtonName={clickedButtonName}
         onNavigateBack={onNavigateBack}
         onNavigateForward={onNavigateForward}
-        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        onClickedButton={onClickedButton}
         constants={constants}
         messages={messages}
       />
@@ -42,7 +42,7 @@ function HistoryButtons({
   clickedButtonName,
   onNavigateBack,
   onNavigateForward,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -52,7 +52,7 @@ function HistoryButtons({
         disabled={disabledBackButton}
         clickedButtonName={clickedButtonName}
         onNavigateBack={onNavigateBack}
-        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        onClickedButton={onClickedButton}
         constants={constants}
         messages={messages}
       />
@@ -60,7 +60,7 @@ function HistoryButtons({
         disabled={disabledForwardButton}
         clickedButtonName={clickedButtonName}
         onNavigateForward={onNavigateForward}
-        onFlashingAnimationEnd={onFlashingAnimationEnd}
+        onClickedButton={onClickedButton}
         constants={constants}
         messages={messages}
       />
@@ -72,7 +72,7 @@ function BackButton({
   disabled,
   clickedButtonName,
   onNavigateBack,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -84,7 +84,7 @@ function BackButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onNavigateBack}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
@@ -93,7 +93,7 @@ function ForwardButton({
   disabled,
   clickedButtonName,
   onNavigateForward,
-  onFlashingAnimationEnd,
+  onClickedButton,
   constants,
   messages
 }) {
@@ -105,7 +105,7 @@ function ForwardButton({
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onNavigateForward}
-      onFlashingAnimationEnd={onFlashingAnimationEnd}
+      onClickedButton={onClickedButton}
     />
   );
 }
