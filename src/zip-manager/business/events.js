@@ -12,11 +12,6 @@ function getEventHandlers({
   disabledForward,
   disabledExportZip,
   disabledEnter,
-  cut,
-  copy,
-  openPromptRename,
-  paste,
-  openConfirmDeleteEntry,
   enter,
   highlightNext,
   highlightPrevious,
@@ -32,13 +27,7 @@ function getEventHandlers({
   toggleNextPage,
   toggleFirst,
   toggleLast,
-  openPromptCreateFolder,
-  openPromptExportZip,
-  navigateBack,
-  navigateForward,
   goIntoFolder,
-  addFilesButton,
-  importZipButton,
   setClickedButtonName,
   util,
   constants
@@ -68,8 +57,6 @@ function getEventHandlers({
         selectedFolder,
         highlightedIds,
         setClickedButtonName,
-        navigateBack,
-        navigateForward,
         goIntoFolder,
         util,
         constants
@@ -80,7 +67,6 @@ function getEventHandlers({
         selectedFolder,
         highlightedIds,
         setClickedButtonName,
-        openConfirmDeleteEntry,
         enter,
         util,
         constants
@@ -97,19 +83,11 @@ function getEventHandlers({
         disabledRename,
         disabledPaste,
         setClickedButtonName,
-        cut,
-        copy,
-        openPromptRename,
-        paste,
         util,
         constants
       });
       onSelectedFolderKeyDown(event, {
         disabledExportZip,
-        openPromptCreateFolder,
-        openPromptExportZip,
-        addFilesButton,
-        importZipButton,
         setClickedButtonName,
         util,
         constants
@@ -215,8 +193,6 @@ function onFoldersKeyUp(
     selectedFolder,
     highlightedIds,
     setClickedButtonName,
-    navigateBack,
-    navigateForward,
     goIntoFolder,
     util,
     constants
@@ -262,7 +238,6 @@ function onHighlightedEntriesKeyUp(
     selectedFolder,
     highlightedIds,
     setClickedButtonName,
-    openConfirmDeleteEntry,
     enter,
     util,
     constants
@@ -321,10 +296,6 @@ function onHighlightedEntriesKeyDown(
     disabledRename,
     disabledPaste,
     setClickedButtonName,
-    cut,
-    copy,
-    openPromptRename,
-    paste,
     util,
     constants
   }
@@ -362,10 +333,6 @@ function onHighlightedEntriesKeyDown(
 function onSelectedFolderKeyDown(
   event,
   {
-    openPromptCreateFolder,
-    openPromptExportZip,
-    addFilesButton,
-    importZipButton,
     disabledExportZip,
     setClickedButtonName,
     util,
@@ -382,8 +349,6 @@ function onSelectedFolderKeyDown(
     IMPORT_ZIP_BUTTON_NAME,
     EXPORT_ZIP_BUTTON_NAME
   } = constants;
-  const openPromptAddFiles = () => util.dispatchClick(addFilesButton);
-  const openPromptImportZip = () => util.dispatchClick(importZipButton);
   if (modifierKeyPressed(event, util)) {
     if (event.key === CREATE_FOLDER_KEY) {
       setClickedButtonName(CREATE_FOLDER_BUTTON_NAME);
