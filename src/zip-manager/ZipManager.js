@@ -73,8 +73,6 @@ function ZipManager() {
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
-  const addFilesButtonRef = useRef(null);
-  const importZipButtonRef = useRef(null);
 
   const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
@@ -333,8 +331,6 @@ function ZipManager() {
           onExportZipFile={openPromptExportZip}
           onReset={openConfirmReset}
           onClickedButton={resetClickedButtonName}
-          addFilesButtonRef={addFilesButtonRef}
-          importZipButtonRef={importZipButtonRef}
           util={util}
           constants={constants}
           messages={messages}

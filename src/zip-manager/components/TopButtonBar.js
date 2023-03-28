@@ -14,8 +14,6 @@ function TopButtonBar({
   onExportZipFile,
   onReset,
   onClickedButton,
-  addFilesButtonRef,
-  importZipButtonRef,
   util,
   constants,
   messages
@@ -50,7 +48,6 @@ function TopButtonBar({
         <AddFilesButton
           clickedButtonName={clickedButtonName}
           onAddFiles={onAddFiles}
-          addFilesButtonRef={addFilesButtonRef}
           onClickedButton={onClickedButton}
           util={util}
           constants={constants}
@@ -62,7 +59,6 @@ function TopButtonBar({
           clickedButtonName={clickedButtonName}
           onImportZipFile={onImportZipFile}
           onClickedButton={onClickedButton}
-          importZipButtonRef={importZipButtonRef}
           util={util}
           constants={constants}
           messages={messages}
@@ -108,7 +104,6 @@ function CreateFolderButton({
 
 function AddFilesButton({
   clickedButtonName,
-  addFilesButtonRef,
   onAddFiles,
   onClickedButton,
   util,
@@ -150,7 +145,6 @@ function AddFilesButton({
         clickedButtonName={clickedButtonName}
         onClick={handleClick}
         onClickedButton={onClickedButton}
-        buttonRef={addFilesButtonRef}
       />
       <input
         onChange={handleChange}
@@ -165,7 +159,6 @@ function AddFilesButton({
 
 function ImportZipButton({
   clickedButtonName,
-  importZipButtonRef,
   onImportZipFile,
   onClickedButton,
   util,
@@ -209,7 +202,6 @@ function ImportZipButton({
         clickedButtonName={clickedButtonName}
         onClick={handleClick}
         onClickedButton={onClickedButton}
-        buttonRef={importZipButtonRef}
       />
       <input
         onChange={handleChange}

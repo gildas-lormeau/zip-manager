@@ -9,8 +9,7 @@ function Button({
   disabled,
   clickedButtonName,
   onClick,
-  onClickedButton,
-  buttonRef
+  onClickedButton
 }) {
   const [className, setClassName] = useState(null);
 
@@ -32,7 +31,6 @@ function Button({
       disabled={disabled}
       onClick={onClick}
       onAnimationEnd={handleAnimationEnd}
-      ref={buttonRef}
     >
       {label}
     </button>
