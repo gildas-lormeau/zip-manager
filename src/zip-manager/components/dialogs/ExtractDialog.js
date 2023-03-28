@@ -54,7 +54,7 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
           required
           onChange={handleChangeFilename}
           ref={filenameInputRef}
-        ></input>
+        />
       </label>
       <label
         style={{
@@ -68,7 +68,7 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
           value={password}
           required={!data?.passwordDisabled}
           onChange={handleChangePassword}
-        ></input>
+        />
       </label>
     </Dialog>
   );

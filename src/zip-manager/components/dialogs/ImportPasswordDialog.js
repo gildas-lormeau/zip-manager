@@ -31,7 +31,7 @@ function PasswordDialog({ data, onClose, messages }) {
           value={password}
           required
           onChange={handleChangePassword}
-        ></input>
+        />
       </label>
     </Dialog>
   );

@@ -48,7 +48,7 @@ function RenameDialog({ data, onRename, onClose, messages }) {
           required
           onChange={handleChangeFilename}
           ref={filenameInputRef}
-        ></input>
+        />
       </label>
     </Dialog>
   );

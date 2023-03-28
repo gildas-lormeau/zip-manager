@@ -212,7 +212,7 @@ function Entry({
           type="checkbox"
           checked={highlighted}
           onChange={() => onToggle(entry)}
-        ></input>
+        />
       )}
       <EntryName
         entry={entry}

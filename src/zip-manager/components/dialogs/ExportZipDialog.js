@@ -54,7 +54,7 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
           required
           onChange={handleChangeFilename}
           ref={filenameInputRef}
-        ></input>
+        />
       </label>
       <label>
         {messages.EXPORT_ZIP_PASSWORD_LABEL}
@@ -63,7 +63,7 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
           autoComplete="off"
           value={password}
           onChange={handleChangePassword}
-        ></input>
+        />
       </label>
     </Dialog>
   );

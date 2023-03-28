@@ -53,7 +53,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
         onChange={handleChange}
         ref={colorInputRef}
         tabIndex={-1}
-      ></input>
+      />
     </>
   );
 }
