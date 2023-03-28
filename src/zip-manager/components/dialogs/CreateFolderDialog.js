@@ -29,11 +29,7 @@ function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
     >
       <label>
         {messages.CREATE_FOLDER_NAME_LABEL}
-        <input
-          value={folderName}
-          required
-          onChange={handleChangeFilename}
-        />
+        <input value={folderName} required onChange={handleChangeFilename} />
       </label>
     </Dialog>
   );
