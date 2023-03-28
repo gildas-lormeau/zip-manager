@@ -52,8 +52,7 @@ function ZipManager() {
   const [entriesHeight, setEntriesHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
-  const [previousHighlightedEntry, setPreviousHighlightedEntry] =
-    useState(null);
+  const [previousHighlight, setPreviousHighlight] = useState(null);
   const [toggleNavigationDirection, setToggleNavigationDirection] = useState(0);
   const [downloads, setDownloads] = useState([]);
   const [downloadId, setDownloadId] = useState(0);
@@ -126,12 +125,12 @@ function ZipManager() {
     toggleLast
   } = getEntriesFeatures({
     entries,
-    previousHighlightedEntry,
+    previousHighlight,
     highlightedIds,
     toggleNavigationDirection,
     getEntriesHeight,
     setHighlightedIds,
-    setPreviousHighlightedEntry,
+    setPreviousHighlight,
     setToggleNavigationDirection
   });
   const { goIntoFolder, navigateBack, navigateForward } = getFoldersFeatures({
@@ -196,7 +195,7 @@ function ZipManager() {
     setHistoryIndex,
     setClipboardData,
     setHighlightedIds,
-    setPreviousHighlightedEntry,
+    setPreviousHighlight,
     setExtractDialog,
     setRenameDialog,
     setDeleteEntryDialog,
@@ -307,7 +306,7 @@ function ZipManager() {
     accentColor,
     setAccentColor,
     setColorScheme,
-    setPreviousHighlightedEntry,
+    setPreviousHighlight,
     setToggleNavigationDirection,
     setSelectedFolder,
     setHighlightedIds,

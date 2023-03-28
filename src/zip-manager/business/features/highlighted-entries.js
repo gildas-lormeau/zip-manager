@@ -10,7 +10,7 @@ function getHighlightedEntriesFeatures({
   setHistoryIndex,
   setClipboardData,
   setHighlightedIds,
-  setPreviousHighlightedEntry,
+  setPreviousHighlight,
   setExtractDialog,
   setRenameDialog,
   setDeleteEntryDialog,
@@ -112,10 +112,10 @@ function getHighlightedEntriesFeatures({
           indexNextEntry--;
         }
       }
-      setPreviousHighlightedEntry(entries[indexNextEntry]);
+      setPreviousHighlight(entries[indexNextEntry]);
       setHighlightedIds([entries[indexNextEntry].id]);
     } else {
-      setPreviousHighlightedEntry(null);
+      setPreviousHighlight(null);
       setHighlightedIds([]);
     }
     updateHistoryData();

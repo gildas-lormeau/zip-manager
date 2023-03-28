@@ -3,7 +3,7 @@ function getEffects({
   accentColor,
   setAccentColor,
   setColorScheme,
-  setPreviousHighlightedEntry,
+  setPreviousHighlight,
   setToggleNavigationDirection,
   setSelectedFolder,
   setHighlightedIds,
@@ -20,7 +20,7 @@ function getEffects({
     const { root } = zipFilesystem;
     setSelectedFolder(root);
     setHighlightedIds([]);
-    setPreviousHighlightedEntry(null);
+    setPreviousHighlight(null);
     setToggleNavigationDirection(0);
     setClipboardData(null);
     setHistory([root]);
