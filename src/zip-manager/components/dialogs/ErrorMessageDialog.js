@@ -8,7 +8,7 @@ function ErrorMessageDialog({ data, onClose, messages }) {
       submitLabel={messages.DIALOG_OK_BUTTON_LABEL}
       onClose={onClose}
     >
-      <label>{data?.message}</label>
+      {data?.message}
     </Dialog>
   );
 }

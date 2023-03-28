@@ -10,7 +10,7 @@ function DeleteEntryDialog({ data, onDeleteEntry, onClose, messages }) {
       onClose={onClose}
       onSubmit={onDeleteEntry}
     >
-      <label>{messages.DELETE_ENTRY_MESSAGE}</label>
+      {messages.DELETE_ENTRY_MESSAGE}
     </Dialog>
   );
 }

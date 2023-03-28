@@ -10,7 +10,7 @@ function ResetDialog({ data, onReset, onClose, messages }) {
       onClose={onClose}
       onSubmit={onReset}
     >
-      <label>{messages.RESET_MESSAGE}</label>
+      {messages.RESET_MESSAGE}
     </Dialog>
   );
 }
