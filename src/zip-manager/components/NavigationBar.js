@@ -6,7 +6,7 @@ function NavigationBar({
   selectedFolder,
   disabledBackButton,
   disabledForwardButton,
-  flashingButton,
+  clickedButtonName,
   onNavigateBack,
   onNavigateForward,
   onGoIntoFolder,
@@ -19,7 +19,7 @@ function NavigationBar({
       <HistoryButtons
         disabledBackButton={disabledBackButton}
         disabledForwardButton={disabledForwardButton}
-        flashingButton={flashingButton}
+        clickedButtonName={clickedButtonName}
         onNavigateBack={onNavigateBack}
         onNavigateForward={onNavigateForward}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
@@ -39,7 +39,7 @@ function NavigationBar({
 function HistoryButtons({
   disabledBackButton,
   disabledForwardButton,
-  flashingButton,
+  clickedButtonName,
   onNavigateBack,
   onNavigateForward,
   onFlashingAnimationEnd,
@@ -50,7 +50,7 @@ function HistoryButtons({
     <span className="history-buttons" aria-label="History commands">
       <BackButton
         disabled={disabledBackButton}
-        flashingButton={flashingButton}
+        clickedButtonName={clickedButtonName}
         onNavigateBack={onNavigateBack}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
         constants={constants}
@@ -58,7 +58,7 @@ function HistoryButtons({
       />
       <ForwardButton
         disabled={disabledForwardButton}
-        flashingButton={flashingButton}
+        clickedButtonName={clickedButtonName}
         onNavigateForward={onNavigateForward}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
         constants={constants}
@@ -70,7 +70,7 @@ function HistoryButtons({
 
 function BackButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onNavigateBack,
   onFlashingAnimationEnd,
   constants,
@@ -82,7 +82,7 @@ function BackButton({
       title={messages.BACK_BUTTON_TOOLTIP}
       label={messages.BACK_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onNavigateBack}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -91,7 +91,7 @@ function BackButton({
 
 function ForwardButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onNavigateForward,
   onFlashingAnimationEnd,
   constants,
@@ -103,7 +103,7 @@ function ForwardButton({
       title={messages.FORWARD_BUTTON_TOOLTIP}
       label={messages.FORWARD_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onNavigateForward}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />

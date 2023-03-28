@@ -6,7 +6,7 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialog,
   setImportPasswordDialog,
-  setFlashingButton,
+  setClickedButtonName,
   downloaderElement,
   zipService,
   util
@@ -100,7 +100,7 @@ function getCommonFeatures({
   }
 
   function resetFlashingButton() {
-    setFlashingButton(null);
+    setClickedButtonName(null);
   }
 
   return {

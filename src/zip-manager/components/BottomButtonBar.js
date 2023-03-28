@@ -11,7 +11,7 @@ function BottomButtonBar({
   disabledResetClipboardDataButton,
   disabledRenameButton,
   disabledDeleteButton,
-  flashingButton,
+  clickedButtonName,
   onCopy,
   onCut,
   onPaste,
@@ -53,7 +53,7 @@ function BottomButtonBar({
       <div className="button-group">
         <CopyEntryButton
           disabled={disabledCopyButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onCopy={onCopy}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -61,7 +61,7 @@ function BottomButtonBar({
         />
         <CutEntryButton
           disabled={disabledCutButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onCut={onCut}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -69,7 +69,7 @@ function BottomButtonBar({
         />
         <PasteEntryButton
           disabled={disabledPasteButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onPaste={onPaste}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -84,7 +84,7 @@ function BottomButtonBar({
       <div className="button-group">
         <RenameEntryButton
           disabled={disabledRenameButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onRename={onRename}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -92,7 +92,7 @@ function BottomButtonBar({
         />
         <DeleteEntryButton
           disabled={disabledDeleteButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onRemove={onRemove}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -105,7 +105,7 @@ function BottomButtonBar({
 
 function CopyEntryButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onCopy,
   onFlashingAnimationEnd,
   constants,
@@ -117,7 +117,7 @@ function CopyEntryButton({
       title={messages.COPY_BUTTON_TOOLTIP}
       label={messages.COPY_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onCopy}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -126,7 +126,7 @@ function CopyEntryButton({
 
 function CutEntryButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onCut,
   onFlashingAnimationEnd,
   constants,
@@ -138,7 +138,7 @@ function CutEntryButton({
       title={messages.CUT_BUTTON_TOOLTIP}
       label={messages.CUT_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onCut}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -147,7 +147,7 @@ function CutEntryButton({
 
 function PasteEntryButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onPaste,
   onFlashingAnimationEnd,
   constants,
@@ -159,7 +159,7 @@ function PasteEntryButton({
       title={messages.PASTE_BUTTON_TOOLTIP}
       label={messages.PASTE_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onPaste}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -182,7 +182,7 @@ function ResetClipboardDataButton({
 
 function RenameEntryButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onRename,
   onFlashingAnimationEnd,
   constants,
@@ -194,7 +194,7 @@ function RenameEntryButton({
       title={messages.RENAME_BUTTON_TOOLTIP}
       label={messages.RENAME_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onRename}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -203,7 +203,7 @@ function RenameEntryButton({
 
 function DeleteEntryButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onRemove,
   onFlashingAnimationEnd,
   constants,
@@ -215,7 +215,7 @@ function DeleteEntryButton({
       title={messages.DELETE_BUTTON_TOOLTIP}
       label={messages.DELETE_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onRemove}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />

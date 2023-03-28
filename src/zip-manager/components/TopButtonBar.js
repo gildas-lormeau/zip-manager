@@ -7,7 +7,7 @@ import Button from "./Button.js";
 function TopButtonBar({
   disabledExportZipButton,
   disabledResetButton,
-  flashingButton,
+  clickedButtonName,
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
@@ -41,14 +41,14 @@ function TopButtonBar({
     >
       <div className="button-group">
         <CreateFolderButton
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onCreateFolder={onCreateFolder}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
           messages={messages}
         />
         <AddFilesButton
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onAddFiles={onAddFiles}
           addFilesButtonRef={addFilesButtonRef}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
@@ -59,7 +59,7 @@ function TopButtonBar({
       </div>
       <div className="button-group">
         <ImportZipButton
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onImportZipFile={onImportZipFile}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           importZipButtonRef={importZipButtonRef}
@@ -69,7 +69,7 @@ function TopButtonBar({
         />
         <ExportZipButton
           disabled={disabledExportZipButton}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onExportZipFile={onExportZipFile}
           onFlashingAnimationEnd={onFlashingAnimationEnd}
           constants={constants}
@@ -88,7 +88,7 @@ function TopButtonBar({
 }
 
 function CreateFolderButton({
-  flashingButton,
+  clickedButtonName,
   onCreateFolder,
   onFlashingAnimationEnd,
   constants,
@@ -99,7 +99,7 @@ function CreateFolderButton({
       name={constants.CREATE_FOLDER_BUTTON_NAME}
       title={messages.CREATE_FOLDER_BUTTON_TOOLTIP}
       label={messages.CREATE_FOLDER_BUTTON_LABEL}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onCreateFolder}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />
@@ -107,7 +107,7 @@ function CreateFolderButton({
 }
 
 function AddFilesButton({
-  flashingButton,
+  clickedButtonName,
   addFilesButtonRef,
   onAddFiles,
   onFlashingAnimationEnd,
@@ -147,7 +147,7 @@ function AddFilesButton({
         name={constants.ADD_FILES_BUTTON_NAME}
         title={messages.ADD_FILES_BUTTON_TOOLTIP}
         label={messages.ADD_FILES_BUTTON_LABEL}
-        flashingButton={flashingButton}
+        clickedButtonName={clickedButtonName}
         onClick={handleClick}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
         buttonRef={addFilesButtonRef}
@@ -164,7 +164,7 @@ function AddFilesButton({
 }
 
 function ImportZipButton({
-  flashingButton,
+  clickedButtonName,
   importZipButtonRef,
   onImportZipFile,
   onFlashingAnimationEnd,
@@ -206,7 +206,7 @@ function ImportZipButton({
         name={constants.IMPORT_ZIP_BUTTON_NAME}
         title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
         label={messages.IMPORT_ZIP_BUTTON_LABEL}
-        flashingButton={flashingButton}
+        clickedButtonName={clickedButtonName}
         onClick={handleClick}
         onFlashingAnimationEnd={onFlashingAnimationEnd}
         buttonRef={importZipButtonRef}
@@ -224,7 +224,7 @@ function ImportZipButton({
 
 function ExportZipButton({
   disabled,
-  flashingButton,
+  clickedButtonName,
   onExportZipFile,
   onFlashingAnimationEnd,
   constants,
@@ -236,7 +236,7 @@ function ExportZipButton({
       title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
       label={messages.EXPORT_ZIP_BUTTON_LABEL}
       disabled={disabled}
-      flashingButton={flashingButton}
+      clickedButtonName={clickedButtonName}
       onClick={onExportZipFile}
       onFlashingAnimationEnd={onFlashingAnimationEnd}
     />

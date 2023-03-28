@@ -7,7 +7,7 @@ function Button({
   title,
   label,
   disabled,
-  flashingButton,
+  clickedButtonName,
   onClick,
   onFlashingAnimationEnd,
   buttonRef
@@ -17,16 +17,14 @@ function Button({
   function handleAnimationEnd() {
     setClassName(null);
     onFlashingAnimationEnd();
-    if (flashingButton.callback) {
-      flashingButton.callback();
-    }
+    onClick();
   }
 
   useEffect(() => {
-    if (flashingButton && flashingButton.name === name) {
+    if (clickedButtonName && clickedButtonName === name) {
       setClassName("flashing-button");
     }
-  }, [flashingButton, name]);
+  }, [clickedButtonName, name]);
   return (
     <button
       className={className}

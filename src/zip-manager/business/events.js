@@ -39,7 +39,7 @@ function getEventHandlers({
   goIntoFolder,
   addFilesButton,
   importZipButton,
-  setFlashingButton,
+  setClickedButtonName,
   util,
   constants
 }) {
@@ -67,7 +67,7 @@ function getEventHandlers({
         disabledForward,
         selectedFolder,
         highlightedIds,
-        setFlashingButton,
+        setClickedButtonName,
         navigateBack,
         navigateForward,
         goIntoFolder,
@@ -79,7 +79,7 @@ function getEventHandlers({
         disabledEnter,
         selectedFolder,
         highlightedIds,
-        setFlashingButton,
+        setClickedButtonName,
         openConfirmDeleteEntry,
         enter,
         util,
@@ -96,7 +96,7 @@ function getEventHandlers({
         disabledCopy,
         disabledRename,
         disabledPaste,
-        setFlashingButton,
+        setClickedButtonName,
         cut,
         copy,
         openPromptRename,
@@ -110,7 +110,7 @@ function getEventHandlers({
         openPromptExportZip,
         addFilesButton,
         importZipButton,
-        setFlashingButton,
+        setClickedButtonName,
         util,
         constants
       });
@@ -214,7 +214,7 @@ function onFoldersKeyUp(
     disabledForward,
     selectedFolder,
     highlightedIds,
-    setFlashingButton,
+    setClickedButtonName,
     navigateBack,
     navigateForward,
     goIntoFolder,
@@ -232,16 +232,10 @@ function onFoldersKeyUp(
   } = constants;
   if (event.altKey) {
     if (event.key === BACK_KEY && !disabledBack) {
-      setFlashingButton({
-        name: BACK_BUTTON_NAME,
-        callback: navigateBack
-      });
+      setClickedButtonName(BACK_BUTTON_NAME);
     }
     if (event.key === FORWARD_KEY && !disabledForward) {
-      setFlashingButton({
-        name: FORWARD_BUTTON_NAME,
-        callback: navigateForward
-      });
+      setClickedButtonName(FORWARD_BUTTON_NAME);
     }
   }
   if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
@@ -267,7 +261,7 @@ function onHighlightedEntriesKeyUp(
     disabledEnter,
     selectedFolder,
     highlightedIds,
-    setFlashingButton,
+    setClickedButtonName,
     openConfirmDeleteEntry,
     enter,
     util,
@@ -277,10 +271,7 @@ function onHighlightedEntriesKeyUp(
   const { ACTION_KEY, DELETE_KEYS, DELETE_BUTTON_NAME } = constants;
   if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
     if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
-      setFlashingButton({
-        name: DELETE_BUTTON_NAME,
-        callback: openConfirmDeleteEntry
-      });
+      setClickedButtonName(DELETE_BUTTON_NAME);
     }
     if (event.key === ACTION_KEY && !disabledEnter) {
       enter(
@@ -329,7 +320,7 @@ function onHighlightedEntriesKeyDown(
     disabledCopy,
     disabledRename,
     disabledPaste,
-    setFlashingButton,
+    setClickedButtonName,
     cut,
     copy,
     openPromptRename,
@@ -350,31 +341,19 @@ function onHighlightedEntriesKeyDown(
   } = constants;
   if (modifierKeyPressed(event, util)) {
     if (event.key === COPY_KEY && !disabledCopy) {
-      setFlashingButton({
-        name: COPY_BUTTON_NAME,
-        callback: copy
-      });
+      setClickedButtonName(COPY_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === CUT_KEY && !disabledCut) {
-      setFlashingButton({
-        name: CUT_BUTTON_NAME,
-        callback: cut
-      });
+      setClickedButtonName(CUT_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === PASTE_KEY && !disabledPaste) {
-      setFlashingButton({
-        name: PASTE_BUTTON_NAME,
-        callback: paste
-      });
+      setClickedButtonName(PASTE_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === RENAME_KEY && !disabledRename) {
-      setFlashingButton({
-        name: RENAME_BUTTON_NAME,
-        callback: openPromptRename
-      });
+      setClickedButtonName(RENAME_BUTTON_NAME);
       event.preventDefault();
     }
   }
@@ -388,7 +367,7 @@ function onSelectedFolderKeyDown(
     addFilesButton,
     importZipButton,
     disabledExportZip,
-    setFlashingButton,
+    setClickedButtonName,
     util,
     constants
   }
@@ -407,31 +386,19 @@ function onSelectedFolderKeyDown(
   const openPromptImportZip = () => util.dispatchClick(importZipButton);
   if (modifierKeyPressed(event, util)) {
     if (event.key === CREATE_FOLDER_KEY) {
-      setFlashingButton({
-        name: CREATE_FOLDER_BUTTON_NAME,
-        callback: openPromptCreateFolder
-      });
+      setClickedButtonName(CREATE_FOLDER_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === ADD_FILES_KEY) {
-      setFlashingButton({
-        name: ADD_FILES_BUTTON_NAME,
-        callback: openPromptAddFiles
-      });
+      setClickedButtonName(ADD_FILES_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === IMPORT_ZIP_KEY) {
-      setFlashingButton({
-        name: IMPORT_ZIP_BUTTON_NAME,
-        callback: openPromptImportZip
-      });
+      setClickedButtonName(IMPORT_ZIP_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
-      setFlashingButton({
-        name: EXPORT_ZIP_BUTTON_NAME,
-        callback: openPromptExportZip
-      });
+      setClickedButtonName(EXPORT_ZIP_BUTTON_NAME);
       event.preventDefault();
     }
   }

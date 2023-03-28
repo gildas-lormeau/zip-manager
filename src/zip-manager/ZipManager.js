@@ -69,7 +69,7 @@ function ZipManager() {
   const [resetDialog, setResetDialog] = useState(null);
   const [errorMessageDialog, setErrorMessageDialog] = useState(null);
   const [importPasswordDialog, setImportPasswordDialog] = useState(null);
-  const [flashingButton, setFlashingButton] = useState(null);
+  const [clickedButtonName, setClickedButtonName] = useState(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -100,7 +100,7 @@ function ZipManager() {
     setEntries,
     setErrorMessageDialog,
     setImportPasswordDialog,
-    setFlashingButton,
+    setClickedButtonName,
     downloaderElement,
     zipService,
     util
@@ -292,7 +292,7 @@ function ZipManager() {
     goIntoFolder,
     addFilesButton,
     importZipButton,
-    setFlashingButton,
+    setClickedButtonName,
     util,
     constants
   });
@@ -340,7 +340,7 @@ function ZipManager() {
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledResetButton={disabledReset}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onCreateFolder={openPromptCreateFolder}
           onAddFiles={addFiles}
           onImportZipFile={importZipFile}
@@ -357,7 +357,7 @@ function ZipManager() {
           selectedFolder={selectedFolder}
           disabledBackButton={disabledBack}
           disabledForwardButton={disabledForward}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onNavigateBack={navigateBack}
           onNavigateForward={navigateForward}
           onGoIntoFolder={goIntoFolder}
@@ -392,7 +392,7 @@ function ZipManager() {
           disabledResetClipboardDataButton={disabledResetClipboardData}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
-          flashingButton={flashingButton}
+          clickedButtonName={clickedButtonName}
           onCopy={copy}
           onCut={cut}
           onPaste={paste}
