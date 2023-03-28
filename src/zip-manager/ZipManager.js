@@ -44,9 +44,8 @@ const {
 } = features;
 
 function ZipManager() {
-  const [zipFilesystem, setZipFilesystem] = useState(
-    zipService.createZipFileSystem()
-  );
+  const apiFilesystem = zipService.createZipFileSystem();
+  const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
   const [entriesHeight, setEntriesHeight] = useState(0);
