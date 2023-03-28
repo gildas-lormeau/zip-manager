@@ -84,6 +84,7 @@ function ZipManager() {
   const addFilesButton = addFilesButtonRef.current;
   const importZipButton = importZipButtonRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
+  const appClassName = ("main-container " + colorScheme).trim();
 
   const {
     downloadFile,
@@ -334,7 +335,7 @@ function ZipManager() {
   useEffect(updateAccentColor, [accentColor]);
 
   return (
-    <div className={("main-container " + colorScheme).trim()}>
+    <div className={appClassName}>
       <main>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
