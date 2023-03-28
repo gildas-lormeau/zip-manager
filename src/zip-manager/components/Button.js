@@ -12,7 +12,7 @@ function Button({
   onFlashingAnimationEnd,
   buttonRef
 }) {
-  const [className, setClassName] = useState("");
+  const [className, setClassName] = useState(null);
 
   function handleAnimationEnd() {
     setClassName(null);
