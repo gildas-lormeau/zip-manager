@@ -7,10 +7,10 @@ function Button({
   title,
   label,
   disabled,
-  buttonRef,
   flashingButton,
   onClick,
-  onFlashingAnimationEnd
+  onFlashingAnimationEnd,
+  buttonRef
 }) {
   const [className, setClassName] = useState("");
 
@@ -30,11 +30,11 @@ function Button({
   return (
     <button
       className={className}
+      title={title}
+      disabled={disabled}
       onClick={onClick}
       onAnimationEnd={handleAnimationEnd}
       ref={buttonRef}
-      title={title}
-      disabled={disabled}
     >
       {label}
     </button>
