@@ -200,6 +200,11 @@ a:visited {
   outline: 1px solid var(--button-color);
 }
 
+::selection {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
 @media (display-mode: standalone) {
   body {
     max-inline-size: none;
