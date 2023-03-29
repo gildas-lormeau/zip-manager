@@ -237,14 +237,23 @@ function ZipManager() {
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledEnter
+    disabledEnter,
+    dialogDisplayed
   } = getUIState({
     entries,
     highlightedIds,
     selectedFolder,
     clipboardData,
     historyIndex,
-    history
+    history,
+    exportZipDialog,
+    extractDialog,
+    renameDialog,
+    createFolderDialog,
+    deleteEntryDialog,
+    resetDialog,
+    errorMessageDialog,
+    importPasswordDialog
   });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
@@ -260,6 +269,7 @@ function ZipManager() {
     disabledForward,
     disabledExportZip,
     disabledEnter,
+    dialogDisplayed,
     enter,
     highlightNext,
     highlightPrevious,

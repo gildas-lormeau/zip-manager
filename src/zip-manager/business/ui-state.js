@@ -4,7 +4,15 @@ function getUIState({
   selectedFolder,
   clipboardData,
   historyIndex,
-  history
+  history,
+  exportZipDialog,
+  extractDialog,
+  renameDialog,
+  createFolderDialog,
+  deleteEntryDialog,
+  resetDialog,
+  errorMessageDialog,
+  importPasswordDialog
 }) {
   const entriesEmpty = !entries.length;
   const parentFolderHighlighted =
@@ -23,6 +31,15 @@ function getUIState({
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
+  const dialogDisplayed =
+    exportZipDialog ||
+    extractDialog ||
+    renameDialog ||
+    createFolderDialog ||
+    deleteEntryDialog ||
+    resetDialog ||
+    errorMessageDialog ||
+    importPasswordDialog;
 
   return {
     disabledExportZip,
@@ -35,7 +52,8 @@ function getUIState({
     disabledResetClipboardData,
     disabledRename,
     disabledDelete,
-    disabledEnter
+    disabledEnter,
+    dialogDisplayed
   };
 }
 

@@ -12,6 +12,7 @@ function getEventHandlers({
   disabledForward,
   disabledExportZip,
   disabledEnter,
+  dialogDisplayed,
   enter,
   highlightNext,
   highlightPrevious,
@@ -33,7 +34,7 @@ function getEventHandlers({
   constants
 }) {
   function handleKeyUp(event) {
-    if (!event.target.closest("dialog")) {
+    if (!dialogDisplayed) {
       onEntriesKeyUp(event, {
         highlightPrevious,
         highlightNext,
@@ -75,7 +76,7 @@ function getEventHandlers({
   }
 
   function handleKeyDown(event) {
-    if (!event.target.closest("dialog")) {
+    if (!dialogDisplayed) {
       onEntriesKeyDown(event, { highlightAll, util, constants });
       onHighlightedEntriesKeyDown(event, {
         disabledCut,
@@ -332,12 +333,7 @@ function onHighlightedEntriesKeyDown(
 
 function onSelectedFolderKeyDown(
   event,
-  {
-    disabledExportZip,
-    setClickedButtonName,
-    util,
-    constants
-  }
+  { disabledExportZip, setClickedButtonName, util, constants }
 ) {
   const {
     CREATE_FOLDER_KEY,
