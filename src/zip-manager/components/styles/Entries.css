@@ -40,6 +40,11 @@
   color: var(--highlighted-text-color);
 }
 
+.entries .entry-highlighted ::selection {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
 .entries .entry-cut {
   filter: opacity(0.25);
 }
