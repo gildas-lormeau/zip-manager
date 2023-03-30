@@ -24,6 +24,8 @@ function Entries({
 }) {
   const [selectModeEnabled, setSelectModeEnabled] = useState(false);
   const touchEndTimeout = useRef(null);
+  const previousTouchClientX = useRef(0);
+  const previousTouchClientY = useRef(0);
 
   function getEntryClassName(entry) {
     const classes = [];
@@ -86,10 +88,24 @@ function Entries({
     }
   }
 
-  function handleMouseMove(event) {
-    if (event.movementX > 1 || event.movementY > 1) {
-      clearTouchEndEventTimeout();
+  function handleTouchMove(event) {
+    const { clientX, clientY } = event.changedTouches[0];
+    if (previousTouchClientY.current && previousTouchClientX.current) {
+      const deltaY = Math.abs(clientY - previousTouchClientY.current);
+      const deltaX = Math.abs(clientX - previousTouchClientX.current);
+      if (deltaX > 1 && deltaY > 1) {
+        clearTouchEndEventTimeout();
+      }
+    } else {
+      previousTouchClientX.current = clientX;
+      previousTouchClientY.current = clientY;
     }
+  }
+
+  function handleTouchEnd(event) {
+    previousTouchClientX.current = 0;
+    previousTouchClientY.current = 0;
+    clearTouchEndEventTimeout();
   }
 
   function handleContextMenu(event) {
@@ -129,12 +145,9 @@ function Entries({
     >
       <ol
         onKeyDown={handleKeyDown}
-        onMouseDown={setTouchEndEventTimeout}
-        onMouseMove={handleMouseMove}
-        onMouseUp={clearTouchEndEventTimeout}
         onTouchStart={setTouchEndEventTimeout}
-        onTouchMove={clearTouchEndEventTimeout}
-        onTouchEnd={clearTouchEndEventTimeout}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onContextMenu={handleContextMenu}
       >
         {entries.map((entry) => {
