@@ -1,4 +1,5 @@
 function getAppFeatures({
+  dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
   setEntriesHeight,
@@ -25,8 +26,14 @@ function getAppFeatures({
     return util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
   }
 
-  function resizeEntries(deltaY) {
+  function moveBottomBar(deltaY) {
     setEntriesDeltaHeight(deltaY);
+  }
+
+  function resizeEntries(height) {
+    if (!dialogDisplayed) {
+      setEntriesHeight(height);
+    }
   }
 
   function stopResizeEntries() {
@@ -44,6 +51,7 @@ function getAppFeatures({
     enter,
     saveAccentColor,
     restoreAccentColor,
+    moveBottomBar,
     resizeEntries,
     stopResizeEntries
   };

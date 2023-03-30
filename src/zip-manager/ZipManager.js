@@ -210,23 +210,6 @@ function ZipManager() {
     setClipboardData
   });
   const {
-    enter,
-    saveAccentColor,
-    restoreAccentColor,
-    resizeEntries,
-    stopResizeEntries
-  } = getAppFeatures({
-    entriesHeight,
-    entriesDeltaHeight,
-    setEntriesHeight,
-    setEntriesDeltaHeight,
-    getEntriesElementHeight,
-    goIntoFolder,
-    openPromptExtract,
-    util,
-    constants
-  });
-  const {
     disabledExportZip,
     disabledReset,
     disabledBack,
@@ -254,6 +237,25 @@ function ZipManager() {
     resetDialog,
     errorMessageDialog,
     importPasswordDialog
+  });
+  const {
+    enter,
+    saveAccentColor,
+    restoreAccentColor,
+    moveBottomBar,
+    resizeEntries,
+    stopResizeEntries
+  } = getAppFeatures({
+    dialogDisplayed,
+    entriesHeight,
+    entriesDeltaHeight,
+    setEntriesHeight,
+    setEntriesDeltaHeight,
+    getEntriesElementHeight,
+    goIntoFolder,
+    openPromptExtract,
+    util,
+    constants
   });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
@@ -369,7 +371,7 @@ function ZipManager() {
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enter}
-          onSetEntriesHeight={setEntriesHeight}
+          onResize={resizeEntries}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
@@ -391,7 +393,7 @@ function ZipManager() {
           onResetClipboardData={resetClipboardData}
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntry}
-          onMove={resizeEntries}
+          onMove={moveBottomBar}
           onStopMove={stopResizeEntries}
           onClickedButton={resetClickedButtonName}
           constants={constants}

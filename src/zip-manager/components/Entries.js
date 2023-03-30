@@ -14,7 +14,7 @@ function Entries({
   onToggle,
   onToggleRange,
   onEnter,
-  onSetEntriesHeight,
+  onResize,
   entriesRef,
   entriesHeightRef,
   highlightedEntryRef,
@@ -68,7 +68,7 @@ function Entries({
   }
 
   function computeEntriesHeight() {
-    onSetEntriesHeight(util.getHeight(entriesRef.current));
+    onResize(util.getHeight(entriesRef.current));
   }
 
   function setTouchEndEventTimeout() {
