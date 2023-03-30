@@ -31,10 +31,6 @@
   cursor: pointer;
 }
 
-.entries .entry-select + .entry-name {
-  user-select: inherit;
-}
-
 .entries .entry-highlighted {
   background-color: var(--accent-color);
   color: var(--highlighted-text-color);
