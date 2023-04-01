@@ -36,6 +36,8 @@ const RENAME_BUTTON_NAME = "rename-button";
 const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
+const ACCENT_COLOR_KEY_NAME = "accent-color";
+const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
 
 export {
   ACTION_KEY,
@@ -75,5 +77,7 @@ export {
   RENAME_BUTTON_NAME,
   DELETE_BUTTON_NAME,
   BACK_BUTTON_NAME,
-  FORWARD_BUTTON_NAME
+  FORWARD_BUTTON_NAME,
+  ACCENT_COLOR_KEY_NAME,
+  ACCENT_COLOR_CUSTOM_PROPERTY_NAME
 };

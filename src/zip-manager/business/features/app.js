@@ -1,4 +1,5 @@
 function getAppFeatures({
+  storageService,
   dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
@@ -19,11 +20,15 @@ function getAppFeatures({
   }
 
   function saveAccentColor(color) {
-    util.saveAccentColor(color);
+    util.setStyleProperty(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
+    storageService.set(constants.ACCENT_COLOR_KEY_NAME, color);
   }
 
   function restoreAccentColor() {
-    return util.restoreAccentColor(constants.DEFAULT_ACCENT_COLOR);
+    return (
+      storageService.get(constants.ACCENT_COLOR_KEY_NAME) ||
+      constants.DEFAULT_ACCENT_COLOR
+    );
   }
 
   function moveBottomBar(deltaY) {

@@ -6,7 +6,6 @@ const KEYUP_EVENT_NAME = "keyup";
 const KEYDOWN_EVENT_NAME = "keydown";
 const BEFORE_UNLOAD_EVENT_NAME = "beforeunload";
 const RESIZE_EVENT_NAME = "resize";
-const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "accent-color";
 const ZIP_EXTENSION = ".zip";
 const ZIP_MIME_TYPE = "application/zip";
 const EN_US_LANGUAGE_ID = "en-US";
@@ -100,18 +99,21 @@ function downloadAborted(error) {
   );
 }
 
-function saveAccentColor(color) {
-  document.documentElement.style.setProperty(
-    "--" + ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
-    color
-  );
-  localStorage.setItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
+function setStyleProperty(name, value) {
+  document.documentElement.style.setProperty(name, value);
 }
 
-function restoreAccentColor(defaultColor) {
-  return (
-    localStorage.getItem(ACCENT_COLOR_CUSTOM_PROPERTY_NAME) || defaultColor
-  );
+function saveValue(name, value) {
+  localStorage.setItem(name, JSON.stringify(value));
+}
+
+function restoreValue(name) {
+  const value = localStorage.getItem(name);
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return value;
+  }
 }
 
 async function showOpenFilePicker({ multiple, description, extension }) {
@@ -187,8 +189,9 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  saveAccentColor,
-  restoreAccentColor,
+  setStyleProperty,
+  saveValue,
+  restoreValue,
   showOpenFilePicker,
   formatSize,
   formatDate,

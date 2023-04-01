@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import * as util from "./misc/dom-util.js";
 import * as messages from "./messages/en-US.js";
 import * as zipService from "./services/zip-service.js";
+import { getStorageService } from "./services/storage-service.js";
 
 import { getHooks } from "./hooks/hooks.js";
 import {
@@ -42,6 +43,7 @@ const {
   getClipboardFeatures,
   getAppFeatures
 } = features;
+const storageService = getStorageService({ util });
 
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
@@ -246,6 +248,7 @@ function ZipManager() {
     resizeEntries,
     stopResizeEntries
   } = getAppFeatures({
+    storageService,
     dialogDisplayed,
     entriesHeight,
     entriesDeltaHeight,
