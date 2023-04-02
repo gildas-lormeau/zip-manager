@@ -1,4 +1,4 @@
-/* global window, document, URL, AbortController, Intl, localStorage */
+/* global navigator, window, document, URL, AbortController, Intl, localStorage */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
@@ -116,6 +116,10 @@ function restoreValue(name) {
   }
 }
 
+function getDefaultMaxWorkers() {
+  return navigator.hardwareConcurrency;
+}
+
 async function showOpenFilePicker({ multiple, description, extension }) {
   const excludeAcceptAllOption = Boolean(extension);
   try {
@@ -197,5 +201,6 @@ export {
   formatDate,
   setTimeout,
   clearTimeout,
-  isMacOSPlatform
+  isMacOSPlatform,
+  getDefaultMaxWorkers
 };
