@@ -4,6 +4,7 @@ dialog::backdrop {
 }
 
 dialog {
+  margin-block-start: 10dvh;
   flex-direction: column;
   width: min(40ch, 75dvw);
   background-color: var(--page-color);
