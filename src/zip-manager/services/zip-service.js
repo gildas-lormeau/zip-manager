@@ -1,4 +1,4 @@
-import { ERR_ENCRYPTED, fs } from "@zip.js/zip.js";
+import { ERR_ENCRYPTED, fs, configure } from "@zip.js/zip.js";
 
 const { FS } = fs;
 
@@ -10,4 +10,4 @@ function passwordNeeded(error) {
   return error.message === ERR_ENCRYPTED;
 }
 
-export { createZipFileSystem, passwordNeeded };
+export { createZipFileSystem, configure, passwordNeeded };
