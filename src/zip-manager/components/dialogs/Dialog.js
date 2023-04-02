@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
 function Dialog({
+  className,
   data,
   title,
   resetLabel,
@@ -32,7 +33,7 @@ function Dialog({
     }
   }, [data, onOpen]);
   return (
-    <dialog ref={dialogRef} onClose={onClose}>
+    <dialog className={className} ref={dialogRef} onClose={onClose}>
       <form method="dialog" onSubmit={onSubmit} onReset={handleReset}>
         <div>{title}</div>
         <p>{children}</p>
