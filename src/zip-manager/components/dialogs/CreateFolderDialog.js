@@ -22,7 +22,7 @@ function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.CREATE_FOLDER_TITLE}
-      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.CREATE_FOLDER_DIALOG_BUTTON_LABEL}
       onClose={handleClose}
       onSubmit={handleSubmit}

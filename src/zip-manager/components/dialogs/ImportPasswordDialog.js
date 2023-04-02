@@ -19,7 +19,7 @@ function PasswordDialog({ data, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.IMPORT_PASSWORD_TITLE}
-      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.DIALOG_OK_BUTTON_LABEL}
       onClose={handleClose}
     >

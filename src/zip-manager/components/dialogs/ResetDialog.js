@@ -5,7 +5,7 @@ function ResetDialog({ data, onReset, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.RESET_TITLE}
-      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.RESET_DIALOG_BUTTON_LABEL}
       onClose={onClose}
       onSubmit={onReset}

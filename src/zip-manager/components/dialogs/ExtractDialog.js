@@ -41,7 +41,7 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.EXPORT_ZIP_TITLE}
-      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.EXTRACT_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
       onSubmit={handleSubmit}

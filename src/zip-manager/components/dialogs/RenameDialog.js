@@ -35,7 +35,7 @@ function RenameDialog({ data, onRename, onClose, messages }) {
     <Dialog
       data={data}
       title={messages.RENAME_TITLE}
-      resetLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
+      cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.RENAME_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
       onClose={handleClose}
