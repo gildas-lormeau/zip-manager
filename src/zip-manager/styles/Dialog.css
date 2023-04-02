@@ -12,10 +12,6 @@ dialog {
   margin-inline: auto;
 }
 
-dialog[open] {
-  display: flex;
-}
-
 dialog input {
   background-color: var(--bg-color);
   color: var(--text-color);
