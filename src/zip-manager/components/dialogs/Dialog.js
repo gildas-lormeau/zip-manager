@@ -38,13 +38,17 @@ function Dialog({
         <div className="dialog-title">{title}</div>
         <p>{children}</p>
         <div className="button-bar">
-          {resetLabel && (
-            <button type="reset" onClick={handleButtonReset}>
-              {resetLabel}
-            </button>
-          )}
-          {cancelLabel && <button type="reset">{cancelLabel}</button>}
-          <button type="submit">{submitLabel}</button>
+          <div className="button-group">
+            {resetLabel && (
+              <button type="reset" onClick={handleButtonReset}>
+                {resetLabel}
+              </button>
+            )}
+          </div>
+          <div className="button-group">
+            {cancelLabel && <button type="reset">{cancelLabel}</button>}
+            <button type="submit">{submitLabel}</button>
+          </div>
         </div>
       </form>
     </dialog>

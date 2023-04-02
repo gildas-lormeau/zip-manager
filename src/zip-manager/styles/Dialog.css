@@ -50,5 +50,8 @@ dialog label {
 
 dialog .button-bar {
   margin-block-start: 0.5em;
-  align-self: end;
+}
+
+dialog .button-group:first-of-type {
+  flex: 1;
 }
