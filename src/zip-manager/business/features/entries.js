@@ -83,9 +83,11 @@ function getEntriesFeatures({
   }
 
   function highlightEntry(entry) {
-    setPreviousHighlight(entry);
-    setToggleNavigationDirection(0);
-    setHighlightedIds([entry.id]);
+    if (entry) {
+      setPreviousHighlight(entry);
+      setToggleNavigationDirection(0);
+      setHighlightedIds([entry.id]);
+    }
   }
 
   function toggleRange(
