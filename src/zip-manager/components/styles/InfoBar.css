@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-block: 0.6em;
+  margin: 0em;
+  margin-block-end: 0.4em;
 }
 
 .info-bar .source-link {
@@ -32,6 +33,20 @@
   vertical-align: middle;
 }
 
+@media (max-width: 128ch) {
+  .info-bar {
+    margin-block-start: 0em;
+  }
+}
+
+@supports (aspect-ratio: 1.75) {
+  @media (max-aspect-ratio: 1.75) and (max-width: 128ch) {
+    .info-bar {
+      margin-block-start: 0.4em;
+    }
+  }
+}
+
 @media (max-width: 128ch), (display-mode: standalone) {
   .info-bar .source-link {
     font-size: 0.8em;
@@ -39,20 +54,12 @@
 }
 
 @media (max-width: 64ch) {
-  .info-bar {
-    margin-block: 0.6em;
-  }
-
   .info-bar .source-link {
     font-size: 0.8em;
   }
 }
 
 @media (max-width: 48ch) {
-  .info-bar {
-    margin-block: 0.7em;
-  }
-
   .info-bar .source-link {
     font-size: 0.7em;
   }
@@ -63,10 +70,6 @@
 }
 
 @media (max-width: 40ch) {
-  .info-bar {
-    margin-block: 0.3em;
-  }
-
   .info-bar .source-link {
     font-size: 0.6em;
   }

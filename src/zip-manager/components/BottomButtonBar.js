@@ -11,6 +11,8 @@ function BottomButtonBar({
   disabledResetClipboardDataButton,
   disabledRenameButton,
   disabledDeleteButton,
+  hideDownloadManager,
+  hideInfobar,
   clickedButtonName,
   onCopy,
   onCut,
@@ -49,6 +51,7 @@ function BottomButtonBar({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onContextMenu={(event) => event.preventDefault()}
+      style={hideInfobar && hideDownloadManager ? { borderBlockEnd: 0 } : null}
     >
       <div className="button-group">
         <CopyEntryButton

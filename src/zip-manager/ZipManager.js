@@ -407,6 +407,8 @@ function ZipManager() {
           disabledResetClipboardDataButton={disabledResetClipboardData}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
+          hideDownloadManager={hideDownloadManager}
+          hideInfobar={hideInfobar}
           clickedButtonName={clickedButtonName}
           onCopy={copy}
           onCut={cut}
@@ -423,6 +425,7 @@ function ZipManager() {
         <DownloadManager
           hidden={hideDownloadManager}
           downloads={downloads}
+          hideInfobar={hideInfobar}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
           constants={constants}

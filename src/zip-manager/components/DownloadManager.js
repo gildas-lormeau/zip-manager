@@ -1,8 +1,9 @@
 import "./styles/DownloadManager.css";
 
 function DownloadManager({
-  downloads,
   hidden,
+  downloads,
+  hideInfobar,
   downloaderRef,
   onAbortDownload,
   constants,
@@ -10,13 +11,20 @@ function DownloadManager({
 }) {
   if (hidden) {
     return (
-      <a hidden ref={downloaderRef} href="about:blank">
-        {}
-      </a>
+      <div style={{ display: "none" }}>
+        <a hidden ref={downloaderRef} href="about:blank">
+          {}
+        </a>
+      </div>
     );
   } else {
     return (
-      <div className="downloads" aria-label="Downloads" role="navigation">
+      <div
+        className="downloads"
+        aria-label="Downloads"
+        role="navigation"
+        style={hideInfobar ? { borderBlockEnd: 0 } : null}
+      >
         <ol>
           {downloads.map((download) => (
             <li key={download.id}>
