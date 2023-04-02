@@ -23,6 +23,12 @@ const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
 const DEFAULT_ACCENT_COLOR = "#3ab000";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
+const DEFAULT_OPTIONS = {
+  bufferedWrite: true,
+  keepOrder: true,
+  maxWorkers: 2,
+  chunkSize: 512
+};
 const ZIP_EXTENSION = ".zip";
 const LONG_TOUCH_DELAY = 750;
 const CREATE_FOLDER_BUTTON_NAME = "create-folder-button";
@@ -36,6 +42,7 @@ const RENAME_BUTTON_NAME = "rename-button";
 const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
+const OPTIONS_KEY_NAME = "options";
 const ACCENT_COLOR_KEY_NAME = "accent-color";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
 
@@ -65,6 +72,7 @@ export {
   FORWARD_KEY,
   DEFAULT_ACCENT_COLOR,
   DEFAULT_MIME_TYPE,
+  DEFAULT_OPTIONS,
   ZIP_EXTENSION,
   LONG_TOUCH_DELAY,
   CREATE_FOLDER_BUTTON_NAME,
@@ -78,6 +86,7 @@ export {
   DELETE_BUTTON_NAME,
   BACK_BUTTON_NAME,
   FORWARD_BUTTON_NAME,
+  OPTIONS_KEY_NAME,
   ACCENT_COLOR_KEY_NAME,
   ACCENT_COLOR_CUSTOM_PROPERTY_NAME
 };

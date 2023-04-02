@@ -6,6 +6,8 @@ function getAppFeatures({
   setEntriesHeight,
   setEntriesDeltaHeight,
   getEntriesElementHeight,
+  setOptionsDialog,
+  getOptions,
   goIntoFolder,
   openPromptExtract,
   util,
@@ -52,8 +54,25 @@ function getAppFeatures({
     setEntriesDeltaHeight(0);
   }
 
+  function openOptions() {
+    setOptionsDialog(getOptions());
+  }
+
+  function closeOptions() {
+    setOptionsDialog(null);
+  }
+
+  function resetOptions() {
+    const options = constants.DEFAULT_OPTIONS;
+    options.maxWorkers = util.getDefaultMaxWorkers();
+    setOptionsDialog(options);
+  }
+
   return {
     enter,
+    openOptions,
+    closeOptions,
+    resetOptions,
     saveAccentColor,
     restoreAccentColor,
     moveBottomBar,

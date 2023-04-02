@@ -8,6 +8,7 @@ function getSelectedFolderFeatures({
   highlightEntries,
   removeDownload,
   downloadFile,
+  getOptions,
   openDisplayError,
   constants
 }) {
@@ -99,10 +100,11 @@ function getSelectedFolderFeatures({
           { mimeType: DEFAULT_MIME_TYPE },
           async (download, options) => {
             try {
+              const { bufferedWrite, keepOrder } = getOptions();
               return await selectedFolder.exportBlob({
                 ...options,
-                bufferedWrite: true,
-                keepOrder: true,
+                bufferedWrite,
+                keepOrder,
                 password
               });
             } finally {

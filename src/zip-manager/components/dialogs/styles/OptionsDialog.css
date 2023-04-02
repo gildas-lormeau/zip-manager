@@ -1,0 +1,40 @@
+.options-dialog label {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 1.8em;
+}
+
+.options-dialog input {
+  margin-inline-start: 1ch;
+}
+
+.options-dialog input[disabled] {
+  color: var(--disabled-button-color);
+}
+
+.options-dialog input[type="checkbox"] {
+  width: 2ch;
+  height: 1em;
+  accent-color: var(--accent-color);
+}
+
+.options-dialog input[type="number"] {
+  width: min(10ch, 100%);
+}
+
+
+@media (max-width: 80ch) {
+  .options-dialog label {
+    min-height: 1.4em;
+  }
+  
+  .options-dialog input {
+    height: 1.4em;
+  }
+
+  .options-dialog input[type="checkbox"] {
+    width: 1.5ch;
+  }
+}

@@ -12,7 +12,8 @@ function getUIState({
   deleteEntryDialog,
   resetDialog,
   errorMessageDialog,
-  importPasswordDialog
+  importPasswordDialog,
+  optionsDialog
 }) {
   const entriesEmpty = !entries.length;
   const parentFolderHighlighted =
@@ -39,7 +40,8 @@ function getUIState({
     deleteEntryDialog ||
     resetDialog ||
     errorMessageDialog ||
-    importPasswordDialog;
+    importPasswordDialog ||
+    optionsDialog;
 
   return {
     disabledExportZip,

@@ -29,7 +29,8 @@ import {
   ResetDialog,
   DeleteEntryDialog,
   ErrorMessageDialog,
-  ImportPasswordDialog
+  ImportPasswordDialog,
+  OptionsDialog
 } from "./components/index.js";
 
 const {
@@ -70,6 +71,7 @@ function ZipManager() {
   const [resetDialog, setResetDialog] = useState(null);
   const [errorMessageDialog, setErrorMessageDialog] = useState(null);
   const [importPasswordDialog, setImportPasswordDialog] = useState(null);
+  const [optionsDialog, setOptionsDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -86,6 +88,8 @@ function ZipManager() {
   const {
     downloadFile,
     updateSelectedFolder,
+    setOptions,
+    getOptions,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName
@@ -100,7 +104,9 @@ function ZipManager() {
     setClickedButtonName,
     downloaderElement,
     zipService,
-    util
+    storageService,
+    util,
+    constants
   });
   const {
     highlightPrevious,
@@ -165,6 +171,7 @@ function ZipManager() {
     highlightEntries,
     removeDownload,
     downloadFile,
+    getOptions,
     openDisplayError,
     constants
   });
@@ -238,10 +245,14 @@ function ZipManager() {
     deleteEntryDialog,
     resetDialog,
     errorMessageDialog,
-    importPasswordDialog
+    importPasswordDialog,
+    optionsDialog
   });
   const {
     enter,
+    openOptions,
+    closeOptions,
+    resetOptions,
     saveAccentColor,
     restoreAccentColor,
     moveBottomBar,
@@ -255,6 +266,8 @@ function ZipManager() {
     setEntriesHeight,
     setEntriesDeltaHeight,
     getEntriesElementHeight,
+    setOptionsDialog,
+    getOptions,
     goIntoFolder,
     openPromptExtract,
     util,
@@ -345,6 +358,7 @@ function ZipManager() {
           onImportZipFile={importZipFile}
           onExportZipFile={openPromptExportZip}
           onReset={openConfirmReset}
+          onOpenOptions={openOptions}
           onClickedButton={resetClickedButtonName}
           util={util}
           constants={constants}
@@ -455,6 +469,13 @@ function ZipManager() {
       <ImportPasswordDialog
         data={importPasswordDialog}
         onClose={closePromptImportPassword}
+        messages={messages}
+      />
+      <OptionsDialog
+        data={optionsDialog}
+        onSetOptions={setOptions}
+        onResetOptions={resetOptions}
+        onClose={closeOptions}
         messages={messages}
       />
     </div>

@@ -13,6 +13,7 @@ function TopButtonBar({
   onImportZipFile,
   onExportZipFile,
   onReset,
+  onOpenOptions,
   onClickedButton,
   util,
   constants,
@@ -78,6 +79,9 @@ function TopButtonBar({
           onReset={onReset}
           messages={messages}
         />
+      </div>
+      <div className="button-group">
+        <OptionsButton onOpenOptions={onOpenOptions} messages={messages} />
       </div>
     </div>
   );
@@ -242,6 +246,12 @@ function ResetButton({ disabled, onReset, messages }) {
       disabled={disabled}
       onClick={onReset}
     />
+  );
+}
+
+function OptionsButton({ onOpenOptions, messages }) {
+  return (
+    <Button label={messages.OPTIONS_BUTTON_LABEL} onClick={onOpenOptions} />
   );
 }
 

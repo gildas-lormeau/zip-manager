@@ -9,7 +9,9 @@ function getCommonFeatures({
   setClickedButtonName,
   downloaderElement,
   zipService,
-  util
+  storageService,
+  util,
+  constants
 }) {
   function updateSelectedFolder(folder = selectedFolder) {
     if (folder) {
@@ -103,9 +105,34 @@ function getCommonFeatures({
     setClickedButtonName(null);
   }
 
+  function setOptions(options) {
+    configureZipService(options);
+    storageService.set(constants.OPTIONS_KEY_NAME, options);
+  }
+
+  function getOptions() {
+    let options = storageService.get(constants.OPTIONS_KEY_NAME);
+    if (!options) {
+      options = constants.DEFAULT_OPTIONS;
+      options.maxWorkers = util.getDefaultMaxWorkers();
+    }
+    configureZipService(options);
+    return options;
+  }
+
+  function configureZipService(options) {
+    const { maxWorkers, chunkSize } = options;
+    zipService.configure({
+      maxWorkers,
+      chunkSize: chunkSize * 1024
+    });
+  }
+
   return {
     downloadFile,
     updateSelectedFolder,
+    setOptions,
+    getOptions,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName
