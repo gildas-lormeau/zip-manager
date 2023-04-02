@@ -230,7 +230,9 @@ function ZipManager() {
     disabledRename,
     disabledDelete,
     disabledEnter,
-    dialogDisplayed
+    dialogDisplayed,
+    hideDownloadManager,
+    hideInfobar
   } = getUIState({
     entries,
     highlightedIds,
@@ -238,6 +240,7 @@ function ZipManager() {
     clipboardData,
     historyIndex,
     history,
+    getOptions,
     exportZipDialog,
     extractDialog,
     renameDialog,
@@ -383,6 +386,7 @@ function ZipManager() {
           entriesHeight={entriesHeight}
           deltaEntriesHeight={entriesDeltaHeight}
           clipboardData={clipboardData}
+          hideDownloadManager={hideDownloadManager}
           onAddFiles={addFiles}
           onHighlight={highlight}
           onToggle={toggle}
@@ -417,6 +421,7 @@ function ZipManager() {
           messages={messages}
         />
         <DownloadManager
+          hidden={hideDownloadManager}
           downloads={downloads}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
@@ -424,7 +429,11 @@ function ZipManager() {
           messages={messages}
         />
       </main>
-      <InfoBar accentColor={accentColor} onSetAccentColor={setAccentColor} />
+      <InfoBar
+        hidden={hideInfobar}
+        accentColor={accentColor}
+        onSetAccentColor={setAccentColor}
+      />
       <CreateFolderDialog
         data={createFolderDialog}
         onCreateFolder={createFolder}

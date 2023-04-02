@@ -5,6 +5,7 @@ function getUIState({
   clipboardData,
   historyIndex,
   history,
+  getOptions,
   exportZipDialog,
   extractDialog,
   renameDialog,
@@ -42,6 +43,9 @@ function getUIState({
     errorMessageDialog ||
     importPasswordDialog ||
     optionsDialog;
+  const options = getOptions();
+  const hideDownloadManager = options.hideDownloadManager;
+  const hideInfobar = options.hideInfobar;
 
   return {
     disabledExportZip,
@@ -55,7 +59,9 @@ function getUIState({
     disabledRename,
     disabledDelete,
     disabledEnter,
-    dialogDisplayed
+    dialogDisplayed,
+    hideDownloadManager,
+    hideInfobar
   };
 }
 

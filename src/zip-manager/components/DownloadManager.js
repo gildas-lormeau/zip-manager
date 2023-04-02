@@ -2,30 +2,39 @@ import "./styles/DownloadManager.css";
 
 function DownloadManager({
   downloads,
+  hidden,
   downloaderRef,
   onAbortDownload,
   constants,
   messages
 }) {
-  return (
-    <div className="downloads" aria-label="Downloads" role="navigation">
-      <ol>
-        {downloads.map((download) => (
-          <li key={download.id}>
-            <DownloadEntry
-              download={download}
-              onAbortDownload={onAbortDownload}
-              constants={constants}
-              messages={messages}
-            />
-          </li>
-        ))}
-      </ol>
+  if (hidden) {
+    return (
       <a hidden ref={downloaderRef} href="about:blank">
         {}
       </a>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="downloads" aria-label="Downloads" role="navigation">
+        <ol>
+          {downloads.map((download) => (
+            <li key={download.id}>
+              <DownloadEntry
+                download={download}
+                onAbortDownload={onAbortDownload}
+                constants={constants}
+                messages={messages}
+              />
+            </li>
+          ))}
+        </ol>
+        <a hidden ref={downloaderRef} href="about:blank">
+          {}
+        </a>
+      </div>
+    );
+  }
 }
 
 function DownloadEntry({ download, onAbortDownload, constants, messages }) {

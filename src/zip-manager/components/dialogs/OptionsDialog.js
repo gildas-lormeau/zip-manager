@@ -10,10 +10,20 @@ function OptionsDialog({
   onClose,
   messages
 }) {
+  const [hideDownloadManager, setHideDownloadManager] = useState(false);
+  const [hideInfobar, setHideinfobar] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState(0);
   const [chunkSize, setChunkSize] = useState(0);
+
+  function handleChangeHideDownloadManager(event) {
+    setHideDownloadManager(event.target.checked);
+  }
+
+  function handleChangeHideInfobar(event) {
+    setHideinfobar(event.target.checked);
+  }
 
   function handleChangeKeepOrder(event) {
     setKeepOrder(event.target.checked);
@@ -31,33 +41,43 @@ function OptionsDialog({
     setChunkSize(event.target.valueAsNumber);
   }
 
-  function onOpen() {
-    const { keepOrder, bufferedWrite, maxWorkers, chunkSize } = data;
-    setKeepOrder(keepOrder);
-    setBufferedWrite(bufferedWrite);
-    setMaxWorkers(maxWorkers);
-    setChunkSize(chunkSize);
-  }
-
   function handleSubmit() {
-    onSetOptions({ keepOrder, bufferedWrite, maxWorkers, chunkSize });
+    onSetOptions({
+      hideDownloadManager,
+      hideInfobar,
+      keepOrder,
+      bufferedWrite,
+      maxWorkers,
+      chunkSize
+    });
   }
 
-  useEffect(() => {
+  function updateData() {
     if (data) {
-      const { keepOrder, bufferedWrite, maxWorkers, chunkSize } = data;
+      const {
+        hideDownloadManager,
+        hideInfobar,
+        keepOrder,
+        bufferedWrite,
+        maxWorkers,
+        chunkSize
+      } = data;
+      setHideDownloadManager(hideDownloadManager);
+      setHideinfobar(hideInfobar);
       setKeepOrder(keepOrder);
       setBufferedWrite(bufferedWrite);
       setMaxWorkers(maxWorkers);
       setChunkSize(chunkSize);
     }
-  }, [data]);
+  }
+
+  useEffect(updateData, [data]);
   return (
     <Dialog
       className="options-dialog"
       data={data}
       title={messages.OPTIONS_TITLE}
-      onOpen={onOpen}
+      onOpen={updateData}
       onSubmit={handleSubmit}
       onReset={onResetOptions}
       onClose={onClose}
@@ -65,6 +85,22 @@ function OptionsDialog({
       cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.OPTIONS_DIALOG_BUTTON_LABEL}
     >
+      <label>
+        {messages.OPTIONS_HIDE_DOWNLOAD_MANAGER}
+        <input
+          checked={hideDownloadManager}
+          type="checkbox"
+          onChange={handleChangeHideDownloadManager}
+        />
+      </label>
+      <label>
+        {messages.OPTIONS_HIDE_INFOBAR}
+        <input
+          checked={hideInfobar}
+          type="checkbox"
+          onChange={handleChangeHideInfobar}
+        />
+      </label>
       <label>
         {messages.OPTIONS_BUFFERED_WRITE_LABEL}
         <input

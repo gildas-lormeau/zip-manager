@@ -2,20 +2,24 @@ import "./styles/InfoBar.css";
 
 import { useEffect, useRef } from "react";
 
-function InfoBar({ accentColor, onSetAccentColor }) {
-  return (
-    <footer className="info-bar">
-      <div className="source-link">
-        {"Source code on "}
-        <a href="https://github.com/gildas-lormeau/zipjs-react-app">GitHub</a>
-        {" | Made with "}
-        <AccentColorPickerButton
-          accentColor={accentColor}
-          onSetAccentColor={onSetAccentColor}
-        ></AccentColorPickerButton>
-      </div>
-    </footer>
-  );
+function InfoBar({ hidden, accentColor, onSetAccentColor }) {
+  if (hidden) {
+    return;
+  } else {
+    return (
+      <footer className="info-bar">
+        <div className="source-link">
+          {"Source code on "}
+          <a href="https://github.com/gildas-lormeau/zipjs-react-app">GitHub</a>
+          {" | Made with "}
+          <AccentColorPickerButton
+            accentColor={accentColor}
+            onSetAccentColor={onSetAccentColor}
+          ></AccentColorPickerButton>
+        </div>
+      </footer>
+    );
+  }
 }
 
 function AccentColorPickerButton({ accentColor, onSetAccentColor }) {

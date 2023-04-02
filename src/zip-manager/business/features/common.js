@@ -116,6 +116,12 @@ function getCommonFeatures({
       options = constants.DEFAULT_OPTIONS;
       options.maxWorkers = util.getDefaultMaxWorkers();
     }
+    if (options.hideDownloadManager === undefined) {
+      options.hideDownloadManager = Boolean(options.hideDownloadManager);
+    }
+    if (options.hideInfobar === undefined) {
+      options.hideInfobar = Boolean(options.hideInfobar);
+    }
     configureZipService(options);
     return options;
   }

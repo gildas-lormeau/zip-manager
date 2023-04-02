@@ -9,6 +9,7 @@ function Entries({
   deltaEntriesHeight,
   entriesHeight,
   clipboardData,
+  hideDownloadManager,
   onAddFiles,
   onHighlight,
   onToggle,
@@ -52,7 +53,9 @@ function Entries({
   }
 
   function getEntriesStyle() {
-    if (entriesHeight) {
+    if (hideDownloadManager) {
+      return { flex: 1, resize: "none" };
+    } else if (entriesHeight) {
       return { height: entriesHeight + deltaEntriesHeight + "px" };
     }
   }
