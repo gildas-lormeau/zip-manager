@@ -19,7 +19,7 @@ dialog input {
   border: solid var(--accent-color) 0.05em;
   height: 1.8em;
   padding-inline: 0.75ch;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 dialog form {
