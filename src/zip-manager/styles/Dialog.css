@@ -28,6 +28,10 @@ dialog form {
   row-gap: 1.25em;
 }
 
+dialog form .dialog-title {
+  font-weight: 500;
+}
+
 dialog form p {
   display: flex;
   flex-direction: column;
