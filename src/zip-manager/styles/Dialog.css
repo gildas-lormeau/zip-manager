@@ -4,13 +4,16 @@ dialog::backdrop {
 }
 
 dialog {
-  top: 7.5em;
+  flex-direction: column;
   width: min(40ch, 75dvw);
   background-color: var(--page-color);
   color: var(--text-color);
   border: solid var(--accent-color) 0.1em;
-  margin: 0px;
   margin-inline: auto;
+}
+
+dialog[open] {
+  display: flex;
 }
 
 dialog input {
@@ -25,7 +28,8 @@ dialog input {
 dialog form {
   display: flex;
   flex-direction: column;
-  row-gap: 1.25em;
+  row-gap: 1em;
+  max-height: 70dvh;
 }
 
 dialog form .dialog-title {
@@ -37,6 +41,8 @@ dialog form p {
   flex-direction: column;
   row-gap: 1em;
   margin: 0;
+  padding-block: 1em;
+  overflow: auto;
 }
 
 dialog label {
