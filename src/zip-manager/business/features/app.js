@@ -63,9 +63,9 @@ function getAppFeatures({
   }
 
   function resetOptions() {
-    const options = constants.DEFAULT_OPTIONS;
+    const options = { ...constants.DEFAULT_OPTIONS };
     options.maxWorkers = util.getDefaultMaxWorkers();
-    setOptionsDialog({ ...options });
+    setOptionsDialog(options);
   }
 
   return {
