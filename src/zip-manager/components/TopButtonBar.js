@@ -211,7 +211,7 @@ function ImportZipButton({
         onChange={handleChange}
         ref={fileInputRef}
         type="file"
-        accept={messages.ZIP_EXTENSION}
+        accept={ZIP_EXTENSION}
         hidden
       />
     </>
