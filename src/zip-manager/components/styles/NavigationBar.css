@@ -52,6 +52,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {
