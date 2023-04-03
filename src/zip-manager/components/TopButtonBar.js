@@ -183,7 +183,7 @@ function ImportZipButton({
       try {
         const files = await util.showOpenFilePicker({
           multiple: false,
-          description: messages.ZIP_FILES_DESCRIPTION_LABEL,
+          description: messages.ZIP_FILE_DESCRIPTION_LABEL,
           extension: ZIP_EXTENSION
         });
         if (files.length) {
