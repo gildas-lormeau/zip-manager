@@ -34,11 +34,15 @@ function OptionsDialog({
   }
 
   function handleChangeMaxWorkers(event) {
-    setMaxWorkers(event.target.valueAsNumber);
+    const value = event.target.valueAsNumber;
+    const minValue = event.target.min;
+    setMaxWorkers(Number.isNaN(value) || value < minValue ? minValue : value);
   }
 
   function handleChangeChunkSize(event) {
-    setChunkSize(event.target.valueAsNumber);
+    const value = event.target.valueAsNumber;
+    const minValue = event.target.min;
+    setChunkSize(Number.isNaN(value) || value < minValue ? minValue : value);
   }
 
   function handleSubmit() {
