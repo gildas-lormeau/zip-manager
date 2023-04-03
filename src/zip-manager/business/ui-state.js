@@ -24,6 +24,7 @@ function getUIState({
   const clipboardDataEmpty = !clipboardData;
   const disabledExportZip = entriesEmpty;
   const disabledReset = entriesEmpty;
+  const disabledNavigation = entriesEmpty;
   const disabledBack = !historyIndex;
   const disabledForward = historyIndex === history.length - 1;
   const disabledCopy = parentFolderHighlighted;
@@ -50,6 +51,7 @@ function getUIState({
   return {
     disabledExportZip,
     disabledReset,
+    disabledNavigation,
     disabledBack,
     disabledForward,
     disabledCopy,

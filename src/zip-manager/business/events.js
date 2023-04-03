@@ -12,6 +12,7 @@ function getEventHandlers({
   disabledForward,
   disabledExportZip,
   disabledEnter,
+  disabledNavigation,
   dialogDisplayed,
   enter,
   highlightNext,
@@ -36,6 +37,7 @@ function getEventHandlers({
   function handleKeyUp(event) {
     if (!dialogDisplayed) {
       onEntriesKeyUp(event, {
+        disabledNavigation,
         highlightPrevious,
         highlightNext,
         highlightPreviousPage,
@@ -113,6 +115,7 @@ function getEventHandlers({
 function onEntriesKeyUp(
   event,
   {
+    disabledNavigation,
     highlightPrevious,
     highlightNext,
     highlightPreviousPage,
@@ -130,58 +133,60 @@ function onEntriesKeyUp(
     constants
   }
 ) {
-  const {
-    ACTION_KEY,
-    DOWN_KEY,
-    UP_KEY,
-    PAGE_UP_KEY,
-    PAGE_DOWN_KEY,
-    HOME_KEY,
-    END_KEY
-  } = constants;
-  if (event.shiftKey) {
-    if (event.key === DOWN_KEY) {
-      toggleNext();
+  if (!disabledNavigation) {
+    const {
+      ACTION_KEY,
+      DOWN_KEY,
+      UP_KEY,
+      PAGE_UP_KEY,
+      PAGE_DOWN_KEY,
+      HOME_KEY,
+      END_KEY
+    } = constants;
+    if (event.shiftKey) {
+      if (event.key === DOWN_KEY) {
+        toggleNext();
+      }
+      if (event.key === UP_KEY) {
+        togglePrevious();
+      }
+      if (event.key === PAGE_UP_KEY) {
+        togglePreviousPage();
+      }
+      if (event.key === PAGE_DOWN_KEY) {
+        toggleNextPage();
+      }
+      if (event.key === HOME_KEY) {
+        toggleFirst();
+      }
+      if (event.key === END_KEY) {
+        toggleLast();
+      }
     }
-    if (event.key === UP_KEY) {
-      togglePrevious();
+    if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
+      if (event.key === DOWN_KEY) {
+        highlightNext();
+      }
+      if (event.key === UP_KEY) {
+        highlightPrevious();
+      }
+      if (event.key === HOME_KEY) {
+        highlightFirst();
+      }
+      if (event.key === END_KEY) {
+        highlightLast();
+      }
+      if (event.key === PAGE_UP_KEY) {
+        highlightPreviousPage();
+      }
+      if (event.key === PAGE_DOWN_KEY) {
+        highlightNextPage();
+      }
     }
-    if (event.key === PAGE_UP_KEY) {
-      togglePreviousPage();
-    }
-    if (event.key === PAGE_DOWN_KEY) {
-      toggleNextPage();
-    }
-    if (event.key === HOME_KEY) {
-      toggleFirst();
-    }
-    if (event.key === END_KEY) {
-      toggleLast();
-    }
-  }
-  if (!event.altKey && !modifierKeyPressed(event, util) && !event.shiftKey) {
-    if (event.key === DOWN_KEY) {
-      highlightNext();
-    }
-    if (event.key === UP_KEY) {
-      highlightPrevious();
-    }
-    if (event.key === HOME_KEY) {
-      highlightFirst();
-    }
-    if (event.key === END_KEY) {
-      highlightLast();
-    }
-    if (event.key === PAGE_UP_KEY) {
-      highlightPreviousPage();
-    }
-    if (event.key === PAGE_DOWN_KEY) {
-      highlightNextPage();
-    }
-  }
-  if (!event.altKey && !modifierKeyPressed(event, util)) {
-    if (event.key.length === 1 && event.key !== ACTION_KEY) {
-      highlightFirstLetter(event.key);
+    if (!event.altKey && !modifierKeyPressed(event, util)) {
+      if (event.key.length === 1 && event.key !== ACTION_KEY) {
+        highlightFirstLetter(event.key);
+      }
     }
   }
 }

@@ -221,6 +221,7 @@ function ZipManager() {
   const {
     disabledExportZip,
     disabledReset,
+    disabledNavigation,
     disabledBack,
     disabledForward,
     disabledCopy,
@@ -290,6 +291,7 @@ function ZipManager() {
     disabledForward,
     disabledExportZip,
     disabledEnter,
+    disabledNavigation,
     dialogDisplayed,
     enter,
     highlightNext,

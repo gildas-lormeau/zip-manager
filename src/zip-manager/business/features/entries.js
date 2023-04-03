@@ -83,11 +83,9 @@ function getEntriesFeatures({
   }
 
   function highlightEntry(entry) {
-    if (entry) {
-      setPreviousHighlight(entry);
-      setToggleNavigationDirection(0);
-      setHighlightedIds([entry.id]);
-    }
+    setPreviousHighlight(entry);
+    setToggleNavigationDirection(0);
+    setHighlightedIds([entry.id]);
   }
 
   function toggleRange(
@@ -137,9 +135,7 @@ function getEntriesFeatures({
       if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
         toggle(
-          toggleNavigationDirection !== 1
-            ? previousEntry
-            : previousHighlight
+          toggleNavigationDirection !== 1 ? previousEntry : previousHighlight
         );
         setToggleNavigationDirection(-1);
       }
@@ -152,9 +148,7 @@ function getEntriesFeatures({
       if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
         toggle(
-          toggleNavigationDirection !== -1
-            ? nextEntry
-            : previousHighlight
+          toggleNavigationDirection !== -1 ? nextEntry : previousHighlight
         );
         setToggleNavigationDirection(1);
       }
