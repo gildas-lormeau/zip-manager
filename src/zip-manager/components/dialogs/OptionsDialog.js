@@ -134,7 +134,7 @@ function OptionsDialog({
           value={chunkSize}
           type="number"
           required
-          min={4}
+          min={1}
           onChange={handleChangeChunkSize}
         />
       </label>
