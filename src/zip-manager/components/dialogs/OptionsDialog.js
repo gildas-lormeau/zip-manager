@@ -14,8 +14,8 @@ function OptionsDialog({
   const [hideInfobar, setHideinfobar] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
-  const [maxWorkers, setMaxWorkers] = useState(0);
-  const [chunkSize, setChunkSize] = useState(0);
+  const [maxWorkers, setMaxWorkers] = useState("0");
+  const [chunkSize, setChunkSize] = useState("0");
 
   function handleChangeHideDownloadManager(event) {
     setHideDownloadManager(event.target.checked);
@@ -34,15 +34,11 @@ function OptionsDialog({
   }
 
   function handleChangeMaxWorkers(event) {
-    const value = event.target.valueAsNumber;
-    const minValue = event.target.min;
-    setMaxWorkers(Number.isNaN(value) || value < minValue ? minValue : value);
+    setMaxWorkers(event.target.value);
   }
 
   function handleChangeChunkSize(event) {
-    const value = event.target.valueAsNumber;
-    const minValue = event.target.min;
-    setChunkSize(Number.isNaN(value) || value < minValue ? minValue : value);
+    setChunkSize(event.target.value);
   }
 
   function handleSubmit() {
@@ -51,8 +47,8 @@ function OptionsDialog({
       hideInfobar,
       keepOrder,
       bufferedWrite,
-      maxWorkers,
-      chunkSize
+      maxWorkers: Number(maxWorkers),
+      chunkSize: Number(chunkSize)
     });
   }
 
