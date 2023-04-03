@@ -20,6 +20,7 @@ dialog input {
   height: 1.8em;
   padding-inline: 0.75ch;
   font-size: 1em;
+  margin-inline: 1px;
 }
 
 dialog form {
@@ -54,4 +55,9 @@ dialog .button-bar {
 
 dialog .button-group:first-of-type {
   flex: 1;
+}
+@media (max-width: 80ch) {
+  dialog input {
+    height: 1.4em;
+  }
 }

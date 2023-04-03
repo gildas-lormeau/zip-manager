@@ -18,6 +18,7 @@
   width: 2ch;
   height: 1em;
   accent-color: var(--accent-color);
+  margin-inline: 3px;
 }
 
 .options-dialog input[type="number"] {
@@ -27,11 +28,6 @@
 @media (max-width: 80ch) {
   .options-dialog label {
     min-height: 1.4em;
-  }
-
-  .options-dialog input {
-    height: 1.4em;
-    font-size: 1em;
   }
 
   .options-dialog input[type="checkbox"] {
