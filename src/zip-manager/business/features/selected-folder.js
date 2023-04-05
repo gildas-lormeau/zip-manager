@@ -1,4 +1,5 @@
 function getSelectedFolderFeatures({
+  zipFilesystem,
   selectedFolder,
   rootZipFilename,
   setImportPasswordDialog,
@@ -51,21 +52,44 @@ function getSelectedFolderFeatures({
     updateSelectedFolder();
   }
 
-  function importZipFile(zipFile) {
+  function importZipFile(zipFile, options = {}) {
     async function updateZipFile() {
-      const children = [...selectedFolder.children];
+      let addedEntries = [];
       try {
-        await selectedFolder.importBlob(zipFile);
+        const importedEntries = await selectedFolder.importBlob(
+          zipFile,
+          options
+        );
+        addedEntries = selectedFolder.children.filter((entry) =>
+          importedEntries.includes(entry)
+        );
+        const isPasswordProtected = (
+          await Promise.all(
+            importedEntries.map(
+              (entry) => !entry.directory && entry.isPasswordProtected()
+            )
+          )
+        ).includes(true);
+        if (isPasswordProtected && !options.password) {
+          addedEntries.forEach((entry) => zipFilesystem.remove(entry));
+          const { password } = await new Promise((resolve) =>
+            setImportPasswordDialog({ onSetImportPassword: resolve })
+          );
+          const isValidPassword = !(
+            await Promise.all(
+              importedEntries.map(
+                (entry) => entry.directory || entry.checkPassword(password)
+              )
+            )
+          ).includes(false);
+          importZipFile(zipFile, isValidPassword ? { password } : {});
+        } else {
+          highlightSortedEntries(addedEntries);
+          updateSelectedFolder();
+        }
       } catch (error) {
         openDisplayError(error.message);
       }
-      const addedEntries = selectedFolder.children.filter(
-        (entry) => !children.includes(entry)
-      );
-      if (addedEntries.length) {
-        highlightSortedEntries(addedEntries);
-      }
-      updateSelectedFolder();
     }
 
     updateZipFile();

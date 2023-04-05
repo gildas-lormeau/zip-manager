@@ -100,7 +100,6 @@ function ZipManager() {
     setDownloads,
     setEntries,
     setErrorMessageDialog,
-    setImportPasswordDialog,
     setClickedButtonName,
     downloaderElement,
     zipService,
@@ -162,6 +161,7 @@ function ZipManager() {
     closePromptExportZip,
     closePromptImportPassword
   } = getSelectedFolderFeatures({
+    zipFilesystem,
     selectedFolder,
     rootZipFilename,
     setImportPasswordDialog,

@@ -5,7 +5,6 @@ function getCommonFeatures({
   setDownloads,
   setEntries,
   setErrorMessageDialog,
-  setImportPasswordDialog,
   setClickedButtonName,
   downloaderElement,
   zipService,
@@ -59,19 +58,7 @@ function getCommonFeatures({
       util.downloadBlob(blob, downloaderElement, download.name);
     } catch (error) {
       if (!util.downloadAborted(error)) {
-        if (zipService.passwordNeeded(error)) {
-          const { password } = await new Promise((resolve) =>
-            setImportPasswordDialog({ onSetImportPassword: resolve })
-          );
-          if (password) {
-            options.readerOptions = { password };
-            await executeDownload(download, options, blobGetter);
-          } else {
-            throw error;
-          }
-        } else {
-          throw error;
-        }
+        await executeDownload(download, options, blobGetter);
       }
     }
   }
