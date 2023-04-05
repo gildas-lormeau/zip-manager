@@ -133,13 +133,12 @@ function getHighlightedEntriesFeatures({
     });
   }
 
-  function extract({ filename, password }) {
+  function extract({ filename }) {
     async function download() {
       try {
         const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
         await downloadFile(filename, {}, async (download, options) => {
           try {
-            options.password = password;
             return await highlightedEntry.getBlob(DEFAULT_MIME_TYPE, options);
           } finally {
             removeDownload(download);
