@@ -6,27 +6,21 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
   const [filename, setFilename] = useState("");
-  const [password, setPassword] = useState("");
 
   function handleChangeFilename(event) {
     setFilename(event.target.value);
   }
 
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
-  }
-
   function onOpen() {
-    const { filename, password } = data;
-    setFilename(filename);
-    setPassword(password);
+    setFilename(data.filename);
   }
 
   function handleSubmit() {
-    onExtract({ filename, password });
+    onExtract({ filename });
   }
 
   function handleClose() {
+    setFilename("");
     filenameTextSelected.current = false;
     onClose();
   }
@@ -44,8 +38,8 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
       cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.EXTRACT_DIALOG_BUTTON_LABEL}
       onOpen={onOpen}
-      onSubmit={handleSubmit}
       onClose={handleClose}
+      onSubmit={handleSubmit}
     >
       <label>
         {messages.EXTRACT_FILENAME_LABEL}
@@ -54,20 +48,6 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
           required
           onChange={handleChangeFilename}
           ref={filenameInputRef}
-        />
-      </label>
-      <label
-        style={{
-          display: data?.passwordDisabled ? "none" : "inherit"
-        }}
-      >
-        {messages.EXTRACT_PASSWORD_LABEL}
-        <input
-          type="password"
-          autoComplete="off"
-          value={password}
-          required={!data?.passwordDisabled}
-          onChange={handleChangePassword}
         />
       </label>
     </Dialog>

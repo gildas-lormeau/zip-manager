@@ -128,11 +128,8 @@ function getHighlightedEntriesFeatures({
 
   function openPromptExtract() {
     const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
-    const encrypted = highlightedEntry.data.encrypted;
     setExtractDialog({
-      filename: highlightedEntry.name,
-      password: "",
-      passwordDisabled: !encrypted
+      filename: highlightedEntry.name
     });
   }
 
