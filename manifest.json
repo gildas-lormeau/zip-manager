@@ -6,6 +6,10 @@
   "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": [
+    "utilities"
+  ],
   "icons": [
     {
       "src": "./icons/icon-512x512.png",
