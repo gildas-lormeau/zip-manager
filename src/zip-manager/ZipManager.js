@@ -228,6 +228,7 @@ function ZipManager() {
     disabledCut,
     disabledPaste,
     disabledResetClipboardData,
+    disabledExtract,
     disabledRename,
     disabledDelete,
     disabledEnter,
@@ -284,6 +285,7 @@ function ZipManager() {
     selectedFolder,
     disabledCut,
     disabledCopy,
+    disabledExtract,
     disabledRename,
     disabledPaste,
     disabledDelete,
@@ -407,6 +409,7 @@ function ZipManager() {
           disabledCutButton={disabledCut}
           disabledPasteButton={disabledPaste}
           disabledResetClipboardDataButton={disabledResetClipboardData}
+          disabledExtractButton={disabledExtract}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
           hideDownloadManager={hideDownloadManager}
@@ -416,6 +419,7 @@ function ZipManager() {
           onCut={cut}
           onPaste={paste}
           onResetClipboardData={resetClipboardData}
+          onExtract={extract}
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntry}
           onMove={moveBottomBar}

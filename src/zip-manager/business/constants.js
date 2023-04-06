@@ -3,6 +3,7 @@ const ENTER_KEY = "Enter";
 const TAB_KEY = "Tab";
 const CUT_KEY = "x";
 const COPY_KEY = "c";
+const EXTRACT_KEY = "Enter";
 const RENAME_KEY = "r";
 const PASTE_KEY = "v";
 const CREATE_FOLDER_KEY = "d";
@@ -40,6 +41,7 @@ const EXPORT_ZIP_BUTTON_NAME = "export-zip-button";
 const COPY_BUTTON_NAME = "copy-button";
 const CUT_BUTTON_NAME = "cut-button";
 const PASTE_BUTTON_NAME = "paste-button";
+const EXTRACT_BUTTON_NAME = "extract-button";
 const RENAME_BUTTON_NAME = "rename-button";
 const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
@@ -54,6 +56,7 @@ export {
   TAB_KEY,
   CUT_KEY,
   COPY_KEY,
+  EXTRACT_KEY,
   RENAME_KEY,
   PASTE_KEY,
   CREATE_FOLDER_KEY,
@@ -84,6 +87,7 @@ export {
   COPY_BUTTON_NAME,
   CUT_BUTTON_NAME,
   PASTE_BUTTON_NAME,
+  EXTRACT_BUTTON_NAME,
   RENAME_BUTTON_NAME,
   DELETE_BUTTON_NAME,
   BACK_BUTTON_NAME,

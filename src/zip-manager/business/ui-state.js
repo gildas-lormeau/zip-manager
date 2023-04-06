@@ -31,6 +31,12 @@ function getUIState({
   const disabledCut = parentFolderHighlighted;
   const disabledPaste = clipboardDataEmpty;
   const disabledResetClipboardData = clipboardDataEmpty;
+  const disabledExtract =
+    parentFolderHighlighted ||
+    !highlightedIds.length ||
+    highlightedIds.find(
+      (id) => selectedFolder.children.find((entry) => entry.id === id).directory
+    );
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
@@ -58,6 +64,7 @@ function getUIState({
     disabledCut,
     disabledPaste,
     disabledResetClipboardData,
+    disabledExtract,
     disabledRename,
     disabledDelete,
     disabledEnter,

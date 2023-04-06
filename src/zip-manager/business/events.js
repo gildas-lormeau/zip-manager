@@ -5,6 +5,7 @@ function getEventHandlers({
   selectedFolder,
   disabledCut,
   disabledCopy,
+  disabledExtract,
   disabledRename,
   disabledPaste,
   disabledDelete,
@@ -83,6 +84,7 @@ function getEventHandlers({
       onHighlightedEntriesKeyDown(event, {
         disabledCut,
         disabledCopy,
+        disabledExtract,
         disabledRename,
         disabledPaste,
         setClickedButtonName,
@@ -299,6 +301,7 @@ function onHighlightedEntriesKeyDown(
   {
     disabledCut,
     disabledCopy,
+    disabledExtract,
     disabledRename,
     disabledPaste,
     setClickedButtonName,
@@ -309,11 +312,13 @@ function onHighlightedEntriesKeyDown(
   const {
     CUT_KEY,
     COPY_KEY,
+    EXTRACT_KEY,
     RENAME_KEY,
     PASTE_KEY,
     CUT_BUTTON_NAME,
     COPY_BUTTON_NAME,
     PASTE_BUTTON_NAME,
+    EXTRACT_BUTTON_NAME,
     RENAME_BUTTON_NAME
   } = constants;
   if (modifierKeyPressed(event, util)) {
@@ -327,6 +332,10 @@ function onHighlightedEntriesKeyDown(
     }
     if (event.key === PASTE_KEY && !disabledPaste) {
       setClickedButtonName(PASTE_BUTTON_NAME);
+      event.preventDefault();
+    }
+    if (event.key === EXTRACT_KEY && !disabledExtract) {
+      setClickedButtonName(EXTRACT_BUTTON_NAME);
       event.preventDefault();
     }
     if (event.key === RENAME_KEY && !disabledRename) {
