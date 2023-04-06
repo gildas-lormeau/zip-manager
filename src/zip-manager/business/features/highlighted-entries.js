@@ -126,8 +126,9 @@ function getHighlightedEntriesFeatures({
     setDeleteEntryDialog(null);
   }
 
-  function openPromptExtract() {
-    const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
+  function openPromptExtract(
+    highlightedEntry = zipFilesystem.getById(highlightedIds[0])
+  ) {
     setExtractDialog({
       filename: highlightedEntry.name
     });
