@@ -43,6 +43,7 @@ function getUIState({
     parentFolderHighlighted ||
     !highlightedIds.length ||
     (!util.savePickersSupported() && subFolderHighlighted);
+  const disabledHighlightAll = entriesEmpty || highlightedIds.length === entries.length;
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
@@ -71,6 +72,7 @@ function getUIState({
     disabledPaste,
     disabledResetClipboardData,
     disabledExtract,
+    disabledHighlightAll,
     disabledRename,
     disabledDelete,
     disabledEnter,

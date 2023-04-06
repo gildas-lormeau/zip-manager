@@ -5,6 +5,7 @@ function getEventHandlers({
   selectedFolder,
   disabledCut,
   disabledCopy,
+  disabledHighlightAll,
   disabledExtract,
   disabledRename,
   disabledPaste,
@@ -23,7 +24,6 @@ function getEventHandlers({
   highlightFirst,
   highlightLast,
   highlightFirstLetter,
-  highlightAll,
   togglePrevious,
   toggleNext,
   togglePreviousPage,
@@ -80,7 +80,12 @@ function getEventHandlers({
 
   function handleKeyDown(event) {
     if (!dialogDisplayed) {
-      onEntriesKeyDown(event, { highlightAll, util, constants });
+      onEntriesKeyDown(event, {
+        disabledHighlightAll,
+        setClickedButtonName,
+        util,
+        constants
+      });
       onHighlightedEntriesKeyDown(event, {
         disabledCut,
         disabledCopy,
@@ -266,20 +271,26 @@ function onHighlightedEntriesKeyUp(
   }
 }
 
-function onEntriesKeyDown(event, { highlightAll, util, constants }) {
+function onEntriesKeyDown(
+  event,
+  { disabledHighlightAll, setClickedButtonName, util, constants }
+) {
   const {
-    SELECT_ALL_KEY,
+    HIGHLIGHT_ALL_KEY,
     DOWN_KEY,
     UP_KEY,
     PAGE_DOWN_KEY,
     PAGE_UP_KEY,
     HOME_KEY,
-    END_KEY
+    END_KEY,
+    HIGHLIGHT_ALL_BUTTON_NAME
   } = constants;
   if (modifierKeyPressed(event, util)) {
-    if (event.key === SELECT_ALL_KEY) {
+    if (event.key === HIGHLIGHT_ALL_KEY) {
       event.preventDefault();
-      highlightAll();
+      if (!disabledHighlightAll) {
+        setClickedButtonName(HIGHLIGHT_ALL_BUTTON_NAME);
+      }
     }
   }
   if (!event.altKey && !modifierKeyPressed(event, util)) {

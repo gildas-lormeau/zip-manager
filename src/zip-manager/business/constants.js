@@ -10,7 +10,7 @@ const CREATE_FOLDER_KEY = "d";
 const ADD_FILES_KEY = "f";
 const IMPORT_ZIP_KEY = "i";
 const EXPORT_ZIP_KEY = "e";
-const SELECT_ALL_KEY = "a";
+const HIGHLIGHT_ALL_KEY = "a";
 const DELETE_KEYS = ["Backspace", "Delete"];
 const DOWN_KEY = "ArrowDown";
 const UP_KEY = "ArrowUp";
@@ -42,6 +42,7 @@ const COPY_BUTTON_NAME = "copy-button";
 const CUT_BUTTON_NAME = "cut-button";
 const PASTE_BUTTON_NAME = "paste-button";
 const EXTRACT_BUTTON_NAME = "extract-button";
+const HIGHLIGHT_ALL_BUTTON_NAME = "select-all";
 const RENAME_BUTTON_NAME = "rename-button";
 const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
@@ -63,7 +64,7 @@ export {
   ADD_FILES_KEY,
   IMPORT_ZIP_KEY,
   EXPORT_ZIP_KEY,
-  SELECT_ALL_KEY,
+  HIGHLIGHT_ALL_KEY,
   DELETE_KEYS,
   DOWN_KEY,
   UP_KEY,
@@ -88,6 +89,7 @@ export {
   CUT_BUTTON_NAME,
   PASTE_BUTTON_NAME,
   EXTRACT_BUTTON_NAME,
+  HIGHLIGHT_ALL_BUTTON_NAME,
   RENAME_BUTTON_NAME,
   DELETE_BUTTON_NAME,
   BACK_BUTTON_NAME,

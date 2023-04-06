@@ -10,6 +10,7 @@ function BottomButtonBar({
   disabledPasteButton,
   disabledResetClipboardDataButton,
   disabledExtractButton,
+  disabledHighlightAllButton,
   disabledRenameButton,
   disabledDeleteButton,
   hideDownloadManager,
@@ -20,6 +21,7 @@ function BottomButtonBar({
   onPaste,
   onResetClipboardData,
   onExtract,
+  onHighlightAll,
   onRename,
   onRemove,
   onMove,
@@ -87,6 +89,14 @@ function BottomButtonBar({
         />
       </div>
       <div className="button-group">
+        <HighlightAllButton
+          disabled={disabledHighlightAllButton}
+          clickedButtonName={clickedButtonName}
+          onHighlightAll={onHighlightAll}
+          onClickedButton={onClickedButton}
+          constants={constants}
+          messages={messages}
+        />
         <ExtractEntryButton
           disabled={disabledExtractButton}
           clickedButtonName={clickedButtonName}
@@ -189,6 +199,27 @@ function ResetClipboardDataButton({
       label={messages.RESET_CLIPBOARD_BUTTON_LABEL}
       disabled={disabled}
       onClick={onResetClipboardData}
+    />
+  );
+}
+
+function HighlightAllButton({
+  disabled,
+  clickedButtonName,
+  onHighlightAll,
+  onClickedButton,
+  constants,
+  messages
+}) {
+  return (
+    <Button
+      name={constants.HIGHLIGHT_ALL_BUTTON_NAME}
+      title={messages.HIGHLIGHT_ALL_BUTTON_TOOLTIP}
+      label={messages.HIGHLIGHT_ALL_BUTTON_LABEL}
+      disabled={disabled}
+      clickedButtonName={clickedButtonName}
+      onClick={onHighlightAll}
+      onClickedButton={onClickedButton}
     />
   );
 }
