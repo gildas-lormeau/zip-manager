@@ -69,7 +69,8 @@ const RESET_TITLE = "Reset filesystem";
 const RESET_MESSAGE = "Please confirm the reset of the filesystem";
 const RESET_DIALOG_BUTTON_LABEL = "Reset";
 const DELETE_ENTRY_TITLE = "Delete entries";
-const DELETE_ENTRY_MESSAGE = "Please confirm the deletion of the highlighted entries";
+const DELETE_ENTRY_MESSAGE =
+  "Please confirm the deletion of the highlighted entries";
 const DELETE_ENTRY_DIALOG_BUTTON_LABEL = "Delete";
 const ZIP_FILE_DESCRIPTION_LABEL = "Zip file";
 const IMPORT_PASSWORD_TITLE = "Enter password";
