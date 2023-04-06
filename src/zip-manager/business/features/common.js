@@ -5,6 +5,7 @@ function getCommonFeatures({
   setEntries,
   setErrorMessageDialog,
   setClickedButtonName,
+  removeDownload,
   downloaderElement,
   zipService,
   storageService,
@@ -32,37 +33,106 @@ function getCommonFeatures({
       );
   }
 
-  async function downloadFile(name, options, blobGetter) {
-    const controller = util.createAbortController();
-    const progressValue = null;
-    const progressMax = null;
-    const download = { name, controller, progressValue, progressMax };
-    setDownloadId((downloadId) => {
-      const id = downloadId + 1;
-      download.id = id;
-      return id;
-    });
-    setDownloads((downloads) => [download, ...downloads]);
-    await executeDownload(download, options, blobGetter);
-    return download;
+  async function saveEntries(entries, filename, options, parentHandle) {
+    if (util.savePickersSupported()) {
+      try {
+        if (!parentHandle && (entries.length > 1 || entries[0].directory)) {
+          parentHandle = await getParentHandle();
+        }
+      } catch (error) {
+        if (util.downloadAborted(error)) {
+          return;
+        } else {
+          throw error;
+        }
+      }
+    }
+    await Promise.all(
+      entries.map(async (entry) =>
+        saveEntry(entry, filename, options, parentHandle)
+      )
+    );
   }
 
-  async function executeDownload(download, options, blobGetter) {
+  async function saveEntry(entry, filename, options, parentHandle) {
+    if (!parentHandle && entry.directory) {
+      parentHandle = await getParentHandle();
+    }
+    const name = filename || entry.name;
+    let download;
+    try {
+      if (entry.directory) {
+        await saveDirectoryEntry(name, entry, options, parentHandle);
+      } else {
+        download = {
+          name,
+          controller: util.createAbortController(),
+          progressValue: null,
+          progressMax: null
+        };
+        await saveFileEntry(name, entry, options, download, parentHandle);
+      }
+    } catch (error) {
+      if (!util.downloadAborted(error)) {
+        throw error;
+      }
+    } finally {
+      if (download) {
+        removeDownload(download);
+      }
+    }
+  }
+
+  async function saveDirectoryEntry(name, entry, options, parentHandle) {
+    const directoryHandle = await parentHandle.getDirectoryHandle(name, {
+      create: true
+    });
+    await saveEntries(entry.children, null, options, directoryHandle);
+  }
+
+  async function saveFileEntry(name, entry, options, download, parentHandle) {
+    const savePickersSupported = util.savePickersSupported();
     const { signal } = download.controller;
     const onprogress = (progressValue, progressMax) =>
       onDownloadProgress(download.id, progressValue, progressMax);
-    try {
-      const blob = await blobGetter(download, {
-        ...options,
-        signal,
-        onprogress
-      });
-      util.downloadBlob(blob, downloaderElement, download.name);
-    } catch (error) {
-      if (!util.downloadAborted(error)) {
-        await executeDownload(download, options, blobGetter);
+    let fileHandle, writable, blob;
+    if (savePickersSupported) {
+      if (parentHandle) {
+        fileHandle = await parentHandle.getFileHandle(name, {
+          create: true
+        });
+      } else {
+        fileHandle = await getFileHandle(name);
+        download.name = fileHandle.name;
       }
+      writable = await fileHandle.createWritable();
+    } else {
+      ({ writable, blob } = util.getWritableBlob());
     }
+    setDownloadId((downloadId) => {
+      download.id = downloadId + 1;
+      return download.id;
+    });
+    setDownloads((downloads) => [download, ...downloads]);
+    await entry.getWritable(writable, { signal, onprogress, ...options });
+    if (!savePickersSupported) {
+      util.downloadBlob(await blob, downloaderElement, download.name);
+    }
+  }
+
+  function getParentHandle() {
+    return util.showDirectoryPicker({
+      mode: "readwrite",
+      startIn: "downloads"
+    });
+  }
+
+  function getFileHandle(suggestedName) {
+    return util.showSaveFilePicker({
+      suggestedName,
+      mode: "readwrite",
+      startIn: "downloads"
+    });
   }
 
   function onDownloadProgress(downloadId, progressValue, progressMax) {
@@ -124,7 +194,8 @@ function getCommonFeatures({
   }
 
   return {
-    downloadFile,
+    saveEntry,
+    saveEntries,
     updateSelectedFolder,
     setOptions,
     getOptions,

@@ -7,14 +7,12 @@ function getSelectedFolderFeatures({
   setCreateFolderDialog,
   updateSelectedFolder,
   highlightEntries,
-  removeDownload,
-  downloadFile,
+  saveEntry,
   getOptions,
   openDisplayError,
+  util,
   constants
 }) {
-  const { DEFAULT_MIME_TYPE, ZIP_EXTENSION } = constants;
-
   function openPromptCreateFolder() {
     setCreateFolderDialog({});
   }
@@ -117,10 +115,12 @@ function getSelectedFolderFeatures({
   }
 
   function openPromptExportZip() {
+    const filename = selectedFolder.name
+      ? selectedFolder.name + constants.ZIP_EXTENSION
+      : rootZipFilename;
     setExportZipDialog({
-      filename: selectedFolder.name
-        ? selectedFolder.name + ZIP_EXTENSION
-        : rootZipFilename,
+      filename,
+      filenameHidden: util.savePickersSupported(),
       password: ""
     });
   }
@@ -130,25 +130,17 @@ function getSelectedFolderFeatures({
   }
 
   function exportZip({ filename, password }) {
+    function getWritable(writable, options) {
+      return selectedFolder.exportWritable(writable, options);
+    }
+
     async function exportZip() {
       try {
-        await downloadFile(
-          filename,
-          { mimeType: DEFAULT_MIME_TYPE },
-          async (download, options) => {
-            try {
-              const { bufferedWrite, keepOrder } = getOptions();
-              return await selectedFolder.exportBlob({
-                ...options,
-                bufferedWrite,
-                keepOrder,
-                password
-              });
-            } finally {
-              removeDownload(download);
-            }
-          }
-        );
+        const options = getOptions();
+        await saveEntry({ filename, getWritable }, filename, {
+          ...options,
+          password
+        });
       } catch (error) {
         openDisplayError(error.message);
       }

@@ -1,4 +1,4 @@
-/* global navigator, window, document, URL, AbortController, Intl, localStorage */
+/* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
@@ -150,6 +150,30 @@ async function showOpenFilePicker({ multiple, description, extension }) {
   }
 }
 
+function showDirectoryPicker(options) {
+  return window.showDirectoryPicker(options);
+}
+
+function showSaveFilePicker(options) {
+  return window.showSaveFilePicker(options);
+}
+
+function savePickersSupported() {
+  return (
+    typeof window.showSaveFilePicker === "function" &&
+    typeof window.showDirectoryPicker === "function"
+  );
+}
+
+function getWritableBlob() {
+  const { readable, writable } = new TransformStream({});
+  const blob = new Response(readable).blob();
+  return {
+    blob,
+    writable
+  };
+}
+
 function formatSize(number) {
   let indexNumberFormat = 0;
   while (number > 1000 && indexNumberFormat < SIZE_NUMBER_FORMATS.length - 1) {
@@ -197,6 +221,10 @@ export {
   saveValue,
   restoreValue,
   showOpenFilePicker,
+  showDirectoryPicker,
+  showSaveFilePicker,
+  savePickersSupported,
+  getWritableBlob,
   formatSize,
   formatDate,
   setTimeout,

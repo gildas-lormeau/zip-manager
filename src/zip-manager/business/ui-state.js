@@ -14,13 +14,21 @@ function getUIState({
   resetDialog,
   errorMessageDialog,
   importPasswordDialog,
-  optionsDialog
+  optionsDialog,
+  util
 }) {
   const entriesEmpty = !entries.length;
   const parentFolderHighlighted =
     !highlightedIds.length ||
     (selectedFolder.parent &&
       highlightedIds.includes(selectedFolder.parent.id));
+  const subFolderHighlighted = highlightedIds.find((id) => {
+    const entry = selectedFolder.children.find((entry) => entry.id === id);
+    if (entry) {
+      return entry.directory;
+    }
+    return false;
+  });
   const clipboardDataEmpty = !clipboardData;
   const disabledExportZip = entriesEmpty;
   const disabledReset = entriesEmpty;
@@ -34,9 +42,7 @@ function getUIState({
   const disabledExtract =
     parentFolderHighlighted ||
     !highlightedIds.length ||
-    highlightedIds.find(
-      (id) => selectedFolder.children.find((entry) => entry.id === id).directory
-    );
+    (!util.savePickersSupported() && subFolderHighlighted);
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;

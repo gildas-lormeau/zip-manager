@@ -7,6 +7,7 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
   const filenameTextSelected = useRef(false);
   const [filename, setFilename] = useState("");
   const [password, setPassword] = useState("");
+  const filenameHidden = data?.filenameHidden;
 
   function handleChangeFilename(event) {
     setFilename(event.target.value);
@@ -32,7 +33,7 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (!filenameTextSelected.current && filename) {
+    if (!filenameTextSelected.current && filename && filenameInputRef && filenameInputRef.current) {
       filenameTextSelected.current = true;
       filenameInputRef.current.select();
     }
@@ -47,14 +48,16 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
       onClose={handleClose}
       onSubmit={handleSubmit}
     >
-      <label>
+      <label style={{ display: filenameHidden ? "none" : null }}>
         {messages.EXPORT_ZIP_FILENAME_LABEL}
-        <input
-          value={filename}
-          required
-          onChange={handleChangeFilename}
-          ref={filenameInputRef}
-        />
+        {!filenameHidden && (
+          <input
+            value={filename}
+            required
+            onChange={handleChangeFilename}
+            ref={filenameInputRef}
+          />
+        )}
       </label>
       <label>
         {messages.EXPORT_ZIP_PASSWORD_LABEL}

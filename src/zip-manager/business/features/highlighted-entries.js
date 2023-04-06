@@ -14,14 +14,12 @@ function getHighlightedEntriesFeatures({
   setExtractDialog,
   setRenameDialog,
   setDeleteEntryDialog,
-  removeDownload,
   updateSelectedFolder,
-  downloadFile,
+  saveEntries,
+  getOptions,
   openDisplayError,
-  constants
+  util
 }) {
-  const { DEFAULT_MIME_TYPE } = constants;
-
   function copy() {
     setClipboardData({
       entries: highlightedIds.map((entryId) =>
@@ -126,46 +124,35 @@ function getHighlightedEntriesFeatures({
     setDeleteEntryDialog(null);
   }
 
-  function openPromptExtract(
-    highlightedEntry = zipFilesystem.getById(highlightedIds[0])
-  ) {
-    setExtractDialog({
-      filename: highlightedEntry.name
-    });
+  function openPromptExtract(entry) {
+    if (!entry) {
+      entry = zipFilesystem.getById(highlightedIds[0]);
+    }
+    const options = {
+      filename: entry.name
+    };
+    if (util.savePickersSupported()) {
+      extract(options);
+    } else {
+      setExtractDialog(options);
+    }
   }
 
   function extract({ filename } = {}) {
     async function download() {
       try {
-        await Promise.all(
-          highlightedIds.map(async (highlightedId) => {
-            const highlightedEntry = zipFilesystem.getById(highlightedId);
-            await downloadFile(
-              filename || highlightedEntry.name,
-              {},
-              async (download, options) => {
-                try {
-                  return await highlightedEntry.getBlob(
-                    DEFAULT_MIME_TYPE,
-                    options
-                  );
-                } finally {
-                  removeDownload(download);
-                }
-              }
-            );
-          })
+        const entries = highlightedIds.map((highlightedId) =>
+          zipFilesystem.getById(highlightedId)
         );
+        const options = getOptions();
+        filename = entries.length === 1 ? filename : null;
+        await saveEntries(entries, filename, options);
       } catch (error) {
         openDisplayError(error.message);
       }
     }
 
-    if (highlightedIds.length === 1 && !filename) {
-      openPromptExtract();
-    } else {
-      download();
-    }
+    download();
   }
 
   function closePromptExtract() {

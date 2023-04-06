@@ -57,7 +57,7 @@ function ZipManager() {
   const [previousHighlight, setPreviousHighlight] = useState(null);
   const [toggleNavigationDirection, setToggleNavigationDirection] = useState(0);
   const [downloads, setDownloads] = useState([]);
-  const [downloadId, setDownloadId] = useState(0);
+  const [, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -85,8 +85,13 @@ function ZipManager() {
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
   const appClassName = ("main-container " + colorScheme).trim();
 
+  const { abortDownload, removeDownload } = getDownloadsFeatures({
+    setDownloads,
+    util
+  });
   const {
-    downloadFile,
+    saveEntry,
+    saveEntries,
     updateSelectedFolder,
     setOptions,
     getOptions,
@@ -100,6 +105,7 @@ function ZipManager() {
     setEntries,
     setErrorMessageDialog,
     setClickedButtonName,
+    removeDownload,
     downloaderElement,
     zipService,
     storageService,
@@ -145,10 +151,6 @@ function ZipManager() {
     setHighlightedIds,
     updateSelectedFolder
   });
-  const { abortDownload, removeDownload } = getDownloadsFeatures({
-    setDownloads,
-    util
-  });
   const {
     openPromptCreateFolder,
     createFolder,
@@ -168,10 +170,10 @@ function ZipManager() {
     setCreateFolderDialog,
     updateSelectedFolder,
     highlightEntries,
-    removeDownload,
-    downloadFile,
+    saveEntry,
     getOptions,
     openDisplayError,
+    util,
     constants
   });
   const {
@@ -203,11 +205,11 @@ function ZipManager() {
     setExtractDialog,
     setRenameDialog,
     setDeleteEntryDialog,
-    removeDownload,
     updateSelectedFolder,
-    downloadFile,
+    saveEntries,
+    getOptions,
     openDisplayError,
-    constants
+    util
   });
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     zipService,
@@ -250,7 +252,8 @@ function ZipManager() {
     resetDialog,
     errorMessageDialog,
     importPasswordDialog,
-    optionsDialog
+    optionsDialog,
+    util
   });
   const {
     enter,
