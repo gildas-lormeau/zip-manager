@@ -37,12 +37,12 @@ function getCommonFeatures({
     const controller = util.createAbortController();
     const progressValue = null;
     const progressMax = null;
+    const download = { name, controller, progressValue, progressMax };
     setDownloadId((downloadId) => {
       const id = downloadId + 1;
       download.id = id;
       return id;
     });
-    const download = { name, controller, progressValue, progressMax };
     setDownloads((downloads) => [download, ...downloads]);
     await executeDownload(download, options, blobGetter);
     return download;
