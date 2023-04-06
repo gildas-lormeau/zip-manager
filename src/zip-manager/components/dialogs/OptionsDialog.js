@@ -67,7 +67,7 @@ function OptionsDialog({
       setKeepOrder(keepOrder);
       setBufferedWrite(bufferedWrite);
       setMaxWorkers(maxWorkers);
-      setChunkSize(chunkSize);
+      setChunkSize(chunkSize / 1024);
     }
   }
 
