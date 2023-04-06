@@ -58,37 +58,6 @@ function BottomButtonBar({
       style={hideInfobar && hideDownloadManager ? { borderBlockEnd: 0 } : null}
     >
       <div className="button-group">
-        <CopyEntryButton
-          disabled={disabledCopyButton}
-          clickedButtonName={clickedButtonName}
-          onCopy={onCopy}
-          onClickedButton={onClickedButton}
-          constants={constants}
-          messages={messages}
-        />
-        <CutEntryButton
-          disabled={disabledCutButton}
-          clickedButtonName={clickedButtonName}
-          onCut={onCut}
-          onClickedButton={onClickedButton}
-          constants={constants}
-          messages={messages}
-        />
-        <PasteEntryButton
-          disabled={disabledPasteButton}
-          clickedButtonName={clickedButtonName}
-          onPaste={onPaste}
-          onClickedButton={onClickedButton}
-          constants={constants}
-          messages={messages}
-        />
-        <ResetClipboardDataButton
-          disabled={disabledResetClipboardDataButton}
-          onResetClipboardData={onResetClipboardData}
-          messages={messages}
-        />
-      </div>
-      <div className="button-group">
         <HighlightAllButton
           disabled={disabledHighlightAllButton}
           clickedButtonName={clickedButtonName}
@@ -119,6 +88,37 @@ function BottomButtonBar({
           onRemove={onRemove}
           onClickedButton={onClickedButton}
           constants={constants}
+          messages={messages}
+        />
+      </div>
+      <div className="button-group">
+        <CopyEntryButton
+          disabled={disabledCopyButton}
+          clickedButtonName={clickedButtonName}
+          onCopy={onCopy}
+          onClickedButton={onClickedButton}
+          constants={constants}
+          messages={messages}
+        />
+        <CutEntryButton
+          disabled={disabledCutButton}
+          clickedButtonName={clickedButtonName}
+          onCut={onCut}
+          onClickedButton={onClickedButton}
+          constants={constants}
+          messages={messages}
+        />
+        <PasteEntryButton
+          disabled={disabledPasteButton}
+          clickedButtonName={clickedButtonName}
+          onPaste={onPaste}
+          onClickedButton={onClickedButton}
+          constants={constants}
+          messages={messages}
+        />
+        <ResetClipboardDataButton
+          disabled={disabledResetClipboardDataButton}
+          onResetClipboardData={onResetClipboardData}
           messages={messages}
         />
       </div>
