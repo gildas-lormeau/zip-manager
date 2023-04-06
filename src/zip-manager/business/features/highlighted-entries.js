@@ -161,7 +161,11 @@ function getHighlightedEntriesFeatures({
       }
     }
 
-    download();
+    if (highlightedIds.length === 1 && !filename) {
+      openPromptExtract();
+    } else {
+      download();
+    }
   }
 
   function closePromptExtract() {
