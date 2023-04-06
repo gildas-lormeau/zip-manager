@@ -22,7 +22,7 @@ const HOME_KEY = "Home";
 const END_KEY = "End";
 const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
-const DEFAULT_ACCENT_COLOR = "#3ab000";
+const DEFAULT_ACCENT_COLOR = "#FF672E";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const DEFAULT_OPTIONS = {
   hideDownloadManager: false,
