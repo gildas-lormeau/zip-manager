@@ -48,7 +48,7 @@ function OptionsDialog({
       keepOrder,
       bufferedWrite,
       maxWorkers: Number(maxWorkers),
-      chunkSize: Number(chunkSize)
+      chunkSize: Number(chunkSize) * 1024
     });
   }
 

@@ -119,7 +119,7 @@ function getCommonFeatures({
     const { maxWorkers, chunkSize } = options;
     zipService.configure({
       maxWorkers,
-      chunkSize: chunkSize * 1024
+      chunkSize
     });
   }
 

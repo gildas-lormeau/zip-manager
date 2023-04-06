@@ -30,7 +30,7 @@ const DEFAULT_OPTIONS = {
   bufferedWrite: true,
   keepOrder: true,
   maxWorkers: 2,
-  chunkSize: 512
+  chunkSize: 512 * 1024
 };
 const ZIP_EXTENSION = ".zip";
 const LONG_TOUCH_DELAY = 750;
