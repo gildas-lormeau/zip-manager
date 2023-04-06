@@ -94,7 +94,6 @@ function ZipManager() {
     closeDisplayError,
     resetClickedButtonName
   } = getCommonFeatures({
-    downloadId,
     selectedFolder,
     setDownloadId,
     setDownloads,

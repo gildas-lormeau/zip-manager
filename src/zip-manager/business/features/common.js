@@ -1,5 +1,4 @@
 function getCommonFeatures({
-  downloadId,
   selectedFolder,
   setDownloadId,
   setDownloads,
