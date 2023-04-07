@@ -10,7 +10,7 @@ function Entries({
   entriesHeight,
   clipboardData,
   hideDownloadManager,
-  onAddFiles,
+  onDropFiles,
   onHighlight,
   onToggle,
   onToggleRange,
@@ -119,10 +119,15 @@ function Entries({
     event.preventDefault();
   }
 
-  function handleDrop(event) {
-    if (event.dataTransfer.files) {
+  async function handleDrop(event) {
+    if (event.dataTransfer.items) {
       event.preventDefault();
-      onAddFiles(Array.from(event.dataTransfer.files));
+      const handles = await Promise.all(
+        Array.from(event.dataTransfer.items)
+          .filter((item) => item.kind === "file")
+          .map((item) => item.getAsFileSystemHandle())
+      );
+      onDropFiles(handles);
     }
   }
 

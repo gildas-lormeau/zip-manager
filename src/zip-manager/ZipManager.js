@@ -156,6 +156,7 @@ function ZipManager() {
     createFolder,
     closePromptCreateFolder,
     addFiles,
+    dropFiles,
     importZipFile,
     openPromptExportZip,
     exportZip,
@@ -394,7 +395,7 @@ function ZipManager() {
           deltaEntriesHeight={entriesDeltaHeight}
           clipboardData={clipboardData}
           hideDownloadManager={hideDownloadManager}
-          onAddFiles={addFiles}
+          onDropFiles={dropFiles}
           onHighlight={highlight}
           onToggle={toggle}
           onToggleRange={toggleRange}

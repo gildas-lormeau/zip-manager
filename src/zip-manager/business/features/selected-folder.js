@@ -50,6 +50,34 @@ function getSelectedFolderFeatures({
     updateSelectedFolder();
   }
 
+  function dropFiles(handles) {
+    async function dropFiles() {
+      const addedEntries = await addFiles(handles, selectedFolder);
+      const addedChildEntries = selectedFolder.children.filter((entry) =>
+        addedEntries.includes(entry)
+      );
+      highlightSortedEntries(addedChildEntries);
+      updateSelectedFolder();
+    }
+
+    async function addFiles(handle, parentEntry, addedEntries = []) {
+      for await (const value of handle.values()) {
+        if (value.kind === "file") {
+          const file = await value.getFile();
+          const fileEntry = parentEntry.addBlob(value.name, file);
+          addedEntries.push(fileEntry);
+        } else if (value.kind === "directory") {
+          const directoryEntry = parentEntry.addDirectory(value.name);
+          addedEntries.push(directoryEntry);
+          await addFiles(value, directoryEntry, addedEntries);
+        }
+      }
+      return addedEntries;
+    }
+
+    dropFiles();
+  }
+
   function importZipFile(zipFile, options = {}) {
     async function updateZipFile() {
       let importedEntries = [];
@@ -158,6 +186,7 @@ function getSelectedFolderFeatures({
     createFolder,
     closePromptCreateFolder,
     addFiles,
+    dropFiles,
     importZipFile,
     openPromptExportZip,
     exportZip,
