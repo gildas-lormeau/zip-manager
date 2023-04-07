@@ -151,7 +151,7 @@ async function showOpenFilePicker({ multiple, description, extension }) {
 }
 
 function openFilePickerSupported() {
-  return window.showOpenFilePicker === "function";
+  return "showOpenFilePicker" in window;
 }
 
 function showDirectoryPicker(options) {
@@ -163,10 +163,7 @@ function showSaveFilePicker(options) {
 }
 
 function savePickersSupported() {
-  return (
-    typeof window.showSaveFilePicker === "function" &&
-    typeof window.showDirectoryPicker === "function"
-  );
+  return "showSaveFilePicker" in window && "showDirectoryPicker" in window;
 }
 
 function getWritableBlob() {
