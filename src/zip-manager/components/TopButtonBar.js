@@ -127,13 +127,12 @@ function AddFilesButton({
 
   function handleClick() {
     async function showOpenFilePicker() {
-      try {
-        onAddFiles(
-          await util.showOpenFilePicker({
-            multiple: true
-          })
-        );
-      } catch (error) {
+      if (util.openFilePickerSupported()) {
+        const files = await util.showOpenFilePicker({
+          multiple: true
+        });
+        onAddFiles(files);
+      } else {
         util.dispatchClick(current);
       }
     }
@@ -180,7 +179,7 @@ function ImportZipButton({
 
   function handleClick() {
     async function showOpenFilePicker() {
-      try {
+      if (util.openFilePickerSupported()) {
         const files = await util.showOpenFilePicker({
           multiple: false,
           description: messages.ZIP_FILE_DESCRIPTION_LABEL,
@@ -189,7 +188,7 @@ function ImportZipButton({
         if (files.length) {
           onImportZipFile(files[0]);
         }
-      } catch (error) {
+      } else {
         util.dispatchClick(current);
       }
     }

@@ -150,6 +150,10 @@ async function showOpenFilePicker({ multiple, description, extension }) {
   }
 }
 
+function openFilePickerSupported() {
+  return window.showOpenFilePicker === "function";
+}
+
 function showDirectoryPicker(options) {
   return window.showDirectoryPicker(options);
 }
@@ -221,6 +225,7 @@ export {
   saveValue,
   restoreValue,
   showOpenFilePicker,
+  openFilePickerSupported,
   showDirectoryPicker,
   showSaveFilePicker,
   savePickersSupported,
