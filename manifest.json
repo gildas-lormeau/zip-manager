@@ -70,22 +70,5 @@
       },
       "launch_type": "single-client"
     }
-  ],
-  "share_target": {
-    "action": "./index.html",
-    "enctype": "multipart/form-data",
-    "method": "POST",
-    "params": {
-      "files": [
-        {
-          "name": "media",
-          "accept": [
-            "audio/*",
-            "image/*",
-            "video/*"
-          ]
-        }
-      ]
-    }
-  }
+  ]
 }
