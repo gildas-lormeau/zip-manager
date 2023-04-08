@@ -1,19 +1,11 @@
 function getEffects({
-  zipFilesystem,
   selectedFolder,
   accentColor,
   setColorScheme,
-  setPreviousHighlight,
-  setToggleNavigationDirection,
-  setSelectedFolder,
-  setHighlightedIds,
-  setClipboardData,
-  setHistory,
-  setHistoryIndex,
   getHighlightedEntryElement,
   initApplication,
   initOpenWithHandler,
-  updateSelectedFolder,
+  initZipFilesystem,
   saveAccentColor,
   util
 }) {
@@ -28,15 +20,7 @@ function getEffects({
   }
 
   function updateZipFilesystem() {
-    const { root } = zipFilesystem;
-    setSelectedFolder(root);
-    setHighlightedIds([]);
-    setPreviousHighlight(null);
-    setToggleNavigationDirection(0);
-    setClipboardData(null);
-    setHistory([root]);
-    setHistoryIndex(0);
-    updateSelectedFolder(root);
+    initZipFilesystem();
   }
 
   function updateHighlightedEntries() {

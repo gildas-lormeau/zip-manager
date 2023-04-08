@@ -1,9 +1,16 @@
 function getAppFeatures({
-  storageService,
+  zipFilesystem,
   dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
   openWithHandlerInitialized,
+  setPreviousHighlight,
+  setToggleNavigationDirection,
+  setSelectedFolder,
+  setHighlightedIds,
+  setClipboardData,
+  setHistory,
+  setHistoryIndex,
   setAccentColor,
   setEntriesHeight,
   setEntriesDeltaHeight,
@@ -14,6 +21,8 @@ function getAppFeatures({
   goIntoFolder,
   openPromptExtract,
   importZipFile,
+  updateSelectedFolder,
+  storageService,
   util,
   constants
 }) {
@@ -47,6 +56,18 @@ function getAppFeatures({
       });
       setOpenWithHandlerInitialized(true);
     }
+  }
+
+  function initZipFilesystem() {
+    const { root } = zipFilesystem;
+    setSelectedFolder(root);
+    setHighlightedIds([]);
+    setPreviousHighlight(null);
+    setToggleNavigationDirection(0);
+    setClipboardData(null);
+    setHistory([root]);
+    setHistoryIndex(0);
+    updateSelectedFolder(root);
   }
 
   function enter(entry) {
@@ -100,6 +121,7 @@ function getAppFeatures({
   return {
     initApplication,
     initOpenWithHandler,
+    initZipFilesystem,
     enter,
     openOptions,
     closeOptions,

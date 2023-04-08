@@ -263,6 +263,7 @@ function ZipManager() {
   const {
     initApplication,
     initOpenWithHandler,
+    initZipFilesystem,
     enter,
     openOptions,
     closeOptions,
@@ -272,11 +273,18 @@ function ZipManager() {
     resizeEntries,
     stopResizeEntries
   } = getAppFeatures({
-    storageService,
+    zipFilesystem,
     dialogDisplayed,
     entriesHeight,
     entriesDeltaHeight,
     openWithHandlerInitialized,
+    setPreviousHighlight,
+    setToggleNavigationDirection,
+    setSelectedFolder,
+    setHighlightedIds,
+    setClipboardData,
+    setHistory,
+    setHistoryIndex,
     setAccentColor,
     setEntriesHeight,
     setEntriesDeltaHeight,
@@ -287,6 +295,8 @@ function ZipManager() {
     goIntoFolder,
     openPromptExtract,
     importZipFile,
+    updateSelectedFolder,
+    storageService,
     util,
     constants
   });
@@ -335,21 +345,13 @@ function ZipManager() {
     updateZipFilesystem,
     updateAccentColor
   } = getEffects({
-    zipFilesystem,
     selectedFolder,
     accentColor,
     setColorScheme,
-    setPreviousHighlight,
-    setToggleNavigationDirection,
-    setSelectedFolder,
-    setHighlightedIds,
-    setClipboardData,
-    setHistory,
-    setHistoryIndex,
     getHighlightedEntryElement,
     initApplication,
     initOpenWithHandler,
-    updateSelectedFolder,
+    initZipFilesystem,
     saveAccentColor,
     util
   });
