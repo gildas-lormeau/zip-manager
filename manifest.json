@@ -2,7 +2,7 @@
   "short_name": "Zip Manager",
   "name": "Zip Manager",
   "description": "Read, edit and write zip files.",
-  "start_url": "/zip-manager/",
+  "start_url": "/",
   "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff",
@@ -62,7 +62,7 @@
   ],
   "file_handlers": [
     {
-      "action": "/zip-manager/",
+      "action": "/",
       "accept": {
         "application/zip": [
           ".zip"
