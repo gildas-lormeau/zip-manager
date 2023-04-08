@@ -71,5 +71,20 @@
       "launch_type": "single-client"
     }
   ],
-  "scope": "/"
+  "scope": "/",
+  "share_target": {
+    "action": "/_share-target",
+    "enctype": "multipart/form-data",
+    "method": "POST",
+    "params": {
+      "files": [{
+        "name": "media",
+        "accept": [
+          "audio/*",
+          "image/*",
+          "video/*"
+        ]
+      }]
+    }
+  }
 }
