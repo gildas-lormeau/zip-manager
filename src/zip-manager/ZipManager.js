@@ -133,6 +133,7 @@ function ZipManager() {
     toggleLast
   } = getEntriesFeatures({
     entries,
+    selectedFolder,
     previousHighlight,
     highlightedIds,
     toggleNavigationDirection,

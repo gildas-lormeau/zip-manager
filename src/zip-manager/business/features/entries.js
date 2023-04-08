@@ -1,5 +1,6 @@
 function getEntriesFeatures({
   entries,
+  selectedFolder,
   previousHighlight,
   highlightedIds,
   toggleNavigationDirection,
@@ -72,7 +73,9 @@ function getEntriesFeatures({
   function highlightAll() {
     setPreviousHighlight(entries[0]);
     setToggleNavigationDirection(0);
-    setHighlightedIds(entries.map((entry) => entry.id));
+    setHighlightedIds(
+      entries.map((entry) => entry !== selectedFolder.parent && entry.id)
+    );
   }
 
   function toggle(entry) {
