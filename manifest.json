@@ -62,7 +62,7 @@
   ],
   "file_handlers": [
     {
-      "action": "/",
+      "action": "./index.html",
       "accept": {
         "application/zip": [
           ".zip"
