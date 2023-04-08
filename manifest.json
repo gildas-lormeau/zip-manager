@@ -2,7 +2,7 @@
   "short_name": "Zip Manager",
   "name": "Zip Manager",
   "description": "Read, edit and write zip files.",
-  "start_url": "/",
+  "start_url": "/zip-manager/",
   "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff",
@@ -62,7 +62,7 @@
   ],
   "file_handlers": [
     {
-      "action": "/",
+      "action": "/zip-manager/",
       "accept": {
         "application/zip": [
           ".zip"
@@ -71,20 +71,5 @@
       "launch_type": "single-client"
     }
   ],
-  "scope": "/",
-  "share_target": {
-    "action": "/_share-target",
-    "enctype": "multipart/form-data",
-    "method": "POST",
-    "params": {
-      "files": [{
-        "name": "media",
-        "accept": [
-          "audio/*",
-          "image/*",
-          "video/*"
-        ]
-      }]
-    }
-  }
+  "scope": "/zip-manager/"
 }
