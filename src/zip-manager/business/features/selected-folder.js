@@ -52,24 +52,27 @@ function getSelectedFolderFeatures({
 
   function dropFiles(handles) {
     async function dropFiles() {
-      const addedEntries = await addFiles(handles, selectedFolder);
+      const droppedEntries = [];
+      await Promise.all(
+        handles.map((handle) => addFile(handle, selectedFolder, droppedEntries))
+      );
       const addedChildEntries = selectedFolder.children.filter((entry) =>
-        addedEntries.includes(entry)
+        droppedEntries.includes(entry)
       );
       highlightSortedEntries(addedChildEntries);
       updateSelectedFolder();
     }
 
-    async function addFiles(handle, parentEntry, addedEntries = []) {
-      for await (const value of handle.values()) {
-        if (value.kind === "file") {
-          const file = await value.getFile();
-          const fileEntry = parentEntry.addBlob(value.name, file);
-          addedEntries.push(fileEntry);
-        } else if (value.kind === "directory") {
-          const directoryEntry = parentEntry.addDirectory(value.name);
-          addedEntries.push(directoryEntry);
-          await addFiles(value, directoryEntry, addedEntries);
+    async function addFile(entry, parentEntry, addedEntries) {
+      if (entry.kind === util.FILESYSTEM_FILE_KIND) {
+        const file = await entry.getFile();
+        const fileEntry = parentEntry.addBlob(entry.name, file);
+        addedEntries.push(fileEntry);
+      } else if (entry.kind === util.FILESYSTEM_DIRECTORY_KIND) {
+        const directoryEntry = parentEntry.addDirectory(entry.name);
+        addedEntries.push(directoryEntry);
+        for await (const value of entry.values()) {
+          await addFile(value, directoryEntry, addedEntries);
         }
       }
       return addedEntries;

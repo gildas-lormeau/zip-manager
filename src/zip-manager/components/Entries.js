@@ -122,12 +122,8 @@ function Entries({
   async function handleDrop(event) {
     if (event.dataTransfer.items) {
       event.preventDefault();
-      const handles = await Promise.all(
-        Array.from(event.dataTransfer.items)
-          .filter((item) => item.kind === "file")
-          .map((item) => item.getAsFileSystemHandle())
-      );
-      onDropFiles(handles);
+      const items = Array.from(event.dataTransfer.items);
+      onDropFiles(await util.getFilesystemHandles(items));
     }
   }
 
