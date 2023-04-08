@@ -1,7 +1,7 @@
 function getEffects({
   zipFilesystem,
+  selectedFolder,
   accentColor,
-  setAccentColor,
   setColorScheme,
   setPreviousHighlight,
   setToggleNavigationDirection,
@@ -11,11 +11,22 @@ function getEffects({
   setHistory,
   setHistoryIndex,
   getHighlightedEntryElement,
+  initApplication,
+  initOpenWithHandler,
   updateSelectedFolder,
-  restoreAccentColor,
   saveAccentColor,
   util
 }) {
+  function updateApplication() {
+    initApplication();
+  }
+
+  function updateOpenWithHandler() {
+    if (selectedFolder) {
+      initOpenWithHandler();
+    }
+  }
+
   function updateZipFilesystem() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
@@ -33,12 +44,6 @@ function getEffects({
     if (highlightedEntryElement) {
       util.scrollIntoView(highlightedEntryElement);
     }
-  }
-
-  function initAccentColor() {
-    const accentColor = restoreAccentColor();
-    setAccentColor(accentColor);
-    saveAccentColor(accentColor);
   }
 
   function updateAccentColor() {
@@ -64,9 +69,10 @@ function getEffects({
   }
 
   return {
+    updateApplication,
+    updateOpenWithHandler,
     updateZipFilesystem,
     updateHighlightedEntries,
-    initAccentColor,
     updateAccentColor
   };
 }

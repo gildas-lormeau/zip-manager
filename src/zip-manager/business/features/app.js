@@ -3,16 +3,52 @@ function getAppFeatures({
   dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
+  openWithHandlerInitialized,
+  setAccentColor,
   setEntriesHeight,
   setEntriesDeltaHeight,
+  setOpenWithHandlerInitialized,
   getEntriesElementHeight,
   setOptionsDialog,
   getOptions,
   goIntoFolder,
   openPromptExtract,
+  importZipFile,
   util,
   constants
 }) {
+  function initApplication() {
+    const accentColor = restoreAccentColor();
+    setAccentColor(accentColor);
+    saveAccentColor(accentColor);
+  }
+
+  function restoreAccentColor() {
+    return (
+      storageService.get(constants.ACCENT_COLOR_KEY_NAME) ||
+      constants.DEFAULT_ACCENT_COLOR
+    );
+  }
+
+  function initOpenWithHandler() {
+    if (!openWithHandlerInitialized) {
+      util.setLaunchQueueConsumer((launchParams) => {
+        async function handleLaunchParams() {
+          if (launchParams.files.length) {
+            await Promise.all(
+              launchParams.files.map(async (handle) =>
+                importZipFile(await handle.getFile())
+              )
+            );
+          }
+        }
+
+        handleLaunchParams();
+      });
+      setOpenWithHandlerInitialized(true);
+    }
+  }
+
   function enter(entry) {
     if (entry.directory) {
       goIntoFolder(entry);
@@ -24,13 +60,6 @@ function getAppFeatures({
   function saveAccentColor(color) {
     util.setStyleProperty(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
     storageService.set(constants.ACCENT_COLOR_KEY_NAME, color);
-  }
-
-  function restoreAccentColor() {
-    return (
-      storageService.get(constants.ACCENT_COLOR_KEY_NAME) ||
-      constants.DEFAULT_ACCENT_COLOR
-    );
   }
 
   function moveBottomBar(deltaY) {
@@ -69,12 +98,13 @@ function getAppFeatures({
   }
 
   return {
+    initApplication,
+    initOpenWithHandler,
     enter,
     openOptions,
     closeOptions,
     resetOptions,
     saveAccentColor,
-    restoreAccentColor,
     moveBottomBar,
     resizeEntries,
     stopResizeEntries

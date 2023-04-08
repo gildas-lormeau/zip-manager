@@ -1,4 +1,4 @@
-/* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response */
+/* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response, LaunchParams */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
@@ -270,6 +270,12 @@ async function transformToFileSystemhandles(entry) {
   };
 }
 
+function setLaunchQueueConsumer(listener) {
+  if ("launchQueue" in window && "files" in LaunchParams.prototype) {
+    window.launchQueue.setConsumer(listener);
+  }
+}
+
 export {
   FILESYSTEM_FILE_KIND,
   FILESYSTEM_DIRECTORY_KIND,
@@ -303,5 +309,6 @@ export {
   clearTimeout,
   isMacOSPlatform,
   getDefaultMaxWorkers,
-  getFilesystemHandles
+  getFilesystemHandles,
+  setLaunchQueueConsumer
 };

@@ -49,6 +49,8 @@ const storageService = getStorageService({ util });
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
+  const [openWithHandlerInitialized, setOpenWithHandlerInitialized] =
+    useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
   const [entriesHeight, setEntriesHeight] = useState(0);
@@ -259,12 +261,13 @@ function ZipManager() {
     util
   });
   const {
+    initApplication,
+    initOpenWithHandler,
     enter,
     openOptions,
     closeOptions,
     resetOptions,
     saveAccentColor,
-    restoreAccentColor,
     moveBottomBar,
     resizeEntries,
     stopResizeEntries
@@ -273,13 +276,17 @@ function ZipManager() {
     dialogDisplayed,
     entriesHeight,
     entriesDeltaHeight,
+    openWithHandlerInitialized,
+    setAccentColor,
     setEntriesHeight,
     setEntriesDeltaHeight,
+    setOpenWithHandlerInitialized,
     getEntriesElementHeight,
     setOptionsDialog,
     getOptions,
     goIntoFolder,
     openPromptExtract,
+    importZipFile,
     util,
     constants
   });
@@ -322,14 +329,15 @@ function ZipManager() {
   });
   const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
   const {
+    updateApplication,
+    updateOpenWithHandler,
     updateHighlightedEntries,
     updateZipFilesystem,
-    initAccentColor,
     updateAccentColor
   } = getEffects({
     zipFilesystem,
+    selectedFolder,
     accentColor,
-    setAccentColor,
     setColorScheme,
     setPreviousHighlight,
     setToggleNavigationDirection,
@@ -339,8 +347,9 @@ function ZipManager() {
     setHistory,
     setHistoryIndex,
     getHighlightedEntryElement,
+    initApplication,
+    initOpenWithHandler,
     updateSelectedFolder,
-    restoreAccentColor,
     saveAccentColor,
     util
   });
@@ -354,9 +363,11 @@ function ZipManager() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateHighlightedEntries, [highlightedIds]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(initAccentColor, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateAccentColor, [accentColor]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(updateOpenWithHandler, [selectedFolder]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(updateApplication, []);
 
   return (
     <div className={appClassName}>
