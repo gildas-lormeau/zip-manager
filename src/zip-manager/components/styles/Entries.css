@@ -42,10 +42,6 @@
   color: var(--bg-color);
 }
 
-.entries .entry-cut {
-  filter: opacity(0.25);
-}
-
 .entries .directory .entry-name::after {
   content: "/";
 }
