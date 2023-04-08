@@ -70,6 +70,5 @@
       },
       "launch_type": "single-client"
     }
-  ],
-  "scope": "/zip-manager/"
+  ]
 }
