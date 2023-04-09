@@ -80,14 +80,14 @@
       "sizes": "393x802",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Homescreen of Ziop Manager"
+      "label": "Homescreen of Zip Manager"
     },
     {
       "src": "/images/screenshot-app.png",
       "sizes": "2054x1614",
       "type": "image/png",
       "platform": "wide",
-      "label": "Homescreen of Ziop Manager"
+      "label": "Homescreen of Zip Manager"
     }
   ]
 }
