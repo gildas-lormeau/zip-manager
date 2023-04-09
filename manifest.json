@@ -73,5 +73,21 @@
         }
       ]
     }
-  }
+  },
+  "screenshots" : [
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "393x802",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Homescreen of Ziop Manager"
+    },
+    {
+      "src": "/images/screenshot-app.png",
+      "sizes": "2054x1614",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Homescreen of Ziop Manager"
+    }
+  ]
 }
