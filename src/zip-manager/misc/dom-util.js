@@ -276,6 +276,10 @@ function setLaunchQueueConsumer(listener) {
   }
 }
 
+function fetch(url) {
+  return window.fetch(url);
+}
+
 export {
   FILESYSTEM_FILE_KIND,
   FILESYSTEM_DIRECTORY_KIND,
@@ -310,5 +314,6 @@ export {
   isMacOSPlatform,
   getDefaultMaxWorkers,
   getFilesystemHandles,
-  setLaunchQueueConsumer
+  setLaunchQueueConsumer,
+  fetch
 };
