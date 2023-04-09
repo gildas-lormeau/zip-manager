@@ -27,18 +27,6 @@
       "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
       "purpose": "maskable"
     },
     {
@@ -70,5 +58,22 @@
       },
       "launch_type": "single-client"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "./shared-files",
+    "enctype": "multipart/form-data",
+    "method": "POST",
+    "params": {
+      "files": [
+        {
+          "name": "shared-files",
+          "accept": [
+            "audio/*",
+            "image/*",
+            "video/*"
+          ]
+        }
+      ]
+    }
+  }
 }
