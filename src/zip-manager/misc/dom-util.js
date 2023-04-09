@@ -280,6 +280,14 @@ function fetch(url) {
   return window.fetch(url);
 }
 
+function getLocationSearch() {
+  return window.location.search;
+}
+
+function resetLocationSearch() {
+  return window.history.replaceState(null, null, window.location.pathname);
+}
+
 export {
   FILESYSTEM_FILE_KIND,
   FILESYSTEM_DIRECTORY_KIND,
@@ -315,5 +323,7 @@ export {
   getDefaultMaxWorkers,
   getFilesystemHandles,
   setLaunchQueueConsumer,
-  fetch
+  fetch,
+  getLocationSearch,
+  resetLocationSearch
 };
