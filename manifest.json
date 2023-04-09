@@ -54,6 +54,45 @@
       "accept": {
         "application/zip": [
           ".zip"
+        ],
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
+          ".docx"
+        ],
+        "application/epub+zip": [
+          ".epub"
+        ],
+        "application/java-archive": [
+          ".jar"
+        ],
+        "application/vnd.oasis.opendocument.presentation": [
+          ".odp"
+        ],
+        "application/vnd.oasis.opendocument.spreadsheet": [
+          ".ods"
+        ],
+        "application/vnd.oasis.opendocument.text": [
+          ".odt"
+        ],
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation": [
+          ".pptx"
+        ],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+          ".xlsx"
+        ],
+        "application/vnd.apple.keynote": [
+          ".key"
+        ],
+        "application/vnd.apple.pages": [
+          ".pages"
+        ],
+        "application/vnd.apple.numbers": [
+          ".numbers"
+        ],
+        "application/vnd.android.package-archive": [
+          ".apk"
+        ],
+        "application/x-ios-app": [
+          ".ipa"
         ]
       },
       "launch_type": "single-client"
@@ -74,7 +113,7 @@
       ]
     }
   },
-  "screenshots" : [
+  "screenshots": [
     {
       "src": "./images/screenshot-mobile.png",
       "sizes": "393x802",
