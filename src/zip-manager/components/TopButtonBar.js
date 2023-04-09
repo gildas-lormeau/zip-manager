@@ -168,7 +168,7 @@ function ImportZipButton({
   constants,
   messages
 }) {
-  const { ZIP_EXTENSION } = constants;
+  const { ZIP_EXTENSIONS } = constants;
   const fileInputRef = useRef(null);
   const { current } = fileInputRef;
 
@@ -183,7 +183,7 @@ function ImportZipButton({
         const files = await util.showOpenFilePicker({
           multiple: false,
           description: messages.ZIP_FILE_DESCRIPTION_LABEL,
-          extension: ZIP_EXTENSION
+          extension: ZIP_EXTENSIONS
         });
         if (files.length) {
           onImportZipFile(files[0]);
@@ -210,7 +210,7 @@ function ImportZipButton({
         onChange={handleChange}
         ref={fileInputRef}
         type="file"
-        accept={ZIP_EXTENSION}
+        accept={ZIP_EXTENSIONS}
         hidden
       />
     </>

@@ -33,6 +33,8 @@ const DEFAULT_OPTIONS = {
   chunkSize: 512 * 1024
 };
 const ZIP_EXTENSION = ".zip";
+const ZIP_EXTENSIONS =
+  ".zip,.docx,.epub,.jar,.odp,.ods,.odt,.pptx,.xlsx,.key,.pages,.numbers,.apk,.ipa";
 const LONG_TOUCH_DELAY = 750;
 const CREATE_FOLDER_BUTTON_NAME = "create-folder-button";
 const ADD_FILES_BUTTON_NAME = "add-files-button";
@@ -87,6 +89,7 @@ export {
   DEFAULT_MIME_TYPE,
   DEFAULT_OPTIONS,
   ZIP_EXTENSION,
+  ZIP_EXTENSIONS,
   LONG_TOUCH_DELAY,
   CREATE_FOLDER_BUTTON_NAME,
   ADD_FILES_BUTTON_NAME,
