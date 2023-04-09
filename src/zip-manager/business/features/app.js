@@ -3,7 +3,7 @@ function getAppFeatures({
   dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
-  openWithHandlerInitialized,
+  selectedFolderInit,
   setPreviousHighlight,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -14,12 +14,13 @@ function getAppFeatures({
   setAccentColor,
   setEntriesHeight,
   setEntriesDeltaHeight,
-  setOpenWithHandlerInitialized,
+  setSelectedFolderInit,
   getEntriesElementHeight,
   setOptionsDialog,
   getOptions,
   goIntoFolder,
   openPromptExtract,
+  addFiles,
   importZipFile,
   refreshSelectedFolder,
   storageService,
@@ -39,8 +40,20 @@ function getAppFeatures({
     );
   }
 
-  function initOpenWithHandler() {
-    if (!openWithHandlerInitialized) {
+  function initSelectedFolder() {
+    async function initSelectedFolder() {
+      const locationSearch = util.getLocationSearch();
+      if (locationSearch) {
+        util.resetLocationSearch();
+        if (locationSearch === constants.SHARED_FILES_PARAMETER) {
+          const response = await util.fetch("." + constants.SHARED_FILES_PATH);
+          const formData = await response.formData();
+          addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
+        }
+      }
+    }
+
+    if (!selectedFolderInit) {
       util.setLaunchQueueConsumer((launchParams) => {
         async function handleLaunchParams() {
           if (launchParams.files.length) {
@@ -54,8 +67,9 @@ function getAppFeatures({
 
         handleLaunchParams();
       });
-      setOpenWithHandlerInitialized(true);
+      setSelectedFolderInit(true);
     }
+    initSelectedFolder();
   }
 
   function initZipFilesystem() {
@@ -120,8 +134,8 @@ function getAppFeatures({
 
   return {
     initApplication,
-    initOpenWithHandler,
     initZipFilesystem,
+    initSelectedFolder,
     enter,
     openOptions,
     closeOptions,

@@ -4,8 +4,8 @@ function getEffects({
   setColorScheme,
   getHighlightedEntryElement,
   initApplication,
-  initOpenWithHandler,
   initZipFilesystem,
+  initSelectedFolder,
   saveAccentColor,
   util
 }) {
@@ -13,9 +13,9 @@ function getEffects({
     initApplication();
   }
 
-  function updateOpenWithHandler() {
+  function updateSelectedFolder() {
     if (selectedFolder) {
-      initOpenWithHandler();
+      initSelectedFolder();
     }
   }
 
@@ -54,7 +54,7 @@ function getEffects({
 
   return {
     updateApplication,
-    updateOpenWithHandler,
+    updateSelectedFolder,
     updateZipFilesystem,
     updateHighlightedEntries,
     updateAccentColor

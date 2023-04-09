@@ -58,5 +58,22 @@
       },
       "launch_type": "single-client"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "./shared-files",
+    "enctype": "multipart/form-data",
+    "method": "POST",
+    "params": {
+      "files": [
+        {
+          "name": "shared-files",
+          "accept": [
+            "audio/*",
+            "image/*",
+            "video/*"
+          ]
+        }
+      ]
+    }
+  }
 }

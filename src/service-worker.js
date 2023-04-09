@@ -1,4 +1,4 @@
-/* global self, process */
+/* global self, process, URL, Response, caches, FormData */
 /* eslint-disable no-restricted-globals */
 
 // This service worker can be customized!
@@ -8,9 +8,22 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+import {
+  MAINPAGE_PATH,
+  SHARED_FILES_PATH,
+  SHARED_FILES_CACHE_ID,
+  SHARED_FILES_FORM_PATH,
+  SHARED_FILES_PARAMETER
+} from "./zip-manager/business/constants.js";
+
 import { clientsClaim } from "workbox-core";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
+
+const BASE_PATH = ".";
+const MAINPAGE_REDIRECT_PATH =
+  BASE_PATH + MAINPAGE_PATH + SHARED_FILES_PARAMETER;
+const SHARED_FILES_FULL_PATH = BASE_PATH + SHARED_FILES_PATH;
 
 clientsClaim();
 
@@ -54,3 +67,28 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+registerRoute(SHARED_FILES_FULL_PATH, getSharedFiles, "GET");
+registerRoute(SHARED_FILES_FULL_PATH, setSharedFiles, "POST");
+
+async function setSharedFiles({ event }) {
+  const formData = await event.request.formData();
+  const cache = await caches.open(SHARED_FILES_CACHE_ID);
+  await cache.put(
+    new URL(SHARED_FILES_FORM_PATH, self.location).href,
+    new Response(formData)
+  );
+  return Response.redirect(MAINPAGE_REDIRECT_PATH, 303);
+}
+
+function getSharedFiles({ event }) {
+  event.respondWith(getSharedFilesResponse());
+}
+
+async function getSharedFilesResponse() {
+  const cache = await caches.open(SHARED_FILES_CACHE_ID);
+  const response = await cache.match(SHARED_FILES_FORM_PATH);
+  if (response) {
+    await cache.delete(SHARED_FILES_FORM_PATH);
+    return response;
+  }
+}
