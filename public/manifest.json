@@ -68,9 +68,7 @@
         {
           "name": "shared-files",
           "accept": [
-            "audio/*",
-            "image/*",
-            "video/*"
+            "*/*"
           ]
         }
       ]
