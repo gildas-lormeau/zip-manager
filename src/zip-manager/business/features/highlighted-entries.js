@@ -14,7 +14,7 @@ function getHighlightedEntriesFeatures({
   setExtractDialog,
   setRenameDialog,
   setDeleteEntryDialog,
-  updateSelectedFolder,
+  refreshSelectedFolder,
   saveEntries,
   getOptions,
   openDisplayError,
@@ -51,7 +51,7 @@ function getHighlightedEntriesFeatures({
         setClipboardData({ entries: clones });
       }
       setHighlightedIds(entries.map((entry) => entry.id));
-      updateSelectedFolder();
+      refreshSelectedFolder();
     } catch (error) {
       openDisplayError(error.message);
     }
@@ -69,7 +69,7 @@ function getHighlightedEntriesFeatures({
       const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
       if (filename !== highlightedEntry.name) {
         highlightedEntry.rename(filename);
-        updateSelectedFolder();
+        refreshSelectedFolder();
       }
     } catch (error) {
       openDisplayError(error.message);
@@ -117,7 +117,7 @@ function getHighlightedEntriesFeatures({
       setHighlightedIds([]);
     }
     updateHistoryData();
-    updateSelectedFolder();
+    refreshSelectedFolder();
   }
 
   function closeConfirmDeleteEntry() {

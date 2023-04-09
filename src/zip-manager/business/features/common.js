@@ -12,7 +12,7 @@ function getCommonFeatures({
   util,
   constants
 }) {
-  function updateSelectedFolder(folder = selectedFolder) {
+  function refreshSelectedFolder(folder = selectedFolder) {
     if (folder) {
       const { parent, children } = folder;
       const folders = filterChildren(children, true);
@@ -196,7 +196,7 @@ function getCommonFeatures({
   return {
     saveEntry,
     saveEntries,
-    updateSelectedFolder,
+    refreshSelectedFolder,
     setOptions,
     getOptions,
     openDisplayError,

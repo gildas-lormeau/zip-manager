@@ -21,7 +21,7 @@ function getAppFeatures({
   goIntoFolder,
   openPromptExtract,
   importZipFile,
-  updateSelectedFolder,
+  refreshSelectedFolder,
   storageService,
   util,
   constants
@@ -67,7 +67,7 @@ function getAppFeatures({
     setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
-    updateSelectedFolder(root);
+    refreshSelectedFolder(root);
   }
 
   function enter(entry) {

@@ -5,7 +5,7 @@ function getSelectedFolderFeatures({
   setImportPasswordDialog,
   setExportZipDialog,
   setCreateFolderDialog,
-  updateSelectedFolder,
+  refreshSelectedFolder,
   highlightEntries,
   saveEntry,
   getOptions,
@@ -21,7 +21,7 @@ function getSelectedFolderFeatures({
     try {
       const entry = selectedFolder.addDirectory(folderName);
       highlightEntries([entry]);
-      updateSelectedFolder();
+      refreshSelectedFolder();
     } catch (error) {
       openDisplayError(error.message);
     }
@@ -47,7 +47,7 @@ function getSelectedFolderFeatures({
     if (addedEntries.length) {
       highlightSortedEntries(addedEntries);
     }
-    updateSelectedFolder();
+    refreshSelectedFolder();
   }
 
   function dropFiles(handles) {
@@ -60,7 +60,7 @@ function getSelectedFolderFeatures({
         droppedEntries.includes(entry)
       );
       highlightSortedEntries(addedChildEntries);
-      updateSelectedFolder();
+      refreshSelectedFolder();
     }
 
     async function addFile(entry, parentEntry, addedEntries) {
@@ -114,7 +114,7 @@ function getSelectedFolderFeatures({
             importedEntries.includes(entry)
           );
           highlightSortedEntries(addedChildEntries);
-          updateSelectedFolder();
+          refreshSelectedFolder();
         }
       } catch (error) {
         cleanup(importedEntries);

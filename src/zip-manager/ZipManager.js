@@ -94,7 +94,7 @@ function ZipManager() {
   const {
     saveEntry,
     saveEntries,
-    updateSelectedFolder,
+    refreshSelectedFolder,
     setOptions,
     getOptions,
     openDisplayError,
@@ -152,7 +152,7 @@ function ZipManager() {
     setHistory,
     setHistoryIndex,
     setHighlightedIds,
-    updateSelectedFolder
+    refreshSelectedFolder
   });
   const {
     openPromptCreateFolder,
@@ -172,7 +172,7 @@ function ZipManager() {
     setImportPasswordDialog,
     setExportZipDialog,
     setCreateFolderDialog,
-    updateSelectedFolder,
+    refreshSelectedFolder,
     highlightEntries,
     saveEntry,
     getOptions,
@@ -209,7 +209,7 @@ function ZipManager() {
     setExtractDialog,
     setRenameDialog,
     setDeleteEntryDialog,
-    updateSelectedFolder,
+    refreshSelectedFolder,
     saveEntries,
     getOptions,
     openDisplayError,
@@ -295,7 +295,7 @@ function ZipManager() {
     goIntoFolder,
     openPromptExtract,
     importZipFile,
-    updateSelectedFolder,
+    refreshSelectedFolder,
     storageService,
     util,
     constants

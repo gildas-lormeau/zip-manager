@@ -6,7 +6,7 @@ function getFoldersFeatures({
   setHistory,
   setHistoryIndex,
   setHighlightedIds,
-  updateSelectedFolder
+  refreshSelectedFolder
 }) {
   function goIntoFolder(entry) {
     const newHistory = [...history];
@@ -19,7 +19,7 @@ function getFoldersFeatures({
     setHistoryIndex(newHistoryIndex);
     highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
-    updateSelectedFolder(entry);
+    refreshSelectedFolder(entry);
   }
 
   function navigateBack() {
@@ -36,7 +36,7 @@ function getFoldersFeatures({
     const entry = history[newHistoryIndex];
     highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
-    updateSelectedFolder(entry);
+    refreshSelectedFolder(entry);
   }
 
   function highlightEntry(selectedFolder, entry) {
