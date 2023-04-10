@@ -79,8 +79,6 @@ function TopButtonBar({
           onReset={onReset}
           messages={messages}
         />
-      </div>
-      <div className="button-group">
         <OptionsButton onOpenOptions={onOpenOptions} messages={messages} />
       </div>
     </div>
