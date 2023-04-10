@@ -11,7 +11,7 @@ function OptionsDialog({
   messages
 }) {
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
-  const [hideInfobar, setHideinfobar] = useState(false);
+  const [hideInfobar, setHideInfobar] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
@@ -22,7 +22,7 @@ function OptionsDialog({
   }
 
   function handleChangeHideInfobar(event) {
-    setHideinfobar(event.target.checked);
+    setHideInfobar(event.target.checked);
   }
 
   function handleChangeKeepOrder(event) {
@@ -63,7 +63,7 @@ function OptionsDialog({
         chunkSize
       } = data;
       setHideDownloadManager(hideDownloadManager);
-      setHideinfobar(hideInfobar);
+      setHideInfobar(hideInfobar);
       setKeepOrder(keepOrder);
       setBufferedWrite(bufferedWrite);
       setMaxWorkers(maxWorkers);
