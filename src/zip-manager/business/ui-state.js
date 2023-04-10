@@ -43,7 +43,8 @@ function getUIState({
     parentFolderHighlighted ||
     !highlightedIds.length ||
     (!util.savePickersSupported() && subFolderHighlighted);
-  const disabledHighlightAll = entriesEmpty || highlightedIds.length === entries.length;
+  const disabledHighlightAll =
+    entriesEmpty || highlightedIds.length === entries.length;
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
@@ -58,6 +59,7 @@ function getUIState({
     importPasswordDialog ||
     optionsDialog;
   const options = getOptions();
+  const hideNavigationBar = options.hideNavigationBar;
   const hideDownloadManager = options.hideDownloadManager;
   const hideInfobar = options.hideInfobar;
 
@@ -77,6 +79,7 @@ function getUIState({
     disabledDelete,
     disabledEnter,
     dialogDisplayed,
+    hideNavigationBar,
     hideDownloadManager,
     hideInfobar
   };

@@ -243,6 +243,7 @@ function ZipManager() {
     disabledDelete,
     disabledEnter,
     dialogDisplayed,
+    hideNavigationBar,
     hideDownloadManager,
     hideInfobar
   } = getUIState({
@@ -396,6 +397,7 @@ function ZipManager() {
           disabledBackButton={disabledBack}
           disabledForwardButton={disabledForward}
           clickedButtonName={clickedButtonName}
+          hidden={hideNavigationBar}
           onNavigateBack={navigateBack}
           onNavigateForward={navigateForward}
           onGoIntoFolder={goIntoFolder}

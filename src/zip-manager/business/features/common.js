@@ -175,6 +175,9 @@ function getCommonFeatures({
       options = constants.DEFAULT_OPTIONS;
       options.maxWorkers = util.getDefaultMaxWorkers();
     }
+    if (options.hideNavigationBar === undefined) {
+      options.hideNavigationBar = Boolean(options.hideNavigationBar);
+    }
     if (options.hideDownloadManager === undefined) {
       options.hideDownloadManager = Boolean(options.hideDownloadManager);
     }

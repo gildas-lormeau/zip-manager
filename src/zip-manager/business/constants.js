@@ -25,6 +25,7 @@ const FORWARD_KEY = "ArrowRight";
 const DEFAULT_ACCENT_COLOR = "#FF672E";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const DEFAULT_OPTIONS = {
+  hideNavigationBar: false,
   hideDownloadManager: false,
   hideInfobar: false,
   bufferedWrite: true,

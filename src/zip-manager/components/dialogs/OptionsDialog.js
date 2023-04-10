@@ -10,12 +10,17 @@ function OptionsDialog({
   onClose,
   messages
 }) {
+  const [hideNavigationBar, setHideNavigationBar] = useState(false);
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
   const [hideInfobar, setHideInfobar] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
   const [chunkSize, setChunkSize] = useState("0");
+
+  function handleChangeHideNavigationBar(event) {
+    setHideNavigationBar(event.target.checked);
+  }
 
   function handleChangeHideDownloadManager(event) {
     setHideDownloadManager(event.target.checked);
@@ -43,6 +48,7 @@ function OptionsDialog({
 
   function handleSubmit() {
     onSetOptions({
+      hideNavigationBar,
       hideDownloadManager,
       hideInfobar,
       keepOrder,
@@ -55,6 +61,7 @@ function OptionsDialog({
   function updateData() {
     if (data) {
       const {
+        hideNavigationBar,
         hideDownloadManager,
         hideInfobar,
         keepOrder,
@@ -62,6 +69,7 @@ function OptionsDialog({
         maxWorkers,
         chunkSize
       } = data;
+      setHideNavigationBar(hideNavigationBar);
       setHideDownloadManager(hideDownloadManager);
       setHideInfobar(hideInfobar);
       setKeepOrder(keepOrder);
@@ -85,6 +93,14 @@ function OptionsDialog({
       cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.OPTIONS_DIALOG_BUTTON_LABEL}
     >
+      <label>
+        {messages.OPTIONS_HIDE_NAVIGATION_BAR}
+        <input
+          checked={hideNavigationBar}
+          type="checkbox"
+          onChange={handleChangeHideNavigationBar}
+        />
+      </label>
       <label>
         {messages.OPTIONS_HIDE_DOWNLOAD_MANAGER}
         <input

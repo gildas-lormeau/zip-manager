@@ -3,6 +3,7 @@ import "./styles/NavigationBar.css";
 import Button from "./Button.js";
 
 function NavigationBar({
+  hidden,
   selectedFolder,
   disabledBackButton,
   disabledForwardButton,
@@ -14,30 +15,34 @@ function NavigationBar({
   constants,
   messages
 }) {
-  return (
-    <div
-      className="navigation-bar"
-      role="toolbar"
-      aria-label="Navigation history"
-    >
-      <HistoryButtons
-        disabledBackButton={disabledBackButton}
-        disabledForwardButton={disabledForwardButton}
-        clickedButtonName={clickedButtonName}
-        onNavigateBack={onNavigateBack}
-        onNavigateForward={onNavigateForward}
-        onClickedButton={onClickedButton}
-        constants={constants}
-        messages={messages}
-      />
-      <Breadcrumb
-        folder={selectedFolder}
-        onGoIntoFolder={onGoIntoFolder}
-        constants={constants}
-        messages={messages}
-      />
-    </div>
-  );
+  if (hidden) {
+    return;
+  } else {
+    return (
+      <div
+        className="navigation-bar"
+        role="toolbar"
+        aria-label="Navigation history"
+      >
+        <HistoryButtons
+          disabledBackButton={disabledBackButton}
+          disabledForwardButton={disabledForwardButton}
+          clickedButtonName={clickedButtonName}
+          onNavigateBack={onNavigateBack}
+          onNavigateForward={onNavigateForward}
+          onClickedButton={onClickedButton}
+          constants={constants}
+          messages={messages}
+        />
+        <Breadcrumb
+          folder={selectedFolder}
+          onGoIntoFolder={onGoIntoFolder}
+          constants={constants}
+          messages={messages}
+        />
+      </div>
+    );
+  }
 }
 
 function HistoryButtons({
