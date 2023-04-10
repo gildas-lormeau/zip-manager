@@ -39,18 +39,18 @@ function TopButtonBar({
       onDrop={handleDrop}
     >
       <div className="button-group">
-        <CreateFolderButton
-          clickedButtonName={clickedButtonName}
-          onCreateFolder={onCreateFolder}
-          onClickedButton={onClickedButton}
-          constants={constants}
-          messages={messages}
-        />
         <AddFilesButton
           clickedButtonName={clickedButtonName}
           onAddFiles={onAddFiles}
           onClickedButton={onClickedButton}
           util={util}
+          constants={constants}
+          messages={messages}
+        />
+        <CreateFolderButton
+          clickedButtonName={clickedButtonName}
+          onCreateFolder={onCreateFolder}
+          onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
         />
