@@ -44,7 +44,13 @@ function getUIState({
     !highlightedIds.length ||
     (!util.savePickersSupported() && subFolderHighlighted);
   const disabledHighlightAll =
-    entriesEmpty || highlightedIds.length === entries.length;
+    !selectedFolder ||
+    (!selectedFolder.parent &&
+      (!entries.length || highlightedIds.length === entries.length)) ||
+    (selectedFolder.parent &&
+      (entries.length === 1 ||
+        (highlightedIds.length === entries.length - 1 &&
+          !highlightedIds.includes(selectedFolder.parent.id))));
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
