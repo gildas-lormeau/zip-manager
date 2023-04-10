@@ -365,16 +365,13 @@ function ZipManager() {
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDown);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(updateZipFilesystem, [zipFilesystem]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateHighlightedEntries, [highlightedIds]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateAccentColor, [accentColor]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateSelectedFolder, [selectedFolder]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateApplication, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={appClassName}>
