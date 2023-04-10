@@ -86,7 +86,7 @@ function ZipManager() {
   const getEntriesHeight = () => entriesHeightRef.current;
   const downloaderElement = downloaderRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
-  const appClassName = ("main-container " + colorScheme).trim();
+  const appClassName = [constants.APP_CLASSNAME, colorScheme].join(" ").trim();
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,

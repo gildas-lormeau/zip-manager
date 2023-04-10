@@ -89,13 +89,13 @@ const FORWARD_BUTTON_NAME = "forward-button";
 const OPTIONS_KEY_NAME = "options";
 const ACCENT_COLOR_KEY_NAME = "accent-color";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
-
 const MAINPAGE_PATH = "/index.html";
 const SHARED_FILES_PATH = "/shared-files";
 const SHARED_FILES_FORM_PATH = SHARED_FILES_PATH + "/form";
 const SHARED_FILES_CACHE_ID = "shared-files";
 const SHARED_FILES_FIELD_NAME = "shared-files";
 const SHARED_FILES_PARAMETER = "?shared-files";
+const APP_CLASSNAME = "main-container";
 
 export {
   ACTION_KEY,
@@ -151,5 +151,6 @@ export {
   SHARED_FILES_FORM_PATH,
   SHARED_FILES_CACHE_ID,
   SHARED_FILES_FIELD_NAME,
-  SHARED_FILES_PARAMETER
+  SHARED_FILES_PARAMETER,
+  APP_CLASSNAME
 };
