@@ -34,7 +34,7 @@ const DEFAULT_OPTIONS = {
 };
 const ZIP_EXTENSION = ".zip";
 const ZIP_EXTENSIONS = [
-  ".zip",
+  ZIP_EXTENSION,
   ".docx",
   ".epub",
   ".jar",
@@ -50,7 +50,7 @@ const ZIP_EXTENSIONS = [
   ".ipa"
 ];
 const ZIP_EXTENSIONS_ACCEPT = {
-  "application/zip": [".zip"],
+  "application/zip": [ZIP_EXTENSION],
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
     ".docx"
   ],
