@@ -30,7 +30,8 @@ import {
   DeleteEntryDialog,
   ErrorMessageDialog,
   ImportPasswordDialog,
-  OptionsDialog
+  OptionsDialog,
+  ChooseActionDialog
 } from "./components/index.js";
 
 const {
@@ -73,6 +74,7 @@ function ZipManager() {
   const [errorMessageDialog, setErrorMessageDialog] = useState(null);
   const [importPasswordDialog, setImportPasswordDialog] = useState(null);
   const [optionsDialog, setOptionsDialog] = useState(null);
+  const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -159,6 +161,7 @@ function ZipManager() {
     closePromptCreateFolder,
     addFiles,
     dropFiles,
+    closeChooseAction,
     importZipFile,
     openPromptExportZip,
     exportZip,
@@ -168,9 +171,11 @@ function ZipManager() {
     zipFilesystem,
     selectedFolder,
     rootZipFilename,
+    chooseActionDialog,
     setImportPasswordDialog,
     setExportZipDialog,
     setCreateFolderDialog,
+    setChooseActionDialog,
     refreshSelectedFolder,
     highlightEntries,
     saveEntry,
@@ -514,6 +519,13 @@ function ZipManager() {
         onSetOptions={setOptions}
         onResetOptions={resetOptions}
         onClose={closeOptions}
+        messages={messages}
+      />
+      <ChooseActionDialog
+        data={chooseActionDialog}
+        onImportZipFile={importZipFile}
+        onAddFiles={addFiles}
+        onClose={closeChooseAction}
         messages={messages}
       />
     </div>

@@ -13,6 +13,7 @@ import DeleteEntryDialog from "./dialogs/DeleteEntryDialog.js";
 import ErrorMessageDialog from "./dialogs/ErrorMessageDialog.js";
 import ImportPasswordDialog from "./dialogs/ImportPasswordDialog.js";
 import OptionsDialog from "./dialogs/OptionsDialog.js";
+import ChooseActionDialog from "./dialogs/ChooseActionDialog.js";
 
 export {
   TopButtonBar,
@@ -29,5 +30,6 @@ export {
   DeleteEntryDialog,
   ErrorMessageDialog,
   ImportPasswordDialog,
-  OptionsDialog
+  OptionsDialog,
+  ChooseActionDialog
 };

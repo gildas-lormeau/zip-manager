@@ -2,9 +2,11 @@ function getSelectedFolderFeatures({
   zipFilesystem,
   selectedFolder,
   rootZipFilename,
+  chooseActionDialog,
   setImportPasswordDialog,
   setExportZipDialog,
   setCreateFolderDialog,
+  setChooseActionDialog,
   refreshSelectedFolder,
   highlightEntries,
   saveEntry,
@@ -31,36 +33,47 @@ function getSelectedFolderFeatures({
     setCreateFolderDialog(null);
   }
 
-  function addFiles(files) {
-    const addedEntries = [];
-    files.forEach((file) => {
-      try {
-        addedEntries.push(
-          selectedFolder.addBlob(file.name, file, {
-            lastModDate: new Date(file.lastModified)
-          })
-        );
-      } catch (error) {
-        openDisplayError(error.message);
+  function addFiles(files, options = {}) {
+    const addFilesPrevented = handleZipFile(files, addFiles, options);
+    if (!addFilesPrevented) {
+      const addedEntries = [];
+      files.forEach((file) => {
+        try {
+          addedEntries.push(
+            selectedFolder.addBlob(file.name, file, {
+              lastModDate: new Date(file.lastModified)
+            })
+          );
+        } catch (error) {
+          openDisplayError(error.message);
+        }
+      });
+      if (addedEntries.length) {
+        highlightSortedEntries(addedEntries);
       }
-    });
-    if (addedEntries.length) {
-      highlightSortedEntries(addedEntries);
+      refreshSelectedFolder();
     }
-    refreshSelectedFolder();
   }
 
-  function dropFiles(handles) {
+  function dropFiles(handles, options = {}) {
     async function dropFiles() {
       const droppedEntries = [];
-      await Promise.all(
-        handles.map((handle) => addFile(handle, selectedFolder, droppedEntries))
-      );
-      const addedChildEntries = selectedFolder.children.filter((entry) =>
-        droppedEntries.includes(entry)
-      );
-      highlightSortedEntries(addedChildEntries);
-      refreshSelectedFolder();
+      const firstHandle = handles[0];
+      const dropFilesPrevented =
+        firstHandle.kind === util.FILESYSTEM_FILE_KIND &&
+        handleZipFile([await firstHandle.getFile()], dropFiles, options);
+      if (!dropFilesPrevented) {
+        await Promise.all(
+          handles.map((handle) =>
+            addFile(handle, selectedFolder, droppedEntries)
+          )
+        );
+        const addedChildEntries = selectedFolder.children.filter((entry) =>
+          droppedEntries.includes(entry)
+        );
+        highlightSortedEntries(addedChildEntries);
+        refreshSelectedFolder();
+      }
     }
 
     async function addFile(entry, parentEntry, addedEntries) {
@@ -79,6 +92,27 @@ function getSelectedFolderFeatures({
     }
 
     dropFiles();
+  }
+
+  function handleZipFile(files, callback, { forceAddFiles }) {
+    const zipFileDetected =
+      files.length === 1 &&
+      constants.ZIP_EXTENSIONS.find((extension) =>
+        files[0].name.endsWith(extension)
+      ) &&
+      !forceAddFiles;
+    if (zipFileDetected) {
+      if (chooseActionDialog) {
+        callback(files, { forceAddFiles: true });
+      } else {
+        setChooseActionDialog({ files });
+      }
+    }
+    return zipFileDetected;
+  }
+
+  function closeChooseAction() {
+    setChooseActionDialog(null);
   }
 
   function importZipFile(zipFile, options = {}) {
@@ -190,6 +224,7 @@ function getSelectedFolderFeatures({
     closePromptCreateFolder,
     addFiles,
     dropFiles,
+    closeChooseAction,
     importZipFile,
     openPromptExportZip,
     exportZip,

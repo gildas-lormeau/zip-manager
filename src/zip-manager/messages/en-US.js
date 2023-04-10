@@ -87,6 +87,10 @@ const OPTIONS_KEEP_ORDER_LABEL = "Keep entries order:";
 const OPTIONS_BUFFERED_WRITE_LABEL = "Use multiple cores:";
 const OPTIONS_MAX_WORKERS_LABEL = "Number of cores:";
 const OPTIONS_CHUNK_SIZE_LABEL = "Chunk size (kB):";
+const CHOOSE_ACTION_DIALOG_ADD_FILE_BUTTON_LABEL = "Add file";
+const CHOOSE_ACTION_TITLE = "Choose action";
+const CHOOSE_ACTION_LABEL =
+  "A zip file has been selected, please select the proper action.";
 
 export {
   ROOT_ZIP_FILENAME,
@@ -168,5 +172,8 @@ export {
   OPTIONS_KEEP_ORDER_LABEL,
   OPTIONS_BUFFERED_WRITE_LABEL,
   OPTIONS_MAX_WORKERS_LABEL,
-  OPTIONS_CHUNK_SIZE_LABEL
+  OPTIONS_CHUNK_SIZE_LABEL,
+  CHOOSE_ACTION_DIALOG_ADD_FILE_BUTTON_LABEL,
+  CHOOSE_ACTION_TITLE,
+  CHOOSE_ACTION_LABEL
 };
