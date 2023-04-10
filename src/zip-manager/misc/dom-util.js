@@ -6,12 +6,8 @@ const KEYUP_EVENT_NAME = "keyup";
 const KEYDOWN_EVENT_NAME = "keydown";
 const BEFORE_UNLOAD_EVENT_NAME = "beforeunload";
 const RESIZE_EVENT_NAME = "resize";
-const ZIP_EXTENSION = ".zip";
-const ZIP_MIME_TYPE = "application/zip";
 const EN_US_LANGUAGE_ID = "en-US";
-const MIME_TYPES = {
-  [ZIP_EXTENSION]: ZIP_MIME_TYPE
-};
+
 const SIZE_NUMBER_FORMATS = [
   "byte",
   "kilobyte",
@@ -122,8 +118,8 @@ function getDefaultMaxWorkers() {
   return navigator.hardwareConcurrency;
 }
 
-async function showOpenFilePicker({ multiple, description, extension }) {
-  const excludeAcceptAllOption = Boolean(extension);
+async function showOpenFilePicker({ multiple, description, accept }) {
+  const excludeAcceptAllOption = Boolean(accept);
   try {
     const options = {
       excludeAcceptAllOption,
@@ -134,9 +130,7 @@ async function showOpenFilePicker({ multiple, description, extension }) {
         types: [
           {
             description,
-            accept: {
-              [MIME_TYPES[extension]]: [extension]
-            }
+            accept
           }
         ]
       });
