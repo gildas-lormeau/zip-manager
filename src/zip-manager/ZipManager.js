@@ -451,8 +451,8 @@ function ZipManager() {
           messages={messages}
         />
         <DownloadManager
-          hidden={hideDownloadManager}
           downloads={downloads}
+          hidden={hideDownloadManager}
           hideInfobar={hideInfobar}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
