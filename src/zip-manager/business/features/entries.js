@@ -74,7 +74,9 @@ function getEntriesFeatures({
     setPreviousHighlight(entries[0]);
     setToggleNavigationDirection(0);
     setHighlightedIds(
-      entries.map((entry) => entry !== selectedFolder.parent && entry.id)
+      entries
+        .filter((entry) => entry !== selectedFolder.parent)
+        .map((entry) => entry.id)
     );
   }
 
