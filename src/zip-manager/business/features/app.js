@@ -46,7 +46,8 @@ function getAppFeatures({
       if (locationSearch) {
         util.resetLocationSearch();
         if (locationSearch === constants.SHARED_FILES_PARAMETER) {
-          const response = await util.fetch("." + constants.SHARED_FILES_PATH);
+          const sharedFilesPath = constants.SHARED_FILES_RELATIVE_PATH;
+          const response = await util.fetch(sharedFilesPath);
           const formData = await response.formData();
           addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
         }
