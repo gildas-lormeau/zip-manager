@@ -1,7 +1,7 @@
 import "./styles/OptionsDialog.css";
 import Dialog from "./Dialog.js";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function OptionsDialog({
   data,
@@ -13,12 +13,14 @@ function OptionsDialog({
   const [hideNavigationBar, setHideNavigationBar] = useState(false);
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
   const [hideInfobar, setHideInfobar] = useState(false);
+  const [defaultExportPassword, setDefaultExportPassword] = useState("");
   const [promptForExportPassword, setPromptForExportPassword] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [checkSignature, setCheckSignature] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
   const [chunkSize, setChunkSize] = useState("0");
+  const defaultPasswordInputRef = useRef(null);
 
   function handleChangeHideNavigationBar(event) {
     setHideNavigationBar(event.target.checked);
@@ -34,6 +36,14 @@ function OptionsDialog({
 
   function handleChangePromptForExportPassword(event) {
     setPromptForExportPassword(event.target.checked);
+  }
+
+  function handleFocusDefaultExportPassword() {
+    defaultPasswordInputRef.current.select();
+  }
+
+  function handleChangeDefaultExportPassword(event) {
+    setDefaultExportPassword(event.target.value);
   }
 
   function handleChangeKeepOrder(event) {
@@ -62,6 +72,7 @@ function OptionsDialog({
       hideDownloadManager,
       hideInfobar,
       promptForExportPassword,
+      defaultExportPassword,
       keepOrder,
       checkSignature,
       bufferedWrite,
@@ -77,6 +88,7 @@ function OptionsDialog({
         hideDownloadManager,
         hideInfobar,
         promptForExportPassword,
+        defaultExportPassword,
         keepOrder,
         checkSignature,
         bufferedWrite,
@@ -87,6 +99,7 @@ function OptionsDialog({
       setHideDownloadManager(hideDownloadManager);
       setHideInfobar(hideInfobar);
       setPromptForExportPassword(promptForExportPassword);
+      setDefaultExportPassword(defaultExportPassword);
       setKeepOrder(keepOrder);
       setCheckSignature(checkSignature);
       setBufferedWrite(bufferedWrite);
@@ -139,6 +152,17 @@ function OptionsDialog({
           checked={promptForExportPassword}
           type="checkbox"
           onChange={handleChangePromptForExportPassword}
+        />
+      </label>
+      <label>
+        {messages.OPTIONS_DEFAULT_PASSWORD_LABEL}
+        <input
+          type="password"
+          autoComplete="off"
+          value={defaultExportPassword}
+          onFocus={handleFocusDefaultExportPassword}
+          onChange={handleChangeDefaultExportPassword}
+          ref={defaultPasswordInputRef}
         />
       </label>
       <label>

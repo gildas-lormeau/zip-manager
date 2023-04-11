@@ -33,7 +33,8 @@ const DEFAULT_OPTIONS = {
   keepOrder: true,
   maxWorkers: 2,
   chunkSize: 512 * 1024,
-  promptForExportPassword: true
+  promptForExportPassword: true,
+  defaultExportPassword: ""
 };
 const ZIP_EXTENSION = ".zip";
 const ZIP_EXTENSIONS = [

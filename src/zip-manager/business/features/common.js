@@ -188,6 +188,8 @@ function getCommonFeatures({
     if (options.promptForExportPassword === undefined) {
       options.promptForExportPassword = DEFAULT_OPTIONS.promptForExportPassword;
     }
+    if (options.defaultExportPassword === undefined) {
+      options.defaultExportPassword = DEFAULT_OPTIONS.defaultExportPassword;
     }
     if (options.checkSignature === undefined) {
       options.checkSignature = DEFAULT_OPTIONS.checkSignature;

@@ -20,6 +20,7 @@
   margin-inline: 3px;
 }
 
+.options-dialog input[type="password"],
 .options-dialog input[type="number"] {
   width: min(10ch, 100%);
 }

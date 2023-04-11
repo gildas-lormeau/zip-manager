@@ -184,14 +184,15 @@ function getSelectedFolderFeatures({
       ? selectedFolder.name + constants.ZIP_EXTENSION
       : rootZipFilename;
     const options = getOptions();
+    const password = options.defaultExportPassword;
     if (!util.savePickersSupported() || options.promptForExportPassword) {
       setExportZipDialog({
         filename,
         filenameHidden: util.savePickersSupported(),
-        password: ""
+        password
       });
     } else {
-      exportZip({ filename });
+      exportZip({ filename, password });
     }
   }
 
