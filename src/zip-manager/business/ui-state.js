@@ -68,6 +68,7 @@ function getUIState({
   const hideNavigationBar = options.hideNavigationBar;
   const hideDownloadManager = options.hideDownloadManager;
   const hideInfobar = options.hideInfobar;
+  const hideExportPassword = !options.promptForExportPassword;
 
   return {
     disabledExportZip,
@@ -87,7 +88,8 @@ function getUIState({
     dialogDisplayed,
     hideNavigationBar,
     hideDownloadManager,
-    hideInfobar
+    hideInfobar,
+    hideExportPassword
   };
 }
 

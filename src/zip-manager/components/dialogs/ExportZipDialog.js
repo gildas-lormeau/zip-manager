@@ -2,7 +2,13 @@ import Dialog from "./Dialog.js";
 
 import { useEffect, useRef, useState } from "react";
 
-function ExportZipDialog({ data, onExportZip, onClose, messages }) {
+function ExportZipDialog({
+  data,
+  hidePassword,
+  onExportZip,
+  onClose,
+  messages
+}) {
   const filenameInputRef = useRef(null);
   const filenameTextSelected = useRef(false);
   const [filename, setFilename] = useState("");
@@ -33,7 +39,12 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
   }
 
   useEffect(() => {
-    if (!filenameTextSelected.current && filename && filenameInputRef && filenameInputRef.current) {
+    if (
+      !filenameTextSelected.current &&
+      filename &&
+      filenameInputRef &&
+      filenameInputRef.current
+    ) {
       filenameTextSelected.current = true;
       filenameInputRef.current.select();
     }
@@ -59,15 +70,17 @@ function ExportZipDialog({ data, onExportZip, onClose, messages }) {
           />
         )}
       </label>
-      <label>
-        {messages.EXPORT_ZIP_PASSWORD_LABEL}
-        <input
-          type="password"
-          autoComplete="off"
-          value={password}
-          onChange={handleChangePassword}
-        />
-      </label>
+      {hidePassword || (
+        <label>
+          {messages.EXPORT_ZIP_PASSWORD_LABEL}
+          <input
+            type="password"
+            autoComplete="off"
+            value={password}
+            onChange={handleChangePassword}
+          />
+        </label>
+      )}
     </Dialog>
   );
 }

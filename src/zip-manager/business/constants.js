@@ -31,7 +31,8 @@ const DEFAULT_OPTIONS = {
   bufferedWrite: true,
   keepOrder: true,
   maxWorkers: 2,
-  chunkSize: 512 * 1024
+  chunkSize: 512 * 1024,
+  promptForExportPassword: true
 };
 const ZIP_EXTENSION = ".zip";
 const ZIP_EXTENSIONS = [

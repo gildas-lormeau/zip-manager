@@ -13,6 +13,7 @@ function OptionsDialog({
   const [hideNavigationBar, setHideNavigationBar] = useState(false);
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
   const [hideInfobar, setHideInfobar] = useState(false);
+  const [promptForExportPassword, setPromptForExportPassword] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
@@ -28,6 +29,10 @@ function OptionsDialog({
 
   function handleChangeHideInfobar(event) {
     setHideInfobar(event.target.checked);
+  }
+
+  function handleChangePromptForExportPassword(event) {
+    setPromptForExportPassword(event.target.checked);
   }
 
   function handleChangeKeepOrder(event) {
@@ -51,6 +56,7 @@ function OptionsDialog({
       hideNavigationBar,
       hideDownloadManager,
       hideInfobar,
+      promptForExportPassword,
       keepOrder,
       bufferedWrite,
       maxWorkers: Number(maxWorkers),
@@ -64,6 +70,7 @@ function OptionsDialog({
         hideNavigationBar,
         hideDownloadManager,
         hideInfobar,
+        promptForExportPassword,
         keepOrder,
         bufferedWrite,
         maxWorkers,
@@ -72,6 +79,7 @@ function OptionsDialog({
       setHideNavigationBar(hideNavigationBar);
       setHideDownloadManager(hideDownloadManager);
       setHideInfobar(hideInfobar);
+      setPromptForExportPassword(promptForExportPassword);
       setKeepOrder(keepOrder);
       setBufferedWrite(bufferedWrite);
       setMaxWorkers(maxWorkers);
@@ -115,6 +123,14 @@ function OptionsDialog({
           checked={hideInfobar}
           type="checkbox"
           onChange={handleChangeHideInfobar}
+        />
+      </label>
+      <label>
+        {messages.OPTIONS_PROMPT_FOR_EXPORT_PASSWORD}
+        <input
+          checked={promptForExportPassword}
+          type="checkbox"
+          onChange={handleChangePromptForExportPassword}
         />
       </label>
       <label>

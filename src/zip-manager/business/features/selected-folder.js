@@ -183,11 +183,16 @@ function getSelectedFolderFeatures({
     const filename = selectedFolder.name
       ? selectedFolder.name + constants.ZIP_EXTENSION
       : rootZipFilename;
-    setExportZipDialog({
-      filename,
-      filenameHidden: util.savePickersSupported(),
-      password: ""
-    });
+    const options = getOptions();
+    if (!util.savePickersSupported() || options.promptForExportPassword) {
+      setExportZipDialog({
+        filename,
+        filenameHidden: util.savePickersSupported(),
+        password: ""
+      });
+    } else {
+      exportZip({ filename });
+    }
   }
 
   function closePromptExportZip() {

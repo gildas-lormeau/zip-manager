@@ -187,6 +187,11 @@ function getCommonFeatures({
     if (options.hideInfobar === undefined) {
       options.hideInfobar = Boolean(DEFAULT_OPTIONS.hideInfobar);
     }
+    if (options.promptForExportPassword === undefined) {
+      options.promptForExportPassword = Boolean(
+        DEFAULT_OPTIONS.promptForExportPassword
+      );
+    }
     configureZipService(options);
     return options;
   }

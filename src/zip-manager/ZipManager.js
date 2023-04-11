@@ -245,7 +245,8 @@ function ZipManager() {
     dialogDisplayed,
     hideNavigationBar,
     hideDownloadManager,
-    hideInfobar
+    hideInfobar,
+    hideExportPassword
   } = getUIState({
     entries,
     highlightedIds,
@@ -475,6 +476,7 @@ function ZipManager() {
       />
       <ExportZipDialog
         data={exportZipDialog}
+        hidePassword={hideExportPassword}
         onExportZip={exportZip}
         onClose={closePromptExportZip}
         messages={messages}
