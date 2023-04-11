@@ -23,7 +23,7 @@
 
 .button-bar button {
   padding-inline: 1.5ch;
-  font-family: "Exo";
+  font-family: inherit;
 }
 
 .button-bar button:not([disabled]) {
