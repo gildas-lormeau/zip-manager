@@ -1,11 +1,10 @@
-/* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response, LaunchParams */
+/* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response, LaunchParams, ResizeObserver */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
 const KEYDOWN_EVENT_NAME = "keydown";
 const BEFORE_UNLOAD_EVENT_NAME = "beforeunload";
-const RESIZE_EVENT_NAME = "resize";
 const EN_US_LANGUAGE_ID = "en-US";
 
 const SIZE_NUMBER_FORMATS = [
@@ -62,12 +61,10 @@ function removeUnloadListener(listener) {
   window.removeEventListener(BEFORE_UNLOAD_EVENT_NAME, listener);
 }
 
-function addResizeListener(listener) {
-  window.addEventListener(RESIZE_EVENT_NAME, listener);
-}
-
-function removeResizeListener(listener) {
-  window.removeEventListener(RESIZE_EVENT_NAME, listener);
+function addResizeObserver(element, listener) {
+  const observer = new ResizeObserver(listener);
+  observer.observe(element, { attributes: true });
+  return observer;
 }
 
 function scrollIntoView(element) {
@@ -297,8 +294,7 @@ export {
   removeKeyDownListener,
   addUnloadListener,
   removeUnloadListener,
-  addResizeListener,
-  removeResizeListener,
+  addResizeObserver,
   getHeight,
   setStyleProperty,
   saveValue,

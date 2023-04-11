@@ -121,8 +121,11 @@ function Entries({
   }
 
   function registerResizeHandler() {
-    util.addResizeListener(computeEntriesHeight);
-    return () => util.removeResizeListener(computeEntriesHeight);
+    const observer = util.addResizeObserver(
+      entriesRef.current,
+      computeEntriesHeight
+    );
+    return () => observer.disconnect();
   }
 
   useEffect(computeEntriesListHeight);

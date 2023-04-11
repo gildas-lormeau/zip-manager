@@ -289,6 +289,7 @@ function ZipManager() {
     setSelectedFolder,
     setHighlightedIds,
     setClipboardData,
+    setOptions,
     setHistory,
     setHistoryIndex,
     setAccentColor,

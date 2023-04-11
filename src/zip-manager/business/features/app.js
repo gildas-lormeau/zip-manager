@@ -9,6 +9,7 @@ function getAppFeatures({
   setSelectedFolder,
   setHighlightedIds,
   setClipboardData,
+  setOptions,
   setHistory,
   setHistoryIndex,
   setAccentColor,
@@ -104,6 +105,13 @@ function getAppFeatures({
 
   function resizeEntries(height) {
     if (!dialogDisplayed) {
+      const options = getOptions();
+      if (!entriesHeight && options.entriesHeight) {
+        height = options.entriesHeight;
+      } else {
+        options.entriesHeight = height;
+        setOptions(options);
+      }
       setEntriesHeight(height);
     }
   }
