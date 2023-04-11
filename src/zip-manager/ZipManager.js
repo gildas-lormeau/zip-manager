@@ -413,7 +413,6 @@ function ZipManager() {
           highlightedIds={highlightedIds}
           entriesHeight={entriesHeight}
           deltaEntriesHeight={entriesDeltaHeight}
-          clipboardData={clipboardData}
           hideDownloadManager={hideDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}

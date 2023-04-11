@@ -8,7 +8,6 @@ function Entries({
   highlightedIds,
   deltaEntriesHeight,
   entriesHeight,
-  clipboardData,
   hideDownloadManager,
   onDropFiles,
   onHighlight,
