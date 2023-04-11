@@ -11,7 +11,7 @@ function TopButtonBar({
   onCreateFolder,
   onAddFiles,
   onImportZipFile,
-  onExportZipFile,
+  onExportZip,
   onReset,
   onOpenOptions,
   onClickedButton,
@@ -67,7 +67,7 @@ function TopButtonBar({
         <ExportZipButton
           disabled={disabledExportZipButton}
           clickedButtonName={clickedButtonName}
-          onExportZipFile={onExportZipFile}
+          onExportZip={onExportZip}
           onClickedButton={onClickedButton}
           constants={constants}
           messages={messages}
@@ -222,7 +222,7 @@ function ImportZipButton({
 function ExportZipButton({
   disabled,
   clickedButtonName,
-  onExportZipFile,
+  onExportZip,
   onClickedButton,
   constants,
   messages
@@ -234,7 +234,7 @@ function ExportZipButton({
       label={messages.EXPORT_ZIP_BUTTON_LABEL}
       disabled={disabled}
       clickedButtonName={clickedButtonName}
-      onClick={onExportZipFile}
+      onClick={onExportZip}
       onClickedButton={onClickedButton}
     />
   );
