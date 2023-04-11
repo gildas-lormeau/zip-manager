@@ -10,7 +10,8 @@
 
 import {
   MAINPAGE_PATH,
-  SHARED_FILES_PATH,
+  MAINPAGE_RELATIVE_PATH,
+  SHARED_FILES_RELATIVE_PATH,
   SHARED_FILES_CACHE_ID,
   SHARED_FILES_FORM_PATH,
   SHARED_FILES_PARAMETER
@@ -20,10 +21,7 @@ import { clientsClaim } from "workbox-core";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 
-const BASE_PATH = ".";
-const MAINPAGE_REDIRECT_PATH =
-  BASE_PATH + MAINPAGE_PATH + SHARED_FILES_PARAMETER;
-const SHARED_FILES_FULL_PATH = BASE_PATH + SHARED_FILES_PATH;
+const MAINPAGE_REDIRECT_PATH = MAINPAGE_RELATIVE_PATH + SHARED_FILES_PARAMETER;
 
 clientsClaim();
 
@@ -67,8 +65,8 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
-registerRoute(SHARED_FILES_FULL_PATH, getSharedFiles, "GET");
-registerRoute(SHARED_FILES_FULL_PATH, setSharedFiles, "POST");
+registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, "GET");
+registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, "POST");
 
 async function setSharedFiles({ event }) {
   const formData = await event.request.formData();
