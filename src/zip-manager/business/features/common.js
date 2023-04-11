@@ -192,6 +192,9 @@ function getCommonFeatures({
         DEFAULT_OPTIONS.promptForExportPassword
       );
     }
+    if (options.checkSignature === undefined) {
+      options.checkSignature = Boolean(DEFAULT_OPTIONS.checkSignature);
+    }
     configureZipService(options);
     return options;
   }

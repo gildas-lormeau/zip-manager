@@ -209,7 +209,10 @@ function getSelectedFolderFeatures({
         const options = getOptions();
         await saveEntry({ filename, getWritable }, filename, {
           ...options,
-          password
+          password,
+          readerOptions: {
+            checkSignature: options.checkSignature
+          }
         });
       } catch (error) {
         openDisplayError(error.message);

@@ -15,6 +15,7 @@ function OptionsDialog({
   const [hideInfobar, setHideInfobar] = useState(false);
   const [promptForExportPassword, setPromptForExportPassword] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
+  const [checkSignature, setCheckSignature] = useState(false);
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
   const [chunkSize, setChunkSize] = useState("0");
@@ -43,6 +44,10 @@ function OptionsDialog({
     setBufferedWrite(event.target.checked);
   }
 
+  function handleChangeCheckSignature(event) {
+    setCheckSignature(event.target.checked);
+  }
+
   function handleChangeMaxWorkers(event) {
     setMaxWorkers(event.target.value);
   }
@@ -58,6 +63,7 @@ function OptionsDialog({
       hideInfobar,
       promptForExportPassword,
       keepOrder,
+      checkSignature,
       bufferedWrite,
       maxWorkers: Number(maxWorkers),
       chunkSize: Number(chunkSize) * 1024
@@ -72,6 +78,7 @@ function OptionsDialog({
         hideInfobar,
         promptForExportPassword,
         keepOrder,
+        checkSignature,
         bufferedWrite,
         maxWorkers,
         chunkSize
@@ -81,6 +88,7 @@ function OptionsDialog({
       setHideInfobar(hideInfobar);
       setPromptForExportPassword(promptForExportPassword);
       setKeepOrder(keepOrder);
+      setCheckSignature(checkSignature);
       setBufferedWrite(bufferedWrite);
       setMaxWorkers(maxWorkers);
       setChunkSize(chunkSize / 1024);
@@ -131,6 +139,14 @@ function OptionsDialog({
           checked={promptForExportPassword}
           type="checkbox"
           onChange={handleChangePromptForExportPassword}
+        />
+      </label>
+      <label>
+        {messages.OPTIONS_CHECK_SIGNATURE_LABEL}
+        <input
+          checked={checkSignature}
+          type="checkbox"
+          onChange={handleChangeCheckSignature}
         />
       </label>
       <label>
