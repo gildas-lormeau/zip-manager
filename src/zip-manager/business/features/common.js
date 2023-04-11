@@ -177,23 +177,20 @@ function getCommonFeatures({
       options.maxWorkers = util.getDefaultMaxWorkers();
     }
     if (options.hideNavigationBar === undefined) {
-      options.hideNavigationBar = Boolean(DEFAULT_OPTIONS.hideNavigationBar);
+      options.hideNavigationBar = DEFAULT_OPTIONS.hideNavigationBar;
     }
     if (options.hideDownloadManager === undefined) {
-      options.hideDownloadManager = Boolean(
-        DEFAULT_OPTIONS.hideDownloadManager
-      );
+      options.hideDownloadManager = DEFAULT_OPTIONS.hideDownloadManager;
     }
     if (options.hideInfobar === undefined) {
-      options.hideInfobar = Boolean(DEFAULT_OPTIONS.hideInfobar);
+      options.hideInfobar = DEFAULT_OPTIONS.hideInfobar;
     }
     if (options.promptForExportPassword === undefined) {
-      options.promptForExportPassword = Boolean(
-        DEFAULT_OPTIONS.promptForExportPassword
-      );
+      options.promptForExportPassword = DEFAULT_OPTIONS.promptForExportPassword;
+    }
     }
     if (options.checkSignature === undefined) {
-      options.checkSignature = Boolean(DEFAULT_OPTIONS.checkSignature);
+      options.checkSignature = DEFAULT_OPTIONS.checkSignature;
     }
     configureZipService(options);
     return options;
