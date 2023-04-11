@@ -1,4 +1,4 @@
-/* global self, process, URL, Response, caches, FormData */
+/* global self, process, URL, Response, caches */
 /* eslint-disable no-restricted-globals */
 
 // This service worker can be customized!
