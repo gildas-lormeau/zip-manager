@@ -25,7 +25,7 @@ function BottomButtonBar({
   onRename,
   onRemove,
   onMove,
-  onStopMove,
+  onUpdateHeight,
   onClickedButton,
   constants,
   messages
@@ -44,7 +44,7 @@ function BottomButtonBar({
 
   function handleTouchEnd() {
     previousTouchClientY.current = 0;
-    onStopMove();
+    onUpdateHeight();
   }
 
   return (

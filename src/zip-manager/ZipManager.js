@@ -278,7 +278,7 @@ function ZipManager() {
     moveBottomBar,
     updateEntriesHeight,
     saveEntriesHeight,
-    stopResizeEntries
+    updateEntriesHeightEnd
   } = getAppFeatures({
     zipFilesystem,
     dialogDisplayed,
@@ -420,8 +420,8 @@ function ZipManager() {
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enter}
-          onSaveEntriesHeight={saveEntriesHeight}
-          onUpdateEntriesHeight={updateEntriesHeight}
+          onSaveHeight={saveEntriesHeight}
+          onUpdateHeight={updateEntriesHeight}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
@@ -450,7 +450,7 @@ function ZipManager() {
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntry}
           onMove={moveBottomBar}
-          onStopMove={stopResizeEntries}
+          onUpdateHeight={updateEntriesHeightEnd}
           onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}

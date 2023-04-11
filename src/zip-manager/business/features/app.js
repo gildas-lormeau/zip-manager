@@ -123,7 +123,7 @@ function getAppFeatures({
     }
   }
 
-  function stopResizeEntries() {
+  function updateEntriesHeightEnd() {
     const entriesElementHeight = getEntriesElementHeight();
     setEntriesHeight(
       Math.max(
@@ -160,7 +160,7 @@ function getAppFeatures({
     moveBottomBar,
     saveEntriesHeight,
     updateEntriesHeight,
-    stopResizeEntries
+    updateEntriesHeightEnd
   };
 }
 
