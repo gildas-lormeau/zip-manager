@@ -14,7 +14,8 @@ function Entries({
   onToggle,
   onToggleRange,
   onEnter,
-  onResize,
+  onSaveEntriesHeight,
+  onUpdateEntriesHeight,
   entriesRef,
   entriesHeightRef,
   highlightedEntryRef,
@@ -63,9 +64,12 @@ function Entries({
       );
     }
   }
+  function updateEntriesHeight() {
+    onUpdateEntriesHeight(util.getHeight(entriesRef.current));
+  }
 
-  function computeEntriesHeight() {
-    onResize(util.getHeight(entriesRef.current));
+  function saveEntriesHeight() {
+    onSaveEntriesHeight(util.getHeight(entriesRef.current));
   }
 
   function setTouchEndEventTimeout() {
@@ -122,15 +126,23 @@ function Entries({
   function registerResizeHandler() {
     const observer = util.addResizeObserver(
       entriesRef.current,
-      computeEntriesHeight
+      saveEntriesHeight
     );
-    return () => observer.disconnect();
+    util.addResizeListener(updateEntriesHeight);
+    return () => {
+      observer.disconnect();
+      util.removeResizeListener(updateEntriesHeight);
+    };
   }
 
   useEffect(computeEntriesListHeight);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(computeEntriesHeight, []);
   useEffect(registerResizeHandler);
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    updateEntriesHeight();
+    saveEntriesHeight();
+  }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div

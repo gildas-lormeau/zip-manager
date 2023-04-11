@@ -103,14 +103,21 @@ function getAppFeatures({
     setEntriesDeltaHeight(deltaY);
   }
 
-  function resizeEntries(height) {
+  function saveEntriesHeight(height) {
+    if (!dialogDisplayed) {
+      const options = getOptions();
+      if (entriesHeight || !options.entriesHeight) {
+        options.entriesHeight = height;
+        setOptions(options);
+      }
+    }
+  }
+
+  function updateEntriesHeight(height) {
     if (!dialogDisplayed) {
       const options = getOptions();
       if (!entriesHeight && options.entriesHeight) {
         height = options.entriesHeight;
-      } else {
-        options.entriesHeight = height;
-        setOptions(options);
       }
       setEntriesHeight(height);
     }
@@ -151,7 +158,8 @@ function getAppFeatures({
     resetOptions,
     saveAccentColor,
     moveBottomBar,
-    resizeEntries,
+    saveEntriesHeight,
+    updateEntriesHeight,
     stopResizeEntries
   };
 }

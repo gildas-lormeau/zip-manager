@@ -1,5 +1,6 @@
 /* global navigator, window, document, URL, AbortController, Intl, localStorage, TransformStream, Response, LaunchParams, ResizeObserver */
 
+const RESIZE_EVENT_NAME = "resize";
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 const KEYUP_EVENT_NAME = "keyup";
@@ -65,6 +66,14 @@ function addResizeObserver(element, listener) {
   const observer = new ResizeObserver(listener);
   observer.observe(element, { attributes: true });
   return observer;
+}
+
+function addResizeListener(listener) {
+  window.addEventListener(RESIZE_EVENT_NAME, listener);
+}
+
+function removeResizeListener(listener) {
+  window.removeEventListener(RESIZE_EVENT_NAME, listener);
 }
 
 function scrollIntoView(element) {
@@ -295,6 +304,8 @@ export {
   addUnloadListener,
   removeUnloadListener,
   addResizeObserver,
+  addResizeListener,
+  removeResizeListener,
   getHeight,
   setStyleProperty,
   saveValue,

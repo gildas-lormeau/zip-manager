@@ -276,7 +276,8 @@ function ZipManager() {
     resetOptions,
     saveAccentColor,
     moveBottomBar,
-    resizeEntries,
+    updateEntriesHeight,
+    saveEntriesHeight,
     stopResizeEntries
   } = getAppFeatures({
     zipFilesystem,
@@ -419,7 +420,8 @@ function ZipManager() {
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enter}
-          onResize={resizeEntries}
+          onSaveEntriesHeight={saveEntriesHeight}
+          onUpdateEntriesHeight={updateEntriesHeight}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
