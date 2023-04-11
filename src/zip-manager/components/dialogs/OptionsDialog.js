@@ -102,7 +102,7 @@ function OptionsDialog({
       submitLabel={messages.OPTIONS_DIALOG_BUTTON_LABEL}
     >
       <label>
-        {messages.OPTIONS_HIDE_NAVIGATION_BAR}
+        {messages.OPTIONS_HIDE_NAVIGATION_BAR_LABEL}
         <input
           checked={hideNavigationBar}
           type="checkbox"
@@ -110,7 +110,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_HIDE_DOWNLOAD_MANAGER}
+        {messages.OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL}
         <input
           checked={hideDownloadManager}
           type="checkbox"
@@ -118,7 +118,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_HIDE_INFOBAR}
+        {messages.OPTIONS_HIDE_INFOBAR_LABEL}
         <input
           checked={hideInfobar}
           type="checkbox"
@@ -126,7 +126,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_PROMPT_FOR_EXPORT_PASSWORD}
+        {messages.OPTIONS_EXPORT_ZIP_PASSWORD_LABEL}
         <input
           checked={promptForExportPassword}
           type="checkbox"
