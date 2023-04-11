@@ -170,19 +170,22 @@ function getCommonFeatures({
   }
 
   function getOptions() {
-    let options = storageService.get(constants.OPTIONS_KEY_NAME);
+    const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME } = constants;
+    let options = storageService.get(OPTIONS_KEY_NAME);
     if (!options) {
-      options = constants.DEFAULT_OPTIONS;
+      options = { ...DEFAULT_OPTIONS };
       options.maxWorkers = util.getDefaultMaxWorkers();
     }
     if (options.hideNavigationBar === undefined) {
-      options.hideNavigationBar = Boolean(options.hideNavigationBar);
+      options.hideNavigationBar = Boolean(DEFAULT_OPTIONS.hideNavigationBar);
     }
     if (options.hideDownloadManager === undefined) {
-      options.hideDownloadManager = Boolean(options.hideDownloadManager);
+      options.hideDownloadManager = Boolean(
+        DEFAULT_OPTIONS.hideDownloadManager
+      );
     }
     if (options.hideInfobar === undefined) {
-      options.hideInfobar = Boolean(options.hideInfobar);
+      options.hideInfobar = Boolean(DEFAULT_OPTIONS.hideInfobar);
     }
     configureZipService(options);
     return options;
