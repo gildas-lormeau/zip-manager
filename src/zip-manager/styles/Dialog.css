@@ -11,6 +11,7 @@ dialog {
   color: var(--text-color);
   border: solid var(--accent-color) 0.1em;
   margin-inline: auto;
+  border-radius: .25em;
 }
 
 dialog input {
@@ -21,6 +22,7 @@ dialog input {
   padding-inline: 0.75ch;
   font-size: 1em;
   margin-inline: 1px;
+  border-radius: .25em;
 }
 
 dialog form {
