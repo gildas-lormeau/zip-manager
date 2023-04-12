@@ -167,6 +167,7 @@ button {
   color: var(--button-color);
   font-size: 0.8em;
   white-space: nowrap;
+  opacity: 0.85;
 }
 
 button:disabled {
@@ -178,6 +179,10 @@ button:disabled {
 button.flashing-button {
   animation-name: flashing-button-animation;
   animation-duration: 0.2s;
+}
+
+button:not([disabled]):hover {
+  opacity: 1;
 }
 
 @keyframes flashing-button-animation {
