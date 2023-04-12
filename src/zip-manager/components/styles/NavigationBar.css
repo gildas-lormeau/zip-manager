@@ -23,7 +23,6 @@
 .breadcrumb {
   display: flex;
   overflow: hidden;
-  margin-block-start: -0.05em;
   line-height: 1.35em;
 }
 
@@ -34,7 +33,6 @@
 }
 
 .breadcrumb li {
-  padding-block: 0.15em;
   padding-inline-start: 0.25ch;
   overflow: hidden;
   column-gap: 0.5ch;
