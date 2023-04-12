@@ -30,7 +30,8 @@ function getUIState({
     return false;
   });
   const clipboardDataEmpty = !clipboardData;
-  const disabledExportZip = entriesEmpty;
+  const disabledExportZip =
+    entriesEmpty || (selectedFolder.parent && entries.length === 1);
   const disabledReset = entriesEmpty;
   const disabledNavigation = entriesEmpty;
   const disabledBack = !historyIndex;
