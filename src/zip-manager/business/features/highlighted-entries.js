@@ -114,7 +114,9 @@ function getHighlightedEntriesFeatures({
       setHighlightedIds([entries[indexNextEntry].id]);
     } else {
       setPreviousHighlight(null);
-      setHighlightedIds([]);
+      if (selectedFolder.parent) {
+        setHighlightedIds([selectedFolder.parent.id]);
+      }
     }
     updateHistoryData();
     refreshSelectedFolder();
