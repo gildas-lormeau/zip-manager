@@ -47,7 +47,7 @@
     );
     --button-color: color-mix(in srgb, var(--accent-color) 50%, black);
     --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, white);
-    --disabled-button-color: color-mix(in srgb, var(--accent-color) 70%, white);
+    --disabled-button-color: color-mix(in srgb, var(--accent-color) 80%, white);
     --bg-disabled-button-color: color-mix(
       in srgb,
       var(--accent-color) 20%,
@@ -87,7 +87,7 @@
     );
     --button-color: color-mix(in srgb, var(--accent-color) 50%, white);
     --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
-    --disabled-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
+    --disabled-button-color: color-mix(in srgb, var(--accent-color) 80%, black);
     --bg-disabled-button-color: color-mix(
       in srgb,
       var(--accent-color) 20%,
@@ -131,7 +131,7 @@
       --bg-button-color: color-mix(in srgb, var(--accent-color) 50%, black);
       --disabled-button-color: color-mix(
         in srgb,
-        var(--accent-color) 50%,
+        var(--accent-color) 80%,
         black
       );
       --bg-disabled-button-color: color-mix(
@@ -168,7 +168,7 @@ button {
   font-size: 0.8em;
   white-space: nowrap;
   opacity: 0.85;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 button:disabled {
