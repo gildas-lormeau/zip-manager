@@ -67,13 +67,3 @@
     inline-size: 1.25ch;
   }
 }
-
-@media (max-width: 40ch) {
-  .info-bar .source-link {
-    font-size: 0.6em;
-  }
-
-  .info-bar input[type="color"] {
-    inline-size: 1ch;
-  }
-}

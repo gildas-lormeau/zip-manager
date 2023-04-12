@@ -31,10 +31,3 @@
     padding-inline: 1ch;
   }
 }
-
-@media (max-width: 40ch) {
-  .button-bar button {
-    font-size: 0.7em;
-    block-size: 1.75em;
-  }
-}
