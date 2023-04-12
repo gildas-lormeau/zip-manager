@@ -34,6 +34,8 @@ dialog form {
 
 dialog form .dialog-title {
   font-weight: 500;
+  border-block-end: solid var(--accent-color) 0.05em;
+  padding-bottom: 1em;
 }
 
 dialog form p {
@@ -41,7 +43,8 @@ dialog form p {
   flex-direction: column;
   row-gap: 1em;
   margin: 0;
-  padding-block: 1em;
+  padding-block-start: .25em;
+  padding-block-end: 1em;
   overflow: auto;
 }
 
