@@ -161,7 +161,7 @@ ol li {
 }
 
 button {
-  border: solid var(--accent-color) 0.05em;
+  border-width: 0;
   user-select: none;
   background-color: var(--bg-button-color);
   color: var(--button-color);
