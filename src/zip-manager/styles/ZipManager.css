@@ -16,7 +16,7 @@ main {
   border: solid var(--accent-color) 0.05em;
   inline-size: 85vw;
   min-block-size: 20em;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 main > * {

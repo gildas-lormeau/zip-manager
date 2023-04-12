@@ -11,7 +11,7 @@ dialog {
   color: var(--text-color);
   border: solid var(--accent-color) 0.1em;
   margin-inline: auto;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 dialog input {
@@ -22,7 +22,7 @@ dialog input {
   padding-inline: 0.75ch;
   font-size: 1em;
   margin-inline: 1px;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 dialog form {
@@ -43,7 +43,7 @@ dialog form p {
   flex-direction: column;
   row-gap: 1em;
   margin: 0;
-  padding-block-start: .25em;
+  padding-block-start: 0.25em;
   padding-block-end: 1em;
   overflow: auto;
 }
