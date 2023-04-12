@@ -2,6 +2,7 @@
   min-block-size: 5vh;
   overflow: auto;
   flex: 1;
+  scrollbar-color: var(--button-color) transparent;
 }
 
 .downloads ol {
