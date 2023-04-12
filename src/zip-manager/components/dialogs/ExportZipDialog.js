@@ -46,7 +46,11 @@ function ExportZipDialog({
       filenameInputRef.current
     ) {
       filenameTextSelected.current = true;
-      filenameInputRef.current.select();
+      let selectionEnd = filename.lastIndexOf(".");
+      filenameInputRef.current.setSelectionRange(
+        0,
+        selectionEnd === -1 ? filename.length : selectionEnd
+      );
     }
   }, [filename]);
   return (
