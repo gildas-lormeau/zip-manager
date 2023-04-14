@@ -43,6 +43,7 @@
 }
 
 .breadcrumb .breadcrumb-item {
+  height: 100%;
   opacity: 0.75;
   font-weight: 400;
   text-decoration: underline dotted transparent 0.1em;
