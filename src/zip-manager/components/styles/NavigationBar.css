@@ -40,6 +40,7 @@
 
 .breadcrumb li::after {
   content: "/";
+  height: 100%;
 }
 
 .breadcrumb .breadcrumb-item {
