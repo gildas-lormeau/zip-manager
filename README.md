@@ -12,3 +12,7 @@ See https://gildas-lormeau.github.io/zip-manager/
  - support of drag and drop files/directories on desktop
  - integration in the "Open with..." menu on desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
  - integration with the Share feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
+
+## Screenshot (desktop)
+
+![image](https://user-images.githubusercontent.com/396787/232257806-bebf91bc-3d29-4866-8caa-c40ad6f63e76.png)
