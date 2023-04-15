@@ -11,7 +11,7 @@ See https://gildas-lormeau.github.io/zip-manager/
  - 4GB+ zip files (i.e. Zip64)
  - support of drag and drop files/directories on desktop
  - integration in the "Open with..." menu on desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
- - integration with the Share feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
+ - integration with the "Share" feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
 
 ## Screenshot (desktop)
 
