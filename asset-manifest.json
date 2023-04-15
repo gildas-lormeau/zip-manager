@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://gildas-lormeau.github.io/zip-manager/static/css/main.8c08ba00.css",
+    "main.css": "https://gildas-lormeau.github.io/zip-manager/static/css/main.6b293746.css",
     "main.js": "https://gildas-lormeau.github.io/zip-manager/static/js/main.e5d1bf0b.js",
     "static/media/Exo-VariableFont_wght.ttf": "https://gildas-lormeau.github.io/zip-manager/static/media/Exo-VariableFont_wght.4c04cd875557390e68c2.ttf",
     "service-worker.js": "https://gildas-lormeau.github.io/zip-manager/service-worker.js",
     "index.html": "https://gildas-lormeau.github.io/zip-manager/index.html",
-    "main.8c08ba00.css.map": "https://gildas-lormeau.github.io/zip-manager/static/css/main.8c08ba00.css.map",
+    "main.6b293746.css.map": "https://gildas-lormeau.github.io/zip-manager/static/css/main.6b293746.css.map",
     "main.e5d1bf0b.js.map": "https://gildas-lormeau.github.io/zip-manager/static/js/main.e5d1bf0b.js.map"
   },
   "entrypoints": [
-    "static/css/main.8c08ba00.css",
+    "static/css/main.6b293746.css",
     "static/js/main.e5d1bf0b.js"
   ]
 }
