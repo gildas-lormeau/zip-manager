@@ -1,9 +1,12 @@
+html {
+  background-color: var(--page-color);
+}
+
 .main-container {
   display: flex;
   height: 100dvh;
   flex-direction: column;
   align-items: center;
-  background-color: var(--page-color);
 }
 
 main {
