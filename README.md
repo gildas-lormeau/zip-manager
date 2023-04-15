@@ -9,5 +9,5 @@ See https://gildas-lormeau.github.io/zip-manager/
  - multi-core compression/decompression
  - encrypted zip files
  - 4GB+ zip files (i.e. Zip64)
- - integration in the "Open with..." menu on Desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
+ - integration in the "Open with..." menu on desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
  - integration with the Share feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
