@@ -73,7 +73,11 @@ function getEntriesFeatures({
   function highlightAll() {
     setHighlightedIds(
       entries
-        .filter((entry) => entry !== selectedFolder.parent && !highlightedIds.includes(entry.id))
+        .filter(
+          (entry) =>
+            entry !== selectedFolder.parent &&
+            !highlightedIds.includes(entry.id)
+        )
         .map((entry) => entry.id)
         .concat(...highlightedIds)
     );
