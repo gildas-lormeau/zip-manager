@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 function ExportZipDialog({
   data,
-  hidePassword,
+  hiddenPassword,
   onExportZip,
   onClose,
   messages
@@ -74,7 +74,7 @@ function ExportZipDialog({
           />
         )}
       </label>
-      {hidePassword || (
+      {hiddenPassword || (
         <label>
           {messages.EXPORT_ZIP_PASSWORD_LABEL}
           <input

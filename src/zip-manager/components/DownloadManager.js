@@ -3,7 +3,7 @@ import "./styles/DownloadManager.css";
 function DownloadManager({
   hidden,
   downloads,
-  hideInfobar,
+  hiddenInfobar,
   downloaderRef,
   onAbortDownload,
   constants,
@@ -23,7 +23,7 @@ function DownloadManager({
         className="downloads"
         aria-label="Downloads"
         role="navigation"
-        style={hideInfobar ? { borderBlockEnd: 0 } : null}
+        style={hiddenInfobar ? { borderBlockEnd: 0 } : null}
       >
         <ol>
           {downloads.map((download) => (

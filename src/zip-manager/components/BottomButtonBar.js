@@ -13,8 +13,8 @@ function BottomButtonBar({
   disabledHighlightAllButton,
   disabledRenameButton,
   disabledDeleteButton,
-  hideDownloadManager,
-  hideInfobar,
+  hiddenDownloadManager,
+  hiddenInfobar,
   clickedButtonName,
   onCopy,
   onCut,
@@ -55,7 +55,11 @@ function BottomButtonBar({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onContextMenu={(event) => event.preventDefault()}
-      style={hideInfobar && hideDownloadManager ? { borderBlockEnd: 0 } : null}
+      style={
+        hiddenDownloadManager && hiddenDownloadManager
+          ? { borderBlockEnd: 0 }
+          : null
+      }
     >
       <div className="button-group">
         <HighlightAllButton

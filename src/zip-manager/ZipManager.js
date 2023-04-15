@@ -243,10 +243,10 @@ function ZipManager() {
     disabledDelete,
     disabledEnter,
     dialogDisplayed,
-    hideNavigationBar,
-    hideDownloadManager,
-    hideInfobar,
-    hideExportPassword
+    hiddenNavigationBar,
+    hiddenDownloadManager,
+    hiddenInfobar,
+    hiddenExportPassword
   } = getUIState({
     entries,
     highlightedIds,
@@ -400,7 +400,7 @@ function ZipManager() {
           disabledBackButton={disabledBack}
           disabledForwardButton={disabledForward}
           clickedButtonName={clickedButtonName}
-          hidden={hideNavigationBar}
+          hidden={hiddenNavigationBar}
           onNavigateBack={navigateBack}
           onNavigateForward={navigateForward}
           onGoIntoFolder={goIntoFolder}
@@ -414,7 +414,7 @@ function ZipManager() {
           highlightedIds={highlightedIds}
           entriesHeight={entriesHeight}
           deltaEntriesHeight={entriesDeltaHeight}
-          hideDownloadManager={hideDownloadManager}
+          hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}
           onToggle={toggle}
@@ -438,8 +438,8 @@ function ZipManager() {
           disabledHighlightAllButton={disabledHighlightAll}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
-          hideDownloadManager={hideDownloadManager}
-          hideInfobar={hideInfobar}
+          hiddenDownloadManager={hiddenDownloadManager}
+          hiddenInfobar={hiddenInfobar}
           clickedButtonName={clickedButtonName}
           onCopy={copy}
           onCut={cut}
@@ -457,8 +457,8 @@ function ZipManager() {
         />
         <DownloadManager
           downloads={downloads}
-          hidden={hideDownloadManager}
-          hideInfobar={hideInfobar}
+          hidden={hiddenDownloadManager}
+          hiddenInfobar={hiddenInfobar}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
           constants={constants}
@@ -466,7 +466,7 @@ function ZipManager() {
         />
       </main>
       <InfoBar
-        hidden={hideInfobar}
+        hidden={hiddenInfobar}
         accentColor={accentColor}
         onSetAccentColor={setAccentColor}
       />
@@ -478,7 +478,7 @@ function ZipManager() {
       />
       <ExportZipDialog
         data={exportZipDialog}
-        hidePassword={hideExportPassword}
+        hiddenPassword={hiddenExportPassword}
         onExportZip={exportZip}
         onClose={closePromptExportZip}
         messages={messages}

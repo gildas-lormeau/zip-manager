@@ -66,10 +66,10 @@ function getUIState({
     importPasswordDialog ||
     optionsDialog;
   const options = getOptions();
-  const hideNavigationBar = options.hideNavigationBar;
-  const hideDownloadManager = options.hideDownloadManager;
-  const hideInfobar = options.hideInfobar;
-  const hideExportPassword = !options.promptForExportPassword;
+  const hiddenNavigationBar = options.hideNavigationBar;
+  const hiddenDownloadManager = options.hideDownloadManager;
+  const hiddenInfobar = options.hideInfobar;
+  const hiddenExportPassword = !options.promptForExportPassword;
 
   return {
     disabledExportZip,
@@ -87,10 +87,10 @@ function getUIState({
     disabledDelete,
     disabledEnter,
     dialogDisplayed,
-    hideNavigationBar,
-    hideDownloadManager,
-    hideInfobar,
-    hideExportPassword
+    hiddenNavigationBar,
+    hiddenDownloadManager,
+    hiddenInfobar,
+    hiddenExportPassword
   };
 }
 
