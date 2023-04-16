@@ -13,21 +13,12 @@
 }
 
 .button-bar button {
-  block-size: 2.5em;
-}
-
-.button-bar button {
-  padding-inline: 1.5ch;
+  block-size: fit-content;
+  padding-block: 0.5em;
+  padding-inline: 1.25ch;
   font-family: inherit;
 }
 
 .button-bar button:not([disabled]) {
   cursor: pointer;
-}
-
-@media (max-width: 80ch) {
-  .button-bar button {
-    block-size: 2.25em;
-    padding-inline: 1ch;
-  }
 }

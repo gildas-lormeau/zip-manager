@@ -166,7 +166,6 @@ button {
   background-color: var(--bg-button-color);
   color: var(--button-color);
   font-size: 0.8em;
-  white-space: nowrap;
   opacity: 0.85;
   border-radius: 0.25em;
 }

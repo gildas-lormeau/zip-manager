@@ -12,7 +12,7 @@
   font-family: monospace;
   padding-inline: 1ch;
   align-self: start;
-  block-size: 1.9em;
+  padding-block: .25em;
   font-size: 1em;
 }
 
