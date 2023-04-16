@@ -24,9 +24,3 @@
 .options-dialog input[type="number"] {
   width: min(10ch, 100%);
 }
-
-@media (max-width: 80ch) {
-  .options-dialog input[type="checkbox"] {
-    width: 1.5ch;
-  }
-}

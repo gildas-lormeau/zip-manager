@@ -77,9 +77,3 @@ main > :last-child {
     border-block-end: solid var(--accent-color) 0.05em;
   }
 }
-
-@media (max-width: 20ch) {
-  main {
-    block-size: auto;
-  }
-}
