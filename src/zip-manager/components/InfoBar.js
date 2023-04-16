@@ -10,7 +10,13 @@ function InfoBar({ hidden, accentColor, onSetAccentColor }) {
       <footer className="info-bar">
         <div className="source-link">
           {"Source code on "}
-          <a href="https://github.com/gildas-lormeau/zip-manager">GitHub</a>
+          <a
+            href="https://github.com/gildas-lormeau/zip-manager"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
           {" | Made with "}
           <AccentColorPickerButton
             accentColor={accentColor}
