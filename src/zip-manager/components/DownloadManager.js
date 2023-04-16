@@ -6,6 +6,7 @@ function DownloadManager({
   hiddenInfobar,
   downloaderRef,
   onAbortDownload,
+  util,
   constants,
   messages
 }) {
@@ -31,6 +32,7 @@ function DownloadManager({
               <DownloadEntry
                 download={download}
                 onAbortDownload={onAbortDownload}
+                util={util}
                 constants={constants}
                 messages={messages}
               />
@@ -45,7 +47,13 @@ function DownloadManager({
   }
 }
 
-function DownloadEntry({ download, onAbortDownload, constants, messages }) {
+function DownloadEntry({
+  download,
+  onAbortDownload,
+  util,
+  constants,
+  messages
+}) {
   return (
     <>
       <DownloadEntryInfo
@@ -54,7 +62,7 @@ function DownloadEntry({ download, onAbortDownload, constants, messages }) {
         constants={constants}
         messages={messages}
       />
-      <DownloadEntryProgress download={download} />
+      <DownloadEntryProgress download={download} util={util} />
     </>
   );
 }
@@ -104,8 +112,16 @@ function DeleteDownloadEntryButton({
   );
 }
 
-function DownloadEntryProgress({ download }) {
-  return <progress value={download.progressValue} max={download.progressMax} />;
+function DownloadEntryProgress({ download, util }) {
+  return (
+    <progress
+      value={Math.floor(download.progressValue / 1000)}
+      max={Math.floor(download.progressMax / 1000)}
+      title={util.formatPercentValue(
+        (100 * download.progressValue) / download.progressMax
+      )}
+    />
+  );
 }
 
 export default DownloadManager;

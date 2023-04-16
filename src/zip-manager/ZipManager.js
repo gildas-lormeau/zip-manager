@@ -461,6 +461,7 @@ function ZipManager() {
           hiddenInfobar={hiddenInfobar}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
+          util={util}
           constants={constants}
           messages={messages}
         />

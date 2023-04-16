@@ -27,6 +27,11 @@ const DATE_TIME_FORMAT = new Intl.DateTimeFormat(EN_US_LANGUAGE_ID, {
   dateStyle: "short",
   timeStyle: "short"
 });
+const PERCENT_VALUE_FORMAT = new Intl.NumberFormat(EN_US_LANGUAGE_ID, {
+  style: "unit",
+  maximumFractionDigits: 0,
+  unit: "percent"
+});
 const MACOS_PLATFORMS = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"];
 const FILESYSTEM_FILE_KIND = "file";
 const FILESYSTEM_DIRECTORY_KIND = "directory";
@@ -190,6 +195,10 @@ function formatDate(date) {
   return DATE_TIME_FORMAT.format(date);
 }
 
+function formatPercentValue(value) {
+  return PERCENT_VALUE_FORMAT.format(value);
+}
+
 function setTimeout(callback, delay, ...args) {
   return window.setTimeout(callback, delay, ...args);
 }
@@ -318,6 +327,7 @@ export {
   getWritableBlob,
   formatSize,
   formatDate,
+  formatPercentValue,
   setTimeout,
   clearTimeout,
   isMacOSPlatform,
