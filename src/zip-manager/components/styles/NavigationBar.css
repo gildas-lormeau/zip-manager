@@ -53,6 +53,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
+  outline-offset: -1px;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {
