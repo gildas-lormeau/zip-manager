@@ -152,7 +152,10 @@ function getSelectedFolderFeatures({
         }
       } catch (error) {
         cleanup(importedEntries);
-        openDisplayError(error.message);
+        const entry = error?.cause?.entry;
+        const message =
+          error.message + (entry ? " (" + entry.filename + ")" : "");
+        openDisplayError(message);
       }
     }
 
