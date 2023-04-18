@@ -206,7 +206,6 @@ function ZipManager() {
     history,
     historyIndex,
     highlightedIds,
-    selectedFolder,
     setHistory,
     setHistoryIndex,
     setClipboardData,

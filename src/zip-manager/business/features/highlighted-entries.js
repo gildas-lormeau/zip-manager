@@ -4,7 +4,6 @@ function getHighlightedEntriesFeatures({
   history,
   historyIndex,
   highlightedIds,
-  selectedFolder,
   setHistory,
   setHistoryIndex,
   setClipboardData,
@@ -64,7 +63,7 @@ function getHighlightedEntriesFeatures({
     highlightedIds.forEach((id) =>
       zipFilesystem.remove(zipFilesystem.getById(id))
     );
-    if (selectedFolder.children.length) {
+    if (entries.length) {
       const indexEntry = Math.max(
         ...entries
           .map((entry, index) => ({ entry, index }))
@@ -89,11 +88,6 @@ function getHighlightedEntriesFeatures({
       }
       setPreviousHighlight(entries[indexNextEntry]);
       setHighlightedIds([entries[indexNextEntry].id]);
-    } else {
-      setPreviousHighlight(null);
-      if (selectedFolder.parent) {
-        setHighlightedIds([selectedFolder.parent.id]);
-      }
     }
     updateHistoryData();
     refreshSelectedFolder();
