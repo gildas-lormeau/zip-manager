@@ -37,17 +37,23 @@ function getSelectedFolderFeatures({
     const addFilesPrevented = handleZipFile(files, addFiles, options);
     if (!addFilesPrevented) {
       const addedEntries = [];
-      files.forEach((file) => {
-        try {
-          addedEntries.push(
-            selectedFolder.addBlob(file.name, file, {
-              lastModDate: new Date(file.lastModified)
-            })
-          );
-        } catch (error) {
-          openDisplayError(error.message);
-        }
-      });
+      try {
+        files.forEach((file) => {
+          try {
+            addedEntries.push(
+              selectedFolder.addBlob(file.name, file, {
+                lastModDate: new Date(file.lastModified)
+              })
+            );
+          } catch (error) {
+            const message =
+              error.message + (file ? " (" + file.name + ")" : "");
+            throw new Error(message);
+          }
+        });
+      } catch (error) {
+        openDisplayError(error.message);
+      }
       if (addedEntries.length) {
         highlightSortedEntries(addedEntries);
       }
@@ -59,34 +65,43 @@ function getSelectedFolderFeatures({
     async function dropFiles() {
       const droppedEntries = [];
       const firstHandle = handles[0];
-      const dropFilesPrevented =
-        firstHandle.kind === util.FILESYSTEM_FILE_KIND &&
-        handleZipFile([await firstHandle.getFile()], dropFiles, options);
-      if (!dropFilesPrevented) {
-        await Promise.all(
-          handles.map((handle) =>
-            addFile(handle, selectedFolder, droppedEntries)
-          )
-        );
-        const addedChildEntries = selectedFolder.children.filter((entry) =>
-          droppedEntries.includes(entry)
-        );
-        highlightSortedEntries(addedChildEntries);
-        refreshSelectedFolder();
+      try {
+        const dropFilesPrevented =
+          firstHandle.kind === util.FILESYSTEM_FILE_KIND &&
+          handleZipFile([await firstHandle.getFile()], dropFiles, options);
+        if (!dropFilesPrevented) {
+          await Promise.all(
+            handles.map((handle) =>
+              addFile(handle, selectedFolder, droppedEntries)
+            )
+          );
+          const addedChildEntries = selectedFolder.children.filter((entry) =>
+            droppedEntries.includes(entry)
+          );
+          highlightSortedEntries(addedChildEntries);
+          refreshSelectedFolder();
+        }
+      } catch (error) {
+        openDisplayError(error.message);
       }
     }
 
     async function addFile(entry, parentEntry, addedEntries) {
-      if (entry.kind === util.FILESYSTEM_FILE_KIND) {
-        const file = await entry.getFile();
-        const fileEntry = parentEntry.addBlob(entry.name, file);
-        addedEntries.push(fileEntry);
-      } else if (entry.kind === util.FILESYSTEM_DIRECTORY_KIND) {
-        const directoryEntry = parentEntry.addDirectory(entry.name);
-        addedEntries.push(directoryEntry);
-        for await (const value of entry.values()) {
-          await addFile(value, directoryEntry, addedEntries);
+      try {
+        if (entry.kind === util.FILESYSTEM_FILE_KIND) {
+          const file = await entry.getFile();
+          const fileEntry = parentEntry.addBlob(entry.name, file);
+          addedEntries.push(fileEntry);
+        } else if (entry.kind === util.FILESYSTEM_DIRECTORY_KIND) {
+          const directoryEntry = parentEntry.addDirectory(entry.name);
+          addedEntries.push(directoryEntry);
+          for await (const value of entry.values()) {
+            await addFile(value, directoryEntry, addedEntries);
+          }
         }
+      } catch (error) {
+        const message = error.message + (entry ? " (" + entry.name + ")" : "");
+        throw new Error(message);
       }
       return addedEntries;
     }
@@ -153,8 +168,10 @@ function getSelectedFolderFeatures({
       } catch (error) {
         cleanup(importedEntries);
         const entry = error?.cause?.entry;
+        const paths = entry && entry.filename.split("/");
         const message =
-          error.message + (entry ? " (" + entry.filename + ")" : "");
+          error.message +
+          (paths && paths.length ? " (" + paths.pop() + ")" : "");
         openDisplayError(message);
       }
     }
