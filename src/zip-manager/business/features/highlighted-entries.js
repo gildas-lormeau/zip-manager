@@ -5,7 +5,6 @@ function getHighlightedEntriesFeatures({
   historyIndex,
   highlightedIds,
   selectedFolder,
-  clipboardData,
   setHistory,
   setHistoryIndex,
   setClipboardData,
@@ -33,38 +32,6 @@ function getHighlightedEntriesFeatures({
       entries: highlightedIds.map((entryId) => zipFilesystem.getById(entryId)),
       cut: true
     });
-  }
-
-  function paste() {
-    try {
-      const { entries, cut } = clipboardData;
-      if (cut) {
-        entries.forEach((entry) => {
-          try {
-            zipFilesystem.move(entry, selectedFolder);
-          } catch (error) {
-            const message = error.message + (" (" + entry.name + ")");
-            throw new Error(message);
-          }
-        });
-      } else {
-        const clones = entries.map((entry) => {
-          let clone = entry.clone(true);
-          try {
-            zipFilesystem.move(entry, selectedFolder);
-          } catch (error) {
-            const message = error.message + (" (" + entry.name + ")");
-            throw new Error(message);
-          }
-          return clone;
-        });
-        setClipboardData({ entries: clones });
-      }
-      setHighlightedIds(entries.map((entry) => entry.id));
-      refreshSelectedFolder();
-    } catch (error) {
-      openDisplayError(error.message);
-    }
   }
 
   function openPromptRename() {
@@ -199,7 +166,6 @@ function getHighlightedEntriesFeatures({
   return {
     copy,
     cut,
-    paste,
     openPromptRename,
     rename,
     closePromptRename,

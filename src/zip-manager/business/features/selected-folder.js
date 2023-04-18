@@ -2,7 +2,10 @@ function getSelectedFolderFeatures({
   zipFilesystem,
   selectedFolder,
   rootZipFilename,
+  clipboardData,
   chooseActionDialog,
+  setHighlightedIds,
+  setClipboardData,
   setImportPasswordDialog,
   setExportZipDialog,
   setCreateFolderDialog,
@@ -243,6 +246,38 @@ function getSelectedFolderFeatures({
     exportZip();
   }
 
+  function paste() {
+    try {
+      const { entries, cut } = clipboardData;
+      if (cut) {
+        entries.forEach((entry) => {
+          try {
+            zipFilesystem.move(entry, selectedFolder);
+          } catch (error) {
+            const message = error.message + (" (" + entry.name + ")");
+            throw new Error(message);
+          }
+        });
+      } else {
+        const clones = entries.map((entry) => {
+          let clone = entry.clone(true);
+          try {
+            zipFilesystem.move(entry, selectedFolder);
+          } catch (error) {
+            const message = error.message + (" (" + entry.name + ")");
+            throw new Error(message);
+          }
+          return clone;
+        });
+        setClipboardData({ entries: clones });
+      }
+      setHighlightedIds(entries.map((entry) => entry.id));
+      refreshSelectedFolder();
+    } catch (error) {
+      openDisplayError(error.message);
+    }
+  }
+
   function closePromptImportPassword() {
     setImportPasswordDialog(null);
   }
@@ -257,6 +292,7 @@ function getSelectedFolderFeatures({
     importZipFile,
     openPromptExportZip,
     exportZip,
+    paste,
     closePromptExportZip,
     closePromptImportPassword
   };

@@ -165,13 +165,17 @@ function ZipManager() {
     importZipFile,
     openPromptExportZip,
     exportZip,
+    paste,
     closePromptExportZip,
     closePromptImportPassword
   } = getSelectedFolderFeatures({
     zipFilesystem,
     selectedFolder,
     rootZipFilename,
+    clipboardData,
     chooseActionDialog,
+    setHighlightedIds,
+    setClipboardData,
     setImportPasswordDialog,
     setExportZipDialog,
     setCreateFolderDialog,
@@ -187,7 +191,6 @@ function ZipManager() {
   const {
     copy,
     cut,
-    paste,
     openPromptRename,
     rename,
     closePromptRename,
@@ -204,7 +207,6 @@ function ZipManager() {
     historyIndex,
     highlightedIds,
     selectedFolder,
-    clipboardData,
     setHistory,
     setHistoryIndex,
     setClipboardData,
