@@ -116,6 +116,46 @@ function ZipManager() {
     constants
   });
   const {
+    disabledExportZip,
+    disabledReset,
+    disabledNavigation,
+    disabledBack,
+    disabledForward,
+    disabledCopy,
+    disabledCut,
+    disabledPaste,
+    disabledResetClipboardData,
+    disabledHighlightAll,
+    disabledExtract,
+    disabledRename,
+    disabledDelete,
+    disabledEnter,
+    dialogDisplayed,
+    hiddenNavigationBar,
+    hiddenDownloadManager,
+    hiddenInfobar,
+    hiddenExportPassword,
+    highlightedEntry
+  } = getUIState({
+    entries,
+    highlightedIds,
+    selectedFolder,
+    clipboardData,
+    historyIndex,
+    history,
+    getOptions,
+    exportZipDialog,
+    extractDialog,
+    renameDialog,
+    createFolderDialog,
+    deleteEntryDialog,
+    resetDialog,
+    errorMessageDialog,
+    importPasswordDialog,
+    optionsDialog,
+    util
+  });
+  const {
     highlightPrevious,
     highlightNext,
     highlightPreviousPage,
@@ -145,16 +185,18 @@ function ZipManager() {
     setPreviousHighlight,
     setToggleNavigationDirection
   });
-  const { goIntoFolder, navigateBack, navigateForward } = getFoldersFeatures({
-    history,
-    historyIndex,
-    selectedFolder,
-    setSelectedFolder,
-    setHistory,
-    setHistoryIndex,
-    setHighlightedIds,
-    refreshSelectedFolder
-  });
+  const { goIntoFolder, navigateBack, navigateForward, updateHistoryData } =
+    getFoldersFeatures({
+      history,
+      historyIndex,
+      highlightedEntry,
+      selectedFolder,
+      setSelectedFolder,
+      setHistory,
+      setHistoryIndex,
+      setHighlightedIds,
+      refreshSelectedFolder
+    });
   const {
     openPromptCreateFolder,
     createFolder,
@@ -203,11 +245,8 @@ function ZipManager() {
   } = getHighlightedEntriesFeatures({
     zipFilesystem,
     entries,
-    history,
-    historyIndex,
     highlightedIds,
-    setHistory,
-    setHistoryIndex,
+    highlightedEntry,
     setClipboardData,
     setHighlightedIds,
     setPreviousHighlight,
@@ -215,6 +254,7 @@ function ZipManager() {
     setRenameDialog,
     setDeleteEntryDialog,
     refreshSelectedFolder,
+    updateHistoryData,
     saveEntries,
     getOptions,
     openDisplayError,
@@ -227,45 +267,6 @@ function ZipManager() {
   });
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
-  });
-  const {
-    disabledExportZip,
-    disabledReset,
-    disabledNavigation,
-    disabledBack,
-    disabledForward,
-    disabledCopy,
-    disabledCut,
-    disabledPaste,
-    disabledResetClipboardData,
-    disabledHighlightAll,
-    disabledExtract,
-    disabledRename,
-    disabledDelete,
-    disabledEnter,
-    dialogDisplayed,
-    hiddenNavigationBar,
-    hiddenDownloadManager,
-    hiddenInfobar,
-    hiddenExportPassword
-  } = getUIState({
-    entries,
-    highlightedIds,
-    selectedFolder,
-    clipboardData,
-    historyIndex,
-    history,
-    getOptions,
-    exportZipDialog,
-    extractDialog,
-    renameDialog,
-    createFolderDialog,
-    deleteEntryDialog,
-    resetDialog,
-    errorMessageDialog,
-    importPasswordDialog,
-    optionsDialog,
-    util
   });
   const {
     initApplication,
@@ -313,7 +314,7 @@ function ZipManager() {
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
     downloads,
-    highlightedIds,
+    highlightedEntry,
     selectedFolder,
     disabledCut,
     disabledCopy,

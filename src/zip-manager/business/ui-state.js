@@ -70,6 +70,10 @@ function getUIState({
   const hiddenDownloadManager = options.hideDownloadManager;
   const hiddenInfobar = options.hideInfobar;
   const hiddenExportPassword = !options.promptForExportPassword;
+  const highlightedEntry =
+    highlightedIds.length === 1 &&
+    selectedFolder &&
+    selectedFolder.children.find((entry) => entry.id === highlightedIds[0]);
 
   return {
     disabledExportZip,
@@ -90,7 +94,8 @@ function getUIState({
     hiddenNavigationBar,
     hiddenDownloadManager,
     hiddenInfobar,
-    hiddenExportPassword
+    hiddenExportPassword,
+    highlightedEntry
   };
 }
 

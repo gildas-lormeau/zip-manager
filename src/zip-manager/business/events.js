@@ -1,7 +1,7 @@
 function getEventHandlers({
   zipFilesystem,
   downloads,
-  highlightedIds,
+  highlightedEntry,
   selectedFolder,
   disabledCut,
   disabledCopy,
@@ -59,7 +59,7 @@ function getEventHandlers({
         disabledBack,
         disabledForward,
         selectedFolder,
-        highlightedIds,
+        highlightedEntry,
         setClickedButtonName,
         goIntoFolder,
         util,
@@ -69,7 +69,7 @@ function getEventHandlers({
         disabledDelete,
         disabledEnter,
         selectedFolder,
-        highlightedIds,
+        highlightedEntry,
         setClickedButtonName,
         enter,
         util,
@@ -204,7 +204,7 @@ function onFoldersKeyUp(
     disabledBack,
     disabledForward,
     selectedFolder,
-    highlightedIds,
+    highlightedEntry,
     setClickedButtonName,
     goIntoFolder,
     util,
@@ -231,14 +231,12 @@ function onFoldersKeyUp(
     if (event.key === LEFT_KEY && selectedFolder.parent) {
       goIntoFolder(selectedFolder.parent);
     }
-    if (event.key === RIGHT_KEY && highlightedIds.length === 1) {
-      const highlightedEntry = getHighlightedEntry({
-        selectedFolder,
-        highlightedIds
-      });
-      if (highlightedEntry && highlightedEntry.directory) {
-        goIntoFolder(highlightedEntry);
-      }
+    if (
+      event.key === RIGHT_KEY &&
+      highlightedEntry &&
+      highlightedEntry.directory
+    ) {
+      goIntoFolder(highlightedEntry);
     }
   }
 }
@@ -249,7 +247,7 @@ function onHighlightedEntriesKeyUp(
     disabledDelete,
     disabledEnter,
     selectedFolder,
-    highlightedIds,
+    highlightedEntry,
     setClickedButtonName,
     enter,
     util,
@@ -262,10 +260,7 @@ function onHighlightedEntriesKeyUp(
       setClickedButtonName(DELETE_BUTTON_NAME);
     }
     if (event.key === ACTION_KEY && !disabledEnter) {
-      enter(
-        getHighlightedEntry({ selectedFolder, highlightedIds }) ||
-          selectedFolder.parent
-      );
+      enter(highlightedEntry || selectedFolder.parent);
       event.preventDefault();
     }
   }
@@ -388,12 +383,6 @@ function onSelectedFolderKeyDown(
       event.preventDefault();
     }
   }
-}
-
-function getHighlightedEntry({ selectedFolder, highlightedIds }) {
-  return selectedFolder.children.find(
-    (entry) => entry.id === highlightedIds[highlightedIds.length - 1]
-  );
 }
 
 function modifierKeyPressed(event, { isMacOSPlatform }) {

@@ -1,11 +1,8 @@
 function getHighlightedEntriesFeatures({
   zipFilesystem,
   entries,
-  history,
-  historyIndex,
   highlightedIds,
-  setHistory,
-  setHistoryIndex,
+  highlightedEntry,
   setClipboardData,
   setHighlightedIds,
   setPreviousHighlight,
@@ -13,6 +10,7 @@ function getHighlightedEntriesFeatures({
   setRenameDialog,
   setDeleteEntryDialog,
   refreshSelectedFolder,
+  updateHistoryData,
   saveEntries,
   getOptions,
   openDisplayError,
@@ -34,7 +32,6 @@ function getHighlightedEntriesFeatures({
   }
 
   function openPromptRename() {
-    const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
     setRenameDialog({
       filename: highlightedEntry.name
     });
@@ -42,7 +39,6 @@ function getHighlightedEntriesFeatures({
 
   function rename({ filename }) {
     try {
-      const highlightedEntry = zipFilesystem.getById(highlightedIds[0]);
       if (filename !== highlightedEntry.name) {
         highlightedEntry.rename(filename);
         refreshSelectedFolder();
@@ -97,10 +93,7 @@ function getHighlightedEntriesFeatures({
     setDeleteEntryDialog(null);
   }
 
-  function openPromptExtract(entry) {
-    if (!entry) {
-      entry = zipFilesystem.getById(highlightedIds[0]);
-    }
+  function openPromptExtract(entry = highlightedEntry) {
     const options = {
       filename: entry.name
     };
@@ -130,31 +123,6 @@ function getHighlightedEntriesFeatures({
 
   function closePromptExtract() {
     setExtractDialog(null);
-  }
-
-  function updateHistoryData() {
-    let offsetIndex = 0;
-    let previousEntry;
-    const highlightedEntry = entries.find(
-      (entry) => entry.id === highlightedIds[0]
-    );
-    const newHistory = history.filter((entry, indexEntry) => {
-      const entryRemoved =
-        previousEntry === entry ||
-        entry === highlightedEntry ||
-        entry.isDescendantOf(highlightedEntry);
-      if (entryRemoved) {
-        if (indexEntry <= historyIndex) {
-          offsetIndex++;
-        }
-      } else {
-        previousEntry = entry;
-      }
-      return !entryRemoved;
-    });
-    const newHistoryIndex = historyIndex - offsetIndex;
-    setHistory(newHistory);
-    setHistoryIndex(newHistoryIndex);
   }
 
   return {

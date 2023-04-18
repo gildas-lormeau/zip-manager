@@ -1,6 +1,7 @@
 function getFoldersFeatures({
   history,
   historyIndex,
+  highlightedEntry,
   selectedFolder,
   setSelectedFolder,
   setHistory,
@@ -55,10 +56,33 @@ function getFoldersFeatures({
     }
   }
 
+  function updateHistoryData() {
+    let offsetIndex = 0;
+    let previousEntry;
+    const newHistory = history.filter((entry, indexEntry) => {
+      const entryRemoved =
+        previousEntry === entry ||
+        entry === highlightedEntry ||
+        entry.isDescendantOf(highlightedEntry);
+      if (entryRemoved) {
+        if (indexEntry <= historyIndex) {
+          offsetIndex++;
+        }
+      } else {
+        previousEntry = entry;
+      }
+      return !entryRemoved;
+    });
+    const newHistoryIndex = historyIndex - offsetIndex;
+    setHistory(newHistory);
+    setHistoryIndex(newHistoryIndex);
+  }
+
   return {
     goIntoFolder,
     navigateBack,
-    navigateForward
+    navigateForward,
+    updateHistoryData
   };
 }
 
