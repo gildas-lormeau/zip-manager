@@ -115,7 +115,7 @@ function getCommonFeatures({
     });
     setDownloads((downloads) => [download, ...downloads]);
     await entry.getWritable(writable, { signal, onprogress, ...options });
-    if (!savePickersSupported) {
+    if (!savePickersSupported && !signal.aborted) {
       util.downloadBlob(await blob, downloaderElement, download.name);
     }
   }
