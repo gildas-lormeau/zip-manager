@@ -18,15 +18,13 @@ function getHighlightedEntriesFeatures({
 }) {
   function copy() {
     setClipboardData({
-      entries: highlightedIds.map((entryId) =>
-        zipFilesystem.getById(entryId).clone(true)
-      )
+      entries: getHighlightedEntries().map((entry) => entry.clone(true))
     });
   }
 
   function cut() {
     setClipboardData({
-      entries: highlightedIds.map((entryId) => zipFilesystem.getById(entryId)),
+      entries: getHighlightedEntries(),
       cut: true
     });
   }
@@ -56,9 +54,7 @@ function getHighlightedEntriesFeatures({
   }
 
   function deleteEntry() {
-    highlightedIds.forEach((id) =>
-      zipFilesystem.remove(zipFilesystem.getById(id))
-    );
+    getHighlightedEntries().forEach((entry) => zipFilesystem.remove(entry));
     if (entries.length) {
       const indexEntry = Math.max(
         ...entries
@@ -82,8 +78,10 @@ function getHighlightedEntriesFeatures({
           indexNextEntry--;
         }
       }
-      setPreviousHighlight(entries[indexNextEntry]);
-      setHighlightedIds([entries[indexNextEntry].id]);
+      if (entries[indexNextEntry]) {
+        setPreviousHighlight(entries[indexNextEntry]);
+        setHighlightedIds([entries[indexNextEntry].id]);
+      }
     }
     updateHistoryData();
     refreshSelectedFolder();
@@ -107,9 +105,7 @@ function getHighlightedEntriesFeatures({
   function extract({ filename } = {}) {
     async function download() {
       try {
-        const entries = highlightedIds.map((highlightedId) =>
-          zipFilesystem.getById(highlightedId)
-        );
+        const entries = getHighlightedEntries();
         const options = getOptions();
         filename = entries.length === 1 ? filename : null;
         await saveEntries(entries, filename, options);
@@ -119,6 +115,12 @@ function getHighlightedEntriesFeatures({
     }
 
     download();
+  }
+
+  function getHighlightedEntries() {
+    return highlightedIds.map((highlightedId) =>
+      zipFilesystem.getById(highlightedId)
+    );
   }
 
   function closePromptExtract() {
