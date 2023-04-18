@@ -40,12 +40,22 @@ function getHighlightedEntriesFeatures({
       const { entries, cut } = clipboardData;
       if (cut) {
         entries.forEach((entry) => {
-          zipFilesystem.move(entry, selectedFolder);
+          try {
+            zipFilesystem.move(entry, selectedFolder);
+          } catch (error) {
+            const message = error.message + (" (" + entry.name + ")");
+            throw new Error(message);
+          }
         });
       } else {
         const clones = entries.map((entry) => {
           let clone = entry.clone(true);
-          zipFilesystem.move(entry, selectedFolder);
+          try {
+            zipFilesystem.move(entry, selectedFolder);
+          } catch (error) {
+            const message = error.message + (" (" + entry.name + ")");
+            throw new Error(message);
+          }
           return clone;
         });
         setClipboardData({ entries: clones });
