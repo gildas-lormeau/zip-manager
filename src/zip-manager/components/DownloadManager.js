@@ -115,11 +115,16 @@ function DeleteDownloadEntryButton({
 function DownloadEntryProgress({ download, util }) {
   return (
     <progress
-      value={Math.floor(download.progressValue / 1000)}
-      max={Math.floor(download.progressMax / 1000)}
-      title={util.formatPercentValue(
-        (100 * download.progressValue) / download.progressMax
-      )}
+      value={
+        download.progressValue && Math.floor(download.progressValue / 1000)
+      }
+      max={download.progressMax && Math.floor(download.progressMax / 1000)}
+      title={
+        download.progressValue &&
+        util.formatPercentValue(
+          (100 * download.progressValue) / download.progressMax
+        )
+      }
     />
   );
 }
