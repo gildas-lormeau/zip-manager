@@ -140,7 +140,7 @@ function getEntriesFeatures({
   function togglePrevious() {
     if (previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (indexEntry > 0) {
+      if (indexEntry > 0 || toggleNavigationDirection === 1) {
         const previousEntry = entries[indexEntry - 1];
         toggle(
           toggleNavigationDirection !== 1 ? previousEntry : previousHighlight
@@ -153,7 +153,7 @@ function getEntriesFeatures({
   function toggleNext() {
     if (previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (indexEntry < entries.length - 1) {
+      if (indexEntry < entries.length - 1 || toggleNavigationDirection === -1) {
         const nextEntry = entries[indexEntry + 1];
         toggle(
           toggleNavigationDirection !== -1 ? nextEntry : previousHighlight
