@@ -1,6 +1,6 @@
 function getEntriesFeatures({
   entries,
-  selectedFolder,
+  selectedFolderEntries,
   previousHighlight,
   highlightedIds,
   toggleNavigationDirection,
@@ -71,15 +71,15 @@ function getEntriesFeatures({
   }
 
   function highlightAll() {
+    const selectedFolderHighlightedIds = highlightedIds.filter((id) =>
+      selectedFolderEntries.find((entry) => entry.id === id)
+    );
     setHighlightedIds(
       entries
-        .filter(
-          (entry) =>
-            entry !== selectedFolder.parent &&
-            !highlightedIds.includes(entry.id)
-        )
+        .filter((entry) => !selectedFolderHighlightedIds.includes(entry.id))
+        .filter((entry) => selectedFolderEntries.includes(entry))
         .map((entry) => entry.id)
-        .concat(...highlightedIds)
+        .concat(...selectedFolderHighlightedIds)
     );
   }
 

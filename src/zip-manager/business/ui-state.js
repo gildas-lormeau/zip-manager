@@ -30,8 +30,10 @@ function getUIState({
     return false;
   });
   const clipboardDataEmpty = !clipboardData;
-  const disabledExportZip =
-    entriesEmpty || (selectedFolder.parent && entries.length === 1);
+  const selectedFolderEntries = entries.filter(
+    (entry) => entry !== selectedFolder.parent
+  );
+  const disabledExportZip = entriesEmpty || !selectedFolderEntries.length;
   const disabledReset = entriesEmpty;
   const disabledNavigation = entriesEmpty;
   const disabledBack = !historyIndex;
@@ -46,12 +48,11 @@ function getUIState({
     (!util.savePickersSupported() && subFolderHighlighted);
   const disabledHighlightAll =
     !selectedFolder ||
-    (!selectedFolder.parent &&
-      (!entries.length || highlightedIds.length === entries.length)) ||
-    (selectedFolder.parent &&
-      (entries.length === 1 ||
-        (highlightedIds.length === entries.length - 1 &&
-          !highlightedIds.includes(selectedFolder.parent.id))));
+    !selectedFolderEntries.length ||
+    (selectedFolderEntries.length === highlightedIds.length &&
+      selectedFolderEntries.every((entry) =>
+        highlightedIds.includes(entry.id)
+      ));
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
   const disabledEnter = highlightedIds.length !== 1;
@@ -95,7 +96,8 @@ function getUIState({
     hiddenDownloadManager,
     hiddenInfobar,
     hiddenExportPassword,
-    highlightedEntry
+    highlightedEntry,
+    selectedFolderEntries
   };
 }
 

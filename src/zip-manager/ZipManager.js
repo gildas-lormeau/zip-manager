@@ -135,7 +135,8 @@ function ZipManager() {
     hiddenDownloadManager,
     hiddenInfobar,
     hiddenExportPassword,
-    highlightedEntry
+    highlightedEntry,
+    selectedFolderEntries
   } = getUIState({
     entries,
     highlightedIds,
@@ -176,7 +177,7 @@ function ZipManager() {
     toggleLast
   } = getEntriesFeatures({
     entries,
-    selectedFolder,
+    selectedFolderEntries,
     previousHighlight,
     highlightedIds,
     toggleNavigationDirection,
