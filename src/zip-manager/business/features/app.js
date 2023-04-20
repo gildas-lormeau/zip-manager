@@ -95,7 +95,7 @@ function getAppFeatures({
   }
 
   function saveAccentColor(color) {
-    util.setStyleProperty(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
+    util.setDocumentStyle(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
     storageService.set(constants.ACCENT_COLOR_KEY_NAME, color);
   }
 

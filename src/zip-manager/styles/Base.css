@@ -1,4 +1,4 @@
-:root .light {
+:root.light {
   --page-color: gainsboro;
   --bg-color: white;
   --basic-bg-color: white;
@@ -31,7 +31,7 @@
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
   :root,
-  :root .light {
+  :root.light {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, white);
     --bg-color: color-mix(in srgb, var(--accent-color) 15%, white);
     --checkbox-accent-color: color-mix(
@@ -56,7 +56,7 @@
   }
 }
 
-:root .dark {
+:root.dark {
   --page-color: #333;
   --bg-color: black;
   --basic-bg-color: black;
@@ -71,7 +71,7 @@
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
-  :root .dark {
+  :root.dark {
     --page-color: color-mix(in srgb, var(--accent-color) 10%, black);
     --bg-color: color-mix(in srgb, var(--accent-color) 15%, black);
     --checkbox-accent-color: color-mix(

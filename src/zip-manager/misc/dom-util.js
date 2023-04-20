@@ -108,8 +108,12 @@ function downloadAborted(error) {
   );
 }
 
-function setStyleProperty(name, value) {
+function setDocumentStyle(name, value) {
   document.documentElement.style.setProperty(name, value);
+}
+
+function setDocumentClass(value) {
+  document.documentElement.className = value;
 }
 
 function saveValue(name, value) {
@@ -316,7 +320,8 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  setStyleProperty,
+  setDocumentStyle,
+  setDocumentClass,
   saveValue,
   restoreValue,
   showOpenFilePicker,

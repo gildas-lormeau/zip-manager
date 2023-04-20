@@ -1,7 +1,6 @@
 function getEffects({
   selectedFolder,
   accentColor,
-  setColorScheme,
   getHighlightedEntryElement,
   initApplication,
   initZipFilesystem,
@@ -34,11 +33,11 @@ function getEffects({
     if (accentColor) {
       const brightNessAccentColor = getBrightNess(accentColor);
       if (brightNessAccentColor > 192) {
-        setColorScheme("dark");
+        util.setDocumentClass("dark");
       } else if (brightNessAccentColor < 64) {
-        setColorScheme("light");
+        util.setDocumentClass("light");
       } else {
-        setColorScheme("");
+        util.setDocumentClass("");
       }
       saveAccentColor(accentColor);
     }

@@ -64,7 +64,6 @@ function ZipManager() {
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [accentColor, setAccentColor] = useState(null);
-  const [colorScheme, setColorScheme] = useState("");
   const [exportZipDialog, setExportZipDialog] = useState(null);
   const [extractDialog, setExtractDialog] = useState(null);
   const [renameDialog, setRenameDialog] = useState(null);
@@ -86,7 +85,7 @@ function ZipManager() {
   const getEntriesHeight = () => entriesHeightRef.current;
   const downloaderElement = downloaderRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
-  const appClassName = [constants.APP_CLASSNAME, colorScheme].join(" ").trim();
+  const appClassName = constants.APP_CLASSNAME;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -359,7 +358,6 @@ function ZipManager() {
   } = getEffects({
     selectedFolder,
     accentColor,
-    setColorScheme,
     getHighlightedEntryElement,
     initApplication,
     initZipFilesystem,
