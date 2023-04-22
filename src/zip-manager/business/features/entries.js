@@ -140,26 +140,44 @@ function getEntriesFeatures({
   function togglePrevious() {
     if (previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (indexEntry > 0 || toggleNavigationDirection === 1) {
+      if (toggleNavigationDirection === 1) {
+        toggle(previousHighlight);
+      } else if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
-        toggle(
-          toggleNavigationDirection !== 1 ? previousEntry : previousHighlight
-        );
-        setToggleNavigationDirection(-1);
+        if (
+          highlightedIds.length === 1 &&
+          highlightedIds.includes(previousEntry.id)
+        ) {
+          if (indexEntry > 1) {
+            toggle(entries[indexEntry - 2]);
+          }
+        } else {
+          toggle(previousEntry);
+        }
       }
+      setToggleNavigationDirection(-1);
     }
   }
 
   function toggleNext() {
     if (previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (indexEntry < entries.length - 1 || toggleNavigationDirection === -1) {
+      if (toggleNavigationDirection === -1) {
+        toggle(previousHighlight);
+      } else if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
-        toggle(
-          toggleNavigationDirection !== -1 ? nextEntry : previousHighlight
-        );
-        setToggleNavigationDirection(1);
+        if (
+          highlightedIds.length === 1 &&
+          highlightedIds.includes(nextEntry.id)
+        ) {
+          if (indexEntry < entries.length - 2) {
+            toggle(entries[indexEntry + 2]);
+          }
+        } else {
+          toggle(nextEntry);
+        }
       }
+      setToggleNavigationDirection(1);
     }
   }
 
