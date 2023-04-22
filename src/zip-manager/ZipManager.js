@@ -83,9 +83,14 @@ function ZipManager() {
   const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
+  const appClassName = () =>
+    constants.APP_CLASSNAME +
+    (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
+    (hiddenDownloadManager
+      ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
+      : "");
   const downloaderElement = downloaderRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
-  const appClassName = constants.APP_CLASSNAME;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -379,7 +384,7 @@ function ZipManager() {
   /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
-    <div className={appClassName}>
+    <div className={appClassName()}>
       <main role="application">
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
@@ -439,8 +444,6 @@ function ZipManager() {
           disabledHighlightAllButton={disabledHighlightAll}
           disabledRenameButton={disabledRename}
           disabledDeleteButton={disabledDelete}
-          hiddenDownloadManager={hiddenDownloadManager}
-          hiddenInfobar={hiddenInfobar}
           clickedButtonName={clickedButtonName}
           onCopy={copy}
           onCut={cut}
@@ -459,7 +462,6 @@ function ZipManager() {
         <DownloadManager
           downloads={downloads}
           hidden={hiddenDownloadManager}
-          hiddenInfobar={hiddenInfobar}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
           util={util}

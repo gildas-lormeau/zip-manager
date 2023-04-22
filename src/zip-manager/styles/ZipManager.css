@@ -16,11 +16,14 @@ main {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0.5em;
-  margin-block-end: 0em;
   border: solid var(--accent-color) 0.05em;
   inline-size: 85vw;
   min-block-size: 20em;
   border-radius: 0.25em;
+}
+
+.main-container:not(.hidden-footer) main {
+  margin-block-end: 0em;
 }
 
 main > * {
@@ -28,53 +31,40 @@ main > * {
   border-block-end: solid var(--accent-color) 0.05em;
 }
 
-main > :last-child {
+.hidden-downloads .entries {
+  flex: 1;
+  resize: none;
+}
+
+.hidden-downloads .button-bar-bottom,
+.hidden-footer .downloads {
   border-block-end: none;
 }
 
-@media (orientation: portrait) {
+@media (display-mode: standalone) or (orientation: portrait) {
   main {
     inline-size: 100vw;
-  }
-
-  main {
     margin: 0;
     border-width: 0;
+    margin-block-end: 0em;
   }
 
-  main > :last-child {
+  .hidden-downloads:not(.hidden-footer) .button-bar-bottom {
     border-block-end: solid var(--accent-color) 0.05em;
   }
 }
 
-@supports (aspect-ratio: 1.75) {
-  @media (max-aspect-ratio: 1.75) {
+@supports (aspect-ratio: 7/5) {
+  @media (max-aspect-ratio: 7/5) {
     main {
       inline-size: 100vw;
-    }
-
-    main {
       margin: 0;
       border-width: 0;
-    }
-
-    main > :last-child {
-      border-block-end: solid var(--accent-color) 0.05em;
+      margin-block-end: 0em;
     }
   }
-}
 
-@media (display-mode: standalone) {
-  main {
-    inline-size: 100vw;
-  }
-
-  main {
-    margin: 0;
-    border-width: 0;
-  }
-
-  main > :last-child {
+  .hidden-downloads:not(.hidden-footer) .button-bar-bottom {
     border-block-end: solid var(--accent-color) 0.05em;
   }
 }

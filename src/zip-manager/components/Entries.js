@@ -46,9 +46,7 @@ function Entries({
   }
 
   function getEntriesStyle() {
-    if (hiddenDownloadManager) {
-      return { flex: 1, resize: "none" };
-    } else if (entriesHeight) {
+    if (!hiddenDownloadManager && entriesHeight) {
       return { height: entriesHeight + deltaEntriesHeight + "px" };
     }
   }

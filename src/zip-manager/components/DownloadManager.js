@@ -3,7 +3,6 @@ import "./styles/DownloadManager.css";
 function DownloadManager({
   hidden,
   downloads,
-  hiddenInfobar,
   downloaderRef,
   onAbortDownload,
   util,
@@ -20,12 +19,7 @@ function DownloadManager({
     );
   } else {
     return (
-      <div
-        className="downloads"
-        aria-label="Downloads"
-        role="navigation"
-        style={hiddenInfobar ? { borderBlockEnd: 0 } : null}
-      >
+      <div className="downloads" aria-label="Downloads" role="navigation">
         <ol>
           {downloads.map((download) => (
             <li key={download.id}>
