@@ -47,7 +47,6 @@
       white
     );
     --button-color: color-mix(in srgb, var(--accent-color) 10%, white);
-    --bg-button-color: color-mix(in srgb, var(--accent-color) 80%, white);
     --disabled-button-color: color-mix(in srgb, var(--accent-color) 80%, black);
     --bg-disabled-button-color: color-mix(
       in srgb,
@@ -88,7 +87,6 @@
       black
     );
     --button-color: color-mix(in srgb, var(--accent-color) 10%, black);
-    --bg-button-color: color-mix(in srgb, var(--accent-color) 80%, black);
     --disabled-button-color: color-mix(in srgb, var(--accent-color) 80%, white);
     --bg-disabled-button-color: color-mix(
       in srgb,
@@ -130,7 +128,6 @@
         black
       );
       --button-color: color-mix(in srgb, var(--accent-color) 10%, black);
-      --bg-button-color: color-mix(in srgb, var(--accent-color) 80%, black);
       --disabled-button-color: color-mix(
         in srgb,
         var(--accent-color) 80%,
