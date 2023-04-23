@@ -69,7 +69,7 @@
       0px 0.5px 0 var(--accent-color), 0.5px -0.5px 0 var(--accent-color),
       0.5px 0px 0 var(--accent-color), 0.5px 0.5px 0 var(--accent-color);
     color: var(--bg-color);
-    opacity: 0.25;
+    opacity: 0.5;
   }
 
   html[lang="en"] .entries ol:empty::after {
