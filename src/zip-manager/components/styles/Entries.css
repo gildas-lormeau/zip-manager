@@ -57,7 +57,7 @@
   .entries ol:empty::after {
     display: flex;
     height: 100%;
-    content: "Drag and drop files or directories here";
+    content: "Drag and drop files and directories here";
     justify-content: center;
     align-items: center;
     text-align: center;
