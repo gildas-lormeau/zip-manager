@@ -1,4 +1,4 @@
-import Dialog from "./Dialog.js";
+import Dialog from "./Dialog.jsx";
 
 import { useState } from "react";
 

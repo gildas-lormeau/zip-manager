@@ -9,6 +9,6 @@ body {
 
 @font-face {
   font-family: "Exo";
-  src: url("/public/fonts/Exo-VariableFont_wght.ttf");
+  src: url("/assets/fonts/Exo-VariableFont_wght.ttf");
   font-display: swap;
 }

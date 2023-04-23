@@ -32,7 +32,7 @@ import {
   ImportPasswordDialog,
   OptionsDialog,
   ChooseActionDialog
-} from "./components/index.js";
+} from "./components/index.jsx";
 
 const {
   getCommonFeatures,

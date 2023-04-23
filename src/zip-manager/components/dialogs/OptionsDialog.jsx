@@ -1,5 +1,5 @@
 import "./styles/OptionsDialog.css";
-import Dialog from "./Dialog.js";
+import Dialog from "./Dialog.jsx";
 
 import { useEffect, useRef, useState } from "react";
 

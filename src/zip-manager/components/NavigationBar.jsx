@@ -1,6 +1,6 @@
 import "./styles/NavigationBar.css";
 
-import Button from "./Button.js";
+import Button from "./Button.jsx";
 
 function NavigationBar({
   hidden,

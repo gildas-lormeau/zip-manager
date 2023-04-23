@@ -2,7 +2,7 @@ import "./styles/BottomButtonBar.css";
 
 import { useRef } from "react";
 
-import Button from "./Button.js";
+import Button from "./Button.jsx";
 
 function BottomButtonBar({
   disabledCopyButton,

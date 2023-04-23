@@ -6,7 +6,6 @@
     "@zip.js/zip.js": "^2.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
     "workbox-cacheable-response": "^6.5.4",
@@ -21,9 +20,9 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "env": {
@@ -34,7 +33,10 @@
     "globals": {
       "console": true
     },
-    "extends": ["eslint:recommended", "react-app"],
+    "extends": [
+      "eslint:recommended",
+      "react-app"
+    ],
     "parserOptions": {
       "ecmaVersion": 2020,
       "sourceType": "module",
@@ -42,17 +44,37 @@
         "jsx": true
       }
     },
-    "ignorePatterns": ["build/"],
-    "plugins": ["react"],
+    "ignorePatterns": [
+      "build/"
+    ],
+    "plugins": [
+      "react"
+    ],
     "rules": {
       "react/jsx-uses-vars": "error",
       "react/jsx-uses-react": "error",
-      "indent": ["error", 2],
-      "linebreak-style": ["error", "unix"],
-      "quotes": ["error", "double"],
-      "semi": ["warn", "always"],
-      "no-console": ["warn"],
-      "no-debugger": ["warn"],
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": [
+        "warn",
+        "always"
+      ],
+      "no-console": [
+        "warn"
+      ],
+      "no-debugger": [
+        "warn"
+      ],
       "no-unused-vars": "warn"
     }
   },
@@ -69,6 +91,9 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.32.2"
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "vite": "^4.3.1",
+    "vite-plugin-pwa": "^0.14.7"
   }
 }
