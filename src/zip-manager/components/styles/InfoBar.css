@@ -15,12 +15,11 @@
 
 .info-bar .icon {
   color: var(--accent-color);
-  opacity: 0.85;
   cursor: pointer;
 }
 
 .info-bar .icon:hover {
-  opacity: 1;
+  filter: brightness(1.1);
 }
 
 .info-bar input[type="color"] {

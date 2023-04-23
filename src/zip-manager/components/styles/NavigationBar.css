@@ -12,7 +12,7 @@
   font-family: monospace;
   padding-inline: 1ch;
   align-self: start;
-  padding-block: .25em;
+  padding-block: 0.25em;
   font-size: 1em;
 }
 
@@ -45,7 +45,6 @@
 
 .breadcrumb .breadcrumb-item {
   height: 100%;
-  opacity: 0.75;
   font-weight: 400;
   text-decoration: underline dotted transparent 0.1em;
   text-underline-offset: 0.25em;
@@ -61,15 +60,15 @@
 }
 
 .breadcrumb li:last-of-type .breadcrumb-item {
-  opacity: 1;
   font-weight: 500;
-}
-
-.breadcrumb li:hover .breadcrumb-item-active {
-  opacity: 1;
 }
 
 .breadcrumb .breadcrumb-item-active {
   cursor: pointer;
+  filter: brightness(0.75);
   text-decoration-color: var(--accent-color);
+}
+
+.breadcrumb .breadcrumb-item-active:hover {
+  filter: brightness(1);
 }
