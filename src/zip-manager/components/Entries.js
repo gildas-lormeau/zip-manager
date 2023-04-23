@@ -62,6 +62,7 @@ function Entries({
       );
     }
   }
+
   function updateHeight() {
     onUpdateHeight(util.getHeight(entriesRef.current));
   }
