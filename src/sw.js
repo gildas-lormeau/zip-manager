@@ -1,16 +1,15 @@
 /* global self, process, URL, Response, caches */
 /* eslint-disable no-restricted-globals */
 
+import { clientsClaim } from "workbox-core";
+import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
+import { registerRoute } from "workbox-routing";
 import {
   MAINPAGE_REDIRECT_PATH,
   SHARED_FILES_RELATIVE_PATH,
   SHARED_FILES_CACHE_ID,
   SHARED_FILES_FORM_PATH
 } from "./zip-manager/business/constants.js";
-
-import { clientsClaim } from "workbox-core";
-import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
 
 clientsClaim();
 cleanupOutdatedCaches();
