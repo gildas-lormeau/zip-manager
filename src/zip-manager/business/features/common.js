@@ -165,6 +165,8 @@ function getCommonFeatures({
   }
 
   function setOptions(options) {
+    const previousOptions = getOptions();
+    options = { ...previousOptions, ...options };
     configureZipService(options);
     storageService.set(constants.OPTIONS_KEY_NAME, options);
   }
@@ -193,6 +195,9 @@ function getCommonFeatures({
     }
     if (options.checkSignature === undefined) {
       options.checkSignature = DEFAULT_OPTIONS.checkSignature;
+    }
+    if (options.accentColor === undefined) {
+      options.accentColor = DEFAULT_OPTIONS.accentColor;
     }
     configureZipService(options);
     return options;

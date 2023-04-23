@@ -5,7 +5,7 @@ function getEffects({
   initApplication,
   initZipFilesystem,
   initSelectedFolder,
-  saveAccentColor,
+  applyAccentColor,
   util
 }) {
   function updateApplication() {
@@ -39,7 +39,7 @@ function getEffects({
       } else {
         util.setDocumentClass("");
       }
-      saveAccentColor(accentColor);
+      applyAccentColor(accentColor);
     }
   }
 

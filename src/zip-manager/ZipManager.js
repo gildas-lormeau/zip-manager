@@ -281,7 +281,7 @@ function ZipManager() {
     openOptions,
     closeOptions,
     resetOptions,
-    saveAccentColor,
+    applyAccentColor,
     moveBottomBar,
     updateEntriesHeight,
     saveEntriesHeight,
@@ -312,7 +312,6 @@ function ZipManager() {
     addFiles,
     importZipFile,
     refreshSelectedFolder,
-    storageService,
     util,
     constants
   });
@@ -367,7 +366,7 @@ function ZipManager() {
     initApplication,
     initZipFilesystem,
     initSelectedFolder,
-    saveAccentColor,
+    applyAccentColor,
     util
   });
 

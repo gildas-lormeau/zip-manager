@@ -24,21 +24,13 @@ function getAppFeatures({
   addFiles,
   importZipFile,
   refreshSelectedFolder,
-  storageService,
   util,
   constants
 }) {
   function initApplication() {
-    const accentColor = restoreAccentColor();
+    const options = getOptions();
+    const { accentColor } = options;
     setAccentColor(accentColor);
-    saveAccentColor(accentColor);
-  }
-
-  function restoreAccentColor() {
-    return (
-      storageService.get(constants.ACCENT_COLOR_KEY_NAME) ||
-      constants.DEFAULT_ACCENT_COLOR
-    );
   }
 
   function initSelectedFolder() {
@@ -94,9 +86,10 @@ function getAppFeatures({
     }
   }
 
-  function saveAccentColor(color) {
+  function applyAccentColor(color) {
     util.setDocumentStyle(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
-    storageService.set(constants.ACCENT_COLOR_KEY_NAME, color);
+    const options = getOptions();
+    setOptions({ ...options, accentColor: color });
   }
 
   function moveBottomBar(deltaY) {
@@ -156,7 +149,7 @@ function getAppFeatures({
     openOptions,
     closeOptions,
     resetOptions,
-    saveAccentColor,
+    applyAccentColor,
     moveBottomBar,
     saveEntriesHeight,
     updateEntriesHeight,

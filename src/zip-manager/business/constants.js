@@ -22,9 +22,9 @@ const HOME_KEY = "Home";
 const END_KEY = "End";
 const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
-const DEFAULT_ACCENT_COLOR = "#FF672E";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
 const DEFAULT_OPTIONS = {
+  accentColor: "#FF672E",
   hideNavigationBar: false,
   hideDownloadManager: false,
   hideInfobar: false,
@@ -91,7 +91,6 @@ const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
 const OPTIONS_KEY_NAME = "options";
-const ACCENT_COLOR_KEY_NAME = "accent-color";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
 const CURRENT_PATH = ".";
 const MAINPAGE_PATH = "/index.html";
@@ -131,7 +130,6 @@ export {
   END_KEY,
   BACK_KEY,
   FORWARD_KEY,
-  DEFAULT_ACCENT_COLOR,
   DEFAULT_MIME_TYPE,
   DEFAULT_OPTIONS,
   ZIP_EXTENSION,
@@ -153,7 +151,6 @@ export {
   BACK_BUTTON_NAME,
   FORWARD_BUTTON_NAME,
   OPTIONS_KEY_NAME,
-  ACCENT_COLOR_KEY_NAME,
   ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
   MAINPAGE_PATH,
   MAINPAGE_RELATIVE_PATH,
