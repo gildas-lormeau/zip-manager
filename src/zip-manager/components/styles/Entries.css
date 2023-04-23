@@ -63,11 +63,11 @@
     font-weight: 900;
     font-size: 2em;
     line-height: 1em;
-    text-shadow: -0.5px -0.5px 0 var(--accent-color),
-      -0.5px 0px 0 var(--accent-color), -0.5px 0.5px 0 var(--accent-color),
-      0px -0.5px 0 var(--accent-color), 0px 0px 0 var(--accent-color),
-      0px 0.5px 0 var(--accent-color), 0.5px -0.5px 0 var(--accent-color),
-      0.5px 0px 0 var(--accent-color), 0.5px 0.5px 0 var(--accent-color);
+    text-shadow: -0.5px -0.5px 0 var(--button-color),
+      -0.5px 0px 0 var(--button-color), -0.5px 0.5px 0 var(--button-color),
+      0px -0.5px 0 var(--button-color), 0px 0px 0 var(--button-color),
+      0px 0.5px 0 var(--button-color), 0.5px -0.5px 0 var(--button-color),
+      0.5px 0px 0 var(--button-color), 0.5px 0.5px 0 var(--button-color);
     color: var(--bg-color);
     opacity: 0.5;
   }
