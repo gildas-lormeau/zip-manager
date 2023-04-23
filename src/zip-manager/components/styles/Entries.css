@@ -57,7 +57,6 @@
   .entries ol:empty::after {
     display: flex;
     height: 100%;
-    content: "Drag and drop files and directories here";
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -71,5 +70,9 @@
       0.5px 0px 0 var(--accent-color), 0.5px 0.5px 0 var(--accent-color);
     color: var(--bg-color);
     opacity: 0.25;
+  }
+
+  html[lang="en"] .entries ol:empty::after {
+    content: "Drag and drop files and directories here";
   }
 }
