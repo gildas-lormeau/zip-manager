@@ -20,6 +20,10 @@ main {
   inline-size: 85vw;
   min-block-size: 20em;
   border-radius: 0.25em;
+  box-shadow: -2px -2px 2px var(--bg-disabled-button-color),
+    2px 2px 2px var(--bg-disabled-button-color),
+    -2px 2px 2px var(--bg-disabled-button-color),
+    2px -2px 2px var(--bg-disabled-button-color);
 }
 
 .main-container:not(.hidden-footer) main {
