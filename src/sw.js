@@ -13,11 +13,10 @@ import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 
 clientsClaim();
-
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
-
 self.skipWaiting();
+
 registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, "GET");
 registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, "POST");
 
