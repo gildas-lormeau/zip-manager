@@ -11,29 +11,6 @@
   flex-direction: column;
 }
 
-.entries ol:empty {
-  height: 100%;
-}
-
-.entries ol:empty::after {
-  display: flex;
-  height: 100%;
-  content: "Drag and drop files or directories here";
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-weight: 900;
-  font-size: 2em;
-  line-height: 1em;
-  text-shadow: -.5px -.5px 0 var(--accent-color), -.5px 0px 0 var(--accent-color),
-    -.5px .5px 0 var(--accent-color), 0px -.5px 0 var(--accent-color),
-    0px 0px 0 var(--accent-color), 0px .5px 0 var(--accent-color),
-    .5px -.5px 0 var(--accent-color), .5px 0px 0 var(--accent-color),
-    .5px .5px 0 var(--accent-color);
-  color: var(--bg-color);
-  opacity: .25;
-}
-
 .entries li {
   padding: 0.25em;
   outline: none;
@@ -70,4 +47,29 @@
 
 .entries .directory .entry-name::after {
   content: "/";
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .entries ol:empty {
+    height: 100%;
+  }
+
+  .entries ol:empty::after {
+    display: flex;
+    height: 100%;
+    content: "Drag and drop files or directories here";
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 900;
+    font-size: 2em;
+    line-height: 1em;
+    text-shadow: -0.5px -0.5px 0 var(--accent-color),
+      -0.5px 0px 0 var(--accent-color), -0.5px 0.5px 0 var(--accent-color),
+      0px -0.5px 0 var(--accent-color), 0px 0px 0 var(--accent-color),
+      0px 0.5px 0 var(--accent-color), 0.5px -0.5px 0 var(--accent-color),
+      0.5px 0px 0 var(--accent-color), 0.5px 0.5px 0 var(--accent-color);
+    color: var(--bg-color);
+    opacity: 0.25;
+  }
 }
