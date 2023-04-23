@@ -12,8 +12,14 @@ export default defineConfig(() => {
       react(),
       VitePWA({
         registerType: "autoUpdate",
+        strategies: "injectManifest",
+        srcDir: "src",
+        filename: "sw.js",
         workbox: {
-          globPatterns: ["./assets/**/*.{js,css,html,png,ttf}", "./*.{html,ico,png}"]
+          globPatterns: [
+            "./assets/**/*.{js,css,html,png,ttf}",
+            "./*.{html,ico,png}"
+          ]
         }
       })
     ]
