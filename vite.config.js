@@ -15,10 +15,10 @@ export default defineConfig(() => {
         strategies: "injectManifest",
         srcDir: "src",
         filename: "sw.js",
-        workbox: {
+        injectManifest: {
           globPatterns: [
-            "./assets/**/*.{js,css,html,png,ttf}",
-            "./*.{html,ico,png}"
+            "./assets/**/*.{js,css,png,ttf}",
+            "./*.{html,ico,png,js,json}"
           ]
         }
       })
