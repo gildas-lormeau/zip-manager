@@ -17,7 +17,7 @@ See https://gildas-lormeau.github.io/zip-manager/
 
 - Desktop
 
-![screenshot-app-1246x918](https://user-images.githubusercontent.com/396787/233868704-7b29ef5d-a084-4fc7-aa5b-b5a67cddaa1f.png)
+![screenshot-app-1135x809](https://user-images.githubusercontent.com/396787/233869327-c379f3dd-3ff7-426e-a2c0-c1eae8b7f5fb.png)
 
 - Mobile
 
