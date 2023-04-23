@@ -115,18 +115,39 @@
   },
   "screenshots": [
     {
-      "src": "./screenshots/screenshot-mobile.png",
-      "sizes": "393x802",
+      "src": "./screenshots/screenshot-395x640.png",
+      "sizes": "395x640",
       "type": "image/png",
       "platform": "narrow",
-      "label": "Homescreen of Zip Manager"
+      "label": "Main screen on mobile"
     },
     {
-      "src": "./screenshots/screenshot-app.png",
-      "sizes": "2054x1614",
+      "src": "./screenshots/screenshot-535x760.png",
+      "sizes": "535x760",
       "type": "image/png",
       "platform": "wide",
-      "label": "Homescreen of Zip Manager"
+      "label": "Main screen on tablet"
+    },
+    {
+      "src": "./screenshots/screenshot-app-1246x918.png",
+      "sizes": "1246x918",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Main screen on desktop"
+    },
+    {
+      "src": "./screenshots/screenshot-options-700x800.png",
+      "sizes": "700x800",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Options dialog"
+    },
+    {
+      "src": "./screenshots/screenshot-custom-395x640.png",
+      "sizes": "395x640",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Custom user interface on mobile"
     }
   ]
 }
