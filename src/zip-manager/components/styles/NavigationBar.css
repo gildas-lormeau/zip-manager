@@ -14,6 +14,7 @@
   align-self: start;
   padding-block: 0.25em;
   font-size: 1em;
+  aspect-ratio: 1;
 }
 
 .history-buttons button:not([disabled]) {
@@ -43,11 +44,11 @@
 
 .breadcrumb li::after {
   content: var(--directory-separator);
-  height: 100%;
+  height: calc(100% - 2px);
 }
 
 .breadcrumb .breadcrumb-item {
-  height: 100%;
+  height: calc(100% - 2px);
   font-weight: 400;
   text-decoration: underline dotted transparent 0.1em;
   text-underline-offset: 0.25em;
@@ -56,7 +57,6 @@
   overflow-inline: hidden;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
-  outline-offset: -1px;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {
