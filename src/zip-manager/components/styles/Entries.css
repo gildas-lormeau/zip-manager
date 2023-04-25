@@ -73,6 +73,11 @@
     opacity: 0.5;
   }
 
+  .entries.dragging-items ol:empty::after {
+    color: var(--accent-color);
+    text-shadow: none;
+  }
+
   html[lang="en"] .entries ol:empty::after {
     content: var(--message-drag-and-drop-entries);
   }

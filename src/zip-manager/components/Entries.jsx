@@ -27,6 +27,7 @@ function Entries({
   const touchEndTimeout = useRef(null);
   const previousTouchClientX = useRef(0);
   const previousTouchClientY = useRef(0);
+  const [draggingItems, setDraggingItems] = useState(false);
 
   function getEntryClassName(entry) {
     const classes = [];
@@ -111,7 +112,16 @@ function Entries({
   }
 
   function handleDragOver(event) {
+    setDraggingItems(draggingItems);
+    if (event.dataTransfer.items && event.dataTransfer.dropEffect === "move") {
+      event.preventDefault();
+      setDraggingItems(true);
+    }
+  }
+
+  function handleDragLeave(event) {
     event.preventDefault();
+    setDraggingItems(false);
   }
 
   async function handleDrop(event) {
@@ -131,6 +141,14 @@ function Entries({
     };
   }
 
+  function getEntriesClassName() {
+    const classes = ["entries"];
+    if (draggingItems) {
+      classes.push("dragging-items");
+    }
+    return classes.join(" ");
+  }
+
   useEffect(computeEntriesListHeight);
   useEffect(registerResizeHandler);
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -142,12 +160,13 @@ function Entries({
 
   return (
     <div
-      className="entries"
+      className={getEntriesClassName()}
       aria-label="Folder entries"
       role="navigation"
       ref={entriesRef}
       style={getEntriesStyle()}
       onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       <ol
