@@ -127,6 +127,7 @@ function Entries({
   async function handleDrop(event) {
     if (event.dataTransfer.items) {
       event.preventDefault();
+      setDraggingItems(false);
       const items = Array.from(event.dataTransfer.items);
       onDropFiles(await util.getFilesystemHandles(items));
     }
