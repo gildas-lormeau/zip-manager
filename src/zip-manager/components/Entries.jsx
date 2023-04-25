@@ -112,9 +112,9 @@ function Entries({
   }
 
   function handleDragOver(event) {
+    event.preventDefault();
     setDraggingItems(draggingItems);
-    if (event.dataTransfer.items && event.dataTransfer.dropEffect === "move") {
-      event.preventDefault();
+    if (event.dataTransfer.items) {
       setDraggingItems(true);
     }
   }
