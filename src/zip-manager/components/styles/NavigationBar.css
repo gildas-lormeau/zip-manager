@@ -69,5 +69,5 @@
 }
 
 .breadcrumb .breadcrumb-item-active:hover {
-  filter: brightness(.75);
+  filter: brightness(0.75);
 }

@@ -7,7 +7,7 @@
 }
 
 .list-item-button:hover {
-  filter: brightness(.75);
+  filter: brightness(0.75);
 }
 
 .list-item-name {
