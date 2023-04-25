@@ -71,6 +71,7 @@ function getSelectedFolderFeatures({
       try {
         const dropFilesPrevented =
           firstHandle.kind === util.FILESYSTEM_FILE_KIND &&
+          handles.length === 1 &&
           handleZipFile([await firstHandle.getFile()], dropFiles, options);
         if (!dropFilesPrevented) {
           await Promise.all(
