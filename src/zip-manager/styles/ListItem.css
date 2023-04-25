@@ -11,6 +11,7 @@
 }
 
 .list-item-name {
+  overflow-x: hidden;
   overflow-inline: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
