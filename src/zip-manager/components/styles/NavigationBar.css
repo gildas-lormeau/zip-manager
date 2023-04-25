@@ -23,13 +23,13 @@
 .breadcrumb {
   display: flex;
   overflow-inline: hidden;
-  line-height: 1.35em;
 }
 
 .breadcrumb ol {
   flex-wrap: wrap;
   overflow-inline: hidden;
   column-gap: 0.125ch;
+  row-gap: 0.25em;
 }
 
 .breadcrumb li {
