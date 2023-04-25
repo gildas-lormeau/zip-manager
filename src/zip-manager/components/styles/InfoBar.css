@@ -19,7 +19,7 @@
 }
 
 .info-bar .icon:hover {
-  filter: brightness(1.1);
+  filter: brightness(.75);
 }
 
 .info-bar input[type="color"] {

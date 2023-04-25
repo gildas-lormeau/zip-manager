@@ -65,10 +65,9 @@
 
 .breadcrumb .breadcrumb-item-active {
   cursor: pointer;
-  filter: brightness(0.75);
   text-decoration-color: var(--accent-color);
 }
 
 .breadcrumb .breadcrumb-item-active:hover {
-  filter: brightness(1);
+  filter: brightness(.75);
 }

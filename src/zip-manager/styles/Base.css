@@ -178,7 +178,7 @@ button.flashing-button {
 }
 
 button:not([disabled]):hover {
-  filter: brightness(1.1);
+  filter: brightness(.75);
 }
 
 @keyframes flashing-button-animation {
@@ -186,7 +186,7 @@ button:not([disabled]):hover {
     outline: 0;
   }
   50% {
-    filter: brightness(1.1);
+    filter: brightness(.75);
     outline: 1px solid var(--accent-color);
   }
 }
