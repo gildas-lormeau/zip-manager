@@ -36,8 +36,8 @@ main > * {
   resize: none;
 }
 
-.hidden-downloads .button-bar-bottom,
-.hidden-footer .downloads {
+.downloads,
+.main-container.hidden-downloads .button-bar-bottom {
   border-block-end: none;
 }
 
@@ -49,7 +49,8 @@ main > * {
     margin-block-end: 0em;
   }
 
-  .hidden-downloads:not(.hidden-footer) .button-bar-bottom {
+  .main-container:not(.hidden-footer) .downloads,
+  .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
     border-block-end: solid var(--accent-color) 0.05em;
   }
 }
@@ -62,9 +63,10 @@ main > * {
       border-width: 0;
       margin-block-end: 0em;
     }
-  }
 
-  .hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-    border-block-end: solid var(--accent-color) 0.05em;
+    .main-container:not(.hidden-footer) .downloads,
+    .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
+      border-block-end: solid var(--accent-color) 0.05em;
+    }
   }
 }
