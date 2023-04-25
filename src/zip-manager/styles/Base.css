@@ -142,6 +142,13 @@
   }
 }
 
+:root {
+  --brightness-hover: 0.75;
+  --border-radius: 0.25em;
+  --directory-separator: "/";
+  --message-drag-and-drop-entries: "Drag and drop files and directories here";
+}
+
 body {
   font-weight: 400;
 }
@@ -164,7 +171,7 @@ button {
   background-color: var(--bg-button-color);
   color: var(--button-color);
   font-size: 0.8em;
-  border-radius: 0.25em;
+  border-radius: var(--border-radius);
 }
 
 button:disabled {
@@ -178,7 +185,7 @@ button.flashing-button {
 }
 
 button:not([disabled]):hover {
-  filter: brightness(0.75);
+  filter: brightness(var(--brightness-hover));
 }
 
 @keyframes flashing-button-animation {
@@ -186,7 +193,7 @@ button:not([disabled]):hover {
     outline: 0;
   }
   50% {
-    filter: brightness(0.75);
+    filter: brightness(var(--brightness-hover));
     outline: 1px solid var(--accent-color);
   }
 }

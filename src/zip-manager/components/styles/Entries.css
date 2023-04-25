@@ -46,7 +46,7 @@
 }
 
 .entries .directory .entry-name::after {
-  content: "/";
+  content: var(--directory-separator);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -73,6 +73,6 @@
   }
 
   html[lang="en"] .entries ol:empty::after {
-    content: "Drag and drop files and directories here";
+    content: var(--message-drag-and-drop-entries);
   }
 }

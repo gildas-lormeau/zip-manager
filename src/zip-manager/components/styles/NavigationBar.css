@@ -39,7 +39,7 @@
 }
 
 .breadcrumb li::after {
-  content: "/";
+  content: var(--directory-separator);
   height: 100%;
 }
 
@@ -69,5 +69,5 @@
 }
 
 .breadcrumb .breadcrumb-item-active:hover {
-  filter: brightness(0.75);
+  filter: brightness(var(--brightness-hover));
 }
