@@ -22,19 +22,19 @@
 
 .breadcrumb {
   display: flex;
-  overflow: hidden;
+  overflow-inline: hidden;
   line-height: 1.35em;
 }
 
 .breadcrumb ol {
   flex-wrap: wrap;
-  overflow: hidden;
+  overflow-inline: hidden;
   column-gap: 0.125ch;
 }
 
 .breadcrumb li {
   padding-inline-start: 0.25ch;
-  overflow: hidden;
+  overflow-inline: hidden;
   column-gap: 0.5ch;
 }
 
@@ -49,7 +49,7 @@
   text-decoration: underline dotted transparent 0.1em;
   text-underline-offset: 0.25em;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-inline: hidden;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
   outline-offset: -1px;

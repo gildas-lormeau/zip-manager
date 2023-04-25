@@ -28,7 +28,7 @@
 .entries .entry-name {
   display: flex;
   user-select: none;
-  overflow: hidden;
+  overflow-inline: hidden;
   column-gap: 0.25ch;
   flex: 1;
   cursor: pointer;

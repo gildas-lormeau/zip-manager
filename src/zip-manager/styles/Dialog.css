@@ -45,7 +45,7 @@ dialog form p {
   margin: 0;
   padding-block-start: 0.25em;
   padding-block-end: 1em;
-  overflow: auto;
+  overflow-block: auto;
 }
 
 dialog label {

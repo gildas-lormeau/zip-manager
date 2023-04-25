@@ -1,6 +1,6 @@
 .downloads {
   min-block-size: 5vh;
-  overflow: auto;
+  overflow-block: auto;
   flex: 1;
   scrollbar-color: var(--button-color) transparent;
 }
