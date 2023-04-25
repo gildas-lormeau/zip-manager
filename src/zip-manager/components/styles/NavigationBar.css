@@ -14,7 +14,7 @@
   align-self: start;
   padding-block: 0.25em;
   font-size: 1em;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
 }
 
 .history-buttons button:not([disabled]) {
