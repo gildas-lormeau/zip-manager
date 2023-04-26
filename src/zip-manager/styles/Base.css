@@ -1,4 +1,5 @@
-:root {
+:root,
+::backdrop {
   --page-color-light: gainsboro;
   --bg-color-light: white;
   --basic-bg-color-light: white;
@@ -24,7 +25,8 @@
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
-  :root {
+  :root,
+  ::backdrop {
     --page-color-light: color-mix(in srgb, var(--accent-color) 7.5%, white);
     --bg-color-light: color-mix(in srgb, var(--accent-color) 5%, white);
     --checkbox-accent-color-light: color-mix(
