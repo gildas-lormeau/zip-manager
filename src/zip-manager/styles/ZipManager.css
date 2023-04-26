@@ -9,8 +9,12 @@ main {
   align-items: center;
 }
 
-main {
+main,
+.hidden-downloads .entries {
   flex: 1;
+}
+
+main {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: var(--gap-width);
@@ -30,7 +34,6 @@ main > * {
 }
 
 .hidden-downloads .entries {
-  flex: 1;
   resize: none;
 }
 
