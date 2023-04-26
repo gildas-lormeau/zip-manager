@@ -42,7 +42,7 @@ main > * {
   border-block-end: none;
 }
 
-@media (display-mode: standalone) or (orientation: portrait) {
+@media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
   main {
     inline-size: 100vw;
     margin: 0;
@@ -53,21 +53,5 @@ main > * {
   .main-container:not(.hidden-footer) .downloads,
   .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
     border-block-end: solid var(--accent-color) var(--border-width);
-  }
-}
-
-@supports (aspect-ratio: 7/5) {
-  @media (max-aspect-ratio: 7/5) {
-    main {
-      inline-size: 100vw;
-      margin: 0;
-      border-width: 0;
-      margin-block-end: 0;
-    }
-
-    .main-container:not(.hidden-footer) .downloads,
-    .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-      border-block-end: solid var(--accent-color) var(--border-width);
-    }
   }
 }
