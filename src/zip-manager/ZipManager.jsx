@@ -313,7 +313,8 @@ function ZipManager() {
     importZipFile,
     refreshSelectedFolder,
     util,
-    constants
+    constants,
+    messages
   });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,

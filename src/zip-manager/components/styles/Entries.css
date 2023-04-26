@@ -49,7 +49,7 @@
 }
 
 .entries .directory .entry-name::after {
-  content: var(--directory-separator);
+  content: var(--folder-separator);
 }
 
 @media (hover: hover) and (pointer: fine) {

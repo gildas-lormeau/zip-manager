@@ -42,7 +42,7 @@
 }
 
 .breadcrumb li::after {
-  content: var(--directory-separator);
+  content: var(--folder-separator);
 }
 
 .breadcrumb .breadcrumb-item {

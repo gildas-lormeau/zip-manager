@@ -25,11 +25,20 @@ function getAppFeatures({
   importZipFile,
   refreshSelectedFolder,
   util,
-  constants
+  constants,
+  messages
 }) {
   function initApplication() {
     const options = getOptions();
     const { accentColor } = options;
+    util.setDocumentStyle(
+      constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
+      JSON.stringify(messages.NO_ENTRIES_LABEL)
+    );
+    util.setDocumentStyle(
+      constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
+      JSON.stringify(constants.FOLDER_SEPARATOR)
+    );
     setAccentColor(accentColor);
   }
 

@@ -159,8 +159,6 @@
   --dialog-margin-block-start: min(10dvh, 5em);
   --dialog-width: min(40ch, 75dvw);
   --dialog-form-max-height: 70dvh;
-  --directory-separator: "/";
-  --message-drag-and-drop-entries: "Drag and drop files and directories here";
 }
 
 html {
