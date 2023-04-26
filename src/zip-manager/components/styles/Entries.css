@@ -9,11 +9,12 @@
 
 .entries ol {
   flex-direction: column;
+  row-gap: calc(var(--button-padding-width) / 4);
 }
 
 .entries li {
-  padding-block: calc(var(--gap-width) / 2);
-  padding-inline: calc(var(--gap-width));
+  padding-block: calc(var(--button-padding-width) / 4);
+  padding-inline: calc(var(--button-padding-width) / 2);
   outline: none;
   column-gap: var(--gap-width);
 }
