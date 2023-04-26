@@ -53,6 +53,12 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .entries ol {
+    --no-entries-outline-width-negative: calc(
+      var(--no-entries-outline-width) * -1
+    );
+  }
+
   .entries ol:empty {
     height: 100%;
   }
@@ -66,11 +72,19 @@
     font-weight: bold;
     font-size: 2em;
     line-height: 1em;
-    text-shadow: -0.5px -0.5px 0 var(--accent-color),
-      -0.5px 0px 0 var(--accent-color), -0.5px 0.5px 0 var(--accent-color),
-      0px -0.5px 0 var(--accent-color), 0px 0px 0 var(--accent-color),
-      0px 0.5px 0 var(--accent-color), 0.5px -0.5px 0 var(--accent-color),
-      0.5px 0px 0 var(--accent-color), 0.5px 0.5px 0 var(--accent-color);
+    text-shadow: var(--no-entries-outline-width-negative)
+        var(--no-entries-outline-width-negative) 0 var(--accent-color),
+      var(--no-entries-outline-width-negative) 0px 0 var(--accent-color),
+      var(--no-entries-outline-width-negative) var(--no-entries-outline-width) 0
+        var(--accent-color),
+      0px var(--no-entries-outline-width-negative) 0 var(--accent-color),
+      0px 0px 0 var(--accent-color),
+      0px var(--no-entries-outline-width) 0 var(--accent-color),
+      var(--no-entries-outline-width) var(--no-entries-outline-width-negative) 0
+        var(--accent-color),
+      var(--no-entries-outline-width) 0px 0 var(--accent-color),
+      var(--no-entries-outline-width) var(--no-entries-outline-width) 0
+        var(--accent-color);
     color: var(--bg-color);
     opacity: 0.5;
   }
