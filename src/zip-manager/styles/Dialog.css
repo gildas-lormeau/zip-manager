@@ -9,7 +9,6 @@ dialog {
   background-color: var(--page-color);
   color: var(--text-color);
   border: solid var(--accent-color) calc(var(--border-width) * 2);
-  margin-inline: auto;
   border-radius: var(--border-radius-width);
 }
 
