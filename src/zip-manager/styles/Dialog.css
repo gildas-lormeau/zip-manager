@@ -24,10 +24,19 @@ dialog input {
   border-radius: var(--border-radius-width);
 }
 
-dialog form {
+dialog form,
+dialog form p,
+dialog label {
   display: flex;
   flex-direction: column;
+}
+
+dialog form,
+dialog form p {
   row-gap: calc(var(--gap-width) * 2);
+}
+
+dialog form {
   max-height: 70dvh;
 }
 
@@ -38,9 +47,6 @@ dialog form .dialog-title {
 }
 
 dialog form p {
-  display: flex;
-  flex-direction: column;
-  row-gap: calc(var(--gap-width) * 2);
   margin: 0;
   padding-block-start: calc(var(--gap-width) / 2);
   padding-block-end: calc(var(--gap-width) * 2);
@@ -49,8 +55,6 @@ dialog form p {
 }
 
 dialog label {
-  display: flex;
-  flex-direction: column;
   row-gap: var(--gap-width);
 }
 
