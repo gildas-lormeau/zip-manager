@@ -1,15 +1,16 @@
-.button-bar {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: calc(var(--gap-width) * 1.5);
-  row-gap: var(--gap-width);
-}
-
+.button-bar,
 .button-bar .button-group {
   display: flex;
   flex-wrap: wrap;
-  column-gap: var(--gap-width);
   row-gap: var(--gap-width);
+}
+
+.button-bar {
+  column-gap: calc(var(--gap-width) * 1.5);
+}
+
+.button-bar .button-group {
+  column-gap: var(--gap-width);
 }
 
 .button-bar button {
