@@ -14,20 +14,18 @@
   <title>Zip Manager</title>
   <style>
     @media (prefers-color-scheme: light) {
-      html:not([style]) body {
+      html:not([pp-ready]) body {
         background-color: white;
-        color: white;
       }
     }
 
     @media (prefers-color-scheme: dark) {
-      html:not([style]) body {
+      html:not([pp-ready]) body {
         background-color: black;
-        color: black;
       }
     }
 
-    html:not([style]) body>* {
+    html:not([app-ready]) body>* {
       display: none;
     }
   </style>

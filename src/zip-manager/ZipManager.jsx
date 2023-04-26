@@ -79,9 +79,11 @@ function ZipManager() {
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
+  const appStyleRef = useRef(null);
 
   const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
+  const getAppStyleElement = () => appStyleRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
   const appClassName = () =>
     constants.APP_CLASSNAME +
@@ -307,6 +309,7 @@ function ZipManager() {
     getEntriesElementHeight,
     setOptionsDialog,
     getOptions,
+    getAppStyleElement,
     goIntoFolder,
     openPromptExtract,
     addFiles,
@@ -385,6 +388,7 @@ function ZipManager() {
 
   return (
     <div className={appClassName()}>
+      <style ref={appStyleRef}></style>
       <main role="application">
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}

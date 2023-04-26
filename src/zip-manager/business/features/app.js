@@ -19,6 +19,7 @@ function getAppFeatures({
   getEntriesElementHeight,
   setOptionsDialog,
   getOptions,
+  getAppStyleElement,
   goIntoFolder,
   openPromptExtract,
   addFiles,
@@ -31,15 +32,19 @@ function getAppFeatures({
   function initApplication() {
     const options = getOptions();
     const { accentColor } = options;
-    util.setDocumentStyle(
+    const styleElement = getAppStyleElement();
+    util.setStyle(
+      styleElement,
       constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
       JSON.stringify(messages.NO_ENTRIES_LABEL)
     );
-    util.setDocumentStyle(
+    util.setStyle(
+      styleElement,
       constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
       JSON.stringify(constants.FOLDER_SEPARATOR)
     );
     setAccentColor(accentColor);
+    util.setDocumentAttribute(constants.APP_READY_ATTRIBUTE_NAME, "");
   }
 
   function initSelectedFolder() {
@@ -96,7 +101,12 @@ function getAppFeatures({
   }
 
   function applyAccentColor(color) {
-    util.setDocumentStyle(constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME, color);
+    const styleElement = getAppStyleElement();
+    util.setStyle(
+      styleElement,
+      constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+      color
+    );
     const options = getOptions();
     setOptions({ ...options, accentColor: color });
   }

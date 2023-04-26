@@ -107,9 +107,19 @@ function downloadAborted(error) {
     message === CANCELLED_DOWNLOAD_MESSAGE || error.name === ABORT_ERROR_NAME
   );
 }
+function setDocumentAttribute(name, value) {
+  document.documentElement.setAttribute(name, value);
+}
 
-function setDocumentStyle(name, value) {
-  document.documentElement.style.setProperty(name, value);
+function setStyle(styleElement, name, value) {
+  const rule = Array.from(styleElement.sheet.rules).find((rule) =>
+    rule.style.getPropertyValue(name)
+  );
+  if (rule) {
+    rule.style.setProperty(name, value);
+  } else {
+    styleElement.sheet.insertRule(":root { " + name + ": " + value + "}");
+  }
 }
 
 function setDocumentClass(value) {
@@ -320,7 +330,8 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  setDocumentStyle,
+  setDocumentAttribute,
+  setStyle,
   setDocumentClass,
   saveValue,
   restoreValue,
