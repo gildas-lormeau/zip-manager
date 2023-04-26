@@ -1,10 +1,11 @@
-.navigation-bar {
+.navigation-bar,
+.history-buttons,
+.breadcrumb {
   display: flex;
-  column-gap: var(--gap-width);
 }
 
+.navigation-bar,
 .history-buttons {
-  display: flex;
   column-gap: var(--gap-width);
 }
 
@@ -17,27 +18,26 @@
   aspect-ratio: 1 / 1;
 }
 
-.history-buttons button:not([disabled]) {
+.history-buttons button:not([disabled]),
+.breadcrumb .breadcrumb-item-active {
   cursor: pointer;
 }
 
-.breadcrumb {
-  display: flex;
+.breadcrumb,
+.breadcrumb ol,
+.breadcrumb li,
+.breadcrumb .breadcrumb-item {
   overflow-x: hidden;
   overflow-inline: hidden;
 }
 
 .breadcrumb ol {
   flex-wrap: wrap;
-  overflow-x: hidden;
-  overflow-inline: hidden;
   column-gap: calc(var(--gap-width) / 2 - 1px);
   row-gap: calc(var(--gap-width) / 2);
 }
 
 .breadcrumb li {
-  overflow-x: hidden;
-  overflow-inline: hidden;
   column-gap: calc(var(--gap-width) / 2);
 }
 
@@ -52,8 +52,6 @@
   text-decoration: underline dotted transparent calc(var(--border-width) * 2);
   text-underline-offset: 0.25em;
   white-space: nowrap;
-  overflow-x: hidden;
-  overflow-inline: hidden;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
   margin-inline-start: 1px;
@@ -68,7 +66,6 @@
 }
 
 .breadcrumb .breadcrumb-item-active {
-  cursor: pointer;
   text-decoration-color: var(--accent-color);
 }
 
