@@ -16,20 +16,20 @@ main {
   flex: 1;
   background-color: var(--bg-color);
   color: var(--text-color);
-  margin: 0.5em;
-  border: solid var(--accent-color) 0.05em;
+  margin: var(--gap-width);
+  border: solid var(--accent-color) var(--border-width);
   inline-size: 85vw;
   min-block-size: 20em;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-width);
 }
 
 .main-container:not(.hidden-footer) main {
-  margin-block-end: 0em;
+  margin-block-end: 0;
 }
 
 main > * {
-  padding: 0.5em;
-  border-block-end: solid var(--accent-color) 0.05em;
+  padding: var(--gap-width);
+  border-block-end: solid var(--accent-color) var(--border-width);
 }
 
 .hidden-downloads .entries {
@@ -47,12 +47,12 @@ main > * {
     inline-size: 100vw;
     margin: 0;
     border-width: 0;
-    margin-block-end: 0em;
+    margin-block-end: 0;
   }
 
   .main-container:not(.hidden-footer) .downloads,
   .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-    border-block-end: solid var(--accent-color) 0.05em;
+    border-block-end: solid var(--accent-color) var(--border-width);
   }
 }
 
@@ -62,12 +62,12 @@ main > * {
       inline-size: 100vw;
       margin: 0;
       border-width: 0;
-      margin-block-end: 0em;
+      margin-block-end: 0;
     }
 
     .main-container:not(.hidden-footer) .downloads,
     .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-      border-block-end: solid var(--accent-color) 0.05em;
+      border-block-end: solid var(--accent-color) var(--border-width);
     }
   }
 }

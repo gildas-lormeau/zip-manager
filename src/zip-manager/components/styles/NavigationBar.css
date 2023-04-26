@@ -1,18 +1,18 @@
 .navigation-bar {
   display: flex;
-  column-gap: 0.75ch;
+  column-gap: var(--gap-width);
 }
 
 .history-buttons {
   display: flex;
-  column-gap: 0.75ch;
+  column-gap: var(--gap-width);
 }
 
 .history-buttons button {
   font-family: monospace;
-  padding-inline: 1ch;
   align-self: start;
-  padding-block: 0.25em;
+  padding-inline: calc(var(--button-padding-width) / 1.5);
+  padding-block: calc(var(--button-padding-width) / 3);
   font-size: 1em;
   aspect-ratio: 1 / 1;
 }
@@ -31,15 +31,14 @@
   flex-wrap: wrap;
   overflow-x: hidden;
   overflow-inline: hidden;
-  column-gap: 0.125ch;
-  row-gap: 0.25em;
+  column-gap: calc(var(--gap-width) / 2 - 1px);
+  row-gap: calc(var(--gap-width) / 2);
 }
 
 .breadcrumb li {
-  padding-inline-start: 0.25ch;
   overflow-x: hidden;
   overflow-inline: hidden;
-  column-gap: 0.5ch;
+  column-gap: calc(var(--gap-width) / 2);
 }
 
 .breadcrumb li::after {
@@ -50,13 +49,14 @@
 .breadcrumb .breadcrumb-item {
   height: calc(100% - 2px);
   font-weight: 400;
-  text-decoration: underline dotted transparent 0.1em;
+  text-decoration: underline dotted transparent calc(var(--border-width) * 2);
   text-underline-offset: 0.25em;
   white-space: nowrap;
   overflow-x: hidden;
   overflow-inline: hidden;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
+  margin-inline-start: 1px;
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {

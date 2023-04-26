@@ -12,9 +12,9 @@
 }
 
 .entries li {
-  padding: 0.25em;
+  padding: calc(var(--gap-width) / 2);
   outline: none;
-  column-gap: 0.75ch;
+  column-gap: var(--gap-width);
 }
 
 .entries .entry-select {
@@ -22,7 +22,7 @@
   margin: 0;
   padding: 0;
   max-block-size: 1em;
-  margin-inline-start: 0.75ch;
+  margin-inline-start: calc(var(--gap-width) / 2);
 }
 
 .entries .entry-name {
@@ -30,7 +30,7 @@
   user-select: none;
   overflow-x: hidden;
   overflow-inline: hidden;
-  column-gap: 0.25ch;
+  column-gap: calc(var(--gap-width) / 2);
   flex: 1;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

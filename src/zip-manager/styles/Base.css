@@ -144,7 +144,10 @@
 
 :root {
   --brightness-hover: 0.75;
-  --border-radius: 0.25em;
+  --border-radius-width: 0.25em;
+  --gap-width: .5em;
+  --button-padding-width: 1em;
+  --border-width: 0.05em;
   --directory-separator: "/";
   --message-drag-and-drop-entries: "Drag and drop files and directories here";
 }
@@ -171,7 +174,7 @@ button {
   background-color: var(--bg-button-color);
   color: var(--button-color);
   font-size: 0.8em;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-width);
 }
 
 button:disabled {

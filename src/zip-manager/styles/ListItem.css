@@ -1,8 +1,8 @@
 .list-item-button {
   font-family: monospace;
   cursor: pointer;
-  padding-inline: 0.5ch;
-  padding-block: 0.2em;
+  padding-inline:calc(var(--button-padding-width) / 4);
+  padding-block: calc(var(--button-padding-width) / 4);
   user-select: none;
 }
 

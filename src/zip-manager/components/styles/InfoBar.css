@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0em;
-  margin-block: 0.4em;
+  margin: 0;
+  margin-block: var(--gap-width);
 }
 
 .info-bar .source-link {
@@ -32,12 +32,6 @@
 }
 
 @media (max-width: 128ch), (display-mode: standalone) {
-  .info-bar .source-link {
-    font-size: 0.8em;
-  }
-}
-
-@media (max-width: 64ch) {
   .info-bar .source-link {
     font-size: 0.8em;
   }

@@ -1,21 +1,21 @@
 .button-bar {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 1.25ch;
-  row-gap: 0.5em;
+  column-gap: calc(var(--gap-width) * 1.5);
+  row-gap: var(--gap-width);
 }
 
 .button-bar .button-group {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 0.75ch;
-  row-gap: 0.5em;
+  column-gap: var(--gap-width);
+  row-gap: var(--gap-width);
 }
 
 .button-bar button {
   block-size: fit-content;
-  padding-block: 0.5em;
-  padding-inline: 1.25ch;
+  padding-block: calc(var(--button-padding-width) / 2);
+  padding-inline: var(--button-padding-width);
   font-family: inherit;
 }
 

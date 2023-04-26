@@ -6,7 +6,7 @@
 }
 
 .options-dialog input {
-  margin-inline-start: 1ch;
+  margin-inline-start: var(--gap-width);
 }
 
 .options-dialog input[disabled] {
