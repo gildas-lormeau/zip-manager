@@ -6,13 +6,16 @@
   scrollbar-color: var(--button-color) transparent;
 }
 
-.downloads ol {
+.downloads ol,
+.downloads li {
   flex-direction: column;
+}
+
+.downloads ol {
   row-gap: var(--gap-width);
 }
 
 .downloads li {
-  flex-direction: column;
   row-gap: calc(var(--gap-width) / 2);
   align-items: normal;
 }
