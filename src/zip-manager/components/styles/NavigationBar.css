@@ -6,14 +6,14 @@
 
 .navigation-bar,
 .history-buttons {
-  column-gap: calc(var(--gap-width) * 0.5);
+  column-gap: var(--small-gap-width);
 }
 
 .history-buttons button {
   font-family: monospace;
   align-self: start;
-  padding-inline: calc(var(--button-padding-width) / 1.5);
-  padding-block: calc(var(--button-padding-width) / 3);
+  padding-inline: var(--small-button-padding-width);
+  padding-block: var(--small-x2-button-padding-width);
   font-size: 1em;
   margin: var(--outline-width);
 }
@@ -33,12 +33,12 @@
 
 .breadcrumb ol {
   flex-wrap: wrap;
-  column-gap: calc(var(--gap-width) / 2 - var(--outline-width));
-  row-gap: calc(var(--gap-width) / 2);
+  column-gap: calc(var(--small-gap-width) - var(--outline-width));
+  row-gap: var(--small-gap-width);
 }
 
 .breadcrumb li {
-  column-gap: calc(var(--gap-width) / 2);
+  column-gap: var(--small-gap-width);
 }
 
 .breadcrumb li::after {
@@ -47,7 +47,7 @@
 
 .breadcrumb .breadcrumb-item {
   font-weight: var(--font-size);
-  text-decoration: underline dotted transparent calc(var(--border-width) * 2);
+  text-decoration: underline dotted transparent var(--large-border-width);
   text-underline-offset: 0.25em;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -1,6 +1,6 @@
 .entries {
   block-size: 60dvh;
-  min-block-size: 5dvh;
+  min-block-size: 10dvh;
   resize: vertical;
   overflow: auto;
   box-sizing: border-box;
@@ -9,12 +9,12 @@
 
 .entries ol {
   flex-direction: column;
-  row-gap: calc(var(--button-padding-width) / 4);
+  row-gap: var(--small-x3-button-padding-width);
 }
 
 .entries li {
-  padding-block: calc(var(--button-padding-width) / 4);
-  padding-inline: calc(var(--button-padding-width) / 2);
+  padding-block: var(--small-x3-button-padding-width);
+  padding-inline: var(--small-x1-button-padding-width);
   outline: none;
   column-gap: var(--gap-width);
 }
@@ -24,7 +24,7 @@
   margin: 0;
   padding: 0;
   max-block-size: 1em;
-  margin-inline-start: calc(var(--gap-width) / 2);
+  margin-inline-start: var(--small-gap-width);
 }
 
 .entries .entry-name {
@@ -32,7 +32,7 @@
   user-select: none;
   overflow-x: hidden;
   overflow-inline: hidden;
-  column-gap: calc(var(--gap-width) / 2);
+  column-gap: var(--small-gap-width);
   flex: 1;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

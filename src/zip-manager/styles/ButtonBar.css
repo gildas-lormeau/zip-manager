@@ -10,12 +10,12 @@
 }
 
 .button-bar .button-group {
-  column-gap: calc(var(--gap-width) * 0.5);
+  column-gap: var(--small-gap-width);
 }
 
 .button-bar button {
   block-size: fit-content;
-  padding-block: calc(var(--button-padding-width) / 2);
+  padding-block: var(--small-button-padding-width);
   padding-inline: var(--button-padding-width);
   font-family: inherit;
   margin: var(--outline-width);

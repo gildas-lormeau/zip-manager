@@ -16,7 +16,7 @@
 }
 
 .downloads li {
-  row-gap: calc(var(--gap-width) / 2);
+  row-gap: var(--small-gap-width);
   align-items: normal;
 }
 

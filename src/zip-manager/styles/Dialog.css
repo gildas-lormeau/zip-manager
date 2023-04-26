@@ -8,7 +8,7 @@ dialog {
   width: var(--dialog-width);
   background-color: var(--page-color);
   color: var(--text-color);
-  border: solid var(--accent-color) calc(var(--border-width) * 2);
+  border: solid var(--accent-color) var(--large-border-width);
   border-radius: var(--border-radius-width);
 }
 
@@ -32,7 +32,7 @@ dialog label {
 
 dialog form,
 dialog form p {
-  row-gap: calc(var(--gap-width) * 2);
+  row-gap: var(--large-gap-width);
 }
 
 dialog form {
@@ -42,13 +42,13 @@ dialog form {
 dialog form .dialog-title {
   font-weight: var(--font-weight-bolder);
   border-block-end: solid var(--accent-color) var(--border-width);
-  padding-bottom: calc(var(--gap-width) * 2);
+  padding-bottom: var(--large-gap-width);
 }
 
 dialog form p {
   margin: 0;
-  padding-block-start: calc(var(--gap-width) / 2);
-  padding-block-end: calc(var(--gap-width) * 2);
+  padding-block-start: var(--small-gap-width);
+  padding-block-end: var(--large-gap-width);
   overflow: visible auto;
 }
 

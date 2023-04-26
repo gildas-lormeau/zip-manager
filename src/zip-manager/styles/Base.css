@@ -140,8 +140,15 @@
   --brightness-hover: 0.75;
   --border-radius-width: 0.25em;
   --gap-width: 0.5em;
+  --small-gap-width: calc(var(--gap-width) / 2);
+  --large-gap-width: calc(var(--gap-width) * 2);
   --button-padding-width: 1em;
+  --small-button-padding-width: calc(var(--button-padding-width) / 1.5);
+  --small-x1-button-padding-width: calc(var(--button-padding-width) / 2);
+  --small-x2-button-padding-width: calc(var(--button-padding-width) / 3);
+  --small-x3-button-padding-width: calc(var(--button-padding-width) / 4);
   --border-width: 0.05em;
+  --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
   --font-size: 1em;
   --button-font-size: calc(var(--font-size) * 0.8);
