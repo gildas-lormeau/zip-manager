@@ -17,7 +17,7 @@
   font-family: monospace;
   align-self: start;
   padding-inline: var(--small-button-padding-width);
-  padding-block: var(--small-x2-button-padding-width);
+  padding-block: var(--small-x3-button-padding-width);
   font-size: 1em;
   margin: var(--outline-width);
 }
