@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" app-loading>
 
 <head>
   <meta charset="utf-8" />
@@ -14,18 +14,18 @@
   <title>Zip Manager</title>
   <style>
     @media (prefers-color-scheme: light) {
-      html:not([app-ready]) body {
+      html[app-loading] body {
         background-color: white;
       }
     }
 
     @media (prefers-color-scheme: dark) {
-      html:not([app-ready]) body {
+      html[app-loading] body {
         background-color: black;
       }
     }
 
-    html:not([app-ready]) body>* {
+    html[app-loading] body>* {
       display: none;
     }
   </style>

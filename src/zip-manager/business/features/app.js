@@ -44,7 +44,7 @@ function getAppFeatures({
       JSON.stringify(constants.FOLDER_SEPARATOR)
     );
     setAccentColor(accentColor);
-    util.setDocumentAttribute(constants.APP_READY_ATTRIBUTE_NAME, "");
+    util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
   }
 
   function initSelectedFolder() {

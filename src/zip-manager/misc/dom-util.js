@@ -107,8 +107,8 @@ function downloadAborted(error) {
     message === CANCELLED_DOWNLOAD_MESSAGE || error.name === ABORT_ERROR_NAME
   );
 }
-function setDocumentAttribute(name, value) {
-  document.documentElement.setAttribute(name, value);
+function removeDocumentAttribute(name) {
+  document.documentElement.removeAttribute(name);
 }
 
 function setStyle(styleElement, name, value) {
@@ -334,7 +334,7 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  setDocumentAttribute,
+  removeDocumentAttribute,
   setStyle,
   setDocumentClass,
   saveValue,
