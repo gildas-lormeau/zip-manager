@@ -6,11 +6,11 @@
 }
 
 .button-bar {
-  column-gap: calc(var(--gap-width) * 1.5);
+  column-gap: var(--gap-width);
 }
 
 .button-bar .button-group {
-  column-gap: var(--gap-width);
+  column-gap: calc(var(--gap-width) * 0.5);
 }
 
 .button-bar button {

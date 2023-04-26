@@ -6,7 +6,7 @@
 
 .navigation-bar,
 .history-buttons {
-  column-gap: var(--gap-width);
+  column-gap: calc(var(--gap-width) * 0.5);
 }
 
 .history-buttons button {

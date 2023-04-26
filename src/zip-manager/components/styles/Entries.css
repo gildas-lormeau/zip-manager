@@ -12,7 +12,8 @@
 }
 
 .entries li {
-  padding: calc(var(--gap-width) / 2);
+  padding-block: calc(var(--gap-width) / 2);
+  padding-inline: calc(var(--gap-width));
   outline: none;
   column-gap: var(--gap-width);
 }
