@@ -40,7 +40,7 @@ dialog form {
 }
 
 dialog form .dialog-title {
-  font-weight: 500;
+  font-weight: var(--font-weight-bolder);
   border-block-end: solid var(--accent-color) var(--border-width);
   padding-bottom: calc(var(--gap-width) * 2);
 }

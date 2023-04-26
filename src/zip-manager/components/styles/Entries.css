@@ -61,7 +61,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-weight: 900;
+    font-weight: bold;
     font-size: 2em;
     line-height: 1em;
     text-shadow: -0.5px -0.5px 0 var(--accent-color),

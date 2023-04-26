@@ -144,6 +144,11 @@
   --border-width: 0.05em;
   --outline-width: 1px;
   --directory-separator: "/";
+  --font-size: 1em;
+  --button-font-size: calc(var(--font-size) * 0.8);
+  --font-weight: 400;
+  --font-weight-bolder: 500;
+  --button-animation-duration: 0.2s;
   --message-drag-and-drop-entries: "Drag and drop files and directories here";
 }
 
@@ -153,7 +158,8 @@ html {
 }
 
 body {
-  font-weight: 400;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 }
 
 ol,
@@ -176,7 +182,7 @@ button {
   user-select: none;
   background-color: var(--accent-color);
   color: var(--button-color);
-  font-size: 0.8em;
+  font-size: var(--button-font-size);
   border-radius: var(--border-radius-width);
 }
 
@@ -187,7 +193,7 @@ button:disabled {
 
 button.flashing-button {
   animation-name: flashing-button-animation;
-  animation-duration: 0.2s;
+  animation-duration: var(--button-animation-duration);
 }
 
 button:not([disabled]):hover {

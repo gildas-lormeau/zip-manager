@@ -46,7 +46,7 @@
 }
 
 .breadcrumb .breadcrumb-item {
-  font-weight: 400;
+  font-weight: var(--font-size);
   text-decoration: underline dotted transparent calc(var(--border-width) * 2);
   text-underline-offset: 0.25em;
   white-space: nowrap;
@@ -60,7 +60,7 @@
 }
 
 .breadcrumb li:last-of-type .breadcrumb-item {
-  font-weight: 500;
+  font-weight: var(--font-weight-bolder);
 }
 
 .breadcrumb .breadcrumb-item-active {
