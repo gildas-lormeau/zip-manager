@@ -3,16 +3,18 @@ html {
   overscroll-behavior: none;
 }
 
-.main-container {
+.main-container,
+main {
   display: flex;
-  height: 100dvh;
   flex-direction: column;
+}
+
+.main-container {
+  height: 100dvh;
   align-items: center;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
   flex: 1;
   background-color: var(--bg-color);
   color: var(--text-color);
