@@ -19,7 +19,7 @@ main {
   color: var(--text-color);
   margin: var(--gap-width);
   border: solid var(--accent-color) var(--border-width);
-  inline-size: 85dvw;
+  inline-size: var(--app-width);
   min-block-size: 20em;
   border-radius: var(--border-radius-width);
 }

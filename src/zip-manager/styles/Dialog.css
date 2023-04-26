@@ -4,8 +4,8 @@ dialog::backdrop {
 }
 
 dialog {
-  margin-block-start: min(10dvh, 5em);
-  width: min(40ch, 75dvw);
+  margin-block-start: var(--dialog-margin-block-start);
+  width: var(--dialog-width);
   background-color: var(--page-color);
   color: var(--text-color);
   border: solid var(--accent-color) calc(var(--border-width) * 2);
@@ -36,7 +36,7 @@ dialog form p {
 }
 
 dialog form {
-  max-height: 70dvh;
+  max-height: var(--dialog-form-max-height);
 }
 
 dialog form .dialog-title {

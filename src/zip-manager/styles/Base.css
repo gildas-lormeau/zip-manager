@@ -143,12 +143,16 @@
   --button-padding-width: 1em;
   --border-width: 0.05em;
   --outline-width: 1px;
-  --directory-separator: "/";
   --font-size: 1em;
   --button-font-size: calc(var(--font-size) * 0.8);
   --font-weight: 400;
   --font-weight-bolder: 500;
   --button-animation-duration: 0.2s;
+  --app-width: 85dvw;
+  --dialog-margin-block-start: min(10dvh, 5em);
+  --dialog-width: min(40ch, 75dvw);
+  --dialog-form-max-height: 70dvh;
+  --directory-separator: "/";
   --message-drag-and-drop-entries: "Drag and drop files and directories here";
 }
 
