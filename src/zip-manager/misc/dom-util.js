@@ -123,7 +123,11 @@ function setStyle(styleElement, name, value) {
 }
 
 function setDocumentClass(value) {
-  document.documentElement.className = value;
+  if (value) {
+    document.documentElement.className = value;
+  } else {
+    document.documentElement.removeAttribute("class");
+  }
 }
 
 function saveValue(name, value) {
