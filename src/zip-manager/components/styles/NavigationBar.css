@@ -8,7 +8,8 @@
   column-gap: var(--gap-width);
 }
 
-.history-buttons {
+.history-buttons,
+.breadcrumb li {
   column-gap: var(--small-gap-width);
 }
 
@@ -38,10 +39,6 @@
   flex-wrap: wrap;
   column-gap: calc(var(--small-gap-width) - var(--outline-width));
   row-gap: var(--small-gap-width);
-}
-
-.breadcrumb li {
-  column-gap: var(--small-gap-width);
 }
 
 .breadcrumb li::after {
