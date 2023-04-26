@@ -4,7 +4,10 @@
   display: flex;
 }
 
-.navigation-bar,
+.navigation-bar {
+  column-gap: var(--gap-width);
+}
+
 .history-buttons {
   column-gap: var(--small-gap-width);
 }
