@@ -32,7 +32,7 @@ function TopButtonBar({
 
   return (
     <div
-      className="button-bar button-bar button-bar-top"
+      className="button-bar button-bar-top"
       role="toolbar"
       aria-label="Selected directory commands"
       onDragOver={handleDragOver}
