@@ -1,6 +1,6 @@
 .entries {
-  block-size: 60vh;
-  min-block-size: 5vh;
+  block-size: 60dvh;
+  min-block-size: 5dvh;
   resize: vertical;
   overflow: auto;
   box-sizing: border-box;

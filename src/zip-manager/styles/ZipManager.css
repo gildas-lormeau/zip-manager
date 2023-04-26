@@ -19,7 +19,7 @@ main {
   color: var(--text-color);
   margin: var(--gap-width);
   border: solid var(--accent-color) var(--border-width);
-  inline-size: 85vw;
+  inline-size: 85dvw;
   min-block-size: 20em;
   border-radius: var(--border-radius-width);
 }
@@ -44,7 +44,7 @@ main > * {
 
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
   main {
-    inline-size: 100vw;
+    inline-size: 100dvw;
     margin: 0;
     border-width: 0;
     margin-block-end: 0;

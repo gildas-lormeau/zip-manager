@@ -1,5 +1,5 @@
 .downloads {
-  min-block-size: 5vh;
+  min-block-size: 5dvh;
   overflow-y: auto;
   overflow-block: auto;
   flex: 1;
