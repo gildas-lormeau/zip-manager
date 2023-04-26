@@ -148,6 +148,7 @@
   --gap-width: 0.5em;
   --button-padding-width: 1em;
   --border-width: 0.05em;
+  --outline-width: 1px;
   --directory-separator: "/";
   --message-drag-and-drop-entries: "Drag and drop files and directories here";
 }
@@ -205,7 +206,7 @@ button:not([disabled]):hover {
   }
   50% {
     filter: brightness(var(--brightness-hover));
-    outline: 1px solid var(--accent-color);
+    outline: var(--outline-width) solid var(--accent-color);
   }
 }
 
@@ -215,7 +216,12 @@ a:visited {
 }
 
 :focus {
-  outline: 1px solid var(--accent-color);
+  outline: var(--outline-width) solid var(--accent-color);
+  outline-offset: 0;
+}
+
+:focus-visible {
+  outline-offset: 0;
 }
 
 ::selection {

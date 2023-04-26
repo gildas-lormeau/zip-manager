@@ -15,7 +15,7 @@
   padding-inline: calc(var(--button-padding-width) / 1.5);
   padding-block: calc(var(--button-padding-width) / 3);
   font-size: 1em;
-  aspect-ratio: 1 / 1;
+  margin: var(--outline-width);
 }
 
 .history-buttons button:not([disabled]),
@@ -33,7 +33,7 @@
 
 .breadcrumb ol {
   flex-wrap: wrap;
-  column-gap: calc(var(--gap-width) / 2 - 1px);
+  column-gap: calc(var(--gap-width) / 2 - var(--outline-width));
   row-gap: calc(var(--gap-width) / 2);
 }
 
@@ -43,18 +43,16 @@
 
 .breadcrumb li::after {
   content: var(--directory-separator);
-  height: calc(100% - 2px);
 }
 
 .breadcrumb .breadcrumb-item {
-  height: calc(100% - 2px);
   font-weight: 400;
   text-decoration: underline dotted transparent calc(var(--border-width) * 2);
   text-underline-offset: 0.25em;
   white-space: nowrap;
   text-overflow: ellipsis;
   -webkit-tap-highlight-color: transparent;
-  margin-inline-start: 1px;
+  margin: var(--outline-width);
 }
 
 .breadcrumb .breadcrumb-item:focus-visible {

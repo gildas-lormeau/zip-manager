@@ -17,7 +17,7 @@
   width: 2ch;
   height: 1em;
   accent-color: var(--accent-color);
-  margin-inline: 3px;
+  margin-inline: calc(var(--outline-width));
 }
 
 .options-dialog input[type="password"],

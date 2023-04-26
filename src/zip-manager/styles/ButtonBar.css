@@ -18,6 +18,7 @@
   padding-block: calc(var(--button-padding-width) / 2);
   padding-inline: var(--button-padding-width);
   font-family: inherit;
+  margin: var(--outline-width);
 }
 
 .button-bar button:not([disabled]) {

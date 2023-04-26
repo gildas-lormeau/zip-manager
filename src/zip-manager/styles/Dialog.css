@@ -19,7 +19,7 @@ dialog input {
   height: 1.8em;
   padding-inline: var(--gap-width);
   font-size: 1em;
-  margin-inline: 1px;
+  margin: var(--outline-width);
   border-radius: var(--border-radius-width);
 }
 
@@ -49,12 +49,12 @@ dialog form p {
   margin: 0;
   padding-block-start: calc(var(--gap-width) / 2);
   padding-block-end: calc(var(--gap-width) * 2);
-  overflow-y: auto;
-  overflow-block: auto;
+  overflow: visible auto;
 }
 
 dialog label {
   row-gap: var(--gap-width);
+  overflow: visible;
 }
 
 dialog .button-bar {
