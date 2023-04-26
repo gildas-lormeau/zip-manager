@@ -10,6 +10,7 @@
   --button-color-light: white;
   --disabled-button-color-light: gray;
   --bg-disabled-button-color-light: gainsboro;
+  --outline-color-light: #333;
   --page-color-dark: #333;
   --bg-color-dark: black;
   --basic-bg-color-dark: black;
@@ -20,6 +21,7 @@
   --button-color-dark: black;
   --disabled-button-color-dark: gray;
   --bg-disabled-button-color-dark: #333;
+  --outline-color-dark: gainsboro;
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
@@ -49,6 +51,7 @@
       var(--accent-color) 25%,
       white
     );
+    --outline-color-dark: color-mix(in srgb, var(--accent-color) 25%, black);
     --page-color-dark: color-mix(in srgb, var(--accent-color) 7.5%, black);
     --bg-color-dark: color-mix(in srgb, var(--accent-color) 5%, black);
     --checkbox-accent-color-dark: color-mix(
@@ -73,6 +76,7 @@
       var(--accent-color) 25%,
       black
     );
+    --outline-color-dark: color-mix(in srgb, var(--accent-color) 25%, white);
   }
 }
 
@@ -88,6 +92,7 @@
   --button-color: var(--button-color-light);
   --disabled-button-color: var(--disabled-button-color-light);
   --bg-disabled-button-color: var(--bg-disabled-button-color-light);
+  --outline-color: var(--outline-color-light);
 }
 
 :root.dark,
@@ -102,6 +107,7 @@
   --button-color: var(--button-color-dark);
   --disabled-button-color: var(--disabled-button-color-dark);
   --bg-disabled-button-color: var(--bg-disabled-button-color-dark);
+  --outline-color: var(--outline-color-dark);
 }
 
 @media (prefers-color-scheme: light) {
@@ -117,6 +123,7 @@
     --button-color: var(--button-color-light);
     --disabled-button-color: var(--disabled-button-color-light);
     --bg-disabled-button-color: var(--bg-disabled-button-color-light);
+    --outline-color: var(--outline-color-light);
   }
 }
 
@@ -133,6 +140,7 @@
     --button-color: var(--button-color-dark);
     --disabled-button-color: var(--disabled-button-color-dark);
     --bg-disabled-button-color: var(--bg-disabled-button-color-dark);
+    --outline-color: var(--outline-color-dark);
   }
 }
 
@@ -216,7 +224,7 @@ button:not([disabled]):hover {
   }
   50% {
     filter: brightness(var(--brightness-hover));
-    outline: var(--outline-width) solid var(--accent-color);
+    outline: var(--outline-width) solid var(--outline-color);
   }
 }
 
@@ -226,7 +234,7 @@ a:visited {
 }
 
 :focus {
-  outline: var(--outline-width) solid var(--accent-color);
+  outline: var(--outline-width) solid var(--outline-color);
   outline-offset: 0;
 }
 
