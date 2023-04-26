@@ -1,8 +1,3 @@
-html {
-  background-color: var(--page-color);
-  overscroll-behavior: none;
-}
-
 .main-container,
 main {
   display: flex;
