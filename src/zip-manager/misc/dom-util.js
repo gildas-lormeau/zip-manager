@@ -319,6 +319,10 @@ function resetLocationSearch() {
   return window.history.replaceState(null, null, window.location.pathname);
 }
 
+function getNavigatorLanguage() {
+  return navigator.language;
+}
+
 export {
   FILESYSTEM_FILE_KIND,
   FILESYSTEM_DIRECTORY_KIND,
@@ -361,5 +365,6 @@ export {
   setLaunchQueueConsumer,
   fetch,
   getLocationSearch,
-  resetLocationSearch
+  resetLocationSearch,
+  getNavigatorLanguage
 };

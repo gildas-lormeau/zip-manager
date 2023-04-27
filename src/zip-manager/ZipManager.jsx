@@ -3,8 +3,8 @@ import "./styles/index.css";
 import { useEffect, useState, useRef } from "react";
 
 import * as util from "./misc/dom-util.js";
-import * as messages from "./messages/en-US.js";
 import * as zipService from "./services/zip-service.js";
+import { getMessages } from "./messages/index.js";
 import { getStorageService } from "./services/storage-service.js";
 
 import { getHooks } from "./hooks/hooks.js";
@@ -45,6 +45,7 @@ const {
   getClipboardFeatures,
   getAppFeatures
 } = features;
+const messages = getMessages({ util });
 const storageService = getStorageService({ util });
 
 function ZipManager() {
