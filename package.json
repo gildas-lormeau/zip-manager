@@ -14,60 +14,6 @@
     "build": "vite build",
     "serve": "vite preview"
   },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": false,
-      "browser": false
-    },
-    "globals": {
-      "console": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "react-app"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "ignorePatterns": [
-      "build/"
-    ],
-    "plugins": [
-      "react"
-    ],
-    "rules": {
-      "react/jsx-uses-vars": "error",
-      "react/jsx-uses-react": "error",
-      "indent": [
-        "error",
-        2
-      ],
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "quotes": [
-        "error",
-        "double"
-      ],
-      "semi": [
-        "warn",
-        "always"
-      ],
-      "no-console": [
-        "warn"
-      ],
-      "no-debugger": [
-        "warn"
-      ],
-      "no-unused-vars": "warn"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -82,6 +28,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.39.0",
     "eslint-plugin-react": "^7.32.2",
     "vite": "^4.3.1",
     "vite-plugin-pwa": "^0.14.7"
