@@ -98,7 +98,7 @@ const CHOOSE_ACTION_TITLE = "Choisir l'action";
 const CHOOSE_ACTION_LABEL =
   "Un fichier zip a été selectionné, veuillez choisir l'action appropriée.";
 const NO_ENTRIES_LABEL =
-  "Glissez et déposez des fichiers ou des répertoires ici";
+  "Glissez et déposez des fichiers et des répertoires ici";
 const INFO_LABEL = [
   "Code source sur ",
   "Github",
