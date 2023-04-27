@@ -475,6 +475,7 @@ function ZipManager() {
         hidden={hiddenInfobar}
         accentColor={accentColor}
         onSetAccentColor={setAccentColor}
+        messages={messages}
       />
       <CreateFolderDialog
         data={createFolderDialog}

@@ -96,6 +96,14 @@ const CHOOSE_ACTION_TITLE = "Choose action";
 const CHOOSE_ACTION_LABEL =
   "A zip file has been selected, please select the proper action.";
 const NO_ENTRIES_LABEL = "Drag and drop files and directories here";
+const INFO_LABEL = [
+  "Source code on ",
+  "Github",
+  " | Made with ",
+  "♡",
+  " in ",
+  "Rennes"
+];
 
 export {
   ROOT_ZIP_FILENAME,
@@ -185,5 +193,6 @@ export {
   CHOOSE_ACTION_DIALOG_ADD_FILE_BUTTON_LABEL,
   CHOOSE_ACTION_TITLE,
   CHOOSE_ACTION_LABEL,
-  NO_ENTRIES_LABEL
+  NO_ENTRIES_LABEL,
+  INFO_LABEL
 };
