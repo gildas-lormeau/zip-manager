@@ -252,3 +252,15 @@ a:visited {
     max-inline-size: none;
   }
 }
+
+@media (max-width: 60ch) {
+  body {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 40ch) {
+  body {
+    font-size: 0.8em;
+  }
+}
