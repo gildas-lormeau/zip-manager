@@ -93,6 +93,10 @@ function getHeight(element) {
   return element.offsetHeight;
 }
 
+function getRowGap(element) {
+  return parseInt(window.getComputedStyle(element).rowGap, 10);
+}
+
 function createAbortController() {
   return new AbortController();
 }
@@ -334,6 +338,7 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
+  getRowGap,
   removeDocumentAttribute,
   setStyle,
   setDocumentClass,

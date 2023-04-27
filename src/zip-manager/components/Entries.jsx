@@ -57,7 +57,8 @@ function Entries({
       entriesHeightRef.current = Math.max(
         Math.ceil(
           util.getHeight(entriesRef.current) /
-            util.getHeight(highlightedEntryRef.current)
+            (util.getHeight(highlightedEntryRef.current) +
+              util.getRowGap(entriesRef.current.firstElementChild))
         ),
         1
       );
