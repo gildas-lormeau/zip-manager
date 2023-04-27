@@ -301,16 +301,20 @@ function EntryName({
       const uncompressedSize = size || entry.data.uncompressedSize;
       tooltip.push(
         LAST_MOD_DATE_LABEL +
+          " " +
           util.formatDate(
             lastModified === undefined ? lastModDate : new Date(lastModified)
           )
       );
       if (uncompressedSize && compressedSize) {
-        tooltip.push(COMPRESSED_SIZE_LABEL + util.formatSize(compressedSize));
+        tooltip.push(
+          COMPRESSED_SIZE_LABEL + " " + util.formatSize(compressedSize)
+        );
       }
       if (uncompressedSize) {
         tooltip.push(
           (compressedSize ? UNCOMPRESSED_SIZE_LABEL : SIZE_LABEL) +
+            " " +
             util.formatSize(uncompressedSize)
         );
       }

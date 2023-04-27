@@ -10,10 +10,10 @@ const ALT_KEY_LABEL = "alt-";
 const SPACE_KEY_LABEL = "space";
 const ARROW_LEFT_KEY_LABEL = "left";
 const ARROW_RIGHT_KEY_LABEL = "right";
-const SIZE_LABEL = "Size: ";
-const UNCOMPRESSED_SIZE_LABEL = "Uncompressed size: ";
-const COMPRESSED_SIZE_LABEL = "Compressed size: ";
-const LAST_MOD_DATE_LABEL = "Last mod. date: ";
+const SIZE_LABEL = "Size:";
+const UNCOMPRESSED_SIZE_LABEL = "Uncompressed size:";
+const COMPRESSED_SIZE_LABEL = "Compressed size:";
+const LAST_MOD_DATE_LABEL = "Last mod. date:";
 
 const COPY_BUTTON_TOOLTIP = SHORTCUT_LABEL + CTRL_KEY_LABEL + "c";
 const CUT_BUTTON_TOOLTIP = SHORTCUT_LABEL + CTRL_KEY_LABEL + "x";
