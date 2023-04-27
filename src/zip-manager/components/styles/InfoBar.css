@@ -15,7 +15,6 @@
 
 .info-bar .icon {
   color: var(--accent-color);
-  cursor: pointer;
 }
 
 .info-bar .icon:hover {
@@ -23,12 +22,14 @@
 }
 
 .info-bar input[type="color"] {
-  inline-size: 2.25ch;
+  position: relative;
+  cursor: pointer;
+  left: -1.75ch;
+  margin-right: -1.75ch;
+  inline-size: 2ch;
   block-size: 1.25em;
   padding: 0;
-  margin-inline-start: 1ch;
   filter: opacity(0);
-  vertical-align: middle;
 }
 
 @media (max-width: 128ch), (display-mode: standalone) {
@@ -40,9 +41,5 @@
 @media (max-width: 48ch) {
   .info-bar .source-link {
     font-size: 0.7em;
-  }
-
-  .info-bar input[type="color"] {
-    inline-size: 1.25ch;
   }
 }

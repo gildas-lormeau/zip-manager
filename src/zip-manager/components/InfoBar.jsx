@@ -22,6 +22,14 @@ function InfoBar({ hidden, accentColor, onSetAccentColor }) {
             accentColor={accentColor}
             onSetAccentColor={onSetAccentColor}
           ></AccentColorPickerButton>
+          {" in "}
+          <a
+            href="https://en.wikipedia.org/wiki/Rennes"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Rennes
+          </a>
         </div>
       </footer>
     );
@@ -30,10 +38,6 @@ function InfoBar({ hidden, accentColor, onSetAccentColor }) {
 
 function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
   const colorInputRef = useRef(null);
-
-  function handleClick() {
-    colorInputRef.current.showPicker();
-  }
 
   function handleChange() {
     onSetAccentColor(colorInputRef.current.value);
@@ -47,17 +51,12 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor }) {
 
   return (
     <>
-      <span className="icon" onClick={handleClick}>
-        ♡
-      </span>
-      {" in "}
+      <span className="icon">♡</span>
       <a
         href="https://en.wikipedia.org/wiki/Rennes"
         target="_blank"
         rel="noreferrer"
-      >
-        Rennes
-      </a>
+      ></a>
       <input
         type="color"
         onChange={handleChange}
