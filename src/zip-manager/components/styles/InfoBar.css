@@ -10,7 +10,6 @@
   display: inline;
   font-size: 0.9em;
   color: var(--basic-text-color);
-  margin-inline-start: 2ch;
 }
 
 .info-bar .icon {
