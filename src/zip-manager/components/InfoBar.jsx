@@ -54,11 +54,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
   return (
     <>
       <span className="icon">{children}</span>
-      <a
-        href="https://en.wikipedia.org/wiki/Rennes"
-        target="_blank"
-        rel="noreferrer"
-      ></a>
       <input
         type="color"
         onChange={handleChange}
