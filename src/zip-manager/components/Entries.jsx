@@ -81,7 +81,7 @@ function Entries({
     }, constants.LONG_TOUCH_DELAY);
   }
 
-  function clearTouchEndEventTimeout(event) {
+  function clearTouchEndEventTimeout() {
     if (touchEndTimeout.current) {
       util.clearTimeout(touchEndTimeout.current);
       touchEndTimeout.current = null;
@@ -102,7 +102,7 @@ function Entries({
     }
   }
 
-  function handleTouchEnd(event) {
+  function handleTouchEnd() {
     previousTouchClientX.current = 0;
     previousTouchClientY.current = 0;
     clearTouchEndEventTimeout();
@@ -153,12 +153,10 @@ function Entries({
 
   useEffect(computeEntriesListHeight);
   useEffect(registerResizeHandler);
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     updateHeight();
     saveHeight();
   }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div

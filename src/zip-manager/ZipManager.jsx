@@ -378,13 +378,11 @@ function ZipManager() {
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDown);
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [accentColor]);
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(updateApplication, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <div className={appClassName()}>
