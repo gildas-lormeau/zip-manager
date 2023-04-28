@@ -83,11 +83,11 @@ function getSelectedFolderFeatures({
             droppedEntries.includes(entry)
           );
           highlightSortedEntries(addedChildEntries);
-          refreshSelectedFolder();
         }
       } catch (error) {
         openDisplayError(error.message);
       }
+      refreshSelectedFolder();
     }
 
     async function addFile(entry, parentEntry, addedEntries) {
@@ -167,7 +167,6 @@ function getSelectedFolderFeatures({
             importedEntries.includes(entry)
           );
           highlightSortedEntries(addedChildEntries);
-          refreshSelectedFolder();
         }
       } catch (error) {
         cleanup(importedEntries);
@@ -178,6 +177,7 @@ function getSelectedFolderFeatures({
           (paths && paths.length ? " (" + paths.pop() + ")" : "");
         openDisplayError(message);
       }
+      refreshSelectedFolder();
     }
 
     function cleanup(importedEntries) {
@@ -273,10 +273,10 @@ function getSelectedFolderFeatures({
         setClipboardData({ entries: clones });
       }
       setHighlightedIds(entries.map((entry) => entry.id));
-      refreshSelectedFolder();
     } catch (error) {
       openDisplayError(error.message);
     }
+    refreshSelectedFolder();
   }
 
   function closePromptImportPassword() {
