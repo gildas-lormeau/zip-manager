@@ -21,7 +21,6 @@ function getAppFeatures({
   setSynth,
   getOptions,
   getAppStyleElement,
-  getSynth,
   goIntoFolder,
   openPromptExtract,
   addFiles,

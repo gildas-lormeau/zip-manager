@@ -88,7 +88,6 @@ function ZipManager() {
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
   const getAppStyleElement = () => appStyleRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
-  const getSynth = () => synthRef.current;
   const setSynth = (synth) => (synthRef.current = synth);
   const appClassName = () =>
     constants.APP_CLASSNAME +
@@ -318,7 +317,6 @@ function ZipManager() {
     setSynth,
     getOptions,
     getAppStyleElement,
-    getSynth,
     goIntoFolder,
     openPromptExtract,
     addFiles,
