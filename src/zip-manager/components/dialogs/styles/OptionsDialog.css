@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  height: 1.75em;
+  min-height: 1.75em;
 }
 
 .options-dialog input {
