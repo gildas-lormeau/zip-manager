@@ -10,6 +10,7 @@
   display: inline;
   font-size: 0.9em;
   color: var(--basic-text-color);
+  text-align: center;
 }
 
 .info-bar .icon {
@@ -33,12 +34,12 @@
 
 @media (max-width: 128ch), (display-mode: standalone) {
   .info-bar .source-link {
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 }
 
 @media (max-width: 48ch) {
   .info-bar .source-link {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
 }
