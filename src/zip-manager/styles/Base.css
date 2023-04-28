@@ -158,7 +158,7 @@
   --border-width: 0.05em;
   --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
-  --no-entries-outline-width: 0.5px;
+  --no-entries-outline-width: 1px;
   --font-size: 1em;
   --button-font-size: calc(var(--font-size) * 0.8);
   --font-weight: 400;
