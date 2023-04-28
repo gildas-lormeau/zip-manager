@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  margin-block: var(--gap-width);
+  margin: var(--gap-width);
 }
 
 .info-bar .source-link {
@@ -11,10 +11,27 @@
   font-size: 0.9em;
   color: var(--basic-text-color);
   text-align: center;
+  margin-block-end: var(--small-gap-width);
 }
 
 .info-bar .icon {
+  display: inline-block;
   color: var(--accent-color);
+  width: 1.75ch;
+}
+
+.info-bar .icon-music-player {
+  width: 2.25ch;
+}
+
+.info-bar input[type="color"],
+.info-bar .icon-music-player {
+  cursor: pointer;
+  outline-width: 0;
+}
+
+.icon-music-player.paused {
+  color: inherit;
 }
 
 .info-bar .icon:hover {
@@ -23,7 +40,6 @@
 
 .info-bar input[type="color"] {
   position: relative;
-  cursor: pointer;
   left: -1.75ch;
   margin-right: -1.8ch;
   inline-size: 1.8ch;

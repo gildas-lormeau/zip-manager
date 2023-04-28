@@ -102,11 +102,14 @@ const NO_ENTRIES_LABEL =
 const INFO_LABEL = [
   "Code source sur ",
   "Github",
-  " | Fait avec ",
+  " |",
+  "| Fait avec ",
   "♡",
   " à ",
   "Rennes"
 ];
+const PLAYING_MUSIC_ICON = "▶";
+const PAUSED_MUSIC_ICON = "II";
 
 export {
   ROOT_ZIP_FILENAME,
@@ -197,5 +200,7 @@ export {
   CHOOSE_ACTION_TITLE,
   CHOOSE_ACTION_LABEL,
   NO_ENTRIES_LABEL,
-  INFO_LABEL
+  INFO_LABEL,
+  PLAYING_MUSIC_ICON,
+  PAUSED_MUSIC_ICON
 };

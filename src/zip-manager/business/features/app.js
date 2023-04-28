@@ -18,13 +18,16 @@ function getAppFeatures({
   setSelectedFolderInit,
   getEntriesElementHeight,
   setOptionsDialog,
+  setSynth,
   getOptions,
   getAppStyleElement,
+  getSynth,
   goIntoFolder,
   openPromptExtract,
   addFiles,
   importZipFile,
   refreshSelectedFolder,
+  musicService,
   util,
   constants,
   messages
@@ -160,6 +163,19 @@ function getAppFeatures({
     setOptionsDialog(options);
   }
 
+  function playMusic() {
+    async function playMusic() {
+      setSynth(await musicService.play());
+    }
+
+    playMusic();
+  }
+
+  function stopMusic() {
+    musicService.stop();
+    setSynth(null);
+  }
+
   return {
     initApplication,
     initZipFilesystem,
@@ -172,7 +188,9 @@ function getAppFeatures({
     moveBottomBar,
     saveEntriesHeight,
     updateEntriesHeight,
-    updateEntriesHeightEnd
+    updateEntriesHeightEnd,
+    playMusic,
+    stopMusic
   };
 }
 

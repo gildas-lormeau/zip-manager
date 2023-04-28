@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 import * as util from "./misc/dom-util.js";
 import * as zipService from "./services/zip-service.js";
+import * as musicService from "./services/music-service.js";
 import { getMessages } from "./messages/index.js";
 import { getStorageService } from "./services/storage-service.js";
 
@@ -81,11 +82,14 @@ function ZipManager() {
   const downloaderRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const appStyleRef = useRef(null);
+  const synthRef = useRef(null);
 
   const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
   const getAppStyleElement = () => appStyleRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
+  const getSynth = () => synthRef.current;
+  const setSynth = (synth) => (synthRef.current = synth);
   const appClassName = () =>
     constants.APP_CLASSNAME +
     (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
@@ -288,7 +292,9 @@ function ZipManager() {
     moveBottomBar,
     updateEntriesHeight,
     saveEntriesHeight,
-    updateEntriesHeightEnd
+    updateEntriesHeightEnd,
+    playMusic,
+    stopMusic
   } = getAppFeatures({
     zipFilesystem,
     dialogDisplayed,
@@ -309,13 +315,16 @@ function ZipManager() {
     setSelectedFolderInit,
     getEntriesElementHeight,
     setOptionsDialog,
+    setSynth,
     getOptions,
     getAppStyleElement,
+    getSynth,
     goIntoFolder,
     openPromptExtract,
     addFiles,
     importZipFile,
     refreshSelectedFolder,
+    musicService,
     util,
     constants,
     messages
@@ -475,7 +484,10 @@ function ZipManager() {
       <InfoBar
         hidden={hiddenInfobar}
         accentColor={accentColor}
+        playMusic={playMusic}
+        stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}
+        synthRef={synthRef}
         messages={messages}
       />
       <CreateFolderDialog
