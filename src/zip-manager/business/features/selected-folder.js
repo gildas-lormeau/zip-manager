@@ -57,7 +57,9 @@ function getSelectedFolderFeatures({
       } catch (error) {
         openDisplayError(error.message);
       } finally {
-        highlightSortedEntries(addedEntries);
+        if (addedEntries.length) {
+          highlightSortedEntries(addedEntries);
+        }
         refreshSelectedFolder();
       }
     }
@@ -82,10 +84,12 @@ function getSelectedFolderFeatures({
       } catch (error) {
         openDisplayError(error.message);
       } finally {
-        const addedChildEntries = selectedFolder.children.filter((entry) =>
+        const addedEntries = selectedFolder.children.filter((entry) =>
           droppedEntries.includes(entry)
         );
-        highlightSortedEntries(addedChildEntries);
+        if (addedEntries.length) {
+          highlightSortedEntries(addedEntries);
+        }
         refreshSelectedFolder();
       }
     }
@@ -136,7 +140,8 @@ function getSelectedFolderFeatures({
 
   function importZipFile(zipFile, options = {}) {
     async function updateZipFile() {
-      let importedEntries = [];
+      let importedEntries = [],
+        addedEntries = [];
       try {
         const importedEntries = await selectedFolder.importBlob(
           zipFile,
@@ -162,11 +167,6 @@ function getSelectedFolderFeatures({
             )
           ).includes(false);
           importZipFile(zipFile, isValidPassword ? { password } : {});
-        } else {
-          const addedChildEntries = selectedFolder.children.filter((entry) =>
-            importedEntries.includes(entry)
-          );
-          highlightSortedEntries(addedChildEntries);
         }
       } catch (error) {
         cleanup(importedEntries);
@@ -177,6 +177,12 @@ function getSelectedFolderFeatures({
           (paths && paths.length ? " (" + paths.pop() + ")" : "");
         openDisplayError(message);
       } finally {
+        addedEntries = selectedFolder.children.filter((entry) =>
+          importedEntries.includes(entry)
+        );
+        if (addedEntries.length) {
+          highlightSortedEntries(addedEntries);
+        }
         refreshSelectedFolder();
       }
     }
@@ -279,7 +285,9 @@ function getSelectedFolderFeatures({
     } catch (error) {
       openDisplayError(error.message);
     } finally {
-      setHighlightedIds(pastedEntries.map((entry) => entry.id));
+      if (pastedEntries.length) {
+        setHighlightedIds(pastedEntries.map((entry) => entry.id));
+      }
       refreshSelectedFolder();
     }
   }
