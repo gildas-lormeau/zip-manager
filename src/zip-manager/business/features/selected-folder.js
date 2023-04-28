@@ -56,11 +56,10 @@ function getSelectedFolderFeatures({
         });
       } catch (error) {
         openDisplayError(error.message);
-      }
-      if (addedEntries.length) {
+      } finally {
         highlightSortedEntries(addedEntries);
+        refreshSelectedFolder();
       }
-      refreshSelectedFolder();
     }
   }
 
@@ -79,15 +78,16 @@ function getSelectedFolderFeatures({
               addFile(handle, selectedFolder, droppedEntries)
             )
           );
-          const addedChildEntries = selectedFolder.children.filter((entry) =>
-            droppedEntries.includes(entry)
-          );
-          highlightSortedEntries(addedChildEntries);
         }
       } catch (error) {
         openDisplayError(error.message);
+      } finally {
+        const addedChildEntries = selectedFolder.children.filter((entry) =>
+          droppedEntries.includes(entry)
+        );
+        highlightSortedEntries(addedChildEntries);
+        refreshSelectedFolder();
       }
-      refreshSelectedFolder();
     }
 
     async function addFile(entry, parentEntry, addedEntries) {
@@ -176,8 +176,9 @@ function getSelectedFolderFeatures({
           error.message +
           (paths && paths.length ? " (" + paths.pop() + ")" : "");
         openDisplayError(message);
+      } finally {
+        refreshSelectedFolder();
       }
-      refreshSelectedFolder();
     }
 
     function cleanup(importedEntries) {
@@ -248,12 +249,14 @@ function getSelectedFolderFeatures({
   }
 
   function paste() {
+    let pastedEntries = [];
     try {
       const { entries, cut } = clipboardData;
       if (cut) {
         entries.forEach((entry) => {
           try {
             zipFilesystem.move(entry, selectedFolder);
+            pastedEntries.push(entry);
           } catch (error) {
             const message = error.message + (" (" + entry.name + ")");
             throw new Error(message);
@@ -264,6 +267,7 @@ function getSelectedFolderFeatures({
           let clone = entry.clone(true);
           try {
             zipFilesystem.move(entry, selectedFolder);
+            pastedEntries.push(entry);
           } catch (error) {
             const message = error.message + (" (" + entry.name + ")");
             throw new Error(message);
@@ -272,11 +276,12 @@ function getSelectedFolderFeatures({
         });
         setClipboardData({ entries: clones });
       }
-      setHighlightedIds(entries.map((entry) => entry.id));
     } catch (error) {
       openDisplayError(error.message);
+    } finally {
+      setHighlightedIds(pastedEntries.map((entry) => entry.id));
+      refreshSelectedFolder();
     }
-    refreshSelectedFolder();
   }
 
   function closePromptImportPassword() {
