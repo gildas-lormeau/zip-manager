@@ -71,7 +71,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 2em;
-    line-height: 1em;
+    line-height: 1.5em;
     text-shadow: var(--no-entries-outline-width-negative)
         var(--no-entries-outline-width-negative) 0 var(--accent-color),
       var(--no-entries-outline-width-negative) 0 0 var(--accent-color),
