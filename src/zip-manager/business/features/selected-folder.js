@@ -75,11 +75,17 @@ function getSelectedFolderFeatures({
           handles.length === 1 &&
           handleZipFile([await firstHandle.getFile()], dropFiles, options);
         if (!dropFilesPrevented) {
-          await Promise.all(
+          const results = await Promise.allSettled(
             handles.map((handle) =>
               addFile(handle, selectedFolder, droppedEntries)
             )
           );
+          const errorResult = results.find(
+            (result) => result.status === "rejected"
+          );
+          if (errorResult) {
+            throw errorResult.reason;
+          }
         }
       } catch (error) {
         openDisplayError(error.message);
