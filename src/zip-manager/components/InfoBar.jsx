@@ -71,7 +71,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
       colorInputRef.current.value = accentColor;
     }
   }, [accentColor]);
-
   return (
     <>
       <span className="icon">{children}</span>
