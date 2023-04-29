@@ -31,7 +31,7 @@ function Dialog({
       }
       dialogRef.current.showModal();
     }
-  }, [data, onOpen]);
+  }, [data]);
   return (
     <dialog className={className} ref={dialogRef} onClose={onClose}>
       <form method="dialog" onSubmit={onSubmit} onReset={handleReset}>
