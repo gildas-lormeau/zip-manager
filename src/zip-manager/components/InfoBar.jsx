@@ -12,8 +12,6 @@ function InfoBar({
   synthRef,
   messages
 }) {
-  const audioContextRef = useRef(null);
-
   if (hidden) {
     return;
   } else {
@@ -54,7 +52,6 @@ function InfoBar({
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
             synthRef={synthRef}
-            audioContextRef={audioContextRef}
           />
         </div>
       </footer>
@@ -113,13 +110,9 @@ function MusicPlayerButton({ playMusic, stopMusic, synthRef, messages }) {
   );
 }
 
-function MusicVisualizer({
-  musicFrequencyData,
-  accentColor,
-  synthRef,
-  audioContextRef
-}) {
+function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
   const canvasRef = useRef(null);
+  const audioContextRef = useRef(null);
   if (canvasRef.current) {
     if (!audioContextRef.current) {
       audioContextRef.current = canvasRef.current.getContext("2d");
