@@ -129,7 +129,7 @@ function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
   function setColor() {
     const context = audioContextRef.current;
     const gradient = context.createLinearGradient(0, 0, 0, 256);
-    gradient.addColorStop(0.75, accentColor);
+    gradient.addColorStop(0.8, accentColor);
     gradient.addColorStop(1, "transparent");
     context.fillStyle = gradient;
   }
