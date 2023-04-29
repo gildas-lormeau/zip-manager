@@ -57,7 +57,7 @@
   z-index: -1;
   width: 115%;
   height: 200%;
-  opacity: 0.15;
+  opacity: 0.2;
 }
 
 @media (max-width: 128ch), (display-mode: standalone) {

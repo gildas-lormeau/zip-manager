@@ -122,12 +122,8 @@ function MusicVisualizer({
   const canvasRef = useRef(null);
   if (canvasRef.current) {
     if (!audioContextRef.current) {
-      const context = (audioContextRef.current =
-        canvasRef.current.getContext("2d"));
-      const gradient = context.createLinearGradient(0, 0, 0, 256);
-      gradient.addColorStop(0.75, accentColor);
-      gradient.addColorStop(1, "transparent");
-      context.fillStyle = gradient;
+      audioContextRef.current = canvasRef.current.getContext("2d");
+      setColor();
     }
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
@@ -137,6 +133,20 @@ function MusicVisualizer({
       });
     }
   }
+
+  function setColor() {
+    const context = audioContextRef.current;
+    const gradient = context.createLinearGradient(0, 0, 0, 256);
+    gradient.addColorStop(0.75, accentColor);
+    gradient.addColorStop(1, "transparent");
+    context.fillStyle = gradient;
+  }
+
+  useEffect(() => {
+    if (audioContextRef.current) {
+      setColor();
+    }
+  }, [accentColor]);
   return <canvas ref={canvasRef} width={256} height={256}></canvas>;
 }
 
