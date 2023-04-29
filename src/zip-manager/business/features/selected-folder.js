@@ -223,18 +223,18 @@ function getSelectedFolderFeatures({
     const options = getOptions();
     const password = options.defaultExportPassword;
     if (!util.savePickersSupported() || options.promptForExportPassword) {
-      setExportZipDialog(() => ({
+      setExportZipDialog({
         filename,
         filenameHidden: util.savePickersSupported(),
         password
-      }));
+      });
     } else {
       exportZip({ filename, password });
     }
   }
 
   function closePromptExportZip() {
-    setExportZipDialog(() => null);
+    setExportZipDialog(null);
   }
 
   function exportZip({ filename, password }) {
