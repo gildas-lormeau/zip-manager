@@ -48,7 +48,7 @@ async function init() {
   ]);
   analyser = synth.actx.createAnalyser();
   synth.out.connect(analyser);
-  analyser.fftSize = 1024;
+  analyser.fftSize = 512;
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
