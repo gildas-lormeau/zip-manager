@@ -77,6 +77,7 @@ function ZipManager() {
   const [optionsDialog, setOptionsDialog] = useState(null);
   const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
+  const [musicFrequencyData, setMusicFrequencyData] = useState([]);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -312,6 +313,7 @@ function ZipManager() {
     setEntriesHeight,
     setEntriesDeltaHeight,
     setSelectedFolderInit,
+    setMusicFrequencyData,
     getEntriesElementHeight,
     setOptionsDialog,
     setSynth,
@@ -482,6 +484,7 @@ function ZipManager() {
       <InfoBar
         hidden={hiddenInfobar}
         accentColor={accentColor}
+        musicFrequencyData={musicFrequencyData}
         playMusic={playMusic}
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}

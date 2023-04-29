@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0;
-  margin: var(--gap-width);
+  padding: var(--gap-width);
+  width: 100%;
+  overflow: hidden;
 }
 
 .info-bar .source-link {
@@ -11,7 +12,8 @@
   font-size: 0.9em;
   color: var(--basic-text-color);
   text-align: center;
-  margin-block-end: var(--small-gap-width);
+  position: relative;
+  overflow: visible;
 }
 
 .info-bar .icon {
@@ -46,6 +48,16 @@
   block-size: 1.25em;
   padding: 0;
   filter: opacity(0);
+}
+
+.info-bar canvas {
+  position: absolute;
+  bottom: calc(var(--gap-width) * -1.5);
+  left: -7.5%;
+  z-index: -1;
+  width: 115%;
+  height: 200%;
+  opacity: 0.15;
 }
 
 @media (max-width: 128ch), (display-mode: standalone) {

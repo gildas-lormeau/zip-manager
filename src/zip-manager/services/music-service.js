@@ -1,10 +1,10 @@
-/* global fetch, document */
+/* global fetch, document, requestAnimationFrame */
 
 import WebAudioTinySynth from "./webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
 
 const PATH_MIDI_FILE = "./assets/music/bg.mid";
 
-let synth, playing;
+let synth, playing, analyser, byteFrequencyData;
 
 async function init() {
   synth = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
@@ -46,15 +46,30 @@ async function init() {
     { w: "sine", v: 0.3, a: 0.05, d: 1, s: 0.3, r: 0.1 },
     { w: "sine", v: 0.1, t: 2.001, f: 1, d: 1, s: 50, g: 1 }
   ]);
+  analyser = synth.actx.createAnalyser();
+  synth.out.connect(analyser);
+  analyser.fftSize = 1024;
+  byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play() {
+async function play(callbackFrequencyData) {
   if (!synth) {
     await init();
   }
+  requestAnimationFrame(getByteFrequencyData);
   synth.playMIDI();
   playing = true;
   return synth;
+
+  function getByteFrequencyData() {
+    analyser.getByteFrequencyData(byteFrequencyData);
+    if (callbackFrequencyData) {
+      callbackFrequencyData(Array.from(byteFrequencyData));
+    }
+    if (playing && !document.hidden) {
+      requestAnimationFrame(getByteFrequencyData);
+    }
+  }
 }
 
 function stop() {

@@ -5,12 +5,15 @@ import { useEffect, useRef, useState } from "react";
 function InfoBar({
   hidden,
   accentColor,
+  musicFrequencyData,
   playMusic,
   stopMusic,
   onSetAccentColor,
   synthRef,
   messages
 }) {
+  const audioContextRef = useRef(null);
+
   if (hidden) {
     return;
   } else {
@@ -47,6 +50,12 @@ function InfoBar({
           >
             {messages.INFO_LABEL[6]}
           </a>
+          <MusicVisualizer
+            musicFrequencyData={musicFrequencyData}
+            accentColor={accentColor}
+            synthRef={synthRef}
+            audioContextRef={audioContextRef}
+          />
         </div>
       </footer>
     );
@@ -102,6 +111,33 @@ function MusicPlayerButton({ playMusic, stopMusic, synthRef, messages }) {
       {iconPlayer}
     </span>
   );
+}
+
+function MusicVisualizer({
+  musicFrequencyData,
+  accentColor,
+  synthRef,
+  audioContextRef
+}) {
+  const canvasRef = useRef(null);
+  if (canvasRef.current) {
+    if (!audioContextRef.current) {
+      const context = (audioContextRef.current =
+        canvasRef.current.getContext("2d"));
+      const gradient = context.createLinearGradient(0, 0, 0, 256);
+      gradient.addColorStop(0.75, accentColor);
+      gradient.addColorStop(1, "transparent");
+      context.fillStyle = gradient;
+    }
+    const context = audioContextRef.current;
+    context.clearRect(0, 0, 256, 256);
+    if (synthRef.current) {
+      musicFrequencyData.forEach((byteTimeDomain, index) => {
+        context.fillRect(index, 255, index + 1, 32 - byteTimeDomain);
+      });
+    }
+  }
+  return <canvas ref={canvasRef} width={256} height={256}></canvas>;
 }
 
 export default InfoBar;

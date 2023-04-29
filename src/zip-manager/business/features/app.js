@@ -16,6 +16,7 @@ function getAppFeatures({
   setEntriesHeight,
   setEntriesDeltaHeight,
   setSelectedFolderInit,
+  setMusicFrequencyData,
   getEntriesElementHeight,
   setOptionsDialog,
   setSynth,
@@ -164,7 +165,7 @@ function getAppFeatures({
 
   function playMusic() {
     async function playMusic() {
-      setSynth(await musicService.play());
+      setSynth(await musicService.play(setMusicFrequencyData));
     }
 
     playMusic();
