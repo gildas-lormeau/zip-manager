@@ -151,7 +151,7 @@ function getDefaultMaxWorkers() {
   return navigator.hardwareConcurrency;
 }
 
-async function showOpenFilePicker({ multiple, description, accept }) {
+async function showOpenFilePicker({ multiple, description, accept } = {}) {
   const excludeAcceptAllOption = Boolean(accept);
   try {
     const options = {

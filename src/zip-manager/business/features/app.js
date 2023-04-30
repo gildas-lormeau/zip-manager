@@ -165,7 +165,23 @@ function getAppFeatures({
 
   function playMusic() {
     async function playMusic() {
-      setSynth(await musicService.play(setMusicFrequencyData));
+      const options = getOptions();
+      const { musicData } = options;
+      let data, defaultIntruments;
+      if (musicData) {
+        defaultIntruments = true;
+        data = new Uint8Array(musicData).buffer;
+      } else {
+        defaultIntruments = false;
+        data = await (await util.fetch(constants.PATH_MIDI_FILE)).arrayBuffer();
+      }
+      setSynth(
+        await musicService.play({
+          data,
+          defaultIntruments,
+          onSetFrequencyData: setMusicFrequencyData
+        })
+      );
     }
 
     playMusic();
@@ -174,6 +190,23 @@ function getAppFeatures({
   function stopMusic() {
     musicService.stop();
     setSynth(null);
+  }
+
+  function setMusicFile(file) {
+    async function setMusicFile() {
+      if (
+        file.name.endsWith(constants.MIDI_FILE_EXTESION) ||
+        file.type === constants.MIDI_CONTENT_TYPE
+      ) {
+        const arrayBuffer = await file.arrayBuffer();
+        const data = Array.from(new Uint8Array(arrayBuffer));
+        const options = getOptions();
+        options.musicData = data;
+        setOptions(options);
+      }
+    }
+
+    setMusicFile();
   }
 
   return {
@@ -190,7 +223,8 @@ function getAppFeatures({
     updateEntriesHeight,
     updateEntriesHeightEnd,
     playMusic,
-    stopMusic
+    stopMusic,
+    setMusicFile
   };
 }
 

@@ -294,7 +294,8 @@ function ZipManager() {
     saveEntriesHeight,
     updateEntriesHeightEnd,
     playMusic,
-    stopMusic
+    stopMusic,
+    setMusicFile
   } = getAppFeatures({
     zipFilesystem,
     dialogDisplayed,
@@ -488,7 +489,9 @@ function ZipManager() {
         playMusic={playMusic}
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}
+        onSetMusicFile={setMusicFile}
         synthRef={synthRef}
+        util={util}
         messages={messages}
       />
       <CreateFolderDialog

@@ -9,7 +9,9 @@ function InfoBar({
   playMusic,
   stopMusic,
   onSetAccentColor,
+  onSetMusicFile,
   synthRef,
+  util,
   messages
 }) {
   if (hidden) {
@@ -30,7 +32,9 @@ function InfoBar({
           <MusicPlayerButton
             playMusic={playMusic}
             stopMusic={stopMusic}
+            onSetMusicFile={onSetMusicFile}
             synthRef={synthRef}
+            util={util}
             messages={messages}
           />
           {messages.INFO_LABEL[3]}
@@ -51,6 +55,7 @@ function InfoBar({
           <MusicVisualizer
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
+            onSetMusicFile={onSetMusicFile}
             synthRef={synthRef}
           />
         </div>
@@ -84,11 +89,19 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
   );
 }
 
-function MusicPlayerButton({ playMusic, stopMusic, synthRef, messages }) {
+function MusicPlayerButton({
+  playMusic,
+  stopMusic,
+  onSetMusicFile,
+  synthRef,
+  util,
+  messages
+}) {
   const ICON_CLASSNAME = "icon icon-music-player";
   const PAUSED_CLASSNAME = " paused";
   const [iconPlayer, setIconPlayer] = useState(messages.PAUSED_MUSIC_ICON);
   const [className, setClassName] = useState(ICON_CLASSNAME + PAUSED_CLASSNAME);
+  const fileInputRef = useRef(null);
 
   function handlePlayButtonClick() {
     if (synthRef.current) {
@@ -102,10 +115,59 @@ function MusicPlayerButton({ playMusic, stopMusic, synthRef, messages }) {
     }
   }
 
+  function handleDragOver(event) {
+    event.preventDefault();
+  }
+
+  function handleDragLeave(event) {
+    event.preventDefault();
+  }
+
+  async function handleDrop(event) {
+    if (event.dataTransfer.items) {
+      event.preventDefault();
+      const items = Array.from(event.dataTransfer.items);
+      onSetMusicFile(
+        await (await util.getFilesystemHandles(items))[0].getFile()
+      );
+    }
+  }
+
+  function handleChange({ target }) {
+    const files = Array.from(target.files);
+    if (files.length) {
+      onSetMusicFile(files[0]);
+    }
+  }
+
+  function handleClick() {
+    async function showOpenFilePicker() {
+      if (util.openFilePickerSupported()) {
+        const files = await util.showOpenFilePicker();
+        onSetMusicFile(files[0]);
+      } else {
+        util.dispatchClick(fileInputRef.current);
+      }
+    }
+
+    showOpenFilePicker();
+  }
+
   return (
-    <span className={className} onClick={handlePlayButtonClick} tabIndex={0}>
-      {iconPlayer}
-    </span>
+    <>
+      <span
+        className={className}
+        onClick={handlePlayButtonClick}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onDoubleClick={handleClick}
+        tabIndex={0}
+      >
+        {iconPlayer}
+      </span>
+      <input onChange={handleChange} ref={fileInputRef} type="file" hidden />
+    </>
   );
 }
 
