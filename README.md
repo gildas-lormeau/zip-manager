@@ -12,6 +12,7 @@ See https://gildas-lormeau.github.io/zip-manager/
  - drag and drop files/directories from filesystem (on desktop)
  - integration in the "Open with..." menu on desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
  - integration with the "Share" feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
+ - customizable accent color
  - integrated MIDI music player and visualizer
 
 ## Screenshots 
