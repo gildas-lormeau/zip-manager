@@ -78,6 +78,7 @@ function ZipManager() {
   const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
+  const [musicTrackIndex, setMusicTrackIndex] = useState(0);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
@@ -301,6 +302,7 @@ function ZipManager() {
     dialogDisplayed,
     entriesHeight,
     entriesDeltaHeight,
+    musicTrackIndex,
     selectedFolderInit,
     setPreviousHighlight,
     setToggleNavigationDirection,
@@ -315,6 +317,7 @@ function ZipManager() {
     setEntriesDeltaHeight,
     setSelectedFolderInit,
     setMusicFrequencyData,
+    setMusicTrackIndex,
     getEntriesElementHeight,
     setOptionsDialog,
     setSynth,

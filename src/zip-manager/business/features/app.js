@@ -3,6 +3,7 @@ function getAppFeatures({
   dialogDisplayed,
   entriesHeight,
   entriesDeltaHeight,
+  musicTrackIndex,
   selectedFolderInit,
   setPreviousHighlight,
   setToggleNavigationDirection,
@@ -17,6 +18,7 @@ function getAppFeatures({
   setEntriesDeltaHeight,
   setSelectedFolderInit,
   setMusicFrequencyData,
+  setMusicTrackIndex,
   getEntriesElementHeight,
   setOptionsDialog,
   setSynth,
@@ -167,18 +169,15 @@ function getAppFeatures({
     async function playMusic() {
       const options = getOptions();
       const { musicData } = options;
-      let data, defaultIntruments;
+      let data;
       if (musicData) {
-        defaultIntruments = true;
         data = new Uint8Array(musicData).buffer;
       } else {
-        defaultIntruments = false;
-        data = await (await util.fetch(constants.PATH_MIDI_FILE)).arrayBuffer();
+        data = await (await util.fetch(constants.PATH_MIDI_FILES[musicTrackIndex])).arrayBuffer();
       }
       setSynth(
         await musicService.play({
           data,
-          defaultIntruments,
           onSetFrequencyData: setMusicFrequencyData
         })
       );
@@ -189,6 +188,7 @@ function getAppFeatures({
 
   function stopMusic() {
     musicService.stop();
+    setMusicTrackIndex((musicTrackIndex + 1) % constants.PATH_MIDI_FILES.length);
     setSynth(null);
   }
 

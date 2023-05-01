@@ -109,7 +109,11 @@ const APP_CLASSNAME = "main-container";
 const INFOBAR_HIDDEN_CLASSNAME = "hidden-footer";
 const DOWNLOAD_MANAGER_HIDDEN_CLASSNAME = "hidden-downloads";
 const APP_LOADING_ATTRIBUTE_NAME = "app-loading";
-const PATH_MIDI_FILE = "./assets/music/bg.mid";
+const PATH_MIDI_FILES = [
+  "./assets/music/track1.mid",
+  "./assets/music/track2.mid",
+  "./assets/music/track3.mid"
+];
 const MIDI_CONTENT_TYPE = "audio/midi";
 const MIDI_FILE_EXTESION = ".mid";
 
@@ -173,7 +177,7 @@ export {
   INFOBAR_HIDDEN_CLASSNAME,
   DOWNLOAD_MANAGER_HIDDEN_CLASSNAME,
   APP_LOADING_ATTRIBUTE_NAME,
-  PATH_MIDI_FILE,
+  PATH_MIDI_FILES,
   MIDI_CONTENT_TYPE,
   MIDI_FILE_EXTESION
 };
