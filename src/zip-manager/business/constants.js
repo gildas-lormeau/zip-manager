@@ -109,11 +109,12 @@ const APP_CLASSNAME = "main-container";
 const INFOBAR_HIDDEN_CLASSNAME = "hidden-footer";
 const DOWNLOAD_MANAGER_HIDDEN_CLASSNAME = "hidden-downloads";
 const APP_LOADING_ATTRIBUTE_NAME = "app-loading";
-const PATH_MIDI_FILES = [
-  "./assets/music/track1.mid",
-  "./assets/music/track2.mid",
-  "./assets/music/track3.mid"
-];
+const MIDI_TRACK_PATH_PREFIX = "music-track-";
+const MIDI_TRACK_RELATIVE_PATH_PREFIX =
+  CURRENT_PATH + "/" + MIDI_TRACK_PATH_PREFIX;
+const MIDI_TRACK_PATH_REGEXP = new RegExp(MIDI_TRACK_PATH_PREFIX + ".*");
+const MIDI_TRACKS_PATH = "./assets/music/tracks.zip";
+const MIDI_TRACKS = 3;
 const MIDI_CONTENT_TYPE = "audio/midi";
 const MIDI_FILE_EXTENSION = ".mid";
 
@@ -177,7 +178,10 @@ export {
   INFOBAR_HIDDEN_CLASSNAME,
   DOWNLOAD_MANAGER_HIDDEN_CLASSNAME,
   APP_LOADING_ATTRIBUTE_NAME,
-  PATH_MIDI_FILES,
+  MIDI_TRACK_PATH_REGEXP,
+  MIDI_TRACK_RELATIVE_PATH_PREFIX,
+  MIDI_TRACKS_PATH,
+  MIDI_TRACKS,
   MIDI_CONTENT_TYPE,
   MIDI_FILE_EXTENSION
 };

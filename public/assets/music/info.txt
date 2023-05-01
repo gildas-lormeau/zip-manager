@@ -1,4 +1,0 @@
-Sources: 
-- track 1: https://www.khinsider.com/midi/arcade/the-ninja-warriors
-- track 2: https://www.vgmusic.com/music/computer/commodore/amiga/#Xenophobe
-- track 3: https://www.khinsider.com/midi/amiga/logical

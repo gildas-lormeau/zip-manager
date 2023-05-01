@@ -8,8 +8,11 @@ import {
   MAINPAGE_REDIRECT_PATH,
   SHARED_FILES_RELATIVE_PATH,
   SHARED_FILES_CACHE_ID,
-  SHARED_FILES_FORM_PATH
+  SHARED_FILES_FORM_PATH,
+  MIDI_TRACKS_PATH,
+  MIDI_TRACK_PATH_REGEXP
 } from "./zip-manager/business/constants.js";
+importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 
 clientsClaim();
 cleanupOutdatedCaches();
@@ -18,6 +21,7 @@ self.skipWaiting();
 
 registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, "GET");
 registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, "POST");
+registerRoute(MIDI_TRACK_PATH_REGEXP, getMusicTrack, "GET");
 
 async function setSharedFiles({ event }) {
   const formData = await event.request.formData();
@@ -40,4 +44,14 @@ async function getSharedFilesResponse() {
     await cache.delete(SHARED_FILES_FORM_PATH);
     return response;
   }
+}
+
+async function getMusicTrack({ event }) {
+  const zipReader = new zip.ZipReader((await fetch(MIDI_TRACKS_PATH)).body);
+  const entries = await zipReader.getEntries();
+  const fileEntryIndex = Number(event.request.url.match(/\d+$/)[0]);
+  const fileEntry = entries[fileEntryIndex];
+  const data = await fileEntry.getData(new zip.BlobWriter());
+  await zipReader.close();
+  return new Response(data);
 }

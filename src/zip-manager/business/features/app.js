@@ -173,7 +173,11 @@ function getAppFeatures({
       if (musicData) {
         data = new Uint8Array(musicData).buffer;
       } else {
-        data = await (await util.fetch(constants.PATH_MIDI_FILES[musicTrackIndex])).arrayBuffer();
+        data = await (
+          await util.fetch(
+            constants.MIDI_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+          )
+        ).arrayBuffer();
       }
       setSynth(
         await musicService.play({
@@ -188,7 +192,7 @@ function getAppFeatures({
 
   function stopMusic() {
     musicService.stop();
-    setMusicTrackIndex((musicTrackIndex + 1) % constants.PATH_MIDI_FILES.length);
+    setMusicTrackIndex((musicTrackIndex + 1) % constants.MIDI_TRACKS);
     setSynth(null);
   }
 
