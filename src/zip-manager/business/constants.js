@@ -115,7 +115,7 @@ const PATH_MIDI_FILES = [
   "./assets/music/track3.mid"
 ];
 const MIDI_CONTENT_TYPE = "audio/midi";
-const MIDI_FILE_EXTESION = ".mid";
+const MIDI_FILE_EXTENSION = ".mid";
 
 export {
   ACTION_KEY,
@@ -179,5 +179,5 @@ export {
   APP_LOADING_ATTRIBUTE_NAME,
   PATH_MIDI_FILES,
   MIDI_CONTENT_TYPE,
-  MIDI_FILE_EXTESION
+  MIDI_FILE_EXTENSION
 };

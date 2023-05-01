@@ -195,7 +195,7 @@ function getAppFeatures({
   function setMusicFile(file) {
     async function setMusicFile() {
       if (
-        file.name.endsWith(constants.MIDI_FILE_EXTESION) ||
+        file.name.endsWith(constants.MIDI_FILE_EXTENSION) ||
         file.type === constants.MIDI_CONTENT_TYPE
       ) {
         const arrayBuffer = await file.arrayBuffer();
