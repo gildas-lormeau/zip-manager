@@ -4,11 +4,16 @@ import WebAudioTinySynth from "./webaudio-tinysynth/webaudio-tinysynth-core-es6.
 
 let synth, playing, analyser, byteFrequencyData;
 
-synth = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
-synth.setLoop(true);
-synth.setMasterVol(0.1);
+function createSynth() {
+  synth = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
+  synth.setLoop(true);
+  synth.setMasterVol(0.1);
+}
 
 async function init({ data }) {
+  if (!createSynth()) {
+    createSynth();
+  }
   synth.loadMIDI(data);
   synth.setTimbre(1, 49, [
     { w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.1, h: 0.05, t: 0, p: 0.1 }
