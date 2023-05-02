@@ -144,7 +144,9 @@ function MusicPlayerButton({
     async function showOpenFilePicker() {
       if (util.openFilePickerSupported()) {
         const files = await util.showOpenFilePicker();
-        onSetMusicFile(files[0]);
+        if (files.length) {
+          onSetMusicFile(files[0]);
+        }
       } else {
         util.dispatchClick(fileInputRef.current);
       }
