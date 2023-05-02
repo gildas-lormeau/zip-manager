@@ -10,7 +10,8 @@ import {
   SHARED_FILES_CACHE_ID,
   SHARED_FILES_FORM_PATH,
   MIDI_TRACKS_PATH,
-  MIDI_TRACK_PATH_REGEXP
+  MIDI_TRACK_PATH_REGEXP,
+  MIDI_CONTENT_TYPE
 } from "./zip-manager/business/constants.js";
 importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 
@@ -51,7 +52,7 @@ async function getMusicTrack({ event }) {
   const entries = await zipReader.getEntries();
   const fileEntryIndex = Number(event.request.url.match(/\d+$/)[0]);
   const fileEntry = entries[fileEntryIndex];
-  const data = await fileEntry.getData(new zip.BlobWriter());
+  const data = await fileEntry.getData(new zip.BlobWriter(MIDI_CONTENT_TYPE));
   await zipReader.close();
   return new Response(data);
 }
