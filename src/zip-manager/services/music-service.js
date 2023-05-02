@@ -65,7 +65,6 @@ function stop() {
 }
 
 document.onvisibilitychange = () => {
-  console.log(playing, document.hidden);
   if (playing) {
     if (document.hidden) {
       synth.stopMIDI();
