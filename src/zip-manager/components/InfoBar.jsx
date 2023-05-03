@@ -140,21 +140,6 @@ function MusicPlayerButton({
     }
   }
 
-  function handleClick() {
-    async function showOpenFilePicker() {
-      if (util.openFilePickerSupported()) {
-        const files = await util.showOpenFilePicker();
-        if (files.length) {
-          onSetMusicFile(files[0]);
-        }
-      } else {
-        util.dispatchClick(fileInputRef.current);
-      }
-    }
-
-    showOpenFilePicker();
-  }
-
   return (
     <>
       <span
