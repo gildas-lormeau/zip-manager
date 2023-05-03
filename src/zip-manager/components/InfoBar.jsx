@@ -19,39 +19,50 @@ function InfoBar({
   } else {
     return (
       <footer className="info-bar">
-        <div className="source-link">
-          {messages.INFO_LABEL[0]}
-          <a
-            href="https://github.com/gildas-lormeau/zip-manager"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {messages.INFO_LABEL[1]}
-          </a>
-          {messages.INFO_LABEL[2]}
-          <MusicPlayerButton
-            playMusic={playMusic}
-            stopMusic={stopMusic}
-            onSetMusicFile={onSetMusicFile}
-            synthRef={synthRef}
-            util={util}
-            messages={messages}
-          />
-          {messages.INFO_LABEL[3]}
-          <AccentColorPickerButton
-            accentColor={accentColor}
-            onSetAccentColor={onSetAccentColor}
-          >
-            {messages.INFO_LABEL[4]}
-          </AccentColorPickerButton>
-          {messages.INFO_LABEL[5]}
-          <a
-            href="https://en.wikipedia.org/wiki/Rennes"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {messages.INFO_LABEL[6]}
-          </a>
+        <div
+          className={
+            "source-link" +
+            (synthRef && synthRef.current ? " player-active" : "")
+          }
+        >
+          <span className="label">
+            {messages.INFO_LABEL[0]}
+            <a
+              href="https://github.com/gildas-lormeau/zip-manager"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {messages.INFO_LABEL[1]}
+            </a>
+            {messages.INFO_LABEL[2]}
+          </span>
+          <span>
+            <MusicPlayerButton
+              playMusic={playMusic}
+              stopMusic={stopMusic}
+              onSetMusicFile={onSetMusicFile}
+              synthRef={synthRef}
+              util={util}
+              messages={messages}
+            />
+          </span>
+          <span className="label">
+            {messages.INFO_LABEL[3]}
+            <AccentColorPickerButton
+              accentColor={accentColor}
+              onSetAccentColor={onSetAccentColor}
+            >
+              {messages.INFO_LABEL[4]}
+            </AccentColorPickerButton>
+            {messages.INFO_LABEL[5]}
+            <a
+              href="https://en.wikipedia.org/wiki/Rennes"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {messages.INFO_LABEL[6]}
+            </a>
+          </span>
           <MusicVisualizer
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
@@ -177,7 +188,7 @@ function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
   function setColor() {
     const context = audioContextRef.current;
     const gradient = context.createLinearGradient(0, 0, 0, 256);
-    gradient.addColorStop(0.8, accentColor);
+    gradient.addColorStop(0.6, accentColor);
     gradient.addColorStop(1, "transparent");
     context.fillStyle = gradient;
   }
