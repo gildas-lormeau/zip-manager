@@ -27,7 +27,7 @@ var dependenciesFulfilled = function runCaller() {
   if (!calledRun) run();
   if (!calledRun) dependenciesFulfilled = runCaller;
 };
-var wasmBinaryFile = locateFile("/assets/lib/libxm.wasm");
+var wasmBinaryFile = locateFile("./assets/lib/libxm.wasm");
 var asmLibraryArg = {
   b: _emscripten_memcpy_big,
   c: _emscripten_resize_heap,
