@@ -1250,7 +1250,7 @@ function WebAudioTinySynthCore(target) {
           that.relcnt = 0;
           for (let i = that.notetab.length - 1; i >= 0; --i) {
             const nt = that.notetab[i];
-            if (that.actx.currentTime > nt.e) {
+            if (that.audioContext.currentTime > nt.e) {
               that._pruneNote(nt);
               that.notetab.splice(i, 1);
             }
@@ -1258,7 +1258,7 @@ function WebAudioTinySynthCore(target) {
         }
         if (that.playing && that.song.ev.length > 0) {
           let e = that.song.ev[that.playIndex];
-          while (that.actx.currentTime + that.preroll > that.playTime) {
+          while (that.audioContext.currentTime + that.preroll > that.playTime) {
             if (e.m[0] == 0xff51) {
               that.song.tempo = e.m[1];
               that.tick2Time = (4 * 60) / that.song.tempo / that.song.timebase;
@@ -1320,7 +1320,7 @@ function WebAudioTinySynthCore(target) {
       const that = this;
       let i,
         p = that.playing;
-      that.stopMIDI();
+      that.pause();
       for (i = 0; i < that.song.ev.length && tick > that.song.ev[i].t; ++i) {
         const m = that.song.ev[i];
         const ch = m.m[0] & 0xf;
@@ -1382,28 +1382,28 @@ function WebAudioTinySynthCore(target) {
       that.masterTuningF = 0;
       that.rhythm[9] = 1;
     },
-    stopMIDI: () => {
+    pause: () => {
       const that = this;
       that.playing = 0;
       for (let i = 0; i < 16; ++i) {
         that.allSoundOff(i);
       }
     },
-    playMIDI: () => {
+    resume: () => {
       const that = this;
       if (!that.song) return;
-      const dummy = that.actx.createOscillator();
-      dummy.connect(that.actx.destination);
+      const dummy = that.audioContext.createOscillator();
+      dummy.connect(that.audioContext.destination);
       dummy.frequency.value = 0;
       dummy.start(0);
-      dummy.stop(that.actx.currentTime + 0.001);
+      dummy.stop(that.audioContext.currentTime + 0.001);
       if (that.playTick >= that.maxTick)
         (that.playTick = 0), (that.playIndex = 0);
-      that.playTime = that.actx.currentTime + 0.1;
+      that.playTime = that.audioContext.currentTime + 0.1;
       that.tick2Time = (4 * 60) / that.song.tempo / that.song.timebase;
       that.playing = 1;
     },
-    loadMIDI: (data) => {
+    play: (data) => {
       const that = this;
       function Get2(s, i) {
         return (s[i] << 8) + s[i + 1];
@@ -1490,7 +1490,7 @@ function WebAudioTinySynthCore(target) {
         }
         return 0;
       }
-      that.stopMIDI();
+      that.pause();
       const s = new Uint8Array(data);
       let datalen = 0,
         datastart = 0,
@@ -1532,6 +1532,7 @@ function WebAudioTinySynthCore(target) {
       });
       that.reset();
       that.locateMIDI(0);
+      that.resume();
     },
     setQuality: (q) => {
       const that = this;
@@ -1606,7 +1607,7 @@ function WebAudioTinySynthCore(target) {
       });
       for (let i = that.notetab.length - 1; i >= 0; --i) {
         const nt = that.notetab[i];
-        if (that.actx.currentTime > nt.e || i >= that.voices - 1) {
+        if (that.audioContext.currentTime > nt.e || i >= that.voices - 1) {
           that._pruneNote(nt);
           that.notetab.splice(i, 1);
         }
@@ -1653,7 +1654,7 @@ function WebAudioTinySynthCore(target) {
             (fp[i] = fp[pn.g - 1] * pn.t + pn.f);
         switch (pn.w[0]) {
           case "n":
-            o[i] = that.actx.createBufferSource();
+            o[i] = that.audioContext.createBufferSource();
             o[i].buffer = that.noiseBuf[pn.w];
             o[i].loop = true;
             o[i].playbackRate.value = fp[i] / 440;
@@ -1670,7 +1671,7 @@ function WebAudioTinySynthCore(target) {
             }
             break;
           default:
-            o[i] = that.actx.createOscillator();
+            o[i] = that.audioContext.createOscillator();
             o[i].frequency.value = fp[i];
             if (pn.p != 1)
               that._setParamTarget(o[i].frequency, fp[i] * pn.p, t, pn.q);
@@ -1682,7 +1683,7 @@ function WebAudioTinySynthCore(target) {
             }
             break;
         }
-        g[i] = that.actx.createGain();
+        g[i] = that.audioContext.createGain();
         r[i] = pn.r;
         o[i].connect(g[i]);
         g[i].connect(out);
@@ -1810,7 +1811,7 @@ function WebAudioTinySynthCore(target) {
       const that = this;
       if (t == undefined || t <= 0) {
         t = 0;
-        if (that.actx) t = that.actx.currentTime;
+        if (that.audioContext) t = that.audioContext.currentTime;
       } else {
         if (that.tsmode) t = t * 0.001 - that.tsdiff;
       }
@@ -1997,24 +1998,36 @@ function WebAudioTinySynthCore(target) {
       const imag = new Float32Array(w.length);
       const real = new Float32Array(w.length);
       for (let i = 1; i < w.length; ++i) imag[i] = w[i];
-      return that.actx.createPeriodicWave(real, imag);
+      return that.audioContext.createPeriodicWave(real, imag);
     },
     getAudioContext: () => {
       const that = this;
-      return that.actx;
+      return that.audioContext;
     },
-    setAudioContext: (actx, dest) => {
+    setAudioContext: (audioContext, dest) => {
       const that = this;
-      that.audioContext = that.actx = actx;
+      that.audioContext = that.audioContext = audioContext;
       that.dest = dest;
-      if (!dest) that.dest = actx.destination;
-      that.out = that.actx.createGain();
-      that.comp = that.actx.createDynamicsCompressor();
-      const blen = (that.actx.sampleRate * 0.5) | 0;
-      that.convBuf = that.actx.createBuffer(2, blen, that.actx.sampleRate);
+      if (!dest) that.dest = audioContext.destination;
+      that.out = that.audioContext.createGain();
+      that.comp = that.audioContext.createDynamicsCompressor();
+      const blen = (that.audioContext.sampleRate * 0.5) | 0;
+      that.convBuf = that.audioContext.createBuffer(
+        2,
+        blen,
+        that.audioContext.sampleRate
+      );
       that.noiseBuf = {};
-      that.noiseBuf.n0 = that.actx.createBuffer(1, blen, that.actx.sampleRate);
-      that.noiseBuf.n1 = that.actx.createBuffer(1, blen, that.actx.sampleRate);
+      that.noiseBuf.n0 = that.audioContext.createBuffer(
+        1,
+        blen,
+        that.audioContext.sampleRate
+      );
+      that.noiseBuf.n1 = that.audioContext.createBuffer(
+        1,
+        blen,
+        that.audioContext.sampleRate
+      );
       const d1 = that.convBuf.getChannelData(0);
       const d2 = that.convBuf.getChannelData(1);
       const dn = that.noiseBuf.n0.getChannelData(0);
@@ -2037,9 +2050,9 @@ function WebAudioTinySynthCore(target) {
         }
       }
       if (that.useReverb) {
-        that.conv = that.actx.createConvolver();
+        that.conv = that.audioContext.createConvolver();
         that.conv.buffer = that.convBuf;
-        that.rev = that.actx.createGain();
+        that.rev = that.audioContext.createGain();
         that.rev.gain.value = that.reverbLev;
         that.out.connect(that.conv);
         that.conv.connect(that.rev);
@@ -2052,20 +2065,20 @@ function WebAudioTinySynthCore(target) {
       that.chmod = [];
       that.chpan = [];
       that.wave = { w9999: that._createWave("w9999") };
-      that.lfo = that.actx.createOscillator();
+      that.lfo = that.audioContext.createOscillator();
       that.lfo.frequency.value = 5;
       that.lfo.start(0);
       for (let i = 0; i < 16; ++i) {
-        that.chvol[i] = that.actx.createGain();
-        if (that.actx.createStereoPanner) {
-          that.chpan[i] = that.actx.createStereoPanner();
+        that.chvol[i] = that.audioContext.createGain();
+        if (that.audioContext.createStereoPanner) {
+          that.chpan[i] = that.audioContext.createStereoPanner();
           that.chvol[i].connect(that.chpan[i]);
           that.chpan[i].connect(that.out);
         } else {
           that.chpan[i] = null;
           that.chvol[i].connect(that.out);
         }
-        that.chmod[i] = that.actx.createGain();
+        that.chmod[i] = that.audioContext.createGain();
         that.lfo.connect(that.chmod[i]);
         that.pg[i] = 0;
         that.resetAllControllers(i);

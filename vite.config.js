@@ -17,7 +17,7 @@ export default defineConfig(() => {
         filename: "sw.js",
         injectManifest: {
           globPatterns: [
-            "./assets/**/*.{js,css,png,ttf,zip}",
+            "./assets/**/*.{js,css,png,ttf,zip,wasm}",
             "./*.{html,ico,png,js,json}"
           ]
         }

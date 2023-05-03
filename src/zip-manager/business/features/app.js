@@ -169,19 +169,21 @@ function getAppFeatures({
     async function playMusic() {
       const options = getOptions();
       const { musicData } = options;
-      let data;
+      let contentType, data;
       if (musicData) {
         data = new Uint8Array(musicData).buffer;
       } else {
-        data = await (
-          await util.fetch(
-            constants.MIDI_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
-          )
-        ).arrayBuffer();
+        const response = await util.fetch(
+          constants.MIDI_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+        );
+        const blob = await response.blob();
+        contentType = blob.type;
+        data = await blob.arrayBuffer();
       }
       setSynth(
         await musicService.play({
           data,
+          contentType,
           onSetFrequencyData: setMusicFrequencyData
         })
       );
