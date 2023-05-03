@@ -40,6 +40,7 @@
   display: inline-block;
   color: var(--accent-color);
   width: 1.75ch;
+  user-select: none;
 }
 
 .info-bar .icon-music-player {
