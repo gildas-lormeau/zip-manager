@@ -174,15 +174,17 @@ function getAppFeatures({
         data = new Uint8Array(musicData).buffer;
       } else {
         const response = await util.fetch(
-          constants.MIDI_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+          constants.MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
         );
         const blob = await response.blob();
         contentType = blob.type;
         data = await blob.arrayBuffer();
       }
+      const masterVolume = constants.MUSIC_TRACKS_VOLUMES[musicTrackIndex];
       setSynth(
         await musicService.play({
           data,
+          masterVolume,
           contentType,
           onSetFrequencyData: setMusicFrequencyData
         })
@@ -194,7 +196,9 @@ function getAppFeatures({
 
   function stopMusic() {
     musicService.stop();
-    setMusicTrackIndex((musicTrackIndex + 1) % constants.MIDI_TRACKS);
+    setMusicTrackIndex(
+      (musicTrackIndex + 1) % constants.MUSIC_TRACKS_VOLUMES.length
+    );
     setSynth(null);
   }
 

@@ -308,7 +308,6 @@ function run(args) {
   }
 }
 
-
 const AUDIO_BUFFER_LENGTH = 4096;
 const XM_BUFFER_LENGTH = 256;
 const RATE = 48000;
@@ -430,19 +429,18 @@ function resume() {
   audioContext.resume();
 }
 
-function play(arrayBuffer) {
+function play({ data, masterVolume = 0.4 }) {
   audioContext = new AudioContext();
   buffers = [
     audioContext.createBuffer(2, AUDIO_BUFFER_LENGTH, RATE),
     audioContext.createBuffer(2, AUDIO_BUFFER_LENGTH, RATE)
   ];
-  const gainValue = out ? out.gain.value : 0.4;
   setupSources();
-  load(arrayBuffer);
+  load(data);
   clip = false;
   audioContext
     .resume()
-    .then(() => setTimeout(() => (out.gain.value = gainValue), 500));
+    .then(() => setTimeout(() => (out.gain.value = masterVolume), 500));
 }
 
 export { init, play, pause, resume, audioContext, out };

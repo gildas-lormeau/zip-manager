@@ -1403,8 +1403,9 @@ function WebAudioTinySynthCore(target) {
       that.tick2Time = (4 * 60) / that.song.tempo / that.song.timebase;
       that.playing = 1;
     },
-    play: (data) => {
+    play: ({ data, masterVolume = 0.1 }) => {
       const that = this;
+      that.setMasterVol(masterVolume);
       function Get2(s, i) {
         return (s[i] << 8) + s[i + 1];
       }

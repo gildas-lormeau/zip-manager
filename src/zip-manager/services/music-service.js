@@ -12,7 +12,6 @@ function initMIDI() {
   if (!midiLibrary) {
     midiLibrary = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
     midiLibrary.setLoop(true);
-    midiLibrary.setMasterVol(0.1);
     midiLibrary.setTimbre(1, 49, [
       { w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.1, h: 0.05, t: 0, p: 0.1 }
     ]);
@@ -45,7 +44,7 @@ async function initXM() {
   musicLibrary = xmLibrary;
 }
 
-async function init({ data, contentType }) {
+async function init({ data, contentType, masterVolume }) {
   musicLibrary = null;
   if (contentType === MIDI_CONTENT_TYPE) {
     initMIDI();
@@ -53,7 +52,7 @@ async function init({ data, contentType }) {
     await initXM();
   }
   if (musicLibrary) {
-    musicLibrary.play(data);
+    musicLibrary.play({ data, masterVolume });
     initAnalyser(musicLibrary);
   }
 }
@@ -65,8 +64,8 @@ function initAnalyser(library) {
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play({ data, contentType, onSetFrequencyData }) {
-  await init({ data, contentType });
+async function play({ data, contentType, masterVolume, onSetFrequencyData }) {
+  await init({ data, contentType, masterVolume });
   playing = true;
   if (musicLibrary) {
     requestAnimationFrame(getByteFrequencyData);
