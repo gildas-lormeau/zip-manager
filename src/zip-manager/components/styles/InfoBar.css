@@ -73,7 +73,7 @@
 
 .info-bar canvas {
   position: absolute;
-  bottom: calc(var(--gap-width) * -1.5);
+  bottom: calc(var(--gap-width) * -1.75);
   left: -7.5%;
   z-index: -1;
   width: 115%;
