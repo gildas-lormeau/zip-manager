@@ -68,7 +68,9 @@ function initAnalyser(library) {
 async function play({ data, contentType, onSetFrequencyData }) {
   await init({ data, contentType });
   playing = true;
-  requestAnimationFrame(getByteFrequencyData);
+  if (musicLibrary) {
+    requestAnimationFrame(getByteFrequencyData);
+  }
   return {};
 
   function getByteFrequencyData() {
