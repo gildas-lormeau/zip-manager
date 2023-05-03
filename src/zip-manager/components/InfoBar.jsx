@@ -163,7 +163,6 @@ function MusicPlayerButton({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onDoubleClick={handleClick}
         tabIndex={0}
       >
         {iconPlayer}
