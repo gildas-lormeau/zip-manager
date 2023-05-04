@@ -102,8 +102,8 @@ const NO_ENTRIES_LABEL =
 const INFO_LABEL = [
   "Code source sur ",
   "Github",
-  " |",
-  "| Fait avec ",
+  " ",
+  " Fait avec ",
   "♡",
   " à ",
   "Rennes"

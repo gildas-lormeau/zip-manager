@@ -99,8 +99,8 @@ const NO_ENTRIES_LABEL = "Drag and drop files and directories here";
 const INFO_LABEL = [
   "Source code on ",
   "Github",
-  " |",
-  "| Made with ",
+  " ",
+  " Made with ",
   "♡",
   " in ",
   "Rennes"
