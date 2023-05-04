@@ -25,10 +25,16 @@
 
 .info-bar .player-active .label {
   opacity: 0;
+  pointer-events: none;
+}
+
+.info-bar:hover .source-link.player-active canvas {
+  opacity: 0.2;
 }
 
 .info-bar:hover .player-active * {
   opacity: 1;
+  pointer-events: inherit;
 }
 
 .info-bar:hover .source-link.player-active .icon {
