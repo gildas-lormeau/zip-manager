@@ -180,7 +180,8 @@ function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
     context.clearRect(0, 0, 256, 256);
     if (synthRef.current) {
       musicFrequencyData.forEach((byteTimeDomain, index) => {
-        context.fillRect(index, 255, index + 1, 32 - byteTimeDomain);
+        context.fillRect(index, 256, 2, 32 - byteTimeDomain);
+        context.fillRect(128 - index - 1, 256, 2, 32 - byteTimeDomain);
       });
     }
   }
@@ -200,7 +201,7 @@ function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
       setColor();
     }
   }, [accentColor]);
-  return <canvas ref={canvasRef} width={256} height={256}></canvas>;
+  return <canvas ref={canvasRef} width={128} height={256}></canvas>;
 }
 
 export default InfoBar;
