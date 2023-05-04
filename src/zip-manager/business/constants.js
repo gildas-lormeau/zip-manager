@@ -114,7 +114,7 @@ const MUSIC_TRACK_RELATIVE_PATH_PREFIX =
   CURRENT_PATH + "/" + MUSIC_TRACK_PATH_PREFIX;
 const MUSIC_TRACK_PATH_REGEXP = new RegExp(MUSIC_TRACK_PATH_PREFIX + ".*");
 const MUSIC_TRACKS_PATH = "./assets/music/tracks.zip";
-const MUSIC_TRACKS_VOLUMES = [0.1, 0.1, 0.4, 0.1, 1.8, 0.8, 0.8, 0.6, 0.7];
+const MUSIC_TRACKS_VOLUMES = [0.1, 0.1, 0.4, 0.1, 1.8, 0.8, 0.8, 0.7, 0.6];
 const MIDI_CONTENT_TYPE = "audio/midi";
 const XM_CONTENT_TYPE = "audio/xm";
 const MIDI_FILE_EXTENSION = ".mid";
