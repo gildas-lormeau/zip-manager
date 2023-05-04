@@ -15,7 +15,6 @@ import {
 } from "./zip-manager/business/constants.js";
 importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 
-clientsClaim();
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 self.skipWaiting();
@@ -23,6 +22,8 @@ self.skipWaiting();
 registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, "GET");
 registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, "POST");
 registerRoute(MUSIC_TRACK_PATH_REGEXP, getMusicTrack, "GET");
+
+clientsClaim();
 
 async function setSharedFiles({ event }) {
   const formData = await event.request.formData();
