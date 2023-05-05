@@ -1,4 +1,4 @@
-/* global fetch, document, requestAnimationFrame */
+/* global document, requestAnimationFrame */
 
 import WebAudioTinySynth from "./webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
 import * as libxm from "./libxm/libxm-es6.js";
