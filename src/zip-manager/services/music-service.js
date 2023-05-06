@@ -6,7 +6,13 @@ import * as libxm from "./libxm/libxm-es6.js";
 const MIDI_CONTENT_TYPE = "audio/midi";
 const XM_CONTENT_TYPE = "audio/xm";
 
-let midiLibrary, xmLibrary, musicLibrary, playing, analyser, byteFrequencyData;
+let midiLibrary,
+  xmLibrary,
+  musicLibrary,
+  playing,
+  analyser,
+  byteFrequencyData,
+  callbackFrequencyData;
 
 function initMIDI() {
   if (!midiLibrary) {
@@ -67,19 +73,20 @@ function initAnalyser() {
 async function play({ data, contentType, masterVolume, onSetFrequencyData }) {
   await init({ data, contentType, masterVolume });
   playing = true;
+  callbackFrequencyData = onSetFrequencyData;
   if (musicLibrary) {
     requestAnimationFrame(getByteFrequencyData);
   }
   return {};
+}
 
-  function getByteFrequencyData() {
-    analyser.getByteFrequencyData(byteFrequencyData);
-    if (onSetFrequencyData) {
-      onSetFrequencyData(Array.from(byteFrequencyData));
-    }
-    if (playing && !document.hidden) {
-      requestAnimationFrame(getByteFrequencyData);
-    }
+function getByteFrequencyData() {
+  analyser.getByteFrequencyData(byteFrequencyData);
+  if (callbackFrequencyData) {
+    callbackFrequencyData(Array.from(byteFrequencyData));
+  }
+  if (playing && !document.hidden) {
+    requestAnimationFrame(getByteFrequencyData);
   }
 }
 
@@ -96,6 +103,7 @@ document.onvisibilitychange = () => {
       musicLibrary.pause();
     } else {
       musicLibrary.resume();
+      requestAnimationFrame(getByteFrequencyData);
     }
   }
 };
