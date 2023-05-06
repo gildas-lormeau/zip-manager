@@ -26,10 +26,10 @@ function Entries({
   messages
 }) {
   const [selectModeEnabled, setSelectModeEnabled] = useState(false);
+  const [draggingItems, setDraggingItems] = useState(false);
   const touchEndTimeout = useRef(null);
   const previousTouchClientX = useRef(0);
   const previousTouchClientY = useRef(0);
-  const [draggingItems, setDraggingItems] = useState(false);
 
   function getEntryClassName(entry) {
     const classes = [];
