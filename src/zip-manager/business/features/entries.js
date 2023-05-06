@@ -330,6 +330,12 @@ function getEntriesFeatures({
     }
   }
 
+  function updateHighlightedEntries() {
+    if (getHighlightedEntryElement()) {
+      util.scrollIntoView(getHighlightedEntryElement());
+    }
+  }
+
   return {
     highlightPrevious,
     highlightNext,
@@ -352,6 +358,7 @@ function getEntriesFeatures({
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
+    updateHighlightedEntries,
     registerResizeEntriesHandler
   };
 }

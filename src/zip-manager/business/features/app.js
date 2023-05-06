@@ -3,7 +3,6 @@ function getAppFeatures({
   accentColor,
   musicTrackIndex,
   appStyleElement,
-  selectedFolderInit,
   setPreviousHighlight,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -13,17 +12,13 @@ function getAppFeatures({
   setHistoryIndex,
   setAccentColor,
   setEntriesDeltaHeight,
-  setSelectedFolderInit,
   setMusicFrequencyData,
   setMusicTrackIndex,
   setOptionsDialog,
   setMusicPlayerActive,
-  getHighlightedEntryElement,
   getOptions,
   goIntoFolder,
   openPromptExtract,
-  addFiles,
-  importZipFile,
   refreshSelectedFolder,
   filesystemService,
   musicService,
@@ -48,39 +43,6 @@ function getAppFeatures({
     }
     setAccentColor(accentColor);
     util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
-  }
-
-  function updateSelectedFolder() {
-    async function updateSelectedFolder() {
-      const locationSearch = util.getLocationSearch();
-      if (locationSearch) {
-        util.resetLocationSearch();
-        if (locationSearch === constants.SHARED_FILES_PARAMETER) {
-          const sharedFilesPath = constants.SHARED_FILES_RELATIVE_PATH;
-          const response = await util.fetch(sharedFilesPath);
-          const formData = await response.formData();
-          addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
-        }
-      }
-    }
-
-    if (!selectedFolderInit) {
-      util.setLaunchQueueConsumer((launchParams) => {
-        async function handleLaunchParams() {
-          if (launchParams.files.length) {
-            await Promise.all(
-              launchParams.files.map(async (handle) =>
-                importZipFile(await handle.getFile())
-              )
-            );
-          }
-        }
-
-        handleLaunchParams();
-      });
-      setSelectedFolderInit(true);
-    }
-    updateSelectedFolder();
   }
 
   function updateZipFilesystem() {
@@ -118,12 +80,6 @@ function getAppFeatures({
     const options = { ...constants.DEFAULT_OPTIONS };
     options.maxWorkers = util.getDefaultMaxWorkers();
     setOptionsDialog(options);
-  }
-
-  function updateHighlightedEntries() {
-    if (getHighlightedEntryElement()) {
-      util.scrollIntoView(getHighlightedEntryElement());
-    }
   }
 
   function playMusic() {
@@ -220,8 +176,6 @@ function getAppFeatures({
     stopMusic,
     updateApplication,
     updateZipFilesystem,
-    updateSelectedFolder,
-    updateHighlightedEntries,
     updateAccentColor,
     playMusicFile
   };

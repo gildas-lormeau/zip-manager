@@ -3,11 +3,13 @@ function getSelectedFolderFeatures({
   selectedFolder,
   rootZipFilename,
   clipboardData,
+  selectedFolderInit,
   addFilePickerElement,
   importZipFilePickerElement,
   chooseActionDialog,
   setHighlightedIds,
   setClipboardData,
+  setSelectedFolderInit,
   setImportPasswordDialog,
   setExportZipDialog,
   setCreateFolderDialog,
@@ -340,6 +342,41 @@ function getSelectedFolderFeatures({
     setImportPasswordDialog(null);
   }
 
+  
+  function updateSelectedFolder() {
+    async function updateSelectedFolder() {
+      const locationSearch = util.getLocationSearch();
+      if (locationSearch) {
+        util.resetLocationSearch();
+        if (locationSearch === constants.SHARED_FILES_PARAMETER) {
+          const sharedFilesPath = constants.SHARED_FILES_RELATIVE_PATH;
+          const response = await util.fetch(sharedFilesPath);
+          const formData = await response.formData();
+          addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
+        }
+      }
+    }
+
+    if (!selectedFolderInit) {
+      util.setLaunchQueueConsumer((launchParams) => {
+        async function handleLaunchParams() {
+          if (launchParams.files.length) {
+            await Promise.all(
+              launchParams.files.map(async (handle) =>
+                importZipFile(await handle.getFile())
+              )
+            );
+          }
+        }
+
+        handleLaunchParams();
+      });
+      setSelectedFolderInit(true);
+    }
+    updateSelectedFolder();
+  }
+
+
   return {
     openPromptCreateFolder,
     createFolder,
@@ -354,7 +391,8 @@ function getSelectedFolderFeatures({
     closePromptExportZip,
     closePromptImportPassword,
     showAddFilesPicker,
-    showImportZipFilePicker
+    showImportZipFilePicker,
+    updateSelectedFolder
   };
 }
 
