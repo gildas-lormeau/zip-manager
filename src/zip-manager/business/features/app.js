@@ -164,8 +164,8 @@ function getAppFeatures({
     setMusicPlayerActive(false);
   }
 
-  function setMusicFile(items) {
-    async function setMusicFile() {
+  function playMusicFile(items) {
+    async function playMusicFile() {
       const file = await (
         await filesystemService.getFilesystemHandles(items)
       )[0].getFile();
@@ -181,7 +181,7 @@ function getAppFeatures({
       }
     }
 
-    setMusicFile();
+    playMusicFile();
   }
 
   function updateAccentColor() {
@@ -213,11 +213,6 @@ function getAppFeatures({
   }
 
   return {
-    updateApplication,
-    updateZipFilesystem,
-    updateSelectedFolder,
-    updateHighlightedEntries,
-    updateAccentColor,
     enter,
     openOptions,
     closeOptions,
@@ -225,7 +220,12 @@ function getAppFeatures({
     moveBottomBar,
     playMusic,
     stopMusic,
-    setMusicFile
+    updateApplication,
+    updateZipFilesystem,
+    updateSelectedFolder,
+    updateHighlightedEntries,
+    updateAccentColor,
+    playMusicFile
   };
 }
 

@@ -313,11 +313,6 @@ function ZipManager() {
     setClipboardData
   });
   const {
-    updateApplication,
-    updateZipFilesystem,
-    updateSelectedFolder,
-    updateHighlightedEntries,
-    updateAccentColor,
     enter,
     openOptions,
     closeOptions,
@@ -325,7 +320,12 @@ function ZipManager() {
     moveBottomBar,
     playMusic,
     stopMusic,
-    setMusicFile
+    updateApplication,
+    updateZipFilesystem,
+    updateSelectedFolder,
+    updateHighlightedEntries,
+    updateAccentColor,
+    playMusicFile
   } = getAppFeatures({
     zipFilesystem,
     accentColor,
@@ -513,7 +513,7 @@ function ZipManager() {
         playMusic={playMusic}
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}
-        onSetMusicFile={setMusicFile}
+        onPlayMusicFile={playMusicFile}
         musicPlayerActive={musicPlayerActive}
         messages={messages}
       />

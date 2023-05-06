@@ -9,7 +9,7 @@ function InfoBar({
   playMusic,
   stopMusic,
   onSetAccentColor,
-  onSetMusicFile,
+  onPlayMusicFile,
   musicPlayerActive,
   messages
 }) {
@@ -38,7 +38,7 @@ function InfoBar({
             <MusicPlayerButton
               playMusic={playMusic}
               stopMusic={stopMusic}
-              onSetMusicFile={onSetMusicFile}
+              onPlayMusicFile={onPlayMusicFile}
               musicPlayerActive={musicPlayerActive}
               messages={messages}
             />
@@ -63,7 +63,7 @@ function InfoBar({
           <MusicVisualizer
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
-            onSetMusicFile={onSetMusicFile}
+            onPlayMusicFile={onPlayMusicFile}
             musicPlayerActive={musicPlayerActive}
           />
         </div>
@@ -100,7 +100,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
 function MusicPlayerButton({
   playMusic,
   stopMusic,
-  onSetMusicFile,
+  onPlayMusicFile,
   musicPlayerActive,
   messages
 }) {
@@ -108,7 +108,6 @@ function MusicPlayerButton({
   const PAUSED_CLASSNAME = " paused";
   const [iconPlayer, setIconPlayer] = useState(messages.PAUSED_MUSIC_ICON);
   const [className, setClassName] = useState(ICON_CLASSNAME + PAUSED_CLASSNAME);
-  const fileInputRef = useRef(null);
 
   function handlePlayButtonClick() {
     if (musicPlayerActive) {
@@ -133,14 +132,7 @@ function MusicPlayerButton({
   async function handleDrop(event) {
     if (event.dataTransfer.items) {
       event.preventDefault();
-      onSetMusicFile(event.dataTransfer.items);
-    }
-  }
-
-  function handleChange({ target }) {
-    const files = Array.from(target.files);
-    if (files.length) {
-      onSetMusicFile(files[0]);
+      onPlayMusicFile(event.dataTransfer.items);
     }
   }
 
@@ -156,7 +148,6 @@ function MusicPlayerButton({
       >
         {iconPlayer}
       </span>
-      <input onChange={handleChange} ref={fileInputRef} type="file" hidden />
     </>
   );
 }
