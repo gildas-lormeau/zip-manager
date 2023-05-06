@@ -106,18 +106,24 @@ function MusicPlayerButton({
 }) {
   const ICON_CLASSNAME = "icon icon-music-player";
   const PAUSED_CLASSNAME = " paused";
-  const [iconPlayer, setIconPlayer] = useState(messages.PAUSED_MUSIC_ICON);
-  const [className, setClassName] = useState(ICON_CLASSNAME + PAUSED_CLASSNAME);
+  const [iconPlayer, setIconPlayer] = useState({
+    label: messages.PAUSED_MUSIC_ICON,
+    className: ICON_CLASSNAME + PAUSED_CLASSNAME
+  });
 
   function handlePlayButtonClick() {
     if (musicPlayerActive) {
       stopMusic();
-      setClassName(ICON_CLASSNAME + PAUSED_CLASSNAME);
-      setIconPlayer(messages.PAUSED_MUSIC_ICON);
+      setIconPlayer({
+        label: messages.PAUSED_MUSIC_ICON,
+        className: ICON_CLASSNAME + PAUSED_CLASSNAME
+      });
     } else {
       playMusic();
-      setClassName(ICON_CLASSNAME);
-      setIconPlayer(messages.PLAYING_MUSIC_ICON);
+      setIconPlayer({
+        label: messages.PLAYING_MUSIC_ICON,
+        className: ICON_CLASSNAME
+      });
     }
   }
 
@@ -139,14 +145,14 @@ function MusicPlayerButton({
   return (
     <>
       <span
-        className={className}
+        className={iconPlayer.className}
         onClick={handlePlayButtonClick}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         tabIndex={0}
       >
-        {iconPlayer}
+        {iconPlayer.label}
       </span>
     </>
   );
