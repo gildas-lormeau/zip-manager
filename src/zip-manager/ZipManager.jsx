@@ -17,7 +17,6 @@ import {
   constants,
   features,
   getUIState,
-  getEffects,
   getEventHandlers
 } from "./business/index.js";
 import {
@@ -314,21 +313,22 @@ function ZipManager() {
     setClipboardData
   });
   const {
-    initApplication,
-    initZipFilesystem,
-    initSelectedFolder,
+    updateApplication,
+    updateZipFilesystem,
+    updateSelectedFolder,
+    updateHighlightedEntries,
+    updateAccentColor,
     enter,
     openOptions,
     closeOptions,
     resetOptions,
-    applyAccentColor,
     moveBottomBar,
-    scrollToHighlightedEntry,
     playMusic,
     stopMusic,
     setMusicFile
   } = getAppFeatures({
     zipFilesystem,
+    accentColor,
     musicTrackIndex,
     appStyleElement,
     selectedFolderInit,
@@ -398,22 +398,6 @@ function ZipManager() {
     constants
   });
   const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
-  const {
-    updateApplication,
-    updateSelectedFolder,
-    updateHighlightedEntries,
-    updateZipFilesystem,
-    updateAccentColor
-  } = getEffects({
-    selectedFolder,
-    accentColor,
-    scrollToHighlightedEntry,
-    initApplication,
-    initZipFilesystem,
-    initSelectedFolder,
-    applyAccentColor,
-    util
-  });
   const appClassName =
     constants.APP_CLASSNAME +
     (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +

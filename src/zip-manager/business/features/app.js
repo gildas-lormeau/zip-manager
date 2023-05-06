@@ -1,5 +1,6 @@
 function getAppFeatures({
   zipFilesystem,
+  accentColor,
   musicTrackIndex,
   appStyleElement,
   selectedFolderInit,
@@ -31,7 +32,7 @@ function getAppFeatures({
   constants,
   messages
 }) {
-  function initApplication() {
+  function updateApplication() {
     const options = getOptions();
     const { accentColor } = options;
     if (appStyleElement) {
@@ -50,8 +51,8 @@ function getAppFeatures({
     util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
   }
 
-  function initSelectedFolder() {
-    async function initSelectedFolder() {
+  function updateSelectedFolder() {
+    async function updateSelectedFolder() {
       const locationSearch = util.getLocationSearch();
       if (locationSearch) {
         util.resetLocationSearch();
@@ -80,10 +81,10 @@ function getAppFeatures({
       });
       setSelectedFolderInit(true);
     }
-    initSelectedFolder();
+    updateSelectedFolder();
   }
 
-  function initZipFilesystem() {
+  function updateZipFilesystem() {
     const { root } = zipFilesystem;
     setSelectedFolder(root);
     setHighlightedIds([]);
@@ -101,16 +102,6 @@ function getAppFeatures({
     } else {
       openPromptExtract(entry);
     }
-  }
-
-  function applyAccentColor(color) {
-    util.setStyle(
-      appStyleElement,
-      constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
-      color
-    );
-    const options = getOptions();
-    setOptions({ ...options, accentColor: color });
   }
 
   function moveBottomBar(deltaY) {
@@ -131,7 +122,7 @@ function getAppFeatures({
     setOptionsDialog(options);
   }
 
-  function scrollToHighlightedEntry() {
+  function updateHighlightedEntries() {
     if (getHighlightedEntryElement()) {
       util.scrollIntoView(getHighlightedEntryElement());
     }
@@ -193,17 +184,45 @@ function getAppFeatures({
     setMusicFile();
   }
 
+  function updateAccentColor() {
+    if (accentColor) {
+      const brightNessAccentColor = getBrightNess(accentColor);
+      if (brightNessAccentColor > 192) {
+        util.setDocumentClass("dark");
+      } else if (brightNessAccentColor < 64) {
+        util.setDocumentClass("light");
+      } else {
+        util.setDocumentClass("");
+      }
+      util.setStyle(
+        appStyleElement,
+        constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+        accentColor
+      );
+      const options = getOptions();
+      setOptions({ ...options, accentColor: accentColor });
+    }
+  }
+
+  function getBrightNess(color) {
+    const red = parseInt(color.substring(1, 3), 16);
+    const green = parseInt(color.substring(3, 5), 16);
+    const blue = parseInt(color.substring(5, 7), 16);
+    // cf. https://www.w3.org/TR/AERT/#color-contrast
+    return Math.round((red * 299 + green * 587 + blue * 114) / 1000);
+  }
+
   return {
-    initApplication,
-    initZipFilesystem,
-    initSelectedFolder,
+    updateApplication,
+    updateZipFilesystem,
+    updateSelectedFolder,
+    updateHighlightedEntries,
+    updateAccentColor,
     enter,
     openOptions,
     closeOptions,
     resetOptions,
-    applyAccentColor,
     moveBottomBar,
-    scrollToHighlightedEntry,
     playMusic,
     stopMusic,
     setMusicFile
