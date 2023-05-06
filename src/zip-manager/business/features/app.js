@@ -90,7 +90,6 @@ function getAppFeatures({
     setHighlightedIds([]);
     setPreviousHighlight(null);
     setToggleNavigationDirection(0);
-    setClipboardData(null);
     setHistory([root]);
     setHistoryIndex(0);
     refreshSelectedFolder(root);
