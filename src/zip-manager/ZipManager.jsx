@@ -47,7 +47,8 @@ const {
   getFilesystemFeatures,
   getDownloadsFeatures,
   getClipboardFeatures,
-  getAppFeatures
+  getAppFeatures,
+  getMiscFeatures
 } = features;
 const messages = getMessages({ i18nService });
 const randomMusicIndex = Math.floor(
@@ -317,41 +318,49 @@ function ZipManager() {
     setClipboardData
   });
   const {
+    playMusic,
+    stopMusic,
+    updateAccentColor,
+    playMusicFile,
+    updateMiscFeatures
+  } = getMiscFeatures({
+    accentColor,
+    musicTrackIndex,
+    appStyleElement,
+    setOptions,
+    setAccentColor,
+    setMusicFrequencyData,
+    setMusicTrackIndex,
+    setMusicPlayerActive,
+    getOptions,
+    filesystemService,
+    musicService,
+    util,
+    constants
+  });
+  const {
     enter,
     openOptions,
     closeOptions,
     resetOptions,
     moveBottomBar,
-    playMusic,
-    stopMusic,
     updateApplication,
-    updateZipFilesystem,
-    updateAccentColor,
-    playMusicFile
+    updateZipFilesystem
   } = getAppFeatures({
     zipFilesystem,
-    accentColor,
-    musicTrackIndex,
     appStyleElement,
     setPreviousHighlight,
     setToggleNavigationDirection,
     setSelectedFolder,
     setHighlightedIds,
-    setOptions,
     setHistory,
     setHistoryIndex,
-    setAccentColor,
     setEntriesDeltaHeight,
-    setMusicFrequencyData,
-    setMusicTrackIndex,
     setOptionsDialog,
-    setMusicPlayerActive,
     getOptions,
     goIntoFolder,
     openPromptExtract,
     refreshSelectedFolder,
-    filesystemService,
-    musicService,
     util,
     constants,
     messages
@@ -409,7 +418,10 @@ function ZipManager() {
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [accentColor]);
   useEffect(updateSelectedFolder, [selectedFolder]);
-  useEffect(updateApplication, [appStyleElement]);
+  useEffect(() => {
+    updateMiscFeatures();
+    updateApplication();
+  }, [appStyleElement]);
 
   return (
     <div className={appClassName}>
