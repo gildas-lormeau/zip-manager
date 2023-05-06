@@ -81,6 +81,9 @@ function getHighlightedEntriesFeatures({
       if (entries[indexNextEntry]) {
         setPreviousHighlight(entries[indexNextEntry]);
         setHighlightedIds([entries[indexNextEntry].id]);
+      } else {
+        setPreviousHighlight(null);
+        setHighlightedIds([]);
       }
     }
     updateHistoryData();
