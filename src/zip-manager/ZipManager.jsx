@@ -47,6 +47,7 @@ const {
   getFilesystemFeatures,
   getDownloadsFeatures,
   getClipboardFeatures,
+  getOptionsFeatures,
   getAppFeatures,
   getMiscFeatures
 } = features;
@@ -338,33 +339,30 @@ function ZipManager() {
     util,
     constants
   });
-  const {
-    enter,
-    openOptions,
-    closeOptions,
-    resetOptions,
-    moveBottomBar,
-    initAppFeatures,
-    updateZipFilesystem
-  } = getAppFeatures({
-    zipFilesystem,
-    appStyleElement,
-    setPreviousHighlight,
-    setToggleNavigationDirection,
-    setSelectedFolder,
-    setHighlightedIds,
-    setHistory,
-    setHistoryIndex,
-    setEntriesDeltaHeight,
+  const { openOptions, closeOptions, resetOptions } = getOptionsFeatures({
     setOptionsDialog,
     getOptions,
-    goIntoFolder,
-    openPromptExtract,
-    refreshSelectedFolder,
     util,
-    constants,
-    messages
+    constants
   });
+  const { initAppFeatures, enter, moveBottomBar, updateZipFilesystem } =
+    getAppFeatures({
+      zipFilesystem,
+      appStyleElement,
+      setPreviousHighlight,
+      setToggleNavigationDirection,
+      setSelectedFolder,
+      setHighlightedIds,
+      setHistory,
+      setHistoryIndex,
+      setEntriesDeltaHeight,
+      goIntoFolder,
+      openPromptExtract,
+      refreshSelectedFolder,
+      util,
+      constants,
+      messages
+    });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
     downloads,

@@ -8,8 +8,6 @@ function getAppFeatures({
   setHistory,
   setHistoryIndex,
   setEntriesDeltaHeight,
-  setOptionsDialog,
-  getOptions,
   goIntoFolder,
   openPromptExtract,
   refreshSelectedFolder,
@@ -56,25 +54,8 @@ function getAppFeatures({
     setEntriesDeltaHeight(deltaY);
   }
 
-  function openOptions() {
-    setOptionsDialog(getOptions());
-  }
-
-  function closeOptions() {
-    setOptionsDialog(null);
-  }
-
-  function resetOptions() {
-    const options = { ...constants.DEFAULT_OPTIONS };
-    options.maxWorkers = util.getDefaultMaxWorkers();
-    setOptionsDialog(options);
-  }
-
   return {
     enter,
-    openOptions,
-    closeOptions,
-    resetOptions,
     moveBottomBar,
     initAppFeatures,
     updateZipFilesystem

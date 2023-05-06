@@ -7,6 +7,7 @@ import getAppFeatures from "./app.js";
 import getFilesystemFeatures from "./filesystem.js";
 import getDownloadsFeatures from "./downloads.js";
 import getClipboardFeatures from "./clipboard.js";
+import getOptionsFeatures from "./options.js";
 import getMiscFeatures from "./misc.js";
 
 export {
@@ -19,5 +20,6 @@ export {
   getFilesystemFeatures,
   getDownloadsFeatures,
   getClipboardFeatures,
+  getOptionsFeatures,
   getMiscFeatures
 };
