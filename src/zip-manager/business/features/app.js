@@ -42,7 +42,7 @@ function getAppFeatures({
     refreshSelectedFolder(root);
   }
 
-  function enter(entry) {
+  function enterEntry(entry) {
     if (entry.directory) {
       goIntoFolder(entry);
     } else {
@@ -55,7 +55,7 @@ function getAppFeatures({
   }
 
   return {
-    enter,
+    enterEntry,
     moveBottomBar,
     initAppFeatures,
     updateZipFilesystem

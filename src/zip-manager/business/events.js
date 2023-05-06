@@ -16,7 +16,7 @@ function getEventHandlers({
   disabledEnter,
   disabledNavigation,
   dialogDisplayed,
-  enter,
+  enterEntry,
   highlightNext,
   highlightPrevious,
   highlightPreviousPage,
@@ -71,7 +71,7 @@ function getEventHandlers({
         selectedFolder,
         highlightedEntry,
         setClickedButtonName,
-        enter,
+        enterEntry,
         util,
         constants
       });
@@ -249,7 +249,7 @@ function onHighlightedEntriesKeyUp(
     selectedFolder,
     highlightedEntry,
     setClickedButtonName,
-    enter,
+    enterEntry,
     util,
     constants
   }
@@ -260,7 +260,7 @@ function onHighlightedEntriesKeyUp(
       setClickedButtonName(DELETE_BUTTON_NAME);
     }
     if (event.key === ACTION_KEY && !disabledEnter) {
-      enter(highlightedEntry || selectedFolder.parent);
+      enterEntry(highlightedEntry || selectedFolder.parent);
       event.preventDefault();
     }
   }

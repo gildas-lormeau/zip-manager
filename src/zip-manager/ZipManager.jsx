@@ -345,7 +345,7 @@ function ZipManager() {
     util,
     constants
   });
-  const { initAppFeatures, enter, moveBottomBar, updateZipFilesystem } =
+  const { initAppFeatures, enterEntry, moveBottomBar, updateZipFilesystem } =
     getAppFeatures({
       zipFilesystem,
       appStyleElement,
@@ -381,7 +381,7 @@ function ZipManager() {
     disabledEnter,
     disabledNavigation,
     dialogDisplayed,
-    enter,
+    enterEntry,
     highlightNext,
     highlightPrevious,
     highlightPreviousPage,
@@ -467,7 +467,7 @@ function ZipManager() {
           onHighlight={highlight}
           onToggle={toggle}
           onToggleRange={toggleRange}
-          onEnter={enter}
+          onEnter={enterEntry}
           onUpdateEntriesHeight={updateEntriesHeight}
           onUpdateEntriesElementHeight={updateEntriesElementHeight}
           onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
