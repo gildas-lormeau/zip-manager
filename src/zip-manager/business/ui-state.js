@@ -40,7 +40,13 @@ function getUIState({
   const disabledForward = historyIndex === history.length - 1;
   const disabledCopy = parentFolderHighlighted;
   const disabledCut = parentFolderHighlighted;
-  const disabledPaste = clipboardDataEmpty;
+  const disabledPaste =
+    clipboardDataEmpty ||
+    (clipboardData.cut &&
+      clipboardData.entries.find(
+        (entry) =>
+          selectedFolder == entry || selectedFolder.isDescendantOf(entry)
+      ));
   const disabledResetClipboardData = clipboardDataEmpty;
   const disabledExtract =
     parentFolderHighlighted ||
@@ -72,7 +78,9 @@ function getUIState({
   const hiddenInfobar = options.hideInfobar;
   const hiddenExportPassword = !options.promptForExportPassword;
   const highlightedEntries = selectedFolder
-    ? selectedFolder.children.filter((entry) => highlightedIds.includes(entry.id))
+    ? selectedFolder.children.filter((entry) =>
+        highlightedIds.includes(entry.id)
+      )
     : [];
   const highlightedEntry =
     highlightedIds.length === 1 &&
