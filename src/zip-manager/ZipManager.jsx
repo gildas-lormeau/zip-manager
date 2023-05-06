@@ -336,7 +336,6 @@ function ZipManager() {
     setToggleNavigationDirection,
     setSelectedFolder,
     setHighlightedIds,
-    setClipboardData,
     setOptions,
     setHistory,
     setHistoryIndex,

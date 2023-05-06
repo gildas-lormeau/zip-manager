@@ -8,7 +8,6 @@ function getAppFeatures({
   setToggleNavigationDirection,
   setSelectedFolder,
   setHighlightedIds,
-  setClipboardData,
   setOptions,
   setHistory,
   setHistoryIndex,
