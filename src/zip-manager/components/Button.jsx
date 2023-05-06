@@ -1,7 +1,5 @@
 import "./styles/TopButtonBar.css";
 
-import { useEffect, useState } from "react";
-
 function Button({
   name,
   title,
@@ -12,19 +10,17 @@ function Button({
   onClick,
   onClickedButton
 }) {
-  const [className, setClassName] = useState(null);
+  let className;
 
   function handleAnimationEnd() {
-    setClassName(null);
+    className = null;
     onClickedButton();
     onClick();
   }
 
-  useEffect(() => {
-    if (clickedButtonName && clickedButtonName === name) {
-      setClassName("flashing-button");
-    }
-  }, [clickedButtonName, name]);
+  if (clickedButtonName && clickedButtonName === name) {
+    className = "flashing-button";
+  }
   return (
     <button
       className={className}
