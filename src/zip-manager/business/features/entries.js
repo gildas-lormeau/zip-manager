@@ -4,11 +4,35 @@ function getEntriesFeatures({
   previousHighlight,
   highlightedIds,
   toggleNavigationDirection,
-  getEntriesHeight,
+  dialogDisplayed,
+  entriesElementHeight,
+  entriesDeltaHeight,
+  entriesElement,
+  getHighlightedEntryElement,
+  entriesHeight,
   setHighlightedIds,
   setPreviousHighlight,
-  setToggleNavigationDirection
+  setToggleNavigationDirection,
+  setOptions,
+  setEntriesHeight,
+  setEntriesElementHeight,
+  setEntriesDeltaHeight,
+  getOptions,
+  util
 }) {
+  function getEntriesElementHeight() {
+    return util.getHeight(entriesElement);
+  }
+
+  function getHightlightedEntryHeight() {
+    if (getHighlightedEntryElement()) {
+      return (
+        util.getHeight(getHighlightedEntryElement()) +
+        util.getRowGap(entriesElement.firstElementChild)
+      );
+    }
+  }
+
   function highlightPrevious() {
     const indexEntry = getHighlightedEntryIndex();
     const previousEntry =
@@ -234,13 +258,11 @@ function getEntriesFeatures({
   }
 
   function getPreviousPageEntry(indexEntry) {
-    return entries[Math.max(indexEntry - getEntriesHeight(), 0)];
+    return entries[Math.max(indexEntry - entriesHeight, 0)];
   }
 
   function getNextPageEntry(indexEntry) {
-    return entries[
-      Math.min(indexEntry + getEntriesHeight(), entries.length - 1)
-    ];
+    return entries[Math.min(indexEntry + entriesHeight, entries.length - 1)];
   }
 
   function getPreviousHighlightedEntryIndex() {
@@ -252,6 +274,60 @@ function getEntriesFeatures({
   function getHighlightedEntryIndex() {
     const entryId = highlightedIds[highlightedIds.length - 1];
     return entries.findIndex((entry) => entry.id === entryId);
+  }
+
+  function updateEntriesHeight() {
+    if (entriesElement && getHighlightedEntryElement()) {
+      setEntriesHeight(
+        Math.max(
+          Math.ceil(getEntriesElementHeight() / getHightlightedEntryHeight()),
+          1
+        )
+      );
+    }
+  }
+
+  function updateEntriesElementHeight() {
+    if (!dialogDisplayed) {
+      let height = entriesElementHeight;
+      const options = getOptions();
+      if (!height && options.entriesHeight) {
+        height = options.entriesHeight;
+      }
+      setEntriesElementHeight(height);
+    }
+  }
+
+  function updateEntriesElementHeightEnd() {
+    const entriesElementHeight = getEntriesElementHeight();
+    setEntriesElementHeight(
+      Math.max(
+        Math.min(
+          entriesElementHeight + entriesDeltaHeight,
+          entriesElementHeight
+        ),
+        entriesElementHeight
+      )
+    );
+    setEntriesDeltaHeight(0);
+  }
+
+  function registerResizeEntriesHandler() {
+    if (entriesElement) {
+      const observer = util.addResizeObserver(entriesElement, () => {
+        let height = getEntriesElementHeight();
+        const options = getOptions();
+        if (height || !options.entriesHeight) {
+          options.entriesHeight = height;
+          setOptions(options);
+        }
+      });
+      util.addResizeListener(updateEntriesElementHeight);
+      return () => {
+        observer.disconnect();
+        util.removeResizeListener(updateEntriesElementHeight);
+      };
+    }
   }
 
   return {
@@ -272,7 +348,11 @@ function getEntriesFeatures({
     togglePreviousPage,
     toggleNextPage,
     toggleFirst,
-    toggleLast
+    toggleLast,
+    updateEntriesHeight,
+    updateEntriesElementHeight,
+    updateEntriesElementHeightEnd,
+    registerResizeEntriesHandler
   };
 }
 

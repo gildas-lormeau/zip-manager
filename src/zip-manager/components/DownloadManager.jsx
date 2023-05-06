@@ -5,7 +5,7 @@ function DownloadManager({
   downloads,
   downloaderRef,
   onAbortDownload,
-  util,
+  i18nService,
   constants,
   messages
 }) {
@@ -26,7 +26,7 @@ function DownloadManager({
               <DownloadEntry
                 download={download}
                 onAbortDownload={onAbortDownload}
-                util={util}
+                i18nService={i18nService}
                 constants={constants}
                 messages={messages}
               />
@@ -44,7 +44,7 @@ function DownloadManager({
 function DownloadEntry({
   download,
   onAbortDownload,
-  util,
+  i18nService,
   constants,
   messages
 }) {
@@ -56,7 +56,7 @@ function DownloadEntry({
         constants={constants}
         messages={messages}
       />
-      <DownloadEntryProgress download={download} util={util} />
+      <DownloadEntryProgress download={download} i18nService={i18nService} />
     </>
   );
 }
@@ -106,7 +106,7 @@ function DeleteDownloadEntryButton({
   );
 }
 
-function DownloadEntryProgress({ download, util }) {
+function DownloadEntryProgress({ download, i18nService }) {
   return (
     <progress
       value={
@@ -115,7 +115,7 @@ function DownloadEntryProgress({ download, util }) {
       max={download.progressMax && Math.floor(download.progressMax / 1000)}
       title={
         download.progressValue &&
-        util.formatPercentValue(
+        i18nService.formatPercentValue(
           (100 * download.progressValue) / download.progressMax
         )
       }

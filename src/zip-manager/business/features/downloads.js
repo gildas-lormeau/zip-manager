@@ -1,7 +1,7 @@
-function getDownloadsFeatures({ setDownloads, util }) {
+function getDownloadsFeatures({ setDownloads, downloadService }) {
   function abortDownload(deletedDownload) {
     removeDownload(deletedDownload);
-    util.abortDownload(deletedDownload.controller);
+    downloadService.abortDownload(deletedDownload.controller);
   }
 
   function removeDownload(deletedDownload) {

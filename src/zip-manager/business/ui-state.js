@@ -15,7 +15,7 @@ function getUIState({
   errorMessageDialog,
   importPasswordDialog,
   optionsDialog,
-  util
+  filesystemService
 }) {
   const entriesEmpty = !entries.length;
   const parentFolderHighlighted =
@@ -45,7 +45,7 @@ function getUIState({
   const disabledExtract =
     parentFolderHighlighted ||
     !highlightedIds.length ||
-    (!util.savePickersSupported() && subFolderHighlighted);
+    (!filesystemService.savePickersSupported() && subFolderHighlighted);
   const disabledHighlightAll =
     !selectedFolder ||
     !selectedFolderEntries.length ||
@@ -71,6 +71,9 @@ function getUIState({
   const hiddenDownloadManager = options.hideDownloadManager;
   const hiddenInfobar = options.hideInfobar;
   const hiddenExportPassword = !options.promptForExportPassword;
+  const highlightedEntries = selectedFolder
+    ? selectedFolder.children.filter((entry) => highlightedIds.includes(entry.id))
+    : [];
   const highlightedEntry =
     highlightedIds.length === 1 &&
     selectedFolder &&
@@ -96,6 +99,7 @@ function getUIState({
     hiddenDownloadManager,
     hiddenInfobar,
     hiddenExportPassword,
+    highlightedEntries,
     highlightedEntry,
     selectedFolderEntries
   };

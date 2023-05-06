@@ -3,11 +3,15 @@ import "./styles/index.css";
 import { useEffect, useState, useRef } from "react";
 
 import * as util from "./misc/dom-util.js";
-import * as zipService from "./services/zip-service.js";
-import * as musicService from "./services/music-service.js";
+import {
+  filesystemService,
+  downloadService,
+  i18nService,
+  storageService,
+  zipService,
+  musicService
+} from "./services/index.js";
 import { getMessages } from "./messages/index.js";
-import { getStorageService } from "./services/storage-service.js";
-
 import { getHooks } from "./hooks/hooks.js";
 import {
   constants,
@@ -47,7 +51,6 @@ const {
   getAppFeatures
 } = features;
 const messages = getMessages({ util });
-const storageService = getStorageService({ util });
 const randomMusicIndex = Math.floor(
   Math.random() * constants.MUSIC_TRACKS_VOLUMES.length
 );
@@ -58,7 +61,7 @@ function ZipManager() {
   const [selectedFolderInit, setSelectedFolderInit] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
-  const [entriesHeight, setEntriesHeight] = useState(0);
+  const [entriesElementHeight, setEntriesElementHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
   const [previousHighlight, setPreviousHighlight] = useState(null);
@@ -82,26 +85,29 @@ function ZipManager() {
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
   const [musicTrackIndex, setMusicTrackIndex] = useState(randomMusicIndex);
+  const appStyleRef = useRef(null);
+  const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const downloaderRef = useRef(null);
-  const highlightedEntryRef = useRef(null);
-  const appStyleRef = useRef(null);
-  const synthRef = useRef(null);
+  const addFilePickerRef = useRef(null);
+  const importZipFilePickerRef = useRef(null);
+  const musicPlayerActiveRef = useRef(null);
 
-  const getEntriesElementHeight = () => util.getHeight(entriesRef.current);
-  const getHighlightedEntryElement = () => highlightedEntryRef.current;
-  const getAppStyleElement = () => appStyleRef.current;
-  const getEntriesHeight = () => entriesHeightRef.current;
-  const setSynth = (synth) => (synthRef.current = synth);
-  const appClassName = () =>
-    constants.APP_CLASSNAME +
-    (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
-    (hiddenDownloadManager
-      ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
-      : "");
+  const appStyleElement = appStyleRef.current;
+  const entriesElement = entriesRef.current;
+  const entriesHeight = entriesHeightRef.current;
   const downloaderElement = downloaderRef.current;
+  const addFilePickerElement = addFilePickerRef.current;
+  const importZipFilePickerElement = importZipFilePickerRef.current;
+  const musicPlayerActive = musicPlayerActiveRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
+
+  const getHighlightedEntryElement = () => highlightedEntryRef.current;
+
+  const setEntriesHeight = (height) => (entriesHeightRef.current = height);
+  const setMusicPlayerActive = (active) =>
+    (musicPlayerActiveRef.current = active);
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -127,6 +133,8 @@ function ZipManager() {
     downloaderElement,
     zipService,
     storageService,
+    downloadService,
+    filesystemService,
     util,
     constants
   });
@@ -151,6 +159,7 @@ function ZipManager() {
     hiddenInfobar,
     hiddenExportPassword,
     highlightedEntry,
+    highlightedEntries,
     selectedFolderEntries
   } = getUIState({
     entries,
@@ -169,7 +178,7 @@ function ZipManager() {
     errorMessageDialog,
     importPasswordDialog,
     optionsDialog,
-    util
+    filesystemService
   });
   const {
     highlightPrevious,
@@ -189,23 +198,38 @@ function ZipManager() {
     togglePreviousPage,
     toggleNextPage,
     toggleFirst,
-    toggleLast
+    toggleLast,
+    updateEntriesHeight,
+    updateEntriesElementHeight,
+    updateEntriesElementHeightEnd,
+    registerResizeEntriesHandler
   } = getEntriesFeatures({
     entries,
     selectedFolderEntries,
     previousHighlight,
     highlightedIds,
     toggleNavigationDirection,
-    getEntriesHeight,
+    dialogDisplayed,
+    entriesElementHeight,
+    entriesDeltaHeight,
+    entriesElement,
+    entriesHeight,
     setHighlightedIds,
     setPreviousHighlight,
-    setToggleNavigationDirection
+    setToggleNavigationDirection,
+    setOptions,
+    setEntriesHeight,
+    setEntriesElementHeight,
+    setEntriesDeltaHeight,
+    getHighlightedEntryElement,
+    getOptions,
+    util
   });
   const { goIntoFolder, navigateBack, navigateForward, updateHistoryData } =
     getFoldersFeatures({
       history,
       historyIndex,
-      highlightedEntry,
+      highlightedEntries,
       selectedFolder,
       setSelectedFolder,
       setHistory,
@@ -225,12 +249,16 @@ function ZipManager() {
     exportZip,
     paste,
     closePromptExportZip,
-    closePromptImportPassword
+    closePromptImportPassword,
+    showAddFilesPicker,
+    showImportZipFilePicker
   } = getSelectedFolderFeatures({
     zipFilesystem,
     selectedFolder,
     rootZipFilename,
     clipboardData,
+    addFilePickerElement,
+    importZipFilePickerElement,
     chooseActionDialog,
     setHighlightedIds,
     setClipboardData,
@@ -243,6 +271,7 @@ function ZipManager() {
     saveEntry,
     getOptions,
     openDisplayError,
+    filesystemService,
     util,
     constants
   });
@@ -274,7 +303,7 @@ function ZipManager() {
     saveEntries,
     getOptions,
     openDisplayError,
-    util
+    filesystemService
   });
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     zipService,
@@ -294,18 +323,14 @@ function ZipManager() {
     resetOptions,
     applyAccentColor,
     moveBottomBar,
-    updateEntriesHeight,
-    saveEntriesHeight,
-    updateEntriesHeightEnd,
+    scrollToHighlightedEntry,
     playMusic,
     stopMusic,
     setMusicFile
   } = getAppFeatures({
     zipFilesystem,
-    dialogDisplayed,
-    entriesHeight,
-    entriesDeltaHeight,
     musicTrackIndex,
+    appStyleElement,
     selectedFolderInit,
     setPreviousHighlight,
     setToggleNavigationDirection,
@@ -316,21 +341,20 @@ function ZipManager() {
     setHistory,
     setHistoryIndex,
     setAccentColor,
-    setEntriesHeight,
     setEntriesDeltaHeight,
     setSelectedFolderInit,
     setMusicFrequencyData,
     setMusicTrackIndex,
-    getEntriesElementHeight,
     setOptionsDialog,
-    setSynth,
+    setMusicPlayerActive,
+    getHighlightedEntryElement,
     getOptions,
-    getAppStyleElement,
     goIntoFolder,
     openPromptExtract,
     addFiles,
     importZipFile,
     refreshSelectedFolder,
+    filesystemService,
     musicService,
     util,
     constants,
@@ -383,13 +407,19 @@ function ZipManager() {
   } = getEffects({
     selectedFolder,
     accentColor,
-    getHighlightedEntryElement,
+    scrollToHighlightedEntry,
     initApplication,
     initZipFilesystem,
     initSelectedFolder,
     applyAccentColor,
     util
   });
+  const appClassName =
+    constants.APP_CLASSNAME +
+    (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
+    (hiddenDownloadManager
+      ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
+      : "");
 
   usePageUnload(handlePageUnload);
   useKeyUp(handleKeyUp);
@@ -399,10 +429,10 @@ function ZipManager() {
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [accentColor]);
   useEffect(updateSelectedFolder, [selectedFolder]);
-  useEffect(updateApplication, []);
+  useEffect(updateApplication, [appStyleElement]);
 
   return (
-    <div className={appClassName()}>
+    <div className={appClassName}>
       <style ref={appStyleRef}></style>
       <main role="application">
         <TopButtonBar
@@ -415,8 +445,11 @@ function ZipManager() {
           onExportZip={openPromptExportZip}
           onReset={openConfirmReset}
           onOpenOptions={openOptions}
+          onShowImportZipFilePicker={showImportZipFilePicker}
+          onShowAddFilesPicker={showAddFilesPicker}
           onClickedButton={resetClickedButtonName}
-          util={util}
+          addFilePickerRef={addFilePickerRef}
+          importZipFilePickerRef={importZipFilePickerRef}
           constants={constants}
           messages={messages}
         />
@@ -437,7 +470,7 @@ function ZipManager() {
           entries={entries}
           selectedFolder={selectedFolder}
           highlightedIds={highlightedIds}
-          entriesHeight={entriesHeight}
+          entriesElementHeight={entriesElementHeight}
           deltaEntriesHeight={entriesDeltaHeight}
           hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
@@ -445,12 +478,13 @@ function ZipManager() {
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enter}
-          onSaveHeight={saveEntriesHeight}
-          onUpdateHeight={updateEntriesHeight}
+          onUpdateEntriesHeight={updateEntriesHeight}
+          onUpdateEntriesElementHeight={updateEntriesElementHeight}
+          onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
           entriesHeightRef={entriesHeightRef}
-          util={util}
+          i18nService={i18nService}
           constants={constants}
           messages={messages}
         />
@@ -473,7 +507,7 @@ function ZipManager() {
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntry}
           onMove={moveBottomBar}
-          onUpdateHeight={updateEntriesHeightEnd}
+          onUpdateElementHeight={updateEntriesElementHeightEnd}
           onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}
@@ -483,7 +517,7 @@ function ZipManager() {
           hidden={hiddenDownloadManager}
           onAbortDownload={abortDownload}
           downloaderRef={downloaderRef}
-          util={util}
+          i18nService={i18nService}
           constants={constants}
           messages={messages}
         />
@@ -496,8 +530,7 @@ function ZipManager() {
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}
         onSetMusicFile={setMusicFile}
-        synthRef={synthRef}
-        util={util}
+        musicPlayerActive={musicPlayerActive}
         messages={messages}
       />
       <CreateFolderDialog

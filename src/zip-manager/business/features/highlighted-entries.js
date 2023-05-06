@@ -14,7 +14,7 @@ function getHighlightedEntriesFeatures({
   saveEntries,
   getOptions,
   openDisplayError,
-  util
+  filesystemService
 }) {
   function copy() {
     setClipboardData({
@@ -98,7 +98,7 @@ function getHighlightedEntriesFeatures({
     const options = {
       filename: entry.name
     };
-    if (util.savePickersSupported()) {
+    if (filesystemService.savePickersSupported()) {
       extract(options);
     } else {
       setExtractDialog(options);

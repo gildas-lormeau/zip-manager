@@ -1,3 +1,5 @@
+/* global TransformStream, Response */
+
 function getCommonFeatures({
   selectedFolder,
   setDownloadId,
@@ -9,6 +11,8 @@ function getCommonFeatures({
   downloaderElement,
   zipService,
   storageService,
+  downloadService,
+  filesystemService,
   util,
   constants
 }) {
@@ -34,13 +38,13 @@ function getCommonFeatures({
   }
 
   async function saveEntries(entries, filename, options, parentHandle) {
-    if (util.savePickersSupported()) {
+    if (filesystemService.savePickersSupported()) {
       try {
         if (!parentHandle && (entries.length > 1 || entries[0].directory)) {
           parentHandle = await getParentHandle();
         }
       } catch (error) {
-        if (util.downloadAborted(error)) {
+        if (downloadService.downloadAborted(error)) {
           return;
         } else {
           throw error;
@@ -66,14 +70,14 @@ function getCommonFeatures({
       } else {
         download = {
           name,
-          controller: util.createAbortController(),
+          controller: downloadService.createAbortController(),
           progressValue: null,
           progressMax: null
         };
         await saveFileEntry(name, entry, options, download, parentHandle);
       }
     } catch (error) {
-      if (!util.downloadAborted(error)) {
+      if (!downloadService.downloadAborted(error)) {
         throw error;
       }
     } finally {
@@ -91,12 +95,11 @@ function getCommonFeatures({
   }
 
   async function saveFileEntry(name, entry, options, download, parentHandle) {
-    const savePickersSupported = util.savePickersSupported();
     const { signal } = download.controller;
     const onprogress = (progressValue, progressMax) =>
       onDownloadProgress(download.id, progressValue, progressMax);
     let fileHandle, writable, blob;
-    if (savePickersSupported) {
+    if (filesystemService.savePickersSupported()) {
       if (parentHandle) {
         fileHandle = await parentHandle.getFileHandle(name, {
           create: true
@@ -107,7 +110,7 @@ function getCommonFeatures({
       }
       writable = await fileHandle.createWritable();
     } else {
-      ({ writable, blob } = util.getWritableBlob());
+      ({ writable, blob } = getWritableBlob());
     }
     setDownloadId((downloadId) => {
       download.id = downloadId + 1;
@@ -115,20 +118,33 @@ function getCommonFeatures({
     });
     setDownloads((downloads) => [download, ...downloads]);
     await entry.getWritable(writable, { signal, onprogress, ...options });
-    if (!savePickersSupported && !signal.aborted) {
-      util.downloadBlob(await blob, downloaderElement, download.name);
+    if (!filesystemService.savePickersSupported() && !signal.aborted) {
+      downloadService.downloadBlob(
+        await blob,
+        downloaderElement,
+        download.name
+      );
     }
   }
 
+  function getWritableBlob() {
+    const { readable, writable } = new TransformStream({});
+    const blob = new Response(readable).blob();
+    return {
+      blob,
+      writable
+    };
+  }
+
   function getParentHandle() {
-    return util.showDirectoryPicker({
+    return filesystemService.showDirectoryPicker({
       mode: "readwrite",
       startIn: "downloads"
     });
   }
 
   function getFileHandle(suggestedName) {
-    return util.showSaveFilePicker({
+    return filesystemService.showSaveFilePicker({
       suggestedName,
       mode: "readwrite",
       startIn: "downloads"

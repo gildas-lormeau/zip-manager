@@ -1,3 +1,5 @@
+/* global setTimeout, clearTimeout */
+
 import "./styles/Entries.css";
 
 import { useEffect, useRef, useState } from "react";
@@ -7,19 +9,19 @@ function Entries({
   selectedFolder,
   highlightedIds,
   deltaEntriesHeight,
-  entriesHeight,
+  entriesElementHeight,
   hiddenDownloadManager,
   onDropFiles,
   onHighlight,
   onToggle,
   onToggleRange,
   onEnter,
-  onSaveHeight,
-  onUpdateHeight,
+  onUpdateEntriesHeight,
+  onUpdateEntriesElementHeight,
+  onRegisterResizeEntriesHandler,
   entriesRef,
-  entriesHeightRef,
   highlightedEntryRef,
-  util,
+  i18nService,
   constants,
   messages
 }) {
@@ -47,35 +49,14 @@ function Entries({
   }
 
   function getEntriesStyle() {
-    if (!hiddenDownloadManager && entriesHeight) {
-      return { height: entriesHeight + deltaEntriesHeight + "px" };
+    if (!hiddenDownloadManager && entriesElementHeight) {
+      return { height: entriesElementHeight + deltaEntriesHeight + "px" };
     }
-  }
-
-  function computeEntriesListHeight() {
-    if (highlightedEntryRef && highlightedEntryRef.current) {
-      entriesHeightRef.current = Math.max(
-        Math.ceil(
-          util.getHeight(entriesRef.current) /
-            (util.getHeight(highlightedEntryRef.current) +
-              util.getRowGap(entriesRef.current.firstElementChild))
-        ),
-        1
-      );
-    }
-  }
-
-  function updateHeight() {
-    onUpdateHeight(util.getHeight(entriesRef.current));
-  }
-
-  function saveHeight() {
-    onSaveHeight(util.getHeight(entriesRef.current));
   }
 
   function setTouchEndEventTimeout() {
     clearTouchEndEventTimeout();
-    touchEndTimeout.current = util.setTimeout(() => {
+    touchEndTimeout.current = setTimeout(() => {
       touchEndTimeout.current = null;
       setSelectModeEnabled(!selectModeEnabled);
     }, constants.LONG_TOUCH_DELAY);
@@ -83,7 +64,7 @@ function Entries({
 
   function clearTouchEndEventTimeout() {
     if (touchEndTimeout.current) {
-      util.clearTimeout(touchEndTimeout.current);
+      clearTimeout(touchEndTimeout.current);
       touchEndTimeout.current = null;
     }
   }
@@ -129,18 +110,8 @@ function Entries({
     if (event.dataTransfer.items) {
       event.preventDefault();
       setDraggingItems(false);
-      const items = Array.from(event.dataTransfer.items);
-      onDropFiles(await util.getFilesystemHandles(items));
+      onDropFiles(event.dataTransfer.items);
     }
-  }
-
-  function registerResizeHandler() {
-    const observer = util.addResizeObserver(entriesRef.current, saveHeight);
-    util.addResizeListener(updateHeight);
-    return () => {
-      observer.disconnect();
-      util.removeResizeListener(updateHeight);
-    };
   }
 
   function getEntriesClassName() {
@@ -151,12 +122,9 @@ function Entries({
     return classes.join(" ");
   }
 
-  useEffect(computeEntriesListHeight);
-  useEffect(registerResizeHandler);
-  useEffect(() => {
-    updateHeight();
-    saveHeight();
-  }, []);
+  useEffect(onUpdateEntriesHeight);
+  useEffect(onRegisterResizeEntriesHandler);
+  useEffect(onUpdateEntriesElementHeight, []);
 
   return (
     <div
@@ -198,7 +166,7 @@ function Entries({
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
                   onEnter={onEnter}
-                  util={util}
+                  i18nService={i18nService}
                   messages={messages}
                 />
               </li>
@@ -215,7 +183,7 @@ function Entries({
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
                   onEnter={onEnter}
-                  util={util}
+                  i18nService={i18nService}
                   messages={messages}
                 />
               </li>
@@ -236,7 +204,7 @@ function Entry({
   onToggle,
   onToggleRange,
   onEnter,
-  util,
+  i18nService,
   messages
 }) {
   function onHighlightEntry() {
@@ -261,7 +229,7 @@ function Entry({
         onToggle={onToggle}
         onToggleRange={onToggleRange}
         onEnter={onEnter}
-        util={util}
+        i18nService={i18nService}
         messages={messages}
       />
       <EntryButton
@@ -282,7 +250,7 @@ function EntryName({
   onToggle,
   onToggleRange,
   onEnter,
-  util,
+  i18nService,
   messages
 }) {
   const {
@@ -302,20 +270,20 @@ function EntryName({
       tooltip.push(
         LAST_MOD_DATE_LABEL +
           " " +
-          util.formatDate(
+          i18nService.formatDate(
             lastModified === undefined ? lastModDate : new Date(lastModified)
           )
       );
       if (uncompressedSize && compressedSize) {
         tooltip.push(
-          COMPRESSED_SIZE_LABEL + " " + util.formatSize(compressedSize)
+          COMPRESSED_SIZE_LABEL + " " + i18nService.formatSize(compressedSize)
         );
       }
       if (uncompressedSize) {
         tooltip.push(
           (compressedSize ? UNCOMPRESSED_SIZE_LABEL : SIZE_LABEL) +
             " " +
-            util.formatSize(uncompressedSize)
+            i18nService.formatSize(uncompressedSize)
         );
       }
     }

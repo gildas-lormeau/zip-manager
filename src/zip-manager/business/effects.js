@@ -1,7 +1,7 @@
 function getEffects({
   selectedFolder,
   accentColor,
-  getHighlightedEntryElement,
+  scrollToHighlightedEntry,
   initApplication,
   initZipFilesystem,
   initSelectedFolder,
@@ -23,10 +23,7 @@ function getEffects({
   }
 
   function updateHighlightedEntries() {
-    const highlightedEntryElement = getHighlightedEntryElement();
-    if (highlightedEntryElement) {
-      util.scrollIntoView(highlightedEntryElement);
-    }
+    scrollToHighlightedEntry();
   }
 
   function updateAccentColor() {

@@ -1,7 +1,5 @@
 import "./styles/TopButtonBar.css";
 
-import { useRef } from "react";
-
 import Button from "./Button.jsx";
 
 function TopButtonBar({
@@ -14,8 +12,11 @@ function TopButtonBar({
   onExportZip,
   onReset,
   onOpenOptions,
+  onShowImportZipFilePicker,
+  onShowAddFilesPicker,
   onClickedButton,
-  util,
+  addFilePickerRef,
+  importZipFilePickerRef,
   constants,
   messages
 }) {
@@ -42,8 +43,9 @@ function TopButtonBar({
         <AddFilesButton
           clickedButtonName={clickedButtonName}
           onAddFiles={onAddFiles}
+          onShowAddFilesPicker={onShowAddFilesPicker}
           onClickedButton={onClickedButton}
-          util={util}
+          addFilePickerRef={addFilePickerRef}
           constants={constants}
           messages={messages}
         />
@@ -59,8 +61,9 @@ function TopButtonBar({
         <ImportZipButton
           clickedButtonName={clickedButtonName}
           onImportZipFile={onImportZipFile}
+          onShowImportZipFilePicker={onShowImportZipFilePicker}
           onClickedButton={onClickedButton}
-          util={util}
+          importZipFilePickerRef={importZipFilePickerRef}
           constants={constants}
           messages={messages}
         />
@@ -106,37 +109,13 @@ function CreateFolderButton({
 
 function AddFilesButton({
   clickedButtonName,
+  addFilePickerRef,
   onAddFiles,
+  onShowAddFilesPicker,
   onClickedButton,
-  util,
   constants,
   messages
 }) {
-  const fileInputRef = useRef(null);
-  const { current } = fileInputRef;
-
-  function handleChange({ target }) {
-    const files = Array.from(target.files);
-    if (files.length) {
-      onAddFiles(files);
-    }
-    current.value = "";
-  }
-
-  function handleClick() {
-    async function showOpenFilePicker() {
-      if (util.openFilePickerSupported()) {
-        const files = await util.showOpenFilePicker({
-          multiple: true
-        });
-        onAddFiles(files);
-      } else {
-        util.dispatchClick(current);
-      }
-    }
-
-    showOpenFilePicker();
-  }
   return (
     <>
       <Button
@@ -144,15 +123,13 @@ function AddFilesButton({
         title={messages.ADD_FILES_BUTTON_TOOLTIP}
         label={messages.ADD_FILES_BUTTON_LABEL}
         clickedButtonName={clickedButtonName}
-        onClick={handleClick}
+        onClick={onShowAddFilesPicker}
         onClickedButton={onClickedButton}
       />
-      <input
-        onChange={handleChange}
-        ref={fileInputRef}
-        type="file"
+      <FilePicker
+        onChange={onAddFiles}
+        filePickerRef={addFilePickerRef}
         multiple
-        hidden
       />
     </>
   );
@@ -161,41 +138,22 @@ function AddFilesButton({
 function ImportZipButton({
   clickedButtonName,
   onImportZipFile,
+  onShowImportZipFilePicker,
   onClickedButton,
-  util,
+  importZipFilePickerRef,
   constants,
   messages
 }) {
-  const {
-    IMPORT_ZIP_BUTTON_NAME,
-    ZIP_EXTENSIONS_ACCEPT,
-    ZIP_EXTENSIONS_ACCEPT_STRING
-  } = constants;
-  const fileInputRef = useRef(null);
-  const { current } = fileInputRef;
+  const { IMPORT_ZIP_BUTTON_NAME, ZIP_EXTENSIONS_ACCEPT_STRING } = constants;
 
-  function handleChange({ target }) {
-    onImportZipFile(target.files[0]);
-    current.value = "";
+  function handleChange(files) {
+    onImportZipFile(files[0]);
   }
 
   function handleClick() {
-    async function showOpenFilePicker() {
-      if (util.openFilePickerSupported()) {
-        const files = await util.showOpenFilePicker({
-          multiple: false,
-          description: messages.ZIP_FILE_DESCRIPTION_LABEL,
-          accept: ZIP_EXTENSIONS_ACCEPT
-        });
-        if (files.length) {
-          onImportZipFile(files[0]);
-        }
-      } else {
-        util.dispatchClick(current);
-      }
-    }
-
-    showOpenFilePicker();
+    onShowImportZipFilePicker({
+      description: messages.ZIP_FILE_DESCRIPTION_LABEL
+    });
   }
 
   return (
@@ -208,12 +166,10 @@ function ImportZipButton({
         onClick={handleClick}
         onClickedButton={onClickedButton}
       />
-      <input
+      <FilePicker
         onChange={handleChange}
-        ref={fileInputRef}
-        type="file"
+        filePickerRef={importZipFilePickerRef}
         accept={ZIP_EXTENSIONS_ACCEPT_STRING}
-        hidden
       />
     </>
   );
@@ -253,6 +209,26 @@ function ResetButton({ disabled, onReset, messages }) {
 function OptionsButton({ onOpenOptions, messages }) {
   return (
     <Button label={messages.OPTIONS_BUTTON_LABEL} onClick={onOpenOptions} />
+  );
+}
+
+function FilePicker({ accept, multiple, onChange, filePickerRef }) {
+  function handleChange({ target }) {
+    if (target.files.length) {
+      onChange(Array.from(target.files));
+    }
+    filePickerRef.current.value = "";
+  }
+
+  return (
+    <input
+      onChange={handleChange}
+      ref={filePickerRef}
+      type="file"
+      accept={accept}
+      hidden
+      multiple={multiple}
+    />
   );
 }
 

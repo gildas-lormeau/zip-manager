@@ -1,7 +1,7 @@
 function getFoldersFeatures({
   history,
   historyIndex,
-  highlightedEntry,
+  highlightedEntries,
   selectedFolder,
   setSelectedFolder,
   setHistory,
@@ -62,8 +62,10 @@ function getFoldersFeatures({
     const newHistory = history.filter((entry, indexEntry) => {
       const entryRemoved =
         previousEntry === entry ||
-        entry === highlightedEntry ||
-        entry.isDescendantOf(highlightedEntry);
+        highlightedEntries.includes(entry) ||
+        highlightedEntries.find((highlightedEntry) =>
+          entry.isDescendantOf(highlightedEntry)
+        );
       if (entryRemoved) {
         if (indexEntry <= historyIndex) {
           offsetIndex++;

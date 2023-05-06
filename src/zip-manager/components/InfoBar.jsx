@@ -10,8 +10,7 @@ function InfoBar({
   stopMusic,
   onSetAccentColor,
   onSetMusicFile,
-  synthRef,
-  util,
+  musicPlayerActive,
   messages
 }) {
   if (hidden) {
@@ -21,8 +20,7 @@ function InfoBar({
       <footer className="info-bar">
         <div
           className={
-            "source-link" +
-            (synthRef && synthRef.current ? " player-active" : "")
+            "source-link" + (musicPlayerActive ? " player-active" : "")
           }
         >
           <span className="label">
@@ -41,8 +39,7 @@ function InfoBar({
               playMusic={playMusic}
               stopMusic={stopMusic}
               onSetMusicFile={onSetMusicFile}
-              synthRef={synthRef}
-              util={util}
+              musicPlayerActive={musicPlayerActive}
               messages={messages}
             />
           </span>
@@ -67,7 +64,7 @@ function InfoBar({
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
             onSetMusicFile={onSetMusicFile}
-            synthRef={synthRef}
+            musicPlayerActive={musicPlayerActive}
           />
         </div>
       </footer>
@@ -104,8 +101,7 @@ function MusicPlayerButton({
   playMusic,
   stopMusic,
   onSetMusicFile,
-  synthRef,
-  util,
+  musicPlayerActive,
   messages
 }) {
   const ICON_CLASSNAME = "icon icon-music-player";
@@ -115,7 +111,7 @@ function MusicPlayerButton({
   const fileInputRef = useRef(null);
 
   function handlePlayButtonClick() {
-    if (synthRef.current) {
+    if (musicPlayerActive) {
       stopMusic();
       setClassName(ICON_CLASSNAME + PAUSED_CLASSNAME);
       setIconPlayer(messages.PAUSED_MUSIC_ICON);
@@ -137,10 +133,7 @@ function MusicPlayerButton({
   async function handleDrop(event) {
     if (event.dataTransfer.items) {
       event.preventDefault();
-      const items = Array.from(event.dataTransfer.items);
-      onSetMusicFile(
-        await (await util.getFilesystemHandles(items))[0].getFile()
-      );
+      onSetMusicFile(event.dataTransfer.items);
     }
   }
 
@@ -168,7 +161,11 @@ function MusicPlayerButton({
   );
 }
 
-function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
+function MusicVisualizer({
+  musicFrequencyData,
+  accentColor,
+  musicPlayerActive
+}) {
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
   if (canvasRef.current) {
@@ -178,7 +175,7 @@ function MusicVisualizer({ musicFrequencyData, accentColor, synthRef }) {
     }
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
-    if (synthRef.current) {
+    if (musicPlayerActive) {
       musicFrequencyData.forEach((byteTimeDomain, index) => {
         context.fillRect(index, 256, 2, 32 - byteTimeDomain);
         context.fillRect(128 - index - 1, 256, 2, 32 - byteTimeDomain);

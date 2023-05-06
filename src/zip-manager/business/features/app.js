@@ -1,9 +1,7 @@
 function getAppFeatures({
   zipFilesystem,
-  dialogDisplayed,
-  entriesHeight,
-  entriesDeltaHeight,
   musicTrackIndex,
+  appStyleElement,
   selectedFolderInit,
   setPreviousHighlight,
   setToggleNavigationDirection,
@@ -14,21 +12,20 @@ function getAppFeatures({
   setHistory,
   setHistoryIndex,
   setAccentColor,
-  setEntriesHeight,
   setEntriesDeltaHeight,
   setSelectedFolderInit,
   setMusicFrequencyData,
   setMusicTrackIndex,
-  getEntriesElementHeight,
   setOptionsDialog,
-  setSynth,
+  setMusicPlayerActive,
+  getHighlightedEntryElement,
   getOptions,
-  getAppStyleElement,
   goIntoFolder,
   openPromptExtract,
   addFiles,
   importZipFile,
   refreshSelectedFolder,
+  filesystemService,
   musicService,
   util,
   constants,
@@ -37,17 +34,18 @@ function getAppFeatures({
   function initApplication() {
     const options = getOptions();
     const { accentColor } = options;
-    const styleElement = getAppStyleElement();
-    util.setStyle(
-      styleElement,
-      constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
-      JSON.stringify(messages.NO_ENTRIES_LABEL)
-    );
-    util.setStyle(
-      styleElement,
-      constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
-      JSON.stringify(constants.FOLDER_SEPARATOR)
-    );
+    if (appStyleElement) {
+      util.setStyle(
+        appStyleElement,
+        constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
+        JSON.stringify(messages.NO_ENTRIES_LABEL)
+      );
+      util.setStyle(
+        appStyleElement,
+        constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
+        JSON.stringify(constants.FOLDER_SEPARATOR)
+      );
+    }
     setAccentColor(accentColor);
     util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
   }
@@ -106,9 +104,8 @@ function getAppFeatures({
   }
 
   function applyAccentColor(color) {
-    const styleElement = getAppStyleElement();
     util.setStyle(
-      styleElement,
+      appStyleElement,
       constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
       color
     );
@@ -118,37 +115,6 @@ function getAppFeatures({
 
   function moveBottomBar(deltaY) {
     setEntriesDeltaHeight(deltaY);
-  }
-
-  function saveEntriesHeight(height) {
-    if (!dialogDisplayed) {
-      const options = getOptions();
-      if (entriesHeight || !options.entriesHeight) {
-        options.entriesHeight = height;
-        setOptions(options);
-      }
-    }
-  }
-
-  function updateEntriesHeight(height) {
-    if (!dialogDisplayed) {
-      const options = getOptions();
-      if (!entriesHeight && options.entriesHeight) {
-        height = options.entriesHeight;
-      }
-      setEntriesHeight(height);
-    }
-  }
-
-  function updateEntriesHeightEnd() {
-    const entriesElementHeight = getEntriesElementHeight();
-    setEntriesHeight(
-      Math.max(
-        Math.min(entriesHeight + entriesDeltaHeight, entriesElementHeight),
-        entriesElementHeight
-      )
-    );
-    setEntriesDeltaHeight(0);
   }
 
   function openOptions() {
@@ -163,6 +129,12 @@ function getAppFeatures({
     const options = { ...constants.DEFAULT_OPTIONS };
     options.maxWorkers = util.getDefaultMaxWorkers();
     setOptionsDialog(options);
+  }
+
+  function scrollToHighlightedEntry() {
+    if (getHighlightedEntryElement()) {
+      util.scrollIntoView(getHighlightedEntryElement());
+    }
   }
 
   function playMusic() {
@@ -181,14 +153,13 @@ function getAppFeatures({
         data = await blob.arrayBuffer();
       }
       const masterVolume = constants.MUSIC_TRACKS_VOLUMES[musicTrackIndex];
-      setSynth(
-        await musicService.play({
-          data,
-          masterVolume,
-          contentType,
-          onSetFrequencyData: setMusicFrequencyData
-        })
-      );
+      await musicService.play({
+        data,
+        masterVolume,
+        contentType,
+        onSetFrequencyData: setMusicFrequencyData
+      });
+      setMusicPlayerActive(true);
     }
 
     playMusic();
@@ -199,11 +170,14 @@ function getAppFeatures({
     setMusicTrackIndex(
       (musicTrackIndex + 1) % constants.MUSIC_TRACKS_VOLUMES.length
     );
-    setSynth(null);
+    setMusicPlayerActive(false);
   }
 
-  function setMusicFile(file) {
+  function setMusicFile(items) {
     async function setMusicFile() {
+      const file = await (
+        await filesystemService.getFilesystemHandles(items)
+      )[0].getFile();
       if (
         file.name.endsWith(constants.MIDI_FILE_EXTENSION) ||
         file.type === constants.MIDI_CONTENT_TYPE
@@ -229,9 +203,7 @@ function getAppFeatures({
     resetOptions,
     applyAccentColor,
     moveBottomBar,
-    saveEntriesHeight,
-    updateEntriesHeight,
-    updateEntriesHeightEnd,
+    scrollToHighlightedEntry,
     playMusic,
     stopMusic,
     setMusicFile

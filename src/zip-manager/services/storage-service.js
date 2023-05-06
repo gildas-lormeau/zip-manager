@@ -1,16 +1,16 @@
-function getStorageService({ util }) {
-  function setValue(key, value) {
-    util.saveValue(key, value);
-  }
+/* global localStorage */
 
-  function getValue(key) {
-    return util.restoreValue(key);
-  }
-
-  return {
-    set: setValue,
-    get: getValue
-  };
+function setValue(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
-export { getStorageService };
+function getValue(key) {
+  const value = localStorage.getItem(key);
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return value;
+  }
+}
+
+export { setValue as set, getValue as get };
