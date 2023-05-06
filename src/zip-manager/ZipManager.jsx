@@ -322,7 +322,7 @@ function ZipManager() {
     stopMusic,
     updateAccentColor,
     playMusicFile,
-    updateMiscFeatures
+    initMiscFeatures
   } = getMiscFeatures({
     accentColor,
     musicTrackIndex,
@@ -344,7 +344,7 @@ function ZipManager() {
     closeOptions,
     resetOptions,
     moveBottomBar,
-    updateApplication,
+    initAppFeatures,
     updateZipFilesystem
   } = getAppFeatures({
     zipFilesystem,
@@ -419,8 +419,8 @@ function ZipManager() {
   useEffect(updateAccentColor, [accentColor]);
   useEffect(updateSelectedFolder, [selectedFolder]);
   useEffect(() => {
-    updateMiscFeatures();
-    updateApplication();
+    initMiscFeatures();
+    initAppFeatures();
   }, [appStyleElement]);
 
   return (

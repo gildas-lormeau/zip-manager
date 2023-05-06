@@ -17,7 +17,7 @@ function getAppFeatures({
   constants,
   messages
 }) {
-  function updateApplication() {
+  function initAppFeatures() {
     if (appStyleElement) {
       util.setStyle(
         appStyleElement,
@@ -76,7 +76,7 @@ function getAppFeatures({
     closeOptions,
     resetOptions,
     moveBottomBar,
-    updateApplication,
+    initAppFeatures,
     updateZipFilesystem
   };
 }

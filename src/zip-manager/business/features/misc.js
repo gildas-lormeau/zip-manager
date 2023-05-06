@@ -13,7 +13,7 @@ function getMiscFeatures({
   util,
   constants
 }) {
-  function updateMiscFeatures() {
+  function initMiscFeatures() {
     const options = getOptions();
     const { accentColor } = options;
     setAccentColor(accentColor);
@@ -108,7 +108,7 @@ function getMiscFeatures({
     stopMusic,
     updateAccentColor,
     playMusicFile,
-    updateMiscFeatures
+    initMiscFeatures
   };
 }
 
