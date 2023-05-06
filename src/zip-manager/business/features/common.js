@@ -9,12 +9,8 @@ function getCommonFeatures({
   setClickedButtonName,
   removeDownload,
   downloaderElement,
-  zipService,
-  storageService,
   downloadService,
-  filesystemService,
-  util,
-  constants
+  filesystemService
 }) {
   function refreshSelectedFolder(folder = selectedFolder) {
     if (folder) {
@@ -180,59 +176,10 @@ function getCommonFeatures({
     setClickedButtonName(null);
   }
 
-  function setOptions(options) {
-    const previousOptions = getOptions();
-    options = { ...previousOptions, ...options };
-    configureZipService(options);
-    storageService.set(constants.OPTIONS_KEY_NAME, options);
-  }
-
-  function getOptions() {
-    const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME } = constants;
-    let options = storageService.get(OPTIONS_KEY_NAME);
-    if (!options) {
-      options = { ...DEFAULT_OPTIONS };
-      options.maxWorkers = util.getDefaultMaxWorkers();
-    }
-    if (options.hideNavigationBar === undefined) {
-      options.hideNavigationBar = DEFAULT_OPTIONS.hideNavigationBar;
-    }
-    if (options.hideDownloadManager === undefined) {
-      options.hideDownloadManager = DEFAULT_OPTIONS.hideDownloadManager;
-    }
-    if (options.hideInfobar === undefined) {
-      options.hideInfobar = DEFAULT_OPTIONS.hideInfobar;
-    }
-    if (options.promptForExportPassword === undefined) {
-      options.promptForExportPassword = DEFAULT_OPTIONS.promptForExportPassword;
-    }
-    if (options.defaultExportPassword === undefined) {
-      options.defaultExportPassword = DEFAULT_OPTIONS.defaultExportPassword;
-    }
-    if (options.checkSignature === undefined) {
-      options.checkSignature = DEFAULT_OPTIONS.checkSignature;
-    }
-    if (options.accentColor === undefined) {
-      options.accentColor = DEFAULT_OPTIONS.accentColor;
-    }
-    configureZipService(options);
-    return options;
-  }
-
-  function configureZipService(options) {
-    const { maxWorkers, chunkSize } = options;
-    zipService.configure({
-      maxWorkers,
-      chunkSize
-    });
-  }
-
   return {
     saveEntry,
     saveEntries,
     refreshSelectedFolder,
-    setOptions,
-    getOptions,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName

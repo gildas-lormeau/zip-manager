@@ -117,8 +117,6 @@ function ZipManager() {
     saveEntry,
     saveEntries,
     refreshSelectedFolder,
-    setOptions,
-    getOptions,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName
@@ -131,13 +129,17 @@ function ZipManager() {
     setClickedButtonName,
     removeDownload,
     downloaderElement,
-    zipService,
-    storageService,
     downloadService,
-    filesystemService,
-    util,
-    constants
+    filesystemService
   });
+  const { setOptions, getOptions, openOptions, closeOptions, resetOptions } =
+    getOptionsFeatures({
+      setOptionsDialog,
+      zipService,
+      storageService,
+      util,
+      constants
+    });
   const {
     disabledExportZip,
     disabledReset,
@@ -333,12 +335,6 @@ function ZipManager() {
     getOptions,
     filesystemService,
     musicService,
-    util,
-    constants
-  });
-  const { openOptions, closeOptions, resetOptions } = getOptionsFeatures({
-    setOptionsDialog,
-    getOptions,
     util,
     constants
   });
