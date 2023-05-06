@@ -59,7 +59,6 @@ const randomMusicIndex = Math.floor(
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
-  const [selectedFolderInit, setSelectedFolderInit] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [entries, setEntries] = useState([]);
   const [entriesElementHeight, setEntriesElementHeight] = useState(0);
@@ -240,6 +239,7 @@ function ZipManager() {
       refreshSelectedFolder
     });
   const {
+    initSelectedFolderFeatures,
     openPromptCreateFolder,
     createFolder,
     closePromptCreateFolder,
@@ -253,20 +253,17 @@ function ZipManager() {
     closePromptExportZip,
     closePromptImportPassword,
     showAddFilesPicker,
-    showImportZipFilePicker,
-    updateSelectedFolder
+    showImportZipFilePicker
   } = getSelectedFolderFeatures({
     zipFilesystem,
     selectedFolder,
     rootZipFilename,
     clipboardData,
-    selectedFolderInit,
     addFilePickerElement,
     importZipFilePickerElement,
     chooseActionDialog,
     setHighlightedIds,
     setClipboardData,
-    setSelectedFolderInit,
     setImportPasswordDialog,
     setExportZipDialog,
     setCreateFolderDialog,
@@ -415,7 +412,7 @@ function ZipManager() {
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [accentColor]);
-  useEffect(updateSelectedFolder, [selectedFolder]);
+  useEffect(initSelectedFolderFeatures, []);
   useEffect(() => {
     initMiscFeatures();
     initAppFeatures();
