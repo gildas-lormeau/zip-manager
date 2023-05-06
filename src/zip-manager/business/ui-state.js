@@ -77,11 +77,12 @@ function getUIState({
   const hiddenDownloadManager = options.hideDownloadManager;
   const hiddenInfobar = options.hideInfobar;
   const hiddenExportPassword = !options.promptForExportPassword;
-  const highlightedEntries = selectedFolder
-    ? selectedFolder.children.filter((entry) =>
+  const highlightedEntries =
+    (selectedFolder &&
+      selectedFolder.children.filter((entry) =>
         highlightedIds.includes(entry.id)
-      )
-    : [];
+      )) ||
+    [];
   const highlightedEntry =
     highlightedIds.length === 1 &&
     selectedFolder &&
