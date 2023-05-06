@@ -57,9 +57,9 @@ async function init({ data, contentType, masterVolume }) {
   }
 }
 
-function initAnalyser(library) {
-  analyser = library.audioContext.createAnalyser();
-  library.out.connect(analyser);
+function initAnalyser() {
+  analyser = musicLibrary.audioContext.createAnalyser();
+  musicLibrary.out.connect(analyser);
   analyser.fftSize = 128;
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
