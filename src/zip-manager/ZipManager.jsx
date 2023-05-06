@@ -52,7 +52,7 @@ const {
   getMiscFeatures
 } = features;
 const messages = getMessages({ i18nService });
-const randomMusicIndex = Math.floor(
+const randomMusicTrackIndex = Math.floor(
   Math.random() * constants.MUSIC_TRACKS_VOLUMES.length
 );
 
@@ -84,7 +84,7 @@ function ZipManager() {
   const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
-  const [musicTrackIndex, setMusicTrackIndex] = useState(randomMusicIndex);
+  const [musicTrackIndex, setMusicTrackIndex] = useState(randomMusicTrackIndex);
   const appStyleRef = useRef(null);
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
