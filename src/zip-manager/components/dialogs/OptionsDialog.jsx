@@ -10,6 +10,7 @@ function OptionsDialog({
   onClose,
   messages
 }) {
+  const [zoomFactor, setZoomFactor] = useState("");
   const [hideNavigationBar, setHideNavigationBar] = useState(false);
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
   const [hideInfobar, setHideInfobar] = useState(false);
@@ -21,6 +22,10 @@ function OptionsDialog({
   const [maxWorkers, setMaxWorkers] = useState("0");
   const [chunkSize, setChunkSize] = useState("0");
   const defaultPasswordInputRef = useRef(null);
+
+  function handleChangeZoomFactor(event) {
+    setZoomFactor(event.target.value);
+  }
 
   function handleChangeHideNavigationBar(event) {
     setHideNavigationBar(event.target.checked);
@@ -68,6 +73,7 @@ function OptionsDialog({
 
   function handleSubmit() {
     onSetOptions({
+      zoomFactor: Number(zoomFactor),
       hideNavigationBar,
       hideDownloadManager,
       hideInfobar,
@@ -84,6 +90,7 @@ function OptionsDialog({
   function updateData() {
     if (data) {
       const {
+        zoomFactor,
         hideNavigationBar,
         hideDownloadManager,
         hideInfobar,
@@ -95,6 +102,7 @@ function OptionsDialog({
         maxWorkers,
         chunkSize
       } = data;
+      setZoomFactor(zoomFactor);
       setHideNavigationBar(hideNavigationBar);
       setHideDownloadManager(hideDownloadManager);
       setHideInfobar(hideInfobar);
@@ -122,6 +130,18 @@ function OptionsDialog({
       cancelLabel={messages.DIALOG_CANCEL_BUTTON_LABEL}
       submitLabel={messages.OPTIONS_DIALOG_BUTTON_LABEL}
     >
+      <label>
+        {messages.OPTIONS_ZOOM_FACTOR_LABEL}
+        <input
+          value={zoomFactor}
+          type="number"
+          required
+          min={20}
+          max={500}
+          step={5}
+          onChange={handleChangeZoomFactor}
+        />
+      </label>
       <label>
         {messages.OPTIONS_HIDE_NAVIGATION_BAR_LABEL}
         <input

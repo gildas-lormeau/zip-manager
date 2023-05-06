@@ -34,7 +34,8 @@ const DEFAULT_OPTIONS = {
   maxWorkers: 2,
   chunkSize: 512 * 1024,
   promptForExportPassword: true,
-  defaultExportPassword: ""
+  defaultExportPassword: "",
+  zoomFactor: 100
 };
 const ZIP_EXTENSION = ".zip";
 const ZIP_EXTENSIONS = [
@@ -92,6 +93,7 @@ const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
 const OPTIONS_KEY_NAME = "options";
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
+const FONT_SIZE_CUSTOM_PROPERTY_NAME = "--font-size";
 const NO_ENTRIES_CUSTOM_PROPERTY_NAME = "--message-drag-and-drop-entries";
 const FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME = "--folder-separator";
 const CURRENT_PATH = ".";
@@ -171,6 +173,7 @@ export {
   FORWARD_BUTTON_NAME,
   OPTIONS_KEY_NAME,
   ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+  FONT_SIZE_CUSTOM_PROPERTY_NAME,
   NO_ENTRIES_CUSTOM_PROPERTY_NAME,
   FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
   MAINPAGE_REDIRECT_PATH,

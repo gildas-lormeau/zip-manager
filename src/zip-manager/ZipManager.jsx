@@ -132,14 +132,21 @@ function ZipManager() {
     downloadService,
     filesystemService
   });
-  const { setOptions, getOptions, openOptions, closeOptions, resetOptions } =
-    getOptionsFeatures({
-      setOptionsDialog,
-      zipService,
-      storageService,
-      util,
-      constants
-    });
+  const {
+    initOptionsFeatures,
+    setOptions,
+    getOptions,
+    openOptions,
+    closeOptions,
+    resetOptions
+  } = getOptionsFeatures({
+    appStyleElement,
+    setOptionsDialog,
+    zipService,
+    storageService,
+    util,
+    constants
+  });
   const {
     disabledExportZip,
     disabledReset,
@@ -410,8 +417,11 @@ function ZipManager() {
   useEffect(updateAccentColor, [accentColor]);
   useEffect(initSelectedFolderFeatures, []);
   useEffect(() => {
+    if (appStyleElement) {
+      initOptionsFeatures();
+      initAppFeatures();
+    }
     initMiscFeatures();
-    initAppFeatures();
   }, [appStyleElement]);
 
   return (

@@ -1,10 +1,17 @@
 function getOptionsFeatures({
+  appStyleElement,
   setOptionsDialog,
   zipService,
   storageService,
   util,
   constants
 }) {
+  function initOptionsFeatures() {
+    const options = getOptions();
+    configureZipService(options);
+    updateZoomFactor(options);
+  }
+
   function openOptions() {
     setOptionsDialog(getOptions());
   }
@@ -23,41 +30,42 @@ function getOptionsFeatures({
     const previousOptions = getOptions();
     options = { ...previousOptions, ...options };
     configureZipService(options);
+    updateZoomFactor(options);
     storageService.set(constants.OPTIONS_KEY_NAME, options);
   }
 
   function getOptions() {
     const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME } = constants;
-    let previousOptions = storageService.get(OPTIONS_KEY_NAME);
-    if (!previousOptions) {
-      previousOptions = { ...DEFAULT_OPTIONS };
-      previousOptions.maxWorkers = util.getDefaultMaxWorkers();
+    let options = storageService.get(OPTIONS_KEY_NAME);
+    if (!options) {
+      options = { ...DEFAULT_OPTIONS };
+      options.maxWorkers = util.getDefaultMaxWorkers();
     }
-    if (previousOptions.hideNavigationBar === undefined) {
-      previousOptions.hideNavigationBar = DEFAULT_OPTIONS.hideNavigationBar;
+    if (options.hideNavigationBar === undefined) {
+      options.hideNavigationBar = DEFAULT_OPTIONS.hideNavigationBar;
     }
-    if (previousOptions.hideDownloadManager === undefined) {
-      previousOptions.hideDownloadManager = DEFAULT_OPTIONS.hideDownloadManager;
+    if (options.hideDownloadManager === undefined) {
+      options.hideDownloadManager = DEFAULT_OPTIONS.hideDownloadManager;
     }
-    if (previousOptions.hideInfobar === undefined) {
-      previousOptions.hideInfobar = DEFAULT_OPTIONS.hideInfobar;
+    if (options.hideInfobar === undefined) {
+      options.hideInfobar = DEFAULT_OPTIONS.hideInfobar;
     }
-    if (previousOptions.promptForExportPassword === undefined) {
-      previousOptions.promptForExportPassword =
-        DEFAULT_OPTIONS.promptForExportPassword;
+    if (options.promptForExportPassword === undefined) {
+      options.promptForExportPassword = DEFAULT_OPTIONS.promptForExportPassword;
     }
-    if (previousOptions.defaultExportPassword === undefined) {
-      previousOptions.defaultExportPassword =
-        DEFAULT_OPTIONS.defaultExportPassword;
+    if (options.defaultExportPassword === undefined) {
+      options.defaultExportPassword = DEFAULT_OPTIONS.defaultExportPassword;
     }
-    if (previousOptions.checkSignature === undefined) {
-      previousOptions.checkSignature = DEFAULT_OPTIONS.checkSignature;
+    if (options.checkSignature === undefined) {
+      options.checkSignature = DEFAULT_OPTIONS.checkSignature;
     }
-    if (previousOptions.accentColor === undefined) {
-      previousOptions.accentColor = DEFAULT_OPTIONS.accentColor;
+    if (options.accentColor === undefined) {
+      options.accentColor = DEFAULT_OPTIONS.accentColor;
     }
-    configureZipService(previousOptions);
-    return previousOptions;
+    if (options.zoomFactor === undefined) {
+      options.zoomFactor = DEFAULT_OPTIONS.zoomFactor;
+    }
+    return options;
   }
 
   function configureZipService(options) {
@@ -68,7 +76,17 @@ function getOptionsFeatures({
     });
   }
 
+  function updateZoomFactor(options) {
+    const { zoomFactor } = options;
+    util.setStyle(
+      appStyleElement,
+      constants.FONT_SIZE_CUSTOM_PROPERTY_NAME,
+      zoomFactor / 100 + "em"
+    );
+  }
+
   return {
+    initOptionsFeatures,
     getOptions,
     setOptions,
     openOptions,

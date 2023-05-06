@@ -16,18 +16,16 @@ function getAppFeatures({
   messages
 }) {
   function initAppFeatures() {
-    if (appStyleElement) {
-      util.setStyle(
-        appStyleElement,
-        constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
-        JSON.stringify(messages.NO_ENTRIES_LABEL)
-      );
-      util.setStyle(
-        appStyleElement,
-        constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
-        JSON.stringify(constants.FOLDER_SEPARATOR)
-      );
-    }
+    util.setStyle(
+      appStyleElement,
+      constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
+      JSON.stringify(messages.NO_ENTRIES_LABEL)
+    );
+    util.setStyle(
+      appStyleElement,
+      constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
+      JSON.stringify(constants.FOLDER_SEPARATOR)
+    );
     util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
   }
 
