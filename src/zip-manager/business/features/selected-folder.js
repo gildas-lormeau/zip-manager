@@ -149,10 +149,7 @@ function getSelectedFolderFeatures({
       let importedEntries = [],
         addedEntries = [];
       try {
-        const importedEntries = await selectedFolder.importBlob(
-          zipFile,
-          options
-        );
+        importedEntries = await selectedFolder.importBlob(zipFile, options);
         const isPasswordProtected = (
           await Promise.all(
             importedEntries.map(
