@@ -5,10 +5,9 @@ const LANGUAGES = {
   "fr-FR": fr_FR,
   "en-US": en_US
 };
-const DEFAULT_LANGUAGE = "en-US";
 
-function getMessages({ util }) {
-  return LANGUAGES[util.getNavigatorLanguage()] || LANGUAGES[DEFAULT_LANGUAGE];
+function getMessages({ i18nService }) {
+  return LANGUAGES[i18nService.getLanguageId()];
 }
 
 export { getMessages };

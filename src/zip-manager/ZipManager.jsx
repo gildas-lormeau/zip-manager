@@ -50,7 +50,7 @@ const {
   getClipboardFeatures,
   getAppFeatures
 } = features;
-const messages = getMessages({ util });
+const messages = getMessages({ i18nService });
 const randomMusicIndex = Math.floor(
   Math.random() * constants.MUSIC_TRACKS_VOLUMES.length
 );

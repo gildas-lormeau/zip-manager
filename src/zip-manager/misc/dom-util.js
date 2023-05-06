@@ -111,10 +111,6 @@ function resetLocationSearch() {
   return window.history.replaceState(null, null, window.location.pathname);
 }
 
-function getNavigatorLanguage() {
-  return navigator.language;
-}
-
 export {
   scrollIntoView,
   dispatchClick,
@@ -137,6 +133,5 @@ export {
   setLaunchQueueConsumer,
   fetch,
   getLocationSearch,
-  resetLocationSearch,
-  getNavigatorLanguage
+  resetLocationSearch
 };
