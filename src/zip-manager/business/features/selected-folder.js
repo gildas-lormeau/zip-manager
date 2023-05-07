@@ -76,9 +76,16 @@ function getSelectedFolderFeatures({
       try {
         files.forEach((file) => {
           try {
+            const readable = file.stream();
+            const size = file.size;
             addedEntries.push(
-              selectedFolder.addBlob(file.name, file, {
-                lastModDate: new Date(file.lastModified)
+              selectedFolder.addData(file.name, {
+                Reader: function () {
+                  return { readable, size };
+                },
+                options: {
+                  lastModDate: new Date(file.lastModified)
+                }
               })
             );
           } catch (error) {
