@@ -417,13 +417,15 @@ function ZipManager() {
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [accentColor]);
-  useEffect(initSelectedFolderFeatures, []);
+  useEffect(() => {
+    initSelectedFolderFeatures();
+    initMiscFeatures();
+  }, []);
   useEffect(() => {
     if (appStyleElement) {
       initOptionsFeatures();
       initAppFeatures();
     }
-    initMiscFeatures();
   }, [appStyleElement]);
 
   return (
