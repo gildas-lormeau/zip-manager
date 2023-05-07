@@ -7,7 +7,6 @@ function getAppFeatures({
   setHighlightedIds,
   setHistory,
   setHistoryIndex,
-  setEntriesDeltaHeight,
   goIntoFolder,
   openPromptExtract,
   refreshSelectedFolder,
@@ -48,13 +47,8 @@ function getAppFeatures({
     }
   }
 
-  function moveBottomBar(deltaY) {
-    setEntriesDeltaHeight(deltaY);
-  }
-
   return {
     enterEntry,
-    moveBottomBar,
     initAppFeatures,
     updateZipFilesystem
   };

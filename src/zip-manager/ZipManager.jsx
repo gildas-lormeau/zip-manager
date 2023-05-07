@@ -208,6 +208,7 @@ function ZipManager() {
     toggleNextPage,
     toggleFirst,
     toggleLast,
+    moveBottomBar,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
@@ -345,24 +346,23 @@ function ZipManager() {
     util,
     constants
   });
-  const { initAppFeatures, enterEntry, moveBottomBar, updateZipFilesystem } =
-    getAppFeatures({
-      zipFilesystem,
-      appStyleElement,
-      setPreviousHighlight,
-      setToggleNavigationDirection,
-      setSelectedFolder,
-      setHighlightedIds,
-      setHistory,
-      setHistoryIndex,
-      setEntriesDeltaHeight,
-      goIntoFolder,
-      openPromptExtract,
-      refreshSelectedFolder,
-      util,
-      constants,
-      messages
-    });
+  const { initAppFeatures, enterEntry, updateZipFilesystem } = getAppFeatures({
+    zipFilesystem,
+    appStyleElement,
+    setPreviousHighlight,
+    setToggleNavigationDirection,
+    setSelectedFolder,
+    setHighlightedIds,
+    setHistory,
+    setHistoryIndex,
+    setEntriesDeltaHeight,
+    goIntoFolder,
+    openPromptExtract,
+    refreshSelectedFolder,
+    util,
+    constants,
+    messages
+  });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     zipFilesystem,
     downloads,

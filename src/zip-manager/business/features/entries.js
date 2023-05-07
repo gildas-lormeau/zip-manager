@@ -276,6 +276,10 @@ function getEntriesFeatures({
     return entries.findIndex((entry) => entry.id === entryId);
   }
 
+  function moveBottomBar(deltaY) {
+    setEntriesDeltaHeight(deltaY);
+  }
+
   function updateEntriesHeight() {
     if (entriesElement && getHighlightedEntryElement()) {
       setEntriesHeight(
@@ -355,6 +359,7 @@ function getEntriesFeatures({
     toggleNextPage,
     toggleFirst,
     toggleLast,
+    moveBottomBar,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
