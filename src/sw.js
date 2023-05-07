@@ -1,4 +1,4 @@
-/* global self, URL, Response, caches */
+/* global self, URL, Response, caches, importScripts */
 /* eslint-disable no-restricted-globals */
 
 import { clientsClaim } from "workbox-core";
