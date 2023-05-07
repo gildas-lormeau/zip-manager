@@ -3,6 +3,7 @@ function getHighlightedEntriesFeatures({
   entries,
   highlightedIds,
   highlightedEntry,
+  highlightedEntries,
   setClipboardData,
   setHighlightedIds,
   setPreviousHighlight,
@@ -18,13 +19,13 @@ function getHighlightedEntriesFeatures({
 }) {
   function copy() {
     setClipboardData({
-      entries: getHighlightedEntries().map((entry) => entry.clone(true))
+      entries: highlightedEntries.map((entry) => entry.clone(true))
     });
   }
 
   function cut() {
     setClipboardData({
-      entries: getHighlightedEntries(),
+      entries: highlightedEntries,
       cut: true
     });
   }
@@ -54,7 +55,7 @@ function getHighlightedEntriesFeatures({
   }
 
   function deleteEntry() {
-    getHighlightedEntries().forEach((entry) => zipFilesystem.remove(entry));
+    highlightedEntries.forEach((entry) => zipFilesystem.remove(entry));
     if (entries.length) {
       const indexEntry = Math.max(
         ...entries
@@ -108,22 +109,15 @@ function getHighlightedEntriesFeatures({
   function extract({ filename } = {}) {
     async function download() {
       try {
-        const entries = getHighlightedEntries();
         const options = getOptions();
-        filename = entries.length === 1 ? filename : null;
-        await saveEntries(entries, filename, options);
+        filename = highlightedEntries.length === 1 ? filename : null;
+        await saveEntries(highlightedEntries, filename, options);
       } catch (error) {
         openDisplayError(error.message);
       }
     }
 
     download();
-  }
-
-  function getHighlightedEntries() {
-    return highlightedIds.map((highlightedId) =>
-      zipFilesystem.getById(highlightedId)
-    );
   }
 
   function closePromptExtract() {

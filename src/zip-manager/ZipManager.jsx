@@ -300,6 +300,7 @@ function ZipManager() {
     entries,
     highlightedIds,
     highlightedEntry,
+    highlightedEntries,
     setClipboardData,
     setHighlightedIds,
     setPreviousHighlight,
