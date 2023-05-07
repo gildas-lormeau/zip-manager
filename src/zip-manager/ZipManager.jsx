@@ -113,24 +113,19 @@ function ZipManager() {
     setDownloads,
     util
   });
-  const {
-    saveEntry,
-    saveEntries,
-    openDisplayError,
-    closeDisplayError,
-    resetClickedButtonName
-  } = getCommonFeatures({
-    selectedFolder,
-    setDownloadId,
-    setDownloads,
-    setEntries,
-    setErrorMessageDialog,
-    setClickedButtonName,
-    removeDownload,
-    downloaderElement,
-    downloadService,
-    filesystemService
-  });
+  const { saveEntry, saveEntries, openDisplayError, closeDisplayError } =
+    getCommonFeatures({
+      selectedFolder,
+      setDownloadId,
+      setDownloads,
+      setEntries,
+      setErrorMessageDialog,
+      setClickedButtonName,
+      removeDownload,
+      downloaderElement,
+      downloadService,
+      filesystemService
+    });
   const {
     initOptionsFeatures,
     setOptions,
@@ -350,7 +345,12 @@ function ZipManager() {
     util,
     constants
   });
-  const { initAppFeatures, enterEntry, updateZipFilesystem } = getAppFeatures({
+  const {
+    initAppFeatures,
+    enterEntry,
+    resetClickedButtonName,
+    updateZipFilesystem
+  } = getAppFeatures({
     zipFilesystem,
     appStyleElement,
     setPreviousHighlight,
@@ -359,7 +359,7 @@ function ZipManager() {
     setHighlightedIds,
     setHistory,
     setHistoryIndex,
-    setEntriesDeltaHeight,
+    setClickedButtonName,
     goIntoFolder,
     openPromptExtract,
     refreshSelectedFolder,

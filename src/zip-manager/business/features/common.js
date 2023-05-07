@@ -4,7 +4,6 @@ function getCommonFeatures({
   setDownloadId,
   setDownloads,
   setErrorMessageDialog,
-  setClickedButtonName,
   removeDownload,
   downloaderElement,
   downloadService,
@@ -151,16 +150,11 @@ function getCommonFeatures({
     setErrorMessageDialog(null);
   }
 
-  function resetClickedButtonName() {
-    setClickedButtonName(null);
-  }
-
   return {
     saveEntry,
     saveEntries,
     openDisplayError,
-    closeDisplayError,
-    resetClickedButtonName
+    closeDisplayError
   };
 }
 

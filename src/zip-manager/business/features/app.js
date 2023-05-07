@@ -7,6 +7,7 @@ function getAppFeatures({
   setHighlightedIds,
   setHistory,
   setHistoryIndex,
+  setClickedButtonName,
   goIntoFolder,
   openPromptExtract,
   refreshSelectedFolder,
@@ -47,10 +48,15 @@ function getAppFeatures({
     }
   }
 
+  function resetClickedButtonName() {
+    setClickedButtonName(null);
+  }
+
   return {
     enterEntry,
     initAppFeatures,
-    updateZipFilesystem
+    updateZipFilesystem,
+    resetClickedButtonName
   };
 }
 
