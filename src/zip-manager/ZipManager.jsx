@@ -115,12 +115,9 @@ function ZipManager() {
   });
   const { saveEntry, saveEntries, openDisplayError, closeDisplayError } =
     getCommonFeatures({
-      selectedFolder,
       setDownloadId,
       setDownloads,
-      setEntries,
       setErrorMessageDialog,
-      setClickedButtonName,
       removeDownload,
       downloaderElement,
       downloadService,
