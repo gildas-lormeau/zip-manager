@@ -1,4 +1,4 @@
-/* global navigator, window, document, LaunchParams, ResizeObserver */
+/* global navigator, window, document, ResizeObserver */
 
 const RESIZE_EVENT_NAME = "resize";
 const KEYUP_EVENT_NAME = "keyup";
@@ -94,7 +94,7 @@ function isMacOSPlatform() {
 }
 
 function setLaunchQueueConsumer(listener) {
-  if ("launchQueue" in window && "files" in LaunchParams.prototype) {
+  if ("launchQueue" in window) {
     window.launchQueue.setConsumer(listener);
   }
 }
