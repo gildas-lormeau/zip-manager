@@ -116,7 +116,6 @@ function ZipManager() {
   const {
     saveEntry,
     saveEntries,
-    refreshSelectedFolder,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName
@@ -236,18 +235,23 @@ function ZipManager() {
     getOptions,
     util
   });
-  const { goIntoFolder, navigateBack, navigateForward, updateHistoryData } =
-    getFoldersFeatures({
-      history,
-      historyIndex,
-      highlightedEntries,
-      selectedFolder,
-      setSelectedFolder,
-      setHistory,
-      setHistoryIndex,
-      setHighlightedIds,
-      refreshSelectedFolder
-    });
+  const {
+    goIntoFolder,
+    navigateBack,
+    navigateForward,
+    refreshSelectedFolder,
+    updateHistoryData
+  } = getFoldersFeatures({
+    history,
+    historyIndex,
+    highlightedEntries,
+    selectedFolder,
+    setSelectedFolder,
+    setEntries,
+    setHistory,
+    setHistoryIndex,
+    setHighlightedIds
+  });
   const {
     initSelectedFolderFeatures,
     openPromptCreateFolder,

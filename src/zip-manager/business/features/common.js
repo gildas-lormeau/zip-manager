@@ -1,10 +1,8 @@
 /* global TransformStream, Response */
 
 function getCommonFeatures({
-  selectedFolder,
   setDownloadId,
   setDownloads,
-  setEntries,
   setErrorMessageDialog,
   setClickedButtonName,
   removeDownload,
@@ -12,26 +10,7 @@ function getCommonFeatures({
   downloadService,
   filesystemService
 }) {
-  function refreshSelectedFolder(folder = selectedFolder) {
-    if (folder) {
-      const { parent, children } = folder;
-      const folders = filterChildren(children, true);
-      const files = filterChildren(children, false);
-      const ancestors = [];
-      if (parent) {
-        ancestors.push(parent);
-      }
-      setEntries([...ancestors, ...folders, ...files]);
-    }
-  }
 
-  function filterChildren(children, isDirectory) {
-    return children
-      .filter((child) => Boolean(child.directory) === isDirectory)
-      .sort((previousChild, nextChild) =>
-        previousChild.name.localeCompare(nextChild.name)
-      );
-  }
 
   async function saveEntries(entries, filename, options, parentHandle) {
     if (filesystemService.savePickersSupported()) {
@@ -179,7 +158,6 @@ function getCommonFeatures({
   return {
     saveEntry,
     saveEntries,
-    refreshSelectedFolder,
     openDisplayError,
     closeDisplayError,
     resetClickedButtonName
