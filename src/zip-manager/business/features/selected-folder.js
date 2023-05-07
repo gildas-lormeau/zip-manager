@@ -145,8 +145,18 @@ function getSelectedFolderFeatures({
       try {
         if (entry.kind === filesystemService.FILESYSTEM_FILE_KIND) {
           const file = await entry.getFile();
-          const fileEntry = parentEntry.addBlob(entry.name, file);
-          addedEntries.push(fileEntry);
+          const readable = file.stream();
+          const size = file.size;
+          addedEntries.push(
+            parentEntry.addData(file.name, {
+              Reader: function () {
+                return { readable, size };
+              },
+              options: {
+                lastModDate: new Date(file.lastModified)
+              }
+            })
+          );
         } else if (entry.kind === filesystemService.FILESYSTEM_DIRECTORY_KIND) {
           const directoryEntry = parentEntry.addDirectory(entry.name);
           addedEntries.push(directoryEntry);
