@@ -56,7 +56,7 @@ function getHeight(element) {
   return element.offsetHeight;
 }
 
-function getRowGap(element) {
+function getRowGapHeight(element) {
   return parseInt(window.getComputedStyle(element).rowGap, 10);
 }
 
@@ -124,7 +124,7 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  getRowGap,
+  getRowGapHeight,
   removeDocumentAttribute,
   setStyle,
   setDocumentClass,

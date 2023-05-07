@@ -28,7 +28,7 @@ function getEntriesFeatures({
     if (getHighlightedEntryElement()) {
       return (
         util.getHeight(getHighlightedEntryElement()) +
-        util.getRowGap(entriesElement.firstElementChild)
+        util.getRowGapHeight(entriesElement.firstElementChild)
       );
     }
   }
