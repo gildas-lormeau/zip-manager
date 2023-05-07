@@ -9,8 +9,6 @@ function getCommonFeatures({
   downloadService,
   filesystemService
 }) {
-
-
   async function saveEntries(entries, filename, options, parentHandle) {
     if (filesystemService.savePickersSupported()) {
       try {
