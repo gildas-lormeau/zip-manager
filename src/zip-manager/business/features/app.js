@@ -55,13 +55,14 @@ function getAppFeatures({
   }
 
   function getAppClassName() {
-    const appClassName =
-      constants.APP_CLASSNAME +
-      (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
-      (hiddenDownloadManager
-        ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
-        : "");
-    return appClassName;
+    const classes = [constants.APP_CLASSNAME];
+    if (hiddenInfobar) {
+      classes.push(constants.INFOBAR_HIDDEN_CLASSNAME);
+    }
+    if (hiddenDownloadManager) {
+      classes.push(constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME);
+    }
+    return classes.join(" ");
   }
 
   return {
