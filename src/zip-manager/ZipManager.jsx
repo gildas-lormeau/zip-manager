@@ -111,15 +111,21 @@ function ZipManager() {
     setDownloads,
     util
   });
-  const { saveEntry, saveEntries, openDisplayError, closeDisplayError } =
-    getCommonFeatures({
-      setDownloadId,
-      setDownloads,
-      setErrorMessageDialog,
-      removeDownload,
-      downloadService,
-      filesystemService
-    });
+  const {
+    modifierKeyPressed,
+    saveEntry,
+    saveEntries,
+    openDisplayError,
+    closeDisplayError
+  } = getCommonFeatures({
+    setDownloadId,
+    setDownloads,
+    setErrorMessageDialog,
+    removeDownload,
+    downloadService,
+    filesystemService,
+    util
+  });
   const {
     initOptionsFeatures,
     setOptions,
@@ -149,7 +155,7 @@ function ZipManager() {
     disabledExtract,
     disabledRename,
     disabledDelete,
-    disabledEnter,
+    disabledEnterEntry,
     dialogDisplayed,
     hiddenNavigationBar,
     hiddenDownloadManager,
@@ -178,31 +184,22 @@ function ZipManager() {
     filesystemService
   });
   const {
-    highlightPrevious,
-    highlightNext,
-    highlightPreviousPage,
-    highlightNextPage,
-    highlightFirst,
-    highlightLast,
-    highlightFirstLetter,
     highlight,
     highlightEntries,
     highlightAll,
     toggle,
     toggleRange,
-    togglePrevious,
-    toggleNext,
-    togglePreviousPage,
-    toggleNextPage,
-    toggleFirst,
-    toggleLast,
     moveBottomBar,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
     updateHighlightedEntries,
-    registerResizeEntriesHandler
+    registerResizeEntriesHandler,
+    onEntriesKeyUp,
+    onEntriesKeyDown
   } = getEntriesFeatures({
+    disabledNavigation,
+    disabledHighlightAll,
     entries,
     selectedFolderEntries,
     previousHighlight,
@@ -220,26 +217,36 @@ function ZipManager() {
     setEntriesHeight,
     setEntriesElementHeight,
     setEntriesDeltaHeight,
+    setClickedButtonName,
     getHighlightedEntryElement,
     getOptions,
-    util
+    modifierKeyPressed,
+    util,
+    constants
   });
   const {
     goIntoFolder,
     navigateBack,
     navigateForward,
     refreshSelectedFolder,
-    updateHistoryData
+    updateHistoryData,
+    onFoldersKeyUp
   } = getFoldersFeatures({
+    disabledBack,
+    disabledForward,
     history,
     historyIndex,
+    highlightedEntry,
     highlightedEntries,
     selectedFolder,
     setSelectedFolder,
     setEntries,
     setHistory,
     setHistoryIndex,
-    setHighlightedIds
+    setHighlightedIds,
+    setClickedButtonName,
+    modifierKeyPressed,
+    constants
   });
   const {
     initSelectedFolderFeatures,
@@ -256,8 +263,11 @@ function ZipManager() {
     closePromptExportZip,
     closePromptImportPassword,
     showAddFilesPicker,
-    showImportZipFilePicker
+    showImportZipFilePicker,
+    onSelectedFolderKeyDown
   } = getSelectedFolderFeatures({
+    disabledPaste,
+    disabledExportZip,
     zipFilesystem,
     selectedFolder,
     rootZipFilename,
@@ -271,12 +281,14 @@ function ZipManager() {
     setExportZipDialog,
     setCreateFolderDialog,
     setChooseActionDialog,
+    setClickedButtonName,
     refreshSelectedFolder,
     highlightEntries,
     saveEntry,
     getOptions,
     openDisplayError,
     filesystemService,
+    modifierKeyPressed,
     util,
     constants
   });
@@ -291,8 +303,15 @@ function ZipManager() {
     closeConfirmDeleteEntry,
     openPromptExtract,
     extract,
-    closePromptExtract
+    closePromptExtract,
+    onHighlightedEntriesKeyUp,
+    onHighlightedEntriesKeyDown
   } = getHighlightedEntriesFeatures({
+    disabledCopy,
+    disabledCut,
+    disabledExtract,
+    disabledRename,
+    disabledDelete,
     zipFilesystem,
     entries,
     highlightedIds,
@@ -304,12 +323,15 @@ function ZipManager() {
     setExtractDialog,
     setRenameDialog,
     setDeleteEntryDialog,
+    setClickedButtonName,
     refreshSelectedFolder,
     updateHistoryData,
     saveEntries,
     getOptions,
     openDisplayError,
-    filesystemService
+    filesystemService,
+    modifierKeyPressed,
+    constants
   });
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     zipService,
@@ -345,9 +367,13 @@ function ZipManager() {
     initAppFeatures,
     updateZipFilesystem,
     resetClickedButtonName,
-    getAppClassName
+    getAppClassName,
+    onAppKeyUp
   } = getAppFeatures({
+    disabledEnterEntry,
     zipFilesystem,
+    highlightedEntry,
+    selectedFolder,
     appStyleElement,
     hiddenInfobar,
     hiddenDownloadManager,
@@ -361,46 +387,22 @@ function ZipManager() {
     goIntoFolder,
     openPromptExtract,
     refreshSelectedFolder,
+    modifierKeyPressed,
     util,
     constants,
     messages
   });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
-    zipFilesystem,
+    entries,
     downloads,
-    highlightedEntry,
-    selectedFolder,
-    disabledCut,
-    disabledCopy,
-    disabledExtract,
-    disabledHighlightAll,
-    disabledRename,
-    disabledPaste,
-    disabledDelete,
-    disabledBack,
-    disabledForward,
-    disabledExportZip,
-    disabledEnter,
-    disabledNavigation,
     dialogDisplayed,
-    enterEntry,
-    highlightNext,
-    highlightPrevious,
-    highlightPreviousPage,
-    highlightNextPage,
-    highlightFirst,
-    highlightLast,
-    highlightFirstLetter,
-    togglePrevious,
-    toggleNext,
-    togglePreviousPage,
-    toggleNextPage,
-    toggleFirst,
-    toggleLast,
-    goIntoFolder,
-    setClickedButtonName,
-    util,
-    constants
+    onEntriesKeyUp,
+    onFoldersKeyUp,
+    onHighlightedEntriesKeyUp,
+    onAppKeyUp,
+    onEntriesKeyDown,
+    onHighlightedEntriesKeyDown,
+    onSelectedFolderKeyDown
   });
   const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
   const appClassName = getAppClassName();

@@ -61,7 +61,7 @@ function getUIState({
       ));
   const disabledRename = highlightedIds.length !== 1 || parentFolderHighlighted;
   const disabledDelete = parentFolderHighlighted;
-  const disabledEnter = highlightedIds.length !== 1;
+  const disabledEnterEntry = highlightedIds.length !== 1;
   const dialogDisplayed =
     exportZipDialog ||
     extractDialog ||
@@ -102,7 +102,7 @@ function getUIState({
     disabledHighlightAll,
     disabledRename,
     disabledDelete,
-    disabledEnter,
+    disabledEnterEntry,
     dialogDisplayed,
     hiddenNavigationBar,
     hiddenDownloadManager,

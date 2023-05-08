@@ -1,5 +1,8 @@
 function getAppFeatures({
+  disabledEnterEntry,
   zipFilesystem,
+  highlightedEntry,
+  selectedFolder,
   appStyleElement,
   hiddenInfobar,
   hiddenDownloadManager,
@@ -13,6 +16,7 @@ function getAppFeatures({
   goIntoFolder,
   openPromptExtract,
   refreshSelectedFolder,
+  modifierKeyPressed,
   util,
   constants,
   messages
@@ -65,12 +69,22 @@ function getAppFeatures({
     return classes.join(" ");
   }
 
+  function onAppKeyUp(event) {
+    if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
+      if (event.key === constants.ACTION_KEY && !disabledEnterEntry) {
+        enterEntry(highlightedEntry || selectedFolder.parent);
+        event.preventDefault();
+      }
+    }
+  }
+
   return {
     enterEntry,
     initAppFeatures,
     updateZipFilesystem,
     resetClickedButtonName,
-    getAppClassName
+    getAppClassName,
+    onAppKeyUp
   };
 }
 

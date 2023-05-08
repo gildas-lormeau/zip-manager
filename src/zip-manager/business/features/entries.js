@@ -1,4 +1,6 @@
 function getEntriesFeatures({
+  disabledNavigation,
+  disabledHighlightAll,
   entries,
   selectedFolderEntries,
   previousHighlight,
@@ -8,7 +10,6 @@ function getEntriesFeatures({
   entriesElementHeight,
   entriesDeltaHeight,
   entriesElement,
-  getHighlightedEntryElement,
   entriesHeight,
   setHighlightedIds,
   setPreviousHighlight,
@@ -17,8 +18,12 @@ function getEntriesFeatures({
   setEntriesHeight,
   setEntriesElementHeight,
   setEntriesDeltaHeight,
+  setClickedButtonName,
+  getHighlightedEntryElement,
   getOptions,
-  util
+  modifierKeyPressed,
+  util,
+  constants
 }) {
   function getEntriesElementHeight() {
     return util.getHeight(entriesElement);
@@ -340,31 +345,112 @@ function getEntriesFeatures({
     }
   }
 
+  function onEntriesKeyUp(event) {
+    if (!disabledNavigation) {
+      const {
+        ACTION_KEY,
+        DOWN_KEY,
+        UP_KEY,
+        PAGE_UP_KEY,
+        PAGE_DOWN_KEY,
+        HOME_KEY,
+        END_KEY
+      } = constants;
+      if (event.shiftKey) {
+        if (event.key === DOWN_KEY) {
+          toggleNext();
+        }
+        if (event.key === UP_KEY) {
+          togglePrevious();
+        }
+        if (event.key === PAGE_UP_KEY) {
+          togglePreviousPage();
+        }
+        if (event.key === PAGE_DOWN_KEY) {
+          toggleNextPage();
+        }
+        if (event.key === HOME_KEY) {
+          toggleFirst();
+        }
+        if (event.key === END_KEY) {
+          toggleLast();
+        }
+      }
+      if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
+        if (event.key === DOWN_KEY) {
+          highlightNext();
+        }
+        if (event.key === UP_KEY) {
+          highlightPrevious();
+        }
+        if (event.key === HOME_KEY) {
+          highlightFirst();
+        }
+        if (event.key === END_KEY) {
+          highlightLast();
+        }
+        if (event.key === PAGE_UP_KEY) {
+          highlightPreviousPage();
+        }
+        if (event.key === PAGE_DOWN_KEY) {
+          highlightNextPage();
+        }
+      }
+      if (!event.altKey && !modifierKeyPressed(event)) {
+        if (event.key.length === 1 && event.key !== ACTION_KEY) {
+          highlightFirstLetter(event.key);
+        }
+      }
+    }
+  }
+
+  function onEntriesKeyDown(event) {
+    const {
+      HIGHLIGHT_ALL_KEY,
+      DOWN_KEY,
+      UP_KEY,
+      PAGE_DOWN_KEY,
+      PAGE_UP_KEY,
+      HOME_KEY,
+      END_KEY,
+      HIGHLIGHT_ALL_BUTTON_NAME
+    } = constants;
+    if (modifierKeyPressed(event)) {
+      if (event.key === HIGHLIGHT_ALL_KEY) {
+        event.preventDefault();
+        if (!disabledHighlightAll) {
+          setClickedButtonName(HIGHLIGHT_ALL_BUTTON_NAME);
+        }
+      }
+    }
+    if (!event.altKey && !modifierKeyPressed(event)) {
+      if (
+        event.key === DOWN_KEY ||
+        event.key === UP_KEY ||
+        event.key === PAGE_DOWN_KEY ||
+        event.key === PAGE_UP_KEY ||
+        event.key === HOME_KEY ||
+        event.key === END_KEY
+      ) {
+        event.preventDefault();
+      }
+    }
+  }
+
   return {
-    highlightPrevious,
-    highlightNext,
-    highlightPreviousPage,
-    highlightNextPage,
-    highlightFirst,
-    highlightLast,
-    highlightFirstLetter,
     highlight,
     highlightEntries,
     highlightAll,
     toggle,
     toggleRange,
-    togglePrevious,
-    toggleNext,
-    togglePreviousPage,
-    toggleNextPage,
-    toggleFirst,
-    toggleLast,
     moveBottomBar,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
     updateHighlightedEntries,
-    registerResizeEntriesHandler
+    registerResizeEntriesHandler,
+    onEntriesKeyUp,
+    onEntriesKeyDown
   };
 }
 

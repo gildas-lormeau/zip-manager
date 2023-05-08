@@ -1,13 +1,19 @@
 function getFoldersFeatures({
+  disabledBack,
+  disabledForward,
   history,
   historyIndex,
+  highlightedEntry,
   highlightedEntries,
   selectedFolder,
   setSelectedFolder,
   setEntries,
   setHistory,
   setHistoryIndex,
-  setHighlightedIds
+  setHighlightedIds,
+  setClickedButtonName,
+  modifierKeyPressed,
+  constants
 }) {
   function goIntoFolder(entry) {
     const newHistory = [...history];
@@ -101,12 +107,44 @@ function getFoldersFeatures({
       );
   }
 
+  function onFoldersKeyUp(event) {
+    const {
+      LEFT_KEY,
+      RIGHT_KEY,
+      BACK_KEY,
+      FORWARD_KEY,
+      BACK_BUTTON_NAME,
+      FORWARD_BUTTON_NAME
+    } = constants;
+    if (event.altKey) {
+      if (event.key === BACK_KEY && !disabledBack) {
+        setClickedButtonName(BACK_BUTTON_NAME);
+      }
+      if (event.key === FORWARD_KEY && !disabledForward) {
+        setClickedButtonName(FORWARD_BUTTON_NAME);
+      }
+    }
+    if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
+      if (event.key === LEFT_KEY && selectedFolder.parent) {
+        goIntoFolder(selectedFolder.parent);
+      }
+      if (
+        event.key === RIGHT_KEY &&
+        highlightedEntry &&
+        highlightedEntry.directory
+      ) {
+        goIntoFolder(highlightedEntry);
+      }
+    }
+  }
+
   return {
     goIntoFolder,
     navigateBack,
     navigateForward,
     refreshSelectedFolder,
-    updateHistoryData
+    updateHistoryData,
+    onFoldersKeyUp
   };
 }
 

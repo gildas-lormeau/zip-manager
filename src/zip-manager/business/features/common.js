@@ -6,7 +6,8 @@ function getCommonFeatures({
   setErrorMessageDialog,
   removeDownload,
   downloadService,
-  filesystemService
+  filesystemService,
+  util
 }) {
   async function saveEntries(entries, filename, options, parentHandle) {
     if (filesystemService.savePickersSupported()) {
@@ -143,7 +144,12 @@ function getCommonFeatures({
     setErrorMessageDialog(null);
   }
 
+  function modifierKeyPressed(event) {
+    return util.isMacOSPlatform() ? event.metaKey : event.ctrlKey;
+  }
+
   return {
+    modifierKeyPressed,
     saveEntry,
     saveEntries,
     openDisplayError,

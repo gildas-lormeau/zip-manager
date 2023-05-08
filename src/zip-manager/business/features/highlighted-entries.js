@@ -1,4 +1,9 @@
 function getHighlightedEntriesFeatures({
+  disabledCopy,
+  disabledCut,
+  disabledExtract,
+  disabledRename,
+  disabledDelete,
   zipFilesystem,
   entries,
   highlightedIds,
@@ -10,12 +15,15 @@ function getHighlightedEntriesFeatures({
   setExtractDialog,
   setRenameDialog,
   setDeleteEntryDialog,
+  setClickedButtonName,
   refreshSelectedFolder,
   updateHistoryData,
   saveEntries,
   getOptions,
   openDisplayError,
-  filesystemService
+  filesystemService,
+  modifierKeyPressed,
+  constants
 }) {
   function copy() {
     setClipboardData({
@@ -124,6 +132,46 @@ function getHighlightedEntriesFeatures({
     setExtractDialog(null);
   }
 
+  function onHighlightedEntriesKeyUp(event) {
+    const { DELETE_KEYS, DELETE_BUTTON_NAME } = constants;
+    if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
+      if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
+        setClickedButtonName(DELETE_BUTTON_NAME);
+      }
+    }
+  }
+
+  function onHighlightedEntriesKeyDown(event) {
+    const {
+      CUT_KEY,
+      COPY_KEY,
+      EXTRACT_KEY,
+      RENAME_KEY,
+      CUT_BUTTON_NAME,
+      COPY_BUTTON_NAME,
+      EXTRACT_BUTTON_NAME,
+      RENAME_BUTTON_NAME
+    } = constants;
+    if (modifierKeyPressed(event)) {
+      if (event.key === COPY_KEY && !disabledCopy) {
+        setClickedButtonName(COPY_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === CUT_KEY && !disabledCut) {
+        setClickedButtonName(CUT_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === EXTRACT_KEY && !disabledExtract) {
+        setClickedButtonName(EXTRACT_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === RENAME_KEY && !disabledRename) {
+        setClickedButtonName(RENAME_BUTTON_NAME);
+        event.preventDefault();
+      }
+    }
+  }
+
   return {
     copy,
     cut,
@@ -135,7 +183,9 @@ function getHighlightedEntriesFeatures({
     closeConfirmDeleteEntry,
     openPromptExtract,
     extract,
-    closePromptExtract
+    closePromptExtract,
+    onHighlightedEntriesKeyUp,
+    onHighlightedEntriesKeyDown
   };
 }
 

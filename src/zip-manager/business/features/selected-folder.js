@@ -1,4 +1,6 @@
 function getSelectedFolderFeatures({
+  disabledPaste,
+  disabledExportZip,
   zipFilesystem,
   selectedFolder,
   rootZipFilename,
@@ -12,12 +14,14 @@ function getSelectedFolderFeatures({
   setExportZipDialog,
   setCreateFolderDialog,
   setChooseActionDialog,
+  setClickedButtonName,
   refreshSelectedFolder,
   highlightEntries,
   saveEntry,
   getOptions,
   openDisplayError,
   filesystemService,
+  modifierKeyPressed,
   util,
   constants
 }) {
@@ -387,6 +391,43 @@ function getSelectedFolderFeatures({
     setImportPasswordDialog(null);
   }
 
+  function onSelectedFolderKeyDown(event) {
+    const {
+      CREATE_FOLDER_KEY,
+      ADD_FILES_KEY,
+      IMPORT_ZIP_KEY,
+      EXPORT_ZIP_KEY,
+      PASTE_KEY,
+      CREATE_FOLDER_BUTTON_NAME,
+      ADD_FILES_BUTTON_NAME,
+      IMPORT_ZIP_BUTTON_NAME,
+      EXPORT_ZIP_BUTTON_NAME,
+      PASTE_BUTTON_NAME
+    } = constants;
+    if (modifierKeyPressed(event)) {
+      if (event.key === CREATE_FOLDER_KEY) {
+        setClickedButtonName(CREATE_FOLDER_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === ADD_FILES_KEY) {
+        setClickedButtonName(ADD_FILES_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === IMPORT_ZIP_KEY) {
+        setClickedButtonName(IMPORT_ZIP_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === EXPORT_ZIP_KEY && !disabledExportZip) {
+        setClickedButtonName(EXPORT_ZIP_BUTTON_NAME);
+        event.preventDefault();
+      }
+      if (event.key === PASTE_KEY && !disabledPaste) {
+        setClickedButtonName(PASTE_BUTTON_NAME);
+        event.preventDefault();
+      }
+    }
+  }
+
   return {
     initSelectedFolderFeatures,
     openPromptCreateFolder,
@@ -402,7 +443,8 @@ function getSelectedFolderFeatures({
     closePromptExportZip,
     closePromptImportPassword,
     showAddFilesPicker,
-    showImportZipFilePicker
+    showImportZipFilePicker,
+    onSelectedFolderKeyDown
   };
 }
 
