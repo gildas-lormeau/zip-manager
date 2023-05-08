@@ -76,11 +76,11 @@ function getSelectedFolderFeatures({
       try {
         files.forEach((file) => {
           try {
-            const readable = file.stream();
-            const size = file.size;
             addedEntries.push(
               selectedFolder.addData(file.name, {
                 Reader: function () {
+                  const readable = file.stream();
+                  const size = file.size;
                   return { readable, size };
                 },
                 options: {
@@ -145,11 +145,11 @@ function getSelectedFolderFeatures({
       try {
         if (entry.kind === filesystemService.FILESYSTEM_FILE_KIND) {
           const file = await entry.getFile();
-          const readable = file.stream();
-          const size = file.size;
           addedEntries.push(
             parentEntry.addData(file.name, {
               Reader: function () {
+                const readable = file.stream();
+                const size = file.size;
                 return { readable, size };
               },
               options: {
