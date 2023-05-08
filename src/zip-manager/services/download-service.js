@@ -1,12 +1,13 @@
-/* global URL, AbortController */
+/* global document, URL, AbortController */
 
 const ABORT_ERROR_NAME = "AbortError";
 const CANCELLED_DOWNLOAD_MESSAGE = "download cancelled";
 
-function downloadBlob(blob, downloaderElement, download) {
+function downloadBlob(blob, download) {
   const href = URL.createObjectURL(blob);
-  Object.assign(downloaderElement, { href, download });
-  downloaderElement.click();
+  const anchorElement = document.createElement("a");
+  Object.assign(anchorElement, { href, download });
+  anchorElement.click();
   URL.revokeObjectURL(href);
 }
 
@@ -25,9 +26,4 @@ function downloadAborted(error) {
   );
 }
 
-export {
-  downloadBlob,
-  createAbortController,
-  abortDownload,
-  downloadAborted
-};
+export { downloadBlob, createAbortController, abortDownload, downloadAborted };

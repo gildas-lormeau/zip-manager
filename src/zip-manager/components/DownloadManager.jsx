@@ -3,20 +3,13 @@ import "./styles/DownloadManager.css";
 function DownloadManager({
   hidden,
   downloads,
-  downloaderRef,
   onAbortDownload,
   i18nService,
   constants,
   messages
 }) {
   if (hidden) {
-    return (
-      <div style={{ display: "none" }}>
-        <a hidden ref={downloaderRef} href="about:blank">
-          {}
-        </a>
-      </div>
-    );
+    return;
   } else {
     return (
       <div className="downloads" aria-label="Downloads" role="navigation">
@@ -33,9 +26,6 @@ function DownloadManager({
             </li>
           ))}
         </ol>
-        <a hidden ref={downloaderRef} href="about:blank">
-          {}
-        </a>
       </div>
     );
   }

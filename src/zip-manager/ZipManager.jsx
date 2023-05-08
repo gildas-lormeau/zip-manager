@@ -89,7 +89,6 @@ function ZipManager() {
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
-  const downloaderRef = useRef(null);
   const addFilePickerRef = useRef(null);
   const importZipFilePickerRef = useRef(null);
   const musicPlayerActiveRef = useRef(null);
@@ -97,7 +96,6 @@ function ZipManager() {
   const appStyleElement = appStyleRef.current;
   const entriesElement = entriesRef.current;
   const entriesHeight = entriesHeightRef.current;
-  const downloaderElement = downloaderRef.current;
   const addFilePickerElement = addFilePickerRef.current;
   const importZipFilePickerElement = importZipFilePickerRef.current;
   const musicPlayerActive = musicPlayerActiveRef.current;
@@ -119,7 +117,6 @@ function ZipManager() {
       setDownloads,
       setErrorMessageDialog,
       removeDownload,
-      downloaderElement,
       downloadService,
       filesystemService
     });
@@ -511,7 +508,6 @@ function ZipManager() {
           downloads={downloads}
           hidden={hiddenDownloadManager}
           onAbortDownload={abortDownload}
-          downloaderRef={downloaderRef}
           i18nService={i18nService}
           constants={constants}
           messages={messages}
