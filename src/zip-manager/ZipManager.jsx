@@ -344,13 +344,16 @@ function ZipManager() {
     constants
   });
   const {
-    initAppFeatures,
     enterEntry,
+    initAppFeatures,
+    updateZipFilesystem,
     resetClickedButtonName,
-    updateZipFilesystem
+    getAppClassName
   } = getAppFeatures({
     zipFilesystem,
     appStyleElement,
+    hiddenInfobar,
+    hiddenDownloadManager,
     setPreviousHighlight,
     setToggleNavigationDirection,
     setSelectedFolder,
@@ -403,12 +406,7 @@ function ZipManager() {
     constants
   });
   const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
-  const appClassName =
-    constants.APP_CLASSNAME +
-    (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
-    (hiddenDownloadManager
-      ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
-      : "");
+  const appClassName = getAppClassName();
 
   usePageUnload(handlePageUnload);
   useKeyUp(handleKeyUp);

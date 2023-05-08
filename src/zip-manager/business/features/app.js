@@ -1,6 +1,8 @@
 function getAppFeatures({
   zipFilesystem,
   appStyleElement,
+  hiddenInfobar,
+  hiddenDownloadManager,
   setPreviousHighlight,
   setToggleNavigationDirection,
   setSelectedFolder,
@@ -52,11 +54,22 @@ function getAppFeatures({
     setClickedButtonName(null);
   }
 
+  function getAppClassName() {
+    const appClassName =
+      constants.APP_CLASSNAME +
+      (hiddenInfobar ? " " + constants.INFOBAR_HIDDEN_CLASSNAME : "") +
+      (hiddenDownloadManager
+        ? " " + constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME
+        : "");
+    return appClassName;
+  }
+
   return {
     enterEntry,
     initAppFeatures,
     updateZipFilesystem,
-    resetClickedButtonName
+    resetClickedButtonName,
+    getAppClassName
   };
 }
 
