@@ -7,7 +7,10 @@ function getOptionsFeatures({
   constants
 }) {
   function initOptionsFeatures() {
-    const options = getOptions();
+    applyOptions(getOptions());
+  }
+
+  function applyOptions(options) {
     configureZipService(options);
     configureZoomFactor(options);
   }
@@ -29,8 +32,7 @@ function getOptionsFeatures({
   function setOptions(options) {
     const previousOptions = getOptions();
     options = { ...previousOptions, ...options };
-    configureZipService(options);
-    configureZoomFactor(options);
+    applyOptions(options);
     storageService.set(constants.OPTIONS_KEY_NAME, options);
   }
 
