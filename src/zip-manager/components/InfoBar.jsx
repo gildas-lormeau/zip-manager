@@ -168,7 +168,7 @@ function MusicVisualizer({
   if (canvasRef.current) {
     if (!audioContextRef.current) {
       audioContextRef.current = canvasRef.current.getContext("2d");
-      setColor();
+      updateColor();
     }
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
@@ -180,7 +180,7 @@ function MusicVisualizer({
     }
   }
 
-  function setColor() {
+  function updateColor() {
     const context = audioContextRef.current;
     const gradient = context.createLinearGradient(0, 0, 0, 256);
     gradient.addColorStop(0, accentColor);
@@ -192,7 +192,7 @@ function MusicVisualizer({
 
   useEffect(() => {
     if (audioContextRef.current) {
-      setColor();
+      updateColor();
     }
   }, [accentColor]);
   return <canvas ref={canvasRef} width={128} height={256}></canvas>;
