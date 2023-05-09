@@ -48,10 +48,6 @@ function scrollIntoView(element) {
   element.scrollIntoView({ block: "nearest" });
 }
 
-function dispatchClick(element) {
-  element.click();
-}
-
 function getHeight(element) {
   return element.offsetHeight;
 }
@@ -113,7 +109,6 @@ function resetLocationSearch() {
 
 export {
   scrollIntoView,
-  dispatchClick,
   addKeyUpListener,
   removeKeyUpListener,
   addKeyDownListener,

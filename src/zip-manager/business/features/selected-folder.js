@@ -296,7 +296,7 @@ function getSelectedFolderFeatures({
         });
         addFiles(files);
       } else {
-        util.dispatchClick(addFilePickerElement);
+        addFilePickerElement.click();
       }
     }
 
@@ -315,7 +315,7 @@ function getSelectedFolderFeatures({
           importZipFile(files[0]);
         }
       } else {
-        util.dispatchClick(importZipFilePickerElement);
+        importZipFilePickerElement.click();
       }
     }
 
