@@ -102,7 +102,6 @@ function ZipManager() {
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
-
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
   const setMusicPlayerActive = (active) =>
     (musicPlayerActiveRef.current = active);
