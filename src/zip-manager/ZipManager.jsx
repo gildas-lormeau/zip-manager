@@ -163,7 +163,8 @@ function ZipManager() {
     hiddenExportPassword,
     highlightedEntry,
     highlightedEntries,
-    selectedFolderEntries
+    selectedFolderEntries,
+    ancestorFolders
   } = getUIState({
     entries,
     highlightedIds,
@@ -449,6 +450,7 @@ function ZipManager() {
         />
         <NavigationBar
           selectedFolder={selectedFolder}
+          ancestorFolders={ancestorFolders}
           disabledBackButton={disabledBack}
           disabledForwardButton={disabledForward}
           clickedButtonName={clickedButtonName}

@@ -5,6 +5,7 @@ import Button from "./Button.jsx";
 function NavigationBar({
   hidden,
   selectedFolder,
+  ancestorFolders,
   disabledBackButton,
   disabledForwardButton,
   clickedButtonName,
@@ -36,6 +37,7 @@ function NavigationBar({
         />
         <Breadcrumb
           folder={selectedFolder}
+          ancestorFolders={ancestorFolders}
           onGoIntoFolder={onGoIntoFolder}
           constants={constants}
           messages={messages}
@@ -121,18 +123,23 @@ function ForwardButton({
   );
 }
 
-function Breadcrumb({ folder, onGoIntoFolder, constants, messages }) {
+function Breadcrumb({
+  folder,
+  ancestorFolders,
+  onGoIntoFolder,
+  constants,
+  messages
+}) {
   const lastItemFolder = folder;
-  const ancestors = getAncestors(folder);
   return (
     <nav className="breadcrumb">
       <ol>
-        {ancestors.map((folder) => (
+        {ancestorFolders.map((folder) => (
           <li key={folder.id}>
             <BreadcrumbItem
               folder={folder}
               onGoIntoFolder={onGoIntoFolder}
-              active={ancestors.length > 1 && folder !== lastItemFolder}
+              active={ancestorFolders.length > 1 && folder !== lastItemFolder}
               isSelectedFolder={folder === lastItemFolder}
               constants={constants}
               messages={messages}
@@ -142,18 +149,6 @@ function Breadcrumb({ folder, onGoIntoFolder, constants, messages }) {
       </ol>
     </nav>
   );
-}
-
-function getAncestors(folder) {
-  const ancestors = [];
-  while (folder && folder.parent) {
-    ancestors.unshift(folder);
-    folder = folder.parent;
-  }
-  if (folder) {
-    ancestors.unshift(folder);
-  }
-  return ancestors;
 }
 
 function BreadcrumbItem({

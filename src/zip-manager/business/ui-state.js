@@ -87,6 +87,7 @@ function getUIState({
     highlightedIds.length === 1 &&
     selectedFolder &&
     selectedFolder.children.find((entry) => entry.id === highlightedIds[0]);
+  const ancestorFolders = getAncestors(selectedFolder);
 
   return {
     disabledExportZip,
@@ -110,8 +111,21 @@ function getUIState({
     hiddenExportPassword,
     highlightedEntries,
     highlightedEntry,
-    selectedFolderEntries
+    selectedFolderEntries,
+    ancestorFolders
   };
+}
+
+function getAncestors(folder) {
+  const ancestors = [];
+  while (folder && folder.parent) {
+    ancestors.unshift(folder);
+    folder = folder.parent;
+  }
+  if (folder) {
+    ancestors.unshift(folder);
+  }
+  return ancestors;
 }
 
 export default getUIState;
