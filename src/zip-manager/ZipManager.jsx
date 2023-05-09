@@ -108,7 +108,7 @@ function ZipManager() {
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
-    util
+    downloadService
   });
   const {
     modifierKeyPressed,
