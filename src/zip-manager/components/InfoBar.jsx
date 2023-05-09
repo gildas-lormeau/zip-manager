@@ -9,7 +9,6 @@ function InfoBar({
   playMusic,
   stopMusic,
   onSetAccentColor,
-  onPlayMusicFile,
   musicPlayerActive,
   messages
 }) {
@@ -38,7 +37,6 @@ function InfoBar({
             <MusicPlayerButton
               playMusic={playMusic}
               stopMusic={stopMusic}
-              onPlayMusicFile={onPlayMusicFile}
               musicPlayerActive={musicPlayerActive}
               messages={messages}
             />
@@ -63,7 +61,6 @@ function InfoBar({
           <MusicVisualizer
             musicFrequencyData={musicFrequencyData}
             accentColor={accentColor}
-            onPlayMusicFile={onPlayMusicFile}
             musicPlayerActive={musicPlayerActive}
           />
         </div>
@@ -100,7 +97,6 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
 function MusicPlayerButton({
   playMusic,
   stopMusic,
-  onPlayMusicFile,
   musicPlayerActive,
   messages
 }) {
@@ -127,29 +123,11 @@ function MusicPlayerButton({
     }
   }
 
-  function handleDragOver(event) {
-    event.preventDefault();
-  }
-
-  function handleDragLeave(event) {
-    event.preventDefault();
-  }
-
-  async function handleDrop(event) {
-    if (event.dataTransfer.items) {
-      event.preventDefault();
-      onPlayMusicFile(event.dataTransfer.items);
-    }
-  }
-
   return (
     <>
       <span
         className={iconPlayer.className}
         onClick={handlePlayButtonClick}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
         tabIndex={0}
       >
         {iconPlayer.label}

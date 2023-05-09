@@ -55,26 +55,6 @@ function getMiscFeatures({
     setMusicPlayerActive(false);
   }
 
-  function playMusicFile(items) {
-    async function playMusicFile() {
-      const file = await (
-        await filesystemService.getFilesystemHandles(items)
-      )[0].getFile();
-      if (
-        file.name.endsWith(constants.MIDI_FILE_EXTENSION) ||
-        file.type === constants.MIDI_CONTENT_TYPE
-      ) {
-        const arrayBuffer = await file.arrayBuffer();
-        const data = Array.from(new Uint8Array(arrayBuffer));
-        const options = getOptions();
-        options.musicData = data;
-        setOptions(options);
-      }
-    }
-
-    playMusicFile();
-  }
-
   function updateAccentColor() {
     if (accentColor) {
       const brightNessAccentColor = getBrightNess(accentColor);
@@ -107,7 +87,6 @@ function getMiscFeatures({
     playMusic,
     stopMusic,
     updateAccentColor,
-    playMusicFile,
     initMiscFeatures
   };
 }

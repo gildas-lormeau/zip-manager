@@ -345,7 +345,6 @@ function ZipManager() {
     playMusic,
     stopMusic,
     updateAccentColor,
-    playMusicFile,
     initMiscFeatures
   } = getMiscFeatures({
     accentColor,
@@ -523,7 +522,6 @@ function ZipManager() {
         playMusic={playMusic}
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}
-        onPlayMusicFile={playMusicFile}
         musicPlayerActive={musicPlayerActive}
         messages={messages}
       />

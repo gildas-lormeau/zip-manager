@@ -98,11 +98,11 @@ function getSelectedFolderFeatures({
     }
   }
 
-  function dropFiles(items, options = {}) {
+  function dropFiles(handles, options = {}) {
     async function dropFiles() {
-      const handles = await filesystemService.getFilesystemHandles(items);
       const droppedEntries = [];
       const firstHandle = handles[0];
+      handles = Array.from(handles);
       try {
         const dropFilesPrevented =
           firstHandle.kind === filesystemService.FILESYSTEM_FILE_KIND &&
@@ -110,8 +110,13 @@ function getSelectedFolderFeatures({
           handleZipFile([await firstHandle.getFile()], dropFiles, options);
         if (!dropFilesPrevented) {
           const results = await Promise.allSettled(
-            handles.map((handle) =>
-              selectedFolder.addFileSystemHandle(handle, options)
+            handles.map(async (handle) =>
+              selectedFolder.addFileSystemHandle(
+                handle.getAsFileSystemHandle
+                  ? await handle.getAsFileSystemHandle()
+                  : handle.webkitGetAsEntry(),
+                options
+              )
             )
           );
           const errorResult = results.find(
