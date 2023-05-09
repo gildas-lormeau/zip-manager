@@ -130,7 +130,7 @@ function Breadcrumb({
   constants,
   messages
 }) {
-  const lastItemFolder = folder;
+  const selectedFolder = folder;
   return (
     <nav className="breadcrumb">
       <ol>
@@ -139,8 +139,8 @@ function Breadcrumb({
             <BreadcrumbItem
               folder={folder}
               onGoIntoFolder={onGoIntoFolder}
-              active={ancestorFolders.length > 1 && folder !== lastItemFolder}
-              isSelectedFolder={folder === lastItemFolder}
+              active={ancestorFolders.length > 1 && folder !== selectedFolder}
+              isSelectedFolder={folder === selectedFolder}
               constants={constants}
               messages={messages}
             />
