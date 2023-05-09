@@ -392,6 +392,7 @@ function ZipManager() {
     constants,
     messages
   });
+  const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
     downloads,
@@ -404,12 +405,11 @@ function ZipManager() {
     onHighlightedEntriesKeyDown,
     onSelectedFolderKeyDown
   });
-  const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
   const appClassName = getAppClassName();
 
-  usePageUnload(handlePageUnload);
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDown);
+  usePageUnload(handlePageUnload);
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
