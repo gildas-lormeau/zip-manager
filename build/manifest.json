@@ -39,13 +39,13 @@
       "src": "./assets/icons/icon-512x512-mono.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable monochrome"
+      "purpose": "monochrome"
     },
     {
       "src": "./assets/icons/icon-192x192-mono.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable monochrome"
+      "purpose": "monochrome"
     }
   ],
   "file_handlers": [
