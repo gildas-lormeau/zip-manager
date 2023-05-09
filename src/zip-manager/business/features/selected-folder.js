@@ -80,18 +80,7 @@ function getSelectedFolderFeatures({
       try {
         files.forEach((file) => {
           try {
-            addedEntries.push(
-              selectedFolder.addData(file.name, {
-                Reader: function () {
-                  const readable = file.stream();
-                  const size = file.size;
-                  return { readable, size };
-                },
-                options: {
-                  lastModDate: new Date(file.lastModified)
-                }
-              })
-            );
+            addedEntries.push(selectedFolder.addFile(file, options));
           } catch (error) {
             const message =
               error.message + (file ? " (" + file.name + ")" : "");
@@ -122,7 +111,7 @@ function getSelectedFolderFeatures({
         if (!dropFilesPrevented) {
           const results = await Promise.allSettled(
             handles.map((handle) =>
-              addFile(handle, selectedFolder, droppedEntries)
+              selectedFolder.addFileSystemHandle(handle, options)
             )
           );
           const errorResult = results.find(
@@ -143,36 +132,6 @@ function getSelectedFolderFeatures({
         }
         refreshSelectedFolder();
       }
-    }
-
-    async function addFile(entry, parentEntry, addedEntries) {
-      try {
-        if (entry.kind === filesystemService.FILESYSTEM_FILE_KIND) {
-          const file = await entry.getFile();
-          addedEntries.push(
-            parentEntry.addData(file.name, {
-              Reader: function () {
-                const readable = file.stream();
-                const size = file.size;
-                return { readable, size };
-              },
-              options: {
-                lastModDate: new Date(file.lastModified)
-              }
-            })
-          );
-        } else if (entry.kind === filesystemService.FILESYSTEM_DIRECTORY_KIND) {
-          const directoryEntry = parentEntry.addDirectory(entry.name);
-          addedEntries.push(directoryEntry);
-          for await (const value of entry.values()) {
-            await addFile(value, directoryEntry, addedEntries);
-          }
-        }
-      } catch (error) {
-        const message = error.message + (entry ? " (" + entry.name + ")" : "");
-        throw new Error(message);
-      }
-      return addedEntries;
     }
 
     dropFiles();
