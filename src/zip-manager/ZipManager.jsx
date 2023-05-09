@@ -341,26 +341,21 @@ function ZipManager() {
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
-  const {
-    playMusic,
-    stopMusic,
-    updateAccentColor,
-    initMiscFeatures
-  } = getMiscFeatures({
-    accentColor,
-    musicTrackIndex,
-    appStyleElement,
-    setOptions,
-    setAccentColor,
-    setMusicFrequencyData,
-    setMusicTrackIndex,
-    setMusicPlayerActive,
-    getOptions,
-    filesystemService,
-    musicService,
-    util,
-    constants
-  });
+  const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
+    getMiscFeatures({
+      accentColor,
+      musicTrackIndex,
+      appStyleElement,
+      setOptions,
+      setAccentColor,
+      setMusicFrequencyData,
+      setMusicTrackIndex,
+      setMusicPlayerActive,
+      getOptions,
+      musicService,
+      util,
+      constants
+    });
   const {
     enterEntry,
     initAppFeatures,

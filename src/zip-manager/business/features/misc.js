@@ -8,7 +8,6 @@ function getMiscFeatures({
   setMusicTrackIndex,
   setMusicPlayerActive,
   getOptions,
-  filesystemService,
   musicService,
   util,
   constants
