@@ -20,19 +20,13 @@ function getMiscFeatures({
 
   function playMusic() {
     async function playMusic() {
-      const options = getOptions();
-      const { musicData } = options;
       let contentType, data;
-      if (musicData) {
-        data = new Uint8Array(musicData).buffer;
-      } else {
-        const response = await util.fetch(
-          constants.MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
-        );
-        const blob = await response.blob();
-        contentType = blob.type;
-        data = await blob.arrayBuffer();
-      }
+      const response = await util.fetch(
+        constants.MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+      );
+      const blob = await response.blob();
+      contentType = blob.type;
+      data = await blob.arrayBuffer();
       const masterVolume = constants.MUSIC_TRACKS_VOLUMES[musicTrackIndex];
       await musicService.play({
         data,
