@@ -7,7 +7,6 @@ function TopButtonBar({
   disabledResetButton,
   clickedButtonName,
   onCreateFolder,
-  onAddFiles,
   onImportZipFile,
   onExportZip,
   onReset,
@@ -15,8 +14,6 @@ function TopButtonBar({
   onShowImportZipFilePicker,
   onShowAddFilesPicker,
   onClickedButton,
-  addFilePickerRef,
-  importZipFilePickerRef,
   constants,
   messages
 }) {
@@ -42,10 +39,8 @@ function TopButtonBar({
       <div className="button-group">
         <AddFilesButton
           clickedButtonName={clickedButtonName}
-          onAddFiles={onAddFiles}
           onShowAddFilesPicker={onShowAddFilesPicker}
           onClickedButton={onClickedButton}
-          addFilePickerRef={addFilePickerRef}
           constants={constants}
           messages={messages}
         />
@@ -60,10 +55,8 @@ function TopButtonBar({
       <div className="button-group">
         <ImportZipButton
           clickedButtonName={clickedButtonName}
-          onImportZipFile={onImportZipFile}
           onShowImportZipFilePicker={onShowImportZipFilePicker}
           onClickedButton={onClickedButton}
-          importZipFilePickerRef={importZipFilePickerRef}
           constants={constants}
           messages={messages}
         />
@@ -109,8 +102,6 @@ function CreateFolderButton({
 
 function AddFilesButton({
   clickedButtonName,
-  addFilePickerRef,
-  onAddFiles,
   onShowAddFilesPicker,
   onClickedButton,
   constants,
@@ -126,29 +117,18 @@ function AddFilesButton({
         onClick={onShowAddFilesPicker}
         onClickedButton={onClickedButton}
       />
-      <FilePicker
-        onChange={onAddFiles}
-        filePickerRef={addFilePickerRef}
-        multiple
-      />
     </>
   );
 }
 
 function ImportZipButton({
   clickedButtonName,
-  onImportZipFile,
   onShowImportZipFilePicker,
   onClickedButton,
-  importZipFilePickerRef,
   constants,
   messages
 }) {
-  const { IMPORT_ZIP_BUTTON_NAME, ZIP_EXTENSIONS_ACCEPT_STRING } = constants;
-
-  function handleChange(files) {
-    onImportZipFile(files[0]);
-  }
+  const { IMPORT_ZIP_BUTTON_NAME } = constants;
 
   function handleClick() {
     onShowImportZipFilePicker({
@@ -165,11 +145,6 @@ function ImportZipButton({
         clickedButtonName={clickedButtonName}
         onClick={handleClick}
         onClickedButton={onClickedButton}
-      />
-      <FilePicker
-        onChange={handleChange}
-        filePickerRef={importZipFilePickerRef}
-        accept={ZIP_EXTENSIONS_ACCEPT_STRING}
       />
     </>
   );
@@ -209,26 +184,6 @@ function ResetButton({ disabled, onReset, messages }) {
 function OptionsButton({ onOpenOptions, messages }) {
   return (
     <Button label={messages.OPTIONS_BUTTON_LABEL} onClick={onOpenOptions} />
-  );
-}
-
-function FilePicker({ accept, multiple, onChange, filePickerRef }) {
-  function handleChange({ target }) {
-    if (target.files.length) {
-      onChange(Array.from(target.files));
-    }
-    filePickerRef.current.value = "";
-  }
-
-  return (
-    <input
-      onChange={handleChange}
-      ref={filePickerRef}
-      type="file"
-      accept={accept}
-      hidden
-      multiple={multiple}
-    />
   );
 }
 

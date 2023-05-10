@@ -89,15 +89,11 @@ function ZipManager() {
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
-  const addFilePickerRef = useRef(null);
-  const importZipFilePickerRef = useRef(null);
   const musicPlayerActiveRef = useRef(null);
 
   const appStyleElement = appStyleRef.current;
   const entriesElement = entriesRef.current;
   const entriesHeight = entriesHeightRef.current;
-  const addFilePickerElement = addFilePickerRef.current;
-  const importZipFilePickerElement = importZipFilePickerRef.current;
   const musicPlayerActive = musicPlayerActiveRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
@@ -272,8 +268,6 @@ function ZipManager() {
     selectedFolder,
     rootZipFilename,
     clipboardData,
-    addFilePickerElement,
-    importZipFilePickerElement,
     chooseActionDialog,
     setHighlightedIds,
     setClipboardData,
@@ -436,8 +430,6 @@ function ZipManager() {
           onShowImportZipFilePicker={showImportZipFilePicker}
           onShowAddFilesPicker={showAddFilesPicker}
           onClickedButton={resetClickedButtonName}
-          addFilePickerRef={addFilePickerRef}
-          importZipFilePickerRef={importZipFilePickerRef}
           constants={constants}
           messages={messages}
         />

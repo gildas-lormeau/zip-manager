@@ -1,39 +1,51 @@
-/* global window */
+/* global window, document */
 
 const FILESYSTEM_FILE_KIND = "file";
-const FILESYSTEM_DIRECTORY_KIND = "directory";
 const ABORT_ERROR_NAME = "AbortError";
 
 async function showOpenFilePicker({ multiple, description, accept } = {}) {
   const excludeAcceptAllOption = Boolean(accept);
-  try {
-    const options = {
-      excludeAcceptAllOption,
+  if ("showOpenFilePicker" in window) {
+    try {
+      const options = {
+        excludeAcceptAllOption,
+        multiple
+      };
+      if (excludeAcceptAllOption) {
+        Object.assign(options, {
+          types: [
+            {
+              description,
+              accept
+            }
+          ]
+        });
+      }
+      const fileHandles = await window.showOpenFilePicker(options);
+      return Promise.all(fileHandles.map((fileHandle) => fileHandle.getFile()));
+    } catch (error) {
+      if (error.name === ABORT_ERROR_NAME) {
+        return [];
+      } else {
+        throw error;
+      }
+    }
+  } else {
+    const fileInputElement = document.createElement("input");
+    Object.assign(fileInputElement, {
+      type: "file",
+      accept,
       multiple
-    };
-    if (excludeAcceptAllOption) {
-      Object.assign(options, {
-        types: [
-          {
-            description,
-            accept
-          }
-        ]
-      });
-    }
-    const fileHandles = await window.showOpenFilePicker(options);
-    return Promise.all(fileHandles.map((fileHandle) => fileHandle.getFile()));
-  } catch (error) {
-    if (error.name === ABORT_ERROR_NAME) {
-      return [];
-    } else {
-      throw error;
-    }
+    });
+    return new Promise((resolve) => {
+      fileInputElement.onchange = ({ target }) => {
+        if (target.files.length) {
+          resolve(Array.from(target.files));
+        }
+      };
+      fileInputElement.click();
+    });
   }
-}
-
-function openFilePickerSupported() {
-  return "showOpenFilePicker" in window;
 }
 
 function showDirectoryPicker(options) {
@@ -50,8 +62,6 @@ function savePickersSupported() {
 
 export {
   FILESYSTEM_FILE_KIND,
-  FILESYSTEM_DIRECTORY_KIND,
-  openFilePickerSupported,
   showOpenFilePicker,
   showDirectoryPicker,
   savePickersSupported,

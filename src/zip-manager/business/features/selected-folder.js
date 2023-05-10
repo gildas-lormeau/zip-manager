@@ -5,8 +5,6 @@ function getSelectedFolderFeatures({
   selectedFolder,
   rootZipFilename,
   clipboardData,
-  addFilePickerElement,
-  importZipFilePickerElement,
   chooseActionDialog,
   setHighlightedIds,
   setClipboardData,
@@ -100,7 +98,7 @@ function getSelectedFolderFeatures({
 
   function dropFiles(handles, options = {}) {
     async function dropFiles() {
-      const droppedEntries = [];
+      let droppedEntries = [];
       const firstHandle = handles[0];
       handles = Array.from(handles);
       try {
@@ -110,14 +108,15 @@ function getSelectedFolderFeatures({
           handleZipFile([await firstHandle.getAsFile()], dropFiles, options);
         if (!dropFilesPrevented) {
           const results = await Promise.allSettled(
-            handles.map(async (handle) =>
-              selectedFolder.addFileSystemHandle(
+            handles.map(async (handle) => {
+              const entries = await selectedFolder.addFileSystemHandle(
                 handle.getAsFileSystemHandle
                   ? await handle.getAsFileSystemHandle()
                   : handle.webkitGetAsEntry(),
                 options
-              )
-            )
+              );
+              droppedEntries = droppedEntries.concat(entries);
+            })
           );
           const errorResult = results.find(
             (result) => result.status === "rejected"
@@ -254,14 +253,10 @@ function getSelectedFolderFeatures({
 
   function showAddFilesPicker() {
     async function showAddFilesPicker() {
-      if (filesystemService.openFilePickerSupported()) {
-        const files = await filesystemService.showOpenFilePicker({
-          multiple: true
-        });
-        addFiles(files);
-      } else {
-        addFilePickerElement.click();
-      }
+      const files = await filesystemService.showOpenFilePicker({
+        multiple: true
+      });
+      addFiles(files);
     }
 
     showAddFilesPicker();
@@ -269,17 +264,13 @@ function getSelectedFolderFeatures({
 
   function showImportZipFilePicker({ description }) {
     async function showImportZipFilePicker() {
-      if (filesystemService.openFilePickerSupported()) {
-        const files = await filesystemService.showOpenFilePicker({
-          multiple: false,
-          description,
-          accept: constants.ZIP_EXTENSIONS_ACCEPT
-        });
-        if (files.length) {
-          importZipFile(files[0]);
-        }
-      } else {
-        importZipFilePickerElement.click();
+      const files = await filesystemService.showOpenFilePicker({
+        multiple: false,
+        description,
+        accept: constants.ZIP_EXTENSIONS_ACCEPT
+      });
+      if (files.length) {
+        importZipFile(files[0]);
       }
     }
 
