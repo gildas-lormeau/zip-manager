@@ -20,13 +20,12 @@ function getMiscFeatures({
 
   function playMusic() {
     async function playMusic() {
-      let contentType, data;
       const response = await util.fetch(
         constants.MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
       );
       const blob = await response.blob();
-      contentType = blob.type;
-      data = await blob.arrayBuffer();
+      const contentType = blob.type;
+      const data = await blob.arrayBuffer();
       const masterVolume = constants.MUSIC_TRACKS_VOLUMES[musicTrackIndex];
       await musicService.play({
         data,
