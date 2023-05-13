@@ -15,7 +15,7 @@ function getSelectedFolderFeatures({
   setClickedButtonName,
   refreshSelectedFolder,
   highlightEntries,
-  saveEntry,
+  saveZipFile,
   getOptions,
   openDisplayError,
   filesystemService,
@@ -289,7 +289,7 @@ function getSelectedFolderFeatures({
     async function exportZip() {
       try {
         const options = getOptions();
-        await saveEntry({ filename, getWritable }, filename, {
+        await saveZipFile({ filename, getWritable }, filename, {
           ...options,
           password,
           readerOptions: {

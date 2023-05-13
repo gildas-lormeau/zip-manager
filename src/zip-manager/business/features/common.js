@@ -25,12 +25,12 @@ function getCommonFeatures({
     }
     await Promise.all(
       entries.map(async (entry) =>
-        saveEntry(entry, filename, options, parentHandle)
+        saveFile(entry, filename, options, parentHandle)
       )
     );
   }
 
-  async function saveEntry(entry, filename, options, parentHandle) {
+  async function saveFile(entry, filename, options, parentHandle) {
     if (!parentHandle && entry.directory) {
       parentHandle = await getParentHandle();
     }
@@ -150,7 +150,7 @@ function getCommonFeatures({
 
   return {
     modifierKeyPressed,
-    saveEntry,
+    saveZipFile: saveFile,
     saveEntries,
     openDisplayError,
     closeDisplayError

@@ -108,7 +108,7 @@ function ZipManager() {
   });
   const {
     modifierKeyPressed,
-    saveEntry,
+    saveZipFile,
     saveEntries,
     openDisplayError,
     closeDisplayError
@@ -278,7 +278,7 @@ function ZipManager() {
     setClickedButtonName,
     refreshSelectedFolder,
     highlightEntries,
-    saveEntry,
+    saveZipFile,
     getOptions,
     openDisplayError,
     filesystemService,
