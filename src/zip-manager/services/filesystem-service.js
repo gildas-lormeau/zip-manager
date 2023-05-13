@@ -60,10 +60,10 @@ function savePickersSupported() {
   return "showSaveFilePicker" in window && "showDirectoryPicker" in window;
 }
 
-function saveBlob(blob, download) {
+function saveBlob(blob, filename) {
   const href = URL.createObjectURL(blob);
   const anchorElement = document.createElement("a");
-  Object.assign(anchorElement, { href, download });
+  Object.assign(anchorElement, { href, download: filename });
   anchorElement.click();
   URL.revokeObjectURL(href);
 }
