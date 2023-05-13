@@ -1,4 +1,4 @@
-/* global window, document */
+/* global window, document, URL */
 
 const FILESYSTEM_FILE_KIND = "file";
 const ABORT_ERROR_NAME = "AbortError";
@@ -60,10 +60,19 @@ function savePickersSupported() {
   return "showSaveFilePicker" in window && "showDirectoryPicker" in window;
 }
 
+function saveBlob(blob, download) {
+  const href = URL.createObjectURL(blob);
+  const anchorElement = document.createElement("a");
+  Object.assign(anchorElement, { href, download });
+  anchorElement.click();
+  URL.revokeObjectURL(href);
+}
+
 export {
   FILESYSTEM_FILE_KIND,
   showOpenFilePicker,
   showDirectoryPicker,
   savePickersSupported,
-  showSaveFilePicker
+  showSaveFilePicker,
+  saveBlob
 };
