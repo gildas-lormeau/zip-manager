@@ -185,7 +185,7 @@ function ZipManager() {
     highlightAll,
     toggle,
     toggleRange,
-    moveBottomBar,
+    resizeEntries,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
@@ -487,7 +487,7 @@ function ZipManager() {
           onHighlightAll={highlightAll}
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntry}
-          onMove={moveBottomBar}
+          onMove={resizeEntries}
           onUpdateElementHeight={updateEntriesElementHeightEnd}
           onClickedButton={resetClickedButtonName}
           constants={constants}

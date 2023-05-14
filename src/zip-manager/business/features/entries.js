@@ -281,7 +281,7 @@ function getEntriesFeatures({
     return entries.findIndex((entry) => entry.id === entryId);
   }
 
-  function moveBottomBar(deltaY) {
+  function resizeEntries(deltaY) {
     setEntriesDeltaHeight(deltaY);
   }
 
@@ -443,7 +443,7 @@ function getEntriesFeatures({
     highlightAll,
     toggle,
     toggleRange,
-    moveBottomBar,
+    resizeEntries,
     updateEntriesHeight,
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
