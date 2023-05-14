@@ -21,18 +21,29 @@ function getAppFeatures({
   constants,
   messages
 }) {
+  const {
+    NO_ENTRIES_CUSTOM_PROPERTY_NAME,
+    FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
+    FOLDER_SEPARATOR,
+    APP_LOADING_ATTRIBUTE_NAME,
+    APP_CLASSNAME,
+    INFOBAR_HIDDEN_CLASSNAME,
+    DOWNLOAD_MANAGER_HIDDEN_CLASSNAME,
+    ACTION_KEY
+  } = constants;
+
   function initAppFeatures() {
     util.setStyle(
       appStyleElement,
-      constants.NO_ENTRIES_CUSTOM_PROPERTY_NAME,
+      NO_ENTRIES_CUSTOM_PROPERTY_NAME,
       JSON.stringify(messages.NO_ENTRIES_LABEL)
     );
     util.setStyle(
       appStyleElement,
-      constants.FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
-      JSON.stringify(constants.FOLDER_SEPARATOR)
+      FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
+      JSON.stringify(FOLDER_SEPARATOR)
     );
-    util.removeDocumentAttribute(constants.APP_LOADING_ATTRIBUTE_NAME);
+    util.removeDocumentAttribute(APP_LOADING_ATTRIBUTE_NAME);
   }
 
   function updateZipFilesystem() {
@@ -59,19 +70,19 @@ function getAppFeatures({
   }
 
   function getAppClassName() {
-    const classes = [constants.APP_CLASSNAME];
+    const classes = [APP_CLASSNAME];
     if (hiddenInfobar) {
-      classes.push(constants.INFOBAR_HIDDEN_CLASSNAME);
+      classes.push(INFOBAR_HIDDEN_CLASSNAME);
     }
     if (hiddenDownloadManager) {
-      classes.push(constants.DOWNLOAD_MANAGER_HIDDEN_CLASSNAME);
+      classes.push(DOWNLOAD_MANAGER_HIDDEN_CLASSNAME);
     }
     return classes.join(" ");
   }
 
   function onAppKeyUp(event) {
     if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
-      if (event.key === constants.ACTION_KEY && !disabledEnterEntry) {
+      if (event.key === ACTION_KEY && !disabledEnterEntry) {
         enterEntry(highlightedEntry || selectedFolder.parent);
         event.preventDefault();
       }

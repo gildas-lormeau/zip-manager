@@ -25,6 +25,18 @@ function getEntriesFeatures({
   util,
   constants
 }) {
+  const {
+    ACTION_KEY,
+    DOWN_KEY,
+    UP_KEY,
+    PAGE_UP_KEY,
+    PAGE_DOWN_KEY,
+    HOME_KEY,
+    END_KEY,
+    HIGHLIGHT_ALL_KEY,
+    HIGHLIGHT_ALL_BUTTON_NAME
+  } = constants;
+
   function getEntriesElementHeight() {
     return util.getHeight(entriesElement);
   }
@@ -345,15 +357,6 @@ function getEntriesFeatures({
 
   function onEntriesKeyUp(event) {
     if (!disabledNavigation) {
-      const {
-        ACTION_KEY,
-        DOWN_KEY,
-        UP_KEY,
-        PAGE_UP_KEY,
-        PAGE_DOWN_KEY,
-        HOME_KEY,
-        END_KEY
-      } = constants;
       if (event.shiftKey) {
         if (event.key === DOWN_KEY) {
           toggleNext();
@@ -403,16 +406,6 @@ function getEntriesFeatures({
   }
 
   function onEntriesKeyDown(event) {
-    const {
-      HIGHLIGHT_ALL_KEY,
-      DOWN_KEY,
-      UP_KEY,
-      PAGE_DOWN_KEY,
-      PAGE_UP_KEY,
-      HOME_KEY,
-      END_KEY,
-      HIGHLIGHT_ALL_BUTTON_NAME
-    } = constants;
     if (modifierKeyPressed(event)) {
       if (event.key === HIGHLIGHT_ALL_KEY) {
         event.preventDefault();

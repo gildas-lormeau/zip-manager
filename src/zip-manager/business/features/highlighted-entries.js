@@ -25,6 +25,19 @@ function getHighlightedEntriesFeatures({
   modifierKeyPressed,
   constants
 }) {
+  const {
+    CUT_KEY,
+    COPY_KEY,
+    EXTRACT_KEY,
+    RENAME_KEY,
+    CUT_BUTTON_NAME,
+    COPY_BUTTON_NAME,
+    EXTRACT_BUTTON_NAME,
+    RENAME_BUTTON_NAME,
+    DELETE_KEYS,
+    DELETE_BUTTON_NAME
+  } = constants;
+
   function copy() {
     setClipboardData({
       entries: highlightedEntries.map((entry) => entry.clone(true))
@@ -133,7 +146,6 @@ function getHighlightedEntriesFeatures({
   }
 
   function onHighlightedEntriesKeyUp(event) {
-    const { DELETE_KEYS, DELETE_BUTTON_NAME } = constants;
     if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
       if (DELETE_KEYS.includes(event.key) && !disabledDelete) {
         setClickedButtonName(DELETE_BUTTON_NAME);
@@ -142,16 +154,6 @@ function getHighlightedEntriesFeatures({
   }
 
   function onHighlightedEntriesKeyDown(event) {
-    const {
-      CUT_KEY,
-      COPY_KEY,
-      EXTRACT_KEY,
-      RENAME_KEY,
-      CUT_BUTTON_NAME,
-      COPY_BUTTON_NAME,
-      EXTRACT_BUTTON_NAME,
-      RENAME_BUTTON_NAME
-    } = constants;
     if (modifierKeyPressed(event)) {
       if (event.key === COPY_KEY && !disabledCopy) {
         setClickedButtonName(COPY_BUTTON_NAME);

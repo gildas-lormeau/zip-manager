@@ -12,6 +12,12 @@ function getMiscFeatures({
   util,
   constants
 }) {
+  const {
+    ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+    MUSIC_TRACK_RELATIVE_PATH_PREFIX,
+    MUSIC_TRACKS_VOLUMES
+  } = constants;
+
   function initMiscFeatures() {
     const options = getOptions();
     const { accentColor } = options;
@@ -21,12 +27,12 @@ function getMiscFeatures({
   function playMusic() {
     async function playMusic() {
       const response = await util.fetch(
-        constants.MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+        MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
       );
       const blob = await response.blob();
       const contentType = blob.type;
       const data = await blob.arrayBuffer();
-      const masterVolume = constants.MUSIC_TRACKS_VOLUMES[musicTrackIndex];
+      const masterVolume = MUSIC_TRACKS_VOLUMES[musicTrackIndex];
       await musicService.play({
         data,
         masterVolume,
@@ -41,9 +47,7 @@ function getMiscFeatures({
 
   function stopMusic() {
     musicService.stop();
-    setMusicTrackIndex(
-      (musicTrackIndex + 1) % constants.MUSIC_TRACKS_VOLUMES.length
-    );
+    setMusicTrackIndex((musicTrackIndex + 1) % MUSIC_TRACKS_VOLUMES.length);
     setMusicPlayerActive(false);
   }
 
@@ -59,7 +63,7 @@ function getMiscFeatures({
       }
       util.setStyle(
         appStyleElement,
-        constants.ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
+        ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
         accentColor
       );
       const options = getOptions();

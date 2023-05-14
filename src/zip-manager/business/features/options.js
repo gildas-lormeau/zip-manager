@@ -6,6 +6,9 @@ function getOptionsFeatures({
   util,
   constants
 }) {
+  const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME, FONT_SIZE_CUSTOM_PROPERTY_NAME } =
+    constants;
+
   function initOptionsFeatures() {
     applyOptions(getOptions());
   }
@@ -24,7 +27,7 @@ function getOptionsFeatures({
   }
 
   function resetOptions() {
-    const options = { ...constants.DEFAULT_OPTIONS };
+    const options = { ...DEFAULT_OPTIONS };
     options.maxWorkers = util.getDefaultMaxWorkers();
     setOptionsDialog(options);
   }
@@ -33,11 +36,10 @@ function getOptionsFeatures({
     const previousOptions = getOptions();
     options = { ...previousOptions, ...options };
     applyOptions(options);
-    storageService.set(constants.OPTIONS_KEY_NAME, options);
+    storageService.set(OPTIONS_KEY_NAME, options);
   }
 
   function getOptions() {
-    const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME } = constants;
     let options = storageService.get(OPTIONS_KEY_NAME);
     if (!options) {
       options = { ...DEFAULT_OPTIONS };
@@ -82,7 +84,7 @@ function getOptionsFeatures({
     const { zoomFactor } = options;
     util.setStyle(
       appStyleElement,
-      constants.FONT_SIZE_CUSTOM_PROPERTY_NAME,
+      FONT_SIZE_CUSTOM_PROPERTY_NAME,
       zoomFactor / 100 + "em"
     );
   }

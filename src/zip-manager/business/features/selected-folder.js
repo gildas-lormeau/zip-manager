@@ -23,13 +23,31 @@ function getSelectedFolderFeatures({
   util,
   constants
 }) {
+  const {
+    SHARED_FILES_PARAMETER,
+    SHARED_FILES_RELATIVE_PATH,
+    ZIP_EXTENSION,
+    ZIP_EXTENSIONS,
+    ZIP_EXTENSIONS_ACCEPT,
+    CREATE_FOLDER_KEY,
+    ADD_FILES_KEY,
+    IMPORT_ZIP_KEY,
+    EXPORT_ZIP_KEY,
+    PASTE_KEY,
+    CREATE_FOLDER_BUTTON_NAME,
+    ADD_FILES_BUTTON_NAME,
+    IMPORT_ZIP_BUTTON_NAME,
+    EXPORT_ZIP_BUTTON_NAME,
+    PASTE_BUTTON_NAME
+  } = constants;
+
   function initSelectedFolderFeatures() {
     async function initFeatures() {
       const locationSearch = util.getLocationSearch();
       if (locationSearch) {
         util.resetLocationSearch();
-        if (locationSearch === constants.SHARED_FILES_PARAMETER) {
-          const sharedFilesPath = constants.SHARED_FILES_RELATIVE_PATH;
+        if (locationSearch === SHARED_FILES_PARAMETER) {
+          const sharedFilesPath = SHARED_FILES_RELATIVE_PATH;
           const response = await util.fetch(sharedFilesPath);
           const formData = await response.formData();
           addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
@@ -144,9 +162,7 @@ function getSelectedFolderFeatures({
   function handleZipFile(files, callback, { forceAddFiles }) {
     const zipFileDetected =
       files.length === 1 &&
-      constants.ZIP_EXTENSIONS.find((extension) =>
-        files[0].name.endsWith(extension)
-      ) &&
+      ZIP_EXTENSIONS.find((extension) => files[0].name.endsWith(extension)) &&
       !forceAddFiles;
     if (zipFileDetected) {
       if (chooseActionDialog) {
@@ -233,7 +249,7 @@ function getSelectedFolderFeatures({
 
   function openPromptExportZip() {
     const filename = selectedFolder.name
-      ? selectedFolder.name + constants.ZIP_EXTENSION
+      ? selectedFolder.name + ZIP_EXTENSION
       : rootZipFilename;
     const options = getOptions();
     const password = options.defaultExportPassword;
@@ -267,7 +283,7 @@ function getSelectedFolderFeatures({
       const files = await filesystemService.showOpenFilePicker({
         multiple: false,
         description,
-        accept: constants.ZIP_EXTENSIONS_ACCEPT
+        accept: ZIP_EXTENSIONS_ACCEPT
       });
       if (files.length) {
         importZipFile(files[0]);
@@ -347,18 +363,6 @@ function getSelectedFolderFeatures({
   }
 
   function onSelectedFolderKeyDown(event) {
-    const {
-      CREATE_FOLDER_KEY,
-      ADD_FILES_KEY,
-      IMPORT_ZIP_KEY,
-      EXPORT_ZIP_KEY,
-      PASTE_KEY,
-      CREATE_FOLDER_BUTTON_NAME,
-      ADD_FILES_BUTTON_NAME,
-      IMPORT_ZIP_BUTTON_NAME,
-      EXPORT_ZIP_BUTTON_NAME,
-      PASTE_BUTTON_NAME
-    } = constants;
     if (modifierKeyPressed(event)) {
       if (event.key === CREATE_FOLDER_KEY) {
         setClickedButtonName(CREATE_FOLDER_BUTTON_NAME);

@@ -15,6 +15,15 @@ function getFoldersFeatures({
   modifierKeyPressed,
   constants
 }) {
+  const {
+    LEFT_KEY,
+    RIGHT_KEY,
+    BACK_KEY,
+    FORWARD_KEY,
+    BACK_BUTTON_NAME,
+    FORWARD_BUTTON_NAME
+  } = constants;
+
   function goIntoFolder(entry) {
     const newHistory = [...history];
     const newHistoryIndex = historyIndex + 1;
@@ -108,14 +117,6 @@ function getFoldersFeatures({
   }
 
   function onFoldersKeyUp(event) {
-    const {
-      LEFT_KEY,
-      RIGHT_KEY,
-      BACK_KEY,
-      FORWARD_KEY,
-      BACK_BUTTON_NAME,
-      FORWARD_BUTTON_NAME
-    } = constants;
     if (event.altKey) {
       if (event.key === BACK_KEY && !disabledBack) {
         setClickedButtonName(BACK_BUTTON_NAME);
