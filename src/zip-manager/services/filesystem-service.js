@@ -34,7 +34,7 @@ async function showOpenFilePicker({ multiple, description, accept } = {}) {
     const fileInputElement = document.createElement("input");
     Object.assign(fileInputElement, {
       type: "file",
-      accept: Object.keys(accept).join(","),
+      accept: accept ? Object.keys(accept).join(",") : "",
       multiple
     });
     return new Promise((resolve) => {
