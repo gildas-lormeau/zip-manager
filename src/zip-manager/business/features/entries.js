@@ -31,10 +31,7 @@ function getEntriesFeatures({
 
   function getHightlightedEntryHeight() {
     if (getHighlightedEntryElement()) {
-      return (
-        util.getHeight(getHighlightedEntryElement()) +
-        util.getRowGapHeight(entriesElement.firstElementChild)
-      );
+      return util.getRowHeight(getHighlightedEntryElement());
     }
   }
 

@@ -52,8 +52,11 @@ function getHeight(element) {
   return element.offsetHeight;
 }
 
-function getRowGapHeight(element) {
-  return parseInt(window.getComputedStyle(element).rowGap, 10);
+function getRowHeight(element) {
+  return (
+    getHeight(element) +
+    parseInt(window.getComputedStyle(element.parentElement).rowGap, 10)
+  );
 }
 
 function removeDocumentAttribute(name) {
@@ -119,7 +122,7 @@ export {
   addResizeListener,
   removeResizeListener,
   getHeight,
-  getRowGapHeight,
+  getRowHeight,
   removeDocumentAttribute,
   setStyle,
   setDocumentClass,
