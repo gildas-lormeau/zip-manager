@@ -1,4 +1,4 @@
-/* global navigator, window, document, ResizeObserver */
+/* global navigator, window, document, ResizeObserver, TransformStream, Response */
 
 const RESIZE_EVENT_NAME = "resize";
 const KEYUP_EVENT_NAME = "keyup";
@@ -110,6 +110,15 @@ function resetLocationSearch() {
   return window.history.replaceState(null, null, window.location.pathname);
 }
 
+function getWritableBlob() {
+  const { readable, writable } = new TransformStream({});
+  const blob = new Response(readable).blob();
+  return {
+    blob,
+    writable
+  };
+}
+
 export {
   scrollIntoView,
   addKeyUpListener,
@@ -131,5 +140,6 @@ export {
   setLaunchQueueConsumer,
   fetch,
   getLocationSearch,
-  resetLocationSearch
+  resetLocationSearch,
+  getWritableBlob
 };

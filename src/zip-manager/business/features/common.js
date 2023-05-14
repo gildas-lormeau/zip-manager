@@ -1,5 +1,3 @@
-/* global TransformStream, Response */
-
 function getCommonFeatures({
   setDownloadId,
   setDownloads,
@@ -82,7 +80,7 @@ function getCommonFeatures({
       }
       writable = await fileHandle.createWritable();
     } else {
-      ({ writable, blob } = getWritableBlob());
+      ({ writable, blob } = util.getWritableBlob());
     }
     setDownloadId((downloadId) => {
       download.id = downloadId + 1;
@@ -93,15 +91,6 @@ function getCommonFeatures({
     if (!filesystemService.savePickersSupported() && !signal.aborted) {
       filesystemService.saveBlob(await blob, download.name);
     }
-  }
-
-  function getWritableBlob() {
-    const { readable, writable } = new TransformStream({});
-    const blob = new Response(readable).blob();
-    return {
-      blob,
-      writable
-    };
   }
 
   function getParentHandle() {
