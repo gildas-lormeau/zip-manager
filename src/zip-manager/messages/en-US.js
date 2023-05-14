@@ -72,10 +72,10 @@ const CREATE_FOLDER_DIALOG_BUTTON_LABEL = "Create";
 const RESET_TITLE = "Reset filesystem";
 const RESET_MESSAGE = "Please confirm the reset of the filesystem.";
 const RESET_DIALOG_BUTTON_LABEL = "Reset";
-const DELETE_ENTRY_TITLE = "Delete entries";
-const DELETE_ENTRY_MESSAGE =
+const DELETE_ENTRIES_TITLE = "Delete entries";
+const DELETE_ENTRIES_MESSAGE =
   "Please confirm the deletion of the highlighted entries.";
-const DELETE_ENTRY_DIALOG_BUTTON_LABEL = "Delete";
+const DELETE_ENTRIES_DIALOG_BUTTON_LABEL = "Delete";
 const ZIP_FILE_DESCRIPTION_LABEL = "Zip file";
 const IMPORT_PASSWORD_TITLE = "Enter password";
 const IMPORT_PASSWORD_LABEL = "Password:";
@@ -175,9 +175,9 @@ export {
   RESET_TITLE,
   RESET_MESSAGE,
   RESET_DIALOG_BUTTON_LABEL,
-  DELETE_ENTRY_TITLE,
-  DELETE_ENTRY_MESSAGE,
-  DELETE_ENTRY_DIALOG_BUTTON_LABEL,
+  DELETE_ENTRIES_TITLE,
+  DELETE_ENTRIES_MESSAGE,
+  DELETE_ENTRIES_DIALOG_BUTTON_LABEL,
   ERROR_TITLE,
   IMPORT_PASSWORD_TITLE,
   IMPORT_PASSWORD_LABEL,

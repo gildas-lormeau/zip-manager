@@ -73,10 +73,10 @@ const RESET_TITLE = "Réinitialiser système de fichiers";
 const RESET_MESSAGE =
   "Veuillez confirmer la réinitialisation du système de fichiers.";
 const RESET_DIALOG_BUTTON_LABEL = "Réinitialiser";
-const DELETE_ENTRY_TITLE = "Supprimer les entrées";
-const DELETE_ENTRY_MESSAGE =
+const DELETE_ENTRIES_TITLE = "Supprimer les entrées";
+const DELETE_ENTRIES_MESSAGE =
   "Veuillez confirmer la suppression des entrées en surbrillance.";
-const DELETE_ENTRY_DIALOG_BUTTON_LABEL = "Supprimer";
+const DELETE_ENTRIES_DIALOG_BUTTON_LABEL = "Supprimer";
 const ZIP_FILE_DESCRIPTION_LABEL = "Zipper fichier";
 const IMPORT_PASSWORD_TITLE = "Entrer le mot de passse";
 const IMPORT_PASSWORD_LABEL = "Mot de passe :";
@@ -178,9 +178,9 @@ export {
   RESET_TITLE,
   RESET_MESSAGE,
   RESET_DIALOG_BUTTON_LABEL,
-  DELETE_ENTRY_TITLE,
-  DELETE_ENTRY_MESSAGE,
-  DELETE_ENTRY_DIALOG_BUTTON_LABEL,
+  DELETE_ENTRIES_TITLE,
+  DELETE_ENTRIES_MESSAGE,
+  DELETE_ENTRIES_DIALOG_BUTTON_LABEL,
   ERROR_TITLE,
   IMPORT_PASSWORD_TITLE,
   IMPORT_PASSWORD_LABEL,

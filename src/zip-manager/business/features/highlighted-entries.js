@@ -58,11 +58,11 @@ function getHighlightedEntriesFeatures({
     setRenameDialog(null);
   }
 
-  function openConfirmDeleteEntry() {
+  function openConfirmDeleteEntries() {
     setDeleteEntryDialog({});
   }
 
-  function deleteEntry() {
+  function deleteEntries() {
     highlightedEntries.forEach((entry) => zipFilesystem.remove(entry));
     if (entries.length) {
       const indexEntry = Math.max(
@@ -99,7 +99,7 @@ function getHighlightedEntriesFeatures({
     refreshSelectedFolder();
   }
 
-  function closeConfirmDeleteEntry() {
+  function closeConfirmDeleteEntries() {
     setDeleteEntryDialog(null);
   }
 
@@ -178,9 +178,9 @@ function getHighlightedEntriesFeatures({
     openPromptRename,
     rename,
     closePromptRename,
-    openConfirmDeleteEntry,
-    deleteEntry,
-    closeConfirmDeleteEntry,
+    openConfirmDeleteEntries,
+    deleteEntries,
+    closeConfirmDeleteEntries,
     openPromptExtract,
     extract,
     closePromptExtract,

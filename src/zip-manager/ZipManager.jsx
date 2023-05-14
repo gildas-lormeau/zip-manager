@@ -31,7 +31,7 @@ import {
   RenameDialog,
   CreateFolderDialog,
   ResetDialog,
-  DeleteEntryDialog,
+  DeleteEntriesDialog,
   ErrorMessageDialog,
   ImportPasswordDialog,
   OptionsDialog,
@@ -292,9 +292,9 @@ function ZipManager() {
     openPromptRename,
     rename,
     closePromptRename,
-    openConfirmDeleteEntry,
-    deleteEntry,
-    closeConfirmDeleteEntry,
+    openConfirmDeleteEntries,
+    deleteEntries,
+    closeConfirmDeleteEntries,
     openPromptExtract,
     extract,
     closePromptExtract,
@@ -486,7 +486,7 @@ function ZipManager() {
           onExtract={extract}
           onHighlightAll={highlightAll}
           onRename={openPromptRename}
-          onRemove={openConfirmDeleteEntry}
+          onRemove={openConfirmDeleteEntries}
           onMove={resizeEntries}
           onUpdateElementHeight={updateEntriesElementHeightEnd}
           onClickedButton={resetClickedButtonName}
@@ -543,10 +543,10 @@ function ZipManager() {
         onClose={closeConfirmReset}
         messages={messages}
       />
-      <DeleteEntryDialog
+      <DeleteEntriesDialog
         data={deleteEntryDialog}
-        onDeleteEntry={deleteEntry}
-        onClose={closeConfirmDeleteEntry}
+        onDeleteEntries={deleteEntries}
+        onClose={closeConfirmDeleteEntries}
         messages={messages}
       />
       <ErrorMessageDialog

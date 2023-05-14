@@ -9,7 +9,7 @@ import ExtractDialog from "./dialogs/ExtractDialog.jsx";
 import RenameDialog from "./dialogs/RenameDialog.jsx";
 import CreateFolderDialog from "./dialogs/CreateFolderDialog.jsx";
 import ResetDialog from "./dialogs/ResetDialog.jsx";
-import DeleteEntryDialog from "./dialogs/DeleteEntryDialog.jsx";
+import DeleteEntriesDialog from "./dialogs/DeleteEntriesDialog.jsx";
 import ErrorMessageDialog from "./dialogs/ErrorMessageDialog.jsx";
 import ImportPasswordDialog from "./dialogs/ImportPasswordDialog.jsx";
 import OptionsDialog from "./dialogs/OptionsDialog.jsx";
@@ -27,7 +27,7 @@ export {
   RenameDialog,
   CreateFolderDialog,
   ResetDialog,
-  DeleteEntryDialog,
+  DeleteEntriesDialog,
   ErrorMessageDialog,
   ImportPasswordDialog,
   OptionsDialog,
