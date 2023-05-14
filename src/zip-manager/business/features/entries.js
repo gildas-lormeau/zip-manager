@@ -30,8 +30,9 @@ function getEntriesFeatures({
   }
 
   function getHightlightedEntryHeight() {
-    if (getHighlightedEntryElement()) {
-      return util.getRowHeight(getHighlightedEntryElement());
+    const highlightedEntryElement = getHighlightedEntryElement();
+    if (highlightedEntryElement) {
+      return util.getRowHeight(highlightedEntryElement);
     }
   }
 
