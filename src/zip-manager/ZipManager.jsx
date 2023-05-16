@@ -59,7 +59,7 @@ const {
   getMiscFeatures
 } = features;
 const messages = getMessages({ i18nService });
-const randomMusicTrackIndex = musicService.getFirstTrackIndex();
+const firstMusicTrackIndex = musicService.getFirstTrackIndex();
 
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
@@ -89,7 +89,7 @@ function ZipManager() {
   const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
-  const [musicTrackIndex, setMusicTrackIndex] = useState(randomMusicTrackIndex);
+  const [musicTrackIndex, setMusicTrackIndex] = useState(firstMusicTrackIndex);
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
