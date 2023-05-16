@@ -22,7 +22,8 @@ function getEntriesFeatures({
   getHighlightedEntryElement,
   getOptions,
   modifierKeyPressed,
-  util,
+  documentService,
+  windowService,
   constants
 }) {
   const {
@@ -38,13 +39,13 @@ function getEntriesFeatures({
   } = constants;
 
   function getEntriesElementHeight() {
-    return util.getHeight(entriesElement);
+    return documentService.getHeight(entriesElement);
   }
 
   function getHightlightedEntryHeight() {
     const highlightedEntryElement = getHighlightedEntryElement();
     if (highlightedEntryElement) {
-      return util.getRowHeight(highlightedEntryElement);
+      return documentService.getRowHeight(highlightedEntryElement);
     }
   }
 
@@ -313,7 +314,9 @@ function getEntriesFeatures({
       if (!height && options.entriesHeight) {
         height = options.entriesHeight;
       }
-      setEntriesElementHeight(height);
+      if (height) {
+        setEntriesElementHeight(height);
+      }
     }
   }
 
@@ -333,25 +336,25 @@ function getEntriesFeatures({
 
   function registerResizeEntriesHandler() {
     if (entriesElement) {
-      const observer = util.addResizeObserver(entriesElement, () => {
-        let height = getEntriesElementHeight();
+      const observer = documentService.addResizeObserver(entriesElement, () => {
+        const height = getEntriesElementHeight();
         const options = getOptions();
         if (height || !options.entriesHeight) {
           options.entriesHeight = height;
           setOptions(options);
         }
       });
-      util.addResizeListener(updateEntriesElementHeight);
+      windowService.addResizeListener(updateEntriesElementHeight);
       return () => {
         observer.disconnect();
-        util.removeResizeListener(updateEntriesElementHeight);
+        windowService.removeResizeListener(updateEntriesElementHeight);
       };
     }
   }
 
   function updateHighlightedEntries() {
     if (getHighlightedEntryElement()) {
-      util.scrollIntoView(getHighlightedEntryElement());
+      documentService.scrollIntoView(getHighlightedEntryElement());
     }
   }
 

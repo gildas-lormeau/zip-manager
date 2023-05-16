@@ -19,13 +19,12 @@ function getSelectedFolderFeatures({
   getOptions,
   openDisplayError,
   filesystemService,
+  fileHandlersService,
+  shareTargetService,
   modifierKeyPressed,
-  util,
   constants
 }) {
   const {
-    SHARED_FILES_PARAMETER,
-    SHARED_FILES_RELATIVE_PATH,
     ZIP_EXTENSION,
     ZIP_EXTENSIONS,
     ZIP_EXTENSIONS_ACCEPT,
@@ -42,33 +41,8 @@ function getSelectedFolderFeatures({
   } = constants;
 
   function initSelectedFolderFeatures() {
-    async function initFeatures() {
-      const locationSearch = util.getLocationSearch();
-      if (locationSearch) {
-        util.resetLocationSearch();
-        if (locationSearch === SHARED_FILES_PARAMETER) {
-          const sharedFilesPath = SHARED_FILES_RELATIVE_PATH;
-          const response = await util.fetch(sharedFilesPath);
-          const formData = await response.formData();
-          addFiles(formData.getAll(constants.SHARED_FILES_FIELD_NAME));
-        }
-      }
-    }
-
-    util.setLaunchQueueConsumer((launchParams) => {
-      async function handleLaunchParams() {
-        if (launchParams.files.length) {
-          await Promise.all(
-            launchParams.files.map(async (handle) =>
-              importZipFile(await handle.getFile())
-            )
-          );
-        }
-      }
-
-      handleLaunchParams();
-    });
-    initFeatures();
+    shareTargetService.onShareFiles(addFiles);
+    fileHandlersService.onOpenWith(importZipFile);
   }
 
   function openPromptCreateFolder() {

@@ -3,7 +3,6 @@ function getAppFeatures({
   zipFilesystem,
   highlightedEntry,
   selectedFolder,
-  appStyleElement,
   hiddenInfobar,
   hiddenDownloadManager,
   setPreviousHighlight,
@@ -17,7 +16,8 @@ function getAppFeatures({
   openPromptExtract,
   refreshSelectedFolder,
   modifierKeyPressed,
-  util,
+  stylesheetService,
+  documentService,
   constants,
   messages
 }) {
@@ -33,17 +33,15 @@ function getAppFeatures({
   } = constants;
 
   function initAppFeatures() {
-    util.setStyle(
-      appStyleElement,
+    stylesheetService.setStyle(
       NO_ENTRIES_CUSTOM_PROPERTY_NAME,
       JSON.stringify(messages.NO_ENTRIES_LABEL)
     );
-    util.setStyle(
-      appStyleElement,
+    stylesheetService.setStyle(
       FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
       JSON.stringify(FOLDER_SEPARATOR)
     );
-    util.removeDocumentAttribute(APP_LOADING_ATTRIBUTE_NAME);
+    documentService.removeDocumentAttribute(APP_LOADING_ATTRIBUTE_NAME);
   }
 
   function updateZipFilesystem() {

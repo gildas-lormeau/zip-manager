@@ -4,25 +4,30 @@
 import { clientsClaim } from "workbox-core";
 import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
+
 import {
   MAINPAGE_REDIRECT_PATH,
   SHARED_FILES_RELATIVE_PATH,
   SHARED_FILES_CACHE_ID,
-  SHARED_FILES_FORM_PATH,
+  SHARED_FILES_FORM_PATH
+} from "./zip-manager/services/share-target-service-constants.js";
+import {
   MUSIC_TRACKS_PATH,
   MUSIC_TRACK_PATH_REGEXP,
+  MUSIC_TRACK_INDEX_REGEXP,
   MUSIC_FILE_CONTENT_TYPES
-} from "./zip-manager/business/constants.js";
-importScripts("./assets/lib/zip-no-worker-inflate.min.js");
+} from "./zip-manager/services/music-service-constants.js";
 
+const GET_REQUEST = "GET";
+const POST_REQUEST = "POST";
+
+importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 self.skipWaiting();
-
-registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, "GET");
-registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, "POST");
-registerRoute(MUSIC_TRACK_PATH_REGEXP, getMusicTrack, "GET");
-
+registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, GET_REQUEST);
+registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, POST_REQUEST);
+registerRoute(MUSIC_TRACK_PATH_REGEXP, getMusicTrack, GET_REQUEST);
 clientsClaim();
 
 async function setSharedFiles({ event }) {
@@ -51,7 +56,9 @@ async function getSharedFilesResponse() {
 async function getMusicTrack({ event }) {
   const zipReader = new zip.ZipReader((await fetch(MUSIC_TRACKS_PATH)).body);
   const entries = await zipReader.getEntries();
-  const fileEntryIndex = Number(event.request.url.match(/\d+$/)[0]);
+  const fileEntryIndex = Number(
+    event.request.url.match(MUSIC_TRACK_INDEX_REGEXP)[0]
+  );
   const fileEntry = entries[fileEntryIndex];
   const contentType = MUSIC_FILE_CONTENT_TYPES.find((info) =>
     fileEntry.filename.endsWith(info.extension)

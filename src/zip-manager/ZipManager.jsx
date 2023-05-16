@@ -2,13 +2,20 @@ import "./styles/index.css";
 
 import { useEffect, useState, useRef } from "react";
 
-import * as util from "./misc/dom-util.js";
 import {
   filesystemService,
   downloadService,
   i18nService,
   storageService,
   zipService,
+  shareTargetService,
+  fileHandlersService,
+  stylesheetService,
+  environmentService,
+  keyboardService,
+  themeService,
+  documentService,
+  windowService,
   musicService
 } from "./services/index.js";
 import { getMessages } from "./messages/index.js";
@@ -52,14 +59,12 @@ const {
   getMiscFeatures
 } = features;
 const messages = getMessages({ i18nService });
-const randomTrackIndex = Math.floor(
-  Math.random() * constants.MUSIC_TRACKS_VOLUMES.length
-);
+const randomMusicTrackIndex = musicService.getFirstTrackIndex();
 
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
-  const [selectedFolder, setSelectedFolder] = useState(null);
+  const [selectedFolder, setSelectedFolder] = useState(apiFilesystem.root);
   const [entries, setEntries] = useState([]);
   const [entriesElementHeight, setEntriesElementHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
@@ -84,14 +89,12 @@ function ZipManager() {
   const [chooseActionDialog, setChooseActionDialog] = useState(null);
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
-  const [musicTrackIndex, setMusicTrackIndex] = useState(randomTrackIndex);
-  const appStyleRef = useRef(null);
+  const [musicTrackIndex, setMusicTrackIndex] = useState(randomMusicTrackIndex);
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
   const musicPlayerActiveRef = useRef(null);
 
-  const appStyleElement = appStyleRef.current;
   const entriesElement = entriesRef.current;
   const entriesHeight = entriesHeightRef.current;
   const musicPlayerActive = musicPlayerActiveRef.current;
@@ -119,7 +122,7 @@ function ZipManager() {
     removeDownload,
     downloadService,
     filesystemService,
-    util
+    environmentService
   });
   const {
     initOptionsFeatures,
@@ -129,11 +132,11 @@ function ZipManager() {
     closeOptions,
     resetOptions
   } = getOptionsFeatures({
-    appStyleElement,
     setOptionsDialog,
     zipService,
     storageService,
-    util,
+    stylesheetService,
+    environmentService,
     constants
   });
   const {
@@ -217,7 +220,8 @@ function ZipManager() {
     getHighlightedEntryElement,
     getOptions,
     modifierKeyPressed,
-    util,
+    documentService,
+    windowService,
     constants
   });
   const {
@@ -282,8 +286,9 @@ function ZipManager() {
     getOptions,
     openDisplayError,
     filesystemService,
+    fileHandlersService,
+    shareTargetService,
     modifierKeyPressed,
-    util,
     constants
   });
   const {
@@ -339,16 +344,15 @@ function ZipManager() {
     getMiscFeatures({
       accentColor,
       musicTrackIndex,
-      appStyleElement,
       setOptions,
       setAccentColor,
       setMusicFrequencyData,
       setMusicTrackIndex,
       setMusicPlayerActive,
       getOptions,
-      musicService,
-      util,
-      constants
+      stylesheetService,
+      themeService,
+      musicService
     });
   const {
     enterEntry,
@@ -362,7 +366,6 @@ function ZipManager() {
     zipFilesystem,
     highlightedEntry,
     selectedFolder,
-    appStyleElement,
     hiddenInfobar,
     hiddenDownloadManager,
     setPreviousHighlight,
@@ -376,11 +379,15 @@ function ZipManager() {
     openPromptExtract,
     refreshSelectedFolder,
     modifierKeyPressed,
-    util,
+    stylesheetService,
+    documentService,
     constants,
     messages
   });
-  const { useKeyUp, useKeyDown, usePageUnload } = getHooks(util);
+  const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
+    keyboardService,
+    windowService
+  });
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
     downloads,
@@ -405,17 +412,12 @@ function ZipManager() {
   useEffect(() => {
     initSelectedFolderFeatures();
     initMiscFeatures();
+    initOptionsFeatures();
+    initAppFeatures();
   }, []);
-  useEffect(() => {
-    if (appStyleElement) {
-      initOptionsFeatures();
-      initAppFeatures();
-    }
-  }, [appStyleElement]);
 
   return (
     <div className={appClassName}>
-      <style ref={appStyleRef}></style>
       <main role="application">
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}

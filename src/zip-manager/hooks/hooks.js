@@ -1,19 +1,12 @@
 import { useEffect } from "react";
 
-function getHooks({
-  addKeyUpListener,
-  removeKeyUpListener,
-  addKeyDownListener,
-  removeKeyDownListener,
-  addUnloadListener,
-  removeUnloadListener
-}) {
+function getHooks({ keyboardService, windowService }) {
   function useKeyUp(handleKeyUp) {
     useEffect(registerKeyUpHandler);
 
     function registerKeyUpHandler() {
-      addKeyUpListener(handleKeyUp);
-      return () => removeKeyUpListener(handleKeyUp);
+      keyboardService.addKeyUpListener(handleKeyUp);
+      return () => keyboardService.removeKeyUpListener(handleKeyUp);
     }
   }
 
@@ -21,8 +14,8 @@ function getHooks({
     useEffect(registerKeyDownHandler);
 
     function registerKeyDownHandler() {
-      addKeyDownListener(handleKeyDown);
-      return () => removeKeyDownListener(handleKeyDown);
+      keyboardService.addKeyDownListener(handleKeyDown);
+      return () => keyboardService.removeKeyDownListener(handleKeyDown);
     }
   }
 
@@ -30,8 +23,8 @@ function getHooks({
     useEffect(registerPageUnloadHandler);
 
     function registerPageUnloadHandler() {
-      addUnloadListener(handlePageUnload);
-      return () => removeUnloadListener(handlePageUnload);
+      windowService.addUnloadListener(handlePageUnload);
+      return () => windowService.removeUnloadListener(handlePageUnload);
     }
   }
 

@@ -1,10 +1,17 @@
-/* global document, requestAnimationFrame */
+/* global document, requestAnimationFrame, fetch */
 
-import WebAudioTinySynth from "./webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
-import * as libxm from "./libxm/libxm-es6.js";
+import WebAudioTinySynth from "./lib/webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
+import * as libxm from "./lib/libxm/libxm-es6.js";
 
-const MIDI_CONTENT_TYPE = "audio/midi";
-const XM_CONTENT_TYPE = "audio/xm";
+import {
+  MUSIC_TRACK_PATH_PREFIX,
+  MIDI_CONTENT_TYPE,
+  XM_CONTENT_TYPE
+} from "./music-service-constants.js";
+
+const MUSIC_TRACK_RELATIVE_PATH_PREFIX = "./" + MUSIC_TRACK_PATH_PREFIX;
+const MUSIC_TRACKS_VOLUMES = [0.1, 0.7, 0.4, 0.1, 1.8, 0.6, 0.8, 1.1, 0.5, 0.7];
+const MUSIC_TRACKS_LENGTH = MUSIC_TRACKS_VOLUMES.length;
 
 let midiLibrary,
   xmLibrary,
@@ -70,7 +77,14 @@ function initAnalyser() {
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play({ data, contentType, masterVolume, onSetFrequencyData }) {
+async function play({ musicTrackIndex, onSetFrequencyData }) {
+  const response = await fetch(
+    MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+  );
+  const blob = await response.blob();
+  const contentType = blob.type;
+  const data = await blob.arrayBuffer();
+  const masterVolume = MUSIC_TRACKS_VOLUMES[musicTrackIndex];
   await init({ data, contentType, masterVolume });
   playing = true;
   callbackFrequencyData = onSetFrequencyData;
@@ -97,6 +111,14 @@ function stop() {
   }
 }
 
+function getFirstTrackIndex() {
+  return Math.floor(Math.random() * MUSIC_TRACKS_LENGTH);
+}
+
+function getNextTrackIndex(musicTrackIndex) {
+  return (musicTrackIndex + 1) % MUSIC_TRACKS_LENGTH;
+}
+
 document.onvisibilitychange = () => {
   if (musicLibrary && playing) {
     if (document.hidden) {
@@ -108,4 +130,4 @@ document.onvisibilitychange = () => {
   }
 };
 
-export { play, stop };
+export { getFirstTrackIndex, getNextTrackIndex, play, stop };

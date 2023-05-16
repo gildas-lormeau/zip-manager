@@ -5,8 +5,10 @@ function getCommonFeatures({
   removeDownload,
   downloadService,
   filesystemService,
-  util
+  environmentService
 }) {
+  const isMacOSPlatform = environmentService.isMacOSPlatform();
+
   async function saveEntries(entries, filename, options, parentHandle) {
     if (filesystemService.savePickersSupported()) {
       try {
@@ -80,7 +82,7 @@ function getCommonFeatures({
       }
       writable = await fileHandle.createWritable();
     } else {
-      ({ writable, blob } = util.getWritableBlob());
+      ({ writable, blob } = getWritableBlob());
     }
     setDownloadId((downloadId) => {
       download.id = downloadId + 1;
@@ -91,6 +93,17 @@ function getCommonFeatures({
     if (!filesystemService.savePickersSupported() && !signal.aborted) {
       filesystemService.saveBlob(await blob, download.name);
     }
+  }
+
+  function getWritableBlob() {
+    // eslint-disable-next-line no-undef
+    const { readable, writable } = new TransformStream({});
+    // eslint-disable-next-line no-undef
+    const blob = new Response(readable).blob();
+    return {
+      blob,
+      writable
+    };
   }
 
   function getParentHandle() {
@@ -134,7 +147,7 @@ function getCommonFeatures({
   }
 
   function modifierKeyPressed(event) {
-    return util.isMacOSPlatform() ? event.metaKey : event.ctrlKey;
+    return isMacOSPlatform ? event.metaKey : event.ctrlKey;
   }
 
   return {

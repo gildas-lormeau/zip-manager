@@ -1,9 +1,9 @@
 function getOptionsFeatures({
-  appStyleElement,
   setOptionsDialog,
   zipService,
   storageService,
-  util,
+  stylesheetService,
+  environmentService,
   constants
 }) {
   const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME, FONT_SIZE_CUSTOM_PROPERTY_NAME } =
@@ -28,7 +28,7 @@ function getOptionsFeatures({
 
   function resetOptions() {
     const options = { ...DEFAULT_OPTIONS };
-    options.maxWorkers = util.getDefaultMaxWorkers();
+    options.maxWorkers = environmentService.getMaximumWorkers();
     setOptionsDialog(options);
   }
 
@@ -43,7 +43,7 @@ function getOptionsFeatures({
     let options = storageService.get(OPTIONS_KEY_NAME);
     if (!options) {
       options = { ...DEFAULT_OPTIONS };
-      options.maxWorkers = util.getDefaultMaxWorkers();
+      options.maxWorkers = environmentService.getMaximumWorkers();
     }
     if (options.hideNavigationBar === undefined) {
       options.hideNavigationBar = DEFAULT_OPTIONS.hideNavigationBar;
@@ -82,8 +82,7 @@ function getOptionsFeatures({
 
   function configureZoomFactor(options) {
     const { zoomFactor } = options;
-    util.setStyle(
-      appStyleElement,
+    stylesheetService.setStyle(
       FONT_SIZE_CUSTOM_PROPERTY_NAME,
       zoomFactor / 100 + "em"
     );
