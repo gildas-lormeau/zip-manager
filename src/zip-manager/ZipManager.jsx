@@ -63,8 +63,9 @@ const firstMusicTrackIndex = musicService.getFirstTrackIndex();
 
 function ZipManager() {
   const apiFilesystem = zipService.createZipFileSystem();
+  const { root } = apiFilesystem;
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
-  const [selectedFolder, setSelectedFolder] = useState(apiFilesystem.root);
+  const [selectedFolder, setSelectedFolder] = useState(root);
   const [entries, setEntries] = useState([]);
   const [entriesElementHeight, setEntriesElementHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
@@ -74,8 +75,10 @@ function ZipManager() {
   const [downloads, setDownloads] = useState([]);
   const [, setDownloadId] = useState(0);
   const [clipboardData, setClipboardData] = useState(null);
-  const [history, setHistory] = useState([]);
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const [history, setHistory] = useState({
+    path: [root],
+    index: 0
+  });
   const [accentColor, setAccentColor] = useState(null);
   const [exportZipDialog, setExportZipDialog] = useState(null);
   const [extractDialog, setExtractDialog] = useState(null);
@@ -168,7 +171,6 @@ function ZipManager() {
     highlightedIds,
     selectedFolder,
     clipboardData,
-    historyIndex,
     history,
     getOptions,
     exportZipDialog,
@@ -235,14 +237,12 @@ function ZipManager() {
     disabledBack,
     disabledForward,
     history,
-    historyIndex,
     highlightedEntry,
     highlightedEntries,
     selectedFolder,
     setSelectedFolder,
     setEntries,
     setHistory,
-    setHistoryIndex,
     setHighlightedIds,
     setClickedButtonName,
     modifierKeyPressed,
@@ -373,7 +373,6 @@ function ZipManager() {
     setSelectedFolder,
     setHighlightedIds,
     setHistory,
-    setHistoryIndex,
     setClickedButtonName,
     goIntoFolder,
     openPromptExtract,

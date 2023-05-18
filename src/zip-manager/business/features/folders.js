@@ -2,14 +2,12 @@ function getFoldersFeatures({
   disabledBack,
   disabledForward,
   history,
-  historyIndex,
   highlightedEntry,
   highlightedEntries,
   selectedFolder,
   setSelectedFolder,
   setEntries,
   setHistory,
-  setHistoryIndex,
   setHighlightedIds,
   setClickedButtonName,
   modifierKeyPressed,
@@ -25,14 +23,16 @@ function getFoldersFeatures({
   } = constants;
 
   function goIntoFolder(entry) {
-    const newHistory = [...history];
-    const newHistoryIndex = historyIndex + 1;
+    const path = [...history.path];
+    const index = history.index + 1;
     if (entry.isDescendantOf(selectedFolder)) {
-      newHistory.length = newHistoryIndex + 1;
+      path.length = index + 1;
     }
-    newHistory[newHistoryIndex] = entry;
-    setHistory(newHistory);
-    setHistoryIndex(newHistoryIndex);
+    path[index] = entry;
+    setHistory({
+      index,
+      path
+    });
     highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
     refreshSelectedFolder(entry);
@@ -47,9 +47,12 @@ function getFoldersFeatures({
   }
 
   function navigateHistory(offset) {
-    const newHistoryIndex = historyIndex + offset;
-    setHistoryIndex(newHistoryIndex);
-    const entry = history[newHistoryIndex];
+    const index = history.index + offset;
+    setHistory({
+      ...history,
+      index
+    });
+    const entry = history.path[index];
     highlightEntry(selectedFolder, entry);
     setSelectedFolder(entry);
     refreshSelectedFolder(entry);
@@ -74,7 +77,7 @@ function getFoldersFeatures({
   function updateHistoryData() {
     let offsetIndex = 0;
     let previousEntry;
-    const newHistory = history.filter((entry, indexEntry) => {
+    const path = history.path.filter((entry, indexEntry) => {
       const entryRemoved =
         previousEntry === entry ||
         highlightedEntries.includes(entry) ||
@@ -82,7 +85,7 @@ function getFoldersFeatures({
           entry.isDescendantOf(highlightedEntry)
         );
       if (entryRemoved) {
-        if (indexEntry <= historyIndex) {
+        if (indexEntry <= history.index) {
           offsetIndex++;
         }
       } else {
@@ -90,9 +93,11 @@ function getFoldersFeatures({
       }
       return !entryRemoved;
     });
-    const newHistoryIndex = historyIndex - offsetIndex;
-    setHistory(newHistory);
-    setHistoryIndex(newHistoryIndex);
+    const index = history.index - offsetIndex;
+    setHistory({
+      path,
+      index
+    });
   }
 
   function refreshSelectedFolder(folder = selectedFolder) {

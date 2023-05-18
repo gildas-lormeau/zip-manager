@@ -10,7 +10,6 @@ function getAppFeatures({
   setSelectedFolder,
   setHighlightedIds,
   setHistory,
-  setHistoryIndex,
   setClickedButtonName,
   goIntoFolder,
   openPromptExtract,
@@ -50,8 +49,7 @@ function getAppFeatures({
     setHighlightedIds([]);
     setPreviousHighlight(null);
     setToggleNavigationDirection(0);
-    setHistory([root]);
-    setHistoryIndex(0);
+    setHistory({ path: [root], index: 0 });
     refreshSelectedFolder(root);
   }
 

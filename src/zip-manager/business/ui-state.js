@@ -3,7 +3,6 @@ function getUIState({
   highlightedIds,
   selectedFolder,
   clipboardData,
-  historyIndex,
   history,
   getOptions,
   exportZipDialog,
@@ -36,8 +35,8 @@ function getUIState({
   const disabledExportZip = entriesEmpty || !selectedFolderEntries.length;
   const disabledReset = entriesEmpty;
   const disabledNavigation = entriesEmpty;
-  const disabledBack = !historyIndex;
-  const disabledForward = historyIndex === history.length - 1;
+  const disabledBack = !history.index;
+  const disabledForward = history.index === history.path.length - 1;
   const disabledCopy = parentFolderHighlighted;
   const disabledCut = parentFolderHighlighted;
   const disabledPaste =
