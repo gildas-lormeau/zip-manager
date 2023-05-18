@@ -3,17 +3,15 @@ function getEntriesFeatures({
   disabledHighlightAll,
   entries,
   selectedFolderEntries,
-  previousHighlight,
   highlightedIds,
-  toggleNavigationDirection,
+  navigationData,
   dialogDisplayed,
   entriesElementHeight,
   entriesDeltaHeight,
   entriesElement,
   entriesHeight,
   setHighlightedIds,
-  setPreviousHighlight,
-  setToggleNavigationDirection,
+  setNavigationData,
   setOptions,
   setEntriesHeight,
   setEntriesElementHeight,
@@ -93,8 +91,10 @@ function getEntriesFeatures({
       if (filteredEntries.length === 1) {
         highlightEntry(firstEntry);
       } else {
-        setPreviousHighlight(firstEntry);
-        setToggleNavigationDirection(0);
+        setNavigationData(() => ({
+          previousHighlight: firstEntry,
+          direction: 0
+        }));
         setHighlightedIds(filteredEntries.reverse().map((entry) => entry.id));
       }
     }
@@ -105,8 +105,10 @@ function getEntriesFeatures({
   }
 
   function highlightEntries(entries) {
-    setPreviousHighlight(entries[entries.length - 1]);
-    setToggleNavigationDirection(0);
+    setNavigationData(() => ({
+      previousHighlight: entries[entries.length - 1],
+      direction: 0
+    }));
     setHighlightedIds(entries.map((entry) => entry.id));
   }
 
@@ -125,14 +127,18 @@ function getEntriesFeatures({
 
   function toggle(entry) {
     let newIds = getToggledHighlightedIds(highlightedIds, entry);
-    setPreviousHighlight(entry);
-    setToggleNavigationDirection(0);
+    setNavigationData(() => ({
+      previousHighlight: entry,
+      direction: 0
+    }));
     setHighlightedIds(newIds);
   }
 
   function highlightEntry(entry) {
-    setPreviousHighlight(entry);
-    setToggleNavigationDirection(0);
+    setNavigationData(() => ({
+      previousHighlight: entry,
+      direction: 0
+    }));
     setHighlightedIds([entry.id]);
   }
 
@@ -161,8 +167,10 @@ function getEntriesFeatures({
         newIds = getToggledHighlightedIds(newIds, entries[indexEntry]);
       }
     }
-    setPreviousHighlight(targetEntry);
-    setToggleNavigationDirection(0);
+    setNavigationData(() => ({
+      previousHighlight: targetEntry,
+      direction: 0
+    }));
     setHighlightedIds(newIds);
   }
 
@@ -178,10 +186,10 @@ function getEntriesFeatures({
   }
 
   function togglePrevious() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (toggleNavigationDirection === 1) {
-        toggle(previousHighlight);
+      if (navigationData.direction === 1) {
+        toggle(navigationData.previousHighlight);
       } else if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
         if (
@@ -195,15 +203,18 @@ function getEntriesFeatures({
           toggle(previousEntry);
         }
       }
-      setToggleNavigationDirection(-1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: -1
+      }));
     }
   }
 
   function toggleNext() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (toggleNavigationDirection === -1) {
-        toggle(previousHighlight);
+      if (navigationData.direction === -1) {
+        toggle(navigationData.previousHighlight);
       } else if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
         if (
@@ -217,59 +228,74 @@ function getEntriesFeatures({
           toggle(nextEntry);
         }
       }
-      setToggleNavigationDirection(1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: 1
+      }));
     }
   }
 
   function togglePreviousPage() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const previousPageEntry = getPreviousPageEntry(indexEntry);
-      if (toggleNavigationDirection !== 1) {
+      if (navigationData.direction !== 1) {
         toggleRange(previousPageEntry);
       } else {
         toggleRange(previousPageEntry, indexEntry + 1);
       }
-      setToggleNavigationDirection(-1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: -1
+      }));
     }
   }
 
   function toggleNextPage() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const nextPageEntry = getNextPageEntry(indexEntry);
-      if (toggleNavigationDirection !== -1) {
+      if (navigationData.direction !== -1) {
         toggleRange(nextPageEntry);
       } else {
         toggleRange(nextPageEntry, indexEntry - 1);
       }
-      setToggleNavigationDirection(1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: 1
+      }));
     }
   }
 
   function toggleFirst() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const firstEntry = entries[0];
-      if (toggleNavigationDirection !== 1) {
+      if (navigationData.direction !== 1) {
         toggleRange(firstEntry);
       } else {
         toggleRange(firstEntry, indexEntry + 1);
       }
-      setToggleNavigationDirection(-1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: -1
+      }));
     }
   }
 
   function toggleLast() {
-    if (previousHighlight) {
+    if (navigationData.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const lastEntry = entries[entries.length - 1];
-      if (toggleNavigationDirection !== -1) {
+      if (navigationData.direction !== -1) {
         toggleRange(lastEntry);
       } else {
         toggleRange(lastEntry, indexEntry - 1);
       }
-      setToggleNavigationDirection(1);
+      setNavigationData((navigationData) => ({
+        ...navigationData,
+        direction: 1
+      }));
     }
   }
 
@@ -283,7 +309,8 @@ function getEntriesFeatures({
 
   function getPreviousHighlightedEntryIndex() {
     return entries.findIndex(
-      (highlightedEntry) => highlightedEntry === previousHighlight
+      (highlightedEntry) =>
+        highlightedEntry === navigationData.previousHighlight
     );
   }
 

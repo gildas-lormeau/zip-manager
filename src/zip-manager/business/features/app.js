@@ -5,8 +5,7 @@ function getAppFeatures({
   selectedFolder,
   hiddenInfobar,
   hiddenDownloadManager,
-  setPreviousHighlight,
-  setToggleNavigationDirection,
+  setNavigationData,
   setSelectedFolder,
   setHighlightedIds,
   setHistory,
@@ -47,8 +46,10 @@ function getAppFeatures({
     const { root } = zipFilesystem;
     setSelectedFolder(root);
     setHighlightedIds([]);
-    setPreviousHighlight(null);
-    setToggleNavigationDirection(0);
+    setNavigationData({
+      previousHighlight: null,
+      direction: 0
+    });
     setHistory({ path: [root], index: 0 });
     refreshSelectedFolder(root);
   }

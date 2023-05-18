@@ -9,9 +9,10 @@ function getHighlightedEntriesFeatures({
   highlightedIds,
   highlightedEntry,
   highlightedEntries,
+  navigationData,
   setClipboardData,
   setHighlightedIds,
-  setPreviousHighlight,
+  setNavigationData,
   setExtractDialog,
   setRenameDialog,
   setDeleteEntryDialog,
@@ -101,10 +102,16 @@ function getHighlightedEntriesFeatures({
         }
       }
       if (entries[indexNextEntry]) {
-        setPreviousHighlight(entries[indexNextEntry]);
+        setNavigationData({
+          ...navigationData,
+          previousHighlight: entries[indexNextEntry]
+        });
         setHighlightedIds([entries[indexNextEntry].id]);
       } else {
-        setPreviousHighlight(null);
+        setNavigationData({
+          ...navigationData,
+          previousHighlight: null
+        });
         setHighlightedIds([]);
       }
     }
