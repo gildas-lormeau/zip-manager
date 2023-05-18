@@ -18,8 +18,6 @@ import {
   windowService,
   musicService
 } from "./services/index.js";
-import { getMessages } from "./messages/index.js";
-import { getHooks } from "./hooks/hooks.js";
 import {
   constants,
   features,
@@ -44,6 +42,8 @@ import {
   OptionsDialog,
   ChooseActionDialog
 } from "./components/index.jsx";
+import { getMessages } from "./messages/index.js";
+import { getHooks } from "./hooks/hooks.js";
 
 const {
   getCommonFeatures,
