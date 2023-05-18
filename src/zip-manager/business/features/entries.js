@@ -339,7 +339,7 @@ function getEntriesFeatures({
       const observer = documentService.addResizeObserver(entriesElement, () => {
         const height = getEntriesElementHeight();
         const options = getOptions();
-        if (height || !options.entriesHeight) {
+        if (height !== options.entriesHeight) {
           options.entriesHeight = height;
           setOptions(options);
         }
