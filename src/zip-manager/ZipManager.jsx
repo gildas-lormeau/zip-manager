@@ -70,7 +70,7 @@ function ZipManager() {
   const [entriesElementHeight, setEntriesElementHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
-  const [navigationData, setNavigationData] = useState({
+  const [navigation, setNavigation] = useState({
     previousHighlight: null,
     direction: 0
   });
@@ -206,14 +206,14 @@ function ZipManager() {
     entries,
     selectedFolderEntries,
     highlightedIds,
-    navigationData,
+    navigation,
     dialogDisplayed,
     entriesElementHeight,
     entriesDeltaHeight,
     entriesElement,
     entriesHeight,
     setHighlightedIds,
-    setNavigationData,
+    setNavigation,
     setOptions,
     setEntriesHeight,
     setEntriesElementHeight,
@@ -316,10 +316,10 @@ function ZipManager() {
     highlightedIds,
     highlightedEntry,
     highlightedEntries,
-    navigationData,
+    navigation,
     setClipboardData,
     setHighlightedIds,
-    setNavigationData,
+    setNavigation,
     setExtractDialog,
     setRenameDialog,
     setDeleteEntryDialog,
@@ -369,7 +369,7 @@ function ZipManager() {
     selectedFolder,
     hiddenInfobar,
     hiddenDownloadManager,
-    setNavigationData,
+    setNavigation,
     setSelectedFolder,
     setHighlightedIds,
     setHistory,

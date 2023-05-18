@@ -4,14 +4,14 @@ function getEntriesFeatures({
   entries,
   selectedFolderEntries,
   highlightedIds,
-  navigationData,
+  navigation,
   dialogDisplayed,
   entriesElementHeight,
   entriesDeltaHeight,
   entriesElement,
   entriesHeight,
   setHighlightedIds,
-  setNavigationData,
+  setNavigation,
   setOptions,
   setEntriesHeight,
   setEntriesElementHeight,
@@ -91,7 +91,7 @@ function getEntriesFeatures({
       if (filteredEntries.length === 1) {
         highlightEntry(firstEntry);
       } else {
-        setNavigationData(() => ({
+        setNavigation(() => ({
           previousHighlight: firstEntry,
           direction: 0
         }));
@@ -105,7 +105,7 @@ function getEntriesFeatures({
   }
 
   function highlightEntries(entries) {
-    setNavigationData(() => ({
+    setNavigation(() => ({
       previousHighlight: entries[entries.length - 1],
       direction: 0
     }));
@@ -127,7 +127,7 @@ function getEntriesFeatures({
 
   function toggle(entry) {
     let newIds = getToggledHighlightedIds(highlightedIds, entry);
-    setNavigationData(() => ({
+    setNavigation(() => ({
       previousHighlight: entry,
       direction: 0
     }));
@@ -135,7 +135,7 @@ function getEntriesFeatures({
   }
 
   function highlightEntry(entry) {
-    setNavigationData(() => ({
+    setNavigation(() => ({
       previousHighlight: entry,
       direction: 0
     }));
@@ -167,7 +167,7 @@ function getEntriesFeatures({
         newIds = getToggledHighlightedIds(newIds, entries[indexEntry]);
       }
     }
-    setNavigationData(() => ({
+    setNavigation(() => ({
       previousHighlight: targetEntry,
       direction: 0
     }));
@@ -186,10 +186,10 @@ function getEntriesFeatures({
   }
 
   function togglePrevious() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (navigationData.direction === 1) {
-        toggle(navigationData.previousHighlight);
+      if (navigation.direction === 1) {
+        toggle(navigation.previousHighlight);
       } else if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
         if (
@@ -203,18 +203,18 @@ function getEntriesFeatures({
           toggle(previousEntry);
         }
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: -1
       }));
     }
   }
 
   function toggleNext() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      if (navigationData.direction === -1) {
-        toggle(navigationData.previousHighlight);
+      if (navigation.direction === -1) {
+        toggle(navigation.previousHighlight);
       } else if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
         if (
@@ -228,72 +228,72 @@ function getEntriesFeatures({
           toggle(nextEntry);
         }
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: 1
       }));
     }
   }
 
   function togglePreviousPage() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const previousPageEntry = getPreviousPageEntry(indexEntry);
-      if (navigationData.direction !== 1) {
+      if (navigation.direction !== 1) {
         toggleRange(previousPageEntry);
       } else {
         toggleRange(previousPageEntry, indexEntry + 1);
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: -1
       }));
     }
   }
 
   function toggleNextPage() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const nextPageEntry = getNextPageEntry(indexEntry);
-      if (navigationData.direction !== -1) {
+      if (navigation.direction !== -1) {
         toggleRange(nextPageEntry);
       } else {
         toggleRange(nextPageEntry, indexEntry - 1);
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: 1
       }));
     }
   }
 
   function toggleFirst() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const firstEntry = entries[0];
-      if (navigationData.direction !== 1) {
+      if (navigation.direction !== 1) {
         toggleRange(firstEntry);
       } else {
         toggleRange(firstEntry, indexEntry + 1);
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: -1
       }));
     }
   }
 
   function toggleLast() {
-    if (navigationData.previousHighlight) {
+    if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       const lastEntry = entries[entries.length - 1];
-      if (navigationData.direction !== -1) {
+      if (navigation.direction !== -1) {
         toggleRange(lastEntry);
       } else {
         toggleRange(lastEntry, indexEntry - 1);
       }
-      setNavigationData((navigationData) => ({
-        ...navigationData,
+      setNavigation((navigation) => ({
+        ...navigation,
         direction: 1
       }));
     }
@@ -310,7 +310,7 @@ function getEntriesFeatures({
   function getPreviousHighlightedEntryIndex() {
     return entries.findIndex(
       (highlightedEntry) =>
-        highlightedEntry === navigationData.previousHighlight
+        highlightedEntry === navigation.previousHighlight
     );
   }
 
