@@ -81,18 +81,7 @@ function ZipManager() {
     path: [root],
     index: 0
   });
-  const [dialogs, setDialogs] = useState({
-    exportZip: null,
-    extract: null,
-    rename: null,
-    createFolder: null,
-    deleteEntries: null,
-    reset: null,
-    displayError: null,
-    enterImportPassword: null,
-    chooseAction: null,
-    options: null
-  });
+  const [dialogs, setDialogs] = useState({});
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [accentColor, setAccentColor] = useState(null);
   const [musicData, setMusicData] = useState({
