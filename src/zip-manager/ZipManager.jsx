@@ -99,7 +99,7 @@ function ZipManager() {
     trackIndex: firstMusicTrackIndex
   });
 
-  const highlightedEntryRef = useRef(null);
+  const highlightedEntryElementRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(1);
   const musicPlayerActiveRef = useRef(null);
@@ -108,7 +108,7 @@ function ZipManager() {
   const musicPlayerActive = musicPlayerActiveRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
-  const getHighlightedEntryElement = () => highlightedEntryRef.current;
+  const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
   const setMusicPlayerActive = (active) =>
@@ -471,7 +471,7 @@ function ZipManager() {
           onUpdateEntriesElementHeight={updateEntriesElementHeight}
           onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
           entriesRef={entriesRef}
-          highlightedEntryRef={highlightedEntryRef}
+          highlightedEntryElementRef={highlightedEntryElementRef}
           i18n={i18nService}
           constants={constants}
           messages={messages}

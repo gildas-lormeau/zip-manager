@@ -20,7 +20,7 @@ function Entries({
   onUpdateEntriesElementHeight,
   onRegisterResizeEntriesHandler,
   entriesRef,
-  highlightedEntryRef,
+  highlightedEntryElementRef,
   i18n,
   constants,
   messages
@@ -151,7 +151,7 @@ function Entries({
                 key={entry.id}
                 ref={
                   highlightedIds[highlightedIds.length - 1] === entry.id
-                    ? highlightedEntryRef
+                    ? highlightedEntryElementRef
                     : null
                 }
                 className={getEntryClassName(entry)}
