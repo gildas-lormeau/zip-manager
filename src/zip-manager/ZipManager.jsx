@@ -105,11 +105,11 @@ function ZipManager() {
   const musicPlayerActiveRef = useRef(null);
 
   const entriesElement = entriesRef.current;
-  const entriesHeight = entriesHeightRef.current;
   const musicPlayerActive = musicPlayerActiveRef.current;
   const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
   const getHighlightedEntryElement = () => highlightedEntryRef.current;
+  const getEntriesHeight = () => entriesHeightRef.current;
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
   const setMusicPlayerActive = (active) =>
     (musicPlayerActiveRef.current = active);
@@ -208,7 +208,6 @@ function ZipManager() {
     entriesElementHeight,
     entriesDeltaHeight,
     entriesElement,
-    entriesHeight,
     setHighlightedIds,
     setNavigation,
     setOptions,
@@ -216,6 +215,7 @@ function ZipManager() {
     setEntriesElementHeight,
     setEntriesDeltaHeight,
     setClickedButtonName,
+    getEntriesHeight,
     getHighlightedEntryElement,
     getOptions,
     modifierKeyPressed,

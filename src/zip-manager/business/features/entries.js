@@ -9,7 +9,6 @@ function getEntriesFeatures({
   entriesElementHeight,
   entriesDeltaHeight,
   entriesElement,
-  entriesHeight,
   setHighlightedIds,
   setNavigation,
   setOptions,
@@ -17,6 +16,7 @@ function getEntriesFeatures({
   setEntriesElementHeight,
   setEntriesDeltaHeight,
   setClickedButtonName,
+  getEntriesHeight,
   getHighlightedEntryElement,
   getOptions,
   modifierKeyPressed,
@@ -300,11 +300,11 @@ function getEntriesFeatures({
   }
 
   function getPreviousPageEntry(indexEntry) {
-    return entries[Math.max(indexEntry - entriesHeight, 0)];
+    return entries[Math.max(indexEntry - getEntriesHeight(), 0)];
   }
 
   function getNextPageEntry(indexEntry) {
-    return entries[Math.min(indexEntry + entriesHeight, entries.length - 1)];
+    return entries[Math.min(indexEntry + getEntriesHeight(), entries.length - 1)];
   }
 
   function getPreviousHighlightedEntryIndex() {
