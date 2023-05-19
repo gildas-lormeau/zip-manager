@@ -472,7 +472,6 @@ function ZipManager() {
           onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
-          entriesHeightRef={entriesHeightRef}
           i18nService={i18nService}
           constants={constants}
           messages={messages}
