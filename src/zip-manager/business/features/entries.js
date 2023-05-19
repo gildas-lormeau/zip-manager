@@ -309,8 +309,7 @@ function getEntriesFeatures({
 
   function getPreviousHighlightedEntryIndex() {
     return entries.findIndex(
-      (highlightedEntry) =>
-        highlightedEntry === navigation.previousHighlight
+      (highlightedEntry) => highlightedEntry === navigation.previousHighlight
     );
   }
 
