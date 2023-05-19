@@ -19,7 +19,7 @@ function Entries({
   onUpdateEntriesHeight,
   onUpdateEntriesElementHeight,
   onRegisterResizeEntriesHandler,
-  entriesRef,
+  entriesElementRef,
   highlightedEntryElementRef,
   i18n,
   constants,
@@ -131,7 +131,7 @@ function Entries({
       className={getEntriesClassName()}
       aria-label="Folder entries"
       role="navigation"
-      ref={entriesRef}
+      ref={entriesElementRef}
       style={getEntriesStyle()}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
