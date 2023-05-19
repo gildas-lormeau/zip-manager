@@ -60,10 +60,10 @@ const {
 } = features;
 const messages = getMessages({ i18nService });
 const firstMusicTrackIndex = musicService.getFirstTrackIndex();
+const apiFilesystem = zipService.createZipFileSystem();
+const { root } = apiFilesystem;
 
 function ZipManager() {
-  const apiFilesystem = zipService.createZipFileSystem();
-  const { root } = apiFilesystem;
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
   const [selectedFolder, setSelectedFolder] = useState(root);
   const [entries, setEntries] = useState([]);
