@@ -1,5 +1,6 @@
 function getOptionsFeatures({
-  setOptionsDialog,
+  dialogs,
+  setDialogs,
   zipService,
   storageService,
   stylesheetService,
@@ -19,17 +20,26 @@ function getOptionsFeatures({
   }
 
   function openOptions() {
-    setOptionsDialog(getOptions());
+    setDialogs({
+      ...dialogs,
+      options: getOptions()
+    });
   }
 
   function closeOptions() {
-    setOptionsDialog(null);
+    setDialogs({
+      ...dialogs,
+      options: null
+    });
   }
 
   function resetOptions() {
     const options = { ...DEFAULT_OPTIONS };
     options.maxWorkers = environmentService.getMaximumWorkers();
-    setOptionsDialog(options);
+    setDialogs({
+      ...dialogs,
+      options
+    });
   }
 
   function setOptions(options) {

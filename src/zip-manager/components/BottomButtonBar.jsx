@@ -79,7 +79,7 @@ function BottomButtonBar({
           constants={constants}
           messages={messages}
         />
-        <DeleteEntryButton
+        <DeleteEntriesButton
           disabled={disabledDeleteButton}
           clickedButtonName={clickedButtonName}
           onRemove={onRemove}
@@ -263,7 +263,7 @@ function RenameEntryButton({
   );
 }
 
-function DeleteEntryButton({
+function DeleteEntriesButton({
   disabled,
   clickedButtonName,
   onRemove,

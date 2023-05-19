@@ -1,7 +1,8 @@
 function getCommonFeatures({
+  dialogs,
   setDownloadId,
   setDownloads,
-  setErrorMessageDialog,
+  setDialogs,
   removeDownload,
   downloadService,
   filesystemService,
@@ -137,13 +138,17 @@ function getCommonFeatures({
   }
 
   function openDisplayError(message) {
-    setErrorMessageDialog({
-      message
+    setDialogs({
+      ...dialogs,
+      displayError: { message }
     });
   }
 
   function closeDisplayError() {
-    setErrorMessageDialog(null);
+    setDialogs({
+      ...dialogs,
+      displayError: null
+    });
   }
 
   function modifierKeyPressed(event) {

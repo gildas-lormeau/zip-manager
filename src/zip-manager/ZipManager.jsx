@@ -82,16 +82,18 @@ function ZipManager() {
     index: 0
   });
   const [accentColor, setAccentColor] = useState(null);
-  const [exportZipDialog, setExportZipDialog] = useState(null);
-  const [extractDialog, setExtractDialog] = useState(null);
-  const [renameDialog, setRenameDialog] = useState(null);
-  const [createFolderDialog, setCreateFolderDialog] = useState(null);
-  const [deleteEntryDialog, setDeleteEntryDialog] = useState(null);
-  const [resetDialog, setResetDialog] = useState(null);
-  const [errorMessageDialog, setErrorMessageDialog] = useState(null);
-  const [importPasswordDialog, setImportPasswordDialog] = useState(null);
-  const [optionsDialog, setOptionsDialog] = useState(null);
-  const [chooseActionDialog, setChooseActionDialog] = useState(null);
+  const [dialogs, setDialogs] = useState({
+    exportZip: null,
+    extract: null,
+    rename: null,
+    createFolder: null,
+    deleteEntries: null,
+    reset: null,
+    displayError: null,
+    enterImportPassword: null,
+    chooseAction: null,
+    options: null
+  });
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [musicFrequencyData, setMusicFrequencyData] = useState([]);
   const [musicTrackIndex, setMusicTrackIndex] = useState(firstMusicTrackIndex);
@@ -121,9 +123,10 @@ function ZipManager() {
     openDisplayError,
     closeDisplayError
   } = getCommonFeatures({
+    dialogs,
     setDownloadId,
     setDownloads,
-    setErrorMessageDialog,
+    setDialogs,
     removeDownload,
     downloadService,
     filesystemService,
@@ -137,7 +140,8 @@ function ZipManager() {
     closeOptions,
     resetOptions
   } = getOptionsFeatures({
-    setOptionsDialog,
+    dialogs,
+    setDialogs,
     zipService,
     storageService,
     stylesheetService,
@@ -175,15 +179,7 @@ function ZipManager() {
     clipboardData,
     history,
     getOptions,
-    exportZipDialog,
-    extractDialog,
-    renameDialog,
-    createFolderDialog,
-    deleteEntryDialog,
-    resetDialog,
-    errorMessageDialog,
-    importPasswordDialog,
-    optionsDialog,
+    dialogs,
     filesystemService
   });
   const {
@@ -272,13 +268,10 @@ function ZipManager() {
     selectedFolder,
     rootZipFilename,
     clipboardData,
-    chooseActionDialog,
+    dialogs,
     setHighlightedIds,
     setClipboardData,
-    setImportPasswordDialog,
-    setExportZipDialog,
-    setCreateFolderDialog,
-    setChooseActionDialog,
+    setDialogs,
     setClickedButtonName,
     refreshSelectedFolder,
     highlightEntries,
@@ -317,12 +310,11 @@ function ZipManager() {
     highlightedEntry,
     highlightedEntries,
     navigation,
+    dialogs,
     setClipboardData,
     setHighlightedIds,
     setNavigation,
-    setExtractDialog,
-    setRenameDialog,
-    setDeleteEntryDialog,
+    setDialogs,
     setClickedButtonName,
     refreshSelectedFolder,
     updateHistoryData,
@@ -334,9 +326,10 @@ function ZipManager() {
     constants
   });
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
-    zipService,
+    dialogs,
     setZipFilesystem,
-    setResetDialog
+    setDialogs,
+    zipService
   });
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
@@ -514,61 +507,61 @@ function ZipManager() {
         messages={messages}
       />
       <CreateFolderDialog
-        data={createFolderDialog}
+        data={dialogs.createFolder}
         onCreateFolder={createFolder}
         onClose={closePromptCreateFolder}
         messages={messages}
       />
       <ExportZipDialog
-        data={exportZipDialog}
+        data={dialogs.exportZip}
         hiddenPassword={hiddenExportPassword}
         onExportZip={exportZip}
         onClose={closePromptExportZip}
         messages={messages}
       />
       <ExtractDialog
-        data={extractDialog}
+        data={dialogs.extract}
         onExtract={extract}
         onClose={closePromptExtract}
         messages={messages}
       />
       <RenameDialog
-        data={renameDialog}
+        data={dialogs.rename}
         onRename={rename}
         onClose={closePromptRename}
         messages={messages}
       />
       <ResetDialog
-        data={resetDialog}
+        data={dialogs.reset}
         onReset={reset}
         onClose={closeConfirmReset}
         messages={messages}
       />
       <DeleteEntriesDialog
-        data={deleteEntryDialog}
+        data={dialogs.deleteEntries}
         onDeleteEntries={deleteEntries}
         onClose={closeConfirmDeleteEntries}
         messages={messages}
       />
       <ErrorMessageDialog
-        data={errorMessageDialog}
+        data={dialogs.displayError}
         onClose={closeDisplayError}
         messages={messages}
       />
       <ImportPasswordDialog
-        data={importPasswordDialog}
+        data={dialogs.enterImportPassword}
         onClose={closePromptImportPassword}
         messages={messages}
       />
       <OptionsDialog
-        data={optionsDialog}
+        data={dialogs.options}
         onSetOptions={setOptions}
         onResetOptions={resetOptions}
         onClose={closeOptions}
         messages={messages}
       />
       <ChooseActionDialog
-        data={chooseActionDialog}
+        data={dialogs.chooseAction}
         onImportZipFile={importZipFile}
         onAddFiles={addFiles}
         onClose={closeChooseAction}

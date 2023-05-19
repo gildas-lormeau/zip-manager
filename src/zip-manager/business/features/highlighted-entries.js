@@ -10,12 +10,11 @@ function getHighlightedEntriesFeatures({
   highlightedEntry,
   highlightedEntries,
   navigation,
+  dialogs,
   setClipboardData,
   setHighlightedIds,
   setNavigation,
-  setExtractDialog,
-  setRenameDialog,
-  setDeleteEntryDialog,
+  setDialogs,
   setClickedButtonName,
   refreshSelectedFolder,
   updateHistoryData,
@@ -53,8 +52,11 @@ function getHighlightedEntriesFeatures({
   }
 
   function openPromptRename() {
-    setRenameDialog({
-      filename: highlightedEntry.name
+    setDialogs({
+      ...dialogs,
+      rename: {
+        filename: highlightedEntry.name
+      }
     });
   }
 
@@ -69,11 +71,17 @@ function getHighlightedEntriesFeatures({
     }
   }
   function closePromptRename() {
-    setRenameDialog(null);
+    setDialogs({
+      ...dialogs,
+      rename: null
+    });
   }
 
   function openConfirmDeleteEntries() {
-    setDeleteEntryDialog({});
+    setDialogs({
+      ...dialogs,
+      deleteEntries: {}
+    });
   }
 
   function deleteEntries() {
@@ -120,7 +128,10 @@ function getHighlightedEntriesFeatures({
   }
 
   function closeConfirmDeleteEntries() {
-    setDeleteEntryDialog(null);
+    setDialogs({
+      ...dialogs,
+      deleteEntries: null
+    });
   }
 
   function openPromptExtract(entry = highlightedEntry) {
@@ -130,7 +141,10 @@ function getHighlightedEntriesFeatures({
     if (filesystemService.savePickersSupported()) {
       extract(options);
     } else {
-      setExtractDialog(options);
+      setDialogs({
+        ...dialogs,
+        extract: options
+      });
     }
   }
 
@@ -149,7 +163,10 @@ function getHighlightedEntriesFeatures({
   }
 
   function closePromptExtract() {
-    setExtractDialog(null);
+    setDialogs({
+      ...dialogs,
+      extract: null
+    });
   }
 
   function onHighlightedEntriesKeyUp(event) {

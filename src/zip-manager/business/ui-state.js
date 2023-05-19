@@ -4,16 +4,8 @@ function getUIState({
   selectedFolder,
   clipboardData,
   history,
+  dialogs,
   getOptions,
-  exportZipDialog,
-  extractDialog,
-  renameDialog,
-  createFolderDialog,
-  deleteEntryDialog,
-  resetDialog,
-  errorMessageDialog,
-  importPasswordDialog,
-  optionsDialog,
   filesystemService
 }) {
   const entriesEmpty = !entries.length;
@@ -62,15 +54,16 @@ function getUIState({
   const disabledDelete = parentFolderHighlighted;
   const disabledEnterEntry = highlightedIds.length !== 1;
   const dialogDisplayed =
-    exportZipDialog ||
-    extractDialog ||
-    renameDialog ||
-    createFolderDialog ||
-    deleteEntryDialog ||
-    resetDialog ||
-    errorMessageDialog ||
-    importPasswordDialog ||
-    optionsDialog;
+    dialogs.exportZip ||
+    dialogs.extract ||
+    dialogs.rename ||
+    dialogs.createFolder ||
+    dialogs.deleteEntries ||
+    dialogs.reset ||
+    dialogs.displayError ||
+    dialogs.enterImportPassword ||
+    dialogs.chooseAction ||
+    dialogs.options;
   const options = getOptions();
   const hiddenNavigationBar = options.hideNavigationBar;
   const hiddenDownloadManager = options.hideDownloadManager;

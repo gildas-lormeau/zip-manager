@@ -1,10 +1,14 @@
 function getFilesystemFeatures({
-  zipService,
+  dialogs,
   setZipFilesystem,
-  setResetDialog
+  setDialogs,
+  zipService
 }) {
   function openConfirmReset() {
-    setResetDialog({});
+    setDialogs({
+      ...dialogs,
+      reset: {}
+    });
   }
 
   function reset() {
@@ -12,7 +16,10 @@ function getFilesystemFeatures({
   }
 
   function closeConfirmReset() {
-    setResetDialog(null);
+    setDialogs({
+      ...dialogs,
+      reset: null
+    });
   }
 
   return {

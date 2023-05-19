@@ -5,13 +5,10 @@ function getSelectedFolderFeatures({
   selectedFolder,
   rootZipFilename,
   clipboardData,
-  chooseActionDialog,
+  dialogs,
   setHighlightedIds,
   setClipboardData,
-  setImportPasswordDialog,
-  setExportZipDialog,
-  setCreateFolderDialog,
-  setChooseActionDialog,
+  setDialogs,
   setClickedButtonName,
   refreshSelectedFolder,
   highlightEntries,
@@ -46,7 +43,10 @@ function getSelectedFolderFeatures({
   }
 
   function openPromptCreateFolder() {
-    setCreateFolderDialog({});
+    setDialogs({
+      ...dialogs,
+      createFolder: {}
+    });
   }
 
   function createFolder({ folderName }) {
@@ -60,7 +60,10 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptCreateFolder() {
-    setCreateFolderDialog(null);
+    setDialogs({
+      ...dialogs,
+      createFolder: null
+    });
   }
 
   function addFiles(files, options = {}) {
@@ -139,17 +142,23 @@ function getSelectedFolderFeatures({
       ZIP_EXTENSIONS.find((extension) => files[0].name.endsWith(extension)) &&
       !forceAddFiles;
     if (zipFileDetected) {
-      if (chooseActionDialog) {
+      if (dialogs.chooseAction) {
         callback(files, { forceAddFiles: true });
       } else {
-        setChooseActionDialog({ files });
+        setDialogs({
+          ...dialogs,
+          chooseAction: { files }
+        });
       }
     }
     return zipFileDetected;
   }
 
   function closeChooseAction() {
-    setChooseActionDialog(null);
+    setDialogs({
+      ...dialogs,
+      chooseAction: null
+    });
   }
 
   function importZipFile(zipFile, options = {}) {
@@ -168,7 +177,10 @@ function getSelectedFolderFeatures({
         if (isPasswordProtected && !options.password) {
           cleanup(importedEntries);
           const { password } = await new Promise((resolve) =>
-            setImportPasswordDialog({ onSetImportPassword: resolve })
+            setDialogs({
+              ...dialogs,
+              enterImportPassword: { onSetImportPassword: resolve }
+            })
           );
           const isValidPassword = !(
             await Promise.all(
@@ -231,10 +243,13 @@ function getSelectedFolderFeatures({
       !filesystemService.savePickersSupported() ||
       options.promptForExportPassword
     ) {
-      setExportZipDialog({
-        filename,
-        filenameHidden: filesystemService.savePickersSupported(),
-        password
+      setDialogs({
+        ...dialogs,
+        exportZip: {
+          filename,
+          filenameHidden: filesystemService.savePickersSupported(),
+          password
+        }
       });
     } else {
       exportZip({ filename, password });
@@ -268,7 +283,10 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptExportZip() {
-    setExportZipDialog(null);
+    setDialogs({
+      ...dialogs,
+      exportZip: null
+    });
   }
 
   function exportZip({ filename, password }) {
@@ -333,7 +351,10 @@ function getSelectedFolderFeatures({
   }
 
   function closePromptImportPassword() {
-    setImportPasswordDialog(null);
+    setDialogs({
+      ...dialogs,
+      enterImportPassword: null
+    });
   }
 
   function onSelectedFolderKeyDown(event) {
