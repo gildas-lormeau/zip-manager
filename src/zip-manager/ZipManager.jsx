@@ -92,16 +92,15 @@ function ZipManager() {
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
   const entriesHeightRef = useRef(1);
-  const musicPlayerActiveRef = useRef(false);
+  const playerActiveRef = useRef(false);
 
   const entriesElement = entriesElementRef.current;
-  const musicPlayerActive = musicPlayerActiveRef.current;
+  const musicPlayerActive = playerActiveRef.current;
 
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
-  const setMusicPlayerActive = (active) =>
-    (musicPlayerActiveRef.current = active);
+  const setPlayerActive = (active) => (playerActiveRef.current = active);
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -341,7 +340,7 @@ function ZipManager() {
       setOptions,
       setAccentColor,
       setMusicData,
-      setMusicPlayerActive,
+      setPlayerActive,
       getOptions,
       stylesheetService,
       themeService,

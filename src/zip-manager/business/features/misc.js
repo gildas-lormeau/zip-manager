@@ -4,7 +4,7 @@ function getMiscFeatures({
   setOptions,
   setAccentColor,
   setMusicData,
-  setMusicPlayerActive,
+  setPlayerActive,
   getOptions,
   stylesheetService,
   themeService,
@@ -19,7 +19,7 @@ function getMiscFeatures({
   }
 
   function playMusic() {
-    setMusicPlayerActive(true);
+    setPlayerActive(true);
     musicService.play({
       trackIndex: musicData.trackIndex,
       onSetFrequencyData: (frequencyData) =>
@@ -31,7 +31,7 @@ function getMiscFeatures({
   }
 
   function stopMusic() {
-    setMusicPlayerActive(false);
+    setPlayerActive(false);
     musicService.stop();
     setMusicData((musicData) => ({
       ...musicData,
