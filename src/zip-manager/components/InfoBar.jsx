@@ -158,7 +158,7 @@ function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
     const context = audioContextRef.current;
     const gradient = context.createLinearGradient(0, 0, 0, 256);
     gradient.addColorStop(0, accentColor);
-    gradient.addColorStop(0.8, accentColor);
+    gradient.addColorStop(0.75, accentColor);
     gradient.addColorStop(0.9, "transparent");
     gradient.addColorStop(1, "transparent");
     context.fillStyle = gradient;
