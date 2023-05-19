@@ -472,7 +472,7 @@ function ZipManager() {
           onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
           entriesRef={entriesRef}
           highlightedEntryRef={highlightedEntryRef}
-          i18nService={i18nService}
+          i18n={i18nService}
           constants={constants}
           messages={messages}
         />
@@ -504,7 +504,7 @@ function ZipManager() {
           downloads={downloads}
           hidden={hiddenDownloadManager}
           onAbortDownload={abortDownload}
-          i18nService={i18nService}
+          i18n={i18nService}
           constants={constants}
           messages={messages}
         />

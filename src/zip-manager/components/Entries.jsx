@@ -21,7 +21,7 @@ function Entries({
   onRegisterResizeEntriesHandler,
   entriesRef,
   highlightedEntryRef,
-  i18nService,
+  i18n,
   constants,
   messages
 }) {
@@ -166,7 +166,7 @@ function Entries({
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
                   onEnter={onEnter}
-                  i18nService={i18nService}
+                  i18n={i18n}
                   messages={messages}
                 />
               </li>
@@ -183,7 +183,7 @@ function Entries({
                   onToggle={onToggle}
                   onToggleRange={onToggleRange}
                   onEnter={onEnter}
-                  i18nService={i18nService}
+                  i18n={i18n}
                   messages={messages}
                 />
               </li>
@@ -204,7 +204,7 @@ function Entry({
   onToggle,
   onToggleRange,
   onEnter,
-  i18nService,
+  i18n,
   messages
 }) {
   function onHighlightEntry() {
@@ -229,7 +229,7 @@ function Entry({
         onToggle={onToggle}
         onToggleRange={onToggleRange}
         onEnter={onEnter}
-        i18nService={i18nService}
+        i18n={i18n}
         messages={messages}
       />
       <EntryButton
@@ -250,7 +250,7 @@ function EntryName({
   onToggle,
   onToggleRange,
   onEnter,
-  i18nService,
+  i18n,
   messages
 }) {
   const {
@@ -270,20 +270,20 @@ function EntryName({
       tooltip.push(
         LAST_MOD_DATE_LABEL +
           " " +
-          i18nService.formatDate(
+          i18n.formatDate(
             lastModified === undefined ? lastModDate : new Date(lastModified)
           )
       );
       if (uncompressedSize && compressedSize) {
         tooltip.push(
-          COMPRESSED_SIZE_LABEL + " " + i18nService.formatSize(compressedSize)
+          COMPRESSED_SIZE_LABEL + " " + i18n.formatSize(compressedSize)
         );
       }
       if (uncompressedSize) {
         tooltip.push(
           (compressedSize ? UNCOMPRESSED_SIZE_LABEL : SIZE_LABEL) +
             " " +
-            i18nService.formatSize(uncompressedSize)
+            i18n.formatSize(uncompressedSize)
         );
       }
     }
