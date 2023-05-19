@@ -21,7 +21,6 @@ function getMiscFeatures({
   function playMusic() {
     setPlayerActive(true);
     musicService.play({
-      trackIndex: musicData.trackIndex,
       onSetFrequencyData: (frequencyData) =>
         setMusicData((musicData) => ({
           ...musicData,
@@ -33,10 +32,6 @@ function getMiscFeatures({
   function stopMusic() {
     setPlayerActive(false);
     musicService.stop();
-    setMusicData((musicData) => ({
-      ...musicData,
-      trackIndex: musicService.getNextTrackIndex(musicData.trackIndex)
-    }));
   }
 
   function updateAccentColor() {

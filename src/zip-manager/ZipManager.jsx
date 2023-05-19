@@ -59,7 +59,6 @@ const {
   getMiscFeatures
 } = features;
 const messages = getMessages({ i18nService });
-const firstMusicTrackIndex = musicService.getFirstTrackIndex();
 const apiFilesystem = zipService.createZipFileSystem();
 const { root } = apiFilesystem;
 const rootZipFilename = messages.ROOT_ZIP_FILENAME;
@@ -85,8 +84,7 @@ function ZipManager() {
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [accentColor, setAccentColor] = useState(null);
   const [musicData, setMusicData] = useState({
-    frequencyData: [],
-    trackIndex: firstMusicTrackIndex
+    frequencyData: []
   });
 
   const highlightedEntryElementRef = useRef(null);

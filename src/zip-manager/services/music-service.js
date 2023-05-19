@@ -13,6 +13,7 @@ const MUSIC_TRACK_RELATIVE_PATH_PREFIX = "./" + MUSIC_TRACK_PATH_PREFIX;
 const MUSIC_TRACKS_VOLUMES = [0.1, 0.7, 0.4, 0.1, 1.8, 0.6, 0.8, 1.1, 0.5, 0.7];
 const MUSIC_TRACKS_LENGTH = MUSIC_TRACKS_VOLUMES.length;
 
+let trackIndex = Math.floor(Math.random() * MUSIC_TRACKS_LENGTH);
 let midiLibrary,
   xmLibrary,
   musicLibrary,
@@ -77,10 +78,11 @@ function initAnalyser() {
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play({ trackIndex, onSetFrequencyData }) {
+async function play({ onSetFrequencyData }) {
   const response = await fetch(
     MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
   );
+  trackIndex = (trackIndex + 1) % MUSIC_TRACKS_LENGTH;
   const blob = await response.blob();
   const contentType = blob.type;
   const data = await blob.arrayBuffer();
@@ -111,14 +113,6 @@ function stop() {
   }
 }
 
-function getFirstTrackIndex() {
-  return Math.floor(Math.random() * MUSIC_TRACKS_LENGTH);
-}
-
-function getNextTrackIndex(musicTrackIndex) {
-  return (musicTrackIndex + 1) % MUSIC_TRACKS_LENGTH;
-}
-
 document.onvisibilitychange = () => {
   if (musicLibrary && playing) {
     if (document.hidden) {
@@ -130,4 +124,4 @@ document.onvisibilitychange = () => {
   }
 };
 
-export { getFirstTrackIndex, getNextTrackIndex, play, stop };
+export { play, stop };
