@@ -62,6 +62,7 @@ const messages = getMessages({ i18nService });
 const firstMusicTrackIndex = musicService.getFirstTrackIndex();
 const apiFilesystem = zipService.createZipFileSystem();
 const { root } = apiFilesystem;
+const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
 function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
@@ -106,7 +107,6 @@ function ZipManager() {
 
   const entriesElement = entriesElementRef.current;
   const musicPlayerActive = musicPlayerActiveRef.current;
-  const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const getEntriesHeight = () => entriesHeightRef.current;
