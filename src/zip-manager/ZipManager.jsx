@@ -118,6 +118,7 @@ function ZipManager() {
     setDownloads,
     downloadService
   });
+
   const {
     modifierKeyPressed,
     saveZipFile,
