@@ -133,6 +133,7 @@ function ZipManager() {
     filesystemService,
     environmentService
   });
+
   const {
     initOptionsFeatures,
     setOptions,
@@ -149,6 +150,7 @@ function ZipManager() {
     environmentService,
     constants
   });
+
   const {
     disabledExportZip,
     disabledReset,
@@ -183,6 +185,7 @@ function ZipManager() {
     dialogs,
     filesystemService
   });
+
   const {
     highlight,
     highlightEntries,
@@ -223,6 +226,7 @@ function ZipManager() {
     windowService,
     constants
   });
+
   const {
     goIntoFolder,
     navigateBack,
@@ -245,6 +249,7 @@ function ZipManager() {
     modifierKeyPressed,
     constants
   });
+
   const {
     initSelectedFolderFeatures,
     openPromptCreateFolder,
@@ -285,6 +290,7 @@ function ZipManager() {
     modifierKeyPressed,
     constants
   });
+
   const {
     copy,
     cut,
@@ -326,15 +332,18 @@ function ZipManager() {
     modifierKeyPressed,
     constants
   });
+
   const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
     dialogs,
     setZipFilesystem,
     setDialogs,
     zipService
   });
+
   const { resetClipboardData } = getClipboardFeatures({
     setClipboardData
   });
+
   const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
     getMiscFeatures({
       accentColor,
@@ -348,6 +357,7 @@ function ZipManager() {
       themeService,
       musicService
     });
+
   const {
     enterEntry,
     initAppFeatures,
@@ -376,10 +386,12 @@ function ZipManager() {
     constants,
     messages
   });
+
   const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
     keyboardService,
     windowService
   });
+
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
     downloads,
@@ -392,6 +404,7 @@ function ZipManager() {
     onHighlightedEntriesKeyDown,
     onSelectedFolderKeyDown
   });
+
   const appClassName = getAppClassName();
 
   useKeyUp(handleKeyUp);
