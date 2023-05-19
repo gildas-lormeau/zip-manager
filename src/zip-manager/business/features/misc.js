@@ -1,6 +1,5 @@
 function getMiscFeatures({
   accentColor,
-  musicData,
   setOptions,
   setAccentColor,
   setMusicData,

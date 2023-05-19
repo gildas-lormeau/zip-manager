@@ -334,7 +334,6 @@ function ZipManager() {
   const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
     getMiscFeatures({
       accentColor,
-      musicData,
       setOptions,
       setAccentColor,
       setMusicData,
