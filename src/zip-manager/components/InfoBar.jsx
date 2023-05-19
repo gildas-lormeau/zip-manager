@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 function InfoBar({
   hidden,
   accentColor,
-  musicFrequencyData,
+  musicData,
   playMusic,
   stopMusic,
   onSetAccentColor,
@@ -59,7 +59,7 @@ function InfoBar({
             </a>
           </span>
           <MusicVisualizer
-            musicFrequencyData={musicFrequencyData}
+            musicData={musicData}
             accentColor={accentColor}
             musicPlayerActive={musicPlayerActive}
           />
@@ -136,11 +136,7 @@ function MusicPlayerButton({
   );
 }
 
-function MusicVisualizer({
-  musicFrequencyData,
-  accentColor,
-  musicPlayerActive
-}) {
+function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
   if (canvasRef.current) {
@@ -151,7 +147,7 @@ function MusicVisualizer({
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
     if (musicPlayerActive) {
-      musicFrequencyData.forEach((byteTimeDomain, index) => {
+      musicData.frequencyData.forEach((byteTimeDomain, index) => {
         context.fillRect(index, 256, 2, 32 - byteTimeDomain);
         context.fillRect(128 - index - 1, 256, 2, 32 - byteTimeDomain);
       });

@@ -77,14 +77,14 @@ function initAnalyser() {
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play({ musicTrackIndex, onSetFrequencyData }) {
+async function play({ trackIndex, onSetFrequencyData }) {
   const response = await fetch(
-    MUSIC_TRACK_RELATIVE_PATH_PREFIX + (musicTrackIndex + 1)
+    MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
   );
   const blob = await response.blob();
   const contentType = blob.type;
   const data = await blob.arrayBuffer();
-  const masterVolume = MUSIC_TRACKS_VOLUMES[musicTrackIndex];
+  const masterVolume = MUSIC_TRACKS_VOLUMES[trackIndex];
   await init({ data, contentType, masterVolume });
   playing = true;
   callbackFrequencyData = onSetFrequencyData;

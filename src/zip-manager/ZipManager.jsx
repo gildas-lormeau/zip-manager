@@ -81,7 +81,6 @@ function ZipManager() {
     path: [root],
     index: 0
   });
-  const [accentColor, setAccentColor] = useState(null);
   const [dialogs, setDialogs] = useState({
     exportZip: null,
     extract: null,
@@ -95,8 +94,12 @@ function ZipManager() {
     options: null
   });
   const [clickedButtonName, setClickedButtonName] = useState(null);
-  const [musicFrequencyData, setMusicFrequencyData] = useState([]);
-  const [musicTrackIndex, setMusicTrackIndex] = useState(firstMusicTrackIndex);
+  const [accentColor, setAccentColor] = useState(null);
+  const [musicData, setMusicData] = useState({
+    frequencyData: [],
+    trackIndex: firstMusicTrackIndex
+  });
+
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
   const entriesHeightRef = useRef(null);
@@ -337,11 +340,10 @@ function ZipManager() {
   const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
     getMiscFeatures({
       accentColor,
-      musicTrackIndex,
+      musicData,
       setOptions,
       setAccentColor,
-      setMusicFrequencyData,
-      setMusicTrackIndex,
+      setMusicData,
       setMusicPlayerActive,
       getOptions,
       stylesheetService,
@@ -499,7 +501,7 @@ function ZipManager() {
       <InfoBar
         hidden={hiddenInfobar}
         accentColor={accentColor}
-        musicFrequencyData={musicFrequencyData}
+        musicData={musicData}
         playMusic={playMusic}
         stopMusic={stopMusic}
         onSetAccentColor={setAccentColor}

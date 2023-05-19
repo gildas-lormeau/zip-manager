@@ -1,10 +1,9 @@
 function getMiscFeatures({
   accentColor,
-  musicTrackIndex,
+  musicData,
   setOptions,
   setAccentColor,
-  setMusicFrequencyData,
-  setMusicTrackIndex,
+  setMusicData,
   setMusicPlayerActive,
   getOptions,
   stylesheetService,
@@ -22,15 +21,22 @@ function getMiscFeatures({
   function playMusic() {
     setMusicPlayerActive(true);
     musicService.play({
-      musicTrackIndex,
-      onSetFrequencyData: setMusicFrequencyData
+      trackIndex: musicData.trackIndex,
+      onSetFrequencyData: (frequencyData) =>
+        setMusicData((musicData) => ({
+          ...musicData,
+          frequencyData
+        }))
     });
   }
 
   function stopMusic() {
     setMusicPlayerActive(false);
     musicService.stop();
-    setMusicTrackIndex(musicService.getNextTrackIndex(musicTrackIndex));
+    setMusicData((musicData) => ({
+      ...musicData,
+      trackIndex: musicService.getNextTrackIndex(musicData.trackIndex)
+    }));
   }
 
   function updateAccentColor() {
