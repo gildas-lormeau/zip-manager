@@ -369,6 +369,7 @@ function getEntriesFeatures({
         if (height !== options.entriesHeight) {
           options.entriesHeight = height;
           setOptions(options);
+          updateEntriesHeight();
         }
       });
       windowService.addResizeListener(updateEntriesElementHeight);
