@@ -101,7 +101,7 @@ function ZipManager() {
 
   const highlightedEntryRef = useRef(null);
   const entriesRef = useRef(null);
-  const entriesHeightRef = useRef(null);
+  const entriesHeightRef = useRef(1);
   const musicPlayerActiveRef = useRef(null);
 
   const entriesElement = entriesRef.current;
