@@ -21,8 +21,7 @@ function getMiscFeatures({
     setPlayerActive(true);
     musicService.play({
       onSetFrequencyData: (frequencyData) =>
-        setMusicData((musicData) => ({
-          ...musicData,
+        setMusicData(() => ({
           frequencyData
         }))
     });
