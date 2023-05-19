@@ -14,7 +14,7 @@ function DownloadManager({
     return (
       <div className="downloads" aria-label="Downloads" role="navigation">
         <ol>
-          {downloads.map((download) => (
+          {downloads.queue.map((download) => (
             <li key={download.id}>
               <DownloadEntry
                 download={download}

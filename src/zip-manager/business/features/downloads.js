@@ -5,9 +5,12 @@ function getDownloadsFeatures({ setDownloads, downloadService }) {
   }
 
   function removeDownload(deletedDownload) {
-    setDownloads((downloads) =>
-      downloads.filter((download) => download.id !== deletedDownload.id)
-    );
+    setDownloads((downloads) => ({
+      ...downloads,
+      queue: downloads.queue.filter(
+        (download) => download.id !== deletedDownload.id
+      )
+    }));
   }
 
   return {

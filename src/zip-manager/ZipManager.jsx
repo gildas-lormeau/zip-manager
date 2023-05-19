@@ -74,8 +74,7 @@ function ZipManager() {
     previousHighlight: null,
     direction: 0
   });
-  const [downloads, setDownloads] = useState([]);
-  const [, setDownloadId] = useState(0);
+  const [downloads, setDownloads] = useState({ queue: [], nextId: 0 });
   const [clipboardData, setClipboardData] = useState(null);
   const [history, setHistory] = useState({
     path: [root],
@@ -127,7 +126,6 @@ function ZipManager() {
     closeDisplayError
   } = getCommonFeatures({
     dialogs,
-    setDownloadId,
     setDownloads,
     setDialogs,
     removeDownload,

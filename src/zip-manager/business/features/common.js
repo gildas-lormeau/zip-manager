@@ -1,6 +1,5 @@
 function getCommonFeatures({
   dialogs,
-  setDownloadId,
   setDownloads,
   setDialogs,
   removeDownload,
@@ -85,11 +84,15 @@ function getCommonFeatures({
     } else {
       ({ writable, blob } = getWritableBlob());
     }
-    setDownloadId((downloadId) => {
-      download.id = downloadId + 1;
-      return download.id;
+    setDownloads((downloads) => {
+      let { nextId } = downloads;
+      download.id = nextId;
+      nextId = nextId + 1;
+      return {
+        nextId,
+        queue: [download, ...downloads.queue]
+      };
     });
-    setDownloads((downloads) => [download, ...downloads]);
     await entry.getWritable(writable, { signal, onprogress, ...options });
     if (!filesystemService.savePickersSupported() && !signal.aborted) {
       filesystemService.saveBlob(await blob, download.name);
@@ -123,8 +126,9 @@ function getCommonFeatures({
   }
 
   function onDownloadProgress(downloadId, progressValue, progressMax) {
-    setDownloads((downloads) =>
-      downloads.map((download) => {
+    setDownloads((downloads) => ({
+      ...downloads,
+      queue: downloads.queue.map((download) => {
         if (download.id === downloadId) {
           download = {
             ...download,
@@ -134,7 +138,7 @@ function getCommonFeatures({
         }
         return download;
       })
-    );
+    }));
   }
 
   function openDisplayError(message) {
