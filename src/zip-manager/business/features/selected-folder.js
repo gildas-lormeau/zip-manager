@@ -317,25 +317,11 @@ function getSelectedFolderFeatures({
     try {
       const { entries, cut } = clipboardData;
       if (cut) {
-        entries.forEach((entry) => {
-          try {
-            zipFilesystem.move(entry, selectedFolder);
-            pastedEntries.push(entry);
-          } catch (error) {
-            const message = error.message + (" (" + entry.name + ")");
-            throw new Error(message);
-          }
-        });
+        entries.forEach((entry) => moveEntry(entry));
       } else {
         const clones = entries.map((entry) => {
           let clone = entry.clone(true);
-          try {
-            zipFilesystem.move(entry, selectedFolder);
-            pastedEntries.push(entry);
-          } catch (error) {
-            const message = error.message + (" (" + entry.name + ")");
-            throw new Error(message);
-          }
+          moveEntry(entry);
           return clone;
         });
         setClipboardData({ entries: clones });
@@ -347,6 +333,16 @@ function getSelectedFolderFeatures({
         setHighlightedIds(pastedEntries.map((entry) => entry.id));
       }
       refreshSelectedFolder();
+    }
+
+    function moveEntry(entry) {
+      try {
+        zipFilesystem.move(entry, selectedFolder);
+        pastedEntries.push(entry);
+      } catch (error) {
+        const message = error.message + (" (" + entry.name + ")");
+        throw new Error(message);
+      }
     }
   }
 
