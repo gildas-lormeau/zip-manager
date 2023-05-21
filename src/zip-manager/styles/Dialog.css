@@ -18,7 +18,7 @@ dialog input {
   border: solid var(--accent-color) var(--border-width);
   height: 1.8em;
   padding-inline: var(--gap-width);
-  font-size: 1em;
+  font-size: var(--font-size);
   margin: var(--outline-width);
   border-radius: var(--border-radius-width);
 }
