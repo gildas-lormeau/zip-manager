@@ -14,11 +14,18 @@ main,
   flex: 1;
 }
 
+main,
+main > * {
+  border-style: solid;
+  border-color: var(--accent-color);
+  border-width: 0;
+}
+
 main {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: var(--gap-width);
-  border: solid var(--accent-color) var(--border-width);
+  border-width: var(--border-width);
   inline-size: var(--app-width);
   min-block-size: 20em;
   border-radius: var(--border-radius-width);
@@ -30,7 +37,7 @@ main {
 
 main > * {
   padding: var(--gap-width);
-  border-block-end: solid var(--accent-color) var(--border-width);
+  border-block-end-width: var(--border-width);
 }
 
 .hidden-downloads .entries {
@@ -39,7 +46,7 @@ main > * {
 
 .downloads,
 .main-container.hidden-downloads .button-bar-bottom {
-  border-block-end: none;
+  border-block-end-width: 0;
 }
 
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
@@ -52,6 +59,6 @@ main > * {
 
   .main-container:not(.hidden-footer) .downloads,
   .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-    border-block-end: solid var(--accent-color) var(--border-width);
+    border-block-end-width: var(--border-width);
   }
 }
