@@ -218,6 +218,9 @@ button {
   color: var(--button-color);
   font-size: var(--button-font-size);
   border-radius: var(--border-radius-width);
+  padding-block: var(--small-x2-button-padding-width);
+  padding-inline: var(--button-padding-width);
+  block-size: fit-content;
 }
 
 button:disabled {

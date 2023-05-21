@@ -14,9 +14,6 @@
 }
 
 .button-bar button {
-  block-size: fit-content;
-  padding-block: var(--small-x2-button-padding-width);
-  padding-inline: var(--button-padding-width);
   font-family: inherit;
   margin: var(--outline-width);
 }
