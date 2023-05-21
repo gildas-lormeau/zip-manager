@@ -2,20 +2,34 @@
 
 import WebAudioTinySynth from "./lib/webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
 import * as libxm from "./lib/libxm/libxm-es6.js";
+import * as jsSID from "./lib/jsSID/jsSID.js";
 
 import {
   MUSIC_TRACK_PATH_PREFIX,
   MIDI_CONTENT_TYPE,
-  XM_CONTENT_TYPE
+  XM_CONTENT_TYPE,
+  SID_CONTENT_TYPE
 } from "./music-service-constants.js";
 
 const MUSIC_TRACK_RELATIVE_PATH_PREFIX = "./" + MUSIC_TRACK_PATH_PREFIX;
-const MUSIC_TRACKS_VOLUMES = [0.1, 0.7, 0.4, 0.1, 1.8, 0.6, 0.8, 1.1, 0.5, 0.7];
-const MUSIC_TRACKS_LENGTH = MUSIC_TRACKS_VOLUMES.length;
+const MUSIC_TRACKS_INFO = [
+  { masterVolume: 0.1 },
+  { masterVolume: 0.7 },
+  { masterVolume: 0.4 },
+  { masterVolume: 0.1 },
+  { masterVolume: 0.8, track: 1 },
+  { masterVolume: 1.8 },
+  { masterVolume: 0.6 },
+  { masterVolume: 0.8 },
+  { masterVolume: 1.1 },
+  { masterVolume: 0.5 },
+  { masterVolume: 0.7 }
+];
 
-let trackIndex = Math.floor(Math.random() * MUSIC_TRACKS_LENGTH);
+let trackIndex = Math.floor(Math.random() * MUSIC_TRACKS_INFO.length);
 let midiLibrary,
   xmLibrary,
+  sidLibrary,
   musicLibrary,
   playing,
   analyser,
@@ -58,15 +72,25 @@ async function initXM() {
   musicLibrary = xmLibrary;
 }
 
-async function init({ data, contentType, masterVolume }) {
+async function initSID() {
+  if (!sidLibrary) {
+    jsSID.init();
+  }
+  musicLibrary = jsSID;
+}
+
+async function init({ data, contentType, masterVolume, track }) {
   musicLibrary = null;
   if (contentType === MIDI_CONTENT_TYPE) {
     initMIDI();
   } else if (contentType === XM_CONTENT_TYPE) {
     await initXM();
   }
+  if (contentType === SID_CONTENT_TYPE) {
+    await initSID();
+  }
   if (musicLibrary) {
-    musicLibrary.play({ data, masterVolume });
+    musicLibrary.play({ data, masterVolume, track });
     initAnalyser(musicLibrary);
   }
 }
@@ -82,12 +106,12 @@ async function play({ onSetFrequencyData }) {
   const response = await fetch(
     MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
   );
-  trackIndex = (trackIndex + 1) % MUSIC_TRACKS_LENGTH;
   const blob = await response.blob();
   const contentType = blob.type;
   const data = await blob.arrayBuffer();
-  const masterVolume = MUSIC_TRACKS_VOLUMES[trackIndex];
-  await init({ data, contentType, masterVolume });
+  const { masterVolume, track } = MUSIC_TRACKS_INFO[trackIndex];
+  trackIndex = (trackIndex + 1) % MUSIC_TRACKS_INFO.length;
+  await init({ data, contentType, masterVolume, track });
   playing = true;
   callbackFrequencyData = onSetFrequencyData;
   if (musicLibrary) {
