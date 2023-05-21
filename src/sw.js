@@ -24,6 +24,7 @@ const POST_REQUEST = "POST";
 importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
+precacheAndRoute([{ url: MUSIC_TRACKS_PATH }]);
 self.skipWaiting();
 registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, GET_REQUEST);
 registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, POST_REQUEST);
