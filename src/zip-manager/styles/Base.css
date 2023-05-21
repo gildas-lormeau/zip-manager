@@ -3,7 +3,8 @@
   --page-color-light: gainsboro;
   --bg-color-light: white;
   --basic-bg-color-light: white;
-  --checkbox-accent-color-light: var(--accent-color);
+  --dark-accent-color-light: var(--accent-color);
+  --darker-accent-color-light: var(--accent-color);
   --text-color-light: #333;
   --basic-text-color-light: black;
   --highlighted-text-color-light: white;
@@ -14,7 +15,8 @@
   --page-color-dark: #333;
   --bg-color-dark: black;
   --basic-bg-color-dark: black;
-  --checkbox-accent-color-dark: var(--accent-color);
+  --dark-accent-color-dark: var(--accent-color);
+  --darker-accent-color-dark: var(--accent-color);
   --text-color-dark: gainsboro;
   --basic-text-color-dark: white;
   --highlighted-text-color-dark: black;
@@ -29,9 +31,14 @@
   ::backdrop {
     --page-color-light: color-mix(in srgb, var(--accent-color) 7.5%, white);
     --bg-color-light: color-mix(in srgb, var(--accent-color) 5%, white);
-    --checkbox-accent-color-light: color-mix(
+    --dark-accent-color-light: color-mix(
       in srgb,
-      var(--accent-color) 75%,
+      var(--accent-color) 60%,
+      var(--bg-color)
+    );
+    --darker-accent-color-light: color-mix(
+      in srgb,
+      var(--accent-color) 30%,
       var(--bg-color)
     );
     --text-color-light: color-mix(in srgb, var(--accent-color) 90%, black);
@@ -54,9 +61,14 @@
     --outline-color-dark: color-mix(in srgb, var(--accent-color) 25%, black);
     --page-color-dark: color-mix(in srgb, var(--accent-color) 7.5%, black);
     --bg-color-dark: color-mix(in srgb, var(--accent-color) 5%, black);
-    --checkbox-accent-color-dark: color-mix(
+    --dark-accent-color-dark: color-mix(
       in srgb,
-      var(--accent-color) 75%,
+      var(--accent-color) 60%,
+      var(--bg-color)
+    );
+    --darker-accent-color-dark: color-mix(
+      in srgb,
+      var(--accent-color) 30%,
       var(--bg-color)
     );
     --text-color-dark: color-mix(in srgb, var(--accent-color) 90%, white);
@@ -85,7 +97,8 @@
   --page-color: var(--page-color-light);
   --bg-color: var(--bg-color-light);
   --basic-bg-color: var(--basic-bg-color-light);
-  --checkbox-accent-color: var(--checkbox-accent-color-light);
+  --dark-accent-color: var(--dark-accent-color-light);
+  --darker-accent-color: var(--darker-accent-color-light);
   --text-color: var(--text-color-light);
   --basic-text-color: var(--basic-text-color-light);
   --highlighted-text-color: var(--highlighted-text-color-light);
@@ -100,7 +113,8 @@
   --page-color: var(--page-color-dark);
   --bg-color: var(--bg-color-dark);
   --basic-bg-color: var(--basic-bg-color-dark);
-  --checkbox-accent-color: var(--checkbox-accent-color-dark);
+  --dark-accent-color: var(--dark-accent-color-dark);
+  --darker-accent-color: var(--darker-accent-color-dark);
   --text-color: var(--text-color-dark);
   --basic-text-color: var(--basic-text-color-dark);
   --highlighted-text-color: var(--highlighted-text-color-dark);
@@ -116,7 +130,8 @@
     --page-color: var(--page-color-light);
     --bg-color: var(--bg-color-light);
     --basic-bg-color: var(--basic-bg-color-light);
-    --checkbox-accent-color: var(--checkbox-accent-color-light);
+    --dark-accent-color: var(--dark-accent-color-light);
+    --darker-accent-color: var(--darker-accent-color-light);
     --text-color: var(--text-color-light);
     --basic-text-color: var(--basic-text-color-light);
     --highlighted-text-color: var(--highlighted-text-color-light);
@@ -133,7 +148,8 @@
     --page-color: var(--page-color-dark);
     --bg-color: var(--bg-color-dark);
     --basic-bg-color: var(--basic-bg-color-dark);
-    --checkbox-accent-color: var(--checkbox-accent-color-dark);
+    --dark-accent-color: var(--dark-accent-color-dark);
+    --darker-accent-color: var(--darker-accent-color-dark);
     --text-color: var(--text-color-dark);
     --basic-text-color: var(--basic-text-color-dark);
     --highlighted-text-color: var(--highlighted-text-color-dark);

@@ -20,7 +20,7 @@
 }
 
 .entries .entry-select {
-  accent-color: var(--checkbox-accent-color);
+  accent-color: var(--dark-accent-color);
   margin: 0;
   padding: 0;
   max-block-size: 1em;
