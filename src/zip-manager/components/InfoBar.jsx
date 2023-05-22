@@ -90,6 +90,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
       <span className="icon">{children}</span>
       <input
         type="color"
+        aria-label="Set accent color"
         onChange={handleChange}
         ref={colorInputRef}
         tabIndex={-1}
