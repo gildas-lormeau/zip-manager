@@ -9,12 +9,12 @@
 
 .entries ol {
   flex-direction: column;
-  row-gap: var(--small-x4-button-padding-width);
+  row-gap: var(--list-item-gap-width);
 }
 
 .entries li {
-  padding-block: var(--small-x4-button-padding-width);
-  padding-inline: var(--small-x2-button-padding-width);
+  padding-block: var(--list-item-padding-block-width);
+  padding-inline: var(--small-button-padding-inline-width);
   outline: none;
   column-gap: var(--gap-width);
 }

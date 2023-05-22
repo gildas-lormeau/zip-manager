@@ -166,11 +166,16 @@
   --gap-width: 0.5em;
   --small-gap-width: calc(var(--gap-width) / 2);
   --large-gap-width: calc(var(--gap-width) * 2);
-  --button-padding-width: 1em;
-  --small-button-padding-width: calc(var(--button-padding-width) / 1.5);
-  --small-x2-button-padding-width: calc(var(--button-padding-width) / 2);
-  --small-x3-button-padding-width: calc(var(--button-padding-width) / 3);
-  --small-x4-button-padding-width: calc(var(--button-padding-width) / 4);
+  --button-padding-inline-width: 1em;
+  --small-button-padding-inline-width: calc(
+    var(--button-padding-inline-width) / 1.5
+  );
+  --button-padding-block-width: calc(var(--button-padding-inline-width) / 2);
+  --small-button-padding-block-width: calc(
+    var(--button-padding-inline-width) / 3
+  );
+  --list-item-padding-block-width: calc(var(--button-padding-inline-width) / 4);
+  --list-item-gap-width: calc(var(--button-padding-inline-width) / 4);
   --border-width: 0.05em;
   --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
@@ -218,8 +223,8 @@ button {
   color: var(--button-color);
   font-size: var(--button-font-size);
   border-radius: var(--border-radius-width);
-  padding-block: var(--small-x2-button-padding-width);
-  padding-inline: var(--button-padding-width);
+  padding-block: var(--button-padding-block-width);
+  padding-inline: var(--button-padding-inline-width);
   block-size: fit-content;
 }
 
