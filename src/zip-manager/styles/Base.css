@@ -166,16 +166,16 @@
   --gap-width: 0.5em;
   --small-gap-width: calc(var(--gap-width) / 2);
   --large-gap-width: calc(var(--gap-width) * 2);
-  --button-padding-inline-width: 1em;
+  --button-padding-inline-width: 1.5ch;
   --small-button-padding-inline-width: calc(
     var(--button-padding-inline-width) / 1.5
   );
-  --button-padding-block-width: calc(var(--button-padding-inline-width) / 2);
+  --button-padding-block-width: 0.5em;
   --small-button-padding-block-width: calc(
-    var(--button-padding-inline-width) / 3
+    var(--button-padding-block-width) / 1.5
   );
-  --list-item-padding-block-width: calc(var(--button-padding-inline-width) / 4);
-  --list-item-gap-width: calc(var(--button-padding-inline-width) / 4);
+  --list-item-padding-block-width: calc(var(--button-padding-block-width) / 2);
+  --list-item-gap-width: calc(var(--button-padding-block-width) / 2);
   --border-width: 0.05em;
   --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
