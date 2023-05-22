@@ -149,7 +149,7 @@ function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
     if (musicPlayerActive) {
       musicData.frequencyData.forEach((byteTimeDomain, index) => {
         context.fillRect(index, 256, 2, 32 - byteTimeDomain);
-        context.fillRect(128 - index - 1, 256, 2, 32 - byteTimeDomain);
+        context.fillRect(128 - index - 2, 256, 2, 32 - byteTimeDomain);
       });
     }
   }
