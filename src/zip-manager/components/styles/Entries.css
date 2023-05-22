@@ -14,7 +14,7 @@
 
 .entries li {
   padding-block: var(--list-item-padding-block-width);
-  padding-inline: var(--small-button-padding-inline-width);
+  padding-inline: var(--list-item-padding-inline-width);
   outline: none;
   column-gap: var(--gap-width);
 }
