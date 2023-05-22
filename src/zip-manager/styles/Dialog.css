@@ -24,6 +24,7 @@ dialog select {
   font-family: inherit;
   margin: var(--outline-width);
   border-radius: var(--border-radius-width);
+  box-sizing: content-box;
 }
 
 dialog form,
