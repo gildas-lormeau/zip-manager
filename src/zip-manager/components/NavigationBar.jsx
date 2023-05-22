@@ -23,7 +23,7 @@ function NavigationBar({
       <div
         className="navigation-bar"
         role="toolbar"
-        aria-label="Navigation history"
+        aria-label={messages.FOLDERS_LABEL}
       >
         <HistoryButtons
           disabledBackButton={disabledBackButton}
@@ -92,7 +92,7 @@ function BackButton({
       name={constants.BACK_BUTTON_NAME}
       title={messages.BACK_BUTTON_TOOLTIP}
       label={messages.BACK_BUTTON_LABEL}
-      ariaLabel="Go back"
+      ariaLabel={messages.GO_BACK_LABEL}
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onNavigateBack}
@@ -114,7 +114,7 @@ function ForwardButton({
       name={constants.FORWARD_BUTTON_NAME}
       title={messages.FORWARD_BUTTON_TOOLTIP}
       label={messages.FORWARD_BUTTON_LABEL}
-      ariaLabel="Go forward"
+      ariaLabel={messages.GO_FORWARD_LABEL}
       disabled={disabled}
       clickedButtonName={clickedButtonName}
       onClick={onNavigateForward}
@@ -184,7 +184,7 @@ function BreadcrumbItem({
       className={getBreadcrumbItemClassName()}
       role="button"
       aria-current={isSelectedFolder ? "location" : null}
-      aria-label={isSelectedFolder ? null : "Go into folder"}
+      aria-label={isSelectedFolder ? null : messages.GO_INTO_FOLDER_LABEL}
       onClick={handleClick}
       onKeyUp={(event) => handleKeyUp({ event, folder })}
       tabIndex={active ? 0 : null}

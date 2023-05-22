@@ -109,6 +109,15 @@ const INFO_LABEL = [
   " in ",
   "Rennes"
 ];
+const HIGHLIGHTED_ENTRIES_LABEL = "Highlighted entries commands";
+const DOWNLOADS_LABEL = "Downloads panel";
+const ENTRIES_LABEL = "Directory entries";
+const FOLDERS_LABEL = "Navigation history";
+const SELECTED_FOLDER_LABEL = "Selected directory commands";
+const GO_INTO_FOLDER_LABEL = "Go into folder";
+const GO_BACK_LABEL = "Go back";
+const GO_FORWARD_LABEL = "Go forward";
+const ACCENT_COLOR_LABEL = "Accent color";
 const PLAYING_MUSIC_ICON = "▶";
 const PAUSED_MUSIC_ICON = "II";
 
@@ -206,6 +215,15 @@ export {
   CHOOSE_ACTION_LABEL,
   NO_ENTRIES_LABEL,
   INFO_LABEL,
+  HIGHLIGHTED_ENTRIES_LABEL,
+  DOWNLOADS_LABEL,
+  ENTRIES_LABEL,
+  FOLDERS_LABEL,
+  SELECTED_FOLDER_LABEL,
+  GO_INTO_FOLDER_LABEL,
+  GO_BACK_LABEL,
+  GO_FORWARD_LABEL,
+  ACCENT_COLOR_LABEL,
   PLAYING_MUSIC_ICON,
   PAUSED_MUSIC_ICON
 };

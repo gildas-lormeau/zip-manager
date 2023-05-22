@@ -12,7 +12,11 @@ function DownloadManager({
     return;
   } else {
     return (
-      <div className="downloads" aria-label="Downloads" role="navigation">
+      <div
+        className="downloads"
+        aria-label={messages.DOWNLOADS_LABEL}
+        role="navigation"
+      >
         <ol>
           {downloads.queue.map((download) => (
             <li key={download.id}>

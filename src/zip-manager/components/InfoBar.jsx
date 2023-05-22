@@ -50,6 +50,7 @@ function InfoBar({
             <AccentColorPickerButton
               accentColor={theme.accentColor}
               onSetAccentColor={handleChangeAccentColor}
+              messages={messages}
             >
               {messages.INFO_LABEL[4]}
             </AccentColorPickerButton>
@@ -73,7 +74,12 @@ function InfoBar({
   }
 }
 
-function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
+function AccentColorPickerButton({
+  accentColor,
+  onSetAccentColor,
+  children,
+  messages
+}) {
   const colorInputRef = useRef(null);
 
   function handleChange() {
@@ -90,7 +96,7 @@ function AccentColorPickerButton({ accentColor, onSetAccentColor, children }) {
       <span className="icon">{children}</span>
       <input
         type="color"
-        aria-label="Set accent color"
+        aria-label={messages.ACCENT_COLOR_LABEL}
         onChange={handleChange}
         ref={colorInputRef}
         tabIndex={-1}

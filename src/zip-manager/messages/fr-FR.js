@@ -112,6 +112,15 @@ const INFO_LABEL = [
   " à ",
   "Rennes"
 ];
+const HIGHLIGHTED_ENTRIES_LABEL = "Commandes des entrées en surbrillance";
+const DOWNLOADS_LABEL = "Panneau de téléchargements";
+const ENTRIES_LABEL = "Entrées du répertoire";
+const FOLDERS_LABEL = "Historique de navigation";
+const SELECTED_FOLDER_LABEL = "Commandes du répertoire selectionné";
+const GO_INTO_FOLDER_LABEL = "Naviguer dans le répertoire";
+const GO_BACK_LABEL = "Naviguer en arrière";
+const GO_FORWARD_LABEL = "Naviguer en avant";
+const ACCENT_COLOR_LABEL = "Couleur d'accentuation";
 const PLAYING_MUSIC_ICON = "▶";
 const PAUSED_MUSIC_ICON = "II";
 
@@ -209,6 +218,15 @@ export {
   CHOOSE_ACTION_LABEL,
   NO_ENTRIES_LABEL,
   INFO_LABEL,
+  HIGHLIGHTED_ENTRIES_LABEL,
+  DOWNLOADS_LABEL,
+  ENTRIES_LABEL,
+  FOLDERS_LABEL,
+  SELECTED_FOLDER_LABEL,
+  GO_INTO_FOLDER_LABEL,
+  GO_BACK_LABEL,
+  GO_FORWARD_LABEL,
+  ACCENT_COLOR_LABEL,
   PLAYING_MUSIC_ICON,
   PAUSED_MUSIC_ICON
 };

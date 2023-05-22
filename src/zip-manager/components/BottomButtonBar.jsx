@@ -49,7 +49,7 @@ function BottomButtonBar({
     <div
       className="button-bar button-bar-bottom"
       role="toolbar"
-      aria-label="Highlighted entry commands"
+      aria-label={messages.HIGHLIGHTED_ENTRIES_LABEL}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onContextMenu={(event) => event.preventDefault()}

@@ -129,7 +129,7 @@ function Entries({
   return (
     <div
       className={getEntriesClassName()}
-      aria-label="Folder entries"
+      aria-label={messages.ENTRIES_LABEL}
       role="navigation"
       ref={entriesElementRef}
       style={getEntriesStyle()}

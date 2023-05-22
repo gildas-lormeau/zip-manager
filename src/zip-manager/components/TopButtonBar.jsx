@@ -32,7 +32,7 @@ function TopButtonBar({
     <div
       className="button-bar button-bar-top"
       role="toolbar"
-      aria-label="Selected directory commands"
+      aria-label={messages.SELECTED_FOLDER_LABEL}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
