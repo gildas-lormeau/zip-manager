@@ -66,16 +66,15 @@
 }
 
 .skin-dos .info-bar {
-  margin-block-start: var(--small-gap-width);
+  margin-block: var(--small-gap-width);
   margin-block-end: 0;
   padding-block: var(--small-gap-width);
   min-height: 1em;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .skin-dos .info-bar canvas {
-  bottom: calc(var(--gap-width) * -0.8);
-  height: 200%;
+  bottom: calc(var(--gap-width) * -1);
 }
 
 .skin-dos dialog form,
@@ -106,5 +105,10 @@
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
   .skin-dos main {
     box-shadow: none;
+  }
+
+  .skin-dos .info-bar {
+    margin-block: calc(var(--small-gap-width) / 2);
+    padding-block: var(--small-gap-width);
   }
 }
