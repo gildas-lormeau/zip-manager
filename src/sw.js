@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-globals */
 
 import { clientsClaim } from "workbox-core";
-import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
+import { cleanupOutdatedCaches, precacheAndRoute, getCacheKeyForURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 
 import {
@@ -24,7 +24,6 @@ const POST_REQUEST = "POST";
 importScripts("./assets/lib/zip-no-worker-inflate.min.js");
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
-precacheAndRoute([{ url: MUSIC_TRACKS_PATH }]);
 self.skipWaiting();
 registerRoute(SHARED_FILES_RELATIVE_PATH, getSharedFiles, GET_REQUEST);
 registerRoute(SHARED_FILES_RELATIVE_PATH, setSharedFiles, POST_REQUEST);
@@ -55,7 +54,7 @@ async function getSharedFilesResponse() {
 }
 
 async function getMusicTrack({ event }) {
-  const zipReader = new zip.ZipReader((await fetch(MUSIC_TRACKS_PATH)).body);
+  const zipReader = new zip.ZipReader((await fetch(getCacheKeyForURL(MUSIC_TRACKS_PATH))).body);
   const entries = await zipReader.getEntries();
   const fileEntryIndex = Number(
     event.request.url.match(MUSIC_TRACK_INDEX_REGEXP)[0]
