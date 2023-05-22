@@ -30,6 +30,10 @@
   border-style: double;
 }
 
+.skin-dos dialog {
+  border-width: var(--border-width);
+}
+
 .skin-dos main > * {
   padding: var(--small-gap-width);
 }
