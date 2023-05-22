@@ -1,7 +1,7 @@
 function getMiscFeatures({
-  accentColor,
+  theme,
   setOptions,
-  setAccentColor,
+  setTheme,
   setMusicData,
   setPlayerActive,
   getOptions,
@@ -13,8 +13,8 @@ function getMiscFeatures({
 
   function initMiscFeatures() {
     const options = getOptions();
-    const { accentColor } = options;
-    setAccentColor(accentColor);
+    const { accentColor, skin } = options;
+    setTheme({ accentColor, skin });
   }
 
   function playMusic() {
@@ -33,14 +33,15 @@ function getMiscFeatures({
   }
 
   function updateAccentColor() {
+    const { accentColor, skin } = theme;
     if (accentColor) {
       stylesheetService.setStyle(
         ACCENT_COLOR_CUSTOM_PROPERTY_NAME,
-        accentColor
+        theme.accentColor
       );
-      themeService.setAccentColor(accentColor);
+      themeService.setTheme({ accentColor, skin });
       const options = getOptions();
-      setOptions({ ...options, accentColor: accentColor });
+      setOptions({ ...options, accentColor });
     }
   }
 

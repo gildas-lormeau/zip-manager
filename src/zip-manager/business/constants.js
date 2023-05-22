@@ -23,8 +23,11 @@ const END_KEY = "End";
 const BACK_KEY = "ArrowLeft";
 const FORWARD_KEY = "ArrowRight";
 const DEFAULT_MIME_TYPE = "application/octet-stream";
+const OPTIONS_DEFAULT_SKIN = "skin-default";
+const OPTIONS_DOS_SKIN = "skin-dos";
 const DEFAULT_OPTIONS = {
   accentColor: "#FF672E",
+  skin: OPTIONS_DEFAULT_SKIN,
   hideNavigationBar: false,
   hideDownloadManager: false,
   hideInfobar: false,
@@ -154,5 +157,7 @@ export {
   APP_CLASSNAME,
   INFOBAR_HIDDEN_CLASSNAME,
   DOWNLOAD_MANAGER_HIDDEN_CLASSNAME,
-  APP_LOADING_ATTRIBUTE_NAME
+  APP_LOADING_ATTRIBUTE_NAME,
+  OPTIONS_DEFAULT_SKIN,
+  OPTIONS_DOS_SKIN
 };

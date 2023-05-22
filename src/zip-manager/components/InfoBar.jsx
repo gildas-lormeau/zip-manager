@@ -4,14 +4,18 @@ import { useEffect, useRef, useState } from "react";
 
 function InfoBar({
   hidden,
-  accentColor,
+  theme,
   musicData,
   playMusic,
   stopMusic,
-  onSetAccentColor,
+  onSetTheme,
   musicPlayerActive,
   messages
 }) {
+  function handleChangeAccentColor(accentColor) {
+    onSetTheme({ accentColor });
+  }
+
   if (hidden) {
     return;
   } else {
@@ -44,8 +48,8 @@ function InfoBar({
           <span className="label">
             {messages.INFO_LABEL[3]}
             <AccentColorPickerButton
-              accentColor={accentColor}
-              onSetAccentColor={onSetAccentColor}
+              accentColor={theme.accentColor}
+              onSetAccentColor={handleChangeAccentColor}
             >
               {messages.INFO_LABEL[4]}
             </AccentColorPickerButton>
@@ -60,7 +64,7 @@ function InfoBar({
           </span>
           <MusicVisualizer
             musicData={musicData}
-            accentColor={accentColor}
+            accentColor={theme.accentColor}
             musicPlayerActive={musicPlayerActive}
           />
         </div>

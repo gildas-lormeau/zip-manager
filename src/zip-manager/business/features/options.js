@@ -5,6 +5,7 @@ function getOptionsFeatures({
   storageService,
   stylesheetService,
   environmentService,
+  themeService,
   constants
 }) {
   const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME, FONT_SIZE_CUSTOM_PROPERTY_NAME } =
@@ -17,6 +18,7 @@ function getOptionsFeatures({
   function applyOptions(options) {
     configureZipService(options);
     configureZoomFactor(options);
+    configureTheme(options);
   }
 
   function openOptions() {
@@ -79,6 +81,9 @@ function getOptionsFeatures({
     if (options.zoomFactor === undefined) {
       options.zoomFactor = DEFAULT_OPTIONS.zoomFactor;
     }
+    if (options.skin === undefined) {
+      options.skin = DEFAULT_OPTIONS.skin;
+    }
     return options;
   }
 
@@ -90,12 +95,15 @@ function getOptionsFeatures({
     });
   }
 
-  function configureZoomFactor(options) {
-    const { zoomFactor } = options;
+  function configureZoomFactor({ zoomFactor }) {
     stylesheetService.setStyle(
       FONT_SIZE_CUSTOM_PROPERTY_NAME,
       zoomFactor / 100 + "em"
     );
+  }
+
+  function configureTheme({ accentColor, skin }) {
+    themeService.setTheme({ accentColor, skin });
   }
 
   return {

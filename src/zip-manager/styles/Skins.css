@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "DOS-VGA-437";
+  src: url("/assets/fonts/dos-vga-9x16.ttf");
+  font-display: swap;
+}
+
+.skin-dos {
+  --gap-width: 2ch;
+  --border-width: 0.5ch;
+  --button-padding-inline-width: 2ch;
+  --button-padding-block-width: 0;
+  --button-font-size: 1em;
+  --list-item-padding-inline-width: 0.5ch;
+  --list-item-padding-block-width: 0;
+  --list-item-gap-width: 0;
+}
+
+.skin-dos body {
+  font-family: "DOS-VGA-437", monospace;
+}
+
+.skin-dos main,
+.skin-dos dialog {
+  box-shadow: 1ch 0.75em var(--darker-accent-color);
+}
+
+.skin-dos main,
+.skin-dos main > *,
+.skin-dos dialog {
+  border-style: double;
+}
+
+.skin-dos main > * {
+  padding: var(--small-gap-width);
+}
+
+.skin-dos main,
+.skin-dos button,
+.skin-dos input,
+.skin-dos select,
+.skin-dos dialog {
+  border-radius: 0;
+}
+
+.skin-dos .button-bar,
+.skin-dos .button-bar .button-group {
+  row-gap: var(--small-gap-width);
+}
+
+.skin-dos .history-buttons button {
+  font-family: "Perfect DOS VGA 437", monospace;
+}
+
+.skin-dos .navigation-bar {
+  column-gap: var(--small-gap-width);
+}
+
+.skin-dos .breadcrumb ol,
+.skin-dos .breadcrumb li,
+.skin-dos .entries .entry-name {
+  column-gap: calc(var(--small-gap-width) / 2);
+}
+
+.skin-dos .info-bar {
+  margin-block-start: calc(var(--small-gap-width) / 2);
+  margin-block-end: 0;
+  padding-block: var(--small-gap-width);
+}
+
+.skin-dos .info-bar canvas {
+  bottom: calc(var(--gap-width) * -0.9);
+  height: 250%;
+}
+
+.skin-dos dialog form,
+.skin-dos dialog form p {
+  row-gap: var(--small-gap-width);
+}
+
+.skin-dos dialog form p {
+  padding-block-start: var(--small-gap-width);
+  padding-block-end: var(--small-gap-width);
+}
+
+.skin-dos dialog form .dialog-title {
+  padding-bottom: var(--gap-width);
+}
+
+.skin-dos dialog input,
+.skin-dos dialog select {
+  border-width: 1px;
+  padding-inline: 0.6ch;
+  height: 1.2em;
+}
+
+.skin-dos dialog select {
+  height: 1.4em;
+}
+
+@media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
+  .skin-dos main {
+    box-shadow: none;
+  }
+}

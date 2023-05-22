@@ -2,6 +2,7 @@ import "./styles/OptionsDialog.css";
 import Dialog from "./Dialog.jsx";
 
 import { useEffect, useRef, useState } from "react";
+import { constants } from "../../business";
 
 function OptionsDialog({
   data,
@@ -14,6 +15,7 @@ function OptionsDialog({
   const [hideNavigationBar, setHideNavigationBar] = useState(false);
   const [hideDownloadManager, setHideDownloadManager] = useState(false);
   const [hideInfobar, setHideInfobar] = useState(false);
+  const [skin, setSkin] = useState("default");
   const [defaultExportPassword, setDefaultExportPassword] = useState("");
   const [promptForExportPassword, setPromptForExportPassword] = useState(false);
   const [keepOrder, setKeepOrder] = useState(false);
@@ -37,6 +39,10 @@ function OptionsDialog({
 
   function handleChangeHideInfobar(event) {
     setHideInfobar(event.target.checked);
+  }
+
+  function handleChangeSkin(event) {
+    setSkin(event.target.value);
   }
 
   function handleChangePromptForExportPassword(event) {
@@ -77,6 +83,7 @@ function OptionsDialog({
       hideNavigationBar,
       hideDownloadManager,
       hideInfobar,
+      skin,
       promptForExportPassword,
       defaultExportPassword,
       keepOrder,
@@ -94,6 +101,7 @@ function OptionsDialog({
         hideNavigationBar,
         hideDownloadManager,
         hideInfobar,
+        skin,
         promptForExportPassword,
         defaultExportPassword,
         keepOrder,
@@ -106,6 +114,7 @@ function OptionsDialog({
       setHideNavigationBar(hideNavigationBar);
       setHideDownloadManager(hideDownloadManager);
       setHideInfobar(hideInfobar);
+      setSkin(skin);
       setPromptForExportPassword(promptForExportPassword);
       setDefaultExportPassword(defaultExportPassword);
       setKeepOrder(keepOrder);
@@ -165,6 +174,17 @@ function OptionsDialog({
           type="checkbox"
           onChange={handleChangeHideInfobar}
         />
+      </label>
+      <label>
+        {messages.OPTIONS_SELECT_SKIN_LABEL}
+        <select value={skin} onChange={handleChangeSkin}>
+          <option value={constants.OPTIONS_DEFAULT_SKIN}>
+            {messages.OPTIONS_DEFAULT_SKIN_LABEL}
+          </option>
+          <option value={constants.OPTIONS_DOS_SKIN}>
+            {messages.OPTIONS_DOS_SKIN_LABEL}
+          </option>
+        </select>
       </label>
       <label>
         {messages.OPTIONS_EXPORT_ZIP_PASSWORD_LABEL}

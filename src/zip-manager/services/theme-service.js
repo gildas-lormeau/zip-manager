@@ -2,15 +2,15 @@
 
 const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
 
-function setAccentColor(accentColor) {
+function setTheme({ accentColor, skin }) {
+  const documentClasses = [skin];
   const brightNessAccentColor = getBrightNess(accentColor);
   if (brightNessAccentColor > 192) {
-    setDocumentClass("dark");
+    documentClasses.push("dark");
   } else if (brightNessAccentColor < 64) {
-    setDocumentClass("light");
-  } else {
-    setDocumentClass("");
+    documentClasses.push("light");
   }
+  document.documentElement.className = documentClasses.join(" ");
 }
 
 function getBrightNess(color) {
@@ -21,12 +21,4 @@ function getBrightNess(color) {
   return Math.round((red * 299 + green * 587 + blue * 114) / 1000);
 }
 
-function setDocumentClass(value) {
-  if (value) {
-    document.documentElement.className = value;
-  } else {
-    document.documentElement.removeAttribute("class");
-  }
-}
-
-export { ACCENT_COLOR_CUSTOM_PROPERTY_NAME, setAccentColor };
+export { ACCENT_COLOR_CUSTOM_PROPERTY_NAME, setTheme };

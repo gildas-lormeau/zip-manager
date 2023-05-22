@@ -82,7 +82,7 @@ function ZipManager() {
   });
   const [dialogs, setDialogs] = useState({});
   const [clickedButtonName, setClickedButtonName] = useState(null);
-  const [accentColor, setAccentColor] = useState(null);
+  const [theme, setTheme] = useState({});
   const [musicData, setMusicData] = useState({
     frequencyData: []
   });
@@ -135,6 +135,7 @@ function ZipManager() {
     storageService,
     stylesheetService,
     environmentService,
+    themeService,
     constants
   });
 
@@ -333,9 +334,9 @@ function ZipManager() {
 
   const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
     getMiscFeatures({
-      accentColor,
+      theme,
       setOptions,
-      setAccentColor,
+      setTheme,
       setMusicData,
       setPlayerActive,
       getOptions,
@@ -399,7 +400,7 @@ function ZipManager() {
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
-  useEffect(updateAccentColor, [accentColor]);
+  useEffect(updateAccentColor, [theme.accentColor]);
   useEffect(() => {
     initSelectedFolderFeatures();
     initMiscFeatures();
@@ -496,11 +497,11 @@ function ZipManager() {
       </main>
       <InfoBar
         hidden={hiddenInfobar}
-        accentColor={accentColor}
+        theme={theme}
         musicData={musicData}
         playMusic={playMusic}
         stopMusic={stopMusic}
-        onSetAccentColor={setAccentColor}
+        onSetTheme={setTheme}
         musicPlayerActive={musicPlayerActive}
         messages={messages}
       />
