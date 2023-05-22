@@ -61,6 +61,10 @@
   column-gap: calc(var(--small-gap-width) / 2);
 }
 
+.skin-dos .breadcrumb .breadcrumb-item {
+  text-decoration: underline transparent var(--large-border-width);
+}
+
 .skin-dos .info-bar {
   margin-block-start: calc(var(--small-gap-width) / 2);
   margin-block-end: 0;
