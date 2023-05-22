@@ -13,11 +13,6 @@
   column-gap: var(--small-gap-width);
 }
 
-.button-bar button {
-  font-family: inherit;
-  margin: var(--outline-width);
-}
-
 .button-bar button:not([disabled]) {
   cursor: pointer;
 }

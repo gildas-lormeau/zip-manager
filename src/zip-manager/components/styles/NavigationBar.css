@@ -18,7 +18,6 @@
   align-self: start;
   padding-block: var(--small-button-padding-block-width);
   padding-inline: var(--small-button-padding-inline-width);
-  margin: var(--outline-width);
 }
 
 .history-buttons button:not([disabled]),

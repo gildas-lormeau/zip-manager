@@ -223,9 +223,11 @@ button {
   background-color: var(--accent-color);
   color: var(--button-color);
   font-size: var(--button-font-size);
+  font-family: inherit;
   border-radius: var(--border-radius-width);
   padding-block: var(--button-padding-block-width);
   padding-inline: var(--button-padding-inline-width);
+  margin: var(--outline-width);
   block-size: fit-content;
 }
 
