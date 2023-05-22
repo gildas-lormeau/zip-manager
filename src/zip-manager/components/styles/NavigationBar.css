@@ -44,7 +44,7 @@
 }
 
 .breadcrumb .breadcrumb-item {
-  font-weight: var(--font-size);
+  font-size: 1em;
   text-decoration: underline dotted transparent var(--large-border-width);
   text-underline-offset: 0.25em;
   white-space: nowrap;

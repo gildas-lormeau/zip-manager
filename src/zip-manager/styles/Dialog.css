@@ -4,6 +4,7 @@ dialog::backdrop {
 }
 
 dialog {
+  font-size: 1em;
   margin-block-start: var(--dialog-margin-block-start);
   width: var(--dialog-width);
   background-color: var(--page-color);
@@ -18,7 +19,8 @@ dialog input {
   border: solid var(--accent-color) var(--border-width);
   height: 1.8em;
   padding-inline: var(--gap-width);
-  font-size: var(--font-size);
+  font-size: 1em;
+  font-family: inherit;
   margin: var(--outline-width);
   border-radius: var(--border-radius-width);
 }

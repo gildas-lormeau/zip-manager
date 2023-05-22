@@ -1,5 +1,6 @@
 .options-dialog form p {
-  padding: var(--small-gap-width);
+  padding-inline: var(--small-gap-width);
+  padding-block-start: var(--large-gap-width);
 }
 
 .options-dialog label {
