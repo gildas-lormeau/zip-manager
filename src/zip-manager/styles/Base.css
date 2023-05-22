@@ -1,4 +1,4 @@
-html,
+:root,
 ::backdrop {
   --page-color-light: gainsboro;
   --bg-color-light: white;
@@ -27,7 +27,7 @@ html,
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
-  html,
+  :root,
   ::backdrop {
     --page-color-light: color-mix(in srgb, var(--accent-color) 7.5%, white);
     --bg-color-light: color-mix(in srgb, var(--accent-color) 5%, white);
@@ -125,7 +125,7 @@ html,
 }
 
 @media (prefers-color-scheme: light) {
-  html,
+  :root,
   ::backdrop {
     --page-color: var(--page-color-light);
     --bg-color: var(--bg-color-light);
@@ -143,7 +143,7 @@ html,
 }
 
 @media (prefers-color-scheme: dark) {
-  html,
+  :root,
   ::backdrop {
     --page-color: var(--page-color-dark);
     --bg-color: var(--bg-color-dark);
@@ -160,7 +160,7 @@ html,
   }
 }
 
-html {
+:root {
   --brightness-hover: 0.75;
   --border-radius-width: 0.25em;
   --gap-width: 0.5em;
@@ -192,7 +192,7 @@ html {
   --dialog-form-max-height: 70dvh;
 }
 
-html {
+:root {
   background-color: var(--page-color);
   overscroll-behavior: none;
 }
@@ -282,12 +282,12 @@ a:visited {
 
 @media (max-width: 60ch) {
   body {
-    font-size: 0.95em;
+    font-size: calc(var(--font-size) * 0.8);
   }
 }
 
 @media (max-width: 40ch) {
   body {
-    font-size: 0.9em;
+    font-size: calc(var(--font-size) * 0.7);
   }
 }
