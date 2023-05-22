@@ -10,7 +10,7 @@ function setStyle(name, value) {
   if (rule) {
     rule.style.setProperty(name, value);
   } else {
-    styleElement.sheet.insertRule("html { " + name + ": " + value + "}");
+    styleElement.sheet.insertRule(":root { " + name + ": " + value + "}");
   }
 }
 
