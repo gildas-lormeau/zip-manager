@@ -1,4 +1,4 @@
-:root,
+html,
 ::backdrop {
   --page-color-light: gainsboro;
   --bg-color-light: white;
@@ -27,7 +27,7 @@
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
-  :root,
+  html,
   ::backdrop {
     --page-color-light: color-mix(in srgb, var(--accent-color) 7.5%, white);
     --bg-color-light: color-mix(in srgb, var(--accent-color) 5%, white);
@@ -92,8 +92,8 @@
   }
 }
 
-:root.light,
-:root.light ::backdrop {
+.light,
+.light ::backdrop {
   --page-color: var(--page-color-light);
   --bg-color: var(--bg-color-light);
   --basic-bg-color: var(--basic-bg-color-light);
@@ -108,8 +108,8 @@
   --outline-color: var(--outline-color-light);
 }
 
-:root.dark,
-:root.dark ::backdrop {
+.dark,
+.dark ::backdrop {
   --page-color: var(--page-color-dark);
   --bg-color: var(--bg-color-dark);
   --basic-bg-color: var(--basic-bg-color-dark);
@@ -125,7 +125,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-  :root,
+  html,
   ::backdrop {
     --page-color: var(--page-color-light);
     --bg-color: var(--bg-color-light);
@@ -143,7 +143,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root,
+  html,
   ::backdrop {
     --page-color: var(--page-color-dark);
     --bg-color: var(--bg-color-dark);
@@ -160,7 +160,7 @@
   }
 }
 
-:root {
+html {
   --brightness-hover: 0.75;
   --border-radius-width: 0.25em;
   --gap-width: 0.5em;
