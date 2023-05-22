@@ -13,7 +13,7 @@ See https://gildas-lormeau.github.io/zip-manager/
  - integration in the "Open with..." menu on desktop (see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers)
  - integration with the "Share" feature on mobile (see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
  - customizable accent color
- - integrated MIDI/XM music player and visualizer
+ - integrated MIDI/XM/SID music player and visualizer
 
 ## Screenshots 
 
