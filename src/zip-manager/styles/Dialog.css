@@ -13,7 +13,8 @@ dialog {
   border-radius: var(--border-radius-width);
 }
 
-dialog input {
+dialog input,
+dialog select {
   background-color: var(--bg-color);
   color: var(--text-color);
   border: solid var(--accent-color) var(--border-width);

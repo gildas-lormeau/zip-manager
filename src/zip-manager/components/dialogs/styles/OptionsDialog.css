@@ -10,7 +10,8 @@
   min-height: 1.75em;
 }
 
-.options-dialog input {
+.options-dialog input,
+.options-dialog select {
   margin-inline-start: var(--gap-width);
 }
 
@@ -26,6 +27,7 @@
 }
 
 .options-dialog input[type="password"],
-.options-dialog input[type="number"] {
+.options-dialog input[type="number"],
+.options-dialog select {
   width: min(10ch, 100%);
 }
