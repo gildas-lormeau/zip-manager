@@ -69,6 +69,10 @@
   text-decoration: underline transparent var(--large-border-width);
 }
 
+.skin-dos .entries li {
+  column-gap: 0;
+}
+
 .skin-dos .info-bar {
   margin-block-start: var(--small-gap-width);
   margin-block-end: 0;
