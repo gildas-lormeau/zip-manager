@@ -16,6 +16,7 @@ function getAppFeatures({
   modifierKeyPressed,
   stylesheetService,
   documentService,
+  i18nService,
   constants,
   messages
 }) {
@@ -39,6 +40,7 @@ function getAppFeatures({
       FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
       JSON.stringify(FOLDER_SEPARATOR)
     );
+    documentService.setDocumentLanguage(i18nService.getLanguageId());
     documentService.removeDocumentAttribute(APP_LOADING_ATTRIBUTE_NAME);
   }
 

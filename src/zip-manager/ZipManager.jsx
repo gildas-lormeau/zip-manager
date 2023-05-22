@@ -370,6 +370,7 @@ function ZipManager() {
     modifierKeyPressed,
     stylesheetService,
     documentService,
+    i18nService,
     constants,
     messages
   });

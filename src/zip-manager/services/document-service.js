@@ -25,10 +25,15 @@ function addResizeObserver(element, listener) {
   return observer;
 }
 
+function setDocumentLanguage(language) {
+  document.documentElement.lang = language;
+}
+
 export {
   getHeight,
   getRowHeight,
   scrollIntoView,
   removeDocumentAttribute,
-  addResizeObserver
+  addResizeObserver,
+  setDocumentLanguage
 };
