@@ -92,8 +92,8 @@
   }
 }
 
-.light,
-.light ::backdrop {
+:root.light,
+:root.light ::backdrop {
   --page-color: var(--page-color-light);
   --bg-color: var(--bg-color-light);
   --basic-bg-color: var(--basic-bg-color-light);
@@ -108,8 +108,8 @@
   --outline-color: var(--outline-color-light);
 }
 
-.dark,
-.dark ::backdrop {
+:root.dark,
+:root.dark ::backdrop {
   --page-color: var(--page-color-dark);
   --bg-color: var(--bg-color-dark);
   --basic-bg-color: var(--basic-bg-color-dark);
