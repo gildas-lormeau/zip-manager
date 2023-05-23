@@ -36,6 +36,17 @@ let midiLibrary,
   byteFrequencyData,
   callbackFrequencyData;
 
+document.onvisibilitychange = () => {
+  if (musicLibrary && playing) {
+    if (document.hidden) {
+      musicLibrary.pause();
+    } else {
+      musicLibrary.resume();
+      requestAnimationFrame(getByteFrequencyData);
+    }
+  }
+};
+
 function initMIDI() {
   if (!midiLibrary) {
     midiLibrary = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
@@ -135,16 +146,5 @@ function stop() {
     musicLibrary.pause();
   }
 }
-
-document.onvisibilitychange = () => {
-  if (musicLibrary && playing) {
-    if (document.hidden) {
-      musicLibrary.pause();
-    } else {
-      musicLibrary.resume();
-      requestAnimationFrame(getByteFrequencyData);
-    }
-  }
-};
 
 export { play, stop };
