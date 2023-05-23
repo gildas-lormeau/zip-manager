@@ -82,7 +82,7 @@
 }
 
 .skin-dos .info-bar canvas {
-  bottom: calc(-1 * var(--small-gap-width) - 4px);
+  bottom: calc(-1 * var(--small-gap-width));
   height: calc(100% + 2 * var(--small-gap-width));
 }
 

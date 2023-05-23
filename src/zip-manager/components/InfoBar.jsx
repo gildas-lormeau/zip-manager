@@ -10,6 +10,7 @@ function InfoBar({
   stopMusic,
   onSetTheme,
   musicPlayerActive,
+  constants,
   messages
 }) {
   function handleChangeAccentColor(accentColor) {
@@ -39,9 +40,11 @@ function InfoBar({
           </span>
           <span>
             <MusicPlayerButton
+              skin={theme.skin}
               playMusic={playMusic}
               stopMusic={stopMusic}
               musicPlayerActive={musicPlayerActive}
+              constants={constants}
               messages={messages}
             />
           </span>
@@ -64,9 +67,11 @@ function InfoBar({
             </a>
           </span>
           <MusicVisualizer
+            skin={theme.skin}
             musicData={musicData}
             accentColor={theme.accentColor}
             musicPlayerActive={musicPlayerActive}
+            constants={constants}
           />
         </div>
       </footer>
@@ -106,9 +111,11 @@ function AccentColorPickerButton({
 }
 
 function MusicPlayerButton({
+  skin,
   playMusic,
   stopMusic,
   musicPlayerActive,
+  constants,
   messages
 }) {
   const ICON_CLASSNAME = "icon icon-music-player";
@@ -126,7 +133,7 @@ function MusicPlayerButton({
         className: ICON_CLASSNAME + PAUSED_CLASSNAME
       });
     } else {
-      playMusic();
+      playMusic({ fftSize: skin === constants.OPTIONS_DOS_SKIN ? 32 : 128 });
       setIconPlayer({
         label: messages.PLAYING_MUSIC_ICON,
         className: ICON_CLASSNAME
@@ -147,7 +154,13 @@ function MusicPlayerButton({
   );
 }
 
-function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
+function MusicVisualizer({
+  skin,
+  musicData,
+  accentColor,
+  musicPlayerActive,
+  constants
+}) {
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
   if (canvasRef.current) {
@@ -158,9 +171,15 @@ function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
     if (musicPlayerActive) {
+      const barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
       musicData.frequencyData.forEach((byteTimeDomain, index) => {
-        context.fillRect(index, 256, 2, 32 - byteTimeDomain);
-        context.fillRect(128 - index - 2, 256, 2, 32 - byteTimeDomain);
+        context.fillRect(index * barWidth, 256, barWidth, 32 - byteTimeDomain);
+        context.fillRect(
+          128 - index * barWidth - barWidth,
+          256,
+          barWidth,
+          32 - byteTimeDomain
+        );
       });
     }
   }
@@ -169,8 +188,7 @@ function MusicVisualizer({ musicData, accentColor, musicPlayerActive }) {
     const context = audioContextRef.current;
     const gradient = context.createLinearGradient(0, 0, 0, 256);
     gradient.addColorStop(0, accentColor);
-    gradient.addColorStop(0.75, accentColor);
-    gradient.addColorStop(0.9, "transparent");
+    gradient.addColorStop(0.7, accentColor);
     gradient.addColorStop(1, "transparent");
     context.fillStyle = gradient;
   }

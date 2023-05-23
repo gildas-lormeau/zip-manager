@@ -504,6 +504,7 @@ function ZipManager() {
         stopMusic={stopMusic}
         onSetTheme={setTheme}
         musicPlayerActive={musicPlayerActive}
+        constants={constants}
         messages={messages}
       />
       <CreateFolderDialog

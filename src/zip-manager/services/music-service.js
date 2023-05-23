@@ -47,7 +47,7 @@ document.onvisibilitychange = () => {
   }
 };
 
-async function init({ data, contentType, masterVolume, track }) {
+async function init({ data, contentType, masterVolume, track, fftSize }) {
   musicLibrary = null;
   if (contentType === MIDI_CONTENT_TYPE) {
     initMIDI();
@@ -58,7 +58,7 @@ async function init({ data, contentType, masterVolume, track }) {
   }
   if (musicLibrary) {
     musicLibrary.play({ data, masterVolume, track });
-    initAnalyser(musicLibrary);
+    initAnalyser(fftSize);
   }
 }
 
@@ -105,14 +105,14 @@ function initSID() {
   musicLibrary = jsSID;
 }
 
-function initAnalyser() {
+function initAnalyser(fftSize = 128) {
   analyser = musicLibrary.audioContext.createAnalyser();
   musicLibrary.out.connect(analyser);
-  analyser.fftSize = 128;
+  analyser.fftSize = fftSize;
   byteFrequencyData = new Uint8Array(analyser.frequencyBinCount);
 }
 
-async function play({ onSetFrequencyData }) {
+async function play({ onSetFrequencyData, fftSize }) {
   const response = await fetch(
     MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
   );
@@ -121,7 +121,7 @@ async function play({ onSetFrequencyData }) {
   const data = await blob.arrayBuffer();
   const { masterVolume, track } = MUSIC_TRACKS_INFO[trackIndex];
   trackIndex = (trackIndex + 1) % MUSIC_TRACKS_INFO.length;
-  await init({ data, contentType, masterVolume, track });
+  await init({ data, contentType, masterVolume, track, fftSize });
   playing = true;
   callbackFrequencyData = onSetFrequencyData;
   if (musicLibrary) {

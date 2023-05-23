@@ -17,13 +17,14 @@ function getMiscFeatures({
     setTheme({ accentColor, skin });
   }
 
-  function playMusic() {
+  function playMusic({ fftSize }) {
     setPlayerActive(true);
     musicService.play({
       onSetFrequencyData: (frequencyData) =>
         setMusicData(() => ({
           frequencyData
-        }))
+        })),
+      fftSize
     });
   }
 
