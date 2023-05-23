@@ -79,11 +79,11 @@
 
 .info-bar canvas {
   position: absolute;
-  bottom: calc(var(--gap-width) * -1.75);
+  bottom: calc(-1 * var(--gap-width) - 4px);
   left: -7.5%;
   z-index: -1;
   width: 115%;
-  height: 200%;
+  height: calc(100% + 2 * var(--gap-width));
   opacity: 0.4;
 }
 

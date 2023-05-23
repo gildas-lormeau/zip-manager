@@ -82,7 +82,8 @@
 }
 
 .skin-dos .info-bar canvas {
-  bottom: calc(var(--gap-width) * -0.9);
+  bottom: calc(-1 * var(--small-gap-width) - 4px);
+  height: calc(100% + 2 * var(--small-gap-width));
 }
 
 .skin-dos dialog form,
