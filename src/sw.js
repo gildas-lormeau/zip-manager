@@ -1,8 +1,12 @@
-/* global self, URL, Response, caches, importScripts, zip, fetch */
+/* global self, URL, Response, caches, importScripts, zip */
 /* eslint-disable no-restricted-globals */
 
 import { cacheNames, clientsClaim } from "workbox-core";
-import { cleanupOutdatedCaches, precacheAndRoute, getCacheKeyForURL } from "workbox-precaching";
+import {
+  cleanupOutdatedCaches,
+  precacheAndRoute,
+  getCacheKeyForURL
+} from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 
 import {
