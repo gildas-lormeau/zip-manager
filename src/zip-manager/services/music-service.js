@@ -85,8 +85,7 @@ async function init({ data, contentType, masterVolume, track }) {
     initMIDI();
   } else if (contentType === XM_CONTENT_TYPE) {
     await initXM();
-  }
-  if (contentType === SID_CONTENT_TYPE) {
+  } else if (contentType === SID_CONTENT_TYPE) {
     initSID();
   }
   if (musicLibrary) {
