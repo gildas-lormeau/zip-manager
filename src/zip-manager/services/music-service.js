@@ -72,7 +72,7 @@ async function initXM() {
   musicLibrary = xmLibrary;
 }
 
-async function initSID() {
+function initSID() {
   if (!sidLibrary) {
     jsSID.init();
   }
@@ -87,7 +87,7 @@ async function init({ data, contentType, masterVolume, track }) {
     await initXM();
   }
   if (contentType === SID_CONTENT_TYPE) {
-    await initSID();
+    initSID();
   }
   if (musicLibrary) {
     musicLibrary.play({ data, masterVolume, track });
