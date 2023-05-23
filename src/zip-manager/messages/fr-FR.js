@@ -105,7 +105,7 @@ const NO_ENTRIES_LABEL =
   "Glissez et déposez des fichiers et des répertoires ici";
 const INFO_LABEL = [
   "Code source sur ",
-  "Github",
+  "GitHub",
   " ",
   " Fait avec ",
   "♡",
