@@ -1,7 +1,7 @@
 /* global self, URL, Response, caches, importScripts, zip, fetch */
 /* eslint-disable no-restricted-globals */
 
-import { clientsClaim } from "workbox-core";
+import { cacheNames, clientsClaim } from "workbox-core";
 import { cleanupOutdatedCaches, precacheAndRoute, getCacheKeyForURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 
@@ -54,7 +54,9 @@ async function getSharedFilesResponse() {
 }
 
 async function getMusicTrack({ event }) {
-  const zipReader = new zip.ZipReader((await fetch(getCacheKeyForURL(MUSIC_TRACKS_PATH))).body);
+  const cache = await caches.open(cacheNames.precache);
+  const response = await cache.match(getCacheKeyForURL(MUSIC_TRACKS_PATH));
+  const zipReader = new zip.ZipReader(response.body);
   const entries = await zipReader.getEntries();
   const fileEntryIndex = Number(
     event.request.url.match(MUSIC_TRACK_INDEX_REGEXP)[0]
