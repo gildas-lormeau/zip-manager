@@ -47,6 +47,21 @@ document.onvisibilitychange = () => {
   }
 };
 
+async function init({ data, contentType, masterVolume, track }) {
+  musicLibrary = null;
+  if (contentType === MIDI_CONTENT_TYPE) {
+    initMIDI();
+  } else if (contentType === XM_CONTENT_TYPE) {
+    await initXM();
+  } else if (contentType === SID_CONTENT_TYPE) {
+    initSID();
+  }
+  if (musicLibrary) {
+    musicLibrary.play({ data, masterVolume, track });
+    initAnalyser(musicLibrary);
+  }
+}
+
 function initMIDI() {
   if (!midiLibrary) {
     midiLibrary = new WebAudioTinySynth({ quality: 1, useReverb: 1 });
@@ -88,21 +103,6 @@ function initSID() {
     jsSID.init();
   }
   musicLibrary = jsSID;
-}
-
-async function init({ data, contentType, masterVolume, track }) {
-  musicLibrary = null;
-  if (contentType === MIDI_CONTENT_TYPE) {
-    initMIDI();
-  } else if (contentType === XM_CONTENT_TYPE) {
-    await initXM();
-  } else if (contentType === SID_CONTENT_TYPE) {
-    initSID();
-  }
-  if (musicLibrary) {
-    musicLibrary.play({ data, masterVolume, track });
-    initAnalyser(musicLibrary);
-  }
 }
 
 function initAnalyser() {
