@@ -17,7 +17,7 @@ const MUSIC_TRACKS_INFO = [
   { masterVolume: 0.7 },
   { masterVolume: 0.4 },
   { masterVolume: 0.1 },
-  { masterVolume: 0.8, track: 1 },
+  { masterVolume: 1.2, track: 1 },
   { masterVolume: 1.8 },
   { masterVolume: 0.6 },
   { masterVolume: 0.8 },

@@ -256,7 +256,7 @@ function jsSID(bufferlen, background_noise) {
   var frame_sampleperiod = samplerate / PAL_FRAMERATE;
   //samplerate/(PAL_FRAMERATE*framespeed);
   var framecnt = 1,
-    volume = 1.0,
+    volume = 0.5,
     CPUtime = 0,
     pPC;
   var SIDamount = 1,
