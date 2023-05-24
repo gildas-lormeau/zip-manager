@@ -83,7 +83,7 @@
 
 .skin-dos .info-bar canvas {
   bottom: calc(-1 * var(--small-gap-width));
-  height: calc(100% + 2 * var(--small-gap-width));
+  height: calc(100% + var(--small-gap-width));
 }
 
 .skin-dos dialog form,
@@ -119,5 +119,9 @@
   .skin-dos .info-bar {
     margin-block-start: 0;
     padding-block: var(--small-gap-width);
+  }
+
+  .skin-dos .info-bar canvas {
+    height: calc(100% + 2 * var(--small-gap-width));
   }
 }
