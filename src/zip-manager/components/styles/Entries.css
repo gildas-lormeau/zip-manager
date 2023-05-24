@@ -94,7 +94,7 @@
     text-shadow: none;
   }
 
-  html[lang] .entries ol:empty::after {
+  .entries ol:empty::after {
     content: var(--message-drag-and-drop-entries);
   }
 }
