@@ -83,7 +83,7 @@
   left: -7.5%;
   z-index: -1;
   width: 115%;
-  height: calc(100% + 2 * var(--gap-width));
+  height: calc(100% + var(--gap-width) + var(--small-gap-width));
   opacity: 0.4;
 }
 
