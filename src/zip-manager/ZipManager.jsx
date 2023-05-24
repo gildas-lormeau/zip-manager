@@ -333,7 +333,7 @@ function ZipManager() {
     setClipboardData
   });
 
-  const { playMusic, stopMusic, updateAccentColor, initMiscFeatures } =
+  const { playMusic, stopMusic, updateAccentColor, updateSkin, initMiscFeatures } =
     getMiscFeatures({
       theme,
       setOptions,
@@ -404,6 +404,7 @@ function ZipManager() {
   useEffect(updateZipFilesystem, [zipFilesystem]);
   useEffect(updateHighlightedEntries, [highlightedIds]);
   useEffect(updateAccentColor, [theme.accentColor]);
+  useEffect(updateSkin, [theme.skin]);
   useEffect(() => {
     initSelectedFolderFeatures();
     initMiscFeatures();

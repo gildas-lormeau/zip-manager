@@ -20,19 +20,20 @@ function getMiscFeatures({
 
   function playMusic() {
     setPlayerActive(true);
-    musicService.setFftSize(getFftSize());
+    updateSkin();
     musicService.play({
       onSetFrequencyData: (frequencyData) => {
-        musicService.setFftSize(getFftSize());
         setMusicData(() => ({
           frequencyData
         }));
       }
     });
+  }
 
-    function getFftSize() {
-      return theme.skin === constants.OPTIONS_DOS_SKIN ? 32 : 128;
-    }
+  function updateSkin() {
+    musicService.setFftSize(
+      theme.skin === constants.OPTIONS_DOS_SKIN ? 32 : 128
+    );
   }
 
   function stopMusic() {
@@ -57,6 +58,7 @@ function getMiscFeatures({
     playMusic,
     stopMusic,
     updateAccentColor,
+    updateSkin,
     initMiscFeatures
   };
 }
