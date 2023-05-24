@@ -20,13 +20,10 @@
   font-family: "DOS-VGA-437", monospace;
 }
 
-.skin-dos main {
-  margin: var(--small-gap-width);
-}
-
 .skin-dos main,
 .skin-dos dialog {
   box-shadow: 1ch 0.75em var(--darker-accent-color);
+  margin-block-start: var(--small-gap-width);
 }
 
 .skin-dos main,
@@ -128,6 +125,7 @@
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
   .skin-dos main {
     box-shadow: none;
+    margin-block-start: 0;
   }
 
   .skin-dos .info-bar {
