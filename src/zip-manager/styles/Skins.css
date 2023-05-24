@@ -54,6 +54,7 @@
 
 .skin-dos .history-buttons button {
   font-family: "DOS-VGA-437", monospace;
+  padding-inline: var(--button-padding-inline-width);
 }
 
 .skin-dos .navigation-bar {
