@@ -157,9 +157,15 @@ function MusicVisualizer({
   musicPlayerActive,
   constants
 }) {
+  const CANVAS_WIDTH = 128;
+  const CANVAS_HEIGTH = 64;
+  const CANVAS_BLOCK_OFFSET = CANVAS_HEIGTH / 8;
+  const MAX_FFT_VALUE = 256;
+
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
-  let barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
+  let barWidth;
+  updateBarWidth();
   if (canvasRef.current) {
     if (!audioContextRef.current) {
       audioContextRef.current = canvasRef.current.getContext("2d");
@@ -167,15 +173,18 @@ function MusicVisualizer({
       updateBarWidth();
     }
     const context = audioContextRef.current;
-    context.clearRect(0, 0, 256, 256);
+    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
     if (musicPlayerActive) {
       musicData.frequencyData.forEach((byteTimeDomain, index) => {
-        context.fillRect(index * barWidth, 256, barWidth, 32 - byteTimeDomain);
+        const barHeight =
+          (CANVAS_BLOCK_OFFSET - byteTimeDomain) /
+          (MAX_FFT_VALUE / CANVAS_HEIGTH);
+        context.fillRect(index * barWidth, CANVAS_HEIGTH, barWidth, barHeight);
         context.fillRect(
-          128 - index * barWidth - barWidth,
-          256,
+          CANVAS_WIDTH - index * barWidth - barWidth,
+          CANVAS_HEIGTH,
           barWidth,
-          32 - byteTimeDomain
+          barHeight
         );
       });
     }
@@ -183,7 +192,7 @@ function MusicVisualizer({
 
   function updateColor() {
     const context = audioContextRef.current;
-    const gradient = context.createLinearGradient(0, 0, 0, 256);
+    const gradient = context.createLinearGradient(0, 0, 0, CANVAS_HEIGTH);
     gradient.addColorStop(0, accentColor);
     gradient.addColorStop(0.7, accentColor);
     gradient.addColorStop(1, "transparent");
@@ -191,7 +200,9 @@ function MusicVisualizer({
   }
 
   function updateBarWidth() {
-    barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
+    if (skin) {
+      barWidth = CANVAS_WIDTH / (constants.FFT_RESOLUTIONS[skin] / 2);
+    }
   }
 
   useEffect(() => {
@@ -200,7 +211,13 @@ function MusicVisualizer({
     }
   }, [accentColor]);
   useEffect(updateBarWidth, [skin]);
-  return <canvas ref={canvasRef} width={128} height={256}></canvas>;
+  return (
+    <canvas
+      ref={canvasRef}
+      width={CANVAS_WIDTH}
+      height={CANVAS_HEIGTH}
+    ></canvas>
+  );
 }
 
 export default InfoBar;

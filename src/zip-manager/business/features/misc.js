@@ -31,9 +31,9 @@ function getMiscFeatures({
   }
 
   function updateSkin() {
-    musicService.setFftSize(
-      theme.skin === constants.OPTIONS_DOS_SKIN ? 32 : 128
-    );
+    if (theme.skin) {
+      musicService.setFftSize(constants.FFT_RESOLUTIONS[theme.skin]);
+    }
   }
 
   function stopMusic() {
