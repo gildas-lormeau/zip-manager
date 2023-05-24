@@ -151,6 +151,9 @@ function stop() {
 
 function setFftSize(value) {
   fftSize = value;
+  if (analyser && fftSize !== value) {
+    analyser.fftSize = fftSize;
+  }
 }
 
 export { play, stop, setFftSize };
