@@ -73,6 +73,10 @@
   column-gap: 0;
 }
 
+.skin-dos .entries .entry-select {
+  margin-inline-end: var(--small-gap-width);
+}
+
 .skin-dos .info-bar {
   margin-block-start: var(--small-gap-width);
   margin-block-end: 0;
