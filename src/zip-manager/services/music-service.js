@@ -114,9 +114,8 @@ function initAnalyser(fftSize = 128) {
 }
 
 async function play({ onSetFrequencyData, fftSize }) {
-  trackIndex = 11;
   const response = await fetch(
-    "./assets/music/tracks/track12.xm"
+    MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
   );
   const blob = await response.blob();
   const contentType = blob.type;
