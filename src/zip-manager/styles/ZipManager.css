@@ -5,7 +5,7 @@ main {
 }
 
 .main-container {
-  height: 100dvh;
+  block-size: 100dvh;
   align-items: center;
 }
 

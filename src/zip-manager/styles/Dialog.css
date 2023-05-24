@@ -6,7 +6,7 @@ dialog::backdrop {
 dialog {
   font-size: 1em;
   margin-block-start: var(--dialog-margin-block-start);
-  width: var(--dialog-width);
+  inline-size: var(--dialog-width);
   background-color: var(--page-color);
   color: var(--text-color);
   border: solid var(--accent-color) var(--large-border-width);
@@ -23,7 +23,7 @@ dialog select {
   background-color: var(--bg-color);
   color: var(--text-color);
   border: solid var(--accent-color) var(--border-width);
-  height: 1.8em;
+  block-size: 1.8em;
   padding-inline: var(--gap-width);
   font-size: 1em;
   font-family: inherit;
@@ -45,7 +45,7 @@ dialog form p {
 }
 
 dialog form {
-  max-height: var(--dialog-form-max-height);
+  max-block-size: var(--dialog-form-max-height);
 }
 
 dialog form .dialog-title {

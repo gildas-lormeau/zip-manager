@@ -7,7 +7,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  min-height: 1.75em;
+  min-block-size: 1.75em;
 }
 
 .options-dialog input,
@@ -20,8 +20,8 @@
 }
 
 .options-dialog input[type="checkbox"] {
-  width: 2ch;
-  height: 1em;
+  inline-size: 2ch;
+  block-size: 1em;
   accent-color: var(--accent-color);
   margin-inline: calc(var(--outline-width));
 }
@@ -29,5 +29,5 @@
 .options-dialog input[type="password"],
 .options-dialog input[type="number"],
 .options-dialog select {
-  width: min(10ch, 100%);
+  inline-size: min(10ch, 100%);
 }

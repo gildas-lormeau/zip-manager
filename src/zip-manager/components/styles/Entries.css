@@ -60,12 +60,12 @@
   }
 
   .entries ol:empty {
-    height: 100%;
+    block-size: 100%;
   }
 
   .entries ol:empty::after {
     display: flex;
-    height: 100%;
+    block-size: 100%;
     justify-content: center;
     align-items: center;
     text-align: center;

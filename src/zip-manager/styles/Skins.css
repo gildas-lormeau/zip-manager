@@ -83,13 +83,13 @@
   margin-block-start: var(--small-gap-width);
   margin-block-end: 0;
   padding-block: var(--small-gap-width);
-  min-height: 1em;
+  min-block-size: 1em;
   font-size: 0.8em;
 }
 
 .skin-dos .info-bar canvas {
   bottom: calc(-1 * var(--small-gap-width));
-  height: calc(100% + var(--small-gap-width));
+  block-size: calc(100% + var(--small-gap-width));
 }
 
 .skin-dos dialog {
@@ -114,11 +114,11 @@
 .skin-dos dialog select {
   border-width: 1px;
   padding-inline: 0.6ch;
-  height: 1.2em;
+  block-size: 1.2em;
 }
 
 .skin-dos dialog select {
-  height: 1.4em;
+  block-size: 1.4em;
 }
 
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
@@ -132,6 +132,6 @@
   }
 
   .skin-dos .info-bar canvas {
-    height: calc(100% + var(--small-gap-width));
+    block-size: calc(100% + var(--small-gap-width));
   }
 }

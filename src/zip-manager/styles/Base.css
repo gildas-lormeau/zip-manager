@@ -280,13 +280,13 @@ a:visited {
   }
 }
 
-@media (max-width: 60ch) {
+@media (max-inline-size: 60ch) {
   body {
     font-size: calc(var(--font-size) * 0.8);
   }
 }
 
-@media (max-width: 40ch) {
+@media (max-inline-size: 40ch) {
   body {
     font-size: calc(var(--font-size) * 0.7);
   }

@@ -29,7 +29,7 @@
 }
 
 .downloads li progress {
-  width: 100%;
+  inline-size: 100%;
   block-size: 1em;
   accent-color: var(--accent-color);
 }
