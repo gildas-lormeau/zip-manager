@@ -1,6 +1,7 @@
 function getOptionsFeatures({
   dialogs,
   setDialogs,
+  setTheme,
   zipService,
   storageService,
   stylesheetService,
@@ -103,6 +104,7 @@ function getOptionsFeatures({
   }
 
   function configureTheme({ accentColor, skin }) {
+    setTheme({ accentColor, skin });
     themeService.setTheme({ accentColor, skin });
   }
 

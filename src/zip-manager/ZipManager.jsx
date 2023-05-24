@@ -131,6 +131,7 @@ function ZipManager() {
   } = getOptionsFeatures({
     dialogs,
     setDialogs,
+    setTheme,
     zipService,
     storageService,
     stylesheetService,
@@ -342,7 +343,8 @@ function ZipManager() {
       getOptions,
       stylesheetService,
       themeService,
-      musicService
+      musicService,
+      constants
     });
 
   const {

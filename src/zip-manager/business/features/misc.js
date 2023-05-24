@@ -7,7 +7,8 @@ function getMiscFeatures({
   getOptions,
   stylesheetService,
   themeService,
-  musicService
+  musicService,
+  constants
 }) {
   const { ACCENT_COLOR_CUSTOM_PROPERTY_NAME } = themeService;
 
@@ -17,15 +18,21 @@ function getMiscFeatures({
     setTheme({ accentColor, skin });
   }
 
-  function playMusic({ fftSize }) {
+  function playMusic() {
     setPlayerActive(true);
+    musicService.setFftSize(getFftSize());
     musicService.play({
-      onSetFrequencyData: (frequencyData) =>
+      onSetFrequencyData: (frequencyData) => {
+        musicService.setFftSize(getFftSize());
         setMusicData(() => ({
           frequencyData
-        })),
-      fftSize
+        }));
+      }
     });
+
+    function getFftSize() {
+      return theme.skin === constants.OPTIONS_DOS_SKIN ? 32 : 128;
+    }
   }
 
   function stopMusic() {

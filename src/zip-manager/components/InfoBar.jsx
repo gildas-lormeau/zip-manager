@@ -40,11 +40,9 @@ function InfoBar({
           </span>
           <span>
             <MusicPlayerButton
-              skin={theme.skin}
               playMusic={playMusic}
               stopMusic={stopMusic}
               musicPlayerActive={musicPlayerActive}
-              constants={constants}
               messages={messages}
             />
           </span>
@@ -111,11 +109,9 @@ function AccentColorPickerButton({
 }
 
 function MusicPlayerButton({
-  skin,
   playMusic,
   stopMusic,
   musicPlayerActive,
-  constants,
   messages
 }) {
   const ICON_CLASSNAME = "icon icon-music-player";
@@ -133,7 +129,7 @@ function MusicPlayerButton({
         className: ICON_CLASSNAME + PAUSED_CLASSNAME
       });
     } else {
-      playMusic({ fftSize: skin === constants.OPTIONS_DOS_SKIN ? 32 : 128 });
+      playMusic();
       setIconPlayer({
         label: messages.PLAYING_MUSIC_ICON,
         className: ICON_CLASSNAME
@@ -163,15 +159,16 @@ function MusicVisualizer({
 }) {
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
+  let barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
   if (canvasRef.current) {
     if (!audioContextRef.current) {
       audioContextRef.current = canvasRef.current.getContext("2d");
       updateColor();
+      updateBarWidth();
     }
     const context = audioContextRef.current;
     context.clearRect(0, 0, 256, 256);
     if (musicPlayerActive) {
-      const barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
       musicData.frequencyData.forEach((byteTimeDomain, index) => {
         context.fillRect(index * barWidth, 256, barWidth, 32 - byteTimeDomain);
         context.fillRect(
@@ -193,11 +190,16 @@ function MusicVisualizer({
     context.fillStyle = gradient;
   }
 
+  function updateBarWidth() {
+    barWidth = skin === constants.OPTIONS_DOS_SKIN ? 8 : 2;
+  }
+
   useEffect(() => {
     if (audioContextRef.current) {
       updateColor();
     }
   }, [accentColor]);
+  useEffect(updateBarWidth, [skin]);
   return <canvas ref={canvasRef} width={128} height={256}></canvas>;
 }
 
