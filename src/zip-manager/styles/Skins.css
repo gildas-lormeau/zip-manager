@@ -20,6 +20,10 @@
   font-family: "DOS-VGA-437", monospace;
 }
 
+.skin-dos main {
+  margin: var(--small-gap-width);
+}
+
 .skin-dos main,
 .skin-dos dialog {
   box-shadow: 1ch 0.75em var(--darker-accent-color);
