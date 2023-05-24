@@ -23,6 +23,7 @@ const MUSIC_TRACKS_INFO = [
   { masterVolume: 0.8 },
   { masterVolume: 1.1 },
   { masterVolume: 0.5 },
+  { masterVolume: 0.7 },
   { masterVolume: 0.7 }
 ];
 
@@ -113,8 +114,9 @@ function initAnalyser(fftSize = 128) {
 }
 
 async function play({ onSetFrequencyData, fftSize }) {
+  trackIndex = 11;
   const response = await fetch(
-    MUSIC_TRACK_RELATIVE_PATH_PREFIX + (trackIndex + 1)
+    "./assets/music/tracks/track12.xm"
   );
   const blob = await response.blob();
   const contentType = blob.type;
