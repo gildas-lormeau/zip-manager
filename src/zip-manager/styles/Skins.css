@@ -6,6 +6,7 @@
 
 .skin-dos {
   --gap-width: 2ch;
+  --smaller-gap-width: calc(var(--small-gap-width) / 1.5);
   --border-width: 0.5ch;
   --button-padding-inline-width: 2ch;
   --button-padding-block-width: 0;
@@ -35,7 +36,7 @@
 }
 
 .skin-dos main > * {
-  padding: var(--small-gap-width);
+  padding: var(--smaller-gap-width);
 }
 
 .skin-dos main,
@@ -62,7 +63,7 @@
 .skin-dos .breadcrumb ol,
 .skin-dos .breadcrumb li,
 .skin-dos .entries .entry-name {
-  column-gap: calc(var(--small-gap-width) / 2);
+  column-gap: var(--smaller-gap-width);
 }
 
 .skin-dos .breadcrumb .breadcrumb-item {
@@ -88,6 +89,10 @@
 .skin-dos .info-bar canvas {
   bottom: calc(-1 * var(--small-gap-width));
   height: calc(100% + var(--small-gap-width));
+}
+
+.skin-dos dialog {
+  padding: var(--small-gap-width);
 }
 
 .skin-dos dialog form,

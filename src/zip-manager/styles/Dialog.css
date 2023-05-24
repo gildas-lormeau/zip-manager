@@ -11,6 +11,7 @@ dialog {
   color: var(--text-color);
   border: solid var(--accent-color) var(--large-border-width);
   border-radius: var(--border-radius-width);
+  padding: var(--large-gap-width);
 }
 
 dialog:focus {
