@@ -42,7 +42,7 @@
 }
 
 .skin-dos main > * {
-  padding: var(--smaller-gap-width);
+  padding: 0.75ch;
 }
 
 .skin-dos button {
