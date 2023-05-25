@@ -73,8 +73,14 @@
   column-gap: var(--smaller-gap-width);
 }
 
-.skin-dos .breadcrumb .breadcrumb-item {
-  text-decoration: underline transparent var(--large-border-width);
+.skin-dos .breadcrumb .breadcrumb-item-active,
+.skin-dos .breadcrumb .breadcrumb-item-active:focus {
+  text-decoration: underline var(--accent-color) var(--large-border-width);
+}
+
+.skin-dos .breadcrumb .breadcrumb-item-active:focus {
+  outline: 0;
+  filter: brightness(var(--brightness-hover));
 }
 
 .skin-dos .entries li {
