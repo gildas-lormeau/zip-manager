@@ -6,9 +6,10 @@
 
 .skin-dos {
   --gap-width: 2ch;
-  --smaller-gap-width: calc(var(--small-gap-width) / 1.5);
+  --small-gap-width: calc(var(--gap-width) / 2);
+  --smaller-gap-width: calc(var(--small-gap-width) / 2);
   --border-width: 0.5ch;
-  --button-padding-inline-width: 1.75ch;
+  --button-padding-inline-width: 2ch;
   --button-padding-block-width: 0;
   --button-font-size: 1em;
   --border-radius-width: 0;
@@ -17,6 +18,7 @@
   --list-item-gap-width: 0;
   --outline-color: var(--accent-color);
   --outline-width: 2px;
+  --list-item-padding-inline-width: calc(var(--small-gap-width) / 4);
 }
 
 .skin-dos body {
@@ -41,6 +43,10 @@
 
 .skin-dos main > * {
   padding: var(--smaller-gap-width);
+}
+
+.skin-dos button {
+  margin: 0;
 }
 
 .skin-dos button:focus {
