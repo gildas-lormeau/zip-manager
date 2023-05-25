@@ -42,7 +42,8 @@
 }
 
 .skin-dos main > * {
-  padding: 0.75ch;
+  padding-inline: 0.5ch;
+  padding-block: 0.75ch;
 }
 
 .skin-dos button {
