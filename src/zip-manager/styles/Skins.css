@@ -107,7 +107,7 @@
 
 .skin-dos .info-bar canvas {
   bottom: calc(-1 * var(--small-gap-width));
-  block-size: calc(100% + var(--small-gap-width));
+  block-size: calc(100% + var(--smaller-gap-width));
 }
 
 .skin-dos dialog {
