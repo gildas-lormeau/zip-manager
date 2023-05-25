@@ -43,7 +43,7 @@
 
 .skin-dos main > * {
   padding-inline: 0.5ch;
-  padding-block: calc(1em - 0.5ch);
+  padding-block: calc(0.5em - 0.25ch);
 }
 
 .skin-dos button {
