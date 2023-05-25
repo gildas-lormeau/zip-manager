@@ -117,7 +117,7 @@
 
 .skin-dos dialog input,
 .skin-dos dialog select {
-  border-width: 1px;
+  border-width: 2px;
   padding-inline: 0.6ch;
   block-size: 1.2em;
 }
