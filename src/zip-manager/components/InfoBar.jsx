@@ -13,8 +13,26 @@ function InfoBar({
   constants,
   messages
 }) {
+  const PLAYER_ICON_CLASSNAME = "icon icon-music-player";
+  const PLAYER_PAUSED_CLASSNAME = " paused";
+  const PLAYER_PAUSED = {
+    label: messages.PAUSED_MUSIC_ICON,
+    className: PLAYER_ICON_CLASSNAME + PLAYER_PAUSED_CLASSNAME
+  };
+  const PLAYER_ACTIVE = {
+    label: messages.PLAYING_MUSIC_ICON,
+    className: PLAYER_ICON_CLASSNAME
+  };
+
+  const [iconPlayer, setIconPlayer] = useState(PLAYER_PAUSED);
+
   function handleChangeAccentColor(accentColor) {
     onSetTheme({ accentColor });
+  }
+
+  function handleChangeIconPlayer(paused) {
+    const iconData = paused ? PLAYER_PAUSED : PLAYER_ACTIVE;
+    setIconPlayer(iconData);
   }
 
   if (hidden) {
@@ -43,7 +61,8 @@ function InfoBar({
               playMusic={playMusic}
               stopMusic={stopMusic}
               musicPlayerActive={musicPlayerActive}
-              messages={messages}
+              iconPlayer={iconPlayer}
+              onSetIconPlayer={handleChangeIconPlayer}
             />
           </span>
           <span className="label">
@@ -112,28 +131,16 @@ function MusicPlayerButton({
   playMusic,
   stopMusic,
   musicPlayerActive,
-  messages
+  iconPlayer,
+  onSetIconPlayer
 }) {
-  const ICON_CLASSNAME = "icon icon-music-player";
-  const PAUSED_CLASSNAME = " paused";
-  const [iconPlayer, setIconPlayer] = useState({
-    label: messages.PAUSED_MUSIC_ICON,
-    className: ICON_CLASSNAME + PAUSED_CLASSNAME
-  });
-
   function handlePlayButtonClick() {
     if (musicPlayerActive) {
       stopMusic();
-      setIconPlayer({
-        label: messages.PAUSED_MUSIC_ICON,
-        className: ICON_CLASSNAME + PAUSED_CLASSNAME
-      });
+      onSetIconPlayer(true);
     } else {
       playMusic();
-      setIconPlayer({
-        label: messages.PLAYING_MUSIC_ICON,
-        className: ICON_CLASSNAME
-      });
+      onSetIconPlayer();
     }
   }
 
