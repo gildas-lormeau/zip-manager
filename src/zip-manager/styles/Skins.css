@@ -27,7 +27,7 @@
 
 .skin-dos main,
 .skin-dos dialog {
-  box-shadow: 1ch 1em var(--darker-accent-color);
+  box-shadow: 1ch calc(0.5em + 0.5ch) var(--darker-accent-color);
   margin-block-start: var(--small-gap-width);
 }
 
