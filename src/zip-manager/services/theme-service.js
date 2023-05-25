@@ -5,9 +5,9 @@ const ACCENT_COLOR_CUSTOM_PROPERTY_NAME = "--accent-color";
 function setTheme({ accentColor, skin }) {
   const documentClasses = [skin];
   const brightNessAccentColor = getBrightNess(accentColor);
-  if (brightNessAccentColor > 192) {
+  if (brightNessAccentColor > 224) {
     documentClasses.push("dark");
-  } else if (brightNessAccentColor < 64) {
+  } else if (brightNessAccentColor < 32) {
     documentClasses.push("light");
   }
   document.documentElement.className = documentClasses.join(" ");
