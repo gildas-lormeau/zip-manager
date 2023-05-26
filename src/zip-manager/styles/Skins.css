@@ -61,6 +61,16 @@
   outline-width: 0;
 }
 
+.skin-dos .scrollable::-webkit-scrollbar {
+  inline-size: var(--small-gap-width);
+  background-color: var(--bg-disabled-button-color);
+}
+
+.skin-dos .scrollable::-webkit-scrollbar-thumb,
+.skin-dos .scrollable::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
 .skin-dos .button-bar,
 .skin-dos .button-bar .button-group {
   row-gap: var(--small-gap-height);

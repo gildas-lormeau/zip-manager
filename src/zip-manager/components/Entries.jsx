@@ -115,7 +115,7 @@ function Entries({
   }
 
   function getEntriesClassName() {
-    const classes = ["entries"];
+    const classes = ["entries", "scrollable"];
     if (draggingItems) {
       classes.push("dragging-items");
     }

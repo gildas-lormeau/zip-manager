@@ -2,9 +2,7 @@
   block-size: 55dvh;
   min-block-size: 10dvh;
   resize: vertical;
-  overflow: auto;
   box-sizing: border-box;
-  scrollbar-color: var(--accent-color) transparent;
 }
 
 .entries ol {

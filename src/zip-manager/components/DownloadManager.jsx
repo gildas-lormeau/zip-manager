@@ -13,7 +13,7 @@ function DownloadManager({
   } else {
     return (
       <div
-        className="downloads"
+        className="downloads scrollable"
         aria-label={messages.DOWNLOADS_LABEL}
         role="navigation"
       >
