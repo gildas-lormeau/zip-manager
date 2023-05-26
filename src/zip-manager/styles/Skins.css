@@ -6,19 +6,22 @@
 
 .skin-dos {
   --gap-width: 2ch;
+  --gap-height: 1em;
   --small-gap-width: calc(var(--gap-width) / 2);
-  --smaller-gap-width: calc(0.5em + 0.25ch);
-  --border-width: 0.5ch;
-  --button-padding-inline-width: 2ch;
+  --small-gap-height: calc(var(--gap-height) / 2);
+  --smaller-gap-width: calc(var(--small-gap-width) / 2);
+  --smaller-gap-height: calc(var(--small-gap-height) / 2);
+  --border-width: 2px;
+  --button-padding-inline-width: var(--gap-width);
   --button-padding-block-width: 0;
-  --button-font-size: 1em;
+  --button-font-size: var(--gap-height);
   --border-radius-width: 0;
-  --list-item-padding-inline-width: 0.5ch;
+  --list-item-padding-inline-width: var(--smaller-gap-width);
   --list-item-padding-block-width: 0;
   --list-item-gap-width: 0;
   --outline-color: var(--accent-color);
   --outline-width: 2px;
-  --list-item-padding-inline-width: calc(var(--small-gap-width) / 4);
+  --list-item-padding-inline-width: 0;
 }
 
 .skin-dos body {
@@ -27,8 +30,14 @@
 
 .skin-dos main,
 .skin-dos dialog {
-  box-shadow: 1ch var(--smaller-gap-width) var(--darker-accent-color);
-  margin-block-start: var(--smaller-gap-width);
+  box-shadow: var(--small-gap-width)
+    calc(var(--gap-height) - var(--smaller-gap-height))
+    var(--darker-accent-color);
+  border-width: var(--smaller-gap-height) var(--smaller-gap-width);
+}
+
+.skin-dos main {
+  margin-block-start: var(--small-gap-height);
 }
 
 .skin-dos main,
@@ -38,8 +47,9 @@
 }
 
 .skin-dos main > * {
-  padding-inline: 0.5ch;
-  padding-block: 0.5em;
+  padding-inline: var(--smaller-gap-width);
+  padding-block: var(--small-gap-height);
+  border-block-end-width: var(--smaller-gap-height);
 }
 
 .skin-dos button {
@@ -53,7 +63,7 @@
 
 .skin-dos .button-bar,
 .skin-dos .button-bar .button-group {
-  row-gap: var(--small-gap-width);
+  row-gap: var(--small-gap-height);
 }
 
 .skin-dos .history-buttons button {
@@ -97,7 +107,7 @@
   margin-block-start: var(--small-gap-width);
   margin-block-end: 0;
   padding-block: var(--small-gap-width);
-  min-block-size: 1em;
+  min-block-size: var(--gap-height);
   font-size: 0.8em;
 }
 
@@ -107,44 +117,51 @@
 }
 
 .skin-dos dialog {
-  border-width: var(--border-width);
-  padding-inline: var(--small-gap-width);
-  padding-block: var(--smaller-gap-width);
+  margin-block-start: calc(2 * var(--gap-height) - var(--smaller-gap-height));
+  padding-inline: var(--smaller-gap-width);
+  padding-block: var(--small-gap-height);
 }
 
 .skin-dos dialog form,
 .skin-dos dialog form p {
   row-gap: var(--small-gap-width);
+  margin-inline: var(--smaller-gap-width);
+  margin-block: var(--smaller-gap-height);
 }
 
 .skin-dos dialog form p {
-  padding-block-start: var(--small-gap-width);
-  padding-block-end: var(--small-gap-width);
+  padding-block: var(--small-gap-height);
 }
 
 .skin-dos dialog form .dialog-title {
-  padding-bottom: var(--gap-width);
+  padding-block-end: var(--gap-height);
 }
 
 .skin-dos dialog input,
 .skin-dos dialog select {
-  border-width: 2px;
-  padding-inline: 0.6ch;
+  padding-inline: var(--smaller-gap-width);
   block-size: 1.2em;
 }
 
-.skin-dos dialog select {
-  block-size: 1.4em;
+.skin-dos .downloads,
+.main-container.hidden-downloads .button-bar-bottom {
+  border-block-end-width: 0;
 }
 
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
+  .skin-dos .main-container:not(.hidden-footer) .downloads,
+  .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
+    border-block-end-width: var(--smaller-gap-height);
+  }
+
   .skin-dos main {
     box-shadow: none;
     margin-block-start: 0;
+    border-width: 0;
   }
 
   .skin-dos main > * {
-    padding-inline: 1ch;
+    padding-inline: var(--small-gap-width);
   }
 
   .skin-dos .info-bar {
@@ -154,5 +171,9 @@
 
   .skin-dos .info-bar canvas {
     block-size: calc(100% + var(--small-gap-width));
+  }
+
+  .skin-dos dialog {
+    margin-block-start: calc(1 * var(--gap-height));
   }
 }
