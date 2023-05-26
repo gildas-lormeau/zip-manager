@@ -446,6 +446,7 @@ function getEntriesFeatures({
         if (event.key === PAGE_DOWN_KEY) {
           highlightNextPage();
         }
+        event.preventDefault();
       }
     }
   }
