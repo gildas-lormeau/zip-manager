@@ -4,7 +4,7 @@
   resize: vertical;
   overflow: auto;
   box-sizing: border-box;
-  scrollbar-color: var(--button-color) transparent;
+  scrollbar-color: var(--accent-color) transparent;
 }
 
 .entries ol {
