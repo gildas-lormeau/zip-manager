@@ -7,7 +7,7 @@
 .skin-dos {
   --gap-width: 2ch;
   --small-gap-width: calc(var(--gap-width) / 2);
-  --smaller-gap-width: calc(var(--small-gap-width) / 2);
+  --smaller-gap-width: calc(0.5em + 0.25ch);
   --border-width: 0.5ch;
   --button-padding-inline-width: 2ch;
   --button-padding-block-width: 0;
@@ -27,8 +27,8 @@
 
 .skin-dos main,
 .skin-dos dialog {
-  box-shadow: 1ch calc(0.5em + 0.25ch) var(--darker-accent-color);
-  margin-block-start: var(--small-gap-width);
+  box-shadow: 1ch var(--smaller-gap-width) var(--darker-accent-color);
+  margin-block-start: var(--smaller-gap-width);
 }
 
 .skin-dos main,
@@ -39,7 +39,7 @@
 
 .skin-dos main > * {
   padding-inline: 0.5ch;
-  padding-block: calc(0.5em - 0.25ch);
+  padding-block: 0.5em;
 }
 
 .skin-dos button {
@@ -108,8 +108,8 @@
 
 .skin-dos dialog {
   border-width: var(--border-width);
-  padding-inline: 0.5ch;
-  padding-block: calc(0.5em - 0.25ch);
+  padding-inline: var(--small-gap-width);
+  padding-block: var(--smaller-gap-width);
 }
 
 .skin-dos dialog form,
