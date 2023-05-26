@@ -304,7 +304,9 @@ function getEntriesFeatures({
   }
 
   function getNextPageEntry(indexEntry) {
-    return entries[Math.min(indexEntry + getEntriesHeight(), entries.length - 1)];
+    return entries[
+      Math.min(indexEntry + getEntriesHeight(), entries.length - 1)
+    ];
   }
 
   function getPreviousHighlightedEntryIndex() {
