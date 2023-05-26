@@ -389,6 +389,24 @@ function getEntriesFeatures({
 
   function onEntriesKeyUp(event) {
     if (!disabledNavigation) {
+      if (!event.altKey && !modifierKeyPressed(event)) {
+        if (event.key.length === 1 && event.key !== ACTION_KEY) {
+          highlightFirstLetter(event.key);
+        }
+      }
+    }
+  }
+
+  function onEntriesKeyDown(event) {
+    if (modifierKeyPressed(event)) {
+      if (event.key === HIGHLIGHT_ALL_KEY) {
+        event.preventDefault();
+        if (!disabledHighlightAll) {
+          setClickedButtonName(HIGHLIGHT_ALL_BUTTON_NAME);
+        }
+      }
+    }
+    if (!disabledNavigation) {
       if (event.shiftKey) {
         if (event.key === DOWN_KEY) {
           toggleNext();
@@ -428,34 +446,6 @@ function getEntriesFeatures({
         if (event.key === PAGE_DOWN_KEY) {
           highlightNextPage();
         }
-      }
-      if (!event.altKey && !modifierKeyPressed(event)) {
-        if (event.key.length === 1 && event.key !== ACTION_KEY) {
-          highlightFirstLetter(event.key);
-        }
-      }
-    }
-  }
-
-  function onEntriesKeyDown(event) {
-    if (modifierKeyPressed(event)) {
-      if (event.key === HIGHLIGHT_ALL_KEY) {
-        event.preventDefault();
-        if (!disabledHighlightAll) {
-          setClickedButtonName(HIGHLIGHT_ALL_BUTTON_NAME);
-        }
-      }
-    }
-    if (!event.altKey && !modifierKeyPressed(event)) {
-      if (
-        event.key === DOWN_KEY ||
-        event.key === UP_KEY ||
-        event.key === PAGE_DOWN_KEY ||
-        event.key === PAGE_UP_KEY ||
-        event.key === HOME_KEY ||
-        event.key === END_KEY
-      ) {
-        event.preventDefault();
       }
     }
   }
