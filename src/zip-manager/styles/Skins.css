@@ -37,10 +37,6 @@
   border-style: double;
 }
 
-.skin-dos dialog {
-  border-width: var(--border-width);
-}
-
 .skin-dos main > * {
   padding-inline: 0.5ch;
   padding-block: calc(0.5em - 0.25ch);
@@ -111,7 +107,9 @@
 }
 
 .skin-dos dialog {
-  padding: var(--small-gap-width);
+  border-width: var(--border-width);
+  padding-inline: 0.5ch;
+  padding-block: calc(0.5em - 0.25ch);
 }
 
 .skin-dos dialog form,
