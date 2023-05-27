@@ -44,6 +44,8 @@ function RenameDialog({ data, onRename, onClose, messages }) {
       <label>
         {messages.RENAME_FILENAME_LABEL}
         <input
+          spellcheck="false"
+          type="text"
           value={filename}
           required
           onChange={handleChangeFilename}
