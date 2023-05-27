@@ -157,6 +157,7 @@
 .skin-dos dialog select {
   padding-inline: var(--smaller-gap-width);
   block-size: 1.2em;
+  caret-shape: underscore;
 }
 
 .skin-dos .downloads,
