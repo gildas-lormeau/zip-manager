@@ -83,7 +83,7 @@
   left: -7.5%;
   z-index: -1;
   inline-size: 115%;
-  block-size: calc(100% + var(--gap-width) + var(--small-gap-width));
+  block-size: calc(100% + var(--gap-width));
   opacity: 0.4;
 }
 
