@@ -30,6 +30,7 @@ dialog select {
   margin: var(--outline-width);
   border-radius: var(--border-radius-width);
   box-sizing: content-box;
+  caret-color: var(--accent-color);
 }
 
 dialog form,
