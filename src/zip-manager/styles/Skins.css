@@ -38,6 +38,7 @@
 
 .skin-dos main {
   margin-block-start: var(--small-gap-height);
+  inline-size: min(round(up, var(--app-width), var(--small-gap-width)), 132ch);
 }
 
 .skin-dos main,
