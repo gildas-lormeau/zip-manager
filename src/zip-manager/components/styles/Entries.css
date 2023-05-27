@@ -3,6 +3,8 @@
   min-block-size: 10dvh;
   resize: vertical;
   box-sizing: border-box;
+  padding-block-start: 0;
+  margin-block-start: var(--gap-width);
 }
 
 .entries ol {

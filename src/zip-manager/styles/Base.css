@@ -307,10 +307,6 @@ a:visited {
   border-radius: var(--border-width);
 }
 
-.scrollable::-webkit-scrollbar-track {
-  border-radius: var(--border-width);
-}
-
 .scrollable::-webkit-resizer {
   background-color: var(--bg-color);
 }

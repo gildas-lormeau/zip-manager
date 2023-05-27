@@ -105,6 +105,11 @@
   filter: brightness(var(--brightness-hover));
 }
 
+.skin-dos .entries {
+  padding-block-start: 0;
+  margin-block-start: var(--small-gap-height);
+}
+
 .skin-dos .entries li {
   column-gap: 0;
 }
