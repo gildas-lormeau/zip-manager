@@ -33,6 +33,7 @@
   overflow-inline: hidden;
 }
 
+.navigation-bar,
 .breadcrumb ol {
   flex-wrap: wrap;
   column-gap: calc(var(--small-gap-width) - var(--outline-width));
