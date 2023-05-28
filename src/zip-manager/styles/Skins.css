@@ -174,7 +174,7 @@
 
   .skin-dos main {
     inline-size: 100%;
-    inline-size: round(up, 100%, 1ch);
+    inline-size: round(down, 100%, 1ch);
     box-shadow: none;
     margin-block-start: 0;
     border-width: 0;
