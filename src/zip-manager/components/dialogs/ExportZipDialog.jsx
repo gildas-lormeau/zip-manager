@@ -67,7 +67,7 @@ function ExportZipDialog({
         {messages.EXPORT_ZIP_FILENAME_LABEL}
         {!filenameHidden && (
           <input
-            spellcheck="false"
+            spellCheck="false"
             type="text"
             value={filename}
             required

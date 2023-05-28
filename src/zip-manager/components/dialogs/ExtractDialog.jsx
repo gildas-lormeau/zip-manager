@@ -44,7 +44,7 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
       <label>
         {messages.EXTRACT_FILENAME_LABEL}
         <input
-          spellcheck="false"
+          spellCheck="false"
           type="text"
           value={filename}
           required

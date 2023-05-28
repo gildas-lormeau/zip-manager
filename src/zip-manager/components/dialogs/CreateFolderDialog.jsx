@@ -30,7 +30,7 @@ function CreateFolderDialog({ data, onCreateFolder, onClose, messages }) {
       <label>
         {messages.CREATE_FOLDER_NAME_LABEL}
         <input
-          spellcheck="false"
+          spellCheck="false"
           type="text"
           value={folderName}
           required
