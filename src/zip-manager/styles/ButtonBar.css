@@ -2,15 +2,15 @@
 .button-bar .button-group {
   display: flex;
   flex-wrap: wrap;
-  row-gap: var(--gap-width);
+  row-gap: var(--gap-block-size);
 }
 
 .button-bar {
-  column-gap: var(--gap-width);
+  column-gap: var(--gap-inline-size);
 }
 
 .button-bar .button-group {
-  column-gap: var(--small-gap-width);
+  column-gap: var(--small-gap-inline-size);
 }
 
 .button-bar button:not([disabled]) {

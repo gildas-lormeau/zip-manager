@@ -163,20 +163,24 @@
 :root {
   --brightness-hover: 0.75;
   --border-radius-width: 0.25em;
-  --gap-width: 0.5em;
-  --small-gap-width: calc(var(--gap-width) / 2);
-  --large-gap-width: calc(var(--gap-width) * 2);
-  --button-padding-inline-width: 1.5ch;
-  --small-button-padding-inline-width: calc(
-    var(--button-padding-inline-width) / 1.5
+  --gap-inline-size: 0.75ch;
+  --gap-block-size: 0.5em;
+  --small-gap-inline-size: calc(var(--gap-inline-size) / 2);
+  --small-gap-block-size: calc(var(--gap-block-size) / 2);
+  --smaller-gap-inline-size: calc(var(--small-gap-inline-size) / 2);
+  --smaller-gap-block-size: calc(var(--small-gap-block-size) / 2);
+  --large-gap-inline-size: calc(var(--gap-inline-size) * 2);
+  --large-gap-block-size: calc(var(--gap-block-size) * 2);
+  --button-padding-inline-size: 1.5ch;
+  --small-button-padding-inline-size: calc(
+    var(--button-padding-inline-size) / 1.5
   );
-  --button-padding-block-width: 0.5em;
-  --small-button-padding-block-width: calc(
-    var(--button-padding-block-width) / 1.5
+  --button-padding-block-size: 0.5em;
+  --small-button-padding-block-size: calc(
+    var(--button-padding-block-size) / 1.5
   );
-  --list-item-padding-inline-width: var(--small-button-padding-inline-width);
-  --list-item-padding-block-width: calc(var(--button-padding-block-width) / 2);
-  --list-item-gap-width: calc(var(--button-padding-block-width) / 2);
+  --list-item-padding-inline-size: var(--small-button-padding-inline-size);
+  --list-item-padding-block-size: calc(var(--button-padding-block-size) / 2);
   --border-width: 0.05em;
   --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
@@ -225,8 +229,8 @@ button {
   font-size: var(--button-font-size);
   font-family: inherit;
   border-radius: var(--border-radius-width);
-  padding-block: var(--button-padding-block-width);
-  padding-inline: var(--button-padding-inline-width);
+  padding-block: var(--button-padding-block-size);
+  padding-inline: var(--button-padding-inline-size);
   margin: var(--outline-width);
   block-size: fit-content;
 }
@@ -299,7 +303,7 @@ a:visited {
 }
 
 .scrollable::-webkit-scrollbar {
-  inline-size: var(--gap-width);
+  inline-size: var(--gap-inline-size);
 }
 
 .scrollable::-webkit-scrollbar-thumb {

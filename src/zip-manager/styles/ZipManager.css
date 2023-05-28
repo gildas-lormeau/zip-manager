@@ -24,7 +24,8 @@ main > * {
 main {
   background-color: var(--bg-color);
   color: var(--text-color);
-  margin: var(--gap-width);
+  margin-inline: var(--gap-inline-size);
+  margin-block: var(--gap-block-size);
   border-width: var(--border-width);
   inline-size: var(--app-width);
   min-block-size: 20em;
@@ -36,7 +37,8 @@ main {
 }
 
 main > * {
-  padding: var(--gap-width);
+  padding-inline: var(--gap-inline-size);
+  padding-block: var(--gap-block-size);
   border-block-end-width: var(--border-width);
 }
 

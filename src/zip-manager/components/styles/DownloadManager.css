@@ -10,11 +10,11 @@
 }
 
 .downloads ol {
-  row-gap: var(--gap-width);
+  row-gap: var(--gap-block-size);
 }
 
 .downloads li {
-  row-gap: var(--small-gap-width);
+  row-gap: var(--small-gap-block-size);
   align-items: normal;
 }
 

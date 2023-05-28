@@ -5,23 +5,21 @@
 }
 
 .skin-dos {
-  --gap-width: 2ch;
-  --gap-height: 1em;
-  --small-gap-width: calc(var(--gap-width) / 2);
-  --small-gap-height: calc(var(--gap-height) / 2);
-  --smaller-gap-width: calc(var(--small-gap-width) / 2);
-  --smaller-gap-height: calc(var(--small-gap-height) / 2);
+  --gap-inline-size: 2ch;
+  --gap-block-size: 1em;
   --border-width: 2px;
-  --button-padding-inline-width: var(--gap-width);
-  --button-padding-block-width: 0;
-  --button-font-size: var(--gap-height);
+  --button-padding-inline-size: var(--gap-inline-size);
+  --button-padding-block-size: 0;
+  --button-font-size: var(--gap-block-size);
   --border-radius-width: 0;
-  --list-item-padding-inline-width: var(--smaller-gap-width);
-  --list-item-padding-block-width: 0;
-  --list-item-gap-width: 0;
+  --list-item-padding-inline-size: var(--smaller-gap-inline-size);
+  --list-item-padding-block-size: 0;
   --outline-color: var(--accent-color);
   --outline-width: 2px;
-  --list-item-padding-inline-width: 0;
+  --list-item-padding-inline-size: 0;
+  --dialog-margin-block-start: calc(
+    2 * var(--gap-block-size) - var(--smaller-gap-block-size)
+  );
 }
 
 .skin-dos body {
@@ -30,14 +28,14 @@
 
 .skin-dos main,
 .skin-dos dialog {
-  box-shadow: var(--small-gap-width)
-    calc(var(--gap-height) - var(--smaller-gap-height))
+  box-shadow: var(--small-gap-inline-size)
+    calc(var(--gap-block-size) - var(--smaller-gap-block-size))
     var(--darker-accent-color);
-  border-width: var(--smaller-gap-height) var(--smaller-gap-width);
+  border-width: var(--smaller-gap-block-size) var(--smaller-gap-inline-size);
 }
 
 .skin-dos main {
-  margin-block-start: var(--small-gap-height);
+  margin-block-start: var(--small-gap-block-size);
   inline-size: min(85dvw, 132ch);
   inline-size: min(round(up, 85dvw, 1ch), 132ch);
 }
@@ -49,9 +47,9 @@
 }
 
 .skin-dos main > * {
-  padding-inline: var(--smaller-gap-width);
-  padding-block: var(--small-gap-height);
-  border-block-end-width: var(--smaller-gap-height);
+  padding-inline: var(--smaller-gap-inline-size);
+  padding-block: var(--small-gap-block-size);
+  border-block-end-width: var(--smaller-gap-block-size);
 }
 
 .skin-dos button {
@@ -64,7 +62,7 @@
 }
 
 .skin-dos .scrollable::-webkit-scrollbar {
-  inline-size: var(--small-gap-width);
+  inline-size: var(--small-gap-inline-size);
   background-color: var(--bg-disabled-button-color);
 }
 
@@ -75,22 +73,22 @@
 
 .skin-dos .button-bar,
 .skin-dos .button-bar .button-group {
-  row-gap: var(--small-gap-height);
+  row-gap: var(--small-gap-block-size);
 }
 
 .skin-dos .history-buttons button {
   font-family: "DOS-VGA-437", monospace;
-  padding-inline: var(--button-padding-inline-width);
+  padding-inline: var(--button-padding-inline-size);
 }
 
 .skin-dos .navigation-bar {
-  column-gap: var(--small-gap-width);
+  column-gap: var(--small-gap-inline-size);
 }
 
 .skin-dos .breadcrumb ol,
 .skin-dos .breadcrumb li,
 .skin-dos .entries .entry-name {
-  column-gap: var(--small-gap-width);
+  column-gap: var(--small-gap-inline-size);
 }
 
 .skin-dos .breadcrumb .breadcrumb-item-active,
@@ -109,7 +107,7 @@
 
 .skin-dos .entries {
   padding-block-start: 0;
-  margin-block-start: var(--small-gap-height);
+  margin-block-start: var(--small-gap-block-size);
 }
 
 .skin-dos .entries li {
@@ -117,46 +115,44 @@
 }
 
 .skin-dos .entries .entry-select {
-  margin-inline-end: var(--small-gap-width);
+  margin-inline-end: var(--small-gap-inline-size);
 }
 
 .skin-dos .info-bar {
-  margin-block-start: var(--small-gap-width);
+  margin-block-start: var(--small-gap-block-size);
   margin-block-end: 0;
-  padding-block: var(--small-gap-width);
-  min-block-size: var(--gap-height);
+  padding-block: var(--gap-block-size);
+  min-block-size: var(--gap-block-size);
   font-size: 0.8em;
 }
 
 .skin-dos .info-bar canvas {
-  bottom: calc(-1 * var(--small-gap-width));
-  block-size: calc(100% + var(--smaller-gap-width));
+  bottom: calc(-1.25 * var(--gap-block-size));
 }
 
 .skin-dos dialog {
-  margin-block-start: calc(2 * var(--gap-height) - var(--smaller-gap-height));
-  padding-inline: var(--smaller-gap-width);
-  padding-block: var(--small-gap-height);
+  padding-inline: var(--smaller-gap-inline-size);
+  padding-block: var(--small-gap-block-size);
 }
 
 .skin-dos dialog form,
 .skin-dos dialog form p {
-  row-gap: var(--small-gap-width);
-  margin-inline: var(--smaller-gap-width);
-  margin-block: var(--smaller-gap-height);
+  row-gap: var(--small-gap-block-size);
+  margin-inline: var(--smaller-gap-inline-size);
+  margin-block: var(--smaller-gap-block-size);
 }
 
 .skin-dos dialog form p {
-  padding-block: var(--small-gap-height);
+  padding-block: var(--small-gap-block-size);
 }
 
 .skin-dos dialog form .dialog-title {
-  padding-block-end: var(--gap-height);
+  padding-block-end: var(--gap-block-size);
 }
 
 .skin-dos dialog input,
 .skin-dos dialog select {
-  padding-inline: var(--smaller-gap-width);
+  padding-inline: var(--smaller-gap-inline-size);
   block-size: 1.2em;
   caret-shape: underscore;
 }
@@ -169,7 +165,7 @@
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
   .skin-dos .main-container:not(.hidden-footer) .downloads,
   .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
-    border-block-end-width: var(--smaller-gap-height);
+    border-block-end-width: var(--smaller-gap-block-size);
   }
 
   .skin-dos main {
@@ -181,19 +177,19 @@
   }
 
   .skin-dos main > * {
-    padding-inline: var(--small-gap-width);
+    padding-inline: var(--small-gap-inline-size);
   }
 
   .skin-dos .info-bar {
     margin-block-start: 0;
-    padding-block: var(--small-gap-width);
+    padding-block: var(--small-gap-inline-size);
   }
 
   .skin-dos .info-bar canvas {
-    block-size: calc(100% + var(--small-gap-width));
+    bottom: calc(-1 * var(--gap-block-size));
   }
 
   .skin-dos dialog {
-    margin-block-start: calc(1 * var(--gap-height));
+    margin-block-start: calc(1 * var(--gap-block-size));
   }
 }

@@ -11,7 +11,8 @@ dialog {
   color: var(--text-color);
   border: solid var(--accent-color) var(--large-border-width);
   border-radius: var(--border-radius-width);
-  padding: var(--large-gap-width);
+  padding-inline: var(--large-gap-inline-size);
+  padding-block: var(--large-gap-block-size);
 }
 
 dialog:focus {
@@ -24,7 +25,7 @@ dialog select {
   color: var(--text-color);
   border: solid var(--accent-color) var(--border-width);
   block-size: 1.8em;
-  padding-inline: var(--gap-width);
+  padding-inline: var(--gap-inline-size);
   font-size: 1em;
   font-family: inherit;
   margin: var(--outline-width);
@@ -42,7 +43,7 @@ dialog label {
 
 dialog form,
 dialog form p {
-  row-gap: var(--large-gap-width);
+  row-gap: var(--large-gap-block-size);
 }
 
 dialog form {
@@ -52,23 +53,23 @@ dialog form {
 dialog form .dialog-title {
   font-weight: var(--font-weight-bolder);
   border-block-end: solid var(--accent-color) var(--border-width);
-  padding-bottom: var(--large-gap-width);
+  padding-block-end: var(--large-gap-block-size);
 }
 
 dialog form p {
   margin: 0;
-  padding-block-start: var(--small-gap-width);
-  padding-block-end: var(--large-gap-width);
+  padding-block-start: var(--small-gap-block-size);
+  padding-block-end: var(--large-gap-block-size);
   overflow: visible auto;
 }
 
 dialog label {
-  row-gap: var(--gap-width);
+  row-gap: var(--gap-block-size);
   overflow: visible;
 }
 
 dialog .button-bar {
-  margin-block-start: var(--gap-width);
+  margin-block-start: var(--gap-block-size);
 }
 
 dialog .button-group:first-of-type {

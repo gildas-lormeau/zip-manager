@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: var(--gap-width);
-  margin-inline: var(--gap-width);
+  padding-block: var(--gap-block-size);
+  margin-inline: var(--gap-inline-size);
   inline-size: 100%;
   overflow: hidden;
 }
@@ -79,11 +79,11 @@
 
 .info-bar canvas {
   position: absolute;
-  bottom: calc(-1 * var(--gap-width));
+  bottom: calc(-1 * var(--gap-block-size));
   left: -7.5%;
   z-index: -1;
   inline-size: 115%;
-  block-size: calc(100% + var(--gap-width));
+  block-size: calc(100% + var(--gap-block-size));
   opacity: 0.4;
 }
 

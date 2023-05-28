@@ -4,19 +4,19 @@
   resize: vertical;
   box-sizing: border-box;
   padding-block-start: 0;
-  margin-block-start: var(--gap-width);
+  margin-block-start: var(--gap-block-size);
 }
 
 .entries ol {
   flex-direction: column;
-  row-gap: var(--list-item-gap-width);
+  row-gap: var(--list-item-gap-block-size);
 }
 
 .entries li {
-  padding-block: var(--list-item-padding-block-width);
-  padding-inline: var(--list-item-padding-inline-width);
+  padding-block: var(--list-item-padding-block-size);
+  padding-inline: var(--list-item-padding-inline-size);
   outline: none;
-  column-gap: var(--gap-width);
+  column-gap: var(--gap-inline-size);
 }
 
 .entries .entry-select {
@@ -24,7 +24,7 @@
   margin: 0;
   padding: 0;
   max-block-size: 1em;
-  margin-inline-start: var(--small-gap-width);
+  margin-inline-start: var(--small-gap-inline-size);
 }
 
 .entries .entry-name {
@@ -32,7 +32,7 @@
   user-select: none;
   overflow-x: hidden;
   overflow-inline: hidden;
-  column-gap: var(--small-gap-width);
+  column-gap: var(--small-gap-inline-size);
   flex: 1;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

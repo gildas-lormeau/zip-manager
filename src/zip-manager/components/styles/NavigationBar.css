@@ -5,19 +5,19 @@
 }
 
 .navigation-bar {
-  column-gap: var(--gap-width);
+  column-gap: var(--gap-inline-size);
 }
 
 .history-buttons,
 .breadcrumb li {
-  column-gap: var(--small-gap-width);
+  column-gap: var(--small-gap-inline-size);
 }
 
 .history-buttons button {
   font-family: monospace;
   align-self: start;
-  padding-block: var(--small-button-padding-block-width);
-  padding-inline: var(--small-button-padding-inline-width);
+  padding-block: var(--small-button-padding-block-size);
+  padding-inline: var(--small-button-padding-inline-size);
 }
 
 .history-buttons button:not([disabled]),
@@ -36,8 +36,8 @@
 .navigation-bar,
 .breadcrumb ol {
   flex-wrap: wrap;
-  column-gap: calc(var(--small-gap-width) - var(--outline-width));
-  row-gap: var(--small-gap-width);
+  column-gap: calc(var(--small-gap-inline-size) - var(--outline-width));
+  row-gap: var(--small-gap-block-size);
 }
 
 .breadcrumb li::after {

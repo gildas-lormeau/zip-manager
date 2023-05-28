@@ -1,6 +1,6 @@
 .options-dialog form p {
-  padding-inline: var(--small-gap-width);
-  padding-block-start: var(--large-gap-width);
+  padding-inline: var(--small-gap-inline-size);
+  padding-block-start: var(--large-gap-block-size);
 }
 
 .options-dialog label {
@@ -12,7 +12,7 @@
 
 .options-dialog input,
 .options-dialog select {
-  margin-inline-start: var(--gap-width);
+  margin-inline-start: var(--gap-inline-size);
 }
 
 .options-dialog input[disabled] {
