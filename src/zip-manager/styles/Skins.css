@@ -12,11 +12,10 @@
   --button-padding-block-size: 0;
   --button-font-size: var(--gap-block-size);
   --border-radius-width: 0;
-  --list-item-padding-inline-size: var(--smaller-gap-inline-size);
+  --list-item-padding-inline-size: 0;
   --list-item-padding-block-size: 0;
   --outline-color: var(--accent-color);
   --outline-width: 2px;
-  --list-item-padding-inline-size: 0;
   --dialog-margin-block-start: calc(
     2 * var(--gap-block-size) - var(--smaller-gap-block-size)
   );
