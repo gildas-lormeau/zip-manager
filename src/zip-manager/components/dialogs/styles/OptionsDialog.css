@@ -7,7 +7,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  min-block-size: 1.75em;
+  min-block-size: 1.6em;
+}
+
+.options-dialog label span {
+  flex: 1;
 }
 
 .options-dialog input,

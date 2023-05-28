@@ -140,7 +140,7 @@ function OptionsDialog({
       submitLabel={messages.OPTIONS_DIALOG_BUTTON_LABEL}
     >
       <label>
-        {messages.OPTIONS_ZOOM_FACTOR_LABEL}
+        <span>{messages.OPTIONS_ZOOM_FACTOR_LABEL}</span>
         <input
           value={zoomFactor}
           type="number"
@@ -152,7 +152,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_HIDE_NAVIGATION_BAR_LABEL}
+        <span>{messages.OPTIONS_HIDE_NAVIGATION_BAR_LABEL}</span>
         <input
           checked={hideNavigationBar}
           type="checkbox"
@@ -160,7 +160,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL}
+        <span>{messages.OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL}</span>
         <input
           checked={hideDownloadManager}
           type="checkbox"
@@ -168,7 +168,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_HIDE_INFOBAR_LABEL}
+        <span>{messages.OPTIONS_HIDE_INFOBAR_LABEL}</span>
         <input
           checked={hideInfobar}
           type="checkbox"
@@ -176,7 +176,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_SELECT_SKIN_LABEL}
+        <span>{messages.OPTIONS_SELECT_SKIN_LABEL}</span>
         <select value={skin} onChange={handleChangeSkin}>
           <option value={constants.OPTIONS_DEFAULT_SKIN}>
             {messages.OPTIONS_DEFAULT_SKIN_LABEL}
@@ -187,7 +187,7 @@ function OptionsDialog({
         </select>
       </label>
       <label>
-        {messages.OPTIONS_EXPORT_ZIP_PASSWORD_LABEL}
+        <span>{messages.OPTIONS_EXPORT_ZIP_PASSWORD_LABEL}</span>
         <input
           checked={promptForExportPassword}
           type="checkbox"
@@ -195,7 +195,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_DEFAULT_PASSWORD_LABEL}
+        <span>{messages.OPTIONS_DEFAULT_PASSWORD_LABEL}</span>
         <input
           type="password"
           autoComplete="off"
@@ -206,7 +206,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_CHECK_SIGNATURE_LABEL}
+        <span>{messages.OPTIONS_CHECK_SIGNATURE_LABEL}</span>
         <input
           checked={checkSignature}
           type="checkbox"
@@ -214,7 +214,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_BUFFERED_WRITE_LABEL}
+        <span>{messages.OPTIONS_BUFFERED_WRITE_LABEL}</span>
         <input
           checked={bufferedWrite}
           type="checkbox"
@@ -222,7 +222,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_MAX_WORKERS_LABEL}
+        <span>{messages.OPTIONS_MAX_WORKERS_LABEL}</span>
         <input
           value={maxWorkers}
           type="number"
@@ -233,7 +233,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_KEEP_ORDER_LABEL}
+        <span>{messages.OPTIONS_KEEP_ORDER_LABEL}</span>
         <input
           checked={keepOrder}
           type="checkbox"
@@ -241,7 +241,7 @@ function OptionsDialog({
         />
       </label>
       <label>
-        {messages.OPTIONS_CHUNK_SIZE_LABEL}
+        <span>{messages.OPTIONS_CHUNK_SIZE_LABEL}</span>
         <input
           value={chunkSize}
           type="number"

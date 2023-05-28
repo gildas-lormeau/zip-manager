@@ -7,7 +7,7 @@
 .skin-dos {
   --gap-inline-size: 2ch;
   --gap-block-size: 1em;
-  --border-width: 2px;
+  --border-width: 0;
   --button-padding-inline-size: var(--gap-inline-size);
   --button-padding-block-size: 0;
   --button-font-size: var(--gap-block-size);
@@ -15,7 +15,8 @@
   --list-item-padding-inline-size: 0;
   --list-item-padding-block-size: 0;
   --outline-color: var(--accent-color);
-  --outline-width: 2px;
+  --outline-width: 0;
+  --dialog-width: min(50ch, 75dvw);
   --dialog-margin-block-start: calc(
     2 * var(--gap-block-size) - var(--smaller-gap-block-size)
   );
@@ -137,8 +138,10 @@
 .skin-dos dialog form,
 .skin-dos dialog form p {
   row-gap: var(--small-gap-block-size);
-  margin-inline: var(--smaller-gap-inline-size);
-  margin-block: var(--smaller-gap-block-size);
+}
+
+.skin-dos dialog form p {
+  margin: 0;
 }
 
 .skin-dos dialog form p {
@@ -146,14 +149,40 @@
 }
 
 .skin-dos dialog form .dialog-title {
-  padding-block-end: var(--gap-block-size);
+  padding-inline-start: var(--small-gap-inline-size);
+  padding-block-end: calc(var(--gap-block-size) - 2px);
+  border-block-end: solid var(--accent-color) 2px;
 }
 
 .skin-dos dialog input,
 .skin-dos dialog select {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  caret-color: var(--bg-color);
+  padding-block: 0;
   padding-inline: var(--smaller-gap-inline-size);
   block-size: 1.2em;
+  inline-size: 100%;
   caret-shape: underscore;
+}
+
+.skin-dos dialog input::selection {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.skin-dos .options-dialog label {
+  min-block-size: auto;
+}
+
+.skin-dos .options-dialog input[type="checkbox"] {
+  margin-inline-end: -3px;
+  accent-color: var(--text-color);
+}
+
+.skin-dos .options-dialog input,
+.skin-dos .options-dialog select {
+  inline-size: min(10ch, 100%);
 }
 
 .skin-dos .downloads,
