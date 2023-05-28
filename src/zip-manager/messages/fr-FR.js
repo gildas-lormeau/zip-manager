@@ -82,7 +82,7 @@ const IMPORT_PASSWORD_TITLE = "Entrer le mot de passse";
 const IMPORT_PASSWORD_LABEL = "Mot de passe :";
 const OPTIONS_DIALOG_BUTTON_LABEL = "Sauver";
 const OPTIONS_TITLE = "Options";
-const OPTIONS_ZOOM_FACTOR_LABEL = "Facteur de zoom (%)";
+const OPTIONS_ZOOM_FACTOR_LABEL = "Facteur de zoom (%) :";
 const OPTIONS_HIDE_NAVIGATION_BAR_LABEL = "Cacher la barre de navigation :";
 const OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL =
   "Cacher le panneau de téléchargements :";
