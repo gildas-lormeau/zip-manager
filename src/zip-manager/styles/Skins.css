@@ -161,7 +161,7 @@
   caret-color: var(--bg-color);
   padding-block: 0;
   padding-inline: 0;
-  block-size: 1.2em;
+  block-size: var(--gap-block-size);
   inline-size: 100%;
   caret-shape: underscore;
 }
