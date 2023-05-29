@@ -193,7 +193,7 @@
   --app-width: 85dvw;
   --dialog-margin-block-start: min(10dvh, 5em);
   --dialog-width: min(40ch, 75dvw);
-  --dialog-form-max-height: 70dvh;
+  --dialog-form-max-block-size: 70dvh;
 }
 
 :root {

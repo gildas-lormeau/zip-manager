@@ -52,7 +52,7 @@ dialog form p {
 }
 
 dialog form {
-  max-block-size: var(--dialog-form-max-height);
+  max-block-size: var(--dialog-form-max-block-size);
 }
 
 dialog form .dialog-title {
