@@ -151,18 +151,21 @@
   margin: 0;
 }
 
-.skin-dos dialog form p {
-  padding-block-start: var(--small-gap-block-size);
-  padding-block-end: 0;
-}
-
 .skin-dos dialog form .dialog-title {
   padding-inline-start: var(--small-gap-inline-size);
   padding-block-end: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4
   );
   border-block-end: solid var(--accent-color)
     calc(var(--smaller-gap-block-size) / 2);
+}
+
+.skin-dos dialog form p {
+  padding-block-start: calc(
+    var(--small-gap-block-size) + var(--smaller-gap-block-size) / 2 -
+      var(--smaller-gap-block-size) / 4
+  );
+  padding-block-end: 0;
 }
 
 .skin-dos dialog input {
