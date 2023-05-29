@@ -9,10 +9,8 @@ function getHeight(element) {
 }
 
 function getRowHeight(element) {
-  return (
-    getHeight(element) +
-    parseInt(getComputedStyle(element.parentElement).rowGap, 10)
-  );
+  const rowGap = parseInt(getComputedStyle(element.parentElement).rowGap, 10);
+  return getHeight(element) + (Number.isNaN(rowGap) ? 0 : rowGap);
 }
 
 function removeDocumentAttribute(name) {
