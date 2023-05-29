@@ -159,6 +159,10 @@
   caret-shape: underscore;
 }
 
+.skin-dos dialog select {
+  appearance: none;
+}
+
 .skin-dos dialog input::-webkit-inner-spin-button {
   appearance: none;
 }
