@@ -154,6 +154,15 @@
   border-block-end: solid var(--accent-color) 2px;
 }
 
+.skin-dos dialog input {
+  appearance: textfield;
+  caret-shape: underscore;
+}
+
+.skin-dos dialog input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
 .skin-dos dialog input,
 .skin-dos dialog select {
   background-color: var(--text-color);
@@ -163,7 +172,6 @@
   padding-inline: 0;
   block-size: var(--gap-block-size);
   inline-size: 100%;
-  caret-shape: underscore;
 }
 
 .skin-dos dialog select {
@@ -192,6 +200,7 @@
   display: grid;
   place-content: baseline;
   appearance: none;
+  cursor: pointer;
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:after {
