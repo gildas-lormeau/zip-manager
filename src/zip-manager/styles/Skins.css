@@ -162,8 +162,7 @@
 
 .skin-dos dialog form p {
   padding-block-start: calc(
-    var(--small-gap-block-size) + var(--smaller-gap-block-size) / 2 -
-      var(--smaller-gap-block-size) / 4
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4
   );
   padding-block-end: 0;
 }
