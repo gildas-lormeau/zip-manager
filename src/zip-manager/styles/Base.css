@@ -219,6 +219,7 @@ ol {
 
 ol li {
   align-items: center;
+  font-size: var(--font-size);
 }
 
 button {
