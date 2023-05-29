@@ -166,6 +166,11 @@
   caret-shape: underscore;
 }
 
+.skin-dos dialog select {
+  padding-block-end: 4px;
+  padding-block-start: 0;
+}
+
 .skin-dos dialog select:focus {
   background-color: var(--bg-color);
   color: var(--text-color);
