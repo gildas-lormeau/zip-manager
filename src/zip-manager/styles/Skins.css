@@ -158,8 +158,11 @@
 
 .skin-dos dialog form .dialog-title {
   padding-inline-start: var(--small-gap-inline-size);
-  padding-block-end: calc(var(--small-gap-block-size) - 2px);
-  border-block-end: solid var(--accent-color) 2px;
+  padding-block-end: calc(
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
+  border-block-end: solid var(--accent-color)
+    calc(var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos dialog input {
