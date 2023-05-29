@@ -59,6 +59,7 @@ dialog form .dialog-title {
   font-weight: var(--font-weight-bolder);
   border-block-end: solid var(--accent-color) var(--border-width);
   padding-block-end: var(--large-gap-block-size);
+  font-size: var(--font-size);
 }
 
 dialog form p {
@@ -71,6 +72,7 @@ dialog form p {
 dialog label {
   row-gap: var(--gap-block-size);
   overflow: visible;
+  font-size: var(--font-size);
 }
 
 dialog .button-bar {
