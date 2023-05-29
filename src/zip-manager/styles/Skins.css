@@ -152,7 +152,8 @@
 }
 
 .skin-dos dialog form p {
-  padding-block: var(--small-gap-block-size);
+  padding-block-start: var(--small-gap-block-size);
+  padding-block-end: 0;
 }
 
 .skin-dos dialog form .dialog-title {
