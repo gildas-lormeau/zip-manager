@@ -160,7 +160,7 @@
   color: var(--bg-color);
   caret-color: var(--bg-color);
   padding-block: 0;
-  padding-inline: var(--smaller-gap-inline-size);
+  padding-inline: 0;
   block-size: 1.2em;
   inline-size: 100%;
   caret-shape: underscore;
