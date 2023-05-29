@@ -137,7 +137,7 @@
 
 .skin-dos dialog form,
 .skin-dos dialog form p {
-  row-gap: var(--small-gap-block-size);
+  row-gap: 0;
 }
 
 .skin-dos dialog form p {
@@ -159,11 +159,16 @@
   background-color: var(--text-color);
   color: var(--bg-color);
   caret-color: var(--bg-color);
-  padding-block: 0;
+  padding-block: 2px;
   padding-inline: 0;
   block-size: var(--gap-block-size);
   inline-size: 100%;
   caret-shape: underscore;
+}
+
+.skin-dos dialog select:focus {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .skin-dos dialog input::selection {
@@ -176,8 +181,30 @@
 }
 
 .skin-dos .options-dialog input[type="checkbox"] {
-  margin-inline-end: -3px;
+  inline-size: 1ch;
+  block-size: var(--font-size);
   accent-color: var(--text-color);
+  display: grid;
+  place-content: baseline;
+  appearance: none;
+}
+
+.skin-dos .options-dialog input[type="checkbox"]:after {
+  position: relative;
+  top: -2px;
+}
+
+.skin-dos .options-dialog input[type="checkbox"]:focus:after {
+  content: "█";
+}
+
+.skin-dos .options-dialog input[type="checkbox"]:checked::after {
+  content: "X";
+}
+
+.skin-dos .options-dialog input[type="checkbox"]:checked:focus:after {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .skin-dos .options-dialog input,
