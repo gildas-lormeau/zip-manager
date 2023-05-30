@@ -99,7 +99,7 @@ function getOptionsFeatures({
   function configureZoomFactor({ zoomFactor }) {
     stylesheetService.setStyle(
       FONT_SIZE_CUSTOM_PROPERTY_NAME,
-      zoomFactor / 100 + "em"
+      zoomFactor / 100 + "rem"
     );
   }
 

@@ -175,7 +175,7 @@
   --small-button-padding-inline-size: calc(
     var(--button-padding-inline-size) / 1.5
   );
-  --button-padding-block-size: 0.5em;
+  --button-padding-block-size: 0.25em;
   --small-button-padding-block-size: calc(
     var(--button-padding-block-size) / 1.5
   );
@@ -186,7 +186,6 @@
   --outline-width: 1px;
   --no-scrollable-outline-width: 1px;
   --font-size: 1em;
-  --button-font-size: calc(var(--font-size) * 0.8);
   --font-weight: 400;
   --font-weight-bolder: 500;
   --button-animation-duration: 0.2s;
@@ -201,8 +200,11 @@
   overscroll-behavior: none;
 }
 
-body {
+* {
   font-size: var(--font-size);
+}
+
+body {
   font-weight: var(--font-weight);
 }
 
@@ -219,7 +221,6 @@ ol {
 
 ol li {
   align-items: center;
-  font-size: var(--font-size);
 }
 
 button {
@@ -227,7 +228,6 @@ button {
   user-select: none;
   background-color: var(--accent-color);
   color: var(--button-color);
-  font-size: var(--button-font-size);
   font-family: inherit;
   border-radius: var(--border-radius-width);
   padding-block: var(--button-padding-block-size);
