@@ -32,10 +32,62 @@
 
 .skin-dos main,
 .skin-dos dialog {
-  box-shadow: var(--small-gap-inline-size)
-    calc(var(--small-gap-block-size) + var(--smaller-gap-block-size) / 2)
-    var(--darker-accent-color);
+  position: relative;
+  overflow: visible;
   border-width: var(--smaller-gap-block-size) var(--smaller-gap-inline-size);
+}
+
+.skin-dos main::before,
+.skin-dos dialog::before,
+.skin-dos main:after,
+.skin-dos dialog::after {
+  position: absolute;
+  content: "";
+  background-color: var(--darker-accent-color);
+}
+
+.skin-dos main::before {
+  top: var(--smaller-gap-block-size);
+  right: calc(
+    -1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size)
+  );
+  inline-size: var(--small-gap-inline-size);
+  block-size: calc(
+    100% + var(--small-gap-block-size) - var(--smaller-gap-block-size) +
+      var(--smaller-gap-block-size) / 2
+  );
+}
+
+.skin-dos main:after {
+  left: var(--smaller-gap-inline-size);
+  bottom: calc(
+    -1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
+  inline-size: calc(100% + var(--small-gap-inline-size));
+  block-size: calc(
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
+}
+
+.skin-dos dialog::before {
+  right: calc(
+    -1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size)
+  );
+  inline-size: var(--small-gap-inline-size);
+  block-size: calc(
+    100% + var(--small-gap-block-size) - var(--smaller-gap-block-size)
+  );
+}
+
+.skin-dos dialog::after {
+  left: var(--smaller-gap-inline-size);
+  bottom: calc(
+    -1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
+  inline-size: calc(100% + var(--small-gap-inline-size));
+  block-size: calc(
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
 }
 
 .skin-dos main {
