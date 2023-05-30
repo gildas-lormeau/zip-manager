@@ -22,6 +22,10 @@
   );
 }
 
+.skin-dos * {
+  line-height: 1.25;
+}
+
 .skin-dos body {
   font-family: "DOS-VGA-437", monospace;
 }
