@@ -142,7 +142,9 @@
 
 .skin-dos dialog {
   padding-inline: var(--smaller-gap-inline-size);
-  padding-block: var(--small-gap-block-size);
+  padding-block: calc(
+    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
+  );
 }
 
 .skin-dos dialog form,
