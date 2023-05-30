@@ -6,7 +6,7 @@
 
 .skin-dos {
   --gap-inline-size: 2ch;
-  --gap-block-size: 1lh;
+  --gap-block-size: calc(1em * 1.25);
   --border-width: 0;
   --button-padding-inline-size: var(--gap-inline-size);
   --button-padding-block-size: 0;
