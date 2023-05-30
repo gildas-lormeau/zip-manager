@@ -37,6 +37,7 @@ dialog select {
     100% - 2 *
       (var(--gap-inline-size) + var(--border-width) + var(--outline-width))
   );
+  align-self: end;
 }
 
 dialog form,
