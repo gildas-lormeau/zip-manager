@@ -262,7 +262,7 @@
 }
 
 .skin-dos .options-dialog input[type="checkbox"] {
-  inline-size: 1ch;
+  inline-size: calc(3 * var(--small-gap-inline-size));
   block-size: var(--gap-block-size);
   accent-color: var(--text-color);
   display: grid;
@@ -273,14 +273,15 @@
 
 .skin-dos .options-dialog input[type="checkbox"]:after {
   position: relative;
+  content: "[ ]";
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:focus:after {
-  content: "█";
+  content: "[█]";
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:checked::after {
-  content: "X";
+  content: "[■]";
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:checked:focus:after {
