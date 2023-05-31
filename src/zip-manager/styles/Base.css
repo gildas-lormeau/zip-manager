@@ -285,15 +285,15 @@ a:visited {
   }
 }
 
-@media (max-inline-size: 60ch) {
-  body {
-    font-size: calc(var(--font-size) * 0.8);
+@media (max-width: 60ch) {
+  * {
+    font-size: 0.85rem;
   }
 }
 
-@media (max-inline-size: 40ch) {
-  body {
-    font-size: calc(var(--font-size) * 0.7);
+@media (max-width: 40ch) {
+  * {
+    font-size: 0.8rem;
   }
 }
 

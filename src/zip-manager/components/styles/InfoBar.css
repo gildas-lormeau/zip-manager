@@ -10,11 +10,14 @@
 
 .info-bar .source-link {
   display: inline;
-  font-size: 0.9em;
   color: var(--basic-text-color);
   text-align: center;
   position: relative;
   overflow: visible;
+}
+
+.info-bar .source-link * {
+  font-size: 0.9em;
 }
 
 .info-bar .player-active :not(canvas) {
@@ -85,16 +88,4 @@
   inline-size: 115%;
   block-size: calc(100% + var(--gap-block-size));
   opacity: 0.4;
-}
-
-@media (max-inline-size: 128ch), (display-mode: standalone) {
-  .info-bar .source-link {
-    font-size: 0.9em;
-  }
-}
-
-@media (max-inline-size: 48ch) {
-  .info-bar .source-link {
-    font-size: 0.8em;
-  }
 }
