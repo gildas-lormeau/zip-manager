@@ -199,6 +199,10 @@
   overscroll-behavior: none;
 }
 
+button, input, select {
+  font-size: inherit;
+}
+
 body {
   font-weight: var(--font-weight);
 }
