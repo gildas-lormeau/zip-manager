@@ -206,6 +206,8 @@
 
 .skin-dos dialog form p {
   margin: 0;
+  padding-inline: var(--small-gap-inline-size);
+  padding-block-start: var(--large-gap-block-size);
 }
 
 .skin-dos dialog form .dialog-title {
