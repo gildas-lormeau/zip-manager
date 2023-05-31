@@ -312,9 +312,7 @@
   }
 
   .skin-dos main::before,
-  .skin-dos dialog::before,
-  .skin-dos main:after,
-  .skin-dos dialog::after {
+  .skin-dos main:after {
     content: none;
   }
 
