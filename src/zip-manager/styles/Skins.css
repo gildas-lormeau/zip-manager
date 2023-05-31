@@ -307,9 +307,15 @@
   .skin-dos main {
     inline-size: 100%;
     inline-size: round(down, 100%, 1ch);
-    box-shadow: none;
     margin-block-start: 0;
     border-width: 0;
+  }
+
+  .skin-dos main::before,
+  .skin-dos dialog::before,
+  .skin-dos main:after,
+  .skin-dos dialog::after {
+    content: none;
   }
 
   .skin-dos main > :first-child {
