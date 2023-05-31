@@ -9,7 +9,7 @@ function getOptionsFeatures({
   themeService,
   constants
 }) {
-  const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME, FONT_SIZE_CUSTOM_PROPERTY_NAME } =
+  const { DEFAULT_OPTIONS, OPTIONS_KEY_NAME, FONT_SIZE_PROPERTY_NAME } =
     constants;
 
   function initOptionsFeatures() {
@@ -98,7 +98,7 @@ function getOptionsFeatures({
 
   function configureZoomFactor({ zoomFactor }) {
     stylesheetService.setStyle(
-      FONT_SIZE_CUSTOM_PROPERTY_NAME,
+      FONT_SIZE_PROPERTY_NAME,
       zoomFactor / 100 + "rem"
     );
   }

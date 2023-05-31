@@ -185,7 +185,6 @@
   --large-border-width: calc(var(--border-width) * 2);
   --outline-width: 1px;
   --no-scrollable-outline-width: 1px;
-  --font-size: 1em;
   --font-weight: 400;
   --font-weight-bolder: 500;
   --button-animation-duration: 0.2s;
@@ -198,10 +197,6 @@
 :root {
   background-color: var(--page-color);
   overscroll-behavior: none;
-}
-
-* {
-  font-size: var(--font-size);
 }
 
 body {
@@ -289,11 +284,19 @@ a:visited {
   * {
     font-size: 0.85rem;
   }
+
+  :root .info-bar .source-link * {
+    font-size: 0.65rem;
+  }
 }
 
 @media (max-width: 40ch) {
   * {
     font-size: 0.8rem;
+  }
+
+  :root .info-bar .source-link * {
+    font-size: 0.55rem;
   }
 }
 

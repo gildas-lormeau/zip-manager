@@ -17,7 +17,7 @@
 }
 
 .info-bar .source-link * {
-  font-size: 0.9em;
+  font-size: 0.8rem;
 }
 
 .info-bar .player-active :not(canvas) {

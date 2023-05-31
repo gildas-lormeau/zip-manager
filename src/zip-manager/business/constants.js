@@ -95,7 +95,7 @@ const DELETE_BUTTON_NAME = "delete-entry-button";
 const BACK_BUTTON_NAME = "back-button";
 const FORWARD_BUTTON_NAME = "forward-button";
 const OPTIONS_KEY_NAME = "options";
-const FONT_SIZE_CUSTOM_PROPERTY_NAME = "--font-size";
+const FONT_SIZE_PROPERTY_NAME = "font-size";
 const NO_ENTRIES_CUSTOM_PROPERTY_NAME = "--message-drag-and-drop-entries";
 const FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME = "--folder-separator";
 const FOLDER_SEPARATOR = "/";
@@ -156,7 +156,7 @@ export {
   BACK_BUTTON_NAME,
   FORWARD_BUTTON_NAME,
   OPTIONS_KEY_NAME,
-  FONT_SIZE_CUSTOM_PROPERTY_NAME,
+  FONT_SIZE_PROPERTY_NAME,
   NO_ENTRIES_CUSTOM_PROPERTY_NAME,
   FOLDER_SEPARATOR_CUSTOM_PROPERTY_NAME,
   FOLDER_SEPARATOR,
