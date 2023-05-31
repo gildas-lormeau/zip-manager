@@ -426,6 +426,7 @@ function getEntriesFeatures({
         if (event.key === END_KEY) {
           toggleLast();
         }
+        event.preventDefault();
       }
       if (!event.altKey && !modifierKeyPressed(event) && !event.shiftKey) {
         if (event.key === DOWN_KEY) {
