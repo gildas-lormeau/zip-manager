@@ -30,21 +30,6 @@
   font-family: "DOS-VGA-437", monospace;
 }
 
-.skin-dos body::after,
-.skin-dos dialog[open] form::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  touch-action: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) calc(1em / 32),
-    transparent calc(1em / 32),
-    transparent calc(1em / 16)
-  );
-}
-
 .skin-dos body::after {
   top: 0;
   left: 0;
