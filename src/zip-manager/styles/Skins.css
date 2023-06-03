@@ -234,10 +234,15 @@
 }
 
 .skin-dos dialog form p {
+  row-gap: var(--gap-block-size);
   padding-block-start: calc(
     var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4
   );
   padding-block-end: 0;
+}
+
+.skin-dos dialog label {
+  row-gap: 0;
 }
 
 .skin-dos dialog input {
@@ -285,6 +290,10 @@
   place-content: baseline;
   appearance: none;
   cursor: pointer;
+}
+
+.skin-dos .options-dialog form p {
+  row-gap: 0;
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:after {
