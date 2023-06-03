@@ -54,6 +54,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .entries ol {
+    --no-entries-outline-width: 1px;
     --no-entries-outline-width-negative: calc(
       var(--no-entries-outline-width) * -1
     );
