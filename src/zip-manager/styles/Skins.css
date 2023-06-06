@@ -108,6 +108,7 @@
   margin-block-start: calc(
     var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
   );
+  min-inline-size: min(85dvw, 132ch);
   inline-size: min(85dvw, 132ch);
   inline-size: min(round(up, 85dvw, 1ch), 132ch);
 }
