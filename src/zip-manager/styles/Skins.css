@@ -196,7 +196,6 @@
 }
 
 .skin-dos .info-bar {
-  margin-block-start: var(--small-gap-block-size);
   margin-block-end: 0;
   padding-block: var(--gap-block-size);
   min-block-size: var(--gap-block-size);
@@ -354,12 +353,12 @@
   }
 
   .skin-dos .info-bar {
-    margin-block-start: 0;
+    margin-block-start: var(--small-gap-block-size);
     padding-block: var(--small-gap-inline-size);
   }
 
   .skin-dos .info-bar canvas {
-    bottom: calc(-1 * var(--gap-block-size));
+    bottom: calc(-.75 * var(--gap-block-size));
   }
 
   .skin-dos dialog {
