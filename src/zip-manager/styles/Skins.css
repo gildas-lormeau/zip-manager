@@ -303,7 +303,8 @@
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:focus:after {
-  content: "[█]";
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:checked::after {
