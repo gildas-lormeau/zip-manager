@@ -188,7 +188,7 @@
 }
 
 .skin-dos .entries li {
-  column-gap: 0;
+  column-gap: var(--small-gap-inline-size);
 }
 
 .skin-dos .entries .entry-select {

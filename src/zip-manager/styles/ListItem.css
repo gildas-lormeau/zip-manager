@@ -1,7 +1,6 @@
 .list-item-button {
   font-family: monospace;
   cursor: pointer;
-  padding-inline-start: var(--small-button-padding-inline-size);
   user-select: none;
 }
 

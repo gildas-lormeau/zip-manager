@@ -4,7 +4,6 @@ const DEFAULT_LANGUAGE_ID = "en-US";
 const LANGUAGE_IDS = [DEFAULT_LANGUAGE_ID, "fr-FR"];
 
 const SIZE_NUMBER_FORMATS = [
-  "byte",
   "kilobyte",
   "megabyte",
   "gigabyte",

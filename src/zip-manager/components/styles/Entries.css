@@ -17,6 +17,21 @@
   padding-inline: var(--list-item-padding-inline-size);
   outline: none;
   column-gap: var(--gap-inline-size);
+  cursor: pointer;
+}
+
+@supports (grid-template-columns: subgrid) {
+  .entries ol {
+    display: grid;
+    grid-template-columns: auto min-content min-content;
+    grid-template-rows: repeat(auto);
+  }
+
+  .entries li {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / 4;
+  }
 }
 
 .entries .entry-select {
@@ -34,8 +49,12 @@
   overflow-inline: hidden;
   column-gap: var(--small-gap-inline-size);
   flex: 1;
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+.entries .entry-size {
+  text-align: right;
+  white-space: nowrap;
 }
 
 .entries .entry-highlighted {

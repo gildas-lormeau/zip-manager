@@ -114,6 +114,18 @@ function Entries({
     }
   }
 
+  function onEntryClick({ event, entry }) {
+    if (event.metaKey) {
+      onToggle(entry);
+    } else if (event.shiftKey) {
+      onToggleRange(entry);
+    } else if (selectModeEnabled) {
+      onToggle(entry);
+    } else {
+      onHighlight(entry);
+    }
+  }
+
   function getEntriesClassName() {
     const classes = ["entries", "scrollable"];
     if (draggingItems) {
@@ -156,15 +168,14 @@ function Entries({
                 }
                 className={getEntryClassName(entry)}
                 tabIndex={0}
+                onClick={(event) => onEntryClick({ event, entry })}
               >
                 <Entry
                   entry={entry}
                   selectedFolder={selectedFolder}
                   highlighted={true}
                   selectModeEnabled={selectModeEnabled}
-                  onHighlight={onHighlight}
                   onToggle={onToggle}
-                  onToggleRange={onToggleRange}
                   onEnter={onEnter}
                   i18n={i18n}
                   messages={messages}
@@ -173,7 +184,11 @@ function Entries({
             );
           } else {
             return (
-              <li key={entry.id} className={getEntryClassName(entry)}>
+              <li
+                key={entry.id}
+                className={getEntryClassName(entry)}
+                onClick={(event) => onEntryClick({ event, entry })}
+              >
                 <Entry
                   entry={entry}
                   selectedFolder={selectedFolder}
@@ -200,17 +215,11 @@ function Entry({
   selectedFolder,
   highlighted,
   selectModeEnabled,
-  onHighlight,
   onToggle,
-  onToggleRange,
   onEnter,
   i18n,
   messages
 }) {
-  function onHighlightEntry() {
-    selectModeEnabled ? onToggle(entry) : onHighlight(entry);
-  }
-
   return (
     <>
       {selectModeEnabled && (
@@ -225,13 +234,11 @@ function Entry({
         entry={entry}
         selectedFolder={selectedFolder}
         selectModeEnabled={selectModeEnabled}
-        onHighlight={onHighlightEntry}
-        onToggle={onToggle}
-        onToggleRange={onToggleRange}
         onEnter={onEnter}
         i18n={i18n}
         messages={messages}
       />
+      <EntrySize entry={entry} i18n={i18n} />
       <EntryButton
         entry={entry}
         selectedFolder={selectedFolder}
@@ -246,9 +253,6 @@ function EntryName({
   entry,
   selectedFolder,
   selectModeEnabled,
-  onHighlight,
-  onToggle,
-  onToggleRange,
   onEnter,
   i18n,
   messages
@@ -266,7 +270,10 @@ function EntryName({
     const tooltip = [entryIsParentFolder ? PARENT_FOLDER_TOOLTIP : entry.name];
     if (entry.data) {
       const { compressedSize, lastModified, lastModDate, size } = entry.data;
-      const uncompressedSize = size || entry.data.uncompressedSize;
+      const uncompressedSize =
+        size === undefined
+          ? !entry.directory && entry.data.uncompressedSize
+          : size;
       tooltip.push(
         LAST_MOD_DATE_LABEL +
           " " +
@@ -290,16 +297,6 @@ function EntryName({
     return tooltip.join("\n");
   }
 
-  function handleClick(event) {
-    if (event.metaKey) {
-      onToggle(entry);
-    } else if (event.shiftKey) {
-      onToggleRange(entry);
-    } else {
-      onHighlight(entry);
-    }
-  }
-
   function handleDoubleClick(event) {
     if (!selectModeEnabled && !event.metaKey) {
       onEnter(entry);
@@ -310,13 +307,29 @@ function EntryName({
     <span
       className="entry-name"
       title={getEntryNameTitle()}
-      onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
       <span className="list-item-name">
         {entryIsParentFolder ? messages.PARENT_FOLDER_LABEL : entry.name}
       </span>
     </span>
+  );
+}
+
+function getEntrySizelabel({ entry, i18n }) {
+  if (entry.data && !entry.directory) {
+    const { size } = entry.data;
+    const uncompressedSize =
+      size === undefined ? entry.data.uncompressedSize : size;
+    if (uncompressedSize !== undefined) {
+      return i18n.formatSize(uncompressedSize);
+    }
+  }
+}
+
+function EntrySize({ entry, i18n }) {
+  return (
+    <span className="entry-size">{getEntrySizelabel({ entry, i18n })}</span>
   );
 }
 
@@ -331,7 +344,8 @@ function EntryButton({ entry, selectedFolder, onEnter, messages }) {
     return messages.SHORTCUT_LABEL + keys.join(messages.KEYS_SEPARATOR_LABEL);
   }
 
-  function handleClick() {
+  function handleClick(event) {
+    event.stopPropagation();
     onEnter(entry);
   }
 
