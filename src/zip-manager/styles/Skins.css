@@ -15,7 +15,6 @@
   --list-item-padding-block-size: 0;
   --outline-color: var(--accent-color);
   --outline-width: 0;
-  --dialog-width: min(50ch, 75dvw);
   --dialog-margin-block-start: calc(
     var(--gap-block-size) + var(--small-gap-block-size) -
       var(--smaller-gap-block-size) / 2
@@ -207,6 +206,9 @@
 }
 
 .skin-dos dialog {
+  min-inline-size: min(75dvw, 50ch);
+  inline-size: min(75dvw, 50ch);
+  inline-size: min(round(up, 75dvw, 1ch), 50ch);
   padding-inline: var(--smaller-gap-inline-size);
   padding-block: calc(
     var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
@@ -358,7 +360,7 @@
   }
 
   .skin-dos .info-bar canvas {
-    bottom: calc(-.75 * var(--gap-block-size));
+    bottom: calc(-0.75 * var(--gap-block-size));
   }
 
   .skin-dos dialog {
