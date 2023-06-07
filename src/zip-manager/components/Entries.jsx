@@ -249,6 +249,12 @@ function Entry({
   );
 }
 
+function getEntrySize(entry) {
+  if (!entry.directory) {
+    return entry.uncompressedSize;
+  }
+}
+
 function EntryName({
   entry,
   selectedFolder,
@@ -269,11 +275,8 @@ function EntryName({
   function getEntryNameTitle() {
     const tooltip = [entryIsParentFolder ? PARENT_FOLDER_TOOLTIP : entry.name];
     if (entry.data) {
-      const { compressedSize, lastModified, lastModDate, size } = entry.data;
-      const uncompressedSize =
-        size === undefined
-          ? !entry.directory && entry.data.uncompressedSize
-          : size;
+      const { compressedSize, lastModified, lastModDate } = entry.data;
+      const uncompressedSize = getEntrySize(entry);
       tooltip.push(
         LAST_MOD_DATE_LABEL +
           " " +
@@ -317,13 +320,9 @@ function EntryName({
 }
 
 function getEntrySizelabel({ entry, i18n }) {
-  if (entry.data && !entry.directory) {
-    const { size } = entry.data;
-    const uncompressedSize =
-      size === undefined ? entry.data.uncompressedSize : size;
-    if (uncompressedSize !== undefined) {
-      return i18n.formatSize(uncompressedSize);
-    }
+  const uncompressedSize = getEntrySize(entry);
+  if (uncompressedSize !== undefined) {
+    return i18n.formatSize(uncompressedSize);
   }
 }
 
