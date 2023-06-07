@@ -29,6 +29,7 @@ const PERCENT_VALUE_FORMAT = new Intl.NumberFormat(getLanguageId(), {
 
 function formatSize(number) {
   let indexNumberFormat = 0;
+  number = number / 1000;
   while (number > 1000 && indexNumberFormat < SIZE_NUMBER_FORMATS.length - 1) {
     number = number / 1000;
     indexNumberFormat++;
