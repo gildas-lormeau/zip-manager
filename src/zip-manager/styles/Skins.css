@@ -262,22 +262,14 @@
 
 .skin-dos dialog input,
 .skin-dos dialog select {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-  caret-color: var(--bg-color);
   padding: 0;
   block-size: var(--gap-block-size);
   inline-size: 100%;
 }
 
 .skin-dos dialog select:focus {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-.skin-dos dialog input::selection {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }
 
 .skin-dos .options-dialog label {
@@ -304,17 +296,12 @@
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:focus:after {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }
 
 .skin-dos .options-dialog input[type="checkbox"]:checked::after {
   content: "[■]";
-}
-
-.skin-dos .options-dialog input[type="checkbox"]:checked:focus:after {
-  background-color: var(--bg-color);
-  color: var(--text-color);
 }
 
 .skin-dos .options-dialog input,
