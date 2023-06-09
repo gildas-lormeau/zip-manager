@@ -307,6 +307,7 @@
 .skin-dos .options-dialog input,
 .skin-dos .options-dialog select {
   inline-size: min(10ch, 100%);
+  text-align: right;
 }
 
 .skin-dos .downloads,
