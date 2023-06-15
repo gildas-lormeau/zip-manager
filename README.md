@@ -6,7 +6,7 @@ See https://gildas-lormeau.github.io/zip-manager/
 
  - installable for offline use
  - keyboard navigation
- - multi-core compression/decompression
+ - multi-core compression/decompression of zip entries
  - encrypted zip files
  - 4GB+ zip files (i.e. Zip64)
  - drag and drop files/directories from filesystem on desktop
