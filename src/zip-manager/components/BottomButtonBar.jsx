@@ -2,7 +2,16 @@ import "./styles/BottomButtonBar.css";
 
 import { useRef } from "react";
 
-import Button from "./Button.jsx";
+import {
+  CopyEntryButton,
+  CutEntryButton,
+  PasteEntryButton,
+  ResetClipboardDataButton,
+  ExtractEntryButton,
+  HighlightAllButton,
+  RenameEntryButton,
+  DeleteEntriesButton
+} from "./Buttons.jsx";
 
 function BottomButtonBar({
   disabledCopyButton,
@@ -120,167 +129,6 @@ function BottomButtonBar({
         />
       </div>
     </div>
-  );
-}
-
-function CopyEntryButton({
-  disabled,
-  clickedButtonName,
-  onCopy,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.COPY_BUTTON_NAME}
-      title={messages.COPY_BUTTON_TOOLTIP}
-      label={messages.COPY_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onCopy}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function CutEntryButton({
-  disabled,
-  clickedButtonName,
-  onCut,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.CUT_BUTTON_NAME}
-      title={messages.CUT_BUTTON_TOOLTIP}
-      label={messages.CUT_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onCut}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function PasteEntryButton({
-  disabled,
-  clickedButtonName,
-  onPaste,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.PASTE_BUTTON_NAME}
-      title={messages.PASTE_BUTTON_TOOLTIP}
-      label={messages.PASTE_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onPaste}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function ResetClipboardDataButton({
-  disabled,
-  onResetClipboardData,
-  messages
-}) {
-  return (
-    <Button
-      label={messages.RESET_CLIPBOARD_BUTTON_LABEL}
-      disabled={disabled}
-      onClick={onResetClipboardData}
-    />
-  );
-}
-
-function HighlightAllButton({
-  disabled,
-  clickedButtonName,
-  onHighlightAll,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.HIGHLIGHT_ALL_BUTTON_NAME}
-      title={messages.HIGHLIGHT_ALL_BUTTON_TOOLTIP}
-      label={messages.HIGHLIGHT_ALL_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onHighlightAll}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function ExtractEntryButton({
-  disabled,
-  clickedButtonName,
-  onExtract,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.EXTRACT_BUTTON_NAME}
-      title={messages.EXTRACT_BUTTON_TOOLTIP}
-      label={messages.EXTRACT_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onExtract}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function RenameEntryButton({
-  disabled,
-  clickedButtonName,
-  onRename,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.RENAME_BUTTON_NAME}
-      title={messages.RENAME_BUTTON_TOOLTIP}
-      label={messages.RENAME_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onRename}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function DeleteEntriesButton({
-  disabled,
-  clickedButtonName,
-  onRemove,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.DELETE_BUTTON_NAME}
-      title={messages.DELETE_BUTTON_TOOLTIP}
-      label={messages.DELETE_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onRemove}
-      onClickedButton={onClickedButton}
-    />
   );
 }
 

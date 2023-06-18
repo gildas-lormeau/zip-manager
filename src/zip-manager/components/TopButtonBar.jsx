@@ -1,6 +1,13 @@
 import "./styles/TopButtonBar.css";
 
-import Button from "./Button.jsx";
+import {
+  AddFilesButton,
+  CreateFolderButton,
+  ImportZipButton,
+  ExportZipButton,
+  ResetButton,
+  OptionsButton
+} from "./Buttons.jsx";
 
 function TopButtonBar({
   disabledExportZipButton,
@@ -78,112 +85,6 @@ function TopButtonBar({
         <OptionsButton onOpenOptions={onOpenOptions} messages={messages} />
       </div>
     </div>
-  );
-}
-
-function CreateFolderButton({
-  clickedButtonName,
-  onCreateFolder,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.CREATE_FOLDER_BUTTON_NAME}
-      title={messages.CREATE_FOLDER_BUTTON_TOOLTIP}
-      label={messages.CREATE_FOLDER_BUTTON_LABEL}
-      clickedButtonName={clickedButtonName}
-      onClick={onCreateFolder}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function AddFilesButton({
-  clickedButtonName,
-  onShowAddFilesPicker,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <>
-      <Button
-        name={constants.ADD_FILES_BUTTON_NAME}
-        title={messages.ADD_FILES_BUTTON_TOOLTIP}
-        label={messages.ADD_FILES_BUTTON_LABEL}
-        clickedButtonName={clickedButtonName}
-        onClick={onShowAddFilesPicker}
-        onClickedButton={onClickedButton}
-      />
-    </>
-  );
-}
-
-function ImportZipButton({
-  clickedButtonName,
-  onShowImportZipFilePicker,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  const { IMPORT_ZIP_BUTTON_NAME } = constants;
-
-  function handleClick() {
-    onShowImportZipFilePicker({
-      description: messages.ZIP_FILE_DESCRIPTION_LABEL
-    });
-  }
-
-  return (
-    <>
-      <Button
-        name={IMPORT_ZIP_BUTTON_NAME}
-        title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
-        label={messages.IMPORT_ZIP_BUTTON_LABEL}
-        clickedButtonName={clickedButtonName}
-        onClick={handleClick}
-        onClickedButton={onClickedButton}
-      />
-    </>
-  );
-}
-
-function ExportZipButton({
-  disabled,
-  clickedButtonName,
-  onExportZip,
-  onClickedButton,
-  constants,
-  messages
-}) {
-  return (
-    <Button
-      name={constants.EXPORT_ZIP_BUTTON_NAME}
-      title={messages.EXPORT_ZIP_BUTTON_TOOLTIP}
-      label={messages.EXPORT_ZIP_BUTTON_LABEL}
-      disabled={disabled}
-      clickedButtonName={clickedButtonName}
-      onClick={onExportZip}
-      onClickedButton={onClickedButton}
-    />
-  );
-}
-
-function ResetButton({ disabled, onReset, messages }) {
-  return (
-    <Button
-      label={messages.RESET_BUTTON_LABEL}
-      disabled={disabled}
-      onClick={onReset}
-    />
-  );
-}
-
-function OptionsButton({ onOpenOptions, messages }) {
-  return (
-    <Button label={messages.OPTIONS_BUTTON_LABEL} onClick={onOpenOptions} />
   );
 }
 
