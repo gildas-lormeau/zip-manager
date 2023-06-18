@@ -186,16 +186,14 @@ function AddFilesButton({
   messages
 }) {
   return (
-    <>
-      <Button
-        name={constants.ADD_FILES_BUTTON_NAME}
-        title={messages.ADD_FILES_BUTTON_TOOLTIP}
-        label={messages.ADD_FILES_BUTTON_LABEL}
-        clickedButtonName={clickedButtonName}
-        onClick={onShowAddFilesPicker}
-        onClickedButton={onClickedButton}
-      />
-    </>
+    <Button
+      name={constants.ADD_FILES_BUTTON_NAME}
+      title={messages.ADD_FILES_BUTTON_TOOLTIP}
+      label={messages.ADD_FILES_BUTTON_LABEL}
+      clickedButtonName={clickedButtonName}
+      onClick={onShowAddFilesPicker}
+      onClickedButton={onClickedButton}
+    />
   );
 }
 
@@ -215,16 +213,14 @@ function ImportZipButton({
   }
 
   return (
-    <>
-      <Button
-        name={IMPORT_ZIP_BUTTON_NAME}
-        title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
-        label={messages.IMPORT_ZIP_BUTTON_LABEL}
-        clickedButtonName={clickedButtonName}
-        onClick={handleClick}
-        onClickedButton={onClickedButton}
-      />
-    </>
+    <Button
+      name={IMPORT_ZIP_BUTTON_NAME}
+      title={messages.IMPORT_ZIP_BUTTON_TOOLTIP}
+      label={messages.IMPORT_ZIP_BUTTON_LABEL}
+      clickedButtonName={clickedButtonName}
+      onClick={handleClick}
+      onClickedButton={onClickedButton}
+    />
   );
 }
 
