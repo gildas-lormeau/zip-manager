@@ -14,9 +14,9 @@ function Breadcrumb({
             <li key={folder.id}>
               <BreadcrumbItem
                 folder={folder}
-                onGoIntoFolder={onGoIntoFolder}
                 disabled={!ancestorFolders.length || isSelectedFolder}
                 isSelectedFolder={isSelectedFolder}
+                onGoIntoFolder={onGoIntoFolder}
                 constants={constants}
                 messages={messages}
               />
