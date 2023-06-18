@@ -29,7 +29,7 @@ import {
   NavigationBar,
   Entries,
   BottomButtonBar,
-  DownloadManager,
+  Downloads,
   InfoBar,
   ExportZipDialog,
   ExtractDialog,
@@ -490,7 +490,7 @@ function ZipManager() {
           constants={constants}
           messages={messages}
         />
-        <DownloadManager
+        <Downloads
           downloads={downloads}
           hidden={hiddenDownloadManager}
           onAbortDownload={abortDownload}

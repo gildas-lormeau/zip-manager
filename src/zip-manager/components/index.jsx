@@ -2,7 +2,7 @@ import TopButtonBar from "./TopButtonBar.jsx";
 import NavigationBar from "./NavigationBar.jsx";
 import Entries from "./Entries.jsx";
 import BottomButtonBar from "./BottomButtonBar.jsx";
-import DownloadManager from "./DownloadManager.jsx";
+import Downloads from "./Downloads.jsx";
 import InfoBar from "./InfoBar.jsx";
 import ExportZipDialog from "./dialogs/ExportZipDialog.jsx";
 import ExtractDialog from "./dialogs/ExtractDialog.jsx";
@@ -20,7 +20,7 @@ export {
   NavigationBar,
   Entries,
   BottomButtonBar,
-  DownloadManager,
+  Downloads,
   InfoBar,
   ExportZipDialog,
   ExtractDialog,

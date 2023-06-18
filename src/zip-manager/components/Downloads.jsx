@@ -1,6 +1,6 @@
-import "./styles/DownloadManager.css";
+import "./styles/Downloads.css";
 
-function DownloadManager({
+function Downloads({
   hidden,
   downloads,
   onAbortDownload,
@@ -117,4 +117,4 @@ function DownloadEntryProgress({ download, i18n }) {
   );
 }
 
-export default DownloadManager;
+export default Downloads;
