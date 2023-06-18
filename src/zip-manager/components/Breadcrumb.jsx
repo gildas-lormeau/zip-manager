@@ -8,18 +8,21 @@ function Breadcrumb({
   return (
     <nav className="breadcrumb">
       <ol>
-        {ancestorFolders.map((folder) => (
-          <li key={folder.id}>
-            <BreadcrumbItem
-              folder={folder}
-              onGoIntoFolder={onGoIntoFolder}
-              active={ancestorFolders.length > 1 && folder !== selectedFolder}
-              isSelectedFolder={folder === selectedFolder}
-              constants={constants}
-              messages={messages}
-            />
-          </li>
-        ))}
+        {ancestorFolders.map((folder) => {
+          const isSelectedFolder = folder === selectedFolder;
+          return (
+            <li key={folder.id}>
+              <BreadcrumbItem
+                folder={folder}
+                onGoIntoFolder={onGoIntoFolder}
+                disabled={!ancestorFolders.length || isSelectedFolder}
+                isSelectedFolder={isSelectedFolder}
+                constants={constants}
+                messages={messages}
+              />
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );
@@ -28,21 +31,21 @@ function Breadcrumb({
 function BreadcrumbItem({
   folder,
   onGoIntoFolder,
-  active,
+  disabled,
   isSelectedFolder,
   constants,
   messages
 }) {
   function getBreadcrumbItemClassName() {
     const classes = ["breadcrumb-item"];
-    if (active) {
+    if (!disabled) {
       classes.push("breadcrumb-item-active");
     }
     return classes.join(" ");
   }
 
   function handleClick() {
-    if (active) {
+    if (!disabled) {
       onGoIntoFolder(folder);
     }
   }
@@ -61,7 +64,7 @@ function BreadcrumbItem({
       aria-label={isSelectedFolder ? null : messages.GO_INTO_FOLDER_LABEL}
       onClick={handleClick}
       onKeyUp={(event) => handleKeyUp({ event, folder })}
-      tabIndex={active ? 0 : null}
+      tabIndex={disabled ? null : 0}
     >
       {folder.parent ? folder.name : messages.ROOT_FOLDER_LABEL}
     </span>
