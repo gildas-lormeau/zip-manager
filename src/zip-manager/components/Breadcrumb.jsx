@@ -1,5 +1,3 @@
-import "./styles/NavigationBar.css";
-
 function Breadcrumb({
   folder,
   ancestorFolders,

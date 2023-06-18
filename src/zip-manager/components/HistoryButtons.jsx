@@ -1,5 +1,3 @@
-import "./styles/NavigationBar.css";
-
 import { BackButton, ForwardButton } from "./Buttons.jsx";
 
 function HistoryButtons({
