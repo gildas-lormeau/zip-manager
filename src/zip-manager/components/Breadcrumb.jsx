@@ -1,11 +1,10 @@
 function Breadcrumb({
-  folder,
+  folder: selectedFolder,
   ancestorFolders,
   onGoIntoFolder,
   constants,
   messages
 }) {
-  const selectedFolder = folder;
   return (
     <nav className="breadcrumb">
       <ol>
