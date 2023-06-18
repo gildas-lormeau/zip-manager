@@ -1,6 +1,6 @@
 import "./styles/NavigationBar.css";
 
-import HistoryButtons from "./HistoryButtons.jsx";
+import History from "./History.jsx";
 import Breadcrumb from "./Breadcrumb.jsx";
 
 function NavigationBar({
@@ -26,7 +26,7 @@ function NavigationBar({
         role="toolbar"
         aria-label={messages.FOLDERS_LABEL}
       >
-        <HistoryButtons
+        <History
           disabledBackButton={disabledBackButton}
           disabledForwardButton={disabledForwardButton}
           clickedButtonName={clickedButtonName}

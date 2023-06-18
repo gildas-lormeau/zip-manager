@@ -1,6 +1,6 @@
 import { BackButton, ForwardButton } from "./Buttons.jsx";
 
-function HistoryButtons({
+function History({
   disabledBackButton,
   disabledForwardButton,
   clickedButtonName,
@@ -32,4 +32,4 @@ function HistoryButtons({
   );
 }
 
-export default HistoryButtons;
+export default History;
