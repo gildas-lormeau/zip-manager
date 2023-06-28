@@ -218,6 +218,16 @@
   color: var(--bg-color);
 }
 
+.skin-dos .entries .entry-select:focus:after {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.skin-dos .entries .entry-select:checked:focus:after {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
 .skin-dos .info-bar {
   margin-block-end: 0;
   padding-block: var(--gap-block-size);
