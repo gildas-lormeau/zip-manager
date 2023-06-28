@@ -145,6 +145,26 @@
   border-radius: 0;
 }
 
+.skin-dos input[type="checkbox"] {
+  font-family: "DOS-VGA-437", monospace;
+  accent-color: var(--text-color);
+  appearance: none;
+  cursor: pointer;
+}
+
+.skin-dos input[type="checkbox"]:after {
+  content: "[ ]";
+}
+
+.skin-dos input[type="checkbox"]:focus:after {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.skin-dos input[type="checkbox"]:checked::after {
+  content: "[■]";
+}
+
 .skin-dos .button-bar,
 .skin-dos .button-bar .button-group {
   row-gap: var(--small-gap-block-size);
@@ -191,7 +211,11 @@
 }
 
 .skin-dos .entries .entry-select {
-  margin-inline-end: var(--small-gap-inline-size);
+  color: var(--text-color);
+}
+
+.skin-dos .entries .entry-select:checked {
+  color: var(--bg-color);
 }
 
 .skin-dos .info-bar {
@@ -276,32 +300,14 @@
   min-block-size: auto;
 }
 
-.skin-dos .options-dialog input[type="checkbox"] {
-  inline-size: calc(3 * var(--small-gap-inline-size));
-  block-size: var(--gap-block-size);
-  accent-color: var(--text-color);
-  display: grid;
-  place-content: baseline;
-  appearance: none;
-  cursor: pointer;
-}
-
 .skin-dos .options-dialog form p {
   row-gap: 0;
 }
 
-.skin-dos .options-dialog input[type="checkbox"]:after {
-  position: relative;
-  content: "[ ]";
-}
-
-.skin-dos .options-dialog input[type="checkbox"]:focus:after {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-}
-
-.skin-dos .options-dialog input[type="checkbox"]:checked::after {
-  content: "[■]";
+.skin-dos .options-dialog input[type="checkbox"] {
+  inline-size: inherit;
+  block-size: inherit;
+  accent-color: inherit;
 }
 
 .skin-dos .options-dialog input,
