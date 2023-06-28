@@ -96,6 +96,8 @@ function ZipManager() {
   const musicPlayerActive = playerActiveRef.current;
 
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
+  const resetHighlightedEntryElement = () =>
+    (highlightedEntryElementRef.current = null);
   const getEntriesHeight = () => entriesHeightRef.current;
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
   const setPlayerActive = (active) => (playerActiveRef.current = active);
@@ -201,6 +203,7 @@ function ZipManager() {
     entriesDeltaHeight,
     entriesElement,
     setHighlightedIds,
+    resetHighlightedEntryElement,
     setNavigation,
     setOptions,
     setEntriesHeight,
@@ -333,19 +336,24 @@ function ZipManager() {
     setClipboardData
   });
 
-  const { playMusic, stopMusic, updateAccentColor, updateSkin, initMiscFeatures } =
-    getMiscFeatures({
-      theme,
-      setOptions,
-      setTheme,
-      setMusicData,
-      setPlayerActive,
-      getOptions,
-      stylesheetService,
-      themeService,
-      musicService,
-      constants
-    });
+  const {
+    playMusic,
+    stopMusic,
+    updateAccentColor,
+    updateSkin,
+    initMiscFeatures
+  } = getMiscFeatures({
+    theme,
+    setOptions,
+    setTheme,
+    setMusicData,
+    setPlayerActive,
+    getOptions,
+    stylesheetService,
+    themeService,
+    musicService,
+    constants
+  });
 
   const {
     enterEntry,

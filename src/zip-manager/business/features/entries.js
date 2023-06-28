@@ -10,6 +10,7 @@ function getEntriesFeatures({
   entriesDeltaHeight,
   entriesElement,
   setHighlightedIds,
+  resetHighlightedEntryElement,
   setNavigation,
   setOptions,
   setEntriesHeight,
@@ -131,6 +132,10 @@ function getEntriesFeatures({
       previousHighlight: entry,
       direction: 0
     }));
+    if (newIds.length < highlightedIds.length) {
+      resetHighlightedEntryElement();
+    }
+    resetHighlightedEntryElement();
     setHighlightedIds(newIds);
   }
 
