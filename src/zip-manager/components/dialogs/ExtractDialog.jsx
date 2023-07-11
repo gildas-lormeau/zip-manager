@@ -16,7 +16,7 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
   }
 
   function handleSubmit() {
-    onExtract({ filename });
+    onExtract({ filename, entries: data.entries });
   }
 
   function handleClose() {

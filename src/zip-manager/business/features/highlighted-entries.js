@@ -136,6 +136,7 @@ function getHighlightedEntriesFeatures({
 
   function openPromptExtract(entry = highlightedEntry) {
     const options = {
+      entries: [entry],
       filename: entry.name
     };
     if (filesystemService.savePickersSupported()) {
@@ -148,12 +149,12 @@ function getHighlightedEntriesFeatures({
     }
   }
 
-  function extract({ filename } = {}) {
+  function extract({ entries = highlightedEntries, filename } = {}) {
     async function download() {
       try {
         const options = getOptions();
-        filename = highlightedEntries.length === 1 ? filename : null;
-        await saveEntries(highlightedEntries, filename, options);
+        filename = entries.length === 1 ? filename : null;
+        await saveEntries(entries, filename, options);
       } catch (error) {
         openDisplayError(error.message);
       }
