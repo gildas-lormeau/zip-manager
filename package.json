@@ -2,7 +2,7 @@
   "name": "zip-manager",
   "version": "0.1.0",
   "dependencies": {
-    "@zip.js/zip.js": "^2.7.22",
+    "@zip.js/zip.js": "^2.7.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "workbox-core": "^7.0.0",
