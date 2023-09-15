@@ -102,9 +102,8 @@ const CHOOSE_ACTION_LABEL =
 const NO_ENTRIES_LABEL = "Drag and drop files and directories here";
 const INFO_LABEL = [
   "Source code on ",
-  "GitHub",
-  " ",
-  " Made with ",
+  " GitHub",
+  "Made with ",
   "♡",
   " in ",
   "Rennes"

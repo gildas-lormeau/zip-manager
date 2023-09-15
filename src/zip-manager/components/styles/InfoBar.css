@@ -20,6 +20,16 @@
   font-size: 0.8rem;
 }
 
+.info-bar .source-link a {
+  text-decoration: none;
+}
+
+.info-bar .source-link a svg {
+  width: 1em;
+  height: 1em;
+  margin-bottom: -2px;
+}
+
 .info-bar .player-active :not(canvas) {
   opacity: 0.5;
   color: var(--basic-text-color);
