@@ -111,6 +111,7 @@ const INFO_LABEL = [
   " à ",
   "Rennes"
 ];
+const CITY_URL = "https://fr.wikipedia.org/wiki/Rennes";
 const HIGHLIGHTED_ENTRIES_LABEL = "Commandes des entrées en surbrillance";
 const DOWNLOADS_LABEL = "Panneau de téléchargements";
 const ENTRIES_LABEL = "Entrées du répertoire";
@@ -217,6 +218,7 @@ export {
   CHOOSE_ACTION_LABEL,
   NO_ENTRIES_LABEL,
   INFO_LABEL,
+  CITY_URL,
   HIGHLIGHTED_ENTRIES_LABEL,
   DOWNLOADS_LABEL,
   ENTRIES_LABEL,

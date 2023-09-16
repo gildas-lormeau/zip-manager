@@ -93,7 +93,7 @@ function InfoBar({
             </AccentColorPickerButton>
             {messages.INFO_LABEL[4]}
             <a
-              href="https://en.wikipedia.org/wiki/Rennes"
+              href={messages.CITY_URL}
               target="_blank"
               rel="noreferrer"
             >
