@@ -16,6 +16,7 @@ export default defineConfig(() => {
         srcDir: "src",
         filename: "sw.js",
         injectManifest: {
+          rollupFormat: "iife",
           globPatterns: [
             "./assets/**/*.{js,css,png,ttf,wasm,zip}",
             "./*.{html,ico,png,js,json}"
