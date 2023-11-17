@@ -1,7 +1,7 @@
 /* global Intl, navigator */
 
 const DEFAULT_LANGUAGE_ID = "en-US";
-const LANGUAGE_IDS = [DEFAULT_LANGUAGE_ID, "fr-FR"];
+const LANGUAGE_IDS = [DEFAULT_LANGUAGE_ID, "de-DE", "es-ES", "fr-FR", "it-IT", "pt-PT"];
 
 const SIZE_NUMBER_FORMATS = [
   "kilobyte",
