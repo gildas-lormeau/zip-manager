@@ -1,4 +1,6 @@
-This is a PWA using the filesystem API in [zip.js](https://github.com/gildas-lormeau/zip.js). It is based on React and built with Vite.
+This is a PWA using the filesystem API in [zip.js](https://github.com/gildas-lormeau/zip.js). 
+
+It is based on React and built with Vite.
 
 See https://gildas-lormeau.github.io/zip-manager/
 
