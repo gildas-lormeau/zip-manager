@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
-    "@zip.js/zip.js": "^2.7.40",
+    "@zip.js/zip.js": "^2.7.42",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "workbox-core": "^7.0.0",
@@ -28,10 +28,10 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react": "^7.33.2",
-    "vite": "^5.0.0",
-    "vite-plugin-pwa": "^0.16.7"
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "vite": "^5.2.10",
+    "vite-plugin-pwa": "^0.19.8"
   }
 }
