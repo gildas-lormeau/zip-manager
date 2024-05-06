@@ -4,7 +4,7 @@ const ROOT_ZIP_FILENAME = "Téléchargement.zip";
 const KEYS_SEPARATOR_LABEL = ", ";
 const PARENT_FOLDER_TOOLTIP = "Répertoire parent";
 
-const SHORTCUT_LABEL = "Raccourci: ";
+const SHORTCUT_LABEL = "Raccourci : ";
 const CTRL_KEY_LABEL = "⌘/ctrl-";
 const ALT_KEY_LABEL = "alt-";
 const SPACE_KEY_LABEL = "espace";
@@ -87,7 +87,7 @@ const OPTIONS_HIDE_NAVIGATION_BAR_LABEL = "Cacher la barre de navigation :";
 const OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL =
   "Cacher le panneau de téléchargements :";
 const OPTIONS_HIDE_INFOBAR_LABEL = "Cacher la barre du bas :";
-const OPTIONS_SELECT_SKIN_LABEL = "Thème:";
+const OPTIONS_SELECT_SKIN_LABEL = "Thème :";
 const OPTIONS_DEFAULT_SKIN_LABEL = "Défaut";
 const OPTIONS_DOS_SKIN_LABEL = "DOS";
 const OPTIONS_EXPORT_ZIP_PASSWORD_LABEL = "Demander un mot de passe :";
