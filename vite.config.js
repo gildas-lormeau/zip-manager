@@ -22,6 +22,7 @@ export default defineConfig(() => {
             "./*.{html,ico,png,js,json}"
           ]
         },
+        includeManifestIcons: false,
         manifest: {
           "short_name": "Zip Manager",
           "name": "Zip Manager",
@@ -36,37 +37,37 @@ export default defineConfig(() => {
           ],
           "icons": [
             {
-              "src": "./icons/icon-512x512.png",
+              "src": "/assets/icons/icon-512x512.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "any"
             },
             {
-              "src": "./icons/icon-192x192.png",
+              "src": "/assets/icons/icon-192x192.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "any"
             },
             {
-              "src": "./icons/icon-512x512.png",
+              "src": "/assets/icons/icon-512x512.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "maskable"
             },
             {
-              "src": "./icons/icon-192x192.png",
+              "src": "/assets/icons/icon-192x192.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "maskable"
             },
             {
-              "src": "./icons/icon-512x512-mono.png",
+              "src": "/assets/icons/icon-512x512-mono.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "monochrome"
             },
             {
-              "src": "./icons/icon-192x192-mono.png",
+              "src": "./assets/icons/icon-192x192-mono.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "monochrome"
@@ -142,35 +143,21 @@ export default defineConfig(() => {
               "src": "./screenshots/screenshot-395x640.png",
               "sizes": "395x640",
               "type": "image/png",
-              "platform": "narrow",
+              "form_factor": "narrow",
               "label": "Main screen on mobile"
             },
             {
-              "src": "./screenshots/screenshot-535x760.png",
-              "sizes": "535x760",
-              "type": "image/png",
-              "platform": "wide",
-              "label": "Main screen on tablet"
-            },
-            {
               "src": "./screenshots/screenshot-app-1135x809.png",
-              "sizes": "1246x918",
+              "sizes": "1135x809",
               "type": "image/png",
-              "platform": "wide",
+              "form_factor": "wide",
               "label": "Main screen on desktop"
-            },
-            {
-              "src": "./screenshots/screenshot-options-700x800.png",
-              "sizes": "700x800",
-              "type": "image/png",
-              "platform": "wide",
-              "label": "Options dialog"
             },
             {
               "src": "./screenshots/screenshot-custom-395x640.png",
               "sizes": "395x640",
               "type": "image/png",
-              "platform": "narrow",
+              "form_factor": "narrow",
               "label": "Custom user interface on mobile"
             }
           ]
