@@ -18,7 +18,7 @@ export default defineConfig(() => {
         injectManifest: {
           rollupFormat: "iife",
           globPatterns: [
-            "./assets/**/*.{js,css,png,ttf,wasm,zip}",
+            "./**/*.{js,css,png,ttf,wasm,zip}",
             "./*.{html,ico,png,js,json}"
           ]
         },
@@ -36,37 +36,37 @@ export default defineConfig(() => {
           ],
           "icons": [
             {
-              "src": "./assets/icons/icon-512x512.png",
+              "src": "./icons/icon-512x512.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "any"
             },
             {
-              "src": "./assets/icons/icon-192x192.png",
+              "src": "./icons/icon-192x192.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "any"
             },
             {
-              "src": "./assets/icons/icon-512x512.png",
+              "src": "./icons/icon-512x512.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "maskable"
             },
             {
-              "src": "./assets/icons/icon-192x192.png",
+              "src": "./icons/icon-192x192.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "maskable"
             },
             {
-              "src": "./assets/icons/icon-512x512-mono.png",
+              "src": "./icons/icon-512x512-mono.png",
               "sizes": "512x512",
               "type": "image/png",
               "purpose": "monochrome"
             },
             {
-              "src": "./assets/icons/icon-192x192-mono.png",
+              "src": "./icons/icon-192x192-mono.png",
               "sizes": "192x192",
               "type": "image/png",
               "purpose": "monochrome"
