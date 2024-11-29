@@ -511,8 +511,8 @@ function ZipManager() {
         hidden={hiddenInfobar}
         theme={theme}
         musicData={musicData}
-        playMusic={playMusic}
-        stopMusic={stopMusic}
+        onPlayMusic={playMusic}
+        onStopMusic={stopMusic}
         onSetTheme={setTheme}
         musicPlayerActive={musicPlayerActive}
         constants={constants}

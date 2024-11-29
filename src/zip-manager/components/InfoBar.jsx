@@ -6,8 +6,8 @@ function InfoBar({
   hidden,
   theme,
   musicData,
-  playMusic,
-  stopMusic,
+  onPlayMusic,
+  onStopMusic,
   onSetTheme,
   musicPlayerActive,
   constants,
@@ -75,11 +75,11 @@ function InfoBar({
           </span>
           <span>
             <MusicPlayerButton
-              playMusic={playMusic}
-              stopMusic={stopMusic}
               musicPlayerActive={musicPlayerActive}
               iconPlayer={iconPlayer}
               onSetIconPlayer={handleChangeIconPlayer}
+              onPlayMusic={onPlayMusic}
+              onStopMusic={onStopMusic}
             />
           </span>
           <span className="label">
