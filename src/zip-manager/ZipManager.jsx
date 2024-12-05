@@ -422,7 +422,7 @@ function ZipManager() {
 
   return (
     <div className={appClassName}>
-      <main role="application">
+      <main>
         <TopButtonBar
           disabledExportZipButton={disabledExportZip}
           disabledResetButton={disabledReset}

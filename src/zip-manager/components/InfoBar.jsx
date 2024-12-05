@@ -51,6 +51,7 @@ function InfoBar({
               href="https://github.com/gildas-lormeau/zip-manager"
               target="_blank"
               rel="noreferrer"
+              aria-label="See the source code on GitHub"
             >
               <svg
                 width="24px"
