@@ -146,18 +146,18 @@ function AccentColorPickerButton({
 }
 
 function MusicPlayerButton({
-  playMusic,
-  stopMusic,
   musicPlayerActive,
   iconPlayer,
+  onPlayMusic,
+  onStopMusic,
   onSetIconPlayer
 }) {
   function handlePlayButtonClick() {
     if (musicPlayerActive) {
-      stopMusic();
+      onStopMusic();
       onSetIconPlayer(true);
     } else {
-      playMusic();
+      onPlayMusic();
       onSetIconPlayer();
     }
   }
