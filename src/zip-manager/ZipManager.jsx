@@ -202,7 +202,6 @@ function ZipManager() {
     entriesHeight,
     entriesElementHeight,
     entriesDeltaHeight,
-    entriesElement,
     setHighlightedIds,
     resetHighlightedEntryElement,
     setNavigation,
@@ -462,9 +461,9 @@ function ZipManager() {
           onToggle={toggle}
           onToggleRange={toggleRange}
           onEnter={enterEntry}
-          onUpdateEntriesHeight={updateEntriesHeight}
+          onUpdateEntriesHeight={() => updateEntriesHeight(entriesElement)}
           onUpdateEntriesElementHeight={updateEntriesElementHeight}
-          onRegisterResizeEntriesHandler={registerResizeEntriesHandler}
+          onRegisterResizeEntriesHandler={() => registerResizeEntriesHandler(entriesElement)}
           entriesElementRef={entriesElementRef}
           highlightedEntryElementRef={highlightedEntryElementRef}
           i18n={i18nService}
@@ -490,7 +489,7 @@ function ZipManager() {
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntries}
           onMove={resizeEntries}
-          onUpdateElementHeight={updateEntriesElementHeightEnd}
+          onUpdateElementHeight={() => updateEntriesElementHeightEnd(entriesElement)}
           onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}

@@ -9,7 +9,6 @@ function getEntriesFeatures({
   entriesHeight,
   entriesElementHeight,
   entriesDeltaHeight,
-  entriesElement,
   setHighlightedIds,
   resetHighlightedEntryElement,
   setNavigation,
@@ -37,7 +36,7 @@ function getEntriesFeatures({
     HIGHLIGHT_ALL_BUTTON_NAME
   } = constants;
 
-  function getEntriesElementHeight() {
+  function getEntriesElementHeight(entriesElement) {
     return documentService.getHeight(entriesElement);
   }
 
@@ -329,11 +328,11 @@ function getEntriesFeatures({
     setEntriesDeltaHeight(deltaY);
   }
 
-  function updateEntriesHeight() {
+  function updateEntriesHeight(entriesElement) {
     if (entriesElement && getHighlightedEntryElement()) {
       setEntriesHeight(
         Math.max(
-          Math.ceil(getEntriesElementHeight() / getHightlightedEntryHeight()),
+          Math.ceil(getEntriesElementHeight(entriesElement) / getHightlightedEntryHeight()),
           1
         )
       );
@@ -353,8 +352,8 @@ function getEntriesFeatures({
     }
   }
 
-  function updateEntriesElementHeightEnd() {
-    const entriesElementHeight = getEntriesElementHeight();
+  function updateEntriesElementHeightEnd(entriesElement) {
+    const entriesElementHeight = getEntriesElementHeight(entriesElement);
     setEntriesElementHeight(
       Math.max(
         Math.min(
@@ -367,15 +366,15 @@ function getEntriesFeatures({
     setEntriesDeltaHeight(0);
   }
 
-  function registerResizeEntriesHandler() {
+  function registerResizeEntriesHandler(entriesElement) {
     if (entriesElement) {
       const observer = documentService.addResizeObserver(entriesElement, () => {
-        const height = getEntriesElementHeight();
+        const height = getEntriesElementHeight(entriesElement);
         const options = getOptions();
         if (height !== options.entriesHeight) {
           options.entriesHeight = height;
           setOptions(options);
-          updateEntriesHeight();
+          updateEntriesHeight(entriesElement);
         }
       });
       windowService.addResizeListener(updateEntriesElementHeight);
