@@ -456,7 +456,7 @@ function ZipManager() {
           hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}
-          onToggle={() => toggle(resetHighlightedEntryElement)}
+          onToggle={entry => toggle(resetHighlightedEntryElement, entry)}
           onToggleRange={toggleRange}
           onEnter={enterEntry}
           onUpdateEntriesHeight={() => updateEntriesHeight(entriesElement)}
