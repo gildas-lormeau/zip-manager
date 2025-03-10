@@ -99,8 +99,7 @@ function ZipManager() {
 
   const entriesElement = entriesElementRef.current;
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
-  const resetHighlightedEntryElement = () =>
-    (highlightedEntryElementRef.current = null);
+  const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
