@@ -104,9 +104,8 @@ function InfoBar({
             </a>
           </span>
           <MusicVisualizer
-            skin={theme.skin}
+            theme={theme}
             musicData={musicData}
-            accentColor={theme.accentColor}
             musicPlayerActive={musicPlayerActive}
             constants={constants}
           />
@@ -178,9 +177,8 @@ function MusicPlayerButton({
 }
 
 function MusicVisualizer({
-  skin,
+  theme,
   musicData,
-  accentColor,
   musicPlayerActive,
   constants
 }) {
@@ -189,55 +187,52 @@ function MusicVisualizer({
   const CANVAS_BLOCK_OFFSET = CANVAS_HEIGTH / 8;
   const MAX_FFT_VALUE = 256;
 
+  const [barWidth, setBarWidth] = useState(0);
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
-  let barWidth;
-  updateBarWidth();
-  if (canvasRef.current) {
-    if (!audioContextRef.current) {
-      audioContextRef.current = canvasRef.current.getContext("2d");
-      updateColor();
-      updateBarWidth();
-    }
-    const context = audioContextRef.current;
-    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-    if (musicPlayerActive) {
-      musicData.frequencyData.forEach((byteTimeDomain, index) => {
-        const barHeight =
-          (CANVAS_BLOCK_OFFSET - byteTimeDomain) /
-          (MAX_FFT_VALUE / CANVAS_HEIGTH);
-        context.fillRect(index * barWidth, CANVAS_HEIGTH, barWidth, barHeight);
-        context.fillRect(
-          CANVAS_WIDTH - index * barWidth - barWidth,
-          CANVAS_HEIGTH,
-          barWidth,
-          barHeight
-        );
-      });
-    }
-  }
 
   function updateColor() {
-    const context = audioContextRef.current;
-    const gradient = context.createLinearGradient(0, 0, 0, CANVAS_HEIGTH);
-    gradient.addColorStop(0, accentColor);
-    gradient.addColorStop(0.7, accentColor);
-    gradient.addColorStop(1, "transparent");
-    context.fillStyle = gradient;
+    if (theme.accentColor) {
+      const context = audioContextRef.current;
+      const gradient = context.createLinearGradient(0, 0, 0, CANVAS_HEIGTH);
+      gradient.addColorStop(0, theme.accentColor);
+      gradient.addColorStop(0.7, theme.accentColor);
+      gradient.addColorStop(1, "transparent");
+      context.fillStyle = gradient;
+    }
   }
 
   function updateBarWidth() {
-    if (skin) {
-      barWidth = CANVAS_WIDTH / (constants.FFT_RESOLUTIONS[skin] / 2);
+    if (theme.skin) {
+      setBarWidth(CANVAS_WIDTH / (constants.FFT_RESOLUTIONS[theme.skin] / 2));
     }
   }
 
+  useEffect(updateBarWidth, [theme.skin]);
+  useEffect(updateColor, [theme.accentColor]);
   useEffect(() => {
-    if (audioContextRef.current) {
-      updateColor();
+    if (canvasRef.current) {
+      if (!audioContextRef.current) {
+        audioContextRef.current = canvasRef.current.getContext("2d");
+      }
+      const context = audioContextRef.current;
+      context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
+      if (musicPlayerActive) {
+        musicData.frequencyData.forEach((byteTimeDomain, index) => {
+          const barHeight =
+            (CANVAS_BLOCK_OFFSET - byteTimeDomain) /
+            (MAX_FFT_VALUE / CANVAS_HEIGTH);
+          context.fillRect(index * barWidth, CANVAS_HEIGTH, barWidth, barHeight);
+          context.fillRect(
+            CANVAS_WIDTH - index * barWidth - barWidth,
+            CANVAS_HEIGTH,
+            barWidth,
+            barHeight
+          );
+        });
+      }
     }
-  }, [accentColor]);
-  useEffect(updateBarWidth, [skin]);
+  }, [musicPlayerActive, musicData]);
   return (
     <canvas
       ref={canvasRef}
