@@ -92,17 +92,15 @@ function ZipManager() {
     frequencyData: []
   });
   const [playerActive, setPlayerActive] = useState(false);
+  const [entriesHeight, setEntriesHeight] = useState(1);
 
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
-  const entriesHeightRef = useRef(1);
 
   const entriesElement = entriesElementRef.current;
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () =>
     (highlightedEntryElementRef.current = null);
-  const getEntriesHeight = () => entriesHeightRef.current;
-  const setEntriesHeight = (height) => (entriesHeightRef.current = height);
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -201,6 +199,7 @@ function ZipManager() {
     highlightedIds,
     navigation,
     dialogDisplayed,
+    entriesHeight,
     entriesElementHeight,
     entriesDeltaHeight,
     entriesElement,
@@ -212,7 +211,6 @@ function ZipManager() {
     setEntriesElementHeight,
     setEntriesDeltaHeight,
     setClickedButtonName,
-    getEntriesHeight,
     getHighlightedEntryElement,
     getOptions,
     modifierKeyPressed,
