@@ -91,20 +91,18 @@ function ZipManager() {
   const [musicData, setMusicData] = useState({
     frequencyData: []
   });
+  const [playerActive, setPlayerActive] = useState(false);
 
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
   const entriesHeightRef = useRef(1);
-  const playerActiveRef = useRef(false);
 
   const entriesElement = entriesElementRef.current;
-
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () =>
     (highlightedEntryElementRef.current = null);
   const getEntriesHeight = () => entriesHeightRef.current;
   const setEntriesHeight = (height) => (entriesHeightRef.current = height);
-  const setPlayerActive = (active) => (playerActiveRef.current = active);
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -512,10 +510,10 @@ function ZipManager() {
         hidden={hiddenInfobar}
         theme={theme}
         musicData={musicData}
+        playerActive={playerActive}
         onPlayMusic={playMusic}
         onStopMusic={stopMusic}
         onSetTheme={setTheme}
-        playerActiveRef={playerActiveRef}
         constants={constants}
         messages={messages}
       />

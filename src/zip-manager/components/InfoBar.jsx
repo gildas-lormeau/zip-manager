@@ -6,10 +6,10 @@ function InfoBar({
   hidden,
   theme,
   musicData,
+  playerActive,
   onPlayMusic,
   onStopMusic,
   onSetTheme,
-  playerActiveRef,
   constants,
   messages
 }) {
@@ -25,8 +25,6 @@ function InfoBar({
   };
 
   const [iconPlayer, setIconPlayer] = useState(PLAYER_PAUSED);
-
-  const musicPlayerActive = playerActiveRef.current;
 
   function handleChangeAccentColor(accentColor) {
     onSetTheme({ accentColor });
@@ -44,7 +42,7 @@ function InfoBar({
       <footer className="info-bar">
         <div
           className={
-            "source-link" + (musicPlayerActive ? " player-active" : "")
+            "source-link" + (playerActive ? " player-active" : "")
           }
         >
           <span className="label">
@@ -78,7 +76,7 @@ function InfoBar({
           </span>
           <span>
             <MusicPlayerButton
-              musicPlayerActive={musicPlayerActive}
+              playerActive={playerActive}
               iconPlayer={iconPlayer}
               onSetIconPlayer={handleChangeIconPlayer}
               onPlayMusic={onPlayMusic}
@@ -106,7 +104,7 @@ function InfoBar({
           <MusicVisualizer
             theme={theme}
             musicData={musicData}
-            musicPlayerActive={musicPlayerActive}
+            playerActive={playerActive}
             constants={constants}
           />
         </div>
@@ -147,14 +145,14 @@ function AccentColorPickerButton({
 }
 
 function MusicPlayerButton({
-  musicPlayerActive,
+  playerActive,
   iconPlayer,
   onPlayMusic,
   onStopMusic,
   onSetIconPlayer
 }) {
   function handlePlayButtonClick() {
-    if (musicPlayerActive) {
+    if (playerActive) {
       onStopMusic();
       onSetIconPlayer(true);
     } else {
@@ -179,7 +177,7 @@ function MusicPlayerButton({
 function MusicVisualizer({
   theme,
   musicData,
-  musicPlayerActive,
+  playerActive,
   constants
 }) {
   const CANVAS_WIDTH = 128;
@@ -217,7 +215,7 @@ function MusicVisualizer({
       }
       const context = audioContextRef.current;
       context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
-      if (musicPlayerActive) {
+      if (playerActive) {
         musicData.frequencyData.forEach((byteTimeDomain, index) => {
           const barHeight =
             (CANVAS_BLOCK_OFFSET - byteTimeDomain) /
@@ -232,7 +230,7 @@ function MusicVisualizer({
         });
       }
     }
-  }, [musicPlayerActive, musicData]);
+  }, [playerActive, musicData]);
   return (
     <canvas
       ref={canvasRef}
