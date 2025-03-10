@@ -19,9 +19,9 @@ function getEventHandlers({
     }
   }
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event, resetHighlightedEntryElement) {
     if (!dialogDisplayed) {
-      onEntriesKeyDown(event);
+      onEntriesKeyDown(event, resetHighlightedEntryElement);
       onHighlightedEntriesKeyDown(event);
       onSelectedFolderKeyDown(event);
     }

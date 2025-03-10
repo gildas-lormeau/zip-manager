@@ -10,14 +10,12 @@ function getEntriesFeatures({
   entriesElementHeight,
   entriesDeltaHeight,
   setHighlightedIds,
-  resetHighlightedEntryElement,
   setNavigation,
   setOptions,
   setEntriesHeight,
   setEntriesElementHeight,
   setEntriesDeltaHeight,
   setClickedButtonName,
-  getHighlightedEntryElement,
   getOptions,
   modifierKeyPressed,
   documentService,
@@ -40,8 +38,7 @@ function getEntriesFeatures({
     return documentService.getHeight(entriesElement);
   }
 
-  function getHightlightedEntryHeight() {
-    const highlightedEntryElement = getHighlightedEntryElement();
+  function getHightlightedEntryHeight(highlightedEntryElement) {
     if (highlightedEntryElement) {
       return documentService.getRowHeight(highlightedEntryElement);
     }
@@ -125,7 +122,7 @@ function getEntriesFeatures({
     );
   }
 
-  function toggle(entry) {
+  function toggle(resetHighlightedEntryElement, entry) {
     let newIds = getToggledHighlightedIds(highlightedIds, entry);
     setNavigation(() => ({
       previousHighlight: entry,
@@ -189,11 +186,11 @@ function getEntriesFeatures({
     return highlightedIds;
   }
 
-  function togglePrevious() {
+  function togglePrevious(resetHighlightedEntryElement) {
     if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       if (navigation.direction === 1) {
-        toggle(navigation.previousHighlight);
+        toggle(resetHighlightedEntryElement, navigation.previousHighlight);
       } else if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
         if (
@@ -201,10 +198,10 @@ function getEntriesFeatures({
           highlightedIds.includes(previousEntry.id)
         ) {
           if (indexEntry > 1) {
-            toggle(entries[indexEntry - 2]);
+            toggle(resetHighlightedEntryElement, entries[indexEntry - 2]);
           }
         } else {
-          toggle(previousEntry);
+          toggle(resetHighlightedEntryElement, previousEntry);
         }
       }
       setNavigation((navigation) => ({
@@ -214,11 +211,11 @@ function getEntriesFeatures({
     }
   }
 
-  function toggleNext() {
+  function toggleNext(resetHighlightedEntryElement) {
     if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       if (navigation.direction === -1) {
-        toggle(navigation.previousHighlight);
+        toggle(resetHighlightedEntryElement, navigation.previousHighlight);
       } else if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
         if (
@@ -226,10 +223,10 @@ function getEntriesFeatures({
           highlightedIds.includes(nextEntry.id)
         ) {
           if (indexEntry < entries.length - 2) {
-            toggle(entries[indexEntry + 2]);
+            toggle(resetHighlightedEntryElement, entries[indexEntry + 2]);
           }
         } else {
-          toggle(nextEntry);
+          toggle(resetHighlightedEntryElement, nextEntry);
         }
       }
       setNavigation((navigation) => ({
@@ -328,11 +325,11 @@ function getEntriesFeatures({
     setEntriesDeltaHeight(deltaY);
   }
 
-  function updateEntriesHeight(entriesElement) {
-    if (entriesElement && getHighlightedEntryElement()) {
+  function updateEntriesHeight(entriesElement, highlightedEntryElement) {
+    if (entriesElement && highlightedEntryElement) {
       setEntriesHeight(
         Math.max(
-          Math.ceil(getEntriesElementHeight(entriesElement) / getHightlightedEntryHeight()),
+          Math.ceil(getEntriesElementHeight(entriesElement) / getHightlightedEntryHeight(highlightedEntryElement)),
           1
         )
       );
@@ -385,9 +382,9 @@ function getEntriesFeatures({
     }
   }
 
-  function updateHighlightedEntries() {
-    if (getHighlightedEntryElement()) {
-      documentService.scrollIntoView(getHighlightedEntryElement());
+  function updateHighlightedEntries(highlightedEntryElement) {
+    if (highlightedEntryElement) {
+      documentService.scrollIntoView(highlightedEntryElement);
     }
   }
 
@@ -401,7 +398,7 @@ function getEntriesFeatures({
     }
   }
 
-  function onEntriesKeyDown(event) {
+  function onEntriesKeyDown(event, resetHighlightedEntryElement) {
     if (modifierKeyPressed(event)) {
       if (event.key === HIGHLIGHT_ALL_KEY) {
         event.preventDefault();
@@ -413,10 +410,10 @@ function getEntriesFeatures({
     if (!disabledNavigation) {
       if (event.shiftKey) {
         if (event.key === DOWN_KEY) {
-          toggleNext();
+          toggleNext(resetHighlightedEntryElement);
         }
         if (event.key === UP_KEY) {
-          togglePrevious();
+          togglePrevious(resetHighlightedEntryElement);
         }
         if (event.key === PAGE_UP_KEY) {
           togglePreviousPage();

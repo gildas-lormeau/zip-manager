@@ -203,14 +203,12 @@ function ZipManager() {
     entriesElementHeight,
     entriesDeltaHeight,
     setHighlightedIds,
-    resetHighlightedEntryElement,
     setNavigation,
     setOptions,
     setEntriesHeight,
     setEntriesElementHeight,
     setEntriesDeltaHeight,
     setClickedButtonName,
-    getHighlightedEntryElement,
     getOptions,
     modifierKeyPressed,
     documentService,
@@ -402,11 +400,11 @@ function ZipManager() {
   const appClassName = getAppClassName();
 
   useKeyUp(handleKeyUp);
-  useKeyDown(handleKeyDown);
+  useKeyDown(event => handleKeyDown(event, resetHighlightedEntryElement));
   usePageUnload(handlePageUnload);
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
-  useEffect(updateHighlightedEntries, [highlightedIds]);
+  useEffect(() => updateHighlightedEntries(getHighlightedEntryElement()), [highlightedIds]);
   useEffect(updateAccentColor, [theme.accentColor]);
   useEffect(updateSkin, [theme.skin]);
   useEffect(() => {
@@ -458,7 +456,7 @@ function ZipManager() {
           hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}
-          onToggle={toggle}
+          onToggle={() => toggle(resetHighlightedEntryElement)}
           onToggleRange={toggleRange}
           onEnter={enterEntry}
           onUpdateEntriesHeight={() => updateEntriesHeight(entriesElement)}
