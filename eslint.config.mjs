@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import react from "eslint-plugin-react";
+import reactCompiler from "eslint-plugin-react-compiler";
 
 export default [
   js.configs.recommended,
@@ -7,6 +8,7 @@ export default [
     files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
     plugins: {
       react,
+      "react-compiler": reactCompiler,
     },
     languageOptions: {
       ecmaVersion: 2020,
@@ -29,7 +31,8 @@ export default [
       "semi": ["warn", "always"],
       "no-console": ["warn"],
       "no-debugger": ["warn"],
-      "no-unused-vars": "warn"
+      "no-unused-vars": "warn",
+      "react-compiler/react-compiler": "error",
     },
     ignores: [
       "**/node_modules/",

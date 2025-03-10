@@ -29,8 +29,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-plugin-react-compiler": "^19.0.0-beta-bafa41b-20250307",
     "eslint": "^9.21.0",
     "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-compiler": "^19.0.0-beta-bafa41b-20250307",
     "vite": "^6.1.1",
     "vite-plugin-pwa": "^0.21.1"
   }

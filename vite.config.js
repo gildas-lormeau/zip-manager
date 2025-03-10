@@ -9,7 +9,13 @@ export default defineConfig(() => {
       outDir: "build"
     },
     plugins: [
-      react(),
+      react({
+        babel: {
+          plugins: [
+            ["babel-plugin-react-compiler"],
+          ],
+        }
+      }),
       VitePWA({
         registerType: "autoUpdate",
         strategies: "injectManifest",
