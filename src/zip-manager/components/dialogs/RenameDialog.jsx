@@ -12,7 +12,7 @@ function RenameDialog({ data, onRename, onClose, messages }) {
   }
 
   function onOpen() {
-    setFilename(data.filename);
+    setFilename(data?.filename);
   }
 
   function handleSubmit() {

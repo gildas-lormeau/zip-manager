@@ -14,11 +14,11 @@ function ChooseActionDialog({
   }
 
   function handleImportZipClick() {
-    onImportZipFile(data.files[0]);
+    onImportZipFile(data?.files[0]);
   }
 
   function handleAddFileClick() {
-    onAddFiles(data.files);
+    onAddFiles(data?.files);
   }
 
   function handleReset() {

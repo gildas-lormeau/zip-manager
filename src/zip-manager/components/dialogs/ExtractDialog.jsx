@@ -12,11 +12,11 @@ function ExtractDialog({ data, onExtract, onClose, messages }) {
   }
 
   function onOpen() {
-    setFilename(data.filename);
+    setFilename(data?.filename);
   }
 
   function handleSubmit() {
-    onExtract({ filename, entries: data.entries });
+    onExtract({ filename, entries: data?.entries });
   }
 
   function handleClose() {
