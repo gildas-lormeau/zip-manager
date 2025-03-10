@@ -98,7 +98,6 @@ function ZipManager() {
   const playerActiveRef = useRef(false);
 
   const entriesElement = entriesElementRef.current;
-  const musicPlayerActive = playerActiveRef.current;
 
   const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () =>
@@ -516,7 +515,7 @@ function ZipManager() {
         onPlayMusic={playMusic}
         onStopMusic={stopMusic}
         onSetTheme={setTheme}
-        musicPlayerActive={musicPlayerActive}
+        playerActiveRef={playerActiveRef}
         constants={constants}
         messages={messages}
       />

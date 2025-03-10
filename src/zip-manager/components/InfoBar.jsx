@@ -9,7 +9,7 @@ function InfoBar({
   onPlayMusic,
   onStopMusic,
   onSetTheme,
-  musicPlayerActive,
+  playerActiveRef,
   constants,
   messages
 }) {
@@ -25,6 +25,8 @@ function InfoBar({
   };
 
   const [iconPlayer, setIconPlayer] = useState(PLAYER_PAUSED);
+
+  const musicPlayerActive = playerActiveRef.current;
 
   function handleChangeAccentColor(accentColor) {
     onSetTheme({ accentColor });
