@@ -44,6 +44,10 @@ import {
 } from "./components/index.jsx";
 import { getMessages } from "./messages/index.js";
 import { getHooks } from "./hooks/hooks.js";
+const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
+  keyboardService,
+  windowService
+});
 
 const {
   getCommonFeatures,
@@ -385,10 +389,7 @@ function ZipManager() {
     messages
   });
 
-  const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
-    keyboardService,
-    windowService
-  });
+
 
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
