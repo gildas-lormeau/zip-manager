@@ -98,7 +98,7 @@ function ZipManager() {
   const entriesElementRef = useRef(null);
 
   const entriesElement = entriesElementRef.current;
-  const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
+  const highlightedEntryElement = highlightedEntryElementRef.current; 
   const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
@@ -403,7 +403,7 @@ function ZipManager() {
   usePageUnload(handlePageUnload);
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
-  useEffect(() => updateHighlightedEntries(getHighlightedEntryElement()), [highlightedIds]);
+  useEffect(() => updateHighlightedEntries(highlightedEntryElement), [highlightedIds]);
   useEffect(updateAccentColor, [theme.accentColor]);
   useEffect(updateSkin, [theme.skin]);
   useEffect(() => {
@@ -455,7 +455,7 @@ function ZipManager() {
           hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}
-          onToggle={entry => toggle(resetHighlightedEntryElement, entry)}
+          onToggle={entry => toggle(entry, resetHighlightedEntryElement)}
           onToggleRange={toggleRange}
           onEnter={enterEntry}
           onUpdateEntriesHeight={() => updateEntriesHeight(entriesElement)}

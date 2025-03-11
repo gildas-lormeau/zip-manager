@@ -122,7 +122,7 @@ function getEntriesFeatures({
     );
   }
 
-  function toggle(resetHighlightedEntryElement, entry) {
+  function toggle(entry, resetHighlightedEntryElement) {
     let newIds = getToggledHighlightedIds(highlightedIds, entry);
     setNavigation(() => ({
       previousHighlight: entry,
@@ -190,7 +190,7 @@ function getEntriesFeatures({
     if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       if (navigation.direction === 1) {
-        toggle(resetHighlightedEntryElement, navigation.previousHighlight);
+        toggle(navigation.previousHighlight, resetHighlightedEntryElement);
       } else if (indexEntry > 0) {
         const previousEntry = entries[indexEntry - 1];
         if (
@@ -198,10 +198,10 @@ function getEntriesFeatures({
           highlightedIds.includes(previousEntry.id)
         ) {
           if (indexEntry > 1) {
-            toggle(resetHighlightedEntryElement, entries[indexEntry - 2]);
+            toggle(entries[indexEntry - 2], resetHighlightedEntryElement);
           }
         } else {
-          toggle(resetHighlightedEntryElement, previousEntry);
+          toggle(previousEntry, resetHighlightedEntryElement);
         }
       }
       setNavigation((navigation) => ({
@@ -215,7 +215,7 @@ function getEntriesFeatures({
     if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
       if (navigation.direction === -1) {
-        toggle(resetHighlightedEntryElement, navigation.previousHighlight);
+        toggle(navigation.previousHighlight, resetHighlightedEntryElement);
       } else if (indexEntry < entries.length - 1) {
         const nextEntry = entries[indexEntry + 1];
         if (
@@ -223,10 +223,10 @@ function getEntriesFeatures({
           highlightedIds.includes(nextEntry.id)
         ) {
           if (indexEntry < entries.length - 2) {
-            toggle(resetHighlightedEntryElement, entries[indexEntry + 2]);
+            toggle(entries[indexEntry + 2], resetHighlightedEntryElement);
           }
         } else {
-          toggle(resetHighlightedEntryElement, nextEntry);
+          toggle(nextEntry, resetHighlightedEntryElement);
         }
       }
       setNavigation((navigation) => ({
