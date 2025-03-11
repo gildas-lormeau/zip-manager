@@ -5,7 +5,7 @@ import reactCompiler from "eslint-plugin-react-compiler";
 export default [
   js.configs.recommended,
   {
-    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+    files: ["**/*.{js,jsx}"],
     plugins: {
       react,
       "react-compiler": reactCompiler,
