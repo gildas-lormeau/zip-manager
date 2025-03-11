@@ -8,6 +8,7 @@ function getValue(key) {
   const value = localStorage.getItem(key);
   try {
     return JSON.parse(value);
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     return value;
   }

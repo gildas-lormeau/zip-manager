@@ -1,4 +1,4 @@
-/* global Intl, navigator */
+/* global navigator */
 
 const DEFAULT_LANGUAGE_ID = "en-US";
 const LANGUAGE_IDS = [DEFAULT_LANGUAGE_ID, "de-DE", "es-ES", "fr-FR", "it-IT", "pt-PT"];
