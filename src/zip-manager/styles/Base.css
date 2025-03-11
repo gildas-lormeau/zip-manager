@@ -27,67 +27,48 @@
 }
 
 @supports (color: color-mix(in srgb, red 0%, red)) {
+
   :root,
   ::backdrop {
     --page-color-light: color-mix(in srgb, var(--accent-color) 7.5%, white);
     --bg-color-light: color-mix(in srgb, var(--accent-color) 5%, white);
-    --dark-accent-color-light: color-mix(
-      in srgb,
-      var(--accent-color) 60%,
-      var(--bg-color)
-    );
-    --darker-accent-color-light: color-mix(
-      in srgb,
-      var(--accent-color) 30%,
-      var(--bg-color)
-    );
+    --dark-accent-color-light: color-mix(in srgb,
+        var(--accent-color) 60%,
+        var(--bg-color));
+    --darker-accent-color-light: color-mix(in srgb,
+        var(--accent-color) 30%,
+        var(--bg-color));
     --text-color-light: color-mix(in srgb, var(--accent-color) 90%, black);
-    --highlighted-text-color-light: color-mix(
-      in srgb,
-      var(--accent-color) 10%,
-      white
-    );
+    --highlighted-text-color-light: color-mix(in srgb,
+        var(--accent-color) 10%,
+        white);
     --button-color-light: color-mix(in srgb, var(--accent-color) 10%, white);
-    --disabled-button-color-light: color-mix(
-      in srgb,
-      var(--accent-color) 50%,
-      gray
-    );
-    --bg-disabled-button-color-light: color-mix(
-      in srgb,
-      var(--accent-color) 25%,
-      white
-    );
+    --disabled-button-color-light: color-mix(in srgb,
+        var(--accent-color) 50%,
+        gray);
+    --bg-disabled-button-color-light: color-mix(in srgb,
+        var(--accent-color) 25%,
+        white);
     --outline-color-dark: color-mix(in srgb, var(--accent-color) 25%, black);
     --page-color-dark: color-mix(in srgb, var(--accent-color) 7.5%, black);
     --bg-color-dark: color-mix(in srgb, var(--accent-color) 5%, black);
-    --dark-accent-color-dark: color-mix(
-      in srgb,
-      var(--accent-color) 60%,
-      var(--bg-color)
-    );
-    --darker-accent-color-dark: color-mix(
-      in srgb,
-      var(--accent-color) 30%,
-      var(--bg-color)
-    );
+    --dark-accent-color-dark: color-mix(in srgb,
+        var(--accent-color) 60%,
+        var(--bg-color));
+    --darker-accent-color-dark: color-mix(in srgb,
+        var(--accent-color) 30%,
+        var(--bg-color));
     --text-color-dark: color-mix(in srgb, var(--accent-color) 90%, white);
-    --highlighted-text-color-dark: color-mix(
-      in srgb,
-      var(--accent-color) 10%,
-      black
-    );
+    --highlighted-text-color-dark: color-mix(in srgb,
+        var(--accent-color) 10%,
+        black);
     --button-color-dark: color-mix(in srgb, var(--accent-color) 10%, black);
-    --disabled-button-color-dark: color-mix(
-      in srgb,
-      var(--accent-color) 50%,
-      gray
-    );
-    --bg-disabled-button-color-dark: color-mix(
-      in srgb,
-      var(--accent-color) 25%,
-      black
-    );
+    --disabled-button-color-dark: color-mix(in srgb,
+        var(--accent-color) 50%,
+        gray);
+    --bg-disabled-button-color-dark: color-mix(in srgb,
+        var(--accent-color) 25%,
+        black);
     --outline-color-dark: color-mix(in srgb, var(--accent-color) 25%, white);
   }
 }
@@ -125,6 +106,7 @@
 }
 
 @media (prefers-color-scheme: light) {
+
   :root,
   ::backdrop {
     --page-color: var(--page-color-light);
@@ -143,6 +125,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
+
   :root,
   ::backdrop {
     --page-color: var(--page-color-dark);
@@ -172,13 +155,9 @@
   --large-gap-inline-size: calc(var(--gap-inline-size) * 2);
   --large-gap-block-size: calc(var(--gap-block-size) * 2);
   --button-padding-inline-size: 1.5ch;
-  --small-button-padding-inline-size: calc(
-    var(--button-padding-inline-size) / 1.5
-  );
+  --small-button-padding-inline-size: calc(var(--button-padding-inline-size) / 1.5);
   --button-padding-block-size: 0.25em;
-  --small-button-padding-block-size: calc(
-    var(--button-padding-block-size) / 1.5
-  );
+  --small-button-padding-block-size: calc(var(--button-padding-block-size) / 1.5);
   --list-item-padding-inline-size: var(--small-button-padding-inline-size);
   --list-item-padding-block-size: calc(var(--button-padding-block-size) / 2);
   --border-width: 0.05em;
@@ -199,7 +178,9 @@
   overscroll-behavior: none;
 }
 
-button, input, select {
+button,
+input,
+select {
   font-size: inherit;
 }
 
@@ -253,6 +234,7 @@ button:not([disabled]):hover {
   0% {
     outline: 0;
   }
+
   50% {
     filter: brightness(var(--brightness-hover));
     outline: var(--outline-width) solid var(--outline-color);

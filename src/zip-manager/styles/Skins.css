@@ -15,10 +15,7 @@
   --list-item-padding-block-size: 0;
   --outline-color: var(--accent-color);
   --outline-width: 0;
-  --dialog-margin-block-start: calc(
-    var(--gap-block-size) + var(--small-gap-block-size) -
-      var(--smaller-gap-block-size) / 2
-  );
+  --dialog-margin-block-start: calc(var(--gap-block-size) + var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos * {
@@ -61,68 +58,47 @@
 
 .skin-dos main::before {
   top: var(--smaller-gap-block-size);
-  right: calc(
-    -1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size)
-  );
+  right: calc(-1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size));
   inline-size: var(--small-gap-inline-size);
-  block-size: calc(
-    100% + var(--small-gap-block-size) - var(--smaller-gap-block-size) +
-      var(--smaller-gap-block-size) / 2
-  );
+  block-size: calc(100% + var(--small-gap-block-size) - var(--smaller-gap-block-size) + var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos main:after {
   left: var(--smaller-gap-inline-size);
-  bottom: calc(
-    -1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  bottom: calc(-1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
   inline-size: calc(100% + var(--small-gap-inline-size));
-  block-size: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  block-size: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos dialog::before {
-  right: calc(
-    -1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size)
-  );
+  right: calc(-1 * var(--smaller-gap-inline-size) - var(--small-gap-inline-size));
   inline-size: var(--small-gap-inline-size);
-  block-size: calc(
-    100% + var(--small-gap-block-size) - var(--smaller-gap-block-size)
-  );
+  block-size: calc(100% + var(--small-gap-block-size) - var(--smaller-gap-block-size));
 }
 
 .skin-dos dialog::after {
   left: var(--smaller-gap-inline-size);
-  bottom: calc(
-    -1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  bottom: calc(-1 * var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
   inline-size: calc(100% + var(--small-gap-inline-size));
-  block-size: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  block-size: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos main {
-  margin-block-start: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  margin-block-start: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
   min-inline-size: min(85dvw, 132ch);
   inline-size: min(85dvw, 132ch);
   inline-size: min(round(up, 85dvw, 1ch), 132ch);
 }
 
 .skin-dos main,
-.skin-dos main > *,
+.skin-dos main>*,
 .skin-dos dialog {
   border-style: double;
 }
 
-.skin-dos main > * {
+.skin-dos main>* {
   padding-inline: var(--smaller-gap-inline-size);
-  padding-block: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  padding-block: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
   border-block-end-width: var(--smaller-gap-block-size);
 }
 
@@ -201,9 +177,7 @@
 
 .skin-dos .entries {
   padding-block-start: 0;
-  margin-block-start: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  margin-block-start: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos .entries li {
@@ -244,9 +218,7 @@
   inline-size: min(75dvw, 50ch);
   inline-size: min(round(up, 75dvw, 1ch), 50ch);
   padding-inline: var(--smaller-gap-inline-size);
-  padding-block: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2
-  );
+  padding-block: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos dialog form,
@@ -262,18 +234,13 @@
 
 .skin-dos dialog form .dialog-title {
   padding-inline-start: var(--small-gap-inline-size);
-  padding-block-end: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4
-  );
-  border-block-end: solid var(--accent-color)
-    calc(var(--smaller-gap-block-size) / 2);
+  padding-block-end: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4);
+  border-block-end: solid var(--accent-color) calc(var(--smaller-gap-block-size) / 2);
 }
 
 .skin-dos dialog form p {
   row-gap: var(--gap-block-size);
-  padding-block-start: calc(
-    var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4
-  );
+  padding-block-start: calc(var(--small-gap-block-size) - var(--smaller-gap-block-size) / 4);
   padding-block-end: 0;
 }
 
@@ -332,6 +299,7 @@
 }
 
 @media (display-mode: standalone) or (orientation: portrait) or (max-aspect-ratio: 7/5) {
+
   .skin-dos .main-container:not(.hidden-footer) .downloads,
   .main-container.hidden-downloads:not(.hidden-footer) .button-bar-bottom {
     border-block-end-width: var(--smaller-gap-block-size);
@@ -349,12 +317,12 @@
     content: none;
   }
 
-  .skin-dos main > :first-child {
+  .skin-dos main> :first-child {
     padding-block-start: var(--small-gap-block-size);
     padding-inline: var(--small-gap-inline-size);
   }
 
-  .skin-dos main > * {
+  .skin-dos main>* {
     padding-inline: var(--small-gap-inline-size);
   }
 
@@ -368,8 +336,6 @@
   }
 
   .skin-dos dialog {
-    margin-block-start: calc(
-      var(--gap-block-size) - var(--smaller-gap-block-size) / 2
-    );
+    margin-block-start: calc(var(--gap-block-size) - var(--smaller-gap-block-size) / 2);
   }
 }

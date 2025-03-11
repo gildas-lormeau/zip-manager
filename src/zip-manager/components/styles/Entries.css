@@ -74,9 +74,7 @@
 @media (hover: hover) and (pointer: fine) {
   .entries ol {
     --no-entries-outline-width: 1px;
-    --no-entries-outline-width-negative: calc(
-      var(--no-entries-outline-width) * -1
-    );
+    --no-entries-outline-width-negative: calc(var(--no-entries-outline-width) * -1);
   }
 
   .entries ol:empty {
@@ -92,19 +90,15 @@
     font-weight: bold;
     font-size: 2em;
     line-height: 1.5em;
-    text-shadow: var(--no-entries-outline-width-negative)
-        var(--no-entries-outline-width-negative) 0 var(--accent-color),
+    text-shadow: var(--no-entries-outline-width-negative) var(--no-entries-outline-width-negative) 0 var(--accent-color),
       var(--no-entries-outline-width-negative) 0 0 var(--accent-color),
-      var(--no-entries-outline-width-negative) var(--no-entries-outline-width) 0
-        var(--accent-color),
+      var(--no-entries-outline-width-negative) var(--no-entries-outline-width) 0 var(--accent-color),
       0 var(--no-entries-outline-width-negative) 0 var(--accent-color),
       0 0 0 var(--accent-color),
       0 var(--no-entries-outline-width) 0 var(--accent-color),
-      var(--no-entries-outline-width) var(--no-entries-outline-width-negative) 0
-        var(--accent-color),
+      var(--no-entries-outline-width) var(--no-entries-outline-width-negative) 0 var(--accent-color),
       var(--no-entries-outline-width) 0 0 var(--accent-color),
-      var(--no-entries-outline-width) var(--no-entries-outline-width) 0
-        var(--accent-color);
+      var(--no-entries-outline-width) var(--no-entries-outline-width) 0 var(--accent-color);
     color: var(--bg-color);
     opacity: 0.5;
   }

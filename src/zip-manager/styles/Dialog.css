@@ -31,10 +31,7 @@ dialog select {
   box-sizing: content-box;
   caret-color: var(--accent-color);
   align-self: baseline;
-  inline-size: calc(
-    100% - 2 *
-      (var(--gap-inline-size) + var(--border-width) + var(--outline-width))
-  );
+  inline-size: calc(100% - 2 * (var(--gap-inline-size) + var(--border-width) + var(--outline-width)));
   align-self: end;
 }
 
