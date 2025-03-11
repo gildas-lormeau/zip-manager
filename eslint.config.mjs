@@ -14,11 +14,11 @@ export default [
       ecmaVersion: 2020,
       sourceType: "module",
       globals: {
-        console: "readonly",
+        console: "readonly"
       },
       parserOptions: {
         ecmaFeatures: {
-          jsx: true,
+          jsx: true
         }
       }
     },
@@ -32,7 +32,7 @@ export default [
       "no-console": ["warn"],
       "no-debugger": ["warn"],
       "no-unused-vars": "warn",
-      "react-compiler/react-compiler": "error",
+      "react-compiler/react-compiler": "error"
     },
     ignores: [
       "**/node_modules/",
