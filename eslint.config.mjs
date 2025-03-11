@@ -8,7 +8,7 @@ export default [
     files: ["**/*.{js,jsx}"],
     plugins: {
       react,
-      "react-compiler": reactCompiler,
+      "react-compiler": reactCompiler
     },
     languageOptions: {
       ecmaVersion: 2020,
