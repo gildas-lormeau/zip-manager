@@ -72,9 +72,6 @@ function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
   const [selectedFolder, setSelectedFolder] = useState(root);
   const [entries, setEntries] = useState([]);
-  const [entriesHeight, setEntriesHeight] = useState(1);
-  const [entriesElementHeight, setEntriesElementHeight] = useState(0);
-  const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
   const [navigation, setNavigation] = useState({
     previousHighlight: null,
@@ -86,6 +83,10 @@ function ZipManager() {
     path: [root],
     index: 0
   });
+
+  const [entriesHeight, setEntriesHeight] = useState(1);
+  const [entriesElementHeight, setEntriesElementHeight] = useState(0);
+  const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [dialogs, setDialogs] = useState({});
   const [clickedButtonName, setClickedButtonName] = useState(null);
   const [theme, setTheme] = useState({});
@@ -96,7 +97,6 @@ function ZipManager() {
 
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
-
   const entriesElement = entriesElementRef.current;
   const highlightedEntryElement = highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
