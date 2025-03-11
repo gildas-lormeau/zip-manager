@@ -29,8 +29,8 @@ export default [
       "linebreak-style": ["error", "unix"],
       "quotes": ["error", "double"],
       "semi": ["warn", "always"],
-      "no-console": ["warn"],
-      "no-debugger": ["warn"],
+      "no-console": "warn",
+      "no-debugger": "warn",
       "no-unused-vars": "warn",
       "react-compiler/react-compiler": "error"
     },
