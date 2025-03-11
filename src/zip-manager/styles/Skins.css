@@ -359,7 +359,7 @@
   }
 
   .skin-dos .info-bar {
-    margin-block-start: var(--small-gap-block-size);
+    margin-block-start: 0;
     padding-block: var(--small-gap-inline-size);
   }
 
