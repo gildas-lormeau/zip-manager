@@ -89,8 +89,8 @@ function getAppFeatures({
   }
 
   return {
-    enterEntry,
     initAppFeatures,
+    enterEntry,
     updateZipFilesystem,
     resetClickedButtonName,
     getAppClassName,

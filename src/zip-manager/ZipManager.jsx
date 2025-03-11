@@ -333,11 +333,11 @@ function ZipManager() {
   });
 
   const {
+    initMiscFeatures,
     playMusic,
     stopMusic,
     updateAccentColor,
     updateSkin,
-    initMiscFeatures
   } = getMiscFeatures({
     theme,
     setOptions,
@@ -352,8 +352,8 @@ function ZipManager() {
   });
 
   const {
-    enterEntry,
     initAppFeatures,
+    enterEntry,
     updateZipFilesystem,
     resetClickedButtonName,
     getAppClassName,

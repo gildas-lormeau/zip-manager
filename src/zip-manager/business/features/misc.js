@@ -55,11 +55,11 @@ function getMiscFeatures({
   }
 
   return {
+    initMiscFeatures,
     playMusic,
     stopMusic,
     updateAccentColor,
-    updateSkin,
-    initMiscFeatures
+    updateSkin
   };
 }
 
