@@ -419,7 +419,6 @@ function ZipManager() {
           disabledResetButton={disabledReset}
           clickedButtonName={clickedButtonName}
           onCreateFolder={openPromptCreateFolder}
-          onAddFiles={addFiles}
           onImportZipFile={importZipFile}
           onExportZip={openPromptExportZip}
           onReset={openConfirmReset}
