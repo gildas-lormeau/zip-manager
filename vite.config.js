@@ -6,7 +6,8 @@ export default defineConfig(() => {
   return {
     base: "./",
     build: {
-      outDir: "build"
+      outDir: "build",
+      target: "es2020"
     },
     plugins: [
       react({
