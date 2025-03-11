@@ -93,7 +93,7 @@ function ZipManager() {
     frequencyData: []
   });
   const [playerActive, setPlayerActive] = useState(false);
-  
+
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
 
@@ -365,6 +365,7 @@ function ZipManager() {
     selectedFolder,
     hiddenInfobar,
     hiddenDownloadManager,
+    modifierKeyPressed,
     setNavigation,
     setSelectedFolder,
     setHighlightedIds,
@@ -373,7 +374,6 @@ function ZipManager() {
     goIntoFolder,
     openPromptExtract,
     refreshSelectedFolder,
-    modifierKeyPressed,
     stylesheetService,
     documentService,
     i18nService,
