@@ -9,6 +9,7 @@ function getEntriesFeatures({
   entriesHeight,
   entriesElementHeight,
   entriesDeltaHeight,
+  modifierKeyPressed,
   setHighlightedIds,
   setNavigation,
   setOptions,
@@ -17,7 +18,6 @@ function getEntriesFeatures({
   setEntriesDeltaHeight,
   setClickedButtonName,
   getOptions,
-  modifierKeyPressed,
   documentService,
   windowService,
   constants

@@ -201,6 +201,7 @@ function ZipManager() {
     entriesHeight,
     entriesElementHeight,
     entriesDeltaHeight,
+    modifierKeyPressed,
     setHighlightedIds,
     setNavigation,
     setOptions,
@@ -209,7 +210,6 @@ function ZipManager() {
     setEntriesDeltaHeight,
     setClickedButtonName,
     getOptions,
-    modifierKeyPressed,
     documentService,
     windowService,
     constants
@@ -229,12 +229,12 @@ function ZipManager() {
     highlightedEntry,
     highlightedEntries,
     selectedFolder,
+    modifierKeyPressed,
     setSelectedFolder,
     setEntries,
     setHistory,
     setHighlightedIds,
     setClickedButtonName,
-    modifierKeyPressed,
     constants
   });
 
@@ -263,6 +263,7 @@ function ZipManager() {
     rootZipFilename,
     clipboardData,
     dialogs,
+    modifierKeyPressed,
     setHighlightedIds,
     setClipboardData,
     setDialogs,
@@ -275,7 +276,6 @@ function ZipManager() {
     filesystemService,
     fileHandlersService,
     shareTargetService,
-    modifierKeyPressed,
     constants
   });
 
@@ -306,6 +306,7 @@ function ZipManager() {
     highlightedEntries,
     navigation,
     dialogs,
+    modifierKeyPressed,
     setClipboardData,
     setHighlightedIds,
     setNavigation,
@@ -317,7 +318,6 @@ function ZipManager() {
     getOptions,
     openDisplayError,
     filesystemService,
-    modifierKeyPressed,
     constants
   });
 

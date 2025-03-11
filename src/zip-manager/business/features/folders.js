@@ -4,13 +4,13 @@ function getFoldersFeatures({
   history,
   highlightedEntry,
   highlightedEntries,
+  modifierKeyPressed,
   selectedFolder,
   setSelectedFolder,
   setEntries,
   setHistory,
   setHighlightedIds,
   setClickedButtonName,
-  modifierKeyPressed,
   constants
 }) {
   const {

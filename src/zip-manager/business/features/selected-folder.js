@@ -6,6 +6,7 @@ function getSelectedFolderFeatures({
   rootZipFilename,
   clipboardData,
   dialogs,
+  modifierKeyPressed,
   setHighlightedIds,
   setClipboardData,
   setDialogs,
@@ -18,7 +19,6 @@ function getSelectedFolderFeatures({
   filesystemService,
   fileHandlersService,
   shareTargetService,
-  modifierKeyPressed,
   constants
 }) {
   const {

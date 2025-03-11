@@ -11,6 +11,7 @@ function getHighlightedEntriesFeatures({
   highlightedEntries,
   navigation,
   dialogs,
+  modifierKeyPressed,
   setClipboardData,
   setHighlightedIds,
   setNavigation,
@@ -22,7 +23,6 @@ function getHighlightedEntriesFeatures({
   getOptions,
   openDisplayError,
   filesystemService,
-  modifierKeyPressed,
   constants
 }) {
   const {
