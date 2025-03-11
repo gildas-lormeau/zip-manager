@@ -72,6 +72,7 @@ function ZipManager() {
   const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
   const [selectedFolder, setSelectedFolder] = useState(root);
   const [entries, setEntries] = useState([]);
+  const [entriesHeight, setEntriesHeight] = useState(1);
   const [entriesElementHeight, setEntriesElementHeight] = useState(0);
   const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
   const [highlightedIds, setHighlightedIds] = useState([]);
@@ -92,8 +93,7 @@ function ZipManager() {
     frequencyData: []
   });
   const [playerActive, setPlayerActive] = useState(false);
-  const [entriesHeight, setEntriesHeight] = useState(1);
-
+  
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
 
