@@ -326,7 +326,7 @@ function Button({
   }
 
   useEffect(() => {
-    if (clickedButtonName && clickedButtonName === name) {
+    if (clickedButtonName === name) {
       setClassName("flashing-button");
     }
   });

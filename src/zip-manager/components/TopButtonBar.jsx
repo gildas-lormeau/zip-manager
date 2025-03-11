@@ -29,9 +29,10 @@ function TopButtonBar({
   }
 
   function handleDrop(event) {
-    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+    const file = event.dataTransfer?.files[0];
+    if (file) {
       event.preventDefault();
-      onImportZipFile(event.dataTransfer.files[0]);
+      onImportZipFile(file);
     }
   }
 

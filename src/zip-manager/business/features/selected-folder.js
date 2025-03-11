@@ -194,10 +194,10 @@ function getSelectedFolderFeatures({
       } catch (error) {
         cleanup(importedEntries);
         const entry = error?.cause?.entry;
-        const paths = entry && entry.filename.split("/");
+        const paths = entry?.filename.split("/");
         const message =
           error.message +
-          (paths && paths.length ? " (" + paths.pop() + ")" : "");
+          (paths?.length ? " (" + paths.pop() + ")" : "");
         openDisplayError(message);
       } finally {
         addedEntries = selectedFolder.children.filter((entry) =>

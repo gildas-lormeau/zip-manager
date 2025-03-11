@@ -110,7 +110,7 @@ function getUIState({
 
 function getAncestors(folder) {
   const ancestors = [];
-  while (folder && folder.parent) {
+  while (folder?.parent) {
     ancestors.unshift(folder);
     folder = folder.parent;
   }
