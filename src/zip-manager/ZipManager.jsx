@@ -98,7 +98,7 @@ function ZipManager() {
   const entriesElementRef = useRef(null);
 
   const entriesElement = entriesElementRef.current;
-  const highlightedEntryElement = highlightedEntryElementRef.current; 
+  const highlightedEntryElement = highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
@@ -380,8 +380,6 @@ function ZipManager() {
     constants,
     messages
   });
-
-
 
   const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
