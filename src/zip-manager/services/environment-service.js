@@ -7,7 +7,6 @@ function getMaximumWorkers() {
 }
 
 function isMacOSPlatform() {
-  // eslint-disable-next-line no-unused-expressions
   const { platform } = navigator;
   return platform !== undefined && MACOS_PLATFORMS.includes(platform);
 }
