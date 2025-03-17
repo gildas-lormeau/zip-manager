@@ -98,7 +98,7 @@ function ZipManager() {
   const highlightedEntryElementRef = useRef(null);
   const entriesElementRef = useRef(null);
   const entriesElement = entriesElementRef.current;
-  const highlightedEntryElement = highlightedEntryElementRef.current;
+  const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
   const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
@@ -401,7 +401,7 @@ function ZipManager() {
   usePageUnload(handlePageUnload);
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
-  useEffect(() => updateHighlightedEntries(highlightedEntryElement), [highlightedIds]);
+  useEffect(() => updateHighlightedEntries(getHighlightedEntryElement()), [highlightedIds]);
   useEffect(updateAccentColor, [theme.accentColor]);
   useEffect(updateSkin, [theme.skin]);
   useEffect(() => {
