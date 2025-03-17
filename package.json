@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@zip.js/zip.js": "^2.7.57",
+    "eslint-plugin-react-refresh": "^0.4.19",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "workbox-core": "^7.3.0",
