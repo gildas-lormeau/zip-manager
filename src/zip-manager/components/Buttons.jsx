@@ -329,7 +329,7 @@ function Button({
     if (clickedButtonName && clickedButtonName === name) {
       setClassName("flashing-button");
     }
-  });
+  }, [clickedButtonName]);
   return (
     <button
       className={className}
