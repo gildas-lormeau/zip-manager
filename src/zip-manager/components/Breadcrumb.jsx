@@ -29,10 +29,10 @@ function Breadcrumb({
 }
 
 function BreadcrumbItem({
-  folder,
-  onGoIntoFolder,
   disabled,
+  folder,
   isSelectedFolder,
+  onGoIntoFolder,
   constants,
   messages
 }) {
