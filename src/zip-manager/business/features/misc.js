@@ -37,6 +37,7 @@ function getMiscFeatures({
   }
 
   function stopMusic() {
+    setMusicData({ frequencyData: [] });
     setPlayerActive(false);
     musicService.stop();
   }

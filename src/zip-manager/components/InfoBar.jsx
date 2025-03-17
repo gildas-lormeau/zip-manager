@@ -105,6 +105,7 @@ function InfoBar({
             theme={theme}
             musicData={musicData}
             playerActive={playerActive}
+            onStopMusic={onStopMusic}
             constants={constants}
           />
         </div>
@@ -178,6 +179,7 @@ function MusicVisualizer({
   theme,
   musicData,
   playerActive,
+  onStopMusic,
   constants
 }) {
   const CANVAS_WIDTH = 128;
@@ -228,6 +230,8 @@ function MusicVisualizer({
             barHeight
           );
         });
+      } else {
+        onStopMusic();
       }
     }
   }, [playerActive, musicData]);
