@@ -230,8 +230,6 @@ function MusicVisualizer({
             barHeight
           );
         });
-      } else {
-        onStopMusic();
       }
     }
   }, [playerActive, musicData]);
