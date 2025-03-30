@@ -35,6 +35,6 @@
     "eslint-plugin-react-compiler": "^19.0.0-beta-aeaed83-20250323",
     "eslint-plugin-react-refresh": "^0.4.19",
     "vite": "^6.2.3",
-    "vite-plugin-pwa": "^0.21.2"
+    "vite-plugin-pwa": "^1.0.0"
   }
 }
