@@ -162,7 +162,7 @@ function Entries({
               <li
                 key={entry.id}
                 ref={
-                  highlightedIds[highlightedIds.length - 1] === entry.id
+                  highlightedIds.at(-1) === entry.id
                     ? highlightedEntryElementRef
                     : null
                 }
@@ -279,10 +279,10 @@ function EntryName({
       const uncompressedSize = getEntrySize(entry);
       tooltip.push(
         LAST_MOD_DATE_LABEL +
-          " " +
-          i18n.formatDate(
-            lastModified === undefined ? lastModDate : new Date(lastModified)
-          )
+        " " +
+        i18n.formatDate(
+          lastModified === undefined ? lastModDate : new Date(lastModified)
+        )
       );
       if (uncompressedSize && compressedSize) {
         tooltip.push(
@@ -292,8 +292,8 @@ function EntryName({
       if (uncompressedSize) {
         tooltip.push(
           (compressedSize ? UNCOMPRESSED_SIZE_LABEL : SIZE_LABEL) +
-            " " +
-            i18n.formatSize(uncompressedSize)
+          " " +
+          i18n.formatSize(uncompressedSize)
         );
       }
     }
