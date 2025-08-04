@@ -74,7 +74,7 @@ function getEntriesFeatures({
   }
 
   function highlightLast() {
-    highlightEntry(entries[entries.length - 1]);
+    highlightEntry(entries.at(-1));
   }
 
   function highlightFirstLetter(letter) {
@@ -103,7 +103,7 @@ function getEntriesFeatures({
 
   function highlightEntries(entries) {
     setNavigation(() => ({
-      previousHighlight: entries[entries.length - 1],
+      previousHighlight: entries.at(-1),
       direction: 0
     }));
     setHighlightedIds(entries.map((entry) => entry.id));
@@ -287,7 +287,7 @@ function getEntriesFeatures({
   function toggleLast() {
     if (navigation.previousHighlight) {
       const indexEntry = getPreviousHighlightedEntryIndex();
-      const lastEntry = entries[entries.length - 1];
+      const lastEntry = entries.at(-1);
       if (navigation.direction !== -1) {
         toggleRange(lastEntry);
       } else {
@@ -317,7 +317,7 @@ function getEntriesFeatures({
   }
 
   function getHighlightedEntryIndex() {
-    const entryId = highlightedIds[highlightedIds.length - 1];
+    const entryId = highlightedIds.at(-1);
     return entries.findIndex((entry) => entry.id === entryId);
   }
 
