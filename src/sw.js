@@ -25,7 +25,8 @@ import {
 const GET_REQUEST = "GET";
 const POST_REQUEST = "POST";
 
-importScripts("./assets/lib/zip-no-worker-inflate.min.js");
+importScripts("./assets/lib/zip-core.min.js");
+zip.configure({ wasmURI: "./assets/lib/zip-module.wasm", useCompressionStream: false });
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 self.skipWaiting();

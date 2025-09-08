@@ -34,8 +34,8 @@ const DEFAULT_OPTIONS = {
   bufferedWrite: true,
   checkSignature: false,
   keepOrder: true,
-  maxWorkers: 2,
-  chunkSize: 512 * 1024,
+  maxWorkers: 4,
+  chunkSize: 64 * 1024,
   promptForExportPassword: true,
   defaultExportPassword: "",
   zoomFactor: 100
