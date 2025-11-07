@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
-    "@zip.js/zip.js": "^2.8.8",
+    "@zip.js/zip.js": "^2.8.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "workbox-core": "^7.3.0",
