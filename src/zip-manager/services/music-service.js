@@ -134,7 +134,7 @@ async function play({ onSetFrequencyData }) {
 
 function getByteFrequencyData() {
   analyser.getByteFrequencyData(byteFrequencyData);
-  if (callbackFrequencyData) {
+  if (playing && callbackFrequencyData) {
     callbackFrequencyData(Array.from(byteFrequencyData));
   }
   if (playing && !document.hidden) {
@@ -144,6 +144,7 @@ function getByteFrequencyData() {
 
 function stop() {
   playing = false;
+  callbackFrequencyData = null;
   if (musicLibrary) {
     musicLibrary.pause();
   }
