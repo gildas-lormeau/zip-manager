@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
-    "@zip.js/zip.js": "^2.8.10",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "workbox-core": "^7.3.0",
-    "workbox-precaching": "^7.3.0",
-    "workbox-routing": "^7.3.0"
+    "@zip.js/zip.js": "^2.8.13",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "workbox-core": "^7.4.0",
+    "workbox-precaching": "^7.4.0",
+    "workbox-routing": "^7.4.0"
   },
   "scripts": {
     "start": "vite",
@@ -28,13 +28,13 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^5.1.2",
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "^19.1.0-rc.2",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "vite": "^7.2.2",
-    "vite-plugin-pwa": "^1.1.0"
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "vite": "^7.3.0",
+    "vite-plugin-pwa": "^1.2.0"
   }
 }
