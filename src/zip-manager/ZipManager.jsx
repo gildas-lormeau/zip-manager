@@ -1,6 +1,6 @@
 import "./styles/index.css";
 
-import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 import {
   filesystemService,
@@ -31,19 +31,11 @@ import {
   BottomButtonBar,
   Downloads,
   InfoBar,
-  ExportZipDialog,
-  ExtractDialog,
-  RenameDialog,
-  CreateFolderDialog,
-  ResetDialog,
-  DeleteEntriesDialog,
-  ErrorMessageDialog,
-  ImportPasswordDialog,
-  OptionsDialog,
-  ChooseActionDialog
+  DialogsContainer
 } from "./components/index.jsx";
 import { getMessages } from "./messages/index.js";
 import { getHooks } from "./hooks/hooks.js";
+import useZipManagerState from "./hooks/useZipManagerState.js";
 
 const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
   keyboardService,
@@ -69,37 +61,46 @@ const { root } = apiFilesystem;
 const rootZipFilename = messages.ROOT_ZIP_FILENAME;
 
 function ZipManager() {
-  const [zipFilesystem, setZipFilesystem] = useState(apiFilesystem);
-  const [selectedFolder, setSelectedFolder] = useState(root);
-  const [entries, setEntries] = useState([]);
-  const [highlightedIds, setHighlightedIds] = useState([]);
-  const [navigation, setNavigation] = useState({
-    previousHighlight: null,
-    direction: 0
-  });
-  const [downloads, setDownloads] = useState({ queue: [], nextId: 0 });
-  const [clipboardData, setClipboardData] = useState(null);
-  const [history, setHistory] = useState({
-    path: [root],
-    index: 0
-  });
+  const {
+    zipFilesystem,
+    setZipFilesystem,
+    selectedFolder,
+    setSelectedFolder,
+    entries,
+    setEntries,
+    highlightedIds,
+    setHighlightedIds,
+    navigation,
+    setNavigation,
+    downloads,
+    setDownloads,
+    clipboardData,
+    setClipboardData,
+    history,
+    setHistory,
+    entriesHeight,
+    setEntriesHeight,
+    entriesElementHeight,
+    setEntriesElementHeight,
+    entriesDeltaHeight,
+    setEntriesDeltaHeight,
+    dialogs,
+    setDialogs,
+    clickedButtonName,
+    setClickedButtonName,
+    theme,
+    setTheme,
+    musicData,
+    setMusicData,
+    playerActive,
+    setPlayerActive,
+    highlightedEntryElementRef,
+    entriesElementRef,
+    getHighlightedEntryElement,
+    resetHighlightedEntryElement
+  } = useZipManagerState({ apiFilesystem, root });
 
-  const [entriesHeight, setEntriesHeight] = useState(1);
-  const [entriesElementHeight, setEntriesElementHeight] = useState(0);
-  const [entriesDeltaHeight, setEntriesDeltaHeight] = useState(0);
-  const [dialogs, setDialogs] = useState({});
-  const [clickedButtonName, setClickedButtonName] = useState(null);
-  const [theme, setTheme] = useState({});
-  const [musicData, setMusicData] = useState({
-    frequencyData: []
-  });
-  const [playerActive, setPlayerActive] = useState(false);
-
-  const highlightedEntryElementRef = useRef(null);
-  const entriesElementRef = useRef(null);
   const entriesElement = entriesElementRef.current;
-  const getHighlightedEntryElement = () => highlightedEntryElementRef.current;
-  const resetHighlightedEntryElement = () => highlightedEntryElementRef.current = null;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -523,66 +524,30 @@ function ZipManager() {
         constants={constants}
         messages={messages}
       />
-      <CreateFolderDialog
-        data={dialogs.createFolder}
+      <DialogsContainer
+        dialogs={dialogs}
+        hiddenExportPassword={hiddenExportPassword}
+        messages={messages}
         onCreateFolder={createFolder}
-        onClose={closePromptCreateFolder}
-        messages={messages}
-      />
-      <ExportZipDialog
-        data={dialogs.exportZip}
-        hiddenPassword={hiddenExportPassword}
+        onCloseCreateFolder={closePromptCreateFolder}
         onExportZip={exportZip}
-        onClose={closePromptExportZip}
-        messages={messages}
-      />
-      <ExtractDialog
-        data={dialogs.extract}
+        onCloseExportZip={closePromptExportZip}
         onExtract={extract}
-        onClose={closePromptExtract}
-        messages={messages}
-      />
-      <RenameDialog
-        data={dialogs.rename}
+        onCloseExtract={closePromptExtract}
         onRename={rename}
-        onClose={closePromptRename}
-        messages={messages}
-      />
-      <ResetDialog
-        data={dialogs.reset}
+        onCloseRename={closePromptRename}
         onReset={reset}
-        onClose={closeConfirmReset}
-        messages={messages}
-      />
-      <DeleteEntriesDialog
-        data={dialogs.deleteEntries}
+        onCloseReset={closeConfirmReset}
         onDeleteEntries={deleteEntries}
-        onClose={closeConfirmDeleteEntries}
-        messages={messages}
-      />
-      <ErrorMessageDialog
-        data={dialogs.displayError}
-        onClose={closeDisplayError}
-        messages={messages}
-      />
-      <ImportPasswordDialog
-        data={dialogs.enterImportPassword}
-        onClose={closePromptImportPassword}
-        messages={messages}
-      />
-      <OptionsDialog
-        data={dialogs.options}
+        onCloseDeleteEntries={closeConfirmDeleteEntries}
+        onCloseDisplayError={closeDisplayError}
+        onCloseImportPassword={closePromptImportPassword}
         onSetOptions={setOptions}
         onResetOptions={resetOptions}
-        onClose={closeOptions}
-        messages={messages}
-      />
-      <ChooseActionDialog
-        data={dialogs.chooseAction}
+        onCloseOptions={closeOptions}
         onImportZipFile={importZipFile}
         onAddFiles={addFiles}
-        onClose={closeChooseAction}
-        messages={messages}
+        onCloseChooseAction={closeChooseAction}
       />
     </div>
   );
