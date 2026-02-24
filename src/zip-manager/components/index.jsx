@@ -5,6 +5,7 @@ import BottomButtonBar from "./BottomButtonBar.jsx";
 import Downloads from "./Downloads.jsx";
 import InfoBar from "./InfoBar.jsx";
 import DialogsContainer from "./DialogsContainer.jsx";
+import ZipManagerView from "./ZipManagerView.jsx";
 import ExportZipDialog from "./dialogs/ExportZipDialog.jsx";
 import ExtractDialog from "./dialogs/ExtractDialog.jsx";
 import RenameDialog from "./dialogs/RenameDialog.jsx";
@@ -24,6 +25,7 @@ export {
   Downloads,
   InfoBar,
   DialogsContainer,
+  ZipManagerView,
   ExportZipDialog,
   ExtractDialog,
   RenameDialog,
