@@ -1,29 +1,13 @@
 import "./styles/index.css";
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 import {
-  filesystemService,
-  downloadService,
   i18nService,
-  storageService,
   zipService,
-  shareTargetService,
-  fileHandlersService,
-  stylesheetService,
-  environmentService,
   keyboardService,
-  themeService,
-  documentService,
-  windowService,
-  musicService
+  windowService
 } from "./services/index.js";
-import {
-  constants,
-  features,
-  getUIState,
-  getEventHandlers
-} from "./business/index.js";
 import {
   TopButtonBar,
   NavigationBar,
@@ -36,25 +20,13 @@ import {
 import { getMessages } from "./messages/index.js";
 import { getHooks } from "./hooks/hooks.js";
 import useZipManagerState from "./hooks/useZipManagerState.js";
+import useZipManagerFeatureWiring from "./hooks/useZipManagerFeatureWiring.js";
 
 const { useKeyUp, useKeyDown, usePageUnload } = getHooks({
   keyboardService,
   windowService
 });
 
-const {
-  getCommonFeatures,
-  getEntriesFeatures,
-  getFoldersFeatures,
-  getSelectedFolderFeatures,
-  getHighlightedEntriesFeatures,
-  getFilesystemFeatures,
-  getDownloadsFeatures,
-  getClipboardFeatures,
-  getOptionsFeatures,
-  getAppFeatures,
-  getMiscFeatures
-} = features;
 const messages = getMessages({ i18nService });
 const apiFilesystem = zipService.createZipFileSystem();
 const { root } = apiFilesystem;
@@ -100,52 +72,17 @@ function ZipManager() {
     resetHighlightedEntryElement
   } = useZipManagerState({ apiFilesystem, root });
 
-  const entriesElement = entriesElementRef.current;
-
-  const { abortDownload, removeDownload } = getDownloadsFeatures({
-    setDownloads,
-    downloadService
-  });
-
   const {
-    modifierKeyPressed,
-    saveZipFile,
-    saveEntries,
-    openDisplayError,
-    closeDisplayError
-  } = getCommonFeatures({
-    dialogs,
-    setDownloads,
-    setDialogs,
-    removeDownload,
-    downloadService,
-    filesystemService,
-    environmentService
-  });
-
-  const {
-    initOptionsFeatures,
-    setOptions,
-    getOptions,
+    constants,
+    appClassName,
+    abortDownload,
+    closeDisplayError,
     openOptions,
     closeOptions,
-    resetOptions
-  } = getOptionsFeatures({
-    dialogs,
-    setDialogs,
-    setTheme,
-    zipService,
-    storageService,
-    stylesheetService,
-    environmentService,
-    themeService,
-    constants
-  });
-
-  const {
+    setOptions,
+    resetOptions,
     disabledExportZip,
     disabledReset,
-    disabledNavigation,
     disabledBack,
     disabledForward,
     disabledCopy,
@@ -156,90 +93,20 @@ function ZipManager() {
     disabledExtract,
     disabledRename,
     disabledDelete,
-    disabledEnterEntry,
-    dialogDisplayed,
     hiddenNavigationBar,
     hiddenDownloadManager,
     hiddenInfobar,
     hiddenExportPassword,
-    highlightedEntry,
-    highlightedEntries,
-    selectedFolderEntries,
-    ancestorFolders
-  } = getUIState({
-    entries,
-    highlightedIds,
-    selectedFolder,
-    clipboardData,
-    history,
-    getOptions,
-    dialogs,
-    filesystemService
-  });
-
-  const {
+    ancestorFolders,
     highlight,
-    highlightEntries,
     highlightAll,
-    toggle,
     toggleRange,
     resizeEntries,
-    updateEntriesHeight,
     updateEntriesElementHeight,
-    updateEntriesElementHeightEnd,
     updateHighlightedEntries,
-    registerResizeEntriesHandler,
-    onEntriesKeyUp,
-    onEntriesKeyDown
-  } = getEntriesFeatures({
-    disabledNavigation,
-    disabledHighlightAll,
-    entries,
-    selectedFolderEntries,
-    highlightedIds,
-    navigation,
-    dialogDisplayed,
-    entriesHeight,
-    entriesElementHeight,
-    entriesDeltaHeight,
-    modifierKeyPressed,
-    setHighlightedIds,
-    setNavigation,
-    setOptions,
-    setEntriesHeight,
-    setEntriesElementHeight,
-    setEntriesDeltaHeight,
-    setClickedButtonName,
-    getOptions,
-    documentService,
-    windowService,
-    constants
-  });
-
-  const {
-    goIntoFolder,
     navigateBack,
     navigateForward,
-    refreshSelectedFolder,
-    updateHistoryData,
-    onFoldersKeyUp
-  } = getFoldersFeatures({
-    disabledBack,
-    disabledForward,
-    history,
-    highlightedEntry,
-    highlightedEntries,
-    selectedFolder,
-    modifierKeyPressed,
-    setSelectedFolder,
-    setEntries,
-    setHistory,
-    setHighlightedIds,
-    setClickedButtonName,
-    constants
-  });
-
-  const {
+    goIntoFolder,
     initSelectedFolderFeatures,
     openPromptCreateFolder,
     createFolder,
@@ -255,32 +122,6 @@ function ZipManager() {
     closePromptImportPassword,
     showAddFilesPicker,
     showImportZipFilePicker,
-    onSelectedFolderKeyDown
-  } = getSelectedFolderFeatures({
-    disabledPaste,
-    disabledExportZip,
-    zipFilesystem,
-    selectedFolder,
-    rootZipFilename,
-    clipboardData,
-    dialogs,
-    modifierKeyPressed,
-    setHighlightedIds,
-    setClipboardData,
-    setDialogs,
-    setClickedButtonName,
-    refreshSelectedFolder,
-    highlightEntries,
-    saveZipFile,
-    getOptions,
-    openDisplayError,
-    filesystemService,
-    fileHandlersService,
-    shareTargetService,
-    constants
-  });
-
-  const {
     copy,
     cut,
     openPromptRename,
@@ -289,128 +130,66 @@ function ZipManager() {
     openConfirmDeleteEntries,
     deleteEntries,
     closeConfirmDeleteEntries,
-    openPromptExtract,
     extract,
     closePromptExtract,
-    onHighlightedEntriesKeyUp,
-    onHighlightedEntriesKeyDown
-  } = getHighlightedEntriesFeatures({
-    disabledCopy,
-    disabledCut,
-    disabledExtract,
-    disabledRename,
-    disabledDelete,
-    zipFilesystem,
-    entries,
-    highlightedIds,
-    highlightedEntry,
-    highlightedEntries,
-    navigation,
-    dialogs,
-    modifierKeyPressed,
-    setClipboardData,
-    setHighlightedIds,
-    setNavigation,
-    setDialogs,
-    setClickedButtonName,
-    refreshSelectedFolder,
-    updateHistoryData,
-    saveEntries,
-    getOptions,
-    openDisplayError,
-    filesystemService,
-    constants
-  });
-
-  const { openConfirmReset, reset, closeConfirmReset } = getFilesystemFeatures({
-    dialogs,
-    setZipFilesystem,
-    setDialogs,
-    zipService
-  });
-
-  const { resetClipboardData } = getClipboardFeatures({
-    setClipboardData
-  });
-
-  const {
+    openConfirmReset,
+    reset,
+    closeConfirmReset,
+    resetClipboardData,
     initMiscFeatures,
     playMusic,
     stopMusic,
     updateAccentColor,
     updateSkin,
-  } = getMiscFeatures({
-    theme,
-    setOptions,
-    setTheme,
-    setMusicData,
-    setPlayerActive,
-    getOptions,
-    stylesheetService,
-    themeService,
-    musicService,
-    constants
-  });
-
-  const {
     initAppFeatures,
     enterEntry,
     updateZipFilesystem,
     resetClickedButtonName,
-    getAppClassName,
-    onAppKeyUp
-  } = getAppFeatures({
-    disabledEnterEntry,
-    zipFilesystem,
-    highlightedEntry,
-    selectedFolder,
-    hiddenInfobar,
-    hiddenDownloadManager,
-    modifierKeyPressed,
-    setNavigation,
-    setSelectedFolder,
-    setHighlightedIds,
-    setHistory,
-    setClickedButtonName,
-    goIntoFolder,
-    openPromptExtract,
-    refreshSelectedFolder,
-    stylesheetService,
-    documentService,
-    i18nService,
-    constants,
+    handleKeyUp,
+    handleKeyDownEvent,
+    handlePageUnload,
+    handleToggleEntry,
+    updateEntriesHeightWithElement,
+    registerResizeEntriesHandlerWithElement,
+    updateEntriesElementHeightEndWithElement,
+    initOptionsFeatures
+  } = useZipManagerFeatureWiring({
+    state: {
+      zipFilesystem,
+      setZipFilesystem,
+      selectedFolder,
+      setSelectedFolder,
+      entries,
+      setEntries,
+      highlightedIds,
+      setHighlightedIds,
+      navigation,
+      setNavigation,
+      downloads,
+      setDownloads,
+      clipboardData,
+      setClipboardData,
+      history,
+      setHistory,
+      entriesHeight,
+      setEntriesHeight,
+      entriesElementHeight,
+      setEntriesElementHeight,
+      entriesDeltaHeight,
+      setEntriesDeltaHeight,
+      dialogs,
+      setDialogs,
+      setClickedButtonName,
+      theme,
+      setTheme,
+      setMusicData,
+      setPlayerActive,
+      entriesElementRef,
+      resetHighlightedEntryElement
+    },
+    rootZipFilename,
     messages
   });
-
-  const { handleKeyUp, handleKeyDown, handlePageUnload } = useMemo(() => getEventHandlers({
-    entries,
-    downloads,
-    dialogDisplayed,
-    onEntriesKeyUp,
-    onFoldersKeyUp,
-    onHighlightedEntriesKeyUp,
-    onAppKeyUp,
-    onEntriesKeyDown,
-    onHighlightedEntriesKeyDown,
-    onSelectedFolderKeyDown
-  }), [
-    entries,
-    downloads,
-    dialogDisplayed,
-    onEntriesKeyUp,
-    onFoldersKeyUp,
-    onHighlightedEntriesKeyUp,
-    onAppKeyUp,
-    onEntriesKeyDown,
-    onHighlightedEntriesKeyDown,
-    onSelectedFolderKeyDown
-  ]);
-
-  const handleKeyDownEvent = useCallback((event) => {
-    handleKeyDown(event, resetHighlightedEntryElement);
-  }, [handleKeyDown]);
-
-  const appClassName = getAppClassName();
 
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDownEvent);
@@ -468,12 +247,12 @@ function ZipManager() {
           hiddenDownloadManager={hiddenDownloadManager}
           onDropFiles={dropFiles}
           onHighlight={highlight}
-          onToggle={entry => toggle(entry, resetHighlightedEntryElement)}
+          onToggle={handleToggleEntry}
           onToggleRange={toggleRange}
           onEnter={enterEntry}
-          onUpdateEntriesHeight={() => updateEntriesHeight(entriesElement)}
+          onUpdateEntriesHeight={updateEntriesHeightWithElement}
           onUpdateEntriesElementHeight={updateEntriesElementHeight}
-          onRegisterResizeEntriesHandler={() => registerResizeEntriesHandler(entriesElement)}
+          onRegisterResizeEntriesHandler={registerResizeEntriesHandlerWithElement}
           entriesElementRef={entriesElementRef}
           highlightedEntryElementRef={highlightedEntryElementRef}
           i18n={i18nService}
@@ -499,7 +278,7 @@ function ZipManager() {
           onRename={openPromptRename}
           onRemove={openConfirmDeleteEntries}
           onMove={resizeEntries}
-          onUpdateElementHeight={() => updateEntriesElementHeightEnd(entriesElement)}
+          onUpdateElementHeight={updateEntriesElementHeightEndWithElement}
           onClickedButton={resetClickedButtonName}
           constants={constants}
           messages={messages}
