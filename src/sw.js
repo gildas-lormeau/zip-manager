@@ -1,5 +1,4 @@
 /* global self, URL, Response, caches, importScripts, zip */
-/* eslint-disable no-restricted-globals */
 
 import { cacheNames, clientsClaim } from "workbox-core";
 import {

@@ -4,6 +4,13 @@ import reactCompiler from "eslint-plugin-react-compiler";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/src/zip-manager/services/lib/**"
+    ]
+  },
   js.configs.recommended,
   {
     files: ["**/*.{js,jsx}"],
@@ -39,7 +46,8 @@ export default [
     },
     ignores: [
       "**/node_modules/",
-      ".git/"
+      ".git/",
+      "**/src/zip-manager/services/lib/**"
     ]
   }
 ];
