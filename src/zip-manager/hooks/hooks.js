@@ -1,31 +1,55 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function getHooks({ keyboardService, windowService }) {
   function useKeyUp(handleKeyUp) {
-    useEffect(registerKeyUpHandler);
+    const handleKeyUpRef = useRef(handleKeyUp);
 
-    function registerKeyUpHandler() {
-      keyboardService.addKeyUpListener(handleKeyUp);
-      return () => keyboardService.removeKeyUpListener(handleKeyUp);
-    }
+    useEffect(() => {
+      handleKeyUpRef.current = handleKeyUp;
+    }, [handleKeyUp]);
+
+    useEffect(() => {
+      function onKeyUp(event) {
+        handleKeyUpRef.current(event);
+      }
+
+      keyboardService.addKeyUpListener(onKeyUp);
+      return () => keyboardService.removeKeyUpListener(onKeyUp);
+    }, []);
   }
 
   function useKeyDown(handleKeyDown) {
-    useEffect(registerKeyDownHandler);
+    const handleKeyDownRef = useRef(handleKeyDown);
 
-    function registerKeyDownHandler() {
-      keyboardService.addKeyDownListener(handleKeyDown);
-      return () => keyboardService.removeKeyDownListener(handleKeyDown);
-    }
+    useEffect(() => {
+      handleKeyDownRef.current = handleKeyDown;
+    }, [handleKeyDown]);
+
+    useEffect(() => {
+      function onKeyDown(event) {
+        handleKeyDownRef.current(event);
+      }
+
+      keyboardService.addKeyDownListener(onKeyDown);
+      return () => keyboardService.removeKeyDownListener(onKeyDown);
+    }, []);
   }
 
   function usePageUnload(handlePageUnload) {
-    useEffect(registerPageUnloadHandler);
+    const handlePageUnloadRef = useRef(handlePageUnload);
 
-    function registerPageUnloadHandler() {
-      windowService.addUnloadListener(handlePageUnload);
-      return () => windowService.removeUnloadListener(handlePageUnload);
-    }
+    useEffect(() => {
+      handlePageUnloadRef.current = handlePageUnload;
+    }, [handlePageUnload]);
+
+    useEffect(() => {
+      function onPageUnload(event) {
+        handlePageUnloadRef.current(event);
+      }
+
+      windowService.addUnloadListener(onPageUnload);
+      return () => windowService.removeUnloadListener(onPageUnload);
+    }, []);
   }
 
   return { useKeyUp, useKeyDown, usePageUnload };

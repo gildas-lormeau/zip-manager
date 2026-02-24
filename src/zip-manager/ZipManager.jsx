@@ -1,6 +1,6 @@
 import "./styles/index.css";
 
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 
 import {
   filesystemService,
@@ -381,7 +381,7 @@ function ZipManager() {
     messages
   });
 
-  const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
+  const { handleKeyUp, handleKeyDown, handlePageUnload } = useMemo(() => getEventHandlers({
     entries,
     downloads,
     dialogDisplayed,
@@ -392,12 +392,27 @@ function ZipManager() {
     onEntriesKeyDown,
     onHighlightedEntriesKeyDown,
     onSelectedFolderKeyDown
-  });
+  }), [
+    entries,
+    downloads,
+    dialogDisplayed,
+    onEntriesKeyUp,
+    onFoldersKeyUp,
+    onHighlightedEntriesKeyUp,
+    onAppKeyUp,
+    onEntriesKeyDown,
+    onHighlightedEntriesKeyDown,
+    onSelectedFolderKeyDown
+  ]);
+
+  const handleKeyDownEvent = useCallback((event) => {
+    handleKeyDown(event, resetHighlightedEntryElement);
+  }, [handleKeyDown]);
 
   const appClassName = getAppClassName();
 
   useKeyUp(handleKeyUp);
-  useKeyDown(event => handleKeyDown(event, resetHighlightedEntryElement));
+  useKeyDown(handleKeyDownEvent);
   usePageUnload(handlePageUnload);
 
   useEffect(updateZipFilesystem, [zipFilesystem]);
