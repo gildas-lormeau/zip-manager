@@ -33,7 +33,7 @@ const DEFAULT_OPTIONS = {
   hideInfobar: false,
   bufferedWrite: true,
   checkSignature: false,
-  keepOrder: true,
+  keepOrder: false,
   maxWorkers: 4,
   chunkSize: 64 * 1024,
   promptForExportPassword: true,
