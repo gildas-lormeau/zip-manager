@@ -32,7 +32,7 @@ const DEFAULT_OPTIONS = {
   hideDownloadManager: false,
   hideInfobar: false,
   bufferedWrite: true,
-  checkSignature: false,
+  checkCrc32: false,
   keepOrder: false,
   maxWorkers: 4,
   chunkSize: 64 * 1024,
