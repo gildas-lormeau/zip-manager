@@ -313,14 +313,14 @@ function getSelectedFolderFeatures({
   }
 
   function paste() {
-    let pastedEntries = [];
+    const pastedEntries = [];
     try {
       const { entries, cut } = clipboardData;
       if (cut) {
         entries.forEach((entry) => moveEntry(entry));
       } else {
         const clones = entries.map((entry) => {
-          let clone = entry.clone(true);
+          const clone = entry.clone(true);
           moveEntry(entry);
           return clone;
         });
