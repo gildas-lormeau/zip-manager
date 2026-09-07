@@ -73,8 +73,8 @@ function getOptionsFeatures({
     if (options.defaultExportPassword === undefined) {
       options.defaultExportPassword = DEFAULT_OPTIONS.defaultExportPassword;
     }
-    if (options.checkSignature === undefined) {
-      options.checkSignature = DEFAULT_OPTIONS.checkSignature;
+    if (options.checkCrc32 === undefined) {
+      options.checkCrc32 = DEFAULT_OPTIONS.checkCrc32;
     }
     if (options.accentColor === undefined) {
       options.accentColor = DEFAULT_OPTIONS.accentColor;

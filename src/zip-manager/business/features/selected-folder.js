@@ -301,7 +301,7 @@ function getSelectedFolderFeatures({
           ...options,
           password,
           readerOptions: {
-            checkSignature: options.checkSignature
+            checkCrc32: options.checkCrc32
           }
         });
       } catch (error) {
