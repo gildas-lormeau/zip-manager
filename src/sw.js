@@ -25,6 +25,7 @@ const GET_REQUEST = "GET";
 const POST_REQUEST = "POST";
 
 importScripts("./assets/lib/zip-core.min.js");
+zip.configure({ wasmURI: "./assets/lib/zip-module.wasm" });
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 self.skipWaiting();
