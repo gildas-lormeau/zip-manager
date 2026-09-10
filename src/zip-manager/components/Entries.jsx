@@ -307,6 +307,7 @@ function EntryName({
   function handleDoubleClick(event) {
     if (!selectModeEnabled && !event.metaKey) {
       onEnter(entry);
+      event.preventDefault();
     }
   }
 
