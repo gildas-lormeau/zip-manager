@@ -2,7 +2,7 @@
 
 import WebAudioTinySynth from "./lib/webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
 import * as libxm from "./lib/libxm/libxm-es6.js";
-import * as jsSID from "./lib/jsSID/jsSID.js";
+import * as sidPlayer from "./lib/sid-worklet/sid-player.js";
 
 import {
   MUSIC_TRACK_PATH_PREFIX,
@@ -17,7 +17,7 @@ const MUSIC_TRACKS_INFO = [
   { masterVolume: 0.7 },
   { masterVolume: 0.4 },
   { masterVolume: 0.1 },
-  { masterVolume: 1.2, track: 1 },
+  { masterVolume: 0.6, track: 1 },
   { masterVolume: 1.8 },
   { masterVolume: 0.6 },
   { masterVolume: 0.8 },
@@ -56,7 +56,7 @@ async function init({ data, contentType, masterVolume, track }) {
   } else if (contentType === XM_CONTENT_TYPE) {
     await initXM();
   } else if (contentType === SID_CONTENT_TYPE) {
-    initSID();
+    await initSID();
   }
   if (musicLibrary) {
     musicLibrary.play({ data, masterVolume, track });
@@ -100,10 +100,10 @@ async function initXM() {
   musicLibrary = xmLibrary;
 }
 
-function initSID() {
+async function initSID() {
   if (!sidLibrary) {
-    jsSID.init();
-    sidLibrary = jsSID;
+    await sidPlayer.init();
+    sidLibrary = sidPlayer;
   }
   musicLibrary = sidLibrary;
 }

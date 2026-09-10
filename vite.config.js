@@ -12,7 +12,8 @@ export default defineConfig(() => {
     },
     plugins: [
       react({
-        compiler: true
+        compiler: true,
+        exclude: [/\/node_modules\//, /\/src\/zip-manager\/services\/lib\//]
       }),
       VitePWA({
         registerType: "autoUpdate",
