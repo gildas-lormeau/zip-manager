@@ -191,9 +191,16 @@ function MusicVisualizer({
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
 
+  function getContext() {
+    if (!audioContextRef.current && canvasRef.current) {
+      audioContextRef.current = canvasRef.current.getContext("2d");
+    }
+    return audioContextRef.current;
+  }
+
   function updateColor() {
-    if (theme.accentColor) {
-      const context = audioContextRef.current;
+    const context = getContext();
+    if (theme.accentColor && context) {
       const gradient = context.createLinearGradient(0, 0, 0, CANVAS_HEIGTH);
       gradient.addColorStop(0, theme.accentColor);
       gradient.addColorStop(0.7, theme.accentColor);
@@ -204,11 +211,8 @@ function MusicVisualizer({
 
   useEffect(updateColor, [theme.accentColor]);
   useEffect(() => {
-    if (canvasRef.current) {
-      if (!audioContextRef.current) {
-        audioContextRef.current = canvasRef.current.getContext("2d");
-      }
-      const context = audioContextRef.current;
+    const context = getContext();
+    if (context) {
       context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGTH);
       if (playerActive) {
         musicData.frequencyData.forEach((byteTimeDomain, index) => {

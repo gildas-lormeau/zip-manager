@@ -363,21 +363,29 @@ function getEntriesFeatures({
     setEntriesDeltaHeight(0);
   }
 
-  function registerResizeEntriesHandler(entriesElement) {
+  function handleEntriesResize(entriesElement, highlightedEntryElement) {
+    const height = getEntriesElementHeight(entriesElement);
+    const options = getOptions();
+    if (height !== options.entriesHeight) {
+      options.entriesHeight = height;
+      setOptions(options);
+      updateEntriesHeight(entriesElement, highlightedEntryElement);
+    }
+  }
+
+  function registerResizeEntriesHandler(
+    entriesElement,
+    { onEntriesResize, onWindowResize }
+  ) {
     if (entriesElement) {
-      const observer = documentService.addResizeObserver(entriesElement, () => {
-        const height = getEntriesElementHeight(entriesElement);
-        const options = getOptions();
-        if (height !== options.entriesHeight) {
-          options.entriesHeight = height;
-          setOptions(options);
-          updateEntriesHeight(entriesElement);
-        }
-      });
-      windowService.addResizeListener(updateEntriesElementHeight);
+      const observer = documentService.addResizeObserver(
+        entriesElement,
+        onEntriesResize
+      );
+      windowService.addResizeListener(onWindowResize);
       return () => {
         observer.disconnect();
-        windowService.removeResizeListener(updateEntriesElementHeight);
+        windowService.removeResizeListener(onWindowResize);
       };
     }
   }
@@ -464,6 +472,7 @@ function getEntriesFeatures({
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
     updateHighlightedEntries,
+    handleEntriesResize,
     registerResizeEntriesHandler,
     onEntriesKeyUp,
     onEntriesKeyDown

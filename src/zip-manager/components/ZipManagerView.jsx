@@ -64,7 +64,6 @@ function ZipManagerView({ state, ui, actions }) {
     enterEntry,
     updateEntriesHeightWithElement,
     updateEntriesElementHeight,
-    registerResizeEntriesHandlerWithElement,
     copy,
     cut,
     paste,
@@ -145,7 +144,6 @@ function ZipManagerView({ state, ui, actions }) {
           onEnter={enterEntry}
           onUpdateEntriesHeight={updateEntriesHeightWithElement}
           onUpdateEntriesElementHeight={updateEntriesElementHeight}
-          onRegisterResizeEntriesHandler={registerResizeEntriesHandlerWithElement}
           entriesElementRef={entriesElementRef}
           highlightedEntryElementRef={highlightedEntryElementRef}
           i18n={i18n}

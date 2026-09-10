@@ -144,7 +144,6 @@ function ZipManager() {
     handlePageUnload,
     handleToggleEntry,
     updateEntriesHeightWithElement,
-    registerResizeEntriesHandlerWithElement,
     updateEntriesElementHeightEndWithElement,
     initOptionsFeatures
   } = useZipManagerFeatureWiring({
@@ -179,6 +178,7 @@ function ZipManager() {
       setMusicData,
       setPlayerActive,
       entriesElementRef,
+      getHighlightedEntryElement,
       resetHighlightedEntryElement
     },
     rootZipFilename,
@@ -277,7 +277,6 @@ function ZipManager() {
     enterEntry,
     updateEntriesHeightWithElement,
     updateEntriesElementHeight,
-    registerResizeEntriesHandlerWithElement,
     copy,
     cut,
     paste,

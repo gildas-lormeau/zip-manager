@@ -1,16 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 function getHooks({ keyboardService, windowService }) {
   function useKeyUp(handleKeyUp) {
-    const handleKeyUpRef = useRef(handleKeyUp);
-
-    useEffect(() => {
-      handleKeyUpRef.current = handleKeyUp;
-    }, [handleKeyUp]);
+    const handleKeyUpEvent = useEffectEvent(handleKeyUp);
 
     useEffect(() => {
       function onKeyUp(event) {
-        handleKeyUpRef.current(event);
+        handleKeyUpEvent(event);
       }
 
       keyboardService.addKeyUpListener(onKeyUp);
@@ -19,15 +15,11 @@ function getHooks({ keyboardService, windowService }) {
   }
 
   function useKeyDown(handleKeyDown) {
-    const handleKeyDownRef = useRef(handleKeyDown);
-
-    useEffect(() => {
-      handleKeyDownRef.current = handleKeyDown;
-    }, [handleKeyDown]);
+    const handleKeyDownEvent = useEffectEvent(handleKeyDown);
 
     useEffect(() => {
       function onKeyDown(event) {
-        handleKeyDownRef.current(event);
+        handleKeyDownEvent(event);
       }
 
       keyboardService.addKeyDownListener(onKeyDown);
@@ -36,15 +28,11 @@ function getHooks({ keyboardService, windowService }) {
   }
 
   function usePageUnload(handlePageUnload) {
-    const handlePageUnloadRef = useRef(handlePageUnload);
-
-    useEffect(() => {
-      handlePageUnloadRef.current = handlePageUnload;
-    }, [handlePageUnload]);
+    const handlePageUnloadEvent = useEffectEvent(handlePageUnload);
 
     useEffect(() => {
       function onPageUnload(event) {
-        handlePageUnloadRef.current(event);
+        handlePageUnloadEvent(event);
       }
 
       windowService.addUnloadListener(onPageUnload);

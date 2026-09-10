@@ -1,3 +1,5 @@
+import { useEffect, useEffectEvent } from "react";
+
 import {
   constants,
   features,
@@ -66,10 +68,9 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     setMusicData,
     setPlayerActive,
     entriesElementRef,
+    getHighlightedEntryElement,
     resetHighlightedEntryElement
   } = state;
-
-  const entriesElement = entriesElementRef.current;
 
   const { abortDownload, removeDownload } = getDownloadsFeatures({
     setDownloads,
@@ -156,6 +157,7 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     updateEntriesElementHeight,
     updateEntriesElementHeightEnd,
     updateHighlightedEntries,
+    handleEntriesResize,
     registerResizeEntriesHandler,
     onEntriesKeyUp,
     onEntriesKeyDown
@@ -371,16 +373,25 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     toggle(entry, resetHighlightedEntryElement);
   }
 
-  function updateEntriesHeightWithElement() {
-    updateEntriesHeight(entriesElement);
-  }
+  const onEntriesResize = useEffectEvent(() =>
+    handleEntriesResize(entriesElementRef.current, getHighlightedEntryElement())
+  );
+  const onWindowResize = useEffectEvent(updateEntriesElementHeight);
+  const registerResizeEntriesHandlers = useEffectEvent(() =>
+    registerResizeEntriesHandler(entriesElementRef.current, {
+      onEntriesResize: () => onEntriesResize(),
+      onWindowResize: () => onWindowResize()
+    })
+  );
 
-  function registerResizeEntriesHandlerWithElement() {
-    registerResizeEntriesHandler(entriesElement);
+  useEffect(() => registerResizeEntriesHandlers(), []);
+
+  function updateEntriesHeightWithElement() {
+    updateEntriesHeight(entriesElementRef.current, getHighlightedEntryElement());
   }
 
   function updateEntriesElementHeightEndWithElement() {
-    updateEntriesElementHeightEnd(entriesElement);
+    updateEntriesElementHeightEnd(entriesElementRef.current);
   }
 
   return {
@@ -462,7 +473,6 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     handlePageUnload,
     handleToggleEntry,
     updateEntriesHeightWithElement,
-    registerResizeEntriesHandlerWithElement,
     updateEntriesElementHeightEndWithElement,
     initOptionsFeatures
   };

@@ -18,7 +18,6 @@ function Entries({
   onEnter,
   onUpdateEntriesHeight,
   onUpdateEntriesElementHeight,
-  onRegisterResizeEntriesHandler,
   entriesElementRef,
   highlightedEntryElementRef,
   i18n,
@@ -137,7 +136,6 @@ function Entries({
   const updateElementHeight = useEffectEvent(onUpdateEntriesElementHeight);
 
   useEffect(onUpdateEntriesHeight);
-  useEffect(onRegisterResizeEntriesHandler);
   useEffect(() => {
     updateElementHeight();
   }, []);

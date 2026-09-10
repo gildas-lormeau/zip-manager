@@ -4,6 +4,43 @@ import Dialog from "./Dialog.jsx";
 import { useRef, useState } from "react";
 import { constants } from "../../business";
 
+const OPTION_NAMES = [
+  "zoomFactor",
+  "hideNavigationBar",
+  "hideDownloadManager",
+  "hideInfobar",
+  "skin",
+  "promptForExportPassword",
+  "defaultExportPassword",
+  "keepOrder",
+  "checkSignature",
+  "bufferedWrite",
+  "maxWorkers",
+  "chunkSize"
+];
+const EMPTY_VALUES = {
+  zoomFactor: "",
+  hideNavigationBar: false,
+  hideDownloadManager: false,
+  hideInfobar: false,
+  skin: constants.OPTIONS_DEFAULT_SKIN,
+  promptForExportPassword: false,
+  defaultExportPassword: "",
+  keepOrder: false,
+  checkSignature: false,
+  bufferedWrite: false,
+  maxWorkers: "0",
+  chunkSize: "0"
+};
+
+function getValues(data) {
+  const values = Object.fromEntries(
+    OPTION_NAMES.map((name) => [name, data[name]])
+  );
+  values.chunkSize = data.chunkSize / 1024;
+  return values;
+}
+
 function OptionsDialog({
   data,
   onSetOptions,
@@ -11,124 +48,38 @@ function OptionsDialog({
   onClose,
   messages
 }) {
-  const [zoomFactor, setZoomFactor] = useState("");
-  const [hideNavigationBar, setHideNavigationBar] = useState(false);
-  const [hideDownloadManager, setHideDownloadManager] = useState(false);
-  const [hideInfobar, setHideInfobar] = useState(false);
-  const [skin, setSkin] = useState("default");
-  const [defaultExportPassword, setDefaultExportPassword] = useState("");
-  const [promptForExportPassword, setPromptForExportPassword] = useState(false);
-  const [keepOrder, setKeepOrder] = useState(false);
-  const [checkSignature, setCheckSignature] = useState(false);
-  const [bufferedWrite, setBufferedWrite] = useState(false);
-  const [maxWorkers, setMaxWorkers] = useState("0");
-  const [chunkSize, setChunkSize] = useState("0");
+  const [values, setValues] = useState(() =>
+    data ? getValues(data) : EMPTY_VALUES
+  );
   const [prevData, setPrevData] = useState(data);
   const defaultPasswordInputRef = useRef(null);
 
   if (data !== prevData) {
     setPrevData(data);
-    updateData();
+    if (data) {
+      setValues(getValues(data));
+    }
   }
 
-  function handleChangeZoomFactor(event) {
-    setZoomFactor(event.target.value);
-  }
-
-  function handleChangeHideNavigationBar(event) {
-    setHideNavigationBar(event.target.checked);
-  }
-
-  function handleChangeHideDownloadManager(event) {
-    setHideDownloadManager(event.target.checked);
-  }
-
-  function handleChangeHideInfobar(event) {
-    setHideInfobar(event.target.checked);
-  }
-
-  function handleChangeSkin(event) {
-    setSkin(event.target.value);
-  }
-
-  function handleChangePromptForExportPassword(event) {
-    setPromptForExportPassword(event.target.checked);
+  function handleChange(event) {
+    const { name, type, value, checked } = event.target;
+    setValues((values) => ({
+      ...values,
+      [name]: type === "checkbox" ? checked : value
+    }));
   }
 
   function handleFocusDefaultExportPassword() {
     defaultPasswordInputRef.current.select();
   }
 
-  function handleChangeDefaultExportPassword(event) {
-    setDefaultExportPassword(event.target.value);
-  }
-
-  function handleChangeKeepOrder(event) {
-    setKeepOrder(event.target.checked);
-  }
-
-  function handleChangeBufferedWrite(event) {
-    setBufferedWrite(event.target.checked);
-  }
-
-  function handleChangeCheckSignature(event) {
-    setCheckSignature(event.target.checked);
-  }
-
-  function handleChangeMaxWorkers(event) {
-    setMaxWorkers(event.target.value);
-  }
-
-  function handleChangeChunkSize(event) {
-    setChunkSize(event.target.value);
-  }
-
   function handleSubmit() {
     onSetOptions({
-      zoomFactor: Number(zoomFactor),
-      hideNavigationBar,
-      hideDownloadManager,
-      hideInfobar,
-      skin,
-      promptForExportPassword,
-      defaultExportPassword,
-      keepOrder,
-      checkSignature,
-      bufferedWrite,
-      maxWorkers: Number(maxWorkers),
-      chunkSize: Number(chunkSize) * 1024
+      ...values,
+      zoomFactor: Number(values.zoomFactor),
+      maxWorkers: Number(values.maxWorkers),
+      chunkSize: Number(values.chunkSize) * 1024
     });
-  }
-
-  function updateData() {
-    if (data) {
-      const {
-        zoomFactor,
-        hideNavigationBar,
-        hideDownloadManager,
-        hideInfobar,
-        skin,
-        promptForExportPassword,
-        defaultExportPassword,
-        keepOrder,
-        checkSignature,
-        bufferedWrite,
-        maxWorkers,
-        chunkSize
-      } = data;
-      setZoomFactor(zoomFactor);
-      setHideNavigationBar(hideNavigationBar);
-      setHideDownloadManager(hideDownloadManager);
-      setHideInfobar(hideInfobar);
-      setSkin(skin);
-      setPromptForExportPassword(promptForExportPassword);
-      setDefaultExportPassword(defaultExportPassword);
-      setKeepOrder(keepOrder);
-      setCheckSignature(checkSignature);
-      setBufferedWrite(bufferedWrite);
-      setMaxWorkers(maxWorkers);
-      setChunkSize(chunkSize / 1024);
-    }
   }
 
   return (
@@ -146,42 +97,46 @@ function OptionsDialog({
       <label>
         <span>{messages.OPTIONS_ZOOM_FACTOR_LABEL}</span>
         <input
-          value={zoomFactor}
+          name="zoomFactor"
+          value={values.zoomFactor}
           type="number"
           required
           min={20}
           max={500}
           step={5}
-          onChange={handleChangeZoomFactor}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_HIDE_NAVIGATION_BAR_LABEL}</span>
         <input
-          checked={hideNavigationBar}
+          name="hideNavigationBar"
+          checked={values.hideNavigationBar}
           type="checkbox"
-          onChange={handleChangeHideNavigationBar}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_HIDE_DOWNLOAD_MANAGER_LABEL}</span>
         <input
-          checked={hideDownloadManager}
+          name="hideDownloadManager"
+          checked={values.hideDownloadManager}
           type="checkbox"
-          onChange={handleChangeHideDownloadManager}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_HIDE_INFOBAR_LABEL}</span>
         <input
-          checked={hideInfobar}
+          name="hideInfobar"
+          checked={values.hideInfobar}
           type="checkbox"
-          onChange={handleChangeHideInfobar}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_SELECT_SKIN_LABEL}</span>
-        <select value={skin} onChange={handleChangeSkin}>
+        <select name="skin" value={values.skin} onChange={handleChange}>
           <option value={constants.OPTIONS_DEFAULT_SKIN}>
             {messages.OPTIONS_DEFAULT_SKIN_LABEL}
           </option>
@@ -193,65 +148,72 @@ function OptionsDialog({
       <label>
         <span>{messages.OPTIONS_EXPORT_ZIP_PASSWORD_LABEL}</span>
         <input
-          checked={promptForExportPassword}
+          name="promptForExportPassword"
+          checked={values.promptForExportPassword}
           type="checkbox"
-          onChange={handleChangePromptForExportPassword}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_DEFAULT_PASSWORD_LABEL}</span>
         <input
+          name="defaultExportPassword"
           type="password"
           autoComplete="off"
-          value={defaultExportPassword}
+          value={values.defaultExportPassword}
           onFocus={handleFocusDefaultExportPassword}
-          onChange={handleChangeDefaultExportPassword}
+          onChange={handleChange}
           ref={defaultPasswordInputRef}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_CHECK_SIGNATURE_LABEL}</span>
         <input
-          checked={checkSignature}
+          name="checkSignature"
+          checked={values.checkSignature}
           type="checkbox"
-          onChange={handleChangeCheckSignature}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_BUFFERED_WRITE_LABEL}</span>
         <input
-          checked={bufferedWrite}
+          name="bufferedWrite"
+          checked={values.bufferedWrite}
           type="checkbox"
-          onChange={handleChangeBufferedWrite}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_MAX_WORKERS_LABEL}</span>
         <input
-          value={maxWorkers}
+          name="maxWorkers"
+          value={values.maxWorkers}
           type="number"
           required
-          disabled={!bufferedWrite}
+          disabled={!values.bufferedWrite}
           min={1}
-          onChange={handleChangeMaxWorkers}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_KEEP_ORDER_LABEL}</span>
         <input
-          checked={keepOrder}
+          name="keepOrder"
+          checked={values.keepOrder}
           type="checkbox"
-          onChange={handleChangeKeepOrder}
+          onChange={handleChange}
         />
       </label>
       <label>
         <span>{messages.OPTIONS_CHUNK_SIZE_LABEL}</span>
         <input
-          value={chunkSize}
+          name="chunkSize"
+          value={values.chunkSize}
           type="number"
           required
           min={1}
-          onChange={handleChangeChunkSize}
+          onChange={handleChange}
         />
       </label>
     </Dialog>
