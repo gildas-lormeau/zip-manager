@@ -103,8 +103,9 @@ async function initXM() {
 function initSID() {
   if (!sidLibrary) {
     jsSID.init();
+    sidLibrary = jsSID;
   }
-  musicLibrary = jsSID;
+  musicLibrary = sidLibrary;
 }
 
 function initAnalyser() {

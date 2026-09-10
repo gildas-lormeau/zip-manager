@@ -12,11 +12,7 @@ export default defineConfig(() => {
     },
     plugins: [
       react({
-        babel: {
-          plugins: [
-            ["babel-plugin-react-compiler"]
-          ]
-        }
+        compiler: true
       }),
       VitePWA({
         registerType: "autoUpdate",

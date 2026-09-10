@@ -77,7 +77,7 @@ function getSelectedFolderFeatures({
           } catch (error) {
             const message =
               error.message + (file ? " (" + file.name + ")" : "");
-            throw new Error(message);
+            throw new Error(message, { cause: error });
           }
         });
       } catch (error) {
@@ -164,7 +164,7 @@ function getSelectedFolderFeatures({
   function importZipFile(zipFile, options = {}) {
     async function updateZipFile() {
       let importedEntries = [],
-        addedEntries = [];
+        addedEntries;
       try {
         importedEntries = await selectedFolder.importBlob(zipFile, options);
         const isPasswordProtected = (
@@ -341,7 +341,7 @@ function getSelectedFolderFeatures({
         pastedEntries.push(entry);
       } catch (error) {
         const message = error.message + (" (" + entry.name + ")");
-        throw new Error(message);
+        throw new Error(message, { cause: error });
       }
     }
   }

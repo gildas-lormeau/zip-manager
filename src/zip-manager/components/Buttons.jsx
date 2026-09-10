@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 
 function CopyEntryButton({
   disabled,
@@ -317,19 +316,14 @@ function Button({
   onClick,
   onClickedButton
 }) {
-  const [className, setClassName] = useState(null);
+  const className =
+    clickedButtonName && clickedButtonName === name ? "flashing-button" : null;
 
   function handleAnimationEnd() {
-    setClassName(null);
     onClickedButton();
     onClick();
   }
 
-  useEffect(() => {
-    if (clickedButtonName && clickedButtonName === name) {
-      setClassName("flashing-button");
-    }
-  }, [name, clickedButtonName]);
   return (
     <button
       className={className}

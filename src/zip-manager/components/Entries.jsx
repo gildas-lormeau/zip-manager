@@ -2,7 +2,7 @@
 
 import "./styles/Entries.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 function Entries({
   entries,
@@ -134,9 +134,13 @@ function Entries({
     return classes.join(" ");
   }
 
+  const updateElementHeight = useEffectEvent(onUpdateEntriesElementHeight);
+
   useEffect(onUpdateEntriesHeight);
   useEffect(onRegisterResizeEntriesHandler);
-  useEffect(onUpdateEntriesElementHeight, []);
+  useEffect(() => {
+    updateElementHeight();
+  }, []);
 
   return (
     <div

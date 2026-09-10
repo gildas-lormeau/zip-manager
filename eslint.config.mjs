@@ -1,6 +1,5 @@
 import js from "@eslint/js";
-import react from "eslint-plugin-react";
-import reactCompiler from "eslint-plugin-react-compiler";
+import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
@@ -8,15 +7,16 @@ export default [
     ignores: [
       "**/node_modules/**",
       "**/.git/**",
+      "build/**",
+      "public/**",
       "**/src/zip-manager/services/lib/**"
     ]
   },
   js.configs.recommended,
+  reactHooks.configs.flat.recommended,
   {
     files: ["**/*.{js,jsx}"],
     plugins: {
-      react,
-      "react-compiler": reactCompiler,
       "react-refresh": reactRefresh
     },
     languageOptions: {
@@ -32,8 +32,6 @@ export default [
       }
     },
     rules: {
-      "react/jsx-uses-vars": "error",
-      "react/jsx-uses-react": "error",
       "react-refresh/only-export-components": ["warn"],
       "indent": ["error", 2],
       "linebreak-style": ["error", "unix"],
@@ -41,8 +39,7 @@ export default [
       "semi": ["warn", "always"],
       "no-console": "warn",
       "no-debugger": "warn",
-      "no-unused-vars": "warn",
-      "react-compiler/react-compiler": "error"
+      "no-unused-vars": "warn"
     },
     ignores: [
       "**/node_modules/",

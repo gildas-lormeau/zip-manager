@@ -174,18 +174,20 @@ function MusicPlayerButton({
   );
 }
 
+const CANVAS_WIDTH = 128;
+const CANVAS_HEIGTH = 64;
+const CANVAS_BLOCK_OFFSET = CANVAS_HEIGTH / 8;
+const MAX_FFT_VALUE = 256;
+
 function MusicVisualizer({
   theme,
   musicData,
   playerActive,
   constants
 }) {
-  const CANVAS_WIDTH = 128;
-  const CANVAS_HEIGTH = 64;
-  const CANVAS_BLOCK_OFFSET = CANVAS_HEIGTH / 8;
-  const MAX_FFT_VALUE = 256;
-
-  const [barWidth, setBarWidth] = useState(0);
+  const barWidth = theme.skin
+    ? CANVAS_WIDTH / (constants.FFT_RESOLUTIONS[theme.skin] / 2)
+    : 0;
   const canvasRef = useRef(null);
   const audioContextRef = useRef(null);
 
@@ -200,13 +202,6 @@ function MusicVisualizer({
     }
   }
 
-  function updateBarWidth() {
-    if (theme.skin) {
-      setBarWidth(CANVAS_WIDTH / (constants.FFT_RESOLUTIONS[theme.skin] / 2));
-    }
-  }
-
-  useEffect(updateBarWidth, [theme.skin]);
   useEffect(updateColor, [theme.accentColor]);
   useEffect(() => {
     if (canvasRef.current) {
@@ -230,7 +225,7 @@ function MusicVisualizer({
         });
       }
     }
-  }, [playerActive, musicData]);
+  }, [playerActive, musicData, barWidth]);
   return (
     <canvas
       ref={canvasRef}

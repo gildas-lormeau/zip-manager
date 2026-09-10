@@ -1,7 +1,7 @@
 import "./styles/OptionsDialog.css";
 import Dialog from "./Dialog.jsx";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { constants } from "../../business";
 
 function OptionsDialog({
@@ -23,7 +23,13 @@ function OptionsDialog({
   const [bufferedWrite, setBufferedWrite] = useState(false);
   const [maxWorkers, setMaxWorkers] = useState("0");
   const [chunkSize, setChunkSize] = useState("0");
+  const [prevData, setPrevData] = useState(data);
   const defaultPasswordInputRef = useRef(null);
+
+  if (data !== prevData) {
+    setPrevData(data);
+    updateData();
+  }
 
   function handleChangeZoomFactor(event) {
     setZoomFactor(event.target.value);
@@ -125,13 +131,11 @@ function OptionsDialog({
     }
   }
 
-  useEffect(updateData, [data]);
   return (
     <Dialog
       className="options-dialog"
       data={data}
       title={messages.OPTIONS_TITLE}
-      onOpen={updateData}
       onSubmit={handleSubmit}
       onReset={onResetOptions}
       onClose={onClose}

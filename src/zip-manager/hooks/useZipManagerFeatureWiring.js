@@ -1,5 +1,3 @@
-import { useCallback, useMemo } from "react";
-
 import {
   constants,
   features,
@@ -352,7 +350,7 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     messages
   });
 
-  const { handleKeyUp, handleKeyDown, handlePageUnload } = useMemo(() => getEventHandlers({
+  const { handleKeyUp, handleKeyDown, handlePageUnload } = getEventHandlers({
     entries,
     downloads,
     dialogDisplayed,
@@ -363,38 +361,27 @@ function useZipManagerFeatureWiring({ state, rootZipFilename, messages }) {
     onEntriesKeyDown,
     onHighlightedEntriesKeyDown,
     onSelectedFolderKeyDown
-  }), [
-    entries,
-    downloads,
-    dialogDisplayed,
-    onEntriesKeyUp,
-    onFoldersKeyUp,
-    onHighlightedEntriesKeyUp,
-    onAppKeyUp,
-    onEntriesKeyDown,
-    onHighlightedEntriesKeyDown,
-    onSelectedFolderKeyDown
-  ]);
+  });
 
-  const handleKeyDownEvent = useCallback((event) => {
+  function handleKeyDownEvent(event) {
     handleKeyDown(event, resetHighlightedEntryElement);
-  }, [handleKeyDown, resetHighlightedEntryElement]);
+  }
 
-  const handleToggleEntry = useCallback((entry) => {
+  function handleToggleEntry(entry) {
     toggle(entry, resetHighlightedEntryElement);
-  }, [toggle, resetHighlightedEntryElement]);
+  }
 
-  const updateEntriesHeightWithElement = useCallback(() => {
+  function updateEntriesHeightWithElement() {
     updateEntriesHeight(entriesElement);
-  }, [updateEntriesHeight, entriesElement]);
+  }
 
-  const registerResizeEntriesHandlerWithElement = useCallback(() => {
+  function registerResizeEntriesHandlerWithElement() {
     registerResizeEntriesHandler(entriesElement);
-  }, [registerResizeEntriesHandler, entriesElement]);
+  }
 
-  const updateEntriesElementHeightEndWithElement = useCallback(() => {
+  function updateEntriesElementHeightEndWithElement() {
     updateEntriesElementHeightEnd(entriesElement);
-  }, [updateEntriesElementHeightEnd, entriesElement]);
+  }
 
   return {
     constants,

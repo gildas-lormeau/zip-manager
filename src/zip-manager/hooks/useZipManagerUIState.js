@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import { getUIState } from "../business/index.js";
 import { filesystemService } from "../services/index.js";
 
@@ -12,7 +10,7 @@ function useZipManagerUIState({
   dialogs,
   getOptions
 }) {
-  return useMemo(() => getUIState({
+  return getUIState({
     entries,
     highlightedIds,
     selectedFolder,
@@ -21,15 +19,7 @@ function useZipManagerUIState({
     getOptions,
     dialogs,
     filesystemService
-  }), [
-    entries,
-    highlightedIds,
-    selectedFolder,
-    clipboardData,
-    history,
-    dialogs,
-    getOptions
-  ]);
+  });
 }
 
 export default useZipManagerUIState;

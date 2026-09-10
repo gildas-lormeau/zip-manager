@@ -1,6 +1,6 @@
 import "./styles/index.css";
 
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 import {
   i18nService,
@@ -189,15 +189,33 @@ function ZipManager() {
   useKeyDown(handleKeyDownEvent);
   usePageUnload(handlePageUnload);
 
-  useEffect(updateZipFilesystem, [zipFilesystem]);
-  useEffect(() => updateHighlightedEntries(getHighlightedEntryElement()), [highlightedIds]);
-  useEffect(updateAccentColor, [theme.accentColor]);
-  useEffect(updateSkin, [theme.skin]);
-  useEffect(() => {
+  const onZipFilesystemChange = useEffectEvent(updateZipFilesystem);
+  const onHighlightedIdsChange = useEffectEvent(() =>
+    updateHighlightedEntries(getHighlightedEntryElement())
+  );
+  const onAccentColorChange = useEffectEvent(updateAccentColor);
+  const onSkinChange = useEffectEvent(updateSkin);
+  const initFeatures = useEffectEvent(() => {
     initSelectedFolderFeatures();
     initMiscFeatures();
     initOptionsFeatures();
     initAppFeatures();
+  });
+
+  useEffect(() => {
+    onZipFilesystemChange();
+  }, [zipFilesystem]);
+  useEffect(() => {
+    onHighlightedIdsChange();
+  }, [highlightedIds]);
+  useEffect(() => {
+    onAccentColorChange();
+  }, [theme.accentColor]);
+  useEffect(() => {
+    onSkinChange();
+  }, [theme.skin]);
+  useEffect(() => {
+    initFeatures();
   }, []);
 
   const viewState = {

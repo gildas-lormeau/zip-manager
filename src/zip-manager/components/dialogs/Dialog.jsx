@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 
 function Dialog({
   className,
@@ -24,11 +24,15 @@ function Dialog({
     dialogRef.current.close();
   }
 
+  const handleOpen = useEffectEvent(() => {
+    if (onOpen) {
+      onOpen();
+    }
+  });
+
   useEffect(() => {
     if (!dialogRef.current.open && data) {
-      if (onOpen) {
-        onOpen();
-      }
+      handleOpen();
       dialogRef.current.showModal();
     }
   }, [data]);
