@@ -1,4 +1,4 @@
-/* global self, URL, Response, caches, importScripts, zip */
+/* global self, URL, Response, caches */
 
 import { cacheNames, clientsClaim } from "workbox-core";
 import {
@@ -7,6 +7,7 @@ import {
   getCacheKeyForURL
 } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
+import { ZipReader, BlobWriter } from "@zip.js/zip.js/lib/zip-core.js";
 
 import {
   MAINPAGE_REDIRECT_PATH,
@@ -24,8 +25,6 @@ import {
 const GET_REQUEST = "GET";
 const POST_REQUEST = "POST";
 
-importScripts("./assets/lib/zip-core.min.js");
-zip.configure({ wasmURI: "./assets/lib/zip-module.wasm" });
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 self.skipWaiting();
@@ -60,7 +59,7 @@ async function getSharedFilesResponse() {
 async function getMusicTrack({ event }) {
   const cache = await caches.open(cacheNames.precache);
   const response = await cache.match(getCacheKeyForURL(MUSIC_TRACKS_PATH));
-  const zipReader = new zip.ZipReader(response.body);
+  const zipReader = new ZipReader(response.body);
   const entries = await zipReader.getEntries();
   const fileEntryIndex = Number(
     event.request.url.match(MUSIC_TRACK_INDEX_REGEXP)[0]
@@ -69,7 +68,7 @@ async function getMusicTrack({ event }) {
   const contentType = MUSIC_FILE_CONTENT_TYPES.find((info) =>
     fileEntry.filename.endsWith(info.extension)
   ).type;
-  const data = await fileEntry.getData(new zip.BlobWriter(contentType));
+  const data = await fileEntry.getData(new BlobWriter(contentType));
   await zipReader.close();
   return new Response(data);
 }
