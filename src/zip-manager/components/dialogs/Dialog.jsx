@@ -15,12 +15,7 @@ function Dialog({
 }) {
   const dialogRef = useRef(null);
 
-  function handleButtonReset(event) {
-    event.preventDefault();
-    onReset();
-  }
-
-  function handleReset() {
+  function handleCancel() {
     dialogRef.current.close();
   }
 
@@ -38,19 +33,23 @@ function Dialog({
   }, [data]);
   return (
     <dialog className={className} ref={dialogRef} onClose={onClose}>
-      <form method="dialog" onSubmit={onSubmit} onReset={handleReset}>
+      <form method="dialog" onSubmit={onSubmit}>
         <div className="dialog-title">{title}</div>
         <p>{children}</p>
         <div className="button-bar">
           <div className="button-group">
             {resetLabel && (
-              <button type="reset" onClick={handleButtonReset}>
+              <button type="button" onClick={onReset}>
                 {resetLabel}
               </button>
             )}
           </div>
           <div className="button-group">
-            {cancelLabel && <button type="reset">{cancelLabel}</button>}
+            {cancelLabel && (
+              <button type="button" onClick={handleCancel}>
+                {cancelLabel}
+              </button>
+            )}
             <button type="submit">{submitLabel}</button>
           </div>
         </div>

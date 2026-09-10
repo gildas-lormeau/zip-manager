@@ -21,7 +21,7 @@ function ChooseActionDialog({
     onAddFiles(data?.files);
   }
 
-  function handleReset() {
+  function handleCancel() {
     dialogRef.current.close();
   }
 
@@ -32,7 +32,7 @@ function ChooseActionDialog({
   }, [data]);
   return (
     <dialog ref={dialogRef} onClose={handleClose}>
-      <form method="dialog" onReset={handleReset}>
+      <form method="dialog">
         <div>
           <div className="dialog-title">
             <label>{messages.CHOOSE_ACTION_TITLE}</label>
@@ -41,7 +41,7 @@ function ChooseActionDialog({
           <div className="button-bar">
             <div className="button-group"></div>
             <div className="button-group">
-              <button type="reset">
+              <button type="button" onClick={handleCancel}>
                 {messages.DIALOG_CANCEL_BUTTON_LABEL}
               </button>
               <button type="submit" onClick={handleAddFileClick}>
