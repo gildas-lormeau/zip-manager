@@ -1,10 +1,10 @@
-/* global self, URL, Response, caches */
+/* global self, URL, Response, caches, fetch */
 
-import { cacheNames, clientsClaim } from "workbox-core";
+import { clientsClaim } from "workbox-core";
 import {
   cleanupOutdatedCaches,
   precacheAndRoute,
-  getCacheKeyForURL
+  matchPrecache
 } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
 import { ZipReader, BlobWriter } from "@zip.js/zip.js/lib/zip-core.js";
@@ -57,8 +57,9 @@ async function getSharedFilesResponse() {
 }
 
 async function getMusicTrack({ event }) {
-  const cache = await caches.open(cacheNames.precache);
-  const response = await cache.match(getCacheKeyForURL(MUSIC_TRACKS_PATH));
+  const response =
+    (await matchPrecache(MUSIC_TRACKS_PATH)) ||
+    (await fetch(MUSIC_TRACKS_PATH));
   const zipReader = new ZipReader(response.body);
   const entries = await zipReader.getEntries();
   const fileEntryIndex = Number(

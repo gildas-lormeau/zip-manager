@@ -3,17 +3,19 @@
 import WebAudioTinySynth from "./lib/webaudio-tinysynth/webaudio-tinysynth-core-es6.js";
 import * as libxm from "./lib/libxm/libxm-es6.js";
 import * as sidPlayer from "./lib/sid-worklet/sid-player.js";
+import * as vgmPlayer from "./lib/ymfm/vgm-player.js";
 
 import {
   MUSIC_TRACK_PATH_PREFIX,
   MIDI_CONTENT_TYPE,
   XM_CONTENT_TYPE,
-  SID_CONTENT_TYPE
+  SID_CONTENT_TYPE,
+  VGM_CONTENT_TYPE
 } from "./music-service-constants.js";
 
 const MUSIC_TRACK_RELATIVE_PATH_PREFIX = "./" + MUSIC_TRACK_PATH_PREFIX;
 const MUSIC_TRACKS_INFO = [
-  { masterVolume: 0.1 },
+  { masterVolume: 1 },
   { masterVolume: 0.7 },
   { masterVolume: 0.4 },
   { masterVolume: 0.1 },
@@ -31,6 +33,7 @@ let trackIndex = Math.floor(Math.random() * MUSIC_TRACKS_INFO.length);
 let midiLibrary,
   xmLibrary,
   sidLibrary,
+  vgmLibrary,
   musicLibrary,
   playing,
   analyser,
@@ -57,6 +60,8 @@ async function init({ data, contentType, masterVolume, track }) {
     await initXM();
   } else if (contentType === SID_CONTENT_TYPE) {
     await initSID();
+  } else if (contentType === VGM_CONTENT_TYPE) {
+    await initVGM();
   }
   if (musicLibrary) {
     musicLibrary.play({ data, masterVolume, track });
@@ -106,6 +111,14 @@ async function initSID() {
     sidLibrary = sidPlayer;
   }
   musicLibrary = sidLibrary;
+}
+
+async function initVGM() {
+  if (!vgmLibrary) {
+    await vgmPlayer.init();
+    vgmLibrary = vgmPlayer;
+  }
+  musicLibrary = vgmLibrary;
 }
 
 function initAnalyser() {
