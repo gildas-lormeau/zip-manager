@@ -28,7 +28,6 @@ __attribute__((export_name("create"))) void tfmx_create(uint32_t rate,
   decoder_ = tfmxdec_new();
   tfmxdec_mixer_init(decoder_, rate, BITS_PER_SAMPLE, CHANNELS, SILENCE,
                      panning);
-  tfmxdec_set_loop_mode(decoder_, 1);
 }
 
 __attribute__((export_name("allocate"))) uint8_t *tfmx_allocate(uint32_t size) {
@@ -39,7 +38,11 @@ __attribute__((export_name("allocate"))) uint8_t *tfmx_allocate(uint32_t size) {
 
 __attribute__((export_name("load"))) uint32_t tfmx_load(uint32_t size,
                                                         uint32_t song) {
-  return tfmxdec_init(decoder_, module_, size, song);
+  if (!tfmxdec_init(decoder_, module_, size, song)) {
+    return 0;
+  }
+  tfmxdec_set_loop_mode(decoder_, 1);
+  return 1;
 }
 
 __attribute__((export_name("songs"))) uint32_t tfmx_songs() {
