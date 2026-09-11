@@ -4,13 +4,15 @@ import WebAudioTinySynth from "./lib/webaudio-tinysynth/webaudio-tinysynth-core-
 import * as libxm from "./lib/libxm/libxm-es6.js";
 import * as sidPlayer from "./lib/sid-worklet/sid-player.js";
 import * as vgmPlayer from "./lib/ymfm/vgm-player.js";
+import * as tfmxPlayer from "./lib/tfmx/tfmx-player.js";
 
 import {
   MUSIC_TRACK_PATH_PREFIX,
   MIDI_CONTENT_TYPE,
   XM_CONTENT_TYPE,
   SID_CONTENT_TYPE,
-  VGM_CONTENT_TYPE
+  VGM_CONTENT_TYPE,
+  TFMX_CONTENT_TYPE
 } from "./music-service-constants.js";
 
 const MUSIC_TRACK_RELATIVE_PATH_PREFIX = "./" + MUSIC_TRACK_PATH_PREFIX;
@@ -18,7 +20,7 @@ const MUSIC_TRACKS_INFO = [
   { masterVolume: 1 },
   { masterVolume: 0.7 },
   { masterVolume: 0.4 },
-  { masterVolume: 0.1 },
+  { masterVolume: 0.6 },
   { masterVolume: 0.6, track: 1 },
   { masterVolume: 1.8 },
   { masterVolume: 0.6 },
@@ -34,6 +36,7 @@ let midiLibrary,
   xmLibrary,
   sidLibrary,
   vgmLibrary,
+  tfmxLibrary,
   musicLibrary,
   playing,
   analyser,
@@ -62,6 +65,8 @@ async function init({ data, contentType, masterVolume, track }) {
     await initSID();
   } else if (contentType === VGM_CONTENT_TYPE) {
     await initVGM();
+  } else if (contentType === TFMX_CONTENT_TYPE) {
+    await initTFMX();
   }
   if (musicLibrary) {
     musicLibrary.play({ data, masterVolume, track });
@@ -119,6 +124,14 @@ async function initVGM() {
     vgmLibrary = vgmPlayer;
   }
   musicLibrary = vgmLibrary;
+}
+
+async function initTFMX() {
+  if (!tfmxLibrary) {
+    await tfmxPlayer.init();
+    tfmxLibrary = tfmxPlayer;
+  }
+  musicLibrary = tfmxLibrary;
 }
 
 function initAnalyser() {
