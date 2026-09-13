@@ -105,7 +105,7 @@ function Entries({
     setDraggingItems(false);
   }
 
-  async function handleDrop(event) {
+  function handleDrop(event) {
     if (event.dataTransfer.items) {
       event.preventDefault();
       setDraggingItems(false);

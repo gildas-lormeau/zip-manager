@@ -2,7 +2,7 @@ import "./styles/OptionsDialog.css";
 import Dialog from "./Dialog.jsx";
 
 import { useRef, useState } from "react";
-import { constants } from "../../business";
+import { constants } from "../../business/index.js";
 
 const OPTION_NAMES = [
   "zoomFactor",
@@ -13,7 +13,7 @@ const OPTION_NAMES = [
   "promptForExportPassword",
   "defaultExportPassword",
   "keepOrder",
-  "checkSignature",
+  "checkCrc32",
   "bufferedWrite",
   "maxWorkers",
   "chunkSize"
@@ -27,7 +27,7 @@ const EMPTY_VALUES = {
   promptForExportPassword: false,
   defaultExportPassword: "",
   keepOrder: false,
-  checkSignature: false,
+  checkCrc32: false,
   bufferedWrite: false,
   maxWorkers: "0",
   chunkSize: "0"
@@ -169,8 +169,8 @@ function OptionsDialog({
       <label>
         <span>{messages.OPTIONS_CHECK_SIGNATURE_LABEL}</span>
         <input
-          name="checkSignature"
-          checked={values.checkSignature}
+          name="checkCrc32"
+          checked={values.checkCrc32}
           type="checkbox"
           onChange={handleChange}
         />

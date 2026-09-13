@@ -46,7 +46,7 @@ function ExportZipDialog({
       filenameInputRef.current
     ) {
       filenameTextSelected.current = true;
-      let selectionEnd = filename.lastIndexOf(".");
+      const selectionEnd = filename.lastIndexOf(".");
       filenameInputRef.current.setSelectionRange(
         0,
         selectionEnd === -1 ? filename.length : selectionEnd

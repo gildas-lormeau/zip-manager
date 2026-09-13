@@ -1,11 +1,11 @@
-/* global window, document, URL */
+/* global document, URL */
 
 const FILESYSTEM_FILE_KIND = "file";
 const ABORT_ERROR_NAME = "AbortError";
 
 async function showOpenFilePicker({ multiple, description, accept } = {}) {
   const excludeAcceptAllOption = Boolean(accept);
-  if ("showOpenFilePicker" in window) {
+  if ("showOpenFilePicker" in globalThis) {
     try {
       const options = {
         excludeAcceptAllOption,
@@ -21,7 +21,7 @@ async function showOpenFilePicker({ multiple, description, accept } = {}) {
           ]
         });
       }
-      const fileHandles = await window.showOpenFilePicker(options);
+      const fileHandles = await globalThis.showOpenFilePicker(options);
       return Promise.all(fileHandles.map((fileHandle) => fileHandle.getFile()));
     } catch (error) {
       if (error.name === ABORT_ERROR_NAME) {
@@ -49,15 +49,15 @@ async function showOpenFilePicker({ multiple, description, accept } = {}) {
 }
 
 function showDirectoryPicker(options) {
-  return window.showDirectoryPicker(options);
+  return globalThis.showDirectoryPicker(options);
 }
 
 function showSaveFilePicker(options) {
-  return window.showSaveFilePicker(options);
+  return globalThis.showSaveFilePicker(options);
 }
 
 function savePickersSupported() {
-  return "showSaveFilePicker" in window && "showDirectoryPicker" in window;
+  return "showSaveFilePicker" in globalThis && "showDirectoryPicker" in globalThis;
 }
 
 function saveBlob(blob, filename) {
